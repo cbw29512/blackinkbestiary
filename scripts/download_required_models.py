@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -88,16 +89,23 @@ def download_resumable(url: str, destination: Path):
 
 
 def main():
-    config = json.loads(CONFIG.read_text(encoding="utf-8"))
-    base = config["comfy_url"].rstrip("/")
-    try:
-        stats = get_json(base + "/system_stats")
-    except Exception as exc:
-        print(f"ComfyUI is not reachable at {base}. Open it first.\n{exc}")
-        return 2
+    parser = argparse.ArgumentParser(description="Install the exact Black-Ink Bestiary model files")
+    parser.add_argument("--models-root", help="Use this ComfyUI models directory instead of probing a running server")
+    args = parser.parse_args()
 
-    comfy_root = comfy_root_from_stats(stats)
-    models_root = models_root_from_stats(stats, comfy_root)
+    config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    if args.models_root:
+        models_root = Path(args.models_root).expanduser().resolve()
+        comfy_root = models_root.parent
+    else:
+        base = config["comfy_url"].rstrip("/")
+        try:
+            stats = get_json(base + "/system_stats")
+        except Exception as exc:
+            print(f"ComfyUI is not reachable at {base}. Open it first, or pass --models-root.\n{exc}")
+            return 2
+        comfy_root = comfy_root_from_stats(stats)
+        models_root = models_root_from_stats(stats, comfy_root)
     models_root.mkdir(parents=True, exist_ok=True)
 
     required = sum(int(item.get("size_bytes") or 0) for item in config["models"])
@@ -138,7 +146,10 @@ def main():
         print(f"  OK — {destination}")
 
     print("\nAll required Black-Ink model files are installed and hash-verified.")
-    print("Restart ComfyUI so it refreshes its model lists, then run VALIDATE_LOCAL_TEMPLATES.bat.")
+    if args.models_root:
+        print("Model installation completed before launch; ComfyUI will see them on first start.")
+    else:
+        print("Restart ComfyUI so it refreshes its model lists, then run VALIDATE_LOCAL_TEMPLATES.bat.")
     return 0
 
 
