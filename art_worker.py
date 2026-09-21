@@ -99,8 +99,11 @@ def run_once() -> int:
     timeout = int(cfg["generation"]["timeout_seconds"])
     existing_review = page_state.get("review_notes") or {}
 
-    reference_rel = page.get("reference_image")
-    use_edit = bool(reference_rel) and status == "modify_requested"
+    reference_rel = None
+    if status == "modify_requested":
+        current_candidate = page_state.get("current_candidate") or {}
+        reference_rel = current_candidate.get("image_path") or page.get("reference_image")
+    use_edit = bool(reference_rel)
     if use_edit:
         prompt = build_edit_prompt(page, existing_review)
         reference_path = WEB_DIR / reference_rel
