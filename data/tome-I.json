@@ -42,7 +42,7 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null,
+      "reference_image": "references/I-01-kobold.png",
       "modify": {
         "preserve": [
           "kobold pose",
