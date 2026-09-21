@@ -61,13 +61,18 @@ def get_current():
 
 
 def exact_slot(slots: list[dict], names: list[str], *, required=True):
-    wanted = {name.lower() for name in names}
-    matches = [
-        slot for slot in slots
-        if isinstance(slot, dict) and str(slot.get("name", "")).lower() in wanted
-    ]
-    if len(matches) == 1:
-        return str(matches[0]["address"])
+    for name in names:
+        matches = [
+            slot for slot in slots
+            if isinstance(slot, dict) and str(slot.get("name", "")).lower() == name.lower()
+        ]
+        if len(matches) == 1:
+            return str(matches[0]["address"])
+        if len(matches) > 1:
+            if not required:
+                return None
+            addresses = ", ".join(str(slot.get("address")) for slot in matches)
+            raise RuntimeError(f"Live template has multiple {name!r} slots: {addresses}")
     if not required:
         return None
     available = ", ".join(
@@ -75,8 +80,7 @@ def exact_slot(slots: list[dict], names: list[str], *, required=True):
         for slot in slots if isinstance(slot, dict)
     )
     raise RuntimeError(
-        f"Expected one slot named {names}, found {len(matches)}. "
-        f"Live template slots: {available}"
+        f"No unique slot named {names} was found. Live template slots: {available}"
     )
 
 
