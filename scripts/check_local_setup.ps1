@@ -6,7 +6,7 @@ Write-Host "======================================="
 $ok = $true
 
 Write-Host ""
-Write-Host "[1/3] Python"
+Write-Host "[1/4] Python"
 $python = Get-Command py -ErrorAction SilentlyContinue
 if (-not $python) { $python = Get-Command python -ErrorAction SilentlyContinue }
 if ($python) {
@@ -17,7 +17,7 @@ if ($python) {
 }
 
 Write-Host ""
-Write-Host "[2/3] ComfyUI local server"
+Write-Host "[2/4] ComfyUI local server"
 try {
     $stats = Invoke-RestMethod -Uri "http://127.0.0.1:8188/system_stats" -TimeoutSec 2
     Write-Host "  OK - ComfyUI is running on port 8188" -ForegroundColor Green
@@ -29,12 +29,37 @@ try {
     }
 } catch {
     Write-Host "  WAITING - ComfyUI is not reachable yet" -ForegroundColor Yellow
-    Write-Host "  This is normal until ComfyUI Desktop is installed and open."
     $ok = $false
 }
 
 Write-Host ""
-Write-Host "[3/3] Black-Ink worker files"
+Write-Host "[3/4] Comfy Desktop instance"
+$installationsFile = Join-Path $env:APPDATA "Comfy Desktop\installations.json"
+if (Test-Path $installationsFile) {
+    try {
+        $installs = Get-Content $installationsFile -Raw | ConvertFrom-Json
+        $target = $installs | Where-Object { $_.name -eq "Black-Ink Bestiary" -and $_.installPath } | Select-Object -First 1
+        if (-not $target) {
+            $target = $installs | Where-Object { $_.sourceId -ne "cloud" -and $_.installPath } | Select-Object -First 1
+        }
+        if ($target) {
+            Write-Host "  OK - $($target.name)" -ForegroundColor Green
+            Write-Host "  Path - $($target.installPath)"
+        } else {
+            Write-Host "  MISSING - no local Comfy Desktop instance found in installations.json" -ForegroundColor Red
+            $ok = $false
+        }
+    } catch {
+        Write-Host "  ERROR - could not parse installations.json" -ForegroundColor Red
+        $ok = $false
+    }
+} else {
+    Write-Host "  MISSING - %APPDATA%\Comfy Desktop\installations.json not found" -ForegroundColor Red
+    $ok = $false
+}
+
+Write-Host ""
+Write-Host "[4/4] Black-Ink worker files"
 $root = Split-Path -Parent $PSScriptRoot
 $required = @(
     "art_pipeline\worker.py",
