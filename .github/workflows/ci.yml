@@ -1,0 +1,20 @@
+name: Studio checks
+
+on:
+  push:
+    branches: [main, "feat/**", "fix/**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate JSON and run state-machine tests
+        run: |
+          python -m json.tool data/tome-I.json > /dev/null
+          python -m json.tool data/production-state.json > /dev/null
+          python -m unittest discover -s tests -v
