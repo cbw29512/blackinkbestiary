@@ -56,6 +56,20 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(len(problems), 2)
 
 
+class ModelManifestTests(unittest.TestCase):
+    def test_v1_model_manifest_is_single_distilled_4b_stack(self):
+        manifest_path = ROOT / "art_pipeline" / "model_manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        names = [item["filename"] for item in manifest["required_models"]]
+        self.assertIn("flux-2-klein-4b-fp8.safetensors", names)
+        self.assertIn("qwen_3_4b.safetensors", names)
+        self.assertIn("flux2-vae.safetensors", names)
+        self.assertFalse(any("9b" in name.lower() for name in names))
+        self.assertFalse(any("base-4b" in name.lower() for name in names))
+        for item in manifest["required_models"]:
+            self.assertTrue(item["url"].startswith("https://huggingface.co/"))
+
+
 class QATests(unittest.TestCase):
     def test_missing_candidate_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
