@@ -12,6 +12,8 @@ class LocalStackConfigTests(unittest.TestCase):
 
     def test_pins_expected_cli_and_model(self):
         self.assertEqual(self.config["comfy_cli_version"], "1.20.0")
+        self.assertEqual(self.config["comfyui_version"], "0.36.0")
+        self.assertEqual(self.config["workspace"], ".blackink-comfy")
         self.assertEqual(self.config["model"]["variant"], "4B distilled FP8")
 
     def test_exactly_three_core_model_files(self):
