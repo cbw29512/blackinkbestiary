@@ -73,6 +73,24 @@ def validate_state(tome, state):
         raise ValueError("Active page does not match current_page_id")
 
 
+def comfy_health():
+    url = "http://127.0.0.1:8188/system_stats"
+    try:
+        with urllib.request.urlopen(url, timeout=1.5) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+        devices = []
+        for device in payload.get("devices", []):
+            devices.append({
+                "name": device.get("name"),
+                "type": device.get("type"),
+                "vram_total": device.get("vram_total"),
+                "vram_free": device.get("vram_free"),
+            })
+        return {"connected": True, "url": "http://127.0.0.1:8188", "devices": devices}
+    except Exception as exc:
+        return {"connected": False, "url": "http://127.0.0.1:8188", "error": str(exc)}
+
+
 def public_state():
     tome = load_tome()
     state = load_state()
@@ -221,6 +239,9 @@ class Handler(BaseHTTPRequestHandler):
                 return
             if path == "/api/state":
                 self.send_json(public_state())
+                return
+            if path == "/api/comfy-health":
+                self.send_json(comfy_health())
                 return
             self.serve_static(path)
         except Exception as exc:
