@@ -83,12 +83,12 @@ function render(data) {
   qs("#modify").disabled = !reviewReady;
   qs("#regenerate").disabled = !reviewReady;
 
-  if (candidate) {
+  if (state.worker_message && state.status !== "awaiting_human") {
+    qs("#statusLine").innerHTML = `<strong>${esc(state.worker_message)}</strong>`;
+  } else if (candidate) {
     const score = candidate.qa_score == null ? "" : ` · QA score: <strong>${esc(candidate.qa_score)}</strong>`;
     qs("#statusLine").innerHTML =
       `Attempt <strong>${candidate.attempt}</strong> · QA: <strong>${esc(candidate.qa_status)}</strong>${score} · Preflight: <strong>${esc(candidate.supervisor_status)}</strong>`;
-  } else if (state.worker_message) {
-    qs("#statusLine").innerHTML = `<strong>${esc(state.worker_message)}</strong>`;
   } else {
     qs("#statusLine").innerHTML =
       "<strong>No active candidate.</strong> Waiting for the local art worker.";
