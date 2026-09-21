@@ -19,4 +19,6 @@ jobs:
         run: |
           python -m json.tool data/tome-I.json > /dev/null
           python -m json.tool data/production-state.json > /dev/null
+          python -m json.tool worker/config.json > /dev/null
+          python -m py_compile server.py art_worker.py worker/*.py
           python -m unittest discover -s tests -v
