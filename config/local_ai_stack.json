@@ -42,5 +42,7 @@
     "auto_update_comfyui": false,
     "ordered_pages": true,
     "current_page_only": true
-  }
+  },
+  "comfyui_version": "0.36.0",
+  "workspace": ".blackink-comfy"
 }
