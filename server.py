@@ -5,6 +5,7 @@ import json
 import mimetypes
 import threading
 import webbrowser
+import urllib.request
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
