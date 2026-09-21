@@ -1,0 +1,18 @@
+{
+  "studio_url": "http://127.0.0.1:8765",
+  "comfy_url": "http://127.0.0.1:8188",
+  "generation": {
+    "candidate_count": 4,
+    "steps": 4,
+    "timeout_seconds": 600
+  },
+  "image": {
+    "width": 768,
+    "height": 1024
+  },
+  "model": {
+    "unet": "flux-2-klein-4b-fp8.safetensors",
+    "clip": "qwen_3_4b.safetensors",
+    "vae": "flux2-vae.safetensors"
+  }
+}
