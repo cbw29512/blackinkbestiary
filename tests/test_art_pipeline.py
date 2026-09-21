@@ -1,0 +1,70 @@
+import json
+import tempfile
+import unittest
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from prompt_builder import build_prompt
+from workflow_adapter import PROMPT_TOKEN, SEED_TOKEN, prepare_workflow, validate_template
+from qa import inspect_png
+
+
+class PromptTests(unittest.TestCase):
+    def test_prompt_contains_page_and_style(self):
+        page = {
+            "monster_name": "Kobold Warrior",
+            "habitat": "trapped corridor",
+            "moment": "tripwire triggered",
+            "identity_rules": ["snout", "horn nubs"],
+            "must_include": ["pit"],
+            "must_avoid": ["gray"],
+            "composition": "portrait",
+        }
+        text = build_prompt(page)
+        self.assertIn("Kobold Warrior", text)
+        self.assertIn("trapped corridor", text)
+        self.assertIn("large uninterrupted white regions", text)
+
+    def test_modify_notes_enter_prompt(self):
+        page = {
+            "monster_name": "Kobold",
+            "habitat": "cave",
+            "moment": "waiting",
+            "identity_rules": [],
+            "must_include": [],
+            "must_avoid": [],
+            "composition": "portrait",
+        }
+        text = build_prompt(page, {"text": "simplify walls", "quick_tags": ["more white space"]})
+        self.assertIn("simplify walls", text)
+        self.assertIn("more white space", text)
+
+
+class WorkflowTests(unittest.TestCase):
+    def test_template_tokens_replace(self):
+        template = {"1": {"inputs": {"text": PROMPT_TOKEN, "seed": SEED_TOKEN}}}
+        self.assertEqual(validate_template(template), [])
+        out = prepare_workflow(template, prompt="hello", seed=123)
+        self.assertEqual(out["1"]["inputs"]["text"], "hello")
+        self.assertEqual(out["1"]["inputs"]["seed"], 123)
+
+    def test_missing_tokens_rejected(self):
+        problems = validate_template({"1": {"inputs": {}}})
+        self.assertEqual(len(problems), 2)
+
+
+class QATests(unittest.TestCase):
+    def test_missing_candidate_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "missing.png"
+            from qa import inspect_candidate
+            result = inspect_candidate(path)
+            self.assertFalse(result["pass"])
+            self.assertIn("missing_file", result["reasons"])
+
+
+if __name__ == "__main__":
+    unittest.main()
