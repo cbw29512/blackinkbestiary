@@ -10,7 +10,7 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("install_blackink_ai.ps1", text)
         self.assertIn("smoke_test_i01.py", text)
         self.assertIn("http://127.0.0.1:8765", text)
-        self.assertNotIn("I-02", text)
+        self.assertNotIn("production-state.json", text)
 
     def test_start_doc_names_single_entry_point(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
