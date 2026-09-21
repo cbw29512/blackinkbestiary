@@ -116,59 +116,64 @@ def run_once() -> int:
         mode = "fresh_generation"
 
     set_status(cfg, page_id, "generating", f"Generating {count} candidates")
-    CANDIDATE_DIR.mkdir(parents=True, exist_ok=True)
-    results = []
+    try:
+        CANDIDATE_DIR.mkdir(parents=True, exist_ok=True)
+        results = []
 
-    for index in range(1, count + 1):
-        seed = random.SystemRandom().randrange(1, 2**48)
-        prefix = f"BlackInkBestiary/{page_id}/candidate-{index:02d}"
-        if use_edit:
-            graph = image_edit(prompt, seed, cfg, prefix, uploaded)
-        else:
-            graph = text_to_image(prompt, seed, cfg, prefix)
+        for index in range(1, count + 1):
+            seed = random.SystemRandom().randrange(1, 2**48)
+            prefix = f"BlackInkBestiary/{page_id}/candidate-{index:02d}"
+            if use_edit:
+                graph = image_edit(prompt, seed, cfg, prefix, uploaded)
+            else:
+                graph = text_to_image(prompt, seed, cfg, prefix)
 
-        print(f"[{index}/{count}] {page_id} seed {seed}")
-        prompt_id = comfy.queue(graph)
-        images = comfy.wait_for_images(prompt_id, timeout)
-        if not images:
-            continue
+            print(f"[{index}/{count}] {page_id} seed {seed}")
+            prompt_id = comfy.queue(graph)
+            images = comfy.wait_for_images(prompt_id, timeout)
+            if not images:
+                continue
 
-        destination = CANDIDATE_DIR / f"{page_id}-candidate-{index:02d}.png"
-        comfy.download_image(images[0], destination)
-        qa = inspect(destination, target_ratio=width / height)
-        results.append({
-            "path": destination,
-            "relative": f"candidates/{destination.name}",
-            "seed": seed,
-            "qa": qa,
-        })
-        print(f"  QA {'PASS' if qa['passed'] else 'FAIL'} score={qa['score']}")
+            destination = CANDIDATE_DIR / f"{page_id}-candidate-{index:02d}.png"
+            comfy.download_image(images[0], destination)
+            qa = inspect(destination, target_ratio=width / height)
+            results.append({
+                "path": destination,
+                "relative": f"candidates/{destination.name}",
+                "seed": seed,
+                "qa": qa,
+            })
+            print(f"  QA {'PASS' if qa['passed'] else 'FAIL'} score={qa['score']}")
 
-    set_status(cfg, page_id, "qa_review", "Ranking candidates with coloring-page QA")
-    best = choose_best(results)
-    if best is None:
-        set_status(cfg, page_id, status, "All candidates failed automatic QA; page remains current")
-        print("No candidate passed QA. Nothing was submitted to the review studio.")
-        for item in results:
-            print(f"- {item['path'].name}: {', '.join(item['qa']['reasons']) or 'failed'}")
-        return 2
+        set_status(cfg, page_id, "qa_review", "Ranking candidates with coloring-page QA")
+        best = choose_best(results)
+        if best is None:
+            set_status(cfg, page_id, status, "All candidates failed automatic QA; page remains current")
+            print("No candidate passed QA. Nothing was submitted to the review studio.")
+            for item in results:
+                print(f"- {item['path'].name}: {', '.join(item['qa']['reasons']) or 'failed'}")
+            return 2
 
-    set_status(cfg, page_id, "supervisor_review", "Best technical candidate selected; awaiting visual human review")
-    payload = {
-        "page_id": page_id,
-        "image_path": best["relative"],
-        "candidate_id": f"{page_id}-{mode}-{best['seed']}",
-        "qa_status": "pass",
-        "qa_score": best["qa"]["score"],
-        "qa_details": best["qa"],
-        "supervisor_status": "preflight_pass",
-        "seed": best["seed"],
-        "generation_mode": mode,
-        "prompt": prompt,
-    }
-    studio_post(cfg, "/api/candidate", payload)
-    print(f"Submitted {best['path'].name} to the Studio for human review.")
-    return 0
+        set_status(cfg, page_id, "supervisor_review", "Best technical candidate selected; awaiting visual human review")
+        payload = {
+            "page_id": page_id,
+            "image_path": best["relative"],
+            "candidate_id": f"{page_id}-{mode}-{best['seed']}",
+            "qa_status": "pass",
+            "qa_score": best["qa"]["score"],
+            "qa_details": best["qa"],
+            "supervisor_status": "preflight_pass",
+            "seed": best["seed"],
+            "generation_mode": mode,
+            "prompt": prompt,
+        }
+        studio_post(cfg, "/api/candidate", payload)
+        print(f"Submitted {best['path'].name} to the Studio for human review.")
+        return 0
+    except Exception as exc:
+        set_status(cfg, page_id, status, f"Worker stopped; page remains current: {exc}")
+        raise
+
 
 
 def main():
@@ -188,7 +193,7 @@ def main():
             print("Required nodes: OK")
             return 0
         return run_once()
-    except (requests.RequestException, ComfyError, FileNotFoundError, RuntimeError) as exc:
+    except (requests.RequestException, ComfyError, FileNotFoundError, RuntimeError, ValueError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
