@@ -27,8 +27,8 @@ if (-not (Test-Path $VenvPython)) {
     }
 }
 
-Write-Host "Installing pinned comfy-cli 1.20.0 into the project tool environment..."
-& $VenvPython -m pip install --disable-pip-version-check --quiet "comfy-cli==1.20.0"
+Write-Host "Installing pinned Black-Ink tools (comfy-cli + Pillow)..."
+& $VenvPython -m pip install --disable-pip-version-check --quiet "comfy-cli==1.20.0" "Pillow==12.3.0"
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Could not install comfy-cli." -ForegroundColor Red
     exit $LASTEXITCODE
