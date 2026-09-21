@@ -1,0 +1,1691 @@
+{
+  "tome_id": "TOME-I",
+  "title": "Caves & Dungeons",
+  "theme": "Fantasy monsters in underground lairs, caves, ruins, and dungeon spaces",
+  "total_pages": 50,
+  "pages": [
+    {
+      "page_id": "I-01",
+      "order": 1,
+      "monster_name": "Kobold Warrior",
+      "habitat": "Tight trapped stone corridor",
+      "moment": "Cackling as a tripwire is triggered",
+      "identity_rules": [
+        "small reptilian humanoid",
+        "long snout",
+        "small horn nubs",
+        "needle teeth",
+        "ragged leather gear",
+        "oversized spear",
+        "devious trap-maker; not cute"
+      ],
+      "must_include": [
+        "kobold",
+        "oversized spear",
+        "tripwire",
+        "punji pit",
+        "wall torch",
+        "tight dressed-stone corridor"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null,
+      "modify": {
+        "preserve": [
+          "kobold pose",
+          "spear",
+          "corridor perspective",
+          "tripwire",
+          "pit trap",
+          "wall torch",
+          "overall scene concept"
+        ],
+        "change": [
+          "reduce detail density roughly 30–40%",
+          "remove most hatching",
+          "reduce tiny scale texture",
+          "reduce unnecessary stone cracks",
+          "create larger clean white coloring areas",
+          "use lighter interior lines"
+        ],
+        "avoid": [
+          "cute reinterpretation",
+          "stick-figure simplification",
+          "losing monster identity",
+          "removing the trap",
+          "adding gray shading"
+        ]
+      }
+    },
+    {
+      "page_id": "I-02",
+      "order": 2,
+      "monster_name": "Kobold Shrine-Keeper",
+      "habitat": "Low cave shrine with coins and dragon skull prop",
+      "moment": "Raising a copper coin as an offering",
+      "identity_rules": [
+        "Must be immediately recognizable as Kobold Shrine-Keeper",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Kobold Shrine-Keeper",
+        "Low cave shrine with coins and dragon skull prop",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-03",
+      "order": 3,
+      "monster_name": "Goblin Minion",
+      "habitat": "Dungeon kitchen and pantry",
+      "moment": "Running away with a stolen ham",
+      "identity_rules": [
+        "Must be immediately recognizable as Goblin Minion",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Goblin Minion",
+        "Dungeon kitchen and pantry",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-04",
+      "order": 4,
+      "monster_name": "Goblin Warrior",
+      "habitat": "Narrow dungeon crawlway",
+      "moment": "Kicking over a lantern to darken the hall",
+      "identity_rules": [
+        "Must be immediately recognizable as Goblin Warrior",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Goblin Warrior",
+        "Narrow dungeon crawlway",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-05",
+      "order": 5,
+      "monster_name": "Goblin Boss",
+      "habitat": "Cave hall with improvised throne",
+      "moment": "Pointing a bent sword from atop a chest",
+      "identity_rules": [
+        "Must be immediately recognizable as Goblin Boss",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Goblin Boss",
+        "Cave hall with improvised throne",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-06",
+      "order": 6,
+      "monster_name": "Hobgoblin Warrior",
+      "habitat": "Underground barracks tunnel",
+      "moment": "Leading a shield-wall drill",
+      "identity_rules": [
+        "Must be immediately recognizable as Hobgoblin Warrior",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Hobgoblin Warrior",
+        "Underground barracks tunnel",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-07",
+      "order": 7,
+      "monster_name": "Hobgoblin Captain",
+      "habitat": "Cave war room",
+      "moment": "Pinning a dagger into a tunnel map",
+      "identity_rules": [
+        "Must be immediately recognizable as Hobgoblin Captain",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Hobgoblin Captain",
+        "Cave war room",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-08",
+      "order": 8,
+      "monster_name": "Bugbear Warrior",
+      "habitat": "Ceiling crack above dungeon hall",
+      "moment": "Dropping into an ambush",
+      "identity_rules": [
+        "Must be immediately recognizable as Bugbear Warrior",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Bugbear Warrior",
+        "Ceiling crack above dungeon hall",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-09",
+      "order": 9,
+      "monster_name": "Bugbear Stalker",
+      "habitat": "Low crawlway",
+      "moment": "Dragging a sack and signaling for silence",
+      "identity_rules": [
+        "Must be immediately recognizable as Bugbear Stalker",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Bugbear Stalker",
+        "Low crawlway",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-10",
+      "order": 10,
+      "monster_name": "Ogre",
+      "habitat": "Too-small spiral dungeon stair",
+      "moment": "Wedged awkwardly on the stairs",
+      "identity_rules": [
+        "Must be immediately recognizable as Ogre",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Ogre",
+        "Too-small spiral dungeon stair",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-11",
+      "order": 11,
+      "monster_name": "Ogre Zombie",
+      "habitat": "Dark cramped dungeon stair",
+      "moment": "Shuffling downward with chains dragging",
+      "identity_rules": [
+        "Must be immediately recognizable as Ogre Zombie",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Ogre Zombie",
+        "Dark cramped dungeon stair",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-12",
+      "order": 12,
+      "monster_name": "Troll",
+      "habitat": "Cave fire pit",
+      "moment": "Watching a wound close while glaring at fire",
+      "identity_rules": [
+        "Must be immediately recognizable as Troll",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Troll",
+        "Cave fire pit",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-13",
+      "order": 13,
+      "monster_name": "Troll Limb",
+      "habitat": "Bare dungeon flagstones",
+      "moment": "Severed arm crawling toward a dropped axe",
+      "identity_rules": [
+        "Must be immediately recognizable as Troll Limb",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Troll Limb",
+        "Bare dungeon flagstones",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-14",
+      "order": 14,
+      "monster_name": "Darkmantle",
+      "habitat": "Limestone cave ceiling",
+      "moment": "Peeling away from a stalactite above a lantern",
+      "identity_rules": [
+        "Must be immediately recognizable as Darkmantle",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Darkmantle",
+        "Limestone cave ceiling",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-15",
+      "order": 15,
+      "monster_name": "Stirges",
+      "habitat": "Dungeon cell",
+      "moment": "Feeding around a sleeping prisoner",
+      "identity_rules": [
+        "Must be immediately recognizable as Stirges",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Stirges",
+        "Dungeon cell",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-16",
+      "order": 16,
+      "monster_name": "Giant Bat",
+      "habitat": "Cavern above underground river",
+      "moment": "Hanging with wings partly wrapped",
+      "identity_rules": [
+        "Must be immediately recognizable as Giant Bat",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Giant Bat",
+        "Cavern above underground river",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-17",
+      "order": 17,
+      "monster_name": "Bat Swarm",
+      "habitat": "Vertical dungeon well shaft",
+      "moment": "Exploding upward from the well",
+      "identity_rules": [
+        "Must be immediately recognizable as Bat Swarm",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Bat Swarm",
+        "Vertical dungeon well shaft",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-18",
+      "order": 18,
+      "monster_name": "Giant Rat",
+      "habitat": "Collapsed dungeon pantry",
+      "moment": "Defending a nest among burst sacks",
+      "identity_rules": [
+        "Must be immediately recognizable as Giant Rat",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Giant Rat",
+        "Collapsed dungeon pantry",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-19",
+      "order": 19,
+      "monster_name": "Rat Swarm",
+      "habitat": "Dungeon floor grate",
+      "moment": "Pouring through the grate like water",
+      "identity_rules": [
+        "Must be immediately recognizable as Rat Swarm",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Rat Swarm",
+        "Dungeon floor grate",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-20",
+      "order": 20,
+      "monster_name": "Giant Centipede",
+      "habitat": "Catacomb coffin niche",
+      "moment": "Uncoiling around an old bone",
+      "identity_rules": [
+        "Must be immediately recognizable as Giant Centipede",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Giant Centipede",
+        "Catacomb coffin niche",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-21",
+      "order": 21,
+      "monster_name": "Giant Fire Beetle",
+      "habitat": "Abandoned mine tunnel",
+      "moment": "Lighting the tunnel with body glands",
+      "identity_rules": [
+        "Must be immediately recognizable as Giant Fire Beetle",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Giant Fire Beetle",
+        "Abandoned mine tunnel",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-22",
+      "order": 22,
+      "monster_name": "Giant Spider",
+      "habitat": "Web-filled dungeon hall",
+      "moment": "Waiting at the center of a large web",
+      "identity_rules": [
+        "Must be immediately recognizable as Giant Spider",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Giant Spider",
+        "Web-filled dungeon hall",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-23",
+      "order": 23,
+      "monster_name": "Giant Wolf Spider",
+      "habitat": "Ceiling above a treasure chest",
+      "moment": "Flattened overhead watching the chest",
+      "identity_rules": [
+        "Must be immediately recognizable as Giant Wolf Spider",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Giant Wolf Spider",
+        "Ceiling above a treasure chest",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-24",
+      "order": 24,
+      "monster_name": "Gelatinous Cube",
+      "habitat": "Ten-foot dressed-stone corridor",
+      "moment": "Sliding forward with bones and a key suspended inside",
+      "identity_rules": [
+        "Must be immediately recognizable as Gelatinous Cube",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Gelatinous Cube",
+        "Ten-foot dressed-stone corridor",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-25",
+      "order": 25,
+      "monster_name": "Black Pudding",
+      "habitat": "Dungeon cistern / floor grate",
+      "moment": "Corroding bars while climbing through",
+      "identity_rules": [
+        "Must be immediately recognizable as Black Pudding",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Black Pudding",
+        "Dungeon cistern / floor grate",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-26",
+      "order": 26,
+      "monster_name": "Ochre Jelly",
+      "habitat": "Dungeon stair",
+      "moment": "Two split halves continuing upward",
+      "identity_rules": [
+        "Must be immediately recognizable as Ochre Jelly",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Ochre Jelly",
+        "Dungeon stair",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-27",
+      "order": 27,
+      "monster_name": "Mimic — Chest",
+      "habitat": "Treasure vault",
+      "moment": "Chest mouth opening around a reaching hand",
+      "identity_rules": [
+        "Must be immediately recognizable as Mimic — Chest",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Mimic — Chest",
+        "Treasure vault",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-28",
+      "order": 28,
+      "monster_name": "Mimic — Door",
+      "habitat": "Torch-lit dungeon hall",
+      "moment": "Door revealing tongue-handle and hidden eye",
+      "identity_rules": [
+        "Must be immediately recognizable as Mimic — Door",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Mimic — Door",
+        "Torch-lit dungeon hall",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-29",
+      "order": 29,
+      "monster_name": "Animated Armor",
+      "habitat": "Pedestal-lined dungeon hall",
+      "moment": "Stepping down from its display pedestal",
+      "identity_rules": [
+        "Must be immediately recognizable as Animated Armor",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Animated Armor",
+        "Pedestal-lined dungeon hall",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-30",
+      "order": 30,
+      "monster_name": "Flying Sword",
+      "habitat": "Dungeon rotunda",
+      "moment": "Orbiting a cracked pillar at throat height",
+      "identity_rules": [
+        "Must be immediately recognizable as Flying Sword",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Flying Sword",
+        "Dungeon rotunda",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-31",
+      "order": 31,
+      "monster_name": "Rug of Smothering",
+      "habitat": "Noble crypt",
+      "moment": "Rearing up from the floor to wrap a victim",
+      "identity_rules": [
+        "Must be immediately recognizable as Rug of Smothering",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Rug of Smothering",
+        "Noble crypt",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-32",
+      "order": 32,
+      "monster_name": "Gargoyle",
+      "habitat": "Stone dungeon gate",
+      "moment": "One statue beginning to move",
+      "identity_rules": [
+        "Must be immediately recognizable as Gargoyle",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Gargoyle",
+        "Stone dungeon gate",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-33",
+      "order": 33,
+      "monster_name": "Labyrinth Minotaur",
+      "habitat": "Identical stone maze corridors",
+      "moment": "Filling an intersection with axe ready",
+      "identity_rules": [
+        "Must be immediately recognizable as Labyrinth Minotaur",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Labyrinth Minotaur",
+        "Identical stone maze corridors",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-34",
+      "order": 34,
+      "monster_name": "Minotaur Skeleton",
+      "habitat": "Dark labyrinth corridor",
+      "moment": "Turning the corner with empty eye sockets",
+      "identity_rules": [
+        "Must be immediately recognizable as Minotaur Skeleton",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Minotaur Skeleton",
+        "Dark labyrinth corridor",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-35",
+      "order": 35,
+      "monster_name": "Roper",
+      "habitat": "Stalagmite cavern",
+      "moment": "Sticky tendrils striking from camouflage",
+      "identity_rules": [
+        "Must be immediately recognizable as Roper",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Roper",
+        "Stalagmite cavern",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-36",
+      "order": 36,
+      "monster_name": "Cloaker",
+      "habitat": "Dungeon antechamber",
+      "moment": "Peeling off a wall hook like a living cloak",
+      "identity_rules": [
+        "Must be immediately recognizable as Cloaker",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Cloaker",
+        "Dungeon antechamber",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-37",
+      "order": 37,
+      "monster_name": "Grick",
+      "habitat": "Collapsed tunnel rubble",
+      "moment": "Tentacles emerging around a central beak",
+      "identity_rules": [
+        "Must be immediately recognizable as Grick",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Grick",
+        "Collapsed tunnel rubble",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-38",
+      "order": 38,
+      "monster_name": "Ankheg",
+      "habitat": "Earthen tunnel / burrow",
+      "moment": "Bursting upward through the floor",
+      "identity_rules": [
+        "Must be immediately recognizable as Ankheg",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Ankheg",
+        "Earthen tunnel / burrow",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-39",
+      "order": 39,
+      "monster_name": "Bulette",
+      "habitat": "Loose-earth cavern",
+      "moment": "Dorsal fin cutting through soil before surfacing",
+      "identity_rules": [
+        "Must be immediately recognizable as Bulette",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Bulette",
+        "Loose-earth cavern",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-40",
+      "order": 40,
+      "monster_name": "Rust Monster",
+      "habitat": "Abandoned armory alcove",
+      "moment": "Feeding on a pile of ruined metal weapons",
+      "identity_rules": [
+        "Must be immediately recognizable as Rust Monster",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Rust Monster",
+        "Abandoned armory alcove",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-41",
+      "order": 41,
+      "monster_name": "Otyugh",
+      "habitat": "Refuse pit beneath dungeon privies",
+      "moment": "Rising from garbage with eyestalks searching",
+      "identity_rules": [
+        "Must be immediately recognizable as Otyugh",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Otyugh",
+        "Refuse pit beneath dungeon privies",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-42",
+      "order": 42,
+      "monster_name": "Gibbering Mouther",
+      "habitat": "Flooded dungeon cell",
+      "moment": "Many mouths churning above rippling water",
+      "identity_rules": [
+        "Must be immediately recognizable as Gibbering Mouther",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Gibbering Mouther",
+        "Flooded dungeon cell",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-43",
+      "order": 43,
+      "monster_name": "Basilisk",
+      "habitat": "Statue-filled underground gallery",
+      "moment": "Staring forward as a small creature petrifies",
+      "identity_rules": [
+        "Must be immediately recognizable as Basilisk",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Basilisk",
+        "Statue-filled underground gallery",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-44",
+      "order": 44,
+      "monster_name": "Cockatrice",
+      "habitat": "Improvised dungeon henhouse",
+      "moment": "Wings raised beside a petrified mouse",
+      "identity_rules": [
+        "Must be immediately recognizable as Cockatrice",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Cockatrice",
+        "Improvised dungeon henhouse",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-45",
+      "order": 45,
+      "monster_name": "Purple Worm",
+      "habitat": "Mine shaft / deep tunnel",
+      "moment": "Circular maw filling the tunnel",
+      "identity_rules": [
+        "Must be immediately recognizable as Purple Worm",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Purple Worm",
+        "Mine shaft / deep tunnel",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-46",
+      "order": 46,
+      "monster_name": "Drider",
+      "habitat": "Webbed underground chapel",
+      "moment": "Hanging overhead and aiming downward",
+      "identity_rules": [
+        "Must be immediately recognizable as Drider",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Drider",
+        "Webbed underground chapel",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-47",
+      "order": 47,
+      "monster_name": "Behir",
+      "habitat": "Crystal cavern",
+      "moment": "Coiled around a crystal column with lightning arcing",
+      "identity_rules": [
+        "Must be immediately recognizable as Behir",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Behir",
+        "Crystal cavern",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-48",
+      "order": 48,
+      "monster_name": "Shrieker Fungus",
+      "habitat": "Underground mushroom hall",
+      "moment": "Gill-mouth opened in a piercing shriek",
+      "identity_rules": [
+        "Must be immediately recognizable as Shrieker Fungus",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Shrieker Fungus",
+        "Underground mushroom hall",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-49",
+      "order": 49,
+      "monster_name": "Violet Fungus",
+      "habitat": "Same fungal cavern family",
+      "moment": "Tendrils reaching toward a dropped torch",
+      "identity_rules": [
+        "Must be immediately recognizable as Violet Fungus",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Violet Fungus",
+        "Same fungal cavern family",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    },
+    {
+      "page_id": "I-50",
+      "order": 50,
+      "monster_name": "Lich",
+      "habitat": "Deep underground phylactery vault",
+      "moment": "Guarding the phylactery while casting",
+      "identity_rules": [
+        "Must be immediately recognizable as Lich",
+        "Use clear fantasy-monster anatomy and a strong silhouette"
+      ],
+      "must_include": [
+        "Lich",
+        "Deep underground phylactery vault",
+        "one clear story moment",
+        "large open areas to color"
+      ],
+      "must_avoid": [
+        "grayscale wash",
+        "dense crosshatching",
+        "decorative border",
+        "text inside the artwork",
+        "clutter that competes with the monster"
+      ],
+      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "coloring_rules": {
+        "outer_contour": "bold",
+        "interior_lines": "light_to_medium",
+        "detail_density": "medium_low",
+        "open_white_area": "high",
+        "color": "black_on_white"
+      },
+      "reference_image": null
+    }
+  ]
+}

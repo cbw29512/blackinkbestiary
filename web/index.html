@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Black-Ink Bestiary Studio</title>
+  <meta name="theme-color" content="#18130f">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Production Studio</p>
+        <h1>Black-Ink Bestiary</h1>
+        <p class="tagline">Fantasy Monsters in Their Natural Habitat</p>
+      </div>
+      <div id="progress" class="progress-card" aria-live="polite"></div>
+    </header>
+    <section class="workspace">
+      <aside class="queue-panel" aria-label="Tome page order">
+        <div class="panel-head"><p class="eyebrow">Tome I</p><h2>Caves & Dungeons</h2></div>
+        <div id="queue" class="queue"></div>
+      </aside>
+      <section class="review-panel">
+        <div id="pageHeader" class="page-head"></div>
+        <div class="review-grid">
+          <div class="art-frame" id="artFrame"></div>
+          <div class="brief-card" id="brief"></div>
+        </div>
+        <div class="decision-card">
+          <div id="statusLine" class="status-line"></div>
+          <label for="notes"><strong>Modification / regeneration notes</strong></label>
+          <textarea id="notes" rows="4" placeholder="Example: Keep the kobold and trap. Simplify the wall detail and open up more white coloring space."></textarea>
+          <div class="quick-tags" id="quickTags">
+            <button type="button" data-tag="more white space">More white space</button>
+            <button type="button" data-tag="less detail">Less detail</button>
+            <button type="button" data-tag="simpler background">Simpler background</button>
+            <button type="button" data-tag="clearer anatomy">Clearer anatomy</button>
+            <button type="button" data-tag="stronger outer contour">Stronger outline</button>
+            <button type="button" data-tag="lighter interior lines">Lighter interior lines</button>
+          </div>
+          <div class="actions">
+            <button id="approve" class="approve" type="button">Approve & Lock</button>
+            <button id="modify" class="modify" type="button">Modify This Page</button>
+            <button id="regenerate" class="regenerate" type="button">Regenerate This Page</button>
+          </div>
+          <p class="rule">The next page stays locked until this page is approved.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
