@@ -19,6 +19,7 @@ STATE_FILE = DATA_DIR / "production-state.json"
 REVIEWS_FILE = DATA_DIR / "reviews.jsonl"
 
 VALID_DECISIONS = {"approve", "modify", "regenerate"}
+WORKER_STATES = {"queued", "generating", "qa_review", "supervisor_review", "modify_requested", "regenerate_requested"}
 ACTIVE_STATES = {
     "queued", "generating", "qa_review", "supervisor_review",
     "awaiting_human", "modify_requested", "regenerate_requested",
@@ -158,6 +159,26 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
     return public_state()
 
 
+def set_worker_status(payload):
+    tome = load_tome()
+    state = load_state()
+    validate_state(tome, state)
+    page_id = payload.get("page_id")
+    if page_id != state["current_page_id"]:
+        raise ValueError("Worker status can only update the current page")
+    status = str(payload.get("status", "")).strip()
+    if status not in WORKER_STATES:
+        raise ValueError("Invalid worker status")
+    page_state = state["pages"][page_id]
+    if page_state["status"] == "locked":
+        raise ValueError("Locked pages cannot be changed by the worker")
+    page_state["status"] = status
+    page_state["worker_message"] = str(payload.get("message", "")).strip()
+    state["updated_at"] = utc_now()
+    write_json(STATE_FILE, state)
+    return public_state()
+
+
 def register_candidate(payload):
     tome = load_tome()
     state = load_state()
@@ -179,7 +200,12 @@ def register_candidate(payload):
         "attempt": attempt,
         "image_path": image_path,
         "qa_status": payload.get("qa_status", "pass"),
+        "qa_score": payload.get("qa_score"),
+        "qa_details": payload.get("qa_details"),
         "supervisor_status": payload.get("supervisor_status", "ready_for_human"),
+        "seed": payload.get("seed"),
+        "generation_mode": payload.get("generation_mode"),
+        "prompt": payload.get("prompt"),
         "created_at": utc_now(),
     }
     page_state["attempt"] = attempt
@@ -239,6 +265,9 @@ class Handler(BaseHTTPRequestHandler):
                 return
             if path == "/api/candidate":
                 self.send_json(register_candidate(payload))
+                return
+            if path == "/api/worker-status":
+                self.send_json(set_worker_status(payload))
                 return
             self.send_json({"error": "Not found"}, HTTPStatus.NOT_FOUND)
         except ValueError as exc:
