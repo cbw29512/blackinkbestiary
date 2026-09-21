@@ -103,6 +103,23 @@ However, ComfyUI has had 2026 Blackwell / DynamicVRAM regressions reported on RT
 5. If DynamicVRAM causes VBAR/OOM instability, test the documented workaround on that machine rather than changing models immediately.
 6. No custom nodes until the core FLUX workflow is proven stable.
 
+## Coloring-book quality gate
+
+FLUX.2 Klein is a general image model, not a purpose-built coloring-book model. Its official capabilities prove generation/editing support and hardware fit; they do **not** prove that every prompt will naturally produce our exact clean line-art house style.
+
+Therefore I-01 is a real go/no-go art test, not a ceremonial smoke test.
+
+Order of escalation if the first outputs are too photographic or too dense:
+
+1. strengthen the Black-Ink prompt and negative style rules;
+2. use the existing strong I-01 artwork as an image-edit reference instead of restarting;
+3. once we have approved pages, use them as **style references** while explicitly preserving each new page's independent composition;
+4. only if the Golden reference approach still cannot hold the style, evaluate one controlled Black-Ink adaptation/LoRA trained from licensed material.
+
+Do **not** respond to a bad page by installing a pile of community LoRAs or models.
+
+The production target remains: a strong result on pass 1 and an approval-quality targeted correction on pass 2.
+
 ## Fallback model
 
 **Qwen-Image-Edit-2511** is reserved only as a later fallback if FLUX.2 Klein cannot preserve approved composition closely enough during MODIFY passes.
