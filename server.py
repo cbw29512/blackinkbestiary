@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+import shutil
 import threading
 import webbrowser
 from datetime import datetime, timezone
@@ -13,6 +14,7 @@ from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
+APPROVED_DIR = WEB_DIR / "approved"
 DATA_DIR = ROOT / "data"
 TOME_FILE = DATA_DIR / "tome-I.json"
 STATE_FILE = DATA_DIR / "production-state.json"
@@ -124,6 +126,21 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
             raise ValueError("Cannot approve without a current candidate")
         if page_state["status"] != "awaiting_human":
             raise ValueError("Page must be awaiting human review before approval")
+        source = (WEB_DIR / candidate["image_path"]).resolve()
+        if WEB_DIR.resolve() not in source.parents:
+            raise ValueError("Candidate image path escapes the web directory")
+        if not source.exists() or not source.is_file():
+            raise ValueError("Candidate image file is missing; cannot approve")
+        if source.suffix.lower() != ".png":
+            raise ValueError("Approved masters must be PNG files")
+        APPROVED_DIR.mkdir(parents=True, exist_ok=True)
+        master = APPROVED_DIR / f"{page_id}.png"
+        if master.exists():
+            raise ValueError("Approved master already exists and will not be overwritten")
+        shutil.copy2(source, master)
+        candidate = dict(candidate)
+        candidate["approved_image_path"] = f"approved/{page_id}.png"
+        page_state["current_candidate"] = candidate
         page_state["status"] = "locked"
         page_state["approved_candidate"] = candidate
         page_state["approved_at"] = utc_now()
@@ -138,6 +155,8 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         else:
             state["complete"] = True
     else:
+        if not candidate or page_state["status"] != "awaiting_human":
+            raise ValueError("Page must be awaiting human review before modification or regeneration")
         page_state["status"] = "modify_requested" if decision == "modify" else "regenerate_requested"
         page_state["last_decision"] = decision
         page_state["review_notes"] = {
