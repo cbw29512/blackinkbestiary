@@ -32,9 +32,10 @@ class ComfyCli:
             raise ComfyCliError("comfy-cli is not installed; run PREPARE_LOCAL_AI.bat")
 
     def run(self, *args: str, timeout: float = 120.0, expect_json: bool = False):
-        command = [self.command, *args]
+        command = [self.command]
         if expect_json:
             command.append("--json")
+        command.extend(args)
         result = subprocess.run(
             command,
             cwd=ROOT,
