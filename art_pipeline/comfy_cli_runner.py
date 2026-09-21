@@ -104,7 +104,7 @@ class ComfyCli:
         )
 
     def workflow_slots(self, workflow: Path):
-        return self.run("workflow", "slots", str(workflow), expect_json=True)
+        return self.run("workflow", "slots", str(workflow), expect_json=True, where="local")
 
     def validate_workflow(self, workflow: Path):
         return self.run(
