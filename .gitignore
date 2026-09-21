@@ -3,3 +3,8 @@ __pycache__/
 .DS_Store
 web/candidates/*
 !web/candidates/.gitkeep
+.blackink-tools/
+.blackink-comfy/
+data/local-environment.json
+data/template-validation.json
+art_pipeline/workflows/official/*.json
