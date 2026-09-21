@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "stack": "ComfyUI + FLUX.2 Klein 4B distilled FP8",
+  "required_models": [
+    {
+      "role": "text_encoder",
+      "filename": "qwen_3_4b.safetensors",
+      "relative_path": "models/text_encoders/qwen_3_4b.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors"
+    },
+    {
+      "role": "diffusion_model",
+      "filename": "flux-2-klein-4b-fp8.safetensors",
+      "relative_path": "models/diffusion_models/flux-2-klein-4b-fp8.safetensors",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4b-fp8/resolve/main/flux-2-klein-4b-fp8.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "flux2-vae.safetensors",
+      "relative_path": "models/vae/flux2-vae.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/flux2-dev/resolve/main/split_files/vae/flux2-vae.safetensors"
+    }
+  ],
+  "notes": [
+    "Use distilled 4B for v1 text-to-image and fast image editing.",
+    "Do not install 9B for v1.",
+    "Do not install Base 4B unless I-01 testing proves distilled editing insufficient."
+  ]
+}
