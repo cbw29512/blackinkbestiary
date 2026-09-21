@@ -10,8 +10,14 @@ class StateTests(unittest.TestCase):
         self.old_state = server.STATE_FILE
         self.old_reviews = server.REVIEWS_FILE
         self.old_load_tome = server.load_tome
+        self.old_web_dir = server.WEB_DIR
+        self.old_approved_dir = server.APPROVED_DIR
         self.temp = tempfile.TemporaryDirectory()
         base = Path(self.temp.name)
+        server.WEB_DIR = base / "web"
+        server.APPROVED_DIR = server.WEB_DIR / "approved"
+        (server.WEB_DIR / "candidates").mkdir(parents=True, exist_ok=True)
+        (server.WEB_DIR / "candidates" / "test.png").write_bytes(b"candidate")
         server.STATE_FILE = base / "state.json"
         server.REVIEWS_FILE = base / "reviews.jsonl"
         server.write_json(server.STATE_FILE, {
@@ -38,6 +44,8 @@ class StateTests(unittest.TestCase):
         server.STATE_FILE = self.old_state
         server.REVIEWS_FILE = self.old_reviews
         server.load_tome = self.old_load_tome
+        server.WEB_DIR = self.old_web_dir
+        server.APPROVED_DIR = self.old_approved_dir
         self.temp.cleanup()
 
     def test_cannot_approve_without_candidate(self):
@@ -51,6 +59,7 @@ class StateTests(unittest.TestCase):
         state = server.load_state()
         self.assertEqual(state["pages"]["I-01"]["status"], "locked")
         self.assertEqual(state["pages"]["I-02"]["status"], "queued")
+        self.assertTrue((server.APPROVED_DIR / "I-01.png").exists())
 
     def test_modify_never_advances(self):
         server.register_candidate({"page_id": "I-01", "image_path": "candidates/test.png"})
@@ -62,6 +71,21 @@ class StateTests(unittest.TestCase):
     def test_reject_candidate_for_future_page(self):
         with self.assertRaises(ValueError):
             server.register_candidate({"page_id": "I-02", "image_path": "candidates/test.png"})
+
+    def test_worker_status_only_changes_current_page(self):
+        result = server.set_worker_status({
+            "page_id": "I-01",
+            "status": "generating",
+            "message": "making candidates",
+        })
+        self.assertEqual(result["current_state"]["status"], "generating")
+        self.assertEqual(result["current_state"]["worker_message"], "making candidates")
+        with self.assertRaises(ValueError):
+            server.set_worker_status({
+                "page_id": "I-02",
+                "status": "generating",
+                "message": "should fail",
+            })
 
 
 if __name__ == "__main__":
