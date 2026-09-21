@@ -1,72 +1,79 @@
 # Windows Local Setup
 
-Black-Ink Bestiary now uses a deliberately controlled local stack.
+Black-Ink Bestiary uses one controlled local AI stack.
 
-## Step 1 — Prepare the project tools
+## Normal setup: one file
 
 Double-click:
 
+`INSTALL_BLACKINK_AI.bat`
+
+That script performs the complete initial machine setup:
+
+1. creates a project-local Python tools environment,
+2. installs pinned **comfy-cli 1.20.0**,
+3. installs pinned **ComfyUI 0.36.0** into `.blackink-comfy`,
+4. skips ComfyUI-Manager and all custom nodes,
+5. downloads exactly three required FLUX.2 Klein files,
+6. verifies every model file by SHA256 before accepting it,
+7. launches ComfyUI locally on `127.0.0.1:8188`,
+8. fetches the two official FLUX.2 Klein workflow templates,
+9. validates them against the live local installation,
+10. records the real Python / PyTorch / GPU / VRAM / launch environment.
+
+The model payload is roughly 12.5 GB, so the first run can take a while depending on internet speed.
+
+## Pinned production stack
+
+- ComfyUI: **0.36.0**
+- comfy-cli: **1.20.0**
+- FLUX.2 [klein] 4B distilled FP8
+- official ComfyUI core nodes only
+- no custom nodes
+- no automatic updates during a book
+
+The exact stack and model hashes are in:
+
+- `docs/LOCAL_AI_STACK.md`
+- `config/local_ai_stack.json`
+
+## If the normal 5060 Ti run hits DynamicVRAM trouble
+
+Do not reinstall models or change the image model.
+
+First run:
+
+`RESTART_AI_SAFE_MODE.bat`
+
+That restarts the dedicated Black-Ink ComfyUI workspace with:
+
+`--disable-dynamic-vram`
+
+This exists because recent ComfyUI issue reports include DynamicVRAM/VBAR/OOM failures on RTX 5060-family hardware. We use it only if the actual production machine reproduces the problem.
+
+## Diagnostics
+
 `PREPARE_LOCAL_AI.bat`
+: install/check only the project tooling.
 
-It:
-1. finds Python 3.10+,
-2. creates a project-local `.blackink-tools` environment,
-3. installs **comfy-cli 1.20.0** there,
-4. runs the Black-Ink local AI doctor.
+`CHECK_LOCAL_SETUP.bat`
+: lightweight server/tool check.
 
-It does not change unrelated Python environments.
+`VALIDATE_LOCAL_TEMPLATES.bat`
+: re-fetch and validate official templates.
 
-## Step 2 — Doctor result
-
-The doctor checks the real machine, not assumptions:
-
-- Python version
-- comfy-cli availability
-- whether ComfyUI is running at `127.0.0.1:8188`
-- ComfyUI version
-- PyTorch version
-- GPU name and VRAM
-- launch arguments
-- exact required model filenames
-
-It writes the machine-specific result to:
-
-`data/local-environment.json`
-
-That file is gitignored.
-
-## Step 3 — Local ComfyUI
-
-Use one known-good ComfyUI install for this project.
-
-Do **not** install random custom nodes.
-
-Do **not** update ComfyUI in the middle of a book once we have a verified production combination.
-
-The target machine is an RTX 5060 Ti 16 GB system. Current ComfyUI has had Blackwell/DynamicVRAM regressions reported in 2026, so the first successful production combination will be recorded and pinned.
-
-## Step 4 — Models
-
-The required initial model set is exactly:
-
-- `models/diffusion_models/flux-2-klein-4b-fp8.safetensors`
-- `models/text_encoders/qwen_3_4b.safetensors`
-- `models/vae/flux2-vae.safetensors`
-
-Do not add Qwen Image Edit, LoRAs, or other models until FLUX.2 Klein has completed the I-01 approval loop.
-
-## Step 5 — Official templates
-
-Once the server and model files are present, run:
-
-`python art_pipeline/validate_local_templates.py`
-
-This fetches and validates:
-- `image_flux2_klein_text_to_image`
-- `image_flux2_klein_image_edit_4b_distilled`
-
-It also records the live template slots so the worker does not rely on guessed node addresses.
+`scripts/blackink_doctor.py`
+: writes the machine report to `data/local-environment.json`.
 
 ## Production gate
 
-We do not advance to I-02 until I-01 has successfully completed generation, QA, supervised review, human decision, and final lock.
+Do not advance to I-02 until I-01 has completed:
+
+```
+page JSON
+→ FLUX generation
+→ QA
+→ supervisor
+→ human review
+→ APPROVE & LOCK
+```
