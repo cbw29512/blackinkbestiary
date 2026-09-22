@@ -48,13 +48,44 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertNotIn("creature_type", raw)
 
         spec = resolve_monster_spec("bugbear-stalker")
-        self.assertEqual(spec["monster_contract"], "black-ink-monster-v2")
+        self.assertEqual(spec["monster_contract"], "black-ink-monster-v3")
         self.assertTrue(spec["catalog"]["minimal_recipe"])
         self.assertEqual(spec["family"], "bugbear")
         self.assertEqual(spec["size"], "medium")
         self.assertEqual(spec["creature_type"], "goblinoid humanoid")
         self.assertIn("ape face or primate muzzle", spec["visual_identity"]["must_avoid"])
         self.assertIn("ape_drift", {item["id"] for item in spec["known_failure_modes"]})
+
+    def test_species_profile_refines_broad_construct_family(self):
+        raw = json.loads(
+            (ROOT / "data" / "monsters" / "flying-sword.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(raw["schema_version"], 3)
+        self.assertNotIn("visual_identity", raw)
+        self.assertEqual(raw["family_profile"], "construct")
+        self.assertEqual(raw["species_profile"], "flying-sword")
+
+        spec = resolve_monster_spec("flying-sword")
+        self.assertEqual(
+            spec["catalog"]["species_profile"],
+            "data/monster_species/flying-sword.json",
+        )
+        self.assertIn("one complete sword", spec["visual_identity"]["must_keep"])
+        self.assertIn("no biological body added", spec["visual_identity"]["must_keep"])
+        self.assertTrue(spec["locomotion"]["can_fly"])
+
+    def test_species_profile_refines_broad_ooze_family(self):
+        raw = json.loads(
+            (ROOT / "data" / "monsters" / "gelatinous-cube.json").read_text(encoding="utf-8")
+        )
+        self.assertNotIn("visual_identity", raw)
+        spec = resolve_monster_spec("gelatinous-cube")
+        self.assertIn("clear cube geometry", spec["visual_identity"]["must_keep"])
+        self.assertIn("faceless anatomy", spec["visual_identity"]["must_keep"])
+        self.assertEqual(
+            spec["catalog"]["species_profile"],
+            "data/monster_species/gelatinous-cube.json",
+        )
 
     def test_family_failure_modes_drive_bugbear_prompt(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
@@ -88,7 +119,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("long reptilian snout", keep)
         self.assertIn("visible tail", keep)
         self.assertEqual(spec["family_profile"], "kobold")
-        self.assertEqual(spec["schema_version"], 2)
+        self.assertEqual(spec["schema_version"], 3)
 
 
 if __name__ == "__main__":
