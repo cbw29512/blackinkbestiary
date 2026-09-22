@@ -49,6 +49,7 @@ class PlatformQualityTests(unittest.TestCase):
 
     def test_composition_failure_recommends_regenerate(self):
         self.assertEqual(recommended_action(ROOT, ["composition wrong"]), "regenerate")
+        self.assertEqual(recommended_action(ROOT, ["wrong monster identity"]), "regenerate")
         self.assertEqual(recommended_action(ROOT, ["less detail"]), "modify")
 
     def test_archetype_rule_is_page_driven(self):
