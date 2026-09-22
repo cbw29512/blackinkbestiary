@@ -27,6 +27,16 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("ape face", avoid)
         self.assertIn("sasquatch_drift", failure_ids)
 
+    def test_hobgoblin_family_blocks_orc_and_goblin_drift(self):
+        spec = resolve_monster_spec("hobgoblin-warrior")
+        avoid = " ".join(spec["visual_identity"]["must_avoid"]).lower()
+        failures = {item["id"] for item in spec.get("known_failure_modes", [])}
+        self.assertIn("orc tusks", avoid)
+        self.assertIn("tiny goblin body", avoid)
+        self.assertIn("orc_drift", failures)
+        self.assertIn("goblin_drift", failures)
+        self.assertEqual(spec["family_profile"], "hobgoblin")
+
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
         keep = spec["visual_identity"]["must_keep"]
