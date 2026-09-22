@@ -1,57 +1,33 @@
 {
+  "schema_version": 3,
   "monster_id": "rug-of-smothering",
   "monster_name": "Rug of Smothering",
-  "family": "construct",
-  "size": "large",
-  "creature_type": "construct",
-  "visual_identity": {
-    "core_identity": "An apparently decorative floor rug animated into a flexible constricting sheet that wraps victims with no face or limbs.",
-    "silhouette": "Large rectangular textile lifting in a curling wave, corners and edges folding around a central victim.",
-    "head_features": "No head, eyes, or mouth; menace comes from folding motion.",
-    "body_shape": "Flat woven rectangle capable of bending, rolling, and wrapping while keeping identifiable rug edges.",
-    "surface": "Broad simple geometric or heraldic pattern with large colorable areas, fringe kept sparse.",
-    "signature_gear": [],
+  "family_profile": "construct",
+  "variant_traits": [
+    "animated rectangular rug",
+    "flexible constricting sheet",
+    "wraps rather than flies",
+    "no face or limbs"
+  ],
+  "taxonomy_overrides": {
+    "default_size": "large"
+  },
+  "visual_overrides": {
+    "core_identity": "An apparently decorative rug animated into a flexible constricting sheet with no face or limbs.",
+    "silhouette": "Large rectangular textile lifting in a curling wave while retaining clear rug corners and edges.",
+    "body_shape": "Flat woven rectangle capable of bending, rolling, and wrapping while remaining unmistakably a rug.",
+    "surface": "Broad simple geometric or heraldic pattern with large colorable areas and sparse fringe.",
+    "must_keep": [
+      "rectangular rug identity",
+      "folding sheet motion",
+      "simple textile pattern",
+      "no face"
+    ],
     "attitude": [
       "sudden",
       "constricting",
       "silent",
       "deceptive"
-    ],
-    "must_keep": [
-      "rectangular rug identity",
-      "folding sheet motion",
-      "victim being wrapped",
-      "simple textile pattern",
-      "no face"
-    ],
-    "must_avoid": [
-      "carpet monster mouth",
-      "tentacles",
-      "solid fabric black fill",
-      "overly intricate pattern",
-      "humanoid limbs",
-      "flying carpet pose"
     ]
-  },
-  "default_habitats": [
-    "noble crypts",
-    "burial chambers",
-    "abandoned halls"
-  ],
-  "accuracy_checks": [
-    "still reads as rug",
-    "wrapping motion is clear",
-    "victim is visible enough to understand action",
-    "pattern remains simple",
-    "no face is added",
-    "large coloring regions remain"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "construct"
+  }
 }
