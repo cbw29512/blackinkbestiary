@@ -36,18 +36,30 @@ jobs:
           python -m json.tool data/environment_spatial_envelopes.json > /dev/null
           for file in data/environment_components/*.json; do python -m json.tool "$file" > /dev/null; done
           python -m json.tool data/series.json > /dev/null
-          python -m unittest discover -s tests -v 2>&1 | tee test-output.txt
-          test ${PIPESTATUS[0]} -eq 0
+          python -m unittest discover -s tests -v
           python scripts/audit_active_book.py
           python scripts/audit_series.py
           python -m compileall -q art_pipeline scripts server.py
           node --check web/app.js
           node --check web/golden-five-view.js
           node --check web/golden-five.js
-      - name: Upload temporary test diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
+
+  diagnostic:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - tests.test_environment_catalog
+          - tests.test_catalog_and_series_audit
+          - tests.test_creature_catalog
+          - tests.test_product_north_star
+          - tests.test_universal_page_contract
+          - tests.test_art_pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          name: test-output
-          path: test-output.txt
-          if-no-files-found: ignore
+          python-version: "3.12"
+      - name: Run focused module
+        run: python -m unittest ${{ matrix.module }} -v
