@@ -3,6 +3,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+try:
+    from .quality_system import archetype_directive, expand_defect_tags
+except ImportError:
+    from quality_system import archetype_directive, expand_defect_tags
+
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
 
@@ -72,6 +77,8 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         *_canonical_sections(spec),
         f"HABITAT: {page['habitat']}.",
         f"MOMENT: {page['moment']}.",
+        f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}.",
+        f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
         _items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules")),
         _items("MUST INCLUDE", page.get("must_include")),
         _items("MUST AVOID", page.get("must_avoid")),
@@ -100,6 +107,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(f"LATEST HUMAN NOTE: {text}")
         if tags:
             sections.append(_items("LATEST HUMAN QUICK CHANGES", tags))
+            sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
 
     sections.append(
         "Final test: the creature must be unmistakable at thumbnail size, its canonical anatomy must survive the "

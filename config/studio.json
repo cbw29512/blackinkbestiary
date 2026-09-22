@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "active_book": {
+    "manifest": "data/tome-I.json",
+    "state": "data/production-state.json",
+    "reviews": "data/reviews.jsonl"
+  },
+  "quality_rules": "config/quality_rules.json",
+  "page_archetypes": "config/page_archetypes.json"
+}

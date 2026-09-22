@@ -1,6 +1,14 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from prompt_builder import STYLE_RULES, _canonical_sections, _items, load_monster_spec
+try:
+    from .quality_system import archetype_directive, expand_defect_tags
+except ImportError:
+    from quality_system import archetype_directive, expand_defect_tags
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
@@ -16,6 +24,8 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
         *_canonical_sections(spec),
         f"HABITAT MUST READ AS: {page['habitat']}.",
         f"STORY MOMENT MUST READ AS: {page['moment']}.",
+        f"SCENE ARCHETYPE MUST REMAIN: {page.get('archetype', 'default_scene')}.",
+        f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
         _items("MUST INCLUDE", page.get("must_include")),
         _items("MUST AVOID", page.get("must_avoid")),
         f"COMPOSITION TARGET: {page.get('composition', '')}".strip(),
@@ -36,8 +46,10 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(f"HUMAN CORRECTION REQUEST: {text}")
         if tags:
             sections.append(_items("HUMAN QUICK CHANGES", tags))
+            sections.append(_items("TARGETED REMEDIATION", expand_defect_tags(ROOT, tags)))
 
     sections.append(
+        "Correct every listed defect, but do not invent unrelated changes. "
         "Make the smallest set of edits needed to satisfy the requirements. "
         "Keep every successful part of the provided image unchanged. "
         "Return one clean black-on-white printable coloring page."

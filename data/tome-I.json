@@ -70,7 +70,8 @@
           "adding gray shading"
         ]
       },
-      "monster_spec_id": "kobold-warrior"
+      "monster_spec_id": "kobold-warrior",
+      "archetype": "trap_scene"
     },
     {
       "page_id": "I-02",
@@ -105,7 +106,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "kobold-shrine-keeper"
+      "monster_spec_id": "kobold-shrine-keeper",
+      "archetype": "lair_scene"
     },
     {
       "page_id": "I-03",
@@ -140,7 +142,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "goblin-minion"
+      "monster_spec_id": "goblin-minion",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-04",
@@ -175,7 +178,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "goblin-warrior"
+      "monster_spec_id": "goblin-warrior",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-05",
@@ -210,7 +214,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "goblin-boss"
+      "monster_spec_id": "goblin-boss",
+      "archetype": "boss_scene"
     },
     {
       "page_id": "I-06",
@@ -245,7 +250,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "hobgoblin-warrior"
+      "monster_spec_id": "hobgoblin-warrior",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-07",
@@ -280,7 +286,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "hobgoblin-captain"
+      "monster_spec_id": "hobgoblin-captain",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-08",
@@ -314,7 +321,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "bugbear-warrior"
+      "monster_spec_id": "bugbear-warrior",
+      "archetype": "stealth_scene"
     },
     {
       "page_id": "I-09",
@@ -349,7 +357,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "bugbear-stalker"
+      "monster_spec_id": "bugbear-stalker",
+      "archetype": "stealth_scene"
     },
     {
       "page_id": "I-10",
@@ -384,7 +393,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "ogre"
+      "monster_spec_id": "ogre",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-11",
@@ -419,7 +429,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "ogre-zombie"
+      "monster_spec_id": "ogre-zombie",
+      "archetype": "horror_scene"
     },
     {
       "page_id": "I-12",
@@ -454,7 +465,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "troll"
+      "monster_spec_id": "troll",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-13",
@@ -489,7 +501,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "troll-limb"
+      "monster_spec_id": "troll-limb",
+      "archetype": "horror_scene"
     },
     {
       "page_id": "I-14",
@@ -524,7 +537,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "darkmantle"
+      "monster_spec_id": "darkmantle",
+      "archetype": "reveal_scene"
     },
     {
       "page_id": "I-15",
@@ -559,7 +573,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "stirges"
+      "monster_spec_id": "stirges",
+      "archetype": "swarm_scene"
     },
     {
       "page_id": "I-16",
@@ -594,7 +609,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "giant-bat"
+      "monster_spec_id": "giant-bat",
+      "archetype": "lair_scene"
     },
     {
       "page_id": "I-17",
@@ -629,7 +645,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "bat-swarm"
+      "monster_spec_id": "bat-swarm",
+      "archetype": "swarm_scene"
     },
     {
       "page_id": "I-18",
@@ -664,7 +681,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "giant-rat"
+      "monster_spec_id": "giant-rat",
+      "archetype": "lair_scene"
     },
     {
       "page_id": "I-19",
@@ -699,7 +717,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "rat-swarm"
+      "monster_spec_id": "rat-swarm",
+      "archetype": "swarm_scene"
     },
     {
       "page_id": "I-20",
@@ -734,7 +753,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "giant-centipede"
+      "monster_spec_id": "giant-centipede",
+      "archetype": "lair_scene"
     },
     {
       "page_id": "I-21",
@@ -769,7 +789,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "giant-fire-beetle"
+      "monster_spec_id": "giant-fire-beetle",
+      "archetype": "lair_scene"
     },
     {
       "page_id": "I-22",
@@ -804,7 +825,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "giant-spider"
+      "monster_spec_id": "giant-spider",
+      "archetype": "lair_scene"
     },
     {
       "page_id": "I-23",
@@ -839,7 +861,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "giant-wolf-spider"
+      "monster_spec_id": "giant-wolf-spider",
+      "archetype": "stealth_scene"
     },
     {
       "page_id": "I-24",
@@ -874,7 +897,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "gelatinous-cube"
+      "monster_spec_id": "gelatinous-cube",
+      "archetype": "reveal_scene"
     },
     {
       "page_id": "I-25",
@@ -909,7 +933,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "black-pudding"
+      "monster_spec_id": "black-pudding",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-26",
@@ -944,7 +969,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "ochre-jelly"
+      "monster_spec_id": "ochre-jelly",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-27",
@@ -979,7 +1005,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "mimic-chest"
+      "monster_spec_id": "mimic-chest",
+      "archetype": "object_monster"
     },
     {
       "page_id": "I-28",
@@ -1014,7 +1041,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "mimic-door"
+      "monster_spec_id": "mimic-door",
+      "archetype": "object_monster"
     },
     {
       "page_id": "I-29",
@@ -1049,7 +1077,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "animated-armor"
+      "monster_spec_id": "animated-armor",
+      "archetype": "reveal_scene"
     },
     {
       "page_id": "I-30",
@@ -1084,7 +1113,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "flying-sword"
+      "monster_spec_id": "flying-sword",
+      "archetype": "object_monster"
     },
     {
       "page_id": "I-31",
@@ -1119,7 +1149,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "rug-of-smothering"
+      "monster_spec_id": "rug-of-smothering",
+      "archetype": "object_monster"
     },
     {
       "page_id": "I-32",
@@ -1154,7 +1185,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "gargoyle"
+      "monster_spec_id": "gargoyle",
+      "archetype": "reveal_scene"
     },
     {
       "page_id": "I-33",
@@ -1189,7 +1221,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "labyrinth-minotaur"
+      "monster_spec_id": "labyrinth-minotaur",
+      "archetype": "large_scale_scene"
     },
     {
       "page_id": "I-34",
@@ -1224,7 +1257,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "minotaur-skeleton"
+      "monster_spec_id": "minotaur-skeleton",
+      "archetype": "horror_scene"
     },
     {
       "page_id": "I-35",
@@ -1259,7 +1293,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "roper"
+      "monster_spec_id": "roper",
+      "archetype": "reveal_scene"
     },
     {
       "page_id": "I-36",
@@ -1295,7 +1330,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "cloaker"
+      "monster_spec_id": "cloaker",
+      "archetype": "reveal_scene"
     },
     {
       "page_id": "I-37",
@@ -1330,7 +1366,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "grick"
+      "monster_spec_id": "grick",
+      "archetype": "reveal_scene"
     },
     {
       "page_id": "I-38",
@@ -1366,7 +1403,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "ankheg"
+      "monster_spec_id": "ankheg",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-39",
@@ -1402,7 +1440,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "bulette"
+      "monster_spec_id": "bulette",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-40",
@@ -1438,7 +1477,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "rust-monster"
+      "monster_spec_id": "rust-monster",
+      "archetype": "lair_scene"
     },
     {
       "page_id": "I-41",
@@ -1474,7 +1514,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "otyugh"
+      "monster_spec_id": "otyugh",
+      "archetype": "horror_scene"
     },
     {
       "page_id": "I-42",
@@ -1510,7 +1551,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "gibbering-mouther"
+      "monster_spec_id": "gibbering-mouther",
+      "archetype": "horror_scene"
     },
     {
       "page_id": "I-43",
@@ -1545,7 +1587,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "basilisk"
+      "monster_spec_id": "basilisk",
+      "archetype": "horror_scene"
     },
     {
       "page_id": "I-44",
@@ -1581,7 +1624,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "cockatrice"
+      "monster_spec_id": "cockatrice",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-45",
@@ -1616,7 +1660,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "purple-worm"
+      "monster_spec_id": "purple-worm",
+      "archetype": "large_scale_scene"
     },
     {
       "page_id": "I-46",
@@ -1652,7 +1697,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "drider"
+      "monster_spec_id": "drider",
+      "archetype": "stealth_scene"
     },
     {
       "page_id": "I-47",
@@ -1688,7 +1734,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "behir"
+      "monster_spec_id": "behir",
+      "archetype": "large_scale_scene"
     },
     {
       "page_id": "I-48",
@@ -1724,7 +1771,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "shrieker-fungus"
+      "monster_spec_id": "shrieker-fungus",
+      "archetype": "horror_scene"
     },
     {
       "page_id": "I-49",
@@ -1760,7 +1808,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "violet-fungus"
+      "monster_spec_id": "violet-fungus",
+      "archetype": "action_scene"
     },
     {
       "page_id": "I-50",
@@ -1797,7 +1846,8 @@
         "color": "black_on_white"
       },
       "reference_image": null,
-      "monster_spec_id": "lich"
+      "monster_spec_id": "lich",
+      "archetype": "boss_scene"
     }
   ]
 }

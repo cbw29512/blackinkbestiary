@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "archetypes": {
+    "default_scene": "One dominant monster, one readable action, and a simple habitat that supports rather than competes with the subject.",
+    "trap_scene": "Show clear cause-and-effect: the trap trigger and trap result must both be readable. The monster remains the focal subject and trap geometry stays simple.",
+    "stealth_scene": "Use a low or concealed pose, clear line of sight, and restrained background detail. Avoid turning the scene into a static portrait.",
+    "swarm_scene": "Use a strong directional flow with distinct readable individuals and deliberate negative space. Never form an unreadable solid mass.",
+    "reveal_scene": "Preserve the disguise or hidden form while making the reveal moment unmistakable with one clear transformation cue.",
+    "boss_scene": "Use a commanding silhouette, stronger posture, and one rank-defining prop. Avoid excessive throne, treasure, or costume clutter.",
+    "lair_scene": "Establish the creature's habitat with two or three large environmental cues while keeping the monster dominant.",
+    "object_monster": "Keep the disguised object's original form readable while adding only the minimum living features needed to reveal the threat.",
+    "large_scale_scene": "Use architecture or environment as a scale reference. Keep the giant creature simple enough that its full silhouette remains readable.",
+    "action_scene": "Prioritize gesture and cause-and-effect. Props must support the action and should not dominate the monster.",
+    "horror_scene": "Use unsettling anatomy and pose without gore. Keep line art clean, printable, and spacious enough to color."
+  }
+}
