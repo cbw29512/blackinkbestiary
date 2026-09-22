@@ -116,7 +116,30 @@
       "scene_identity.behavior_style",
       "accuracy_checks"
     ],
-    "prompt_rule": "A standalone species profile must carry enough visual and scene DNA to produce the creature without relying on page scenery or an invented family."
+    "prompt_rule": "A standalone species profile must carry enough visual and scene DNA to produce the creature without relying on page scenery or an invented family.",
+    "allowed_top_level": [
+      "schema_version",
+      "identity_version",
+      "profile_id",
+      "display_name",
+      "taxonomy",
+      "visual_identity",
+      "scene_identity",
+      "accuracy_checks",
+      "known_failure_modes"
+    ],
+    "forbidden_top_level": [
+      "default_habitats",
+      "environment_fit",
+      "environment_variant",
+      "habitat",
+      "moment",
+      "composition",
+      "must_include",
+      "must_avoid_scene",
+      "reference"
+    ],
+    "environment_rule": "Species DNA must not own rooms, scenery, habitat dressing, page moments, composition, or page-specific props."
   },
   "recipe_forbidden_fields": [
     "visual_identity",
