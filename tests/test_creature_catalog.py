@@ -48,7 +48,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertNotIn("creature_type", raw)
 
         spec = resolve_monster_spec("bugbear-stalker")
-        self.assertEqual(spec["monster_contract"], "black-ink-monster-v2")
+        self.assertEqual(spec["monster_contract"], "black-ink-monster-v3")
         self.assertTrue(spec["catalog"]["minimal_recipe"])
         self.assertEqual(spec["family"], "bugbear")
         self.assertEqual(spec["size"], "medium")
@@ -63,6 +63,34 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", text)
         self.assertIn("gorilla, ape-man, or primate", text)
         self.assertIn("CORRECTION:", text)
+
+    def test_entire_monster_catalog_is_minimal_v3(self):
+        from catalog_audit import audit_monster_catalog
+
+        report = audit_monster_catalog(ROOT)
+        self.assertEqual(report["monster_specs"], 50)
+        self.assertEqual(report["minimal_recipe_specs"], 50)
+        self.assertGreaterEqual(report["family_profiles"], 30)
+        self.assertGreaterEqual(report["variant_profiles"], 19)
+        self.assertGreaterEqual(report["variant_backed_specs"], 19)
+        self.assertEqual(report["errors"], [])
+
+    def test_variant_profile_preserves_specialized_identity(self):
+        cube = resolve_monster_spec("gelatinous-cube")
+        armor = resolve_monster_spec("animated-armor")
+        zombie = resolve_monster_spec("ogre-zombie")
+
+        self.assertEqual(cube["catalog"]["variant_profile"], "data/monster_variants/gelatinous-cube.json")
+        self.assertIn("clear cube geometry", cube["visual_identity"]["must_keep"])
+        self.assertIn("no visible body inside", armor["visual_identity"]["must_keep"])
+        self.assertIn("obvious undead posture", zombie["visual_identity"]["must_keep"])
+
+    def test_variant_family_mismatch_is_rejected(self):
+        raw = json.loads(
+            (ROOT / "data" / "monsters" / "gelatinous-cube.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(raw["family_profile"], "ooze")
+        self.assertEqual(raw["variant_profile"], "gelatinous-cube")
 
     def test_all_family_profiles_pass_expanded_dna_audit(self):
         from catalog_audit import audit_monster_catalog
@@ -88,7 +116,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("long reptilian snout", keep)
         self.assertIn("visible tail", keep)
         self.assertEqual(spec["family_profile"], "kobold")
-        self.assertEqual(spec["schema_version"], 2)
+        self.assertEqual(spec["schema_version"], 3)
 
 
 if __name__ == "__main__":
