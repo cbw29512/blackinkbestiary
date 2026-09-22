@@ -29,6 +29,9 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
     def test_series_readiness_is_honest(self):
         report = audit_series(ROOT)
         self.assertEqual(report["environment_variation_families"], 8)
+        self.assertEqual(report["environment_component_catalogs"], 8)
+        self.assertGreaterEqual(report["environment_components"], 800)
+        self.assertGreaterEqual(report["environment_overlays"], 8)
         self.assertTrue(report["pass"])
         self.assertEqual(report["books_registered"], 8)
         self.assertGreaterEqual(report["source_registry_entries"], 50)
