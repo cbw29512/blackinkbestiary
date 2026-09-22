@@ -18,6 +18,7 @@ from urllib.parse import unquote, urlparse
 
 from art_pipeline.rebuild_state import activate_rebuild_source
 from art_pipeline.manifest_validation import validate_manifest
+from art_pipeline.monster_catalog import load_monster_for_page
 from art_pipeline.quality_system import expand_defect_tags, recommended_action
 from art_pipeline.studio_config import active_book_paths
 from art_pipeline.state_validation import ACTIVE_STATES, assert_valid_state
@@ -72,17 +73,7 @@ def page_by_id(tome, page_id: str):
 
 
 def load_monster_spec(page: dict):
-    spec_id = str(page.get("monster_spec_id", "")).strip()
-    if not spec_id:
-        return None
-    path = MONSTER_DIR / f"{spec_id}.json"
-    if not path.exists():
-        raise ValueError(f"Monster spec not found: {spec_id}")
-    spec = read_json(path)
-    if spec.get("monster_id") != spec_id:
-        raise ValueError(f"Monster spec ID mismatch: {spec_id}")
-    return spec
-
+    return load_monster_for_page(page, MONSTER_DIR)
 
 def public_monster_spec(page: dict):
     spec = load_monster_spec(page)
