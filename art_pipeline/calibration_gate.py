@@ -10,14 +10,12 @@ CONFIG_FILE = ROOT / "config" / "golden_five_calibration.json"
 
 LOGGER = logging.getLogger(__name__)
 
-
 def _read_json(path: Path) -> dict:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         LOGGER.exception("Could not load Golden Five JSON: %s", path)
         raise RuntimeError(f"Could not load Golden Five JSON {path}: {exc}") from exc
-
 
 def _write_json(path: Path, payload: dict) -> None:
     try:
@@ -29,14 +27,11 @@ def _write_json(path: Path, payload: dict) -> None:
         LOGGER.exception("Could not write Golden Five JSON: %s", path)
         raise RuntimeError(f"Could not write Golden Five JSON {path}: {exc}") from exc
 
-
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
-
 def load_calibration_config(path: Path = CONFIG_FILE) -> dict:
     return _read_json(path)
-
 
 def calibration_paths(root: Path = ROOT, config: dict | None = None) -> dict[str, Path]:
     cfg = config or load_calibration_config(root / "config" / "golden_five_calibration.json")
@@ -46,7 +41,6 @@ def calibration_paths(root: Path = ROOT, config: dict | None = None) -> dict[str
         "output_dir": root / cfg["output_dir"],
     }
 
-
 def calibration_case(page_id: str, config: dict | None = None) -> dict:
     cfg = config or load_calibration_config()
     wanted = str(page_id or "").strip()
@@ -54,7 +48,6 @@ def calibration_case(page_id: str, config: dict | None = None) -> dict:
     if not match:
         raise RuntimeError(f"{wanted!r} is not a Golden Five calibration page")
     return dict(match)
-
 
 def validate_calibration(root: Path = ROOT) -> list[str]:
     errors: list[str] = []
@@ -93,7 +86,6 @@ def validate_calibration(root: Path = ROOT) -> list[str]:
 
     return errors
 
-
 def calibration_report(root: Path = ROOT) -> dict:
     cfg = load_calibration_config(root / "config" / "golden_five_calibration.json")
     paths = calibration_paths(root, cfg)
@@ -128,13 +120,11 @@ def calibration_report(root: Path = ROOT) -> dict:
         "pages": rows,
     }
 
-
 def save_calibration_state(state: dict, root: Path = ROOT) -> None:
     cfg = load_calibration_config(root / "config" / "golden_five_calibration.json")
     state["updated_at"] = utc_now()
     state["complete"] = calibration_report_from_state(state, cfg)
     _write_json(calibration_paths(root, cfg)["state"], state)
-
 
 def calibration_report_from_state(state: dict, config: dict) -> bool:
     required = list(config.get("required_review_dimensions") or [])
