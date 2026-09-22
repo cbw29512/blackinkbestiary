@@ -34,6 +34,24 @@ web/approved/Tome-I/I-02.png
 
 Candidate attempts remain under `web/candidates/`; only human-approved pages enter the ordered book folder.
 
+## Production Platform
+
+The Studio is now book-configurable. `config/studio.json` selects the active book manifest, state file, and review log. Shared quality behavior lives in `config/quality_rules.json` and `config/page_archetypes.json`, so fixes improve future books without duplicating Python logic.
+
+Before starting production on any active book:
+
+```powershell
+python scripts/audit_active_book.py
+```
+
+For a brand-new active book state:
+
+```powershell
+python scripts/init_active_book.py
+```
+
+See [Production Platform](docs/PRODUCTION_PLATFORM.md) for the data contract and quality-routing rules.
+
 ## Product Rules
 
 - One current page at a time.
