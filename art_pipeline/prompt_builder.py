@@ -1,7 +1,11 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
+
+try:
+    from .monster_catalog import load_monster_for_page
+except ImportError:
+    from monster_catalog import load_monster_for_page
 
 try:
     from .quality_system import (
@@ -36,17 +40,7 @@ def _items(label: str, values) -> str:
 
 
 def load_monster_spec(page: dict) -> dict | None:
-    spec_id = str(page.get("monster_spec_id", "")).strip()
-    if not spec_id:
-        return None
-    path = MONSTER_DIR / f"{spec_id}.json"
-    if not path.exists():
-        raise RuntimeError(f"Monster spec not found: {path}")
-    spec = json.loads(path.read_text(encoding="utf-8"))
-    if spec.get("monster_id") != spec_id:
-        raise RuntimeError(f"Monster spec ID mismatch in {path}")
-    return spec
-
+    return load_monster_for_page(page)
 
 def _canonical_sections(spec: dict | None) -> list[str]:
     if not spec:
