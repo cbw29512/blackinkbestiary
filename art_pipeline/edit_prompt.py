@@ -4,9 +4,9 @@ from pathlib import Path
 
 from prompt_builder import STYLE_RULES, _canonical_sections, _items, load_monster_spec
 try:
-    from .quality_system import archetype_directive, expand_defect_tags
+    from .quality_system import archetype_directive, environment_directives, expand_defect_tags
 except ImportError:
-    from quality_system import archetype_directive, expand_defect_tags
+    from quality_system import archetype_directive, environment_directives, expand_defect_tags
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -23,6 +23,11 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
         f"SUBJECT MUST REMAIN: {page['monster_name']}.",
         *_canonical_sections(spec),
         f"HABITAT MUST READ AS: {page['habitat']}.",
+        _items("GLOBAL ENVIRONMENT STANDARD", environment_directives(ROOT)),
+        (
+            "ENVIRONMENT PRESERVATION RULE: Preserve successful setting identity, perspective, scale references, "
+            "and story-critical environmental interactions. Simplify clutter only; never flatten the scene into a generic backdrop."
+        ),
         f"STORY MOMENT MUST READ AS: {page['moment']}.",
         f"SCENE ARCHETYPE MUST REMAIN: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
@@ -49,7 +54,7 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(_items("TARGETED REMEDIATION", expand_defect_tags(ROOT, tags)))
 
     sections.append(
-        "Correct every listed defect, but do not invent unrelated changes. "
+        "Correct every listed defect across monster, environment, and story moment, but do not invent unrelated changes. "
         "Make the smallest set of edits needed to satisfy the requirements. "
         "Keep every successful part of the provided image unchanged. "
         "Return one clean black-on-white printable coloring page."
