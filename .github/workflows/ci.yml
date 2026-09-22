@@ -38,3 +38,5 @@ jobs:
           python scripts/audit_series.py
           python -m compileall -q art_pipeline scripts server.py
           node --check web/app.js
+          node --check web/golden-five-view.js
+          node --check web/golden-five.js
