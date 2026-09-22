@@ -5,6 +5,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import uuid
 from pathlib import Path
 
 
@@ -38,6 +39,63 @@ class ComfyClient:
     def health(self) -> dict:
         raw = self._request("/system_stats")
         return json.loads(raw.decode("utf-8"))
+
+
+    def upload_image(
+        self,
+        source: Path,
+        *,
+        subfolder: str = "blackink",
+        overwrite: bool = True,
+    ) -> dict:
+        """Upload a PNG/JPEG into ComfyUI's input folder using its stable multipart endpoint."""
+        source = Path(source)
+        if not source.exists() or not source.is_file():
+            raise ComfyError(f"Image upload source does not exist: {source}")
+
+        boundary = f"----BlackInk{uuid.uuid4().hex}"
+        crlf = b"\r\n"
+        body = bytearray()
+
+        def add_field(name: str, value: str) -> None:
+            body.extend(f"--{boundary}\r\n".encode())
+            body.extend(f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode())
+            body.extend(value.encode("utf-8"))
+            body.extend(crlf)
+
+        add_field("type", "input")
+        add_field("subfolder", subfolder)
+        add_field("overwrite", "true" if overwrite else "false")
+
+        body.extend(f"--{boundary}\r\n".encode())
+        body.extend(
+            (
+                f'Content-Disposition: form-data; name="image"; filename="{source.name}"\r\n'
+                "Content-Type: image/png\r\n\r\n"
+            ).encode()
+        )
+        body.extend(source.read_bytes())
+        body.extend(crlf)
+        body.extend(f"--{boundary}--\r\n".encode())
+
+        request = urllib.request.Request(
+            f"{self.base_url}/upload/image",
+            data=bytes(body),
+            headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+        except (urllib.error.URLError, TimeoutError) as exc:
+            raise ComfyError(f"Could not upload image to ComfyUI: {exc}") from exc
+
+        name = str(payload.get("name") or "").strip()
+        if not name:
+            raise ComfyError(f"ComfyUI upload returned no image name: {payload}")
+        folder = str(payload.get("subfolder") or "").strip("/")
+        payload["load_image_name"] = f"{folder}/{name}" if folder else name
+        return payload
 
     def queue_prompt(self, workflow_api: dict, client_id: str | None = None) -> str:
         payload = {"prompt": workflow_api}
