@@ -8,19 +8,19 @@
   "composition_targets": {
     "primary_subject": {
       "preferred_page_height_fraction": [
-        0.55,
-        0.72
+        0.6,
+        0.75
       ],
       "hard_max_page_height_fraction": 0.82,
       "placement": "centered or near-centered in the primary visual field",
-      "rule": "The monster is the largest and first-read object on the page. Keep it centered or near-centered, substantial, and easy to color, while leaving enough surrounding page area for the habitat and story interaction to remain unmistakable."
+      "rule": "The monster is the largest and first-read object on the page, centered or near-centered, normally occupying about 60–75% of page height. Keep the full or nearly full silhouette readable while leaving a surrounding environmental frame."
     },
     "environment": {
       "preferred_major_cues": [
         2,
         4
       ],
-      "rule": "Use two to four large environment-defining objects or structures arranged around, behind, or beneath the monster. They must establish the habitat without competing with the monster for visual dominance."
+      "rule": "Use two to four large environment-defining forms arranged around and behind the monster. The habitat must read clearly but remain visually secondary."
     },
     "story_prop": {
       "preferred_count": [
@@ -36,13 +36,14 @@
   },
   "shape_rules": [
     "The monster is the dominant central focal shape and should be the first thing the eye reads.",
+    "Keep the full or nearly full monster silhouette visible; avoid cropping major anatomy unless the page concept explicitly requires a close-up.",
     "Favor broad contiguous coloring regions over tiny enclosed islands.",
-    "Use bold outer contours and lighter interior detail.",
-    "Avoid micro-texture such as repeated scales, fur strokes, cracks, pebbles, bubbles, leaves, or barnacles unless only a few are needed for identity.",
-    "Break large environment forms into a small number of medium-to-large colorable regions.",
+    "Use bold outer contours and lighter simpler interior detail.",
+    "Build the environment from a few large colorable forms such as arches, rocks, trees, ruins, doors, stairs, pillars, shelves, or ledges.",
+    "Avoid micro-texture such as repeated scales, fur strokes, cracks, pebbles, bubbles, leaves, barnacles, bricks, coins, or rubble unless only a few are needed for identity.",
     "Frame the monster with environment forms instead of placing equally dominant objects beside it.",
-    "Do not let a single prop or foreground object rival or block the monster unless the composition intentionally uses scale contrast.",
-    "Background depth should come from overlapping large forms and perspective, not from filling empty space with tiny objects."
+    "Story-critical props must remain readable but visually subordinate to the monster.",
+    "Background depth should come from overlap and perspective of large forms, not from filling empty space with tiny objects."
   ],
   "environment_object_scale": {
     "major_objects": "large enough to color comfortably and recognize at thumbnail size",
@@ -57,5 +58,21 @@
     "story-critical object is too small to recognize",
     "large foreground object blocks monster anatomy without narrative purpose",
     "background is empty because detail reduction removed all habitat cues"
-  ]
+  ],
+  "reference_composition": {
+    "source": "user-approved visual references",
+    "monster_page_height_target": [
+      0.6,
+      0.75
+    ],
+    "monster_hard_max_page_height": 0.82,
+    "placement": "centered or near-centered; full or nearly full silhouette visible",
+    "environment_role": "frame the monster around and behind it using large readable shapes",
+    "environment_major_forms": [
+      2,
+      4
+    ],
+    "prop_rule": "story props readable but visually subordinate to the monster",
+    "line_rule": "strong outer contour, simpler interior detail, broad white coloring regions"
+  }
 }
