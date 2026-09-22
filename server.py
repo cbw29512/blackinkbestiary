@@ -21,7 +21,7 @@ from art_pipeline.manifest_validation import validate_manifest
 from art_pipeline.page_contract import resolve_manifest
 from art_pipeline.environment_catalog import resolve_environment_profile
 from art_pipeline.monster_catalog import load_monster_for_page
-from art_pipeline.quality_system import expand_defect_tags, recommended_action
+from art_pipeline.quality_system import expand_defect_tags, review_diagnosis
 from art_pipeline.studio_config import active_book_paths
 from art_pipeline.state_validation import ACTIVE_STATES, assert_valid_state
 
@@ -270,7 +270,13 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         raise ValueError("Invalid decision")
     quick_tags = list(quick_tags or [])
     requested_decision = decision
-    route = recommended_action(ROOT, quick_tags) if quick_tags else decision
+    diagnosis = review_diagnosis(ROOT, quick_tags) if quick_tags else {
+        "action": decision,
+        "failed_dimensions": [],
+        "preserve_dimensions": [],
+        "unknown_tags": [],
+    }
+    route = diagnosis["action"]
     if decision == "modify" and route == "regenerate":
         decision = "regenerate"
     tome = load_tome()
@@ -307,6 +313,10 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         page_state["review_notes"] = {
             "text": notes.strip(),
             "quick_tags": quick_tags,
+            "routing_recommendation": route,
+            "failed_dimensions": diagnosis["failed_dimensions"],
+            "preserve_dimensions": diagnosis["preserve_dimensions"],
+            "unknown_tags": diagnosis["unknown_tags"],
             "at": utc_now(),
         }
 
@@ -321,6 +331,9 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         "requested_decision": requested_decision,
         "decision": decision,
         "routing_recommendation": route,
+        "failed_dimensions": diagnosis["failed_dimensions"],
+        "preserve_dimensions": diagnosis["preserve_dimensions"],
+        "unknown_tags": diagnosis["unknown_tags"],
         "candidate": candidate,
         "approved_image_path": page_state.get("approved_image_path"),
         "notes": notes.strip(),
