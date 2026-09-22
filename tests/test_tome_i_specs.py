@@ -45,6 +45,14 @@ class TomeISpecTests(unittest.TestCase):
             self.assertIn("55–72% of page height", page.get("composition", ""), page["page_id"])
             self.assertIn("two to four large supporting forms", composition, page["page_id"])
 
+    def test_every_page_has_explicit_physicality(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            physicality = page.get("physicality") or {}
+            self.assertTrue(physicality.get("mode"), page["page_id"])
+            self.assertTrue(physicality.get("support"), page["page_id"])
+            self.assertTrue(physicality.get("motion"), page["page_id"])
+
     def test_page_requirements_are_concrete(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         forbidden_placeholders = {"one clear story moment", "large open areas to color"}
