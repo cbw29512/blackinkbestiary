@@ -66,20 +66,21 @@ Reference art controls **identity and anatomy only**. It never controls Black-In
 
 ### 2. Page Spec
 
-A structured JSON blueprint for one page.
+A small structured JSON recipe for what is unique about one page.
 
 It defines:
 - page ID and order
-- monster identity
-- anatomy requirements
-- habitat
-- scene moment
-- composition
-- must-include elements
-- must-avoid elements
-- coloring-book rules
-- optional reference images
-- current review instructions
+- canonical monster spec ID
+- canonical environment profile ID
+- one scene moment
+- scene archetype
+- unique landmark
+- unique framing
+- monster/environment interaction
+- physical state, support, and motion
+- optional page-specific negative exceptions
+
+It does **not** own reusable monster anatomy, habitat prose, global composition, global coloring rules, or current review instructions. Those resolve from the universal engines and production-state review memory. Legacy copies may remain during migration but are non-authoritative.
 
 ### 3. Production Manager
 
