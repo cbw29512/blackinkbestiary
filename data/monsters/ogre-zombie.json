@@ -1,61 +1,24 @@
 {
+  "schema_version": 3,
   "monster_id": "ogre-zombie",
   "monster_name": "Ogre Zombie",
-  "family": "ogre",
-  "size": "large",
-  "creature_type": "undead giant humanoid",
-  "visual_identity": {
-    "core_identity": "A dead ogre animated into a slow hulking corpse, preserving the ogre's huge proportions while showing restrained unmistakable undeath.",
-    "silhouette": "Massive slumped giant with drooping shoulders, uneven gait, thick limbs, and dragging chains.",
-    "head_features": "Broad ogre face with sunken eyes, slack jaw, damaged but recognizable features, no graphic gore.",
-    "body_shape": "Huge heavy ogre frame with sagging posture, stiff joints, and asymmetrical undead movement.",
-    "surface": "Sparse torn skin, a few exposed bone edges or stitched tears, kept clean and non-gory for coloring.",
+  "family_profile": "ogre",
+  "species_profile": "ogre-zombie",
+  "variant_traits": [
+    "undead",
+    "slow",
+    "mindless"
+  ],
+  "visual_overrides": {
     "signature_gear": [
       "dragging chains",
       "torn simple wraps",
       "broken belt or shackles"
-    ],
-    "attitude": [
-      "mindless",
-      "slow",
-      "relentless",
-      "vacant"
-    ],
-    "must_keep": [
-      "huge ogre scale",
-      "broad heavy anatomy",
-      "obvious undead posture",
-      "dragging chains",
-      "restrained corpse damage"
-    ],
-    "must_avoid": [
-      "graphic gore",
-      "skeletal-only body",
-      "fast athletic pose",
-      "troll proportions",
-      "ornate gear",
-      "dense decay texture"
     ]
   },
   "default_habitats": [
     "dark dungeon stairs",
     "crypt access tunnels",
     "abandoned underground prisons"
-  ],
-  "accuracy_checks": [
-    "reads as ogre and zombie simultaneously",
-    "large scale remains obvious",
-    "chains are visible",
-    "undeath is clear without gore",
-    "movement looks slow and heavy",
-    "coloring areas remain open"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "ogre"
+  ]
 }
