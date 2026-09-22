@@ -1,0 +1,59 @@
+{
+  "monster_id": "bugbear-warrior",
+  "monster_name": "Bugbear Warrior",
+  "family": "bugbear",
+  "size": "medium",
+  "creature_type": "goblinoid humanoid",
+  "visual_identity": {
+    "core_identity": "A tall shaggy ambush predator of goblinoid stock, defined by long arms, heavy shoulders, and surprising stealth.",
+    "silhouette": "Broad upper body, very long arms hanging below the waist, slightly hunched posture, shaggy outline, powerful hands.",
+    "head_features": "Heavy goblinoid face with broad nose, small deep-set eyes, pointed ears partly hidden by coarse hair.",
+    "body_shape": "Tall muscular but not bodybuilder-thick humanoid with long reach, large hands and feet, and a forward-leaning ambush posture.",
+    "surface": "Coarse shaggy fur concentrated on head, shoulders, forearms, and back with open uncluttered body areas.",
+    "signature_gear": [
+      "simple hide armor",
+      "large club or morningstar",
+      "rope belt",
+      "minimal scavenged gear"
+    ],
+    "attitude": [
+      "patient",
+      "predatory",
+      "brutal",
+      "stealthy"
+    ],
+    "must_keep": [
+      "very long arms",
+      "shaggy goblinoid silhouette",
+      "broad shoulders",
+      "large hands",
+      "ambush-ready posture"
+    ],
+    "must_avoid": [
+      "ape face",
+      "bear muzzle",
+      "tiny goblin body",
+      "reptilian skin",
+      "full-body dense fur texture",
+      "ornate armor"
+    ]
+  },
+  "default_habitats": [
+    "dark dungeon halls",
+    "cave ambush ledges",
+    "collapsed passages"
+  ],
+  "accuracy_checks": [
+    "arms are visibly longer than normal humanoid arms",
+    "body reads bugbear rather than ogre",
+    "fur is present but not over-rendered",
+    "face remains goblinoid",
+    "ambush posture is clear",
+    "large open coloring regions remain"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  }
+}
