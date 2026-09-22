@@ -43,11 +43,11 @@
     },
     "focal subject weak": {
       "action": "modify",
-      "directive": "Make the monster the dominant focal subject by reducing competing object scale, background contrast, and visual tangents."
+      "directive": "Make the monster immediately readable without weakening habitat identity. Reduce competing object scale, tangents, and unnecessary detail while preserving two to four strong environmental cues and the environmental interaction that supports the story."
     },
     "composition wrong": {
       "action": "regenerate",
-      "directive": "Rebuild the composition around one dominant monster, one clear story beat, and only the habitat elements needed to support that moment."
+      "directive": "Rebuild the composition around three co-equal storytelling pillars: unmistakable monster identity, unmistakable environment identity, and one clear story moment. Use perspective and interaction to connect the creature to the place, with broad colorable shapes instead of filler clutter."
     },
     "environment identity weak": {
       "action": "modify",
