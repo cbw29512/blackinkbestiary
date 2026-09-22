@@ -54,8 +54,9 @@ def environment_checklist(page: dict, root: Path) -> list[str]:
         f"Unique landmark is visible: {variant.get('landmark', '')}",
         f"Framing differs from repeated generic backgrounds: {variant.get('framing', '')}",
         f"Monster/environment interaction reads clearly: {variant.get('interaction', '')}",
-        "Major environmental objects are large and comfortable to color",
-        "Monster is substantial but leaves enough page area for the habitat to read",
+        "Monster is large, centered or near-centered, and the dominant focal shape",
+        "Major environmental objects are large and comfortable to color but visually secondary to the monster",
+        "Monster leaves enough surrounding page area for the habitat to read",
         "Background depth comes from a few large forms, not micro-detail",
     ]
     checks.extend(f"Environment check: {item}" for item in environment_approval_checks(root))
