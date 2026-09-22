@@ -9,10 +9,18 @@ from pathlib import Path
 from comfy_client import ComfyClient, ComfyError
 from prompt_builder import build_prompt, build_supervisor_checklist
 from workflow_adapter import load_workflow, prepare_workflow, validate_template
+try:
+    from .manifest_validation import validate_manifest
+    from .studio_config import active_book_paths
+except ImportError:
+    from manifest_validation import validate_manifest
+    from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
-TOME_FILE = ROOT / "data" / "tome-I.json"
-STATE_FILE = ROOT / "data" / "production-state.json"
+_BOOK_PATHS = active_book_paths(ROOT)
+TOME_FILE = _BOOK_PATHS["manifest"]
+STATE_FILE = _BOOK_PATHS["state"]
+MONSTER_DIR = ROOT / "data" / "monsters"
 WORKFLOW_FILE = Path(__file__).resolve().parent / "workflows" / "flux2_klein_api.json"
 
 
@@ -22,6 +30,9 @@ def read_json(path: Path):
 
 def current_context():
     tome = read_json(TOME_FILE)
+    errors = validate_manifest(ROOT, tome, MONSTER_DIR)
+    if errors:
+        raise RuntimeError("Production manifest invalid: " + " | ".join(errors))
     state = read_json(STATE_FILE)
     page_id = state["current_page_id"]
     page = next(page for page in tome["pages"] if page["page_id"] == page_id)
