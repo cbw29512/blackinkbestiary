@@ -5,13 +5,13 @@ from pathlib import Path
 
 try:
     from .quality_system import archetype_rules
-    from .monster_catalog import resolve_monster_spec
+    from .monster_catalog import minimal_recipe_errors, resolve_monster_spec
     from .environment_catalog import environment_fingerprint, resolve_environment_profile
     from .page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
     from .physicality_prompt import locomotion_errors
 except ImportError:
     from quality_system import archetype_rules
-    from monster_catalog import resolve_monster_spec
+    from monster_catalog import minimal_recipe_errors, resolve_monster_spec
     from environment_catalog import environment_fingerprint, resolve_environment_profile
     from page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
     from physicality_prompt import locomotion_errors
@@ -35,6 +35,7 @@ def _validate_spec(monster_dir: Path, page: dict) -> list[str]:
         return [f"{page_id}: {exc}"]
 
     errors = []
+    errors.extend(minimal_recipe_errors(spec_id, monster_dir))
     explicit_name = str(page.get("monster_name") or "").strip()
     if explicit_name and spec.get("monster_name") != explicit_name:
         errors.append(f"{page_id}: explicit monster_name conflicts with catalog")
