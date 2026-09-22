@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "roper",
+  "display_name": "Roper",
+  "taxonomy": {
+    "family": "roper",
+    "creature_type": "cave aberration",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A stationary cave predator resembling a stalagmite, revealed by one central eye, a toothed mouth, and multiple long adhesive tendrils.",
+    "silhouette": "Tall tapering cone like a stalagmite, broad rooted base, several long rope-like tendrils radiating outward.",
+    "head_features": "No separate head; a single eye and horizontal toothed mouth are embedded in the upper body.",
+    "body_shape": "Conical flexible central trunk with long simple tendrils emerging from its sides.",
+    "limb_structure": "No walking legs; body remains rooted at a broad base while several long tendrils extend outward.",
+    "surface": "Rocklike folds and ridges kept sparse enough to preserve camouflage silhouette.",
+    "must_keep": [
+      "stalagmite body",
+      "single central eye",
+      "toothed mouth",
+      "multiple long tendrils",
+      "anchored cave posture"
+    ],
+    "must_avoid": [
+      "humanoid torso",
+      "many eyes",
+      "octopus head",
+      "walking legs",
+      "dense rock texture",
+      "tree-like branches"
+    ]
+  },
+  "accuracy_checks": [
+    "could plausibly resemble a stalagmite at rest",
+    "single eye is obvious",
+    "mouth is visible",
+    "tendrils are long and distinct",
+    "body remains rooted"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "walking_drift",
+      "symptom": "roper gains legs or mobile beast body",
+      "correction": "restore broad rooted stalagmite base"
+    },
+    {
+      "id": "many_eye_drift",
+      "symptom": "multiple eyes appear",
+      "correction": "restore one central eye"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "body becomes round cephalopod",
+      "correction": "restore tall tapering stalagmite body and rooted base"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Large tall cave form that can plausibly be mistaken for a stalagmite until tendrils extend.",
+    "natural_posture": "Rooted firmly to cave floor with tendrils extending while central body remains stationary.",
+    "behavior_style": [
+      "waiting among stalagmites",
+      "reaching across a cave lane",
+      "guarding a rocky choke point",
+      "revealing eye and mouth from camouflage"
+    ],
+    "environment_fit": [
+      "stalagmite caverns",
+      "deep caves",
+      "rocky underground chambers"
+    ]
+  }
+}
