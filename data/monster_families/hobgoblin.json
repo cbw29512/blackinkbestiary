@@ -33,7 +33,8 @@
       "wild furry silhouette",
       "cute elf face",
       "reptilian features"
-    ]
+    ],
+    "limb_structure": "Balanced athletic humanoid arms and legs with controlled hand placement and stable booted or armored feet; no giant, animal, or exaggerated goblin limb proportions."
   },
   "accuracy_checks": [
     "reads as disciplined goblinoid soldier before generic fantasy brute",
@@ -64,5 +65,20 @@
       "symptom": "face becomes handsome or elf-like",
       "correction": "restore broad flattened goblinoid nose, heavy brow, angular cheeks, and stern predatory eyes"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Medium athletic goblinoid with disciplined humanlike scale, visibly sturdier than a goblin but not hulking like an ogre or orc stereotype.",
+    "natural_posture": "Upright, balanced, alert, and trained: standing guard, patrolling, bracing, or advancing with controlled weight.",
+    "behavior_style": [
+      "standing disciplined guard",
+      "patrolling or holding a formation-ready stance",
+      "organizing or inspecting military gear",
+      "advancing through a defended space with controlled martial body language"
+    ],
+    "environment_fit": [
+      "barracks and fortified halls",
+      "gatehouses and dungeon guard corridors",
+      "ruins or underground chambers repurposed as military posts"
+    ]
+  }
 }
