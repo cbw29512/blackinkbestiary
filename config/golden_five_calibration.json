@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "calibration_id": "golden-five-v1",
+  "purpose": "Prove the universal Black-Ink engine across five deliberately different Tome I page types before mass production begins.",
+  "source_manifest": "data/tome-I.json",
+  "state_path": "data/golden-five-state.json",
+  "output_dir": "web/calibration/golden-five",
+  "required_review_dimensions": [
+    "colorability",
+    "monster_identity",
+    "environment_identity",
+    "story_moment",
+    "physical_grounding",
+    "print_layout"
+  ],
+  "production_gate": {
+    "required_approved_pages": 5,
+    "rule": "All five calibration pages must be human-approved with every required review dimension passing before mass Tome I generation may be treated as calibrated."
+  },
+  "cases": [
+    {
+      "page_id": "I-01",
+      "calibration_role": "small humanoid + trap storytelling + built dungeon perspective",
+      "stress_test": [
+        "kobold identity",
+        "tripwire/pit cause-and-effect",
+        "open coloring regions inside masonry scene"
+      ],
+      "special_rule": "Keep the trap story obvious without filling the corridor with cracks, spikes, or texture."
+    },
+    {
+      "page_id": "I-24",
+      "calibration_role": "ooze volume + corridor scale + internal story objects",
+      "stress_test": [
+        "cube silhouette",
+        "bones/key readable inside body",
+        "simple ten-foot corridor"
+      ],
+      "special_rule": "Internal objects must stay sparse and readable; the cube must remain enjoyable to color."
+    },
+    {
+      "page_id": "I-27",
+      "calibration_role": "object-monster identity + vault environment + close interaction",
+      "stress_test": [
+        "chest-to-mimic transformation",
+        "mouth/tongue readability",
+        "vault identity without treasure clutter"
+      ],
+      "special_rule": "Use one reaching hand only as a subordinate story cue; it may not become a second focal subject."
+    },
+    {
+      "page_id": "I-38",
+      "calibration_role": "burrowing anatomy + natural earth environment + dynamic but supported emergence",
+      "stress_test": [
+        "ankheg anatomy",
+        "earthen burrow identity",
+        "grounded emergence"
+      ],
+      "special_rule": "Show the ankheg half-emerged with lower body visibly supported by the broken earth opening; never depict a midair jump or falling pose."
+    },
+    {
+      "page_id": "I-40",
+      "calibration_role": "unusual insectoid identity + material interaction + armory environment",
+      "stress_test": [
+        "rust monster silhouette and antennae",
+        "metal-feeding contact",
+        "armory identity without weapon clutter"
+      ],
+      "special_rule": "Use only a few large ruined metal forms so the feeding beat reads without turning the armory into tiny-object homework."
+    }
+  ]
+}
