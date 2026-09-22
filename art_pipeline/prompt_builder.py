@@ -95,7 +95,8 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
 
     sections.append(
-        "Final test: all three pillars must pass independently at thumbnail size: the monster is unmistakable, "
+        "Final test: the monster is the large centered or near-centered dominant focal subject and is unmistakable at thumbnail size. "
+        "All three storytelling pillars must pass independently: "
         "the environment is unmistakably the named habitat and worth coloring, and the story moment is unmistakable. "
         "Monster and environment must feel physically connected through perspective, scale, and interaction. "
         "The finished page must still contain generous clean white areas for coloring."
@@ -110,7 +111,7 @@ def build_supervisor_checklist(page: dict) -> list[str]:
         f"Clearly recognizable as {page['monster_name']}",
         f"Habitat reads as: {page['habitat']}",
         f"Scene moment reads as: {page['moment']}",
-        "Monster is immediately readable and visually clear",
+        "Monster is large, centered or near-centered, and visually dominant",
         "Large open white coloring regions",
         "Outer contours stronger than interior detail",
         "No grayscale wash or painterly shading",
