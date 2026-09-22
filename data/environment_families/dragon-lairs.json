@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "family_id": "dragon-lairs",
+  "display_name": "Dragon Lair Environments",
+  "profiles": {
+    "dragon.volcanic-caldera": {
+      "name": "Volcanic Caldera Lair",
+      "description": "Harsh volcanic basin with basalt ledges, vents, and lava channels.",
+      "visual_cues": [
+        "basalt ledge",
+        "lava channel",
+        "vent plume",
+        "crater wall"
+      ],
+      "colorable_forms": [
+        "large rock planes",
+        "broad lava ribbons"
+      ],
+      "must_avoid": [
+        "dense tiny cracks"
+      ]
+    },
+    "dragon.cliff-nest": {
+      "name": "Cliff Nest",
+      "description": "High exposed nesting site built into a massive cliff shelf.",
+      "visual_cues": [
+        "wide cliff ledge",
+        "large nest bowl",
+        "drop-off",
+        "distant peaks"
+      ],
+      "colorable_forms": [
+        "large cliff planes",
+        "simple nest shape"
+      ],
+      "must_avoid": [
+        "forest floor"
+      ]
+    },
+    "dragon.hoard-cavern": {
+      "name": "Hoard Cavern",
+      "description": "Large chamber with a small number of broad treasure piles and architectural remnants.",
+      "visual_cues": [
+        "two large coin mounds",
+        "large chest",
+        "broken pillar",
+        "high cave arch"
+      ],
+      "colorable_forms": [
+        "broad treasure masses",
+        "large stone forms"
+      ],
+      "must_avoid": [
+        "individual coin overload"
+      ]
+    },
+    "dragon.swamp-lair": {
+      "name": "Swamp Dragon Lair",
+      "description": "Shallow wetland den with cypress roots, water channels, and reed islands.",
+      "visual_cues": [
+        "large root knees",
+        "shallow water",
+        "reed island",
+        "fallen log"
+      ],
+      "colorable_forms": [
+        "large roots",
+        "broad water",
+        "simple reeds"
+      ],
+      "must_avoid": [
+        "dry mountain cave"
+      ]
+    }
+  }
+}
