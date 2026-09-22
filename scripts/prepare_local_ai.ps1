@@ -3,7 +3,7 @@ $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 
 Write-Host ""
-Write-Host "Black-Ink Bestiary — Preparing local AI tools" -ForegroundColor Cyan
+Write-Host "Black-Ink Bestiary - Preparing local AI tools" -ForegroundColor Cyan
 Write-Host "================================================"
 
 $Py = Get-Command py -ErrorAction SilentlyContinue
