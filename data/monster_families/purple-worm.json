@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "purple-worm",
+  "display_name": "Purple Worm",
+  "taxonomy": {
+    "family": "purple worm",
+    "creature_type": "monstrosity",
+    "default_size": "gargantuan"
+  },
+  "visual_identity": {
+    "core_identity": "A colossal subterranean worm whose immense segmented body and circular tooth-filled maw can fill an entire mine tunnel.",
+    "silhouette": "Huge cylindrical segmented body emerging through tunnel space, front dominated by round open maw.",
+    "head_features": "No separate skull; front is a circular muscular mouth ringed with inward-pointing teeth.",
+    "body_shape": "Extremely thick worm body with repeated broad segments and long unseen continuation into tunnel.",
+    "limb_structure": "No legs, arms, fins, or wings; the entire body is a massive cylindrical worm.",
+    "surface": "Large simple segmented plates or folds; minimal fine texture.",
+    "must_keep": [
+      "circular maw",
+      "massive tunnel-filling scale",
+      "segmented worm body",
+      "no legs",
+      "subterranean emergence"
+    ],
+    "must_avoid": [
+      "dragon head",
+      "snake face with lips",
+      "limbs",
+      "humanoid eyes",
+      "too many tiny teeth",
+      "dense segment detail"
+    ]
+  },
+  "accuracy_checks": [
+    "maw dominates identity",
+    "scale is obvious from tunnel geometry",
+    "worm body has no limbs",
+    "segments are broad and simple",
+    "teeth remain colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "worm gains dragonlike skull or horns",
+      "correction": "restore circular maw with no separate head shape"
+    },
+    {
+      "id": "snake_drift",
+      "symptom": "front becomes normal snake face",
+      "correction": "replace with round radial mouth opening"
+    },
+    {
+      "id": "microteeth_drift",
+      "symptom": "maw fills with tiny coloring clutter",
+      "correction": "use fewer larger readable teeth"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Gargantuan and tunnel-filling; architecture must visibly establish scale.",
+    "natural_posture": "Body remains supported by tunnel, earth, or cavern opening while emerging or coiling.",
+    "behavior_style": [
+      "emerging through a mine tunnel",
+      "filling a broad subterranean passage",
+      "pressing through broken rock",
+      "coiling around a cavern route"
+    ],
+    "environment_fit": [
+      "mine shafts",
+      "deep tunnels",
+      "underground caverns with strong scale cues"
+    ]
+  }
+}
