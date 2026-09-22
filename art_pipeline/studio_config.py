@@ -57,4 +57,9 @@ def active_book_paths(root: Path) -> dict[str, Path]:
             config["universal_page_contract"],
             "universal page contract",
         ),
+        "universal_monster_contract": resolve_root_path(
+            root,
+            config["universal_monster_contract"],
+            "universal monster contract",
+        ),
     }
