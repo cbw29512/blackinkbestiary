@@ -143,7 +143,9 @@ The brand should not use D&D logos, Wizards of the Coast trade dress, or imply a
 
 ## Current Phase
 
-**Tome I production lane is prepared for all 50 ordered pages.**
+**Engine V2 is structurally green; mass Tome I generation is intentionally gated on Golden Five calibration.**
+
+Before the 50-page rebuild is allowed to run at scale, I-01, I-24, I-27, I-38, and I-40 must each pass human review across colorability, monster identity, environment identity, story moment, physical grounding, and print layout.
 
 Every Tome I page now has:
 - a canonical monster identity spec
@@ -151,7 +153,7 @@ Every Tome I page now has:
 - strict ordered generation/review state
 - technical PNG QA including line-art content checks
 
-Production still requires human approval for every final page:
+After Golden Five reaches 5/5, production still requires human approval for every final page:
 
 ```
 spec → generation → technical QA → human review → edit/regenerate as needed → approve & lock → next page
