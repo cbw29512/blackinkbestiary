@@ -81,6 +81,6 @@
       "lair dressing",
       "environment depth cues"
     ],
-    "rule": "If a visual element could be reused by another creature in the same place, it belongs in the environment family/profile/component/overlay system."
+    "rule": "If a visual element could be reused by another creature in the same place, it belongs in the universal environment engine: family/profile/component/overlay system."
   }
 }
