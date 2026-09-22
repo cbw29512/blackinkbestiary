@@ -13,6 +13,7 @@ from calibration_gate import (
     validate_calibration,
 )
 from calibration_service import public_calibration_state
+from calibration_state import load_calibration_state, set_calibration_generation_error
 
 
 class GoldenFiveCalibrationTests(unittest.TestCase):
@@ -49,6 +50,20 @@ class GoldenFiveCalibrationTests(unittest.TestCase):
         self.assertIn("lower body visibly supported", rule)
         self.assertIn("never depict a midair", rule)
 
+    def test_generation_error_is_exposed_and_can_be_cleared(self):
+        state_path = ROOT / "data" / "golden-five-state.json"
+        original = state_path.read_text(encoding="utf-8")
+        try:
+            set_calibration_generation_error(ROOT, "I-01", "template fetch failed")
+            payload = public_calibration_state(ROOT)
+            page = next(item for item in payload["pages"] if item["page_id"] == "I-01")
+            self.assertEqual(page["generation_error"]["message"], "template fetch failed")
+
+            set_calibration_generation_error(ROOT, "I-01", None)
+            state = load_calibration_state(ROOT)
+            self.assertNotIn("generation_error", state["pages"]["I-01"])
+        finally:
+            state_path.write_text(original, encoding="utf-8")
     def test_studio_calibration_payload_exposes_five_reviewable_pages(self):
         payload = public_calibration_state(ROOT)
         self.assertEqual(len(payload["pages"]), 5)
