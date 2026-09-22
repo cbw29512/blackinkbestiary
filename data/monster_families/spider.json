@@ -28,7 +28,8 @@
       "extra limbs",
       "cartoon smile",
       "dense fur overload"
-    ]
+    ],
+    "limb_structure": "Exactly eight jointed arachnid legs attach to the cephalothorax; no antennae, wings, humanoid arms, mammal paws, or extra limbs."
   },
   "accuracy_checks": [
     "eight legs are countable",
@@ -47,5 +48,20 @@
       "symptom": "wolf-spider wording produces canine features",
       "correction": "remove mammal muzzle, paws, and ears; keep only arachnid anatomy"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Low, wide arachnid spread; exact scale follows the variant, with leg span providing size while the two-part spider body remains clear.",
+    "natural_posture": "Supported on multiple legs, clinging to wall or ceiling, waiting in a web, or descending only with a visible silk/support relationship.",
+    "behavior_style": [
+      "waiting in a web or crevice",
+      "stalking low with legs spread around the body",
+      "climbing wall or ceiling with clear contact",
+      "descending on visible silk while maintaining readable eight-leg anatomy"
+    ],
+    "environment_fit": [
+      "webbed caves and ruined chambers",
+      "shafts, ceilings, arches, and stone crevices",
+      "forest or rocky recesses where web/support geometry remains obvious"
+    ]
+  }
 }
