@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "goblin",
+  "display_name": "Goblin",
+  "taxonomy": {
+    "family": "goblin",
+    "creature_type": "goblinoid humanoid",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "Small wiry goblinoid scavengers with ugly-cunning angular faces, oversized pointed ears, broad flattened noses, quick hands, and opportunistic body language.",
+    "silhouette": "Small narrow torso, thin limbs, oversized pointed ears, slightly hunched or darting posture, large quick hands and feet, sparse hair only.",
+    "head_features": "Broad flattened nose, angular cheeks, low brow, sharp chin, wide irregular-toothed mouth, large pointed ears, lively predatory eyes.",
+    "body_shape": "Lean narrow-chested humanoid with sinewy limbs and a crouched scavenger stance rather than heroic or muscular proportions.",
+    "surface": "Mostly bare leathery-looking skin with sparse hair; never a furry or fluffy outline.",
+    "must_keep": [
+      "oversized pointed ears",
+      "broad flattened goblinoid nose",
+      "angular scrappy face",
+      "small wiry body",
+      "crouched or darting posture"
+    ],
+    "must_avoid": [
+      "cute elf-child face",
+      "imp or devil face",
+      "furry or fluffy silhouette",
+      "animal muzzle",
+      "heroic human proportions",
+      "orc-like bulk",
+      "reptilian snout",
+      "tail"
+    ]
+  },
+  "accuracy_checks": [
+    "goblin reads ugly-cunning rather than cute",
+    "ears and broad nose establish goblinoid identity",
+    "body remains small and wiry",
+    "surface is not furry",
+    "posture is quick, hunched, or opportunistic"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "imp_drift",
+      "symptom": "face reads like an imp or devil",
+      "correction": "flatten the nose, remove demonic cues, strengthen angular goblinoid cheeks and oversized ears"
+    },
+    {
+      "id": "elf_child_drift",
+      "symptom": "face becomes cute, smooth, or childlike",
+      "correction": "sharpen features with low brow, broad nose, irregular teeth, and scrappy expression"
+    },
+    {
+      "id": "furry_gremlin_drift",
+      "symptom": "fur or fluff dominates the silhouette",
+      "correction": "return to mostly bare leathery skin with sparse hair only"
+    },
+    {
+      "id": "heroic_humanoid_drift",
+      "symptom": "upright muscular heroic body",
+      "correction": "reduce muscle mass and use a smaller crouched scavenger posture"
+    }
+  ]
+}
