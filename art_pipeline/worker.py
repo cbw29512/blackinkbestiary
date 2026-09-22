@@ -39,7 +39,7 @@ def current_context():
     page_id = state["current_page_id"]
     page = next(page for page in tome["pages"] if page["page_id"] == page_id)
     page_state = state["pages"][page_id]
-    return page, page_state
+    return resolve_page_spec(page, ROOT), page_state
 
 
 def readiness(comfy_url: str):
