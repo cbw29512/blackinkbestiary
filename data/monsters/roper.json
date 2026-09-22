@@ -1,54 +1,6 @@
 {
+  "schema_version": 3,
   "monster_id": "roper",
   "monster_name": "Roper",
-  "family": "roper",
-  "size": "large",
-  "creature_type": "cave aberration",
-  "visual_identity": {
-    "core_identity": "A stationary cave predator resembling a stalagmite, revealed by one central eye, a toothed mouth, and multiple long adhesive tendrils.",
-    "silhouette": "Tall tapering cone like a stalagmite, rooted broad base, several long rope-like tendrils radiating outward.",
-    "head_features": "No separate head; a single eye and horizontal toothed mouth are embedded in the upper stone-like body.",
-    "body_shape": "Conical flexible central trunk with six or fewer long simple tendrils emerging from its sides.",
-    "surface": "Rocklike folds and ridges kept sparse enough to preserve the camouflage silhouette.",
-    "signature_gear": [],
-    "attitude": [
-      "patient",
-      "camouflaged",
-      "grasping",
-      "sudden"
-    ],
-    "must_keep": [
-      "stalagmite body",
-      "single central eye",
-      "toothed mouth",
-      "multiple long tendrils",
-      "anchored cave posture"
-    ],
-    "must_avoid": [
-      "humanoid torso",
-      "many eyes",
-      "octopus head",
-      "walking legs",
-      "dense rock texture",
-      "tree-like branches"
-    ]
-  },
-  "default_habitats": [
-    "stalagmite caverns",
-    "deep caves",
-    "rocky dungeon chambers"
-  ],
-  "accuracy_checks": [
-    "could plausibly resemble a stalagmite at rest",
-    "single eye is obvious",
-    "mouth is visible",
-    "tendrils are long and distinct",
-    "body remains rooted",
-    "cave camouflage reads clearly"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  "family_profile": "roper"
 }
