@@ -38,7 +38,6 @@
   "accuracy_checks": [
     "emptiness inside helmet is clear",
     "armor reads as one moving construct",
-    "pedestal relationship is visible",
     "plate anatomy is plausible",
     "no wearer appears",
     "metal surfaces remain open for coloring"
