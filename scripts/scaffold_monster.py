@@ -3,6 +3,10 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art_pipeline"))
+from source_scope import monster_allowed
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
@@ -16,6 +20,10 @@ def main() -> int:
     parser.add_argument("family_profile")
     parser.add_argument("--traits", default="", help="Comma-separated variant traits")
     args = parser.parse_args()
+
+    if not monster_allowed(args.monster_id, ROOT):
+        print(f"REFUSED: {args.monster_id!r} is not on the approved 2024 SRD project roster.")
+        return 4
 
     family_path = FAMILY_DIR / f"{args.family_profile}.json"
     if not family_path.exists():
