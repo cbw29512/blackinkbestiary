@@ -1,0 +1,869 @@
+{
+  "schema_version": 1,
+  "family_id": "forest",
+  "display_name": "Forest Environment Component Library",
+  "purpose": "Reusable woodland scenery for clearings, streams, bogs, ravines, ruins, hollow trees, and forest lairs.",
+  "context_rules": [
+    {
+      "terms": [
+        "clearing"
+      ],
+      "add": [
+        "clearing"
+      ]
+    },
+    {
+      "terms": [
+        "stream"
+      ],
+      "add": [
+        "stream",
+        "water"
+      ]
+    },
+    {
+      "terms": [
+        "bog"
+      ],
+      "add": [
+        "bog",
+        "water"
+      ]
+    },
+    {
+      "terms": [
+        "ravine"
+      ],
+      "add": [
+        "ravine",
+        "slope"
+      ]
+    },
+    {
+      "terms": [
+        "hollow"
+      ],
+      "add": [
+        "hollow",
+        "lair",
+        "root"
+      ]
+    },
+    {
+      "terms": [
+        "ruin"
+      ],
+      "add": [
+        "ruin",
+        "ancient"
+      ]
+    },
+    {
+      "terms": [
+        "conifer"
+      ],
+      "add": [
+        "conifer"
+      ]
+    },
+    {
+      "terms": [
+        "birch"
+      ],
+      "add": [
+        "birch"
+      ]
+    },
+    {
+      "terms": [
+        "moonlit"
+      ],
+      "add": [
+        "moonlit"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Foliage is built from a few large masses, never leaf-by-leaf wallpaper.",
+    "Trunks, roots, logs, water edges, rocks, and ruins should be satisfying coloring objects.",
+    "Use open lanes and canopy gaps to preserve negative space.",
+    "A forest page must read as a specific woodland place rather than generic plants behind a monster."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "open woodland clearing framed by two or three large trunks",
+        "contexts": [
+          "clearing",
+          "forest"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "root-arched path with a visible lane beyond",
+        "contexts": [
+          "root",
+          "path"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "stream crossing with one readable bank transition",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "ravine edge or sloped forest shelf with a strong diagonal",
+        "contexts": [
+          "ravine",
+          "slope"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "bog margin with open water and sparse trunks",
+        "contexts": [
+          "bog",
+          "water"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "fallen-log corridor creating a foreground-to-background path",
+        "contexts": [
+          "log",
+          "path"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "hollow-tree pocket with exposed roots and a simple opening",
+        "contexts": [
+          "hollow",
+          "lair"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "overgrown ruin pocket embedded in woodland",
+        "contexts": [
+          "ruin",
+          "ancient"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "broad tree trunks with simplified bark bands",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "mossy stone outcrop with large clean rock planes",
+        "contexts": [
+          "rock",
+          "ruin"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "root-woven earth bank with a few large root forms",
+        "contexts": [
+          "root",
+          "earth"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "weathered ruin masonry partly overtaken by vegetation",
+        "contexts": [
+          "ruin",
+          "ancient"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "bog-darkened wood and broad wet ground edges",
+        "contexts": [
+          "bog",
+          "water"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "conifer trunks with long simple vertical bark shapes",
+        "contexts": [
+          "conifer"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "birch trunks with restrained large bark patches",
+        "contexts": [
+          "birch"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "stream-worn stones with broad rounded surfaces",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "open leaf-litter floor shown as broad masses rather than individual leaves",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "simple dirt path winding between roots",
+        "contexts": [
+          "path"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "broad moss floor around one tree or rock landmark",
+        "contexts": [
+          "moss",
+          "clearing"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "stream bank with one clean water edge",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "bog mud shelf with one large puddle or pool",
+        "contexts": [
+          "bog",
+          "water"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "rocky ravine shelf with a few large stones",
+        "contexts": [
+          "ravine",
+          "rock"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "fallen-log crossing over open ground",
+        "contexts": [
+          "log",
+          "path"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "ruin floor slabs partly covered by roots and moss",
+        "contexts": [
+          "ruin",
+          "ancient"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "high canopy opening with broad leaf masses and sky gaps",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "two crossing branches framing the top of the page",
+        "contexts": [
+          "forest"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "root or branch arch creating a natural threshold",
+        "contexts": [
+          "root",
+          "hollow"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "conifer boughs forming a high tapered canopy",
+        "contexts": [
+          "conifer"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "hanging moss or vine bands used sparingly",
+        "contexts": [
+          "bog",
+          "ruin"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "broken ruin arch beneath tree canopy",
+        "contexts": [
+          "ruin",
+          "ancient"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "leaning trunk creating a strong overhead diagonal",
+        "contexts": [
+          "forest",
+          "slope"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "open clearing sky framed by a few large crowns",
+        "contexts": [
+          "clearing"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "open canopy gap creating clean daylight around the monster",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "sun shaft between trunks rendered as white negative space",
+        "contexts": [
+          "forest"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "reflected light from a stream or pool",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "moonlit clearing with simple bright sky opening",
+        "contexts": [
+          "clearing",
+          "moonlit"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "dappled light suggested with a few broad patches only",
+        "contexts": [
+          "forest"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "glow from a small ruin lantern or shrine light",
+        "contexts": [
+          "ruin",
+          "sacred"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "mist-bright bog opening with simple pale negative space",
+        "contexts": [
+          "bog"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "bright horizon beyond a ravine or forest edge",
+        "contexts": [
+          "ravine",
+          "slope"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "large root arch spanning the path",
+        "contexts": [
+          "root",
+          "forest"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "fallen trunk bridge or barrier",
+        "contexts": [
+          "log",
+          "path"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "single broken stone arch or wall remnant",
+        "contexts": [
+          "ruin",
+          "ancient"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "standing stone or simple woodland shrine marker",
+        "contexts": [
+          "sacred",
+          "ancient"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "natural rock shelf or ledge beside the path",
+        "contexts": [
+          "rock",
+          "ravine"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "hollow trunk opening large enough to read as a lair",
+        "contexts": [
+          "hollow",
+          "lair"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "simple stream bank or stepping-stone crossing",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "weathered wooden footbridge or fence remnant",
+        "contexts": [
+          "path",
+          "ruin"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "giant stump or hollow tree with one bold opening",
+        "contexts": [
+          "hollow",
+          "lair"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "distinctive split or twisted tree",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "single mossy boulder or outcrop",
+        "contexts": [
+          "rock"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "fallen log crossing the scene",
+        "contexts": [
+          "log",
+          "path"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "stream bend or broad pool",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "broken stone arch or shrine ruin",
+        "contexts": [
+          "ruin",
+          "sacred"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "standing stone circle fragment with open center",
+        "contexts": [
+          "ancient",
+          "sacred"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "large root mass gripping one rock or ruin wall",
+        "contexts": [
+          "root",
+          "ruin"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "one broad fern or shrub mass",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "small cluster of three or four large mushrooms",
+        "contexts": [
+          "fungal",
+          "forest"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "one vine band crossing a trunk or stone",
+        "contexts": [
+          "ruin",
+          "forest"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "one reed or grass clump at a water edge",
+        "contexts": [
+          "water",
+          "bog"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "one broad fallen-leaf pile",
+        "contexts": [
+          "forest"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "single broken branch or deadwood form",
+        "contexts": [
+          "forest"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "one abandoned basket, pack, or camp object when story-appropriate",
+        "contexts": [
+          "path",
+          "settlement"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one patch of broad flowers or groundcover",
+        "contexts": [
+          "clearing",
+          "forest"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "exposed root snare or trip line across a narrow path",
+        "contexts": [
+          "root",
+          "trap"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "unstable fallen trunk spanning a drop or stream",
+        "contexts": [
+          "log",
+          "ravine"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "bog pool with a clear sinking edge",
+        "contexts": [
+          "bog",
+          "water"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "thorn wall or bramble choke using large branch shapes",
+        "contexts": [
+          "forest",
+          "trap"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "rockslide edge at a ravine shelf",
+        "contexts": [
+          "ravine",
+          "rock"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "collapsed ruin stones blocking part of the path",
+        "contexts": [
+          "ruin"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "fast stream crossing with one obvious current channel",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "hollow-tree drop or root pit with a broad opening",
+        "contexts": [
+          "hollow",
+          "trap"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "path disappears around a large trunk",
+        "contexts": [
+          "path",
+          "forest"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "root arch frames a deeper section of woods",
+        "contexts": [
+          "root"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "stream bends behind rocks or vegetation",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "ravine drops to a visible lower forest floor",
+        "contexts": [
+          "ravine",
+          "slope"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "ruin doorway opens to trees beyond",
+        "contexts": [
+          "ruin"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "fallen log points toward a distant clearing",
+        "contexts": [
+          "log",
+          "clearing"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "bog opens into a broad misty water lane",
+        "contexts": [
+          "bog",
+          "water"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "tree spacing creates a clear foreground-middle-background rhythm",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few broad moss patches on trunk or stone",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "light mist band kept away from the monster silhouette",
+        "contexts": [
+          "bog",
+          "ravine"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "one hanging vine or moss curtain",
+        "contexts": [
+          "ruin",
+          "bog"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "simple water ripples at a stream or pool edge",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "few large fallen leaves used as accents",
+        "contexts": [
+          "forest"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "small fungal shelf on one trunk",
+        "contexts": [
+          "fungal",
+          "forest"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "weathered stone cracks limited to one ruin feature",
+        "contexts": [
+          "ruin",
+          "ancient"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "clean open sky gap used as negative space",
+        "contexts": [
+          "clearing",
+          "slope"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "monster uses a trunk, boulder, or ruin as partial cover",
+        "contexts": [
+          "forest",
+          "universal"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "monster steps through or under a root arch",
+        "contexts": [
+          "root",
+          "path"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "monster crosses or reaches over a stream edge",
+        "contexts": [
+          "stream",
+          "water"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "monster climbs onto a log, root, or low rock shelf",
+        "contexts": [
+          "log",
+          "rock"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "monster investigates a hollow trunk or ruin opening",
+        "contexts": [
+          "hollow",
+          "ruin"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "monster pushes through one broad plant mass",
+        "contexts": [
+          "forest"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "monster pauses beside a standing stone, stump, or stream landmark",
+        "contexts": [
+          "sacred",
+          "forest"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "monster carries, steals, guards, or drags one simple object along the forest path",
+        "contexts": [
+          "path",
+          "lair"
+        ]
+      }
+    ]
+  }
+}
