@@ -173,3 +173,34 @@ CI and series readiness must fail if:
 - component JSON is invalid
 - the selected environment profile cannot resolve
 - the environment engine becomes dependent on monster-specific scenery JSON
+
+
+## Spatial envelope grammar
+
+Before the engine chooses walls, torches, traps, vegetation, coral, furniture, ruins, or other scenery, the selected environment profile resolves to one strict spatial envelope.
+
+The order is:
+
+**profile -> spatial envelope -> component palette -> overlays -> page-specific landmark / framing / interaction**
+
+Each envelope defines:
+
+- plan shape
+- width/depth or open-space proportions
+- ceiling / overhead condition
+- allowed openings
+- focal-zone organization
+- preferred camera / perspective
+- forms that must be visible
+- spatial drift that automatically fails review
+
+Examples:
+
+- a trapped corridor must remain a narrow linear passage with two readable side boundaries, a floor travel lane, and recession toward a turn/door/gate
+- a low crawlway must visibly retain its low overhead boundary
+- a compact room must show enough bounding surfaces to read as a room rather than a corridor
+- a natural cavern must retain irregular rock geometry and cannot become masonry
+- a forest clearing must preserve an open center instead of filling the page with foliage
+- a reef shelf must show both solid shelf terrain and open-water negative space
+
+The spatial envelope is environment-owned. Monster habitat preferences and reusable scenery components may decorate it but may not change the fundamental geometry.
