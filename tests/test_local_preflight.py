@@ -83,6 +83,18 @@ class LocalPreflightTests(unittest.TestCase):
         self.assertFalse(report["checks"]["required_models"])
         self.assertEqual(report["required_models_missing"], ["vae.safetensors"])
 
+    def test_setup_check_uses_project_workspace_not_legacy_desktop(self):
+        text = (ROOT / "scripts" / "check_local_setup.ps1").read_text(encoding="utf-8")
+        self.assertNotIn("Comfy Desktop", text)
+        self.assertNotIn("art_pipeline\\worker.py", text)
+        self.assertIn("local_ai_stack.json", text)
+        self.assertIn("generate_golden_page.py", text)
+
+    def test_doctor_reuses_preflight_and_stays_modular(self):
+        text = (ROOT / "scripts" / "blackink_doctor.py").read_text(encoding="utf-8")
+        self.assertIn("from local_preflight import local_generation_preflight", text)
+        self.assertLessEqual(len(text.splitlines()), 150)
+
     def test_unreachable_comfyui_blocks_generation(self):
         temp, root = self._root()
         self.addCleanup(temp.cleanup)
