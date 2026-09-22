@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "flying-sword",
+  "display_name": "Flying Sword",
+  "visual_identity": {
+    "core_identity": "A normal-looking weapon animated by magic, flying and attacking with no hand, arm, or visible wielder.",
+    "silhouette": "Single sword suspended horizontally or diagonally in open air with a clear motion arc.",
+    "head_features": "No head or face.",
+    "body_shape": "One complete sword with blade, guard, grip, and pommel; the weapon itself is the creature.",
+    "surface": "Clean metal blade and simple hilt with minimal decorative marks.",
+    "signature_gear": [
+      "single sword only"
+    ],
+    "attitude": [
+      "precise",
+      "guarding",
+      "swift",
+      "unnatural"
+    ],
+    "must_keep": [
+      "one complete sword",
+      "no wielder",
+      "clear airborne position",
+      "simple readable hilt"
+    ],
+    "must_avoid": [
+      "ghost holding sword",
+      "multiple swords",
+      "eyes on blade",
+      "arms or hands",
+      "overly ornate runes",
+      "motion clutter"
+    ]
+  },
+  "accuracy_checks": [
+    "sword is visibly unsupported",
+    "weapon remains dominant",
+    "no hidden hand appears",
+    "blade silhouette is clean",
+    "background stays secondary"
+  ]
+}
