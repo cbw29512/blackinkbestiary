@@ -230,3 +230,19 @@ Rules:
 - I-38 explicitly requires a half-emerged supported pose; the story may feel dynamic but may not become a midair freeze-frame
 
 **Next action:** generate and ruthlessly review the five calibration pages. Only after all five lock does controlled Tome I mass rebuilding begin.
+
+
+## 2026-09-22 Golden Five Studio Workflow
+
+The local Studio now exposes the isolated Golden Five calibration lane directly.
+
+- select I-01, I-24, I-27, I-38, or I-40 without changing the normal Tome I queue
+- generate a calibration candidate with the same universal monster/environment/story/coloring engines
+- open the full-size candidate from the Studio
+- approve a page only when all six review dimensions pass
+- reject by selecting the failed dimensions; the Studio records the failure and immediately starts a regenerated calibration attempt
+- calibration progress is visible as 0/5 through 5/5
+- mass-generation readiness unlocks only at 5/5
+- Golden Five UI/controller/service code is kept modular under the project's 150-line ceiling for new modules
+
+The production page queue remains independent and cannot be advanced by calibration actions.
