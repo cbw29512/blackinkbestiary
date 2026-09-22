@@ -64,7 +64,6 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
     resolved["habitat"] = environment.get("name")
     resolved["identity_rules"] = _merge_unique(
         monster.get("accuracy_checks"),
-        page.get("identity_rules"),
     )
     resolved["must_avoid"] = _merge_unique(
         contract.get("global_must_avoid"),
@@ -76,7 +75,7 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
     resolved.setdefault("composition", defaults.get("composition", ""))
     resolved["coloring_rules"] = _merge_dict(
         defaults.get("coloring_rules") or {},
-        page.get("coloring_rules"),
+        None,
     )
     locomotion_defaults = {
         "can_fly": bool((contract.get("locomotion") or {}).get("default_can_fly", False))
