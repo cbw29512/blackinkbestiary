@@ -36,6 +36,8 @@
     }
   },
   "shape_rules": [
+    "Story should be communicated with simple body language and one clear environment interaction, not with extra clutter.",
+    "If a story beat requires many props or small details, reduce it to the simplest recognizable version.",
     "The monster is the dominant central focal shape and should be the first thing the eye reads.",
     "Keep the full or nearly full monster silhouette visible; avoid cropping major anatomy unless the page concept explicitly requires a close-up.",
     "Favor broad contiguous coloring regions over tiny enclosed islands.",
@@ -87,5 +89,16 @@
     ],
     "prop_rule": "story props readable but visually subordinate to the monster",
     "line_rule": "strong outer contour, simpler interior detail, broad white coloring regions"
+  },
+  "priority_order": [
+    "fun and satisfying to color",
+    "monster identity and readable anatomy",
+    "environment identity",
+    "one simple memorable story beat"
+  ],
+  "colorability_over_story": {
+    "rule": "When story and coloring usability conflict, simplify the story. Never add clutter, tiny props, extra figures, unstable motion, or dense linework merely to make the narrative more elaborate.",
+    "preferred_story_expression": "one clear verb + simple body language + one environmental interaction",
+    "maximum_primary_beats": 1
   }
 }
