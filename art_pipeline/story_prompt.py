@@ -23,10 +23,12 @@ def story_sections(page: dict, root: Path = ROOT) -> list[str]:
         f"STORY BEAT: {page.get('moment', '')}.",
         f"STORY/ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
         f"STORY BODY LANGUAGE: {physicality.get('motion', '')}.",
+        f"STORY PRIORITY: {contract.get('priority_rule', '')}",
         "STORY RULES: " + "; ".join(contract.get("principles") or []) + ".",
         (
             "STATIC STORY TEST: the page must read as one clear verb/action at thumbnail size, "
-            "not as a character portrait or a monster merely holding props."
+            "not as a character portrait or a monster merely holding props. "
+            "If extra story detail would reduce coloring space or silhouette clarity, simplify the story."
         ),
     ]
 
