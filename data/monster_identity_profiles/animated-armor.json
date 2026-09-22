@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "animated-armor",
+  "display_name": "Animated Armor",
+  "extends_family": "construct",
+  "taxonomy": {
+    "family": "construct",
+    "creature_type": "construct",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "An empty suit of medieval plate armor moving under magical force with no wearer inside.",
+    "silhouette": "Complete humanoid plate-armor silhouette with articulated helmet, torso, arms, gauntlets, greaves, and armored feet moving as one hollow construct.",
+    "head_features": "Closed or partly open helmet with visible emptiness where a face would be; no flesh, eyes, skull, or hidden wearer.",
+    "body_shape": "Breastplate, pauldrons, vambraces, gauntlets, faulds, greaves, and boots form one plausible articulated suit.",
+    "limb_structure": "Two articulated armored arms and two armored legs connected through the suit's normal joints; no biological limbs and no detached floating pieces.",
+    "surface": "Broad simple metal plates with restrained dents and edge lines, leaving large open coloring regions.",
+    "must_keep": [
+      "empty armor",
+      "complete recognizable plate suit",
+      "one coherent articulated construct",
+      "visible emptiness inside helmet",
+      "broad simple metal surfaces"
+    ],
+    "must_avoid": [
+      "human wearer",
+      "skeleton inside",
+      "robot machinery",
+      "floating separated armor pieces",
+      "ornate micro-engraving",
+      "cute face"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "Human-sized hollow armor with believable medieval plate proportions.",
+    "natural_posture": "Weight-bearing through armored feet or a clearly supported stance; deliberate guard, step, reach, or turn rather than floating.",
+    "behavior_style": [
+      "guarding",
+      "stepping from stillness",
+      "blocking an approach",
+      "turning toward an intruder"
+    ],
+    "environment_fit": [
+      "armories",
+      "guard halls",
+      "crypt galleries",
+      "ceremonial rooms"
+    ]
+  },
+  "locomotion": {
+    "can_fly": false
+  },
+  "render_identity": {
+    "subject_mode": "single",
+    "expected_count": "one"
+  },
+  "anatomy": {
+    "body_plan": "hollow articulated humanoid armor",
+    "limb_count": 4,
+    "wing_count": 0,
+    "support_logic": "weight-bearing through armored feet unless a page explicitly supplies another support"
+  },
+  "accuracy_checks": [
+    "helmet interior visibly empty",
+    "armor reads as one coherent suit",
+    "plate articulation is plausible",
+    "no biological wearer appears",
+    "large armor surfaces remain colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "wearer_drift",
+      "symptom": "human or skeleton appears inside the suit",
+      "correction": "remove all biological occupants and show empty darkness through helmet and joint gaps"
+    },
+    {
+      "id": "floating_parts_drift",
+      "symptom": "armor pieces separate and hover independently",
+      "correction": "restore one mechanically plausible connected suit with normal plate articulation"
+    }
+  ],
+  "default_habitats": [
+    "armories",
+    "guard halls",
+    "crypt galleries"
+  ]
+}
