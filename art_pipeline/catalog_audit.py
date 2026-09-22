@@ -6,10 +6,20 @@ from pathlib import Path
 
 try:
     from .environment_variation import family_variation_errors, load_variation_registry
-    from .monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
+    from .monster_catalog import (
+        load_monster_contract,
+        minimal_recipe_errors,
+        resolve_monster_spec,
+        species_profile_path,
+    )
 except ImportError:
     from environment_variation import family_variation_errors, load_variation_registry
-    from monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
+    from monster_catalog import (
+        load_monster_contract,
+        minimal_recipe_errors,
+        resolve_monster_spec,
+        species_profile_path,
+    )
 
 
 def _missing_paths(payload: dict, paths) -> list[str]:
@@ -89,11 +99,49 @@ def audit_monster_catalog(root: Path) -> dict:
         if missing:
             errors.append(f"{path.name}: missing family DNA fields: {', '.join(missing)}")
 
+    species_dir = root / "data" / "monster_species"
+    species_profiles = 0
+    for path in sorted(species_dir.glob("*.json")) if species_dir.exists() else []:
+        species_profiles += 1
+        try:
+            profile = _read(path)
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{path.name}: invalid species JSON: {exc}")
+            continue
+        if profile.get("profile_id") != path.stem:
+            errors.append(f"{path.name}: species profile_id must match filename")
+        if not profile.get("visual_identity"):
+            errors.append(f"{path.name}: species profile missing visual_identity")
+        if not profile.get("accuracy_checks"):
+            errors.append(f"{path.name}: species profile missing accuracy_checks")
+
+    legacy_specs = [
+        path.name for path, spec in specs
+        if int(spec.get("schema_version") or 1) < 3
+    ]
+    inline_identity_specs = [
+        path.name for path, spec in specs
+        if isinstance(spec.get("visual_identity"), dict)
+    ]
+    missing_identity_source = []
+    for path, spec in specs:
+        if int(spec.get("schema_version") or 1) < 3:
+            continue
+        if not spec.get("family_profile") and not spec.get("species_profile"):
+            missing_identity_source.append(path.name)
+
+    scale_ready = not legacy_specs and not inline_identity_specs and not missing_identity_source
+
     return {
         "pass": not errors,
+        "scale_ready": scale_ready and not errors,
         "monster_specs": len(specs),
         "repeated_families": sorted(repeated),
         "family_profiles": family_profiles,
+        "species_profiles": species_profiles,
+        "legacy_specs": legacy_specs,
+        "inline_identity_specs": inline_identity_specs,
+        "missing_identity_source": missing_identity_source,
         "errors": errors,
     }
 
