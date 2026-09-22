@@ -1,57 +1,33 @@
 {
+  "schema_version": 3,
   "monster_id": "bat-swarm",
   "monster_name": "Bat Swarm",
-  "family": "bat",
-  "size": "swarm",
-  "creature_type": "swarm of tiny beasts",
-  "visual_identity": {
-    "core_identity": "A dense but readable cloud of ordinary cave bats moving as one turbulent mass through confined underground air.",
-    "silhouette": "Dozens of small bat silhouettes arranged in a clear upward spiral or funnel, with negative space between groups.",
-    "head_features": "Individual bats have simple pointed ears and short natural muzzles; no single face dominates.",
-    "body_shape": "Small natural bat bodies with simple membrane wings, varied wing positions, no oversized leader creature.",
+  "family_profile": "bat",
+  "variant_traits": [
+    "swarm of many tiny natural bats",
+    "directional spiral or funnel movement",
+    "negative space between clusters",
+    "no single leader bat"
+  ],
+  "taxonomy_overrides": {
+    "default_size": "swarm",
+    "creature_type": "swarm of tiny beasts"
+  },
+  "visual_overrides": {
+    "core_identity": "A readable swarm of ordinary bats moving as one turbulent mass while individual bat anatomy remains visible.",
+    "silhouette": "Many small bat silhouettes arranged in a clear directional spiral or funnel with open gaps between groups.",
+    "body_shape": "Repeated small natural bat bodies in varied wing positions with no oversized leader creature.",
     "surface": "Minimal fur and wing detail to prevent visual noise.",
-    "signature_gear": [],
+    "must_keep": [
+      "many distinct bats",
+      "clear swarm movement",
+      "negative space between clusters"
+    ],
     "attitude": [
       "panicked",
       "surging",
       "chaotic",
       "fast"
-    ],
-    "must_keep": [
-      "many distinct bats",
-      "clear swarm movement",
-      "natural bat anatomy",
-      "strong directional flow",
-      "negative space between clusters"
-    ],
-    "must_avoid": [
-      "solid black cloud",
-      "single giant bat",
-      "bird flock",
-      "insect swarm",
-      "dense crosshatching",
-      "unreadable overlap"
     ]
-  },
-  "default_habitats": [
-    "vertical wells",
-    "cave shafts",
-    "collapsed underground chambers"
-  ],
-  "accuracy_checks": [
-    "swarm direction is instantly readable",
-    "individual bats remain recognizable",
-    "center retains open space",
-    "no single bat dominates",
-    "shaft geometry remains visible",
-    "page avoids black visual mass"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "bat"
+  }
 }
