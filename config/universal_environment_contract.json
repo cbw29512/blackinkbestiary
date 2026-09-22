@@ -26,8 +26,8 @@
     "note": "Retained for backward compatibility and coarse family diversity audits. New generation uses the v3 component_engine and overlay_engine."
   },
   "prompt_rules": [
-    "Lock the spatial envelope before selecting scenery: define plan shape, proportions, ceiling/overhead, openings, focal zone, and camera so the place cannot drift into a generic room.",
-    "State spatial type, material language, identity markers, and spatial read explicitly.",
+    "Use one authoritative ROOM BRIEF compiled from the selected profile and spatial envelope.",
+    "The ROOM BRIEF must state geometry, proportions, materials, overhead condition, openings, focal organization, and view without redundant alternate descriptions.",
     "Use at least one large structural cue and one unmistakable location marker.",
     "The environment must remain identifiable if the monster is mentally removed.",
     "Do not use smooth featureless walls, generic room boxes, or vague scenery when a more specific setting is required.",
@@ -130,5 +130,18 @@
     ],
     "sequence": "profile -> spatial envelope -> component palette -> overlays -> page-specific landmark/framing/interaction",
     "review_rule": "A page fails environment QA if its bounding geometry, proportions, ceiling/overhead condition, openings, or focal-zone organization contradict the resolved spatial envelope."
+  },
+  "room_brief_engine": {
+    "purpose": "Compile the full environment profile and spatial envelope into one concise authoritative room description for generation while retaining the detailed source data for validation and QA.",
+    "sequence": "profile + spatial envelope -> ROOM BRIEF -> proof cues -> compact component palette -> overlays -> page recipe lock",
+    "prompt_rule": "Generation receives one authoritative ROOM BRIEF instead of multiple overlapping descriptions of the same space.",
+    "proof_cue_limit": 5,
+    "drift_failure_limit": 4,
+    "duplication_rule": "Do not separately repeat spatial type, material language, spatial read, plan shape, proportions, ceiling, openings, focal zone, camera, profile description, and visual cues after the ROOM BRIEF.",
+    "specificity_rule": "A room brief must define geometry, scale/proportions, material, overhead condition, openings, focal organization, and camera in compact literal language.",
+    "anti_improvisation_rule": "The image model may decorate inside the brief but may not reinterpret the room into a different corridor, chamber, cave, exterior, aquatic, or sacred-space type.",
+    "max_words": 95,
+    "max_sentences": 7,
+    "brevity_rule": "If the compiled brief exceeds the budget, shorten wording; never solve it by deleting geometry, material, overhead, openings, focal organization, or view."
   }
 }

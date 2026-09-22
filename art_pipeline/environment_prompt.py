@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 try:
+    from .environment_brief import build_room_brief
     from .environment_catalog import load_environment_contract, resolve_environment_profile
     from .environment_components import assemble_environment_palette
     from .environment_spatial import resolve_spatial_envelope
@@ -13,6 +14,7 @@ try:
         environment_directives,
     )
 except ImportError:
+    from environment_brief import build_room_brief
     from environment_catalog import load_environment_contract, resolve_environment_profile
     from environment_components import assemble_environment_palette
     from environment_spatial import resolve_spatial_envelope
@@ -69,8 +71,9 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     identity = profile.get("resolved_identity") or {}
     palette = assemble_environment_palette(page, root)
     envelope = resolve_spatial_envelope(profile)
+    room = build_room_brief(page, root)
     component_lines = [
-        f"SELECTED {group.replace('_', ' ').upper()}: {item.get('text', '')}."
+        f"ROOM COMPONENT — {group.replace('_', ' ')}: {item.get('text', '')}."
         for group, item in palette["components"].items()
     ]
     overlay_rules = [
@@ -79,26 +82,11 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         for rule in overlay.get("directives") or []
     ]
     return [
-        f"ENVIRONMENT PROFILE: {profile['name']}.",
-        f"ENVIRONMENT SPATIAL TYPE: {identity.get('spatial_type', '')}.",
-        f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
-        _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
-        f"ENVIRONMENT SPATIAL READ: {identity.get('spatial_read', '')}.",
-        f"SPACE ENVELOPE: {envelope['envelope_id']}.",
-        f"SPACE PLAN SHAPE: {envelope.get('plan_shape', '')}.",
-        f"SPACE PROPORTIONS: {envelope.get('proportions', '')}.",
-        f"SPACE CEILING / OVERHEAD: {envelope.get('ceiling', '')}.",
-        f"SPACE OPENINGS: {envelope.get('openings', '')}.",
-        f"SPACE FOCAL ZONE: {envelope.get('focal_zone', '')}.",
-        f"SPACE CAMERA: {envelope.get('camera', '')}.",
-        _items("SPACE MUST SHOW", envelope.get("must_show")),
-        _items("SPACE DRIFT FAILURES", envelope.get("must_not_drift")),
-        _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", load_environment_contract().get("prompt_rules")),
-        f"ENVIRONMENT ACCURACY: {profile['description']}",
-        _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
-        _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
-        _items("ENVIRONMENT ERRORS TO AVOID", profile.get("must_avoid")),
-        _items("ENVIRONMENT ASSEMBLY CONTEXTS", palette.get("contexts")),
+        f"ROOM BRIEF — AUTHORITATIVE: {room['brief']}",
+        _items("ROOM PROOF CUES", room.get("proof_cues")),
+        _items("ROOM DRIFT FAILURES", room.get("drift_failures")),
+        _items("ROOM COLORING FORMS", profile.get("colorable_forms")),
+        _items("ROOM PROFILE ERRORS", profile.get("must_avoid")),
         *component_lines,
         _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules),
         _items("REQUIRED OBJECT PHYSICAL RULES", _required_object_rules(page)),
