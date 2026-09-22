@@ -16,6 +16,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+from art_pipeline.rebuild_state import activate_rebuild_source
+
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
 DATA_DIR = ROOT / "data"
@@ -229,34 +231,6 @@ def append_review(entry):
         handle.write(json.dumps(entry) + "\n")
 
 
-def activate_rebuild_source(state: dict, page_id: str) -> bool:
-    entry = state["pages"][page_id]
-    image_path = str(entry.get("rebuild_source_path") or "").strip()
-    if not image_path:
-        return False
-    relative = Path(image_path)
-    if relative.is_absolute() or ".." in relative.parts:
-        raise ValueError(f"Unsafe rebuild source path for {page_id}")
-    source = (WEB_DIR / relative).resolve()
-    if not source.exists() or not source.is_file():
-        raise ValueError(f"Rebuild source is missing for {page_id}: {image_path}")
-
-    attempt = int(entry.get("attempt", 0)) + 1
-    candidate = {
-        "candidate_id": f"{page_id}-REBUILD-SOURCE",
-        "attempt": attempt,
-        "image_path": image_path,
-        "qa_status": "imported_rebuild_source",
-        "supervisor_status": "needs_human_review",
-        "generation_mode": "rebuild_source",
-        "created_at": utc_now(),
-    }
-    entry["attempt"] = attempt
-    entry["current_candidate"] = candidate
-    entry.setdefault("attempt_history", []).append(candidate)
-    entry["status"] = "awaiting_human"
-    return True
-
 
 def tome_folder_name(tome) -> str:
     tome_id = str(tome.get("tome_id", "TOME-I")).strip()
@@ -327,7 +301,7 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         if index + 1 < len(order):
             next_id = order[index + 1]
             state["current_page_id"] = next_id
-            if not activate_rebuild_source(state, next_id):
+            if not activate_rebuild_source(state, next_id, WEB_DIR):
                 state["pages"][next_id]["status"] = "queued"
         else:
             state["complete"] = True
