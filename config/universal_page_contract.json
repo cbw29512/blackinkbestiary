@@ -53,7 +53,9 @@
     "environment disconnected from the story moment",
     "clutter that obscures monster, habitat, or story beat",
     "accidental hovering or unsupported standing pose",
-    "tiny repeated texture that creates coloring homework"
+    "tiny repeated texture that creates coloring homework",
+    "non-flying creature shown jumping, falling, dropping, or frozen in midair",
+    "chaotic action pose that makes anatomy difficult to read or color"
   ],
   "page_uniqueness": {
     "fingerprint_fields": [
@@ -84,6 +86,13 @@
       "levitating",
       "magical-flight"
     ],
-    "rule": "Only creatures whose resolved monster data explicitly sets locomotion.can_fly=true may use powered airborne modes. Falling or jumping is allowed for non-flyers only when the source, trajectory, and landing/support logic are explicit. Otherwise non-flyers must visibly contact a support surface."
+    "forbidden_static_coloring_modes": [
+      "falling",
+      "jumping",
+      "leaping",
+      "dropping",
+      "midair"
+    ],
+    "rule": "Coloring pages favor stable natural poses. Non-flying creatures must be visibly supported by the environment and may not be shown falling, jumping, leaping, dropping, hovering, or frozen in midair. Creatures with locomotion.can_fly=true may use controlled natural flight, but the pose must remain calm, readable, and easy to color."
   }
 }
