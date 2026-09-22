@@ -10,109 +10,159 @@ def envelope_data(payload):
     return payload
 
 
-def _slot(slots: list[dict], address: str):
-    return next((s for s in slots if str(s.get("address")) == address), None)
+def _node_by_type(nodes: list[dict], node_type: str) -> dict:
+    matches = [n for n in nodes if isinstance(n, dict) and n.get("type") == node_type]
+    if len(matches) != 1:
+        raise RuntimeError(f"Expected exactly one {node_type} node, found {len(matches)}")
+    return matches[0]
 
 
-def _root(address: str) -> str:
-    return address.split(".", 1)[0].split("/", 1)[0]
-
-
-def select_distilled_branch(slots: list[dict]) -> tuple[str, list[str]]:
-    unets = [
-        s for s in slots
-        if s.get("name") == "unet_name" and "." in str(s.get("address", ""))
+def _primitive_by_title(nodes: list[dict], title: str) -> dict:
+    matches = [
+        n for n in nodes
+        if isinstance(n, dict)
+        and n.get("type") == "PrimitiveInt"
+        and str(n.get("title", "")).lower() == title.lower()
     ]
-    if not unets:
-        raise RuntimeError("Official FLUX.2 Klein template exposed no unet_name slots.")
-
-    roots = sorted({_root(str(s["address"])) for s in unets}, key=lambda x: int(x) if x.isdigit() else x)
-    scored = []
-    for slot in unets:
-        root = _root(str(slot["address"]))
-        current = str(slot.get("current_value", "")).lower()
-        steps = next(
-            (s.get("current_value") for s in slots
-             if _root(str(s.get("address", ""))) == root and s.get("name") == "steps"),
-            None,
-        )
-        cfg = next(
-            (s.get("current_value") for s in slots
-             if _root(str(s.get("address", ""))) == root and s.get("name") == "cfg"),
-            None,
-        )
-        score = 0
-        if "base" not in current:
-            score += 10
-        if isinstance(steps, (int, float)) and steps <= 4:
-            score += 5
-        if isinstance(cfg, (int, float)) and cfg <= 1.5:
-            score += 3
-        scored.append((score, root, current, steps, cfg))
-
-    scored.sort(reverse=True)
-    selected = scored[0]
-    if selected[0] < 10:
-        raise RuntimeError(f"Could not identify distilled FLUX.2 Klein branch from slots: {scored}")
-    return selected[1], roots
+    if len(matches) != 1:
+        raise RuntimeError(f"Expected exactly one PrimitiveInt titled {title!r}, found {len(matches)}")
+    return matches[0]
 
 
-def prompt_slot(slots: list[dict]) -> str:
-    candidates = [
-        str(s["address"]) for s in slots
-        if s.get("node_type") == "PrimitiveStringMultiline" and s.get("name") == "value"
+def _set_widget(node: dict, index: int, value) -> None:
+    values = node.get("widgets_values")
+    if not isinstance(values, list):
+        values = []
+        node["widgets_values"] = values
+    while len(values) <= index:
+        values.append(None)
+    values[index] = value
+
+
+def _find_distilled_definition(workflow: dict) -> dict:
+    definitions = workflow.get("definitions")
+    subgraphs = definitions.get("subgraphs") if isinstance(definitions, dict) else None
+    if not isinstance(subgraphs, list):
+        raise RuntimeError("Official FLUX template has no subgraph definitions.")
+
+    matches = [
+        sg for sg in subgraphs
+        if isinstance(sg, dict)
+        and "text to image" in str(sg.get("name", "")).lower()
+        and "flux.2 klein 4b" in str(sg.get("name", "")).lower()
+        and "distilled" in str(sg.get("name", "")).lower()
     ]
-    if len(candidates) != 1:
-        raise RuntimeError(f"Expected one shared prompt primitive, found: {candidates}")
-    return candidates[0]
+    if len(matches) != 1:
+        names = [sg.get("name") for sg in subgraphs if isinstance(sg, dict)]
+        raise RuntimeError(f"Could not identify one distilled FLUX.2 Klein text-to-image subgraph: {names}")
+    return matches[0]
 
 
-def build_distilled_overrides(
-    slots: list[dict],
-    selected_root: str,
+def _find_branch_instances(workflow: dict, selected_definition: dict) -> tuple[str, list[str]]:
+    definitions = workflow.get("definitions", {}).get("subgraphs", [])
+    family_ids = {
+        str(sg.get("id"))
+        for sg in definitions
+        if isinstance(sg, dict)
+        and "text to image" in str(sg.get("name", "")).lower()
+        and "flux.2 klein 4b" in str(sg.get("name", "")).lower()
+    }
+
+    selected_type = str(selected_definition.get("id"))
+    selected = []
+    roots = []
+    for node in workflow.get("nodes", []):
+        if not isinstance(node, dict):
+            continue
+        node_type = str(node.get("type", ""))
+        if node_type in family_ids:
+            roots.append(str(node.get("id")))
+        if node_type == selected_type:
+            selected.append(str(node.get("id")))
+
+    if len(selected) != 1:
+        raise RuntimeError(f"Expected one distilled branch instance, found {selected}")
+    if len(roots) < 1:
+        raise RuntimeError("No FLUX.2 Klein text-to-image branch instances found.")
+    return selected[0], sorted(roots, key=lambda x: int(x) if x.isdigit() else x)
+
+
+def _patch_model_metadata(node: dict, filename: str) -> None:
+    properties = node.get("properties")
+    models = properties.get("models") if isinstance(properties, dict) else None
+    if isinstance(models, list) and models and isinstance(models[0], dict):
+        models[0]["name"] = filename
+
+
+def patch_distilled_definition(
+    definition: dict,
     *,
     prompt: str,
     seed: int,
     model_filename: str,
+    clip_filename: str,
+    vae_filename: str,
     width: int,
     height: int,
-) -> dict:
-    overrides = {
-        prompt_slot(slots): prompt,
-        f"{selected_root}.unet_name": model_filename,
-        f"{selected_root}.noise_seed": seed,
-    }
+) -> None:
+    nodes = definition.get("nodes")
+    if not isinstance(nodes, list):
+        raise RuntimeError("Distilled subgraph has no nodes list.")
 
-    if _slot(slots, f"{selected_root}.value"):
-        overrides[f"{selected_root}.value"] = width
-    if _slot(slots, f"{selected_root}.value_1"):
-        overrides[f"{selected_root}.value_1"] = height
+    unet = _node_by_type(nodes, "UNETLoader")
+    clip = _node_by_type(nodes, "CLIPLoader")
+    vae = _node_by_type(nodes, "VAELoader")
+    noise = _node_by_type(nodes, "RandomNoise")
+    scheduler = _node_by_type(nodes, "Flux2Scheduler")
+    cfg = _node_by_type(nodes, "CFGGuider")
+    latent = _node_by_type(nodes, "EmptyFlux2LatentImage")
+    text = _node_by_type(nodes, "CLIPTextEncode")
+    width_node = _primitive_by_title(nodes, "Width")
+    height_node = _primitive_by_title(nodes, "Height")
 
-    step_slot = next(
-        (s for s in slots if _root(str(s.get("address", ""))) == selected_root and s.get("name") == "steps"),
-        None,
-    )
-    cfg_slot = next(
-        (s for s in slots if _root(str(s.get("address", ""))) == selected_root and s.get("name") == "cfg"),
-        None,
-    )
-    if step_slot:
-        overrides[str(step_slot["address"])] = 4
-    if cfg_slot:
-        overrides[str(cfg_slot["address"])] = 1
-    return overrides
+    _set_widget(unet, 0, model_filename)
+    _set_widget(clip, 0, clip_filename)
+    _set_widget(vae, 0, vae_filename)
+    _set_widget(noise, 0, seed)
+    _set_widget(noise, 1, "fixed")
+    _set_widget(scheduler, 0, 4)
+    _set_widget(scheduler, 1, width)
+    _set_widget(scheduler, 2, height)
+    _set_widget(cfg, 0, 1)
+    _set_widget(latent, 0, width)
+    _set_widget(latent, 1, height)
+    _set_widget(latent, 2, 1)
+    _set_widget(text, 0, prompt)
+    _set_widget(width_node, 0, width)
+    _set_widget(width_node, 1, "fixed")
+    _set_widget(height_node, 0, height)
+    _set_widget(height_node, 1, "fixed")
+
+    _patch_model_metadata(unet, model_filename)
+    _patch_model_metadata(clip, clip_filename)
+    _patch_model_metadata(vae, vae_filename)
 
 
-def activate_branch(workflow_path: Path, selected_root: str, branch_roots: list[str]) -> None:
-    workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
-    nodes = {str(node.get("id")): node for node in workflow.get("nodes", [])}
+def patch_shared_prompt(workflow: dict, prompt: str) -> str:
+    candidates = [
+        node for node in workflow.get("nodes", [])
+        if isinstance(node, dict)
+        and node.get("type") == "PrimitiveStringMultiline"
+        and str(node.get("title", "")).lower() == "prompt"
+    ]
+    if len(candidates) != 1:
+        raise RuntimeError(f"Expected one shared Prompt primitive, found {len(candidates)}")
+    _set_widget(candidates[0], 0, prompt)
+    return str(candidates[0].get("id"))
+
+
+def activate_branch(workflow: dict, selected_root: str, branch_roots: list[str]) -> None:
+    nodes = {str(node.get("id")): node for node in workflow.get("nodes", []) if isinstance(node, dict)}
 
     for root in branch_roots:
         if root in nodes:
             nodes[root]["mode"] = 0 if root == selected_root else 4
 
-    # SaveImage nodes follow each top-level branch. Mirror the branch mode so
-    # conversion has exactly one reachable output.
     for link in workflow.get("links", []):
         if not isinstance(link, list) or len(link) < 4:
             continue
@@ -124,8 +174,6 @@ def activate_branch(workflow_path: Path, selected_root: str, branch_roots: list[
         if target_node and target_node.get("type") == "SaveImage":
             target_node["mode"] = 0 if origin == selected_root else 4
 
-    workflow_path.write_text(json.dumps(workflow, indent=2) + "\n", encoding="utf-8")
-
 
 def prepare_distilled_text_to_image(
     cli,
@@ -135,31 +183,45 @@ def prepare_distilled_text_to_image(
     prompt: str,
     seed: int,
     model_filename: str,
+    clip_filename: str,
+    vae_filename: str,
     width: int = 768,
     height: int = 1024,
 ) -> dict:
     cli.fetch_template(template_name, workflow_path)
-    slot_payload = envelope_data(cli.workflow_slots(workflow_path)) or {}
-    slots = slot_payload.get("slots")
-    if not isinstance(slots, list):
-        raise RuntimeError(f"Could not read template slots: {slot_payload}")
+    workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
 
-    selected_root, roots = select_distilled_branch(slots)
-    overrides = build_distilled_overrides(
-        slots,
-        selected_root,
+    definition = _find_distilled_definition(workflow)
+    selected_root, roots = _find_branch_instances(workflow, definition)
+
+    patch_distilled_definition(
+        definition,
         prompt=prompt,
         seed=seed,
         model_filename=model_filename,
+        clip_filename=clip_filename,
+        vae_filename=vae_filename,
         width=width,
         height=height,
     )
-    cli.set_workflow_slots(workflow_path, overrides)
-    activate_branch(workflow_path, selected_root, roots)
+    prompt_node = patch_shared_prompt(workflow, prompt)
+    activate_branch(workflow, selected_root, roots)
+
+    selected_node = next(
+        n for n in workflow.get("nodes", [])
+        if isinstance(n, dict) and str(n.get("id")) == selected_root
+    )
+    selected_node["widgets_values"] = []
+
+    workflow_path.parent.mkdir(parents=True, exist_ok=True)
+    workflow_path.write_text(json.dumps(workflow, indent=2) + "\n", encoding="utf-8")
 
     return {
         "selected_root": selected_root,
         "branch_roots": roots,
-        "overrides": overrides,
+        "prompt_node": prompt_node,
+        "model_filename": model_filename,
+        "clip_filename": clip_filename,
+        "vae_filename": vae_filename,
         "workflow": str(workflow_path),
     }

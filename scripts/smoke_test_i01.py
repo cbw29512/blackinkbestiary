@@ -55,11 +55,11 @@ def get_current():
     return page, state["pages"][page_id]
 
 
-def diffusion_model_filename(config: dict) -> str:
+def model_filename(config: dict, folder: str) -> str:
     for model in config["models"]:
-        if model.get("folder") == "diffusion_models":
+        if model.get("folder") == folder:
             return model["filename"]
-    raise RuntimeError("No diffusion model configured")
+    raise RuntimeError(f"No model configured for {folder}")
 
 
 def studio_health():
@@ -134,7 +134,9 @@ def main():
             workflow_path,
             prompt=prompt,
             seed=seed,
-            model_filename=diffusion_model_filename(config),
+            model_filename=model_filename(config, "diffusion_models"),
+            clip_filename=model_filename(config, "text_encoders"),
+            vae_filename=model_filename(config, "vae"),
             width=768,
             height=1024,
         )
@@ -149,7 +151,7 @@ def main():
 
     print(f"Template: {template_name}")
     print(f"Distilled branch: {prepared['selected_root']}")
-    print(f"Model: {diffusion_model_filename(config)}")
+    print(f"Model: {model_filename(config, 'diffusion_models')}")
     print(f"Seed: {seed}")
     print("Generating one calibration candidate...")
 

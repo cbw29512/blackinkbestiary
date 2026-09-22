@@ -12,11 +12,11 @@ OUT = ROOT / "art_pipeline" / "workflows" / "official"
 REPORT = ROOT / "data" / "template-validation.json"
 
 
-def diffusion_model_filename(config: dict) -> str:
+def model_filename(config: dict, folder: str) -> str:
     for model in config["models"]:
-        if model.get("folder") == "diffusion_models":
+        if model.get("folder") == folder:
             return model["filename"]
-    raise RuntimeError("No diffusion model configured")
+    raise RuntimeError(f"No model configured for {folder}")
 
 
 def validation_data(payload: dict) -> dict:
@@ -45,7 +45,9 @@ def main():
                     path,
                     prompt="Black-Ink Bestiary validation prompt",
                     seed=1,
-                    model_filename=diffusion_model_filename(config),
+                    model_filename=model_filename(config, "diffusion_models"),
+                    clip_filename=model_filename(config, "text_encoders"),
+                    vae_filename=model_filename(config, "vae"),
                     width=768,
                     height=1024,
                 )
