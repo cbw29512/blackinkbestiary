@@ -113,7 +113,7 @@ These are engine feedback, not isolated page problems.
 1. story-moment engine: one readable static beat instead of portrait/prop posing — **implemented; colorability has priority over story complexity**
 2. family DNA audit across every repeated monster family
 3. environment variation depth across every book family
-4. Modify/Regenerate routing based on passed vs failed pillars
+4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented; review state records failed and preserved dimensions**
 5. Golden Five reference pages before mass regeneration
 
 ## Working Rule
@@ -163,3 +163,17 @@ Preferred story formula:
 **one clear verb + simple body language + one environmental interaction**
 
 Do not turn a coloring page into a busy narrative illustration.
+
+
+## 2026-09-22 Colorability Enforcement Update
+
+The written rule is now being enforced in engine behavior, not just documentation:
+
+- review defects map to explicit quality dimensions
+- MODIFY preserves dimensions that passed and targets only failed dimensions
+- REGENERATE is used for fundamental failures such as a page that is structurally uncolorable
+- generation prompts state that colorability governs monster/environment/story complexity
+- environment and archetype rules no longer describe the three visual requirements as co-equal with coloring usability
+- new first-class colorability defects include cramped coloring spaces, excessive line density, story-overload, and fundamentally uncolorable composition
+
+**Next hardening priority:** family DNA coverage across every repeated monster family, followed by environment-variation depth and the Golden Five reference pages.

@@ -80,8 +80,16 @@ class ReviewMemoryTests(unittest.TestCase):
         self.assertEqual(record["archetype"], "trap_scene")
         self.assertEqual(record["routing_recommendation"], "modify")
         self.assertEqual(record["quick_tags"], ["story beat unclear", "pose too stiff"])
+        self.assertEqual(record["failed_dimensions"], ["story_moment"])
+        self.assertIn("colorability", record["preserve_dimensions"])
+        self.assertIn("monster_identity", record["preserve_dimensions"])
         self.assertEqual(len(record["remediation_directives"]), 2)
         self.assertIn("cause-and-effect", record["remediation_directives"][0])
+
+        state = server.load_state()
+        notes = state["pages"]["I-01"]["review_notes"]
+        self.assertEqual(notes["failed_dimensions"], ["story_moment"])
+        self.assertIn("environment_identity", notes["preserve_dimensions"])
 
 
 if __name__ == "__main__":

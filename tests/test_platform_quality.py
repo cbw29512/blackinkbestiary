@@ -13,6 +13,7 @@ from quality_system import (
     environment_directives,
     expand_defect_tags,
     recommended_action,
+    review_diagnosis,
 )
 from studio_config import active_book_paths
 
@@ -38,7 +39,7 @@ class PlatformQualityTests(unittest.TestCase):
     def test_environment_standard_is_global_and_actionable(self):
         directives = environment_directives(ROOT)
         checks = environment_approval_checks(ROOT)
-        self.assertTrue(any("co-equal storytelling pillars" in item for item in directives))
+        self.assertTrue(any("Colorability is the governing product constraint" in item for item in directives))
         self.assertTrue(any("two to four" in item.lower() for item in directives))
         self.assertTrue(any("without reading the caption" in item for item in checks))
 
@@ -66,6 +67,22 @@ class PlatformQualityTests(unittest.TestCase):
         self.assertEqual(recommended_action(ROOT, ["composition wrong"]), "regenerate")
         self.assertEqual(recommended_action(ROOT, ["wrong monster identity"]), "regenerate")
         self.assertEqual(recommended_action(ROOT, ["less detail"]), "modify")
+
+    def test_colorability_defects_are_first_class(self):
+        diagnosis = review_diagnosis(
+            ROOT,
+            ["story overwhelms colorability", "line density too high"],
+        )
+        self.assertEqual(diagnosis["action"], "modify")
+        self.assertIn("colorability", diagnosis["failed_dimensions"])
+        self.assertIn("story_moment", diagnosis["failed_dimensions"])
+        self.assertIn("monster_identity", diagnosis["preserve_dimensions"])
+        self.assertIn("environment_identity", diagnosis["preserve_dimensions"])
+
+    def test_fundamentally_uncolorable_page_regenerates(self):
+        diagnosis = review_diagnosis(ROOT, ["page fundamentally uncolorable"])
+        self.assertEqual(diagnosis["action"], "regenerate")
+        self.assertEqual(diagnosis["failed_dimensions"], ["colorability"])
 
     def test_archetype_rule_is_page_driven(self):
         page = {"archetype": "trap_scene"}

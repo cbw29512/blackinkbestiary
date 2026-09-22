@@ -1,7 +1,8 @@
 {
   "schema_version": 1,
-  "principle": "Every page has three co-equal storytelling pillars: monster identity, environment identity, and story moment. Visually, the monster is the large centered dominant focal subject; the environment frames and supports it.",
+  "principle": "Colorability is the governing product constraint. Under that constraint, every page must independently communicate monster identity, environment identity, and one simple story moment. Visually, the monster is the large centered or near-centered dominant focal subject; the environment frames and supports it without turning the page into coloring homework.",
   "generation_requirements": [
+    "If environment or story detail reduces broad colorable regions, simplify the environment/story detail before shrinking the monster, adding micro-texture, or increasing line density.",
     "At thumbnail size, the setting must identify itself even if the monster is mentally removed.",
     "Every environment must resolve a clear spatial type, material language, one to three location markers, and a readable spatial geometry/depth cue.",
     "The environment must be specific to the named habitat, never a generic room or empty backdrop.",
@@ -15,6 +16,7 @@
     "A broad label such as cave, forest, ocean, crypt, or ruin is not specific enough by itself; every production page must resolve to a concrete environment profile."
   ],
   "approval_checks": [
+    "Is the page immediately inviting and satisfying to color, with broad open regions and no fiddly density?",
     "If the monster were removed, could you still tell what kind of place this is?",
     "Are structure, materials, and at least one unmistakable location marker visible at thumbnail size?",
     "Is the monster the largest, centered or near-centered, first-read focal subject?",

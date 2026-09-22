@@ -7,7 +7,7 @@ STYLE_RULES = [
     "lighter simpler interior lines",
     "large uninterrupted white regions that are enjoyable to color",
     "medium-low detail density",
-    "environment is a co-equal storytelling pillar but visually secondary to the monster: specific, readable, purposeful, and enjoyable to color",
+    "colorability governs the page; the environment must be specific, readable, purposeful, enjoyable to color, and visually secondary to the monster",
     "use two to four large habitat-defining environmental cues arranged around, behind, or beneath the monster instead of competing with it",
     "at least one environmental feature directly supports or interacts with the story moment",
     "no grayscale wash",

@@ -15,7 +15,7 @@ Every page should feel like it belongs in the same book:
 - Lighter interior lines.
 - Large uninterrupted white areas.
 - Medium-low detail density.
-- Environment is a co-equal storytelling pillar, but the monster is the large centered visual focal point.
+- Colorability is the governing product constraint. Environment identity is mandatory, but it must support the large centered monster without creating fiddly coloring density.
 - Habitat must be specific, immediately readable, and worth coloring.
 - Use two to four large environmental cues rather than generic backdrop filler.
 - At least one environmental feature should interact with the creature or story moment.
@@ -116,7 +116,7 @@ Exact duplicate environment fingerprints fail validation. Similar habitat famili
 
 ## Habitat Rule
 
-The environment is not filler. It is one of three co-equal storytelling pillars on every page, while the monster remains visually dominant:
+The environment is not filler. It must read clearly on every page, but colorability governs the composition and the monster remains visually dominant:
 
 > **Monster identity + environment identity + story moment**
 

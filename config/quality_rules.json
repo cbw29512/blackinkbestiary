@@ -3,131 +3,281 @@
   "defects": {
     "more white space": {
       "action": "modify",
-      "directive": "Increase large uninterrupted white coloring regions. Remove secondary texture and nonessential interior marks without weakening the subject silhouette."
+      "directive": "Increase large uninterrupted white coloring regions. Remove secondary texture and nonessential interior marks without weakening the subject silhouette.",
+      "affects": [
+        "colorability"
+      ]
     },
     "less detail": {
       "action": "modify",
-      "directive": "Reduce tiny texture, decorative marks, and secondary line density. Keep only anatomy, story-critical props, and simple habitat cues."
+      "directive": "Reduce tiny texture, decorative marks, and secondary line density. Keep only anatomy, story-critical props, and simple habitat cues.",
+      "affects": [
+        "colorability"
+      ]
     },
     "simpler background": {
       "action": "modify",
-      "directive": "Remove nonessential clutter and tiny texture while preserving strong habitat identity, environmental storytelling, perspective, and story-critical setting features. Simplify detail, not place."
+      "directive": "Remove nonessential clutter and tiny texture while preserving strong habitat identity, environmental storytelling, perspective, and story-critical setting features. Simplify detail, not place.",
+      "affects": [
+        "colorability",
+        "environment_identity"
+      ]
     },
     "clearer anatomy": {
       "action": "modify",
-      "directive": "Correct anatomy and limb structure while preserving the successful pose and composition. Make joints, extremities, and body proportions easy to read."
+      "directive": "Correct anatomy and limb structure while preserving the successful pose and composition. Make joints, extremities, and body proportions easy to read.",
+      "affects": [
+        "monster_identity"
+      ]
     },
     "stronger monster identity": {
       "action": "modify",
-      "directive": "Strengthen the canonical silhouette, head features, body proportions, and signature anatomy so the creature is unmistakable at thumbnail size."
+      "directive": "Strengthen the canonical silhouette, head features, body proportions, and signature anatomy so the creature is unmistakable at thumbnail size.",
+      "affects": [
+        "monster_identity"
+      ]
     },
     "stronger outer contour": {
       "action": "modify",
-      "directive": "Strengthen the main subject's outer contour and reduce competing interior lines so the creature separates clearly from the background."
+      "directive": "Strengthen the main subject's outer contour and reduce competing interior lines so the creature separates clearly from the background.",
+      "affects": [
+        "colorability",
+        "monster_identity"
+      ]
     },
     "lighter interior lines": {
       "action": "modify",
-      "directive": "Reduce interior line weight and density while keeping the outer contour bold and readable."
+      "directive": "Reduce interior line weight and density while keeping the outer contour bold and readable.",
+      "affects": [
+        "colorability"
+      ]
     },
     "story beat unclear": {
       "action": "modify",
-      "directive": "Make the required story moment immediately readable through pose, cause-and-effect, and placement of the key prop or environmental interaction."
+      "directive": "Make the required story moment immediately readable through pose, cause-and-effect, and placement of the key prop or environmental interaction.",
+      "affects": [
+        "story_moment"
+      ]
     },
     "required prop missing": {
       "action": "modify",
-      "directive": "Add the missing required prop in a clear, plausible position without redesigning successful anatomy, framing, or habitat."
+      "directive": "Add the missing required prop in a clear, plausible position without redesigning successful anatomy, framing, or habitat.",
+      "affects": [
+        "story_moment"
+      ]
     },
     "pose too stiff": {
       "action": "modify",
-      "directive": "Keep the composition but improve gesture, weight shift, and expression so the pose communicates the intended action rather than a static character portrait."
+      "directive": "Keep the composition but improve gesture, weight shift, and expression so the pose communicates the intended action rather than a static character portrait.",
+      "affects": [
+        "story_moment"
+      ]
     },
     "focal subject weak": {
       "action": "modify",
-      "directive": "Make the monster immediately readable without weakening habitat identity. Reduce competing object scale, tangents, and unnecessary detail while preserving two to four strong environmental cues and the environmental interaction that supports the story."
+      "directive": "Make the monster immediately readable without weakening habitat identity. Reduce competing object scale, tangents, and unnecessary detail while preserving two to four strong environmental cues and the environmental interaction that supports the story.",
+      "affects": [
+        "colorability",
+        "monster_identity"
+      ]
     },
     "composition wrong": {
       "action": "regenerate",
-      "directive": "Rebuild the composition around three co-equal storytelling pillars: unmistakable monster identity, unmistakable environment identity, and one clear story moment. Use perspective and interaction to connect the creature to the place, with broad colorable shapes instead of filler clutter."
+      "directive": "Rebuild the composition with colorability as the governing constraint. Keep one large readable monster, two to four broad habitat cues, and one simple story beat. Monster identity, environment identity, and story moment must each read clearly, but none may reduce broad open coloring regions or create clutter.",
+      "affects": [
+        "colorability",
+        "monster_identity",
+        "environment_identity",
+        "story_moment"
+      ]
     },
     "environment identity weak": {
       "action": "modify",
-      "directive": "Strengthen the named habitat with two to four large, unmistakable environmental cues. Make the place identifiable at thumbnail size without adding decorative clutter."
+      "directive": "Strengthen the named habitat with two to four large, unmistakable environmental cues. Make the place identifiable at thumbnail size without adding decorative clutter.",
+      "affects": [
+        "environment_identity"
+      ]
     },
     "environment generic": {
       "action": "modify",
-      "directive": "Replace generic room or backdrop details with setting-specific architecture, terrain, furnishings, storage, hazards, vegetation, or lair features appropriate to the named habitat and fantasy context."
+      "directive": "Replace generic room or backdrop details with setting-specific architecture, terrain, furnishings, storage, hazards, vegetation, or lair features appropriate to the named habitat and fantasy context.",
+      "affects": [
+        "environment_identity"
+      ]
     },
     "environment story disconnect": {
       "action": "modify",
-      "directive": "Make at least one environmental feature directly participate in the story moment through cause-and-effect, use, movement, scale, concealment, danger, feeding, guarding, or habitation."
+      "directive": "Make at least one environmental feature directly participate in the story moment through cause-and-effect, use, movement, scale, concealment, danger, feeding, guarding, or habitation.",
+      "affects": [
+        "environment_identity",
+        "story_moment"
+      ]
     },
     "environment cluttered": {
       "action": "modify",
-      "directive": "Reduce secondary environmental clutter while preserving the strongest habitat-defining features and all story-critical environmental interactions. Keep broad colorable shapes."
+      "directive": "Reduce secondary environmental clutter while preserving the strongest habitat-defining features and all story-critical environmental interactions. Keep broad colorable shapes.",
+      "affects": [
+        "colorability",
+        "environment_identity"
+      ]
     },
     "wrong environment": {
       "action": "regenerate",
-      "directive": "Rebuild the scene in the correct named habitat using setting-appropriate architecture, terrain, furnishings, and props. The environment must be immediately recognizable and integrated with the monster's action."
+      "directive": "Rebuild the scene in the correct named habitat using setting-appropriate architecture, terrain, furnishings, and props. The environment must be immediately recognizable and integrated with the monster's action.",
+      "affects": [
+        "environment_identity"
+      ]
     },
     "modern setting drift": {
       "action": "modify",
-      "directive": "Remove modern-looking domestic, industrial, or contemporary design cues that do not belong in the intended fantasy setting. Replace them with believable period-appropriate or fantastical equivalents."
+      "directive": "Remove modern-looking domestic, industrial, or contemporary design cues that do not belong in the intended fantasy setting. Replace them with believable period-appropriate or fantastical equivalents.",
+      "affects": [
+        "environment_identity"
+      ]
     },
     "wrong monster identity": {
       "action": "regenerate",
-      "directive": "Regenerate from the canonical creature specification because the current subject is fundamentally off-model. Rebuild the head, silhouette, body proportions, posture, and signature anatomy so the creature is unmistakable at thumbnail size before preserving any scene details."
+      "directive": "Regenerate from the canonical creature specification because the current subject is fundamentally off-model. Rebuild the head, silhouette, body proportions, posture, and signature anatomy so the creature is unmistakable at thumbnail size before preserving any scene details.",
+      "affects": [
+        "monster_identity"
+      ]
     },
     "background reused": {
       "action": "regenerate",
-      "directive": "Recompose the page using the assigned environment profile but a clearly different landmark, framing, depth structure, and monster/environment interaction from nearby pages. Do not reuse the same room, cave wall, seabed, corridor, or horizon layout."
+      "directive": "Recompose the page using the assigned environment profile but a clearly different landmark, framing, depth structure, and monster/environment interaction from nearby pages. Do not reuse the same room, cave wall, seabed, corridor, or horizon layout.",
+      "affects": [
+        "environment_identity"
+      ]
     },
     "objects too small": {
       "action": "modify",
-      "directive": "Enlarge story-critical props and major environmental forms into a few bold, simple, easy-to-color shapes. Remove tiny secondary objects that create fiddly coloring regions."
+      "directive": "Enlarge story-critical props and major environmental forms into a few bold, simple, easy-to-color shapes. Remove tiny secondary objects that create fiddly coloring regions.",
+      "affects": [
+        "colorability",
+        "story_moment"
+      ]
     },
     "monster too large": {
       "action": "modify",
-      "directive": "Reduce the monster only enough to restore readable habitat and story interaction. Keep it large, centered or near-centered, and clearly the dominant focal subject; do not shrink it into a secondary figure."
+      "directive": "Reduce the monster only enough to restore readable habitat and story interaction. Keep it large, centered or near-centered, and clearly the dominant focal subject; do not shrink it into a secondary figure.",
+      "affects": [
+        "colorability",
+        "environment_identity"
+      ]
     },
     "environment objects too large": {
       "action": "modify",
-      "directive": "Reduce any single foreground or environmental object that blocks monster anatomy or consumes the composition. Keep major objects large and easy to color, but subordinate them to the three-pillar scene balance."
+      "directive": "Reduce any single foreground or environmental object that blocks monster anatomy or consumes the composition. Keep major objects large and easy to color, but subordinate them to the three-pillar scene balance.",
+      "affects": [
+        "colorability",
+        "monster_identity"
+      ]
     },
     "too many tiny coloring regions": {
       "action": "modify",
-      "directive": "Merge or remove micro-detail, repeated texture, tiny enclosed islands, and small decorative shapes. Preserve identity using fewer medium-to-large colorable regions."
+      "directive": "Merge or remove micro-detail, repeated texture, tiny enclosed islands, and small decorative shapes. Preserve identity using fewer medium-to-large colorable regions.",
+      "affects": [
+        "colorability"
+      ]
     },
     "monster too small": {
       "action": "modify",
-      "directive": "Enlarge the monster into the dominant central focal subject. Preserve the successful environment and story beat, but scale the creature to roughly 60–75% of page height in ordinary scenes while keeping its full silhouette comfortably inside the page."
+      "directive": "Enlarge the monster into the dominant central focal subject. Preserve the successful environment and story beat, but scale the creature to roughly 60–75% of page height in ordinary scenes while keeping its full silhouette comfortably inside the page.",
+      "affects": [
+        "monster_identity"
+      ]
     },
     "monster off-center": {
       "action": "modify",
-      "directive": "Rebalance the composition so the monster is centered or near-centered in the primary visual field. Preserve believable interaction with the environment and avoid making the background symmetrical merely for decoration."
+      "directive": "Rebalance the composition so the monster is centered or near-centered in the primary visual field. Preserve believable interaction with the environment and avoid making the background symmetrical merely for decoration.",
+      "affects": [
+        "monster_identity"
+      ]
     },
     "artwork border present": {
       "action": "modify",
-      "directive": "Remove any decorative rectangular artwork frame, inset picture border, or printed-page box line. Preserve normal blank page margins and do not crop or redesign the successful scene."
+      "directive": "Remove any decorative rectangular artwork frame, inset picture border, or printed-page box line. Preserve normal blank page margins and do not crop or redesign the successful scene.",
+      "affects": [
+        "print_layout"
+      ]
     },
     "secondary figures compete": {
       "action": "modify",
-      "directive": "Keep the primary monster large, centered or near-centered, and clearly dominant. Shrink, simplify, push back, or remove nonessential secondary figures so they support the story without creating competing focal subjects."
+      "directive": "Keep the primary monster large, centered or near-centered, and clearly dominant. Shrink, simplify, push back, or remove nonessential secondary figures so they support the story without creating competing focal subjects.",
+      "affects": [
+        "colorability",
+        "monster_identity"
+      ]
     },
     "repeated micro-pattern overload": {
       "action": "modify",
-      "directive": "Simplify repeated small patterns such as chainmail scales, coin piles, tiny bricks, map cracks, shelf clutter, fur strokes, webs, or rubble. Replace them with fewer larger colorable regions while preserving the material and scene identity."
+      "directive": "Simplify repeated small patterns such as chainmail scales, coin piles, tiny bricks, map cracks, shelf clutter, fur strokes, webs, or rubble. Replace them with fewer larger colorable regions while preserving the material and scene identity.",
+      "affects": [
+        "colorability"
+      ]
     },
     "grounding unclear": {
       "action": "modify",
-      "directive": "Put the creature into a stable natural pose with unmistakable support/contact. Non-flying creatures must be grounded, perched, hanging, climbing, swimming, burrowing, coiled, or otherwise visibly supported. Do not use jumping, falling, dropping, hovering, or midair freeze-frames."
+      "directive": "Put the creature into a stable natural pose with unmistakable support/contact. Non-flying creatures must be grounded, perched, hanging, climbing, swimming, burrowing, coiled, or otherwise visibly supported. Do not use jumping, falling, dropping, hovering, or midair freeze-frames.",
+      "affects": [
+        "physical_grounding"
+      ]
     },
     "airborne action unclear": {
       "action": "modify",
-      "directive": "Replace unstable midair action with a stable natural coloring pose. Non-flyers must be visibly supported. True flyers may remain airborne only in controlled natural flight with clear readable anatomy."
+      "directive": "Replace unstable midair action with a stable natural coloring pose. Non-flyers must be visibly supported. True flyers may remain airborne only in controlled natural flight with clear readable anatomy.",
+      "affects": [
+        "physical_grounding"
+      ]
     },
     "environment ambiguous": {
       "action": "modify",
-      "directive": "Make the setting identifiable without relying on the monster or caption. Strengthen the spatial type, dominant materials, and one or two unmistakable location markers. Replace smooth generic walls or vague scenery with large, colorable, setting-specific forms while preserving the successful monster."
+      "directive": "Make the setting identifiable without relying on the monster or caption. Strengthen the spatial type, dominant materials, and one or two unmistakable location markers. Replace smooth generic walls or vague scenery with large, colorable, setting-specific forms while preserving the successful monster.",
+      "affects": [
+        "environment_identity"
+      ]
+    },
+    "coloring spaces cramped": {
+      "action": "modify",
+      "affects": [
+        "colorability"
+      ],
+      "directive": "Open up the page for coloring. Merge tiny enclosed regions, remove nonessential lines and props, and enlarge important shapes while preserving the successful monster identity, habitat identity, and story beat."
+    },
+    "line density too high": {
+      "action": "modify",
+      "affects": [
+        "colorability"
+      ],
+      "directive": "Reduce interior line density, hatching, repeated marks, and micro-texture. Preserve bold outer contours and only the anatomy/environment marks needed for recognition."
+    },
+    "story overwhelms colorability": {
+      "action": "modify",
+      "affects": [
+        "colorability",
+        "story_moment"
+      ],
+      "directive": "Simplify the narrative to one clear verb, simple body language, and one environmental interaction. Remove extra figures, tiny props, secondary actions, and dense detail until the page is satisfying to color."
+    },
+    "page fundamentally uncolorable": {
+      "action": "regenerate",
+      "affects": [
+        "colorability"
+      ],
+      "directive": "Regenerate the composition from the page recipe with broad open coloring regions as the first requirement. Use one dominant monster, a few large environment forms, clean black line art, and one simple story beat; do not preserve cluttered micro-detail from the failed page."
     }
+  },
+  "review_dimensions": [
+    "colorability",
+    "monster_identity",
+    "environment_identity",
+    "story_moment",
+    "physical_grounding",
+    "print_layout"
+  ],
+  "review_policy": {
+    "colorability_priority": "Colorability is evaluated first and governs every story/environment correction.",
+    "modify_rule": "MODIFY preserves every dimension that passed and changes only failed dimensions.",
+    "regenerate_rule": "REGENERATE rebuilds the page when a defect is fundamental or the current composition cannot be repaired without cascading damage."
   }
 }
