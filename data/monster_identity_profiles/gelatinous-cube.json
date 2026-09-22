@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "gelatinous-cube",
+  "display_name": "Gelatinous Cube",
+  "extends_family": "ooze",
+  "taxonomy": {
+    "family": "ooze",
+    "creature_type": "ooze",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A nearly transparent rectilinear dungeon ooze defined by its unmistakable cube geometry and open gelatinous interior.",
+    "silhouette": "Large near-perfect cube with straight readable edges, a flat forward face, and only slight soft rippling at the boundaries.",
+    "head_features": "No head, eyes, mouth, face, or directional facial features.",
+    "body_shape": "Uniform cubic gelatinous mass with no skeleton or limbs; internal debris may be suspended when a page calls for it.",
+    "limb_structure": "No limbs, joints, hands, feet, tentacles, or wings.",
+    "surface": "Mostly open white interior with sparse contour ripples, a few bubbles, and restrained transparency cues.",
+    "must_keep": [
+      "clear cube geometry",
+      "faceless anatomy",
+      "mostly open transparent-looking interior",
+      "straight readable outer edges",
+      "large simple coloring regions"
+    ],
+    "must_avoid": [
+      "rounded blob silhouette",
+      "eyes or mouth",
+      "slime tentacles",
+      "solid black fill",
+      "dense bubbles",
+      "decorative reflection clutter"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "A massive cubic ooze whose scale is communicated by its relationship to surrounding architecture.",
+    "natural_posture": "Fully supported by and conforming to the floor and enclosing space; never floating.",
+    "behavior_style": [
+      "advancing as one silent mass",
+      "filling part of a passage",
+      "engulfing page-specific debris when required"
+    ],
+    "environment_fit": [
+      "stone corridors",
+      "dungeon passages",
+      "underground halls"
+    ]
+  },
+  "locomotion": {
+    "can_fly": false
+  },
+  "render_identity": {
+    "subject_mode": "amorphous",
+    "expected_count": "one"
+  },
+  "anatomy": {
+    "body_plan": "rectilinear cubic ooze",
+    "limb_count": 0,
+    "wing_count": 0,
+    "support_logic": "full lower surface supported by floor or enclosing architecture"
+  },
+  "accuracy_checks": [
+    "cube edges are unmistakable",
+    "interior remains mostly open white",
+    "no face or limbs appear",
+    "cube remains fully supported by surrounding geometry",
+    "any internal debris stays visually inside the cube"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "blob_drift",
+      "symptom": "cube rounds into an ordinary slime blob",
+      "correction": "restore straight rectilinear cube edges and a broad flat forward face"
+    },
+    {
+      "id": "mascot_drift",
+      "symptom": "eyes or smile appear",
+      "correction": "remove all facial features and restore geometry-based identity"
+    }
+  ],
+  "default_habitats": [
+    "stone corridors",
+    "square dungeon passages",
+    "underground halls"
+  ]
+}
