@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "rat-swarm",
+  "family_profile": "rat",
+  "display_name": "Rat Swarm",
+  "size": "swarm",
+  "creature_type": "swarm of tiny beasts",
+  "visual_identity": {
+    "core_identity": "A flowing mass of ordinary dungeon rats whose individual bodies remain readable while the group moves like a living tide.",
+    "silhouette": "Many low rat bodies arranged in one directional stream, tails and snouts creating motion without becoming a black pile.",
+    "body_shape": "Repeated small four-legged rodent forms in varied running poses; no giant leader.",
+    "must_keep": [
+      "many distinct rats",
+      "clear flowing direction",
+      "open gaps between animals"
+    ],
+    "must_avoid": [
+      "single giant rat",
+      "solid black pile",
+      "mouse-cartoon faces",
+      "excessive overlap"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "The swarm covers a broad strip of floor while individual rats remain clearly small.",
+    "natural_posture": "Each rat remains supported by floor, debris, or edge surfaces; the group follows one coherent route.",
+    "behavior_style": [
+      "pouring from a grate",
+      "surging along a wall",
+      "crossing a pantry floor",
+      "flowing around one large obstacle"
+    ]
+  },
+  "accuracy_checks": [
+    "individual silhouettes remain readable",
+    "flow direction is obvious",
+    "background route remains visible"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "pile_drift",
+      "symptom": "rats merge into one unreadable heap",
+      "correction": "separate bodies with white gaps and one directional stream"
+    },
+    {
+      "id": "leader_drift",
+      "symptom": "one giant rat dominates",
+      "correction": "keep individuals similar small scale"
+    }
+  ]
+}
