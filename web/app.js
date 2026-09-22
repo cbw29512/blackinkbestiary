@@ -165,6 +165,10 @@ function render(d) {
 
   if (generating) {
     qs("#statusLine").innerHTML = `<strong>Generating ${esc(p.monster_name)} locally...</strong> The Studio will refresh when the candidate is ready.`;
+  } else if (worker.reason === "local_generation_preflight_failed") {
+    const missing = worker.preflight?.required_models_missing || [];
+    const detail = missing.length ? ` Missing models: ${missing.join(", ")}.` : "";
+    qs("#statusLine").innerHTML = `<span class="error"><strong>Local artist is not generation-ready.</strong>${esc(detail)} Check the readiness status above.</span>`;
   } else if (s.generation_error?.message) {
     qs("#statusLine").innerHTML = `<span class="error"><strong>Generation stopped:</strong> ${esc(s.generation_error.message)}</span>`;
   } else if (c) {
@@ -224,18 +228,24 @@ async function checkComfy() {
   const el = qs("#comfyStatus");
   if (!el) return;
   try {
-    const d = await api("/api/comfy-health");
-    if (d.connected) {
+    const d = await api("/api/local-preflight");
+    window.blackInkPreflight = d;
+    if (d.ready_for_generation) {
       const gpu = d.devices?.[0]?.name || "GPU detected";
       el.className = "comfy-status comfy-ok";
-      el.textContent = "Local artist connected · " + gpu;
-    } else {
-      el.className = "comfy-status comfy-off";
-      el.textContent = "Local artist offline";
+      el.textContent = "Local artist generation-ready · " + gpu;
+      return;
     }
-  } catch {
+    const failed = Object.entries(d.checks || {}).filter(([, ok]) => !ok).map(([name]) => name);
+    const missing = d.required_models_missing || [];
+    let detail = failed.join(", ").replaceAll("_", " ");
+    if (missing.length) detail = "missing models: " + missing.join(", ");
     el.className = "comfy-status comfy-off";
-    el.textContent = "Local artist offline";
+    el.textContent = "Local artist not ready · " + (detail || "preflight failed");
+  } catch {
+    window.blackInkPreflight = null;
+    el.className = "comfy-status comfy-off";
+    el.textContent = "Local artist readiness check failed";
   }
 }
 
