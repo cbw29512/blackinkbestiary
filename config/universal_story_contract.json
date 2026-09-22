@@ -4,12 +4,13 @@
   "purpose": "Make every page communicate one clear, static, colorable story beat instead of a generic character portrait.",
   "principles": [
     "One page communicates one primary beat.",
-    "The beat must be readable from body language, prop use, and environment interaction at thumbnail size.",
-    "Prefer stable actions such as stalking, guarding, feeding, hiding, dragging, inspecting, climbing with contact, tending, watching, threatening, or using an object.",
+    "Colorability wins every conflict with story complexity.",
+    "Express the beat with one clear verb, simple body language, and one environmental interaction.",
+    "Prefer stable actions such as stalking, guarding, feeding, hiding, dragging, inspecting, climbing with contact, tending, watching, threatening, or using one object.",
     "Avoid neutral portrait poses where the monster merely stands and holds props.",
-    "Avoid simultaneous unrelated actions.",
+    "Avoid simultaneous unrelated actions, extra characters, or multiple props added only to explain the story.",
     "The environment must participate in the beat rather than acting as wallpaper.",
-    "Story clarity must not require falling, jumping, or chaotic midair action."
+    "Story clarity must not require falling, jumping, chaotic motion, micro-detail, or dense background clutter."
   ],
   "required_inputs": [
     "moment",
@@ -23,7 +24,10 @@
     "environment does not participate in the moment",
     "multiple competing story beats are present",
     "moment requires unstable jump/fall action to be understood",
-    "stated moment is not visually distinguishable at thumbnail size"
+    "stated moment is not visually distinguishable at thumbnail size",
+    "story adds enough props, figures, or detail to reduce coloring space",
+    "story complexity makes the monster silhouette or anatomy harder to color",
+    "more than one primary action must be decoded to understand the page"
   ],
   "review_questions": [
     "What single verb describes what the monster is doing?",
@@ -31,5 +35,19 @@
     "Does at least one environment feature participate?",
     "Does the pose remain stable and easy to color?",
     "Would removing the prop destroy the entire story read? If yes, strengthen body/environment interaction."
-  ]
+  ],
+  "priority_rule": "Story makes the page memorable, but colorability wins every conflict. Simplify the beat before adding clutter, extra figures, unstable poses, tiny props, or dense environment detail.",
+  "story_budget": {
+    "primary_beats": 1,
+    "preferred_story_props": [
+      0,
+      1
+    ],
+    "environment_interactions": [
+      1,
+      1
+    ],
+    "secondary_figures": "none unless essential; if present, small and simple",
+    "rule": "Express the beat with one clear verb, simple body language, and one environment interaction. Do not build a miniature narrative scene full of objects."
+  }
 }
