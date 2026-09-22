@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "bat-swarm",
+  "display_name": "Bat Swarm",
+  "taxonomy": {
+    "family": "bat",
+    "creature_type": "swarm of tiny beasts",
+    "default_size": "swarm"
+  },
+  "visual_identity": {
+    "core_identity": "A readable cloud of ordinary cave bats moving as one turbulent mass while individual bats remain recognizable.",
+    "silhouette": "Many small bat silhouettes arranged in a clear directional cluster with negative space between groups.",
+    "head_features": "Individual bats have simple pointed ears and short natural muzzles; no single face dominates.",
+    "body_shape": "Repeated small natural bat bodies with membrane wings in varied positions; no oversized leader creature.",
+    "surface": "Minimal fur and wing detail to prevent visual noise.",
+    "signature_gear": [],
+    "attitude": [
+      "panicked",
+      "surging",
+      "chaotic",
+      "fast"
+    ],
+    "must_keep": [
+      "many distinct bats",
+      "clear swarm movement",
+      "natural bat anatomy",
+      "negative space between clusters"
+    ],
+    "must_avoid": [
+      "solid black cloud",
+      "single giant bat",
+      "bird flock",
+      "insect swarm",
+      "dense crosshatching",
+      "unreadable overlap"
+    ]
+  },
+  "accuracy_checks": [
+    "individual bats remain recognizable",
+    "no single bat dominates",
+    "swarm retains open white space",
+    "movement direction is readable"
+  ]
+}
