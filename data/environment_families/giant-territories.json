@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "family_id": "giant-territories",
+  "display_name": "Giant & Brute Environments",
+  "profiles": {
+    "giant.mountain-pass": {
+      "name": "Mountain Pass",
+      "description": "Narrow high route between large rock walls with strong scale references.",
+      "visual_cues": [
+        "towering cliff faces",
+        "large boulder",
+        "narrow path",
+        "small ruined marker"
+      ],
+      "colorable_forms": [
+        "broad cliffs",
+        "large rocks",
+        "open path"
+      ],
+      "must_avoid": [
+        "tiny rock texture"
+      ]
+    },
+    "giant.giant-hall": {
+      "name": "Giant Hall",
+      "description": "Overscaled built interior where doors, furniture, and stairs visibly dwarf normal proportions.",
+      "visual_cues": [
+        "massive doorway",
+        "oversized bench or table",
+        "huge stair",
+        "thick support beams"
+      ],
+      "colorable_forms": [
+        "large furniture panels",
+        "broad masonry"
+      ],
+      "must_avoid": [
+        "human-scale room"
+      ]
+    },
+    "giant.ruined-settlement": {
+      "name": "Ruined Settlement",
+      "description": "Village-scale destruction with a few large damaged structures used to communicate brute scale.",
+      "visual_cues": [
+        "collapsed cottage wall",
+        "broken cart",
+        "large gate beam",
+        "open street"
+      ],
+      "colorable_forms": [
+        "large wall panels",
+        "broad street",
+        "simple cart"
+      ],
+      "must_avoid": [
+        "dozens of tiny buildings"
+      ]
+    },
+    "giant.ravine": {
+      "name": "Deep Ravine",
+      "description": "Steep rock cut with ledges, streambed, and large fallen stone.",
+      "visual_cues": [
+        "two ravine walls",
+        "large fallen boulder",
+        "streambed",
+        "ledge"
+      ],
+      "colorable_forms": [
+        "broad rock faces",
+        "simple water/ground band"
+      ],
+      "must_avoid": [
+        "flat open field"
+      ]
+    }
+  }
+}
