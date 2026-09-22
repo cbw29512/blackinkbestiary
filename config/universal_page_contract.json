@@ -73,5 +73,17 @@
     "minimum_repeat_allowance": 2,
     "max_consecutive_same_profile": 2,
     "rule": "A concrete environment profile may recur when appropriate, but must not dominate the book. For a 50-page tome, the same profile may appear at most four times. Consecutive use is capped at two pages. Unique landmarks, framing, interaction, and physicality are still required on every occurrence."
+  },
+  "locomotion": {
+    "default_can_fly": false,
+    "powered_air_modes": [
+      "flying",
+      "flying-swarm",
+      "hovering",
+      "gliding",
+      "levitating",
+      "magical-flight"
+    ],
+    "rule": "Only creatures whose resolved monster data explicitly sets locomotion.can_fly=true may use powered airborne modes. Falling or jumping is allowed for non-flyers only when the source, trajectory, and landing/support logic are explicit. Otherwise non-flyers must visibly contact a support surface."
   }
 }
