@@ -333,3 +333,28 @@ Additional calibration-derived rules now also require:
 
 - wall torches/sconces to visibly attach to masonry rather than become freestanding posts
 - tripwires to visibly cross the walking path and connect cause-and-effect to the triggered hazard
+
+
+## 2026-09-22 Page Recipe Authority Boundary
+
+Legacy Tome I manifests still contain fields from the pre-universal architecture. Those fields may remain temporarily for compatibility or Studio display, but they are no longer allowed to compete with the universal engines.
+
+Generation authority is now:
+
+- monster identity/anatomy/gear tendencies -> universal monster engine
+- room/place geometry and reusable scenery -> universal environment engine
+- story action -> `moment` + `environment_variant.interaction`
+- composition framing -> `environment_variant.framing`
+- physical support/motion -> `physicality`
+- page-specific negative exceptions -> `must_avoid`
+- current human corrections -> production/calibration state `review_notes`
+
+Legacy manifest fields `monster_name`, `habitat`, `identity_rules`, `must_include`, `coloring_rules`, `reference_image`, and `modify` are non-authoritative during migration.
+
+Prompt generation, image-edit prompting, environment object triggers, and scene-relationship activation no longer consume legacy `must_include` or manifest-level `modify` instructions. Canonical monster identity and universal coloring defaults override stale page copies.
+
+The page contract remains `black-ink-page-v1` for backward compatibility with all eight book plans and scaffolding. This is an authority clarification, not a breaking contract migration.
+
+Regression tests use deliberately poisoned legacy values to ensure they cannot leak into generation.
+
+**Validation status:** implementation is isolated on the stacked branch. GitHub Actions is still failing before runner assignment, so this is not yet CI-certified.
