@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "rust-monster",
+  "display_name": "Rust Monster",
+  "taxonomy": {
+    "family": "rust monster",
+    "creature_type": "monstrosity",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A low insectoid dungeon scavenger recognized by extremely long sensory antennae, an armored body, four sturdy legs, and a flexible tail.",
+    "silhouette": "Low four-legged arthropod-like body, arched armored back, extremely long feeler antennae sweeping forward, and tapered tail.",
+    "head_features": "Small blunt head with simple mandibles and very long feathery or segmented antennae.",
+    "body_shape": "Compact low body on four sturdy legs with plated back and flexible tail, more alien than mammalian.",
+    "surface": "Broad armor plates with restrained seam lines; antennae kept clean and readable.",
+    "signature_gear": [],
+    "attitude": [
+      "curious",
+      "metal-seeking",
+      "skittish",
+      "persistent"
+    ],
+    "must_keep": [
+      "very long antennae",
+      "low armored body",
+      "four legs",
+      "non-mammalian silhouette"
+    ],
+    "must_avoid": [
+      "dog body",
+      "dragon head",
+      "six insect legs",
+      "giant horns",
+      "humanoid face",
+      "dense antenna detail"
+    ]
+  },
+  "accuracy_checks": [
+    "antennae dominate silhouette",
+    "body remains low and armored",
+    "four legs are clear",
+    "not mistaken for ordinary insect",
+    "page preserves white space"
+  ]
+}
