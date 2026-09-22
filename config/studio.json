@@ -13,5 +13,6 @@
   "universal_monster_contract": "config/universal_monster_contract.json",
   "kdp_print_standard": "config/kdp_print_standard.json",
   "content_scope": "config/content_scope.json",
-  "universal_environment_contract": "config/universal_environment_contract.json"
+  "universal_environment_contract": "config/universal_environment_contract.json",
+  "universal_story_contract": "config/universal_story_contract.json"
 }
