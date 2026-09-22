@@ -48,7 +48,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertNotIn("creature_type", raw)
 
         spec = resolve_monster_spec("bugbear-stalker")
-        self.assertEqual(spec["monster_contract"], "black-ink-monster-v1")
+        self.assertEqual(spec["monster_contract"], "black-ink-monster-v2")
         self.assertTrue(spec["catalog"]["minimal_recipe"])
         self.assertEqual(spec["family"], "bugbear")
         self.assertEqual(spec["size"], "medium")
@@ -79,7 +79,8 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("CANONICAL SIZE IMPRESSION", text)
         self.assertIn("CANONICAL NATURAL POSTURE", text)
         self.assertIn("CANONICAL BEHAVIOR STYLE", text)
-        self.assertIn("CANONICAL ENVIRONMENT FIT", text)
+        self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
+        self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
 
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
