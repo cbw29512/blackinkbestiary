@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "giant-rat",
+  "display_name": "Giant Rat",
+  "taxonomy": {
+    "family": "rat",
+    "creature_type": "giant beast",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "An oversized dungeon rat retaining natural rodent anatomy, long mostly hairless tail, and strong incisors.",
+    "silhouette": "Low four-legged rodent with arched back, long tapering tail, pointed snout, and rounded ears.",
+    "head_features": "Long rat snout, prominent incisors, whiskers, rounded ears, and small alert eyes.",
+    "body_shape": "Lean low quadruped with strong hind legs and small forepaws.",
+    "surface": "Short coarse fur indicated sparingly; tail mostly hairless.",
+    "signature_gear": [],
+    "attitude": [
+      "defensive",
+      "nervous",
+      "territorial",
+      "hungry"
+    ],
+    "must_keep": [
+      "rat snout",
+      "long naked tail",
+      "rounded ears",
+      "large incisors",
+      "four-legged rodent anatomy"
+    ],
+    "must_avoid": [
+      "wolf body",
+      "mouse-cute proportions",
+      "human hands",
+      "huge fangs",
+      "dense fur hatching",
+      "fantasy horns"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as rat not generic beast",
+    "tail is visible",
+    "incisors and whiskers are clear",
+    "scale is larger than a normal rat",
+    "fur remains simple"
+  ]
+}
