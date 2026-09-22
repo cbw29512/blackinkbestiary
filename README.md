@@ -60,10 +60,16 @@ The brand should not use D&D logos, Wizards of the Coast trade dress, or imply a
 
 ## Current Phase
 
-**Architecture locked. Implementation starts with I-01 only.**
+**Tome I production lane is prepared for all 50 ordered pages.**
 
-The system is not trusted on later pages until I-01 can complete the full loop:
+Every Tome I page now has:
+- a canonical monster identity spec
+- concrete page-specific visual requirements
+- strict ordered generation/review state
+- technical PNG QA including line-art content checks
+
+Production still requires human approval for every final page:
 
 ```
-spec → generation → QA → supervised review → approve/modify/regenerate → locked final
+spec → generation → technical QA → human review → edit/regenerate as needed → approve & lock → next page
 ```
