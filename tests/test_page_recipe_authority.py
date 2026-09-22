@@ -24,7 +24,7 @@ class PageRecipeAuthorityTests(unittest.TestCase):
         contract = load_page_contract(ROOT / "config" / "universal_page_contract.json")
         authority = contract["generation_authority"]
         legacy = set(authority["legacy_non_authoritative_fields"])
-        self.assertEqual(contract["contract_id"], "black-ink-page-v2")
+        self.assertEqual(contract["contract_id"], "black-ink-page-v1")
         self.assertTrue(
             {"identity_rules", "must_include", "coloring_rules", "modify"}.issubset(legacy)
         )
