@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "behir",
+  "display_name": "Behir",
+  "taxonomy": {
+    "family": "behir",
+    "creature_type": "monstrosity",
+    "default_size": "huge"
+  },
+  "visual_identity": {
+    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head, and a body built to coil through caverns.",
+    "silhouette": "Very long snake-like torso wrapped in coils, numerous paired legs along the sides, horned head raised from the coil.",
+    "head_features": "Long reptilian head with strong jaws and backward horns or spines; no wings.",
+    "body_shape": "Serpentine torso with many pairs of short legs spaced along its length and a tapering tail.",
+    "limb_structure": "Many repeated pairs of short sturdy reptilian legs attach along the long torso; no wings, humanoid arms, or insect segmentation.",
+    "surface": "Large simple scales or ridge plates with minimal texture.",
+    "must_keep": [
+      "many pairs of legs",
+      "long serpentine body",
+      "horned reptilian head",
+      "no wings",
+      "cavern-coiling posture"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "four-legged dragon proportions",
+      "centipede insect head",
+      "humanoid arms",
+      "smooth legless snake",
+      "dense scales"
+    ]
+  },
+  "accuracy_checks": [
+    "many legs are obvious",
+    "body reads serpentine not centipede",
+    "head is reptilian",
+    "no wings appear",
+    "coils remain readable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "behir becomes four-legged or winged dragon",
+      "correction": "restore long serpentine body, many paired legs, and no wings"
+    },
+    {
+      "id": "centipede_drift",
+      "symptom": "head or body becomes insectoid",
+      "correction": "restore reptilian head and continuous scaled serpentine torso"
+    },
+    {
+      "id": "legless_drift",
+      "symptom": "legs disappear in coils",
+      "correction": "show enough repeated leg pairs to make multi-legged anatomy unmistakable"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Huge and tunnel-filling, with multiple coils and many leg pairs communicating length and mass.",
+    "natural_posture": "Coiled or braced along cave floor, ledge, or wall with body weight visibly supported.",
+    "behavior_style": [
+      "coiling around a cavern landmark",
+      "moving along a subterranean ledge",
+      "raising its head from grounded coils",
+      "blocking a broad cave route"
+    ],
+    "environment_fit": [
+      "crystal caverns",
+      "deep caves",
+      "subterranean cliffs and broad tunnels"
+    ]
+  }
+}
