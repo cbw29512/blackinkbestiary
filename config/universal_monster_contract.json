@@ -4,10 +4,10 @@
   "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
   "minimal_recipe_required": [
     "monster_id",
-    "monster_name",
-    "family_profile"
+    "monster_name"
   ],
   "minimal_recipe_optional": [
+    "family_profile",
     "species_profile",
     "variant_traits",
     "locomotion",
@@ -46,7 +46,8 @@
     "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
     "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it.",
     "Inline visual_identity, accuracy_checks, known_failure_modes, size, creature_type, and reference blocks are legacy-only and forbidden in schema-v3+ monster recipes.",
-    "Do not create a fake one-monster family merely to make a recipe small; use a species profile beneath the nearest reusable family when the family is broader than the creature."
+    "Do not create a fake one-monster family merely to make a recipe small; use a species profile beneath the nearest reusable family when the family is broader than the creature.",
+    "Do not force distinctive one-off creatures into fake families. A complete species profile may be the sole identity source."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -91,7 +92,7 @@
     "directory": "data/monster_species",
     "purpose": "Carry exact reusable creature/silhouette identity when a broad family profile is not specific enough.",
     "use_when": "Use a species profile when two or more creatures share family DNA but differ materially in silhouette, anatomy, surface behavior, or object form.",
-    "rule": "Species profiles may refine family DNA but must not contain page-specific scenery, room layout, story props, or environment dressing.",
+    "rule": "Species profiles may stand alone for distinctive one-off creatures or refine family DNA for variants within a broad reusable family. They must not contain page-specific scenery, room layout, story props, or environment dressing.",
     "examples": [
       "construct -> flying sword / animated armor / rug of smothering",
       "ooze -> gelatinous cube / black pudding / ochre jelly",
@@ -107,5 +108,6 @@
     "family",
     "size",
     "creature_type"
-  ]
+  ],
+  "identity_source_rule": "Every schema-v3+ monster recipe must reference at least one valid identity source: family_profile or species_profile. Use both when species identity refines a genuinely reusable family."
 }
