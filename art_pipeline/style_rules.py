@@ -14,6 +14,6 @@ STYLE_RULES = [
     "no painterly shading",
     "almost no crosshatching",
     "minimal solid-black shadow masses",
-    "no text, caption, logo, watermark, or decorative border",
+    "no text, caption, logo, watermark, decorative border, rectangular artwork frame, or inset page box",
     "mature fantasy look; not preschool-cute and not stick-figure simple",
 ]

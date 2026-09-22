@@ -43,7 +43,10 @@
     "Avoid micro-texture such as repeated scales, fur strokes, cracks, pebbles, bubbles, leaves, barnacles, bricks, coins, or rubble unless only a few are needed for identity.",
     "Frame the monster with environment forms instead of placing equally dominant objects beside it.",
     "Story-critical props must remain readable but visually subordinate to the monster.",
-    "Background depth should come from overlap and perspective of large forms, not from filling empty space with tiny objects."
+    "Background depth should come from overlap and perspective of large forms, not from filling empty space with tiny objects.",
+    "Do not add a decorative rectangular artwork frame or inset page border; use clean white page margins only.",
+    "Secondary creatures may support a story beat, but they must remain smaller, simpler, and visually subordinate to the primary monster.",
+    "Represent repeated materials such as coins, chainmail, scales, masonry, fur, webs, and rubble with selective marks and larger grouped regions rather than exhaustive tiny repetition."
   ],
   "environment_object_scale": {
     "major_objects": "large enough to color comfortably and recognize at thumbnail size",
@@ -57,7 +60,10 @@
     "too many small enclosed coloring cells",
     "story-critical object is too small to recognize",
     "large foreground object blocks monster anatomy without narrative purpose",
-    "background is empty because detail reduction removed all habitat cues"
+    "background is empty because detail reduction removed all habitat cues",
+    "decorative rectangular artwork border or inset page frame",
+    "secondary figures compete with the primary monster for attention",
+    "repeated micro-patterns turn large colorable surfaces into many tiny cells"
   ],
   "reference_composition": {
     "source": "user-approved visual references",
