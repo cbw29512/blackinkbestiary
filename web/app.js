@@ -23,7 +23,7 @@ function list(items) {
 }
 
 function candidateImageUrl(imagePath, version = "") {
-  const relative = String(imagePath || "").replace(/^\\/+/, "");
+  const relative = String(imagePath || "").replace(/^\/+/, "");
   return `/${relative}?v=${encodeURIComponent(version)}`;
 }
 
