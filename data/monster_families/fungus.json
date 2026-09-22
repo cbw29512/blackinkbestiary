@@ -26,7 +26,8 @@
       "animal head",
       "dense gill texture",
       "octopus body replacing fungus"
-    ]
+    ],
+    "limb_structure": "No humanoid limbs. The body remains rooted; cap, stalk, shelves, pores, and variant-specific tendrils provide all visible extension or motion."
   },
   "accuracy_checks": [
     "reads as fungus first",
@@ -45,5 +46,19 @@
       "symptom": "tendril fungus loses mushroom form",
       "correction": "keep a strong rooted cap-and-stalk body and make tendrils secondary"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "A rooted oversized fungal organism whose scale comes from cap, stalk, colony, or tendril mass rather than humanoid height.",
+    "natural_posture": "Firmly rooted to floor, soil, wood, or stone with a stable vertical or spreading fungal body.",
+    "behavior_style": [
+      "waiting rooted in place",
+      "reacting through cap, stalk, pore, or resonant body movement",
+      "reaching with tendrils only when the variant specifically has them while the fungal base remains dominant"
+    ],
+    "environment_fit": [
+      "damp caves and fungal underpasses",
+      "moist subterranean ruins",
+      "organic caverns, rot pockets, and shadowed stone floors"
+    ]
+  }
 }

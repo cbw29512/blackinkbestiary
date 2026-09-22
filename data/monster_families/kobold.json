@@ -29,7 +29,8 @@
       "bulky ogre-like build",
       "dragon wings",
       "dense scale texture"
-    ]
+    ],
+    "limb_structure": "Lean reptilian arms with clawed hands, light digitigrade-looking legs with long clawed feet, and a visible balancing tail. No wings unless a specific future variant explicitly supplies them."
   },
   "accuracy_checks": [
     "long draconic snout is obvious",
@@ -54,5 +55,20 @@
       "symptom": "dense scale texture hurts coloring space",
       "correction": "keep scales sparse and use broad open body regions"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Small, light reptilian humanoid built for tight spaces, traps, and quick movement rather than heroic dragon-person mass.",
+    "natural_posture": "Low, alert, balanced by the tail, and clearly supported while crouching, inspecting, carrying, tending, or watching.",
+    "behavior_style": [
+      "testing or tending a simple trap",
+      "carrying or arranging scavenged tools",
+      "guarding a narrow passage or small shrine",
+      "peeking from cover while remaining grounded and readable"
+    ],
+    "environment_fit": [
+      "trapped stone corridors",
+      "mines, caves, and narrow tunnels",
+      "small shrines, storage niches, ledges, and defensible underground passages"
+    ]
+  }
 }

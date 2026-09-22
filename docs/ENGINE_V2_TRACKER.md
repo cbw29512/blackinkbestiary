@@ -111,7 +111,7 @@ These are engine feedback, not isolated page problems.
 ### Current hardening priorities
 
 1. story-moment engine: one readable static beat instead of portrait/prop posing — **implemented; colorability has priority over story complexity**
-2. family DNA audit across every repeated monster family
+2. family DNA audit across every repeated monster family — **implemented; all 14 reusable family profiles pass the expanded DNA contract and catalog audit**
 3. environment variation depth across every book family
 4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented; review state records failed and preserved dimensions**
 5. Golden Five reference pages before mass regeneration
@@ -177,3 +177,16 @@ The written rule is now being enforced in engine behavior, not just documentatio
 - new first-class colorability defects include cramped coloring spaces, excessive line density, story-overload, and fundamentally uncolorable composition
 
 **Next hardening priority:** family DNA coverage across every repeated monster family, followed by environment-variation depth and the Golden Five reference pages.
+
+
+## 2026-09-22 Monster Family DNA Update
+
+The universal monster contract now requires reusable families to define limbs/extremities, size impression, stable natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.
+
+The catalog audit reads these required paths from the contract itself. This intentionally makes CI fail until every reusable family is upgraded, preventing partial family coverage from being treated as production-ready.
+
+Variant monster JSON remains minimal. A variant may use `scene_overrides` only when its posture, behavior, or environment fit truly differs from the family.
+
+**Validation:** the first complete 14-family state passed Studio checks on the branch.
+
+**Next hardening priority:** environment variation depth across every book family, then Golden Five reference pages.

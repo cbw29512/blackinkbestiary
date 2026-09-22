@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "contract_id": "black-ink-monster-v1",
   "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
   "minimal_recipe_required": [
@@ -11,7 +11,8 @@
     "variant_traits",
     "locomotion",
     "visual_overrides",
-    "default_habitats"
+    "default_habitats",
+    "scene_overrides"
   ],
   "defaults": {
     "visual_identity": {
@@ -21,6 +22,10 @@
     "default_habitats": [],
     "locomotion": {
       "can_fly": false
+    },
+    "scene_identity": {
+      "behavior_style": [],
+      "environment_fit": []
     }
   },
   "resolution_order": [
@@ -33,6 +38,25 @@
     "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
     "Monster recipes should only state what differs from the family.",
     "Known family failure modes must be injected into generation and review, not merely stored.",
-    "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment."
+    "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment.",
+    "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
+    "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
+    "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit."
+  ],
+  "family_profile_required": [
+    "visual_identity.core_identity",
+    "visual_identity.silhouette",
+    "visual_identity.head_features",
+    "visual_identity.body_shape",
+    "visual_identity.limb_structure",
+    "visual_identity.surface",
+    "visual_identity.must_keep",
+    "visual_identity.must_avoid",
+    "scene_identity.size_impression",
+    "scene_identity.natural_posture",
+    "scene_identity.behavior_style",
+    "scene_identity.environment_fit",
+    "accuracy_checks",
+    "known_failure_modes"
   ]
 }

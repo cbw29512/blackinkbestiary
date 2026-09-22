@@ -28,7 +28,8 @@
       "horns",
       "insect anatomy",
       "vampire clothing"
-    ]
+    ],
+    "limb_structure": "Forelimbs are true bat wings formed by elongated finger bones supporting a continuous membrane; hind limbs end in small clawed roosting feet. Never add separate humanoid arms."
   },
   "accuracy_checks": [
     "reads as bat immediately",
@@ -50,5 +51,19 @@
   ],
   "locomotion": {
     "can_fly": true
+  },
+  "scene_identity": {
+    "size_impression": "Light, compact flying mammal anatomy; exact scale follows the variant, but the body should never feel dragon-heavy or birdlike.",
+    "natural_posture": "Hanging securely by clawed feet, clinging to stone or timber, or moving in controlled wing-powered flight with the compact body suspended between the wings.",
+    "behavior_style": [
+      "roosting beneath ceilings, arches, or ledges",
+      "banking through clear cavern or chamber air",
+      "moving as a coordinated cluster when the variant is a swarm without giving individuals mascot poses"
+    ],
+    "environment_fit": [
+      "cave ceilings and stone vaults",
+      "ruined rafters and dark chambers",
+      "open cavern air with visible roosting or landing surfaces"
+    ]
   }
 }

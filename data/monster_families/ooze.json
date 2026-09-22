@@ -26,7 +26,8 @@
       "solid black mass",
       "dense bubbles",
       "tentacle-monster anatomy unless variant requires it"
-    ]
+    ],
+    "limb_structure": "No fixed limbs, joints, hands, or feet. The body flows, pools, sheets, or holds variant-specific geometry against surrounding architecture."
   },
   "accuracy_checks": [
     "ooze has no accidental face",
@@ -45,5 +46,20 @@
       "symptom": "dark ooze becomes a solid black shape",
       "correction": "use outline-driven form with open white interior and sparse contour marks"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "A substantial amorphous mass whose scale is shown by how much floor, wall, doorway, stair, or corridor it contacts; exact dimensions follow the variant.",
+    "natural_posture": "Fully supported by and conforming to floors, walls, stairs, bars, doors, or other surfaces; never floating as an unsupported blob.",
+    "behavior_style": [
+      "flowing around a large obstacle",
+      "filling part of a corridor, drain, or doorway",
+      "pooling beneath or against architecture",
+      "engulfing one simple object while remaining faceless and easy to color"
+    ],
+    "environment_fit": [
+      "dungeon drains and sewers",
+      "stone corridors and stairwells",
+      "damp chambers, doorways, barred passages, and other geometry that makes ooze shape readable"
+    ]
+  }
 }

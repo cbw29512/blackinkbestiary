@@ -28,7 +28,8 @@
       "reptilian scales",
       "cute features",
       "dense skin texture"
-    ]
+    ],
+    "limb_structure": "Very long humanoid arms ending in large clawed hands, long powerful legs, and large clawed feet; limbs are lanky giant anatomy rather than ogre thickness or animal posture."
   },
   "accuracy_checks": [
     "troll reads lanky rather than ogre-heavy",
@@ -47,5 +48,20 @@
       "symptom": "troll gains tusks or orc armor",
       "correction": "remove tusks and military gear; restore predatory cave-giant anatomy"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Tall large cave giant whose reach and elongated limbs create scale more than torso width.",
+    "natural_posture": "Hunched but bipedal and grounded, stalking with long arms hanging naturally, reaching around an obstacle, or braced in a confined opening.",
+    "behavior_style": [
+      "stalking through cave or ruined passages",
+      "reaching around or over a large obstacle",
+      "guarding or feeding in a lair",
+      "squeezing through a broken stone opening while keeping long-limbed anatomy readable"
+    ],
+    "environment_fit": [
+      "caves and rocky lairs",
+      "ruined stone halls",
+      "large subterranean corridors, fissures, and broken openings that show reach and height"
+    ]
+  }
 }

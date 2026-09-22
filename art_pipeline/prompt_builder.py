@@ -44,6 +44,7 @@ def _canonical_sections(spec: dict | None) -> list[str]:
     if not spec:
         return []
     visual = spec.get("visual_identity") or {}
+    scene = spec.get("scene_identity") or {}
     failures = [
         f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
         for item in spec.get("known_failure_modes", [])
@@ -55,7 +56,12 @@ def _canonical_sections(spec: dict | None) -> list[str]:
         f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}".strip(),
         f"CANONICAL HEAD: {visual.get('head_features', '')}".strip(),
         f"CANONICAL BODY: {visual.get('body_shape', '')}".strip(),
+        f"CANONICAL LIMBS / EXTREMITIES: {visual.get('limb_structure', '')}".strip(),
         f"CANONICAL SURFACE: {visual.get('surface', '')}".strip(),
+        f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}".strip(),
+        f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}".strip(),
+        _items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style")),
+        _items("CANONICAL ENVIRONMENT FIT", scene.get("environment_fit")),
         _items("VARIANT TRAITS", spec.get("variant_traits")),
         _items("CANONICAL GEAR", visual.get("signature_gear")),
         _items("CANONICAL ATTITUDE", visual.get("attitude")),

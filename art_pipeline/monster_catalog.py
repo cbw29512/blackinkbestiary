@@ -64,6 +64,10 @@ def _apply_contract_defaults(resolved: dict, contract: dict) -> dict:
         defaults.get("locomotion") or {},
         resolved.get("locomotion") or {},
     )
+    resolved["scene_identity"] = _merge_dict(
+        defaults.get("scene_identity") or {},
+        resolved.get("scene_identity") or {},
+    )
     return resolved
 
 
@@ -73,6 +77,11 @@ def _apply_minimal_recipe(resolved: dict, raw: dict) -> dict:
     if overrides:
         visual = _merge_dict(visual, overrides)
     resolved["visual_identity"] = visual
+    scene = resolved.get("scene_identity") or {}
+    scene_overrides = raw.get("scene_overrides") or {}
+    if scene_overrides:
+        scene = _merge_dict(scene, scene_overrides)
+    resolved["scene_identity"] = scene
     resolved["variant_traits"] = list(raw.get("variant_traits") or [])
     return resolved
 
