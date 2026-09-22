@@ -343,6 +343,382 @@
         "cathedral-scale clutter",
         "dense lace-like webbing"
       ]
+    },
+    "underground.rough-stone-pantry": {
+      "name": "Rough Stone Pantry",
+      "description": "Underground food store with crude shelves, sacks, crocks, and hanging provisions rather than modern cabinetry.",
+      "visual_cues": [
+        "rough stone walls",
+        "open timber shelves",
+        "sacks and crocks",
+        "hanging food or heavy worktable"
+      ],
+      "colorable_forms": [
+        "large shelf boards",
+        "broad sacks",
+        "simple crock shapes",
+        "open wall planes"
+      ],
+      "must_avoid": [
+        "modern cabinets",
+        "appliances",
+        "tiny food clutter"
+      ]
+    },
+    "underground.throne-grotto": {
+      "name": "Improvised Throne Grotto",
+      "description": "Natural cave chamber turned into a crude audience space with scavenged furniture and trophies.",
+      "visual_cues": [
+        "irregular cave wall",
+        "rock ledge or dais",
+        "improvised throne",
+        "few large trophies"
+      ],
+      "colorable_forms": [
+        "broad rock shapes",
+        "large throne panels",
+        "simple trophy silhouettes"
+      ],
+      "must_avoid": [
+        "royal palace symmetry",
+        "ornate throne detail"
+      ]
+    },
+    "underground.war-room": {
+      "name": "Cave War Room",
+      "description": "Natural chamber adapted for military planning with a central table and practical gear.",
+      "visual_cues": [
+        "irregular rock walls",
+        "large map table",
+        "weapon pegs",
+        "single tunnel map or marker board"
+      ],
+      "colorable_forms": [
+        "large table top",
+        "broad wall areas",
+        "simple weapon silhouettes"
+      ],
+      "must_avoid": [
+        "modern office",
+        "tiny tactical clutter"
+      ]
+    },
+    "underground.spiral-stair": {
+      "name": "Cramped Spiral Stair",
+      "description": "Tight masonry stair curling around a central newel or shaft, emphasizing vertical confinement.",
+      "visual_cues": [
+        "curving stone steps",
+        "central column or open shaft",
+        "tight wall radius",
+        "small landing"
+      ],
+      "colorable_forms": [
+        "large step bands",
+        "broad curved wall",
+        "simple railing if any"
+      ],
+      "must_avoid": [
+        "grand staircase",
+        "open ballroom"
+      ]
+    },
+    "underground.prison-cell": {
+      "name": "Dungeon Prison Cell",
+      "description": "Small barred cell with heavy masonry and only a few functional objects.",
+      "visual_cues": [
+        "large iron bars",
+        "stone bunk or straw pallet",
+        "heavy wall blocks",
+        "simple door or chain anchor"
+      ],
+      "colorable_forms": [
+        "broad bars",
+        "large wall stones",
+        "simple bunk shape"
+      ],
+      "must_avoid": [
+        "modern jail furniture",
+        "dense chain detail"
+      ]
+    },
+    "underground.well-shaft": {
+      "name": "Vertical Well Shaft",
+      "description": "Deep circular stone shaft with strong vertical perspective and a visible rim or ledge.",
+      "visual_cues": [
+        "circular masonry shaft",
+        "deep opening",
+        "simple rim or ledge",
+        "one rope or bracket"
+      ],
+      "colorable_forms": [
+        "large stone rings",
+        "broad dark opening",
+        "simple rope"
+      ],
+      "must_avoid": [
+        "flat floor grate composition"
+      ]
+    },
+    "underground.floor-grate": {
+      "name": "Floor-Grate Passage",
+      "description": "Built corridor section organized around a large drain or grate opening.",
+      "visual_cues": [
+        "large floor grate",
+        "stone gutter",
+        "broad flagstones",
+        "nearby wall recess"
+      ],
+      "colorable_forms": [
+        "large grate bars",
+        "broad slabs",
+        "simple gutter"
+      ],
+      "must_avoid": [
+        "tiny vent",
+        "modern sewer pipework"
+      ]
+    },
+    "underground.webbed-hall": {
+      "name": "Webbed Dungeon Hall",
+      "description": "Built hall overtaken by a few broad web sheets anchored to arches and corners.",
+      "visual_cues": [
+        "two or three large web spans",
+        "arched masonry",
+        "open floor lane",
+        "single abandoned furnishing"
+      ],
+      "colorable_forms": [
+        "large web cells",
+        "broad arches",
+        "open floor"
+      ],
+      "must_avoid": [
+        "lace-like micro-webbing",
+        "wall-to-wall tiny strands"
+      ]
+    },
+    "underground.treasure-vault": {
+      "name": "Treasure Vault",
+      "description": "Secure chamber with a small number of large treasure containers and masonry security features.",
+      "visual_cues": [
+        "large chest",
+        "stone plinth",
+        "heavy door or arch",
+        "one broad coin or object pile"
+      ],
+      "colorable_forms": [
+        "large chest panels",
+        "broad plinth",
+        "simple treasure mass"
+      ],
+      "must_avoid": [
+        "thousands of individual coins",
+        "jewelry confetti"
+      ]
+    },
+    "underground.display-gallery": {
+      "name": "Dungeon Display Gallery",
+      "description": "Formal passage or room with pedestals, statues, or armor displays spaced clearly apart.",
+      "visual_cues": [
+        "large pedestal",
+        "arched wall bay",
+        "one or two display objects",
+        "broad floor slabs"
+      ],
+      "colorable_forms": [
+        "large pedestal faces",
+        "broad wall bays",
+        "simple display silhouettes"
+      ],
+      "must_avoid": [
+        "museum clutter",
+        "many tiny objects"
+      ]
+    },
+    "underground.labyrinth": {
+      "name": "Stone Labyrinth",
+      "description": "Maze of repeating masonry passages distinguished by turns, intersections, and scale rather than decorative clutter.",
+      "visual_cues": [
+        "high stone walls",
+        "hard ninety-degree turn",
+        "intersection",
+        "few large floor slabs"
+      ],
+      "colorable_forms": [
+        "broad wall planes",
+        "large floor shapes"
+      ],
+      "must_avoid": [
+        "ornate wall carving",
+        "same straight corridor framing on every page"
+      ]
+    },
+    "underground.antechamber": {
+      "name": "Dungeon Antechamber",
+      "description": "Small transitional chamber with one or two architectural features indicating entry to a more important room.",
+      "visual_cues": [
+        "broad doorway",
+        "wall hook or niche",
+        "simple bench or plinth",
+        "arched ceiling"
+      ],
+      "colorable_forms": [
+        "large doorway",
+        "broad wall planes",
+        "single furnishing"
+      ],
+      "must_avoid": [
+        "empty box room"
+      ]
+    },
+    "underground.collapsed-tunnel": {
+      "name": "Collapsed Tunnel",
+      "description": "Damaged passage with a few massive rubble blocks and a restricted opening.",
+      "visual_cues": [
+        "large fallen blocks",
+        "broken wall edge",
+        "narrow surviving gap",
+        "dust or loose earth shown sparingly"
+      ],
+      "colorable_forms": [
+        "large angular rocks",
+        "broad broken wall",
+        "open gap"
+      ],
+      "must_avoid": [
+        "hundreds of tiny rubble stones"
+      ]
+    },
+    "underground.earthen-burrow": {
+      "name": "Earthen Burrow",
+      "description": "Excavated soil tunnel with packed walls, root intrusions, and a rough floor.",
+      "visual_cues": [
+        "packed earth wall",
+        "large root crossing",
+        "burrow opening",
+        "loose soil mound"
+      ],
+      "colorable_forms": [
+        "broad earth bands",
+        "large roots",
+        "simple opening"
+      ],
+      "must_avoid": [
+        "masonry blocks",
+        "tiny dirt texture"
+      ]
+    },
+    "underground.loose-earth-cavern": {
+      "name": "Loose-Earth Cavern",
+      "description": "Natural chamber with deep soil, eroded banks, and exposed rock, suitable for burrowing creatures.",
+      "visual_cues": [
+        "broad soil bank",
+        "rock outcrop",
+        "large furrow or ridge",
+        "open cavern wall"
+      ],
+      "colorable_forms": [
+        "large earth planes",
+        "broad rocks",
+        "simple furrows"
+      ],
+      "must_avoid": [
+        "flagstone floor",
+        "tiny gravel"
+      ]
+    },
+    "underground.stone-gallery": {
+      "name": "Underground Stone Gallery",
+      "description": "Long masonry chamber with large statues or wall bays and clear walking space.",
+      "visual_cues": [
+        "two or three large statues or plinths",
+        "arched bays",
+        "broad floor",
+        "deep doorway"
+      ],
+      "colorable_forms": [
+        "large statue masses",
+        "broad wall panels",
+        "open floor"
+      ],
+      "must_avoid": [
+        "dozens of statues",
+        "tiny ornaments"
+      ]
+    },
+    "underground.crude-henhouse": {
+      "name": "Improvised Dungeon Henhouse",
+      "description": "Crude underground animal pen built from rough boards, wire-free slats, straw, and stone walls.",
+      "visual_cues": [
+        "large wooden slat pen",
+        "straw mound",
+        "feed bowl or trough",
+        "stone wall"
+      ],
+      "colorable_forms": [
+        "large slats",
+        "broad straw mass",
+        "simple trough"
+      ],
+      "must_avoid": [
+        "modern chicken wire",
+        "farmhouse exterior"
+      ]
+    },
+    "underground.phylactery-vault": {
+      "name": "Deep Phylactery Vault",
+      "description": "Secure arcane burial chamber built around a single protected relic and monumental stone architecture.",
+      "visual_cues": [
+        "central reliquary plinth",
+        "heavy stone arch",
+        "sealed door or runic slab",
+        "few large ritual floor lines"
+      ],
+      "colorable_forms": [
+        "large plinth",
+        "broad arch",
+        "simple relic silhouette"
+      ],
+      "must_avoid": [
+        "tiny rune wallpaper",
+        "treasure clutter"
+      ]
+    },
+    "underground.mushroom-hall": {
+      "name": "Underground Mushroom Hall",
+      "description": "Broad damp chamber with a small number of oversized mushroom forms and open floor lanes.",
+      "visual_cues": [
+        "three or four large mushroom caps",
+        "thick stalks",
+        "rock wall",
+        "shallow damp patch"
+      ],
+      "colorable_forms": [
+        "large caps",
+        "thick stalks",
+        "broad floor"
+      ],
+      "must_avoid": [
+        "hundreds of tiny mushrooms"
+      ]
+    },
+    "underground.mine-shaft": {
+      "name": "Deep Mine Shaft",
+      "description": "Large excavated vertical or sloping mine passage reinforced by timber and dominated by depth.",
+      "visual_cues": [
+        "large timber supports",
+        "deep shaft opening",
+        "ore cart rail",
+        "rough-cut rock wall"
+      ],
+      "colorable_forms": [
+        "large beams",
+        "broad rock faces",
+        "simple shaft opening"
+      ],
+      "must_avoid": [
+        "modern elevator machinery"
+      ]
     }
   }
 }
