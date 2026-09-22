@@ -5,9 +5,18 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    from .manifest_validation import validate_manifest
+    from .studio_config import active_book_paths
+except ImportError:
+    from manifest_validation import validate_manifest
+    from studio_config import active_book_paths
+
 ROOT = Path(__file__).resolve().parents[1]
-TOME_FILE = ROOT / "data" / "tome-I.json"
-STATE_FILE = ROOT / "data" / "production-state.json"
+_BOOK_PATHS = active_book_paths(ROOT)
+TOME_FILE = _BOOK_PATHS["manifest"]
+STATE_FILE = _BOOK_PATHS["state"]
+MONSTER_DIR = ROOT / "data" / "monsters"
 WEB_DIR = ROOT / "web"
 CANDIDATE_DIR = WEB_DIR / "candidates"
 STUDIO_URL = "http://127.0.0.1:8765"
@@ -29,6 +38,9 @@ def write_json(path: Path, payload) -> None:
 
 def current_context():
     tome = read_json(TOME_FILE)
+    errors = validate_manifest(ROOT, tome, MONSTER_DIR)
+    if errors:
+        raise RuntimeError("Production manifest invalid: " + " | ".join(errors))
     state = read_json(STATE_FILE)
     page_id = state["current_page_id"]
     page = next(item for item in tome["pages"] if item["page_id"] == page_id)
