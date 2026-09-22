@@ -8,11 +8,13 @@ try:
     from .monster_catalog import resolve_monster_spec
     from .environment_catalog import environment_fingerprint, resolve_environment_profile
     from .page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from .physicality_prompt import locomotion_errors
 except ImportError:
     from quality_system import archetype_rules
     from monster_catalog import resolve_monster_spec
     from environment_catalog import environment_fingerprint, resolve_environment_profile
     from page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from physicality_prompt import locomotion_errors
 
 
 REQUIRED_PAGE_FIELDS = {"page_id", "order", "monster_spec_id", "moment", "archetype"}
@@ -132,6 +134,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
                 errors.append(f"{page_id}: habitat could not be derived")
             if not resolved.get("must_avoid"):
                 errors.append(f"{page_id}: resolved must_avoid cannot be empty")
+            errors.extend(locomotion_errors(resolved))
         except RuntimeError as exc:
             errors.append(f"{page_id}: page contract resolution failed: {exc}")
 
