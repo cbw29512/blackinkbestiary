@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "spider",
+  "display_name": "Spider",
+  "taxonomy": {
+    "family": "spider",
+    "creature_type": "arachnid",
+    "default_size": "variable"
+  },
+  "visual_identity": {
+    "core_identity": "True arachnid monsters with two main body sections, eight jointed legs, visible fangs, and no humanoid or insect anatomy.",
+    "silhouette": "Cephalothorax plus abdomen with exactly eight legs radiating from the front body section.",
+    "head_features": "Arachnid cephalothorax with multiple simple eyes and fangs; never a mammal or human face.",
+    "body_shape": "Two-section spider anatomy; proportions vary by web-building or hunting variant.",
+    "surface": "Sparse hair or markings only; avoid dense furry mass.",
+    "must_keep": [
+      "eight legs",
+      "two-part arachnid body",
+      "fangs",
+      "spider eye arrangement",
+      "jointed legs"
+    ],
+    "must_avoid": [
+      "six insect legs",
+      "human face",
+      "wolf mammal features",
+      "extra limbs",
+      "cartoon smile",
+      "dense fur overload"
+    ]
+  },
+  "accuracy_checks": [
+    "eight legs are countable",
+    "body reads true spider",
+    "no mammal or humanoid anatomy appears",
+    "detail stays colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "insect_drift",
+      "symptom": "spider has six legs or insect body segmentation",
+      "correction": "restore eight legs and two main arachnid body sections"
+    },
+    {
+      "id": "mammal_drift",
+      "symptom": "wolf-spider wording produces canine features",
+      "correction": "remove mammal muzzle, paws, and ears; keep only arachnid anatomy"
+    }
+  ]
+}
