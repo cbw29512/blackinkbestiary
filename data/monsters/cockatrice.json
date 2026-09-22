@@ -1,54 +1,18 @@
 {
+  "schema_version": 3,
   "monster_id": "cockatrice",
   "monster_name": "Cockatrice",
-  "family": "cockatrice",
-  "size": "small",
-  "creature_type": "monstrosity",
-  "visual_identity": {
-    "core_identity": "A small vicious rooster-reptile hybrid combining a cock's head and comb with leathery wings, clawed feet, and a serpentine tail.",
-    "silhouette": "Compact birdlike body, raised leathery wings, rooster head with comb, two clawed legs, long curling reptilian tail.",
-    "head_features": "Rooster-like head with hooked beak, prominent comb and wattles, fierce eyes.",
-    "body_shape": "Small feathered torso transitioning into leathery wings and a scaled curling tail, with birdlike clawed legs.",
-    "surface": "Sparse feathers on torso, smooth wing membranes, simple tail scales.",
-    "signature_gear": [],
-    "attitude": [
-      "agitated",
-      "territorial",
-      "hissing",
-      "threatening"
-    ],
-    "must_keep": [
-      "rooster head and comb",
-      "leathery wings",
-      "clawed bird legs",
-      "serpentine tail",
-      "small hybrid silhouette"
-    ],
-    "must_avoid": [
-      "ordinary chicken",
-      "full dragon body",
-      "four-legged lizard",
-      "feathered angel wings",
-      "cute farm-bird look",
-      "dense feathers"
-    ]
+  "species_profile": "cockatrice",
+  "locomotion": {
+    "can_fly": true
   },
+  "variant_traits": [
+    "petrifying hybrid",
+    "rooster-reptile"
+  ],
   "default_habitats": [
     "improvised henhouses",
     "dungeon pens",
     "ruined underground farms"
-  ],
-  "accuracy_checks": [
-    "hybrid identity is obvious",
-    "comb and beak are clear",
-    "wings differ from ordinary bird wings",
-    "tail is reptilian",
-    "petrified mouse reads clearly",
-    "creature stays small and colorable"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  ]
 }
