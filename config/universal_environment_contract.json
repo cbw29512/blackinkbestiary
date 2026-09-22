@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "contract_id": "black-ink-environment-v1",
+  "purpose": "Make every background immediately identifiable, accurate, unique, and colorable without bloating page recipes.",
+  "identity_test": "If the monster were removed, a reviewer should still identify the kind of place at thumbnail size.",
+  "resolved_identity": {
+    "spatial_type": "What kind of place/space this is: corridor, crawlway, cavern, crypt, forest clearing, reef, wreck, shrine, etc.",
+    "material_language": "The dominant construction/geology/vegetation/materials that make the setting believable.",
+    "identity_markers": "One to three unmistakable location cues that prove the setting without clutter.",
+    "spatial_read": "The geometry/depth/scale cue that makes the space read correctly around the monster."
+  },
+  "prompt_rules": [
+    "State spatial type, material language, identity markers, and spatial read explicitly.",
+    "Use at least one large structural cue and one unmistakable location marker.",
+    "The environment must remain identifiable if the monster is mentally removed.",
+    "Do not use smooth featureless walls, generic room boxes, or vague scenery when a more specific setting is required.",
+    "Environment cues must be large enough to color comfortably and visually secondary to the monster.",
+    "At least one environment feature must participate in the story moment."
+  ],
+  "automatic_failures": [
+    "setting type cannot be identified at thumbnail size",
+    "wall/floor/ceiling treatment is so generic that dungeon, building, cave, or outdoor location is ambiguous",
+    "materials do not match the named place",
+    "no unmistakable location marker is visible",
+    "spatial geometry contradicts the named environment",
+    "background could be swapped with an unrelated page without changing the scene"
+  ],
+  "minimal_page_inputs": [
+    "environment_profile_id",
+    "environment_variant.landmark",
+    "environment_variant.framing",
+    "environment_variant.interaction"
+  ],
+  "inheritance_rule": "Environment profiles own reusable place identity. Page recipes add only the unique landmark, framing, and monster/environment interaction."
+}

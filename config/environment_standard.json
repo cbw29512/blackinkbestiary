@@ -2,6 +2,8 @@
   "schema_version": 1,
   "principle": "Every page has three co-equal storytelling pillars: monster identity, environment identity, and story moment. Visually, the monster is the large centered dominant focal subject; the environment frames and supports it.",
   "generation_requirements": [
+    "At thumbnail size, the setting must identify itself even if the monster is mentally removed.",
+    "Every environment must resolve a clear spatial type, material language, one to three location markers, and a readable spatial geometry/depth cue.",
     "The environment must be specific to the named habitat, never a generic room or empty backdrop.",
     "Use two to four large, readable environmental cues that establish place at thumbnail size.",
     "At least one environmental feature must interact with the monster or story moment through cause-and-effect, use, movement, scale, concealment, danger, feeding, guarding, or habitation.",
@@ -13,6 +15,8 @@
     "A broad label such as cave, forest, ocean, crypt, or ruin is not specific enough by itself; every production page must resolve to a concrete environment profile."
   ],
   "approval_checks": [
+    "If the monster were removed, could you still tell what kind of place this is?",
+    "Are structure, materials, and at least one unmistakable location marker visible at thumbnail size?",
     "Is the monster the largest, centered or near-centered, first-read focal subject?",
     "Could the habitat be identified without reading the caption?",
     "Does the environment feel like a place this creature plausibly lives, hunts, guards, feeds, hides, or operates?",
@@ -24,6 +28,9 @@
     "Is the habitat subtype specific enough that it would still feel distinct if the monster were removed?"
   ],
   "automatic_failures": [
+    "setting type is ambiguous at thumbnail size",
+    "smooth featureless walls make dungeon, building, cave, or outdoor location unclear",
+    "no unmistakable location marker is visible",
     "monster is visually secondary, too small, or unnecessarily pushed to the edge",
     "generic empty backdrop",
     "wrong habitat",

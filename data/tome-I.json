@@ -427,19 +427,24 @@
       "must_include": [
         "dragged sack",
         "finger-to-mouth silence signal",
-        "visibly low crawlway forcing a crouch"
+        "visibly low crawlway forcing a crouch",
+        "cut-stone block walls",
+        "flagstone floor",
+        "one unmistakable dungeon fixture such as an iron sconce or barred service recess"
       ],
       "must_avoid": [
         "normal-height hallway",
-        "upright relaxed stance"
+        "upright relaxed stance",
+        "smooth generic walls",
+        "modern building hallway"
       ],
       "monster_spec_id": "bugbear-stalker",
       "archetype": "stealth_scene",
       "environment_profile_id": "underground.service-crawlway",
       "environment_variant": {
-        "landmark": "low support beam and narrow squeeze beside a wall niche",
-        "framing": "compressed side-on crawlway framing",
-        "interaction": "bugbear drags a sack while ducking under the low passage"
+        "landmark": "low stone lintel with an iron wall sconce beside a narrow barred service recess",
+        "framing": "compressed three-quarter dungeon crawlway view showing cut-stone walls, flagstone floor, and visibly low ceiling",
+        "interaction": "bugbear stoops beneath the low lintel while dragging the sack past the iron dungeon fittings"
       },
       "physicality": {
         "mode": "crouched-dragging",
