@@ -7,6 +7,7 @@ try:
     from .book_registry import load_series, plan_path
     from .calibration_gate import calibration_report
     from .catalog_audit import audit_environment_variation_catalog
+    from .environment_engine_audit import audit_environment_engine
     from .manifest_validation import validate_manifest
     from .page_contract import missing_required_paths, page_uniqueness_fingerprint
     from .state_validation import validate_state
@@ -15,6 +16,7 @@ except ImportError:
     from book_registry import load_series, plan_path
     from calibration_gate import calibration_report
     from catalog_audit import audit_environment_variation_catalog
+    from environment_engine_audit import audit_environment_engine
     from manifest_validation import validate_manifest
     from page_contract import missing_required_paths, page_uniqueness_fingerprint
     from state_validation import validate_state
@@ -103,6 +105,11 @@ def audit_series(root: Path) -> dict:
         structural_errors.extend(
             f"environment variation: {error}" for error in variation_report["errors"]
         )
+    environment_report = audit_environment_engine(root)
+    if not environment_report["pass"]:
+        structural_errors.extend(
+            f"environment engine: {error}" for error in environment_report["errors"]
+        )
 
     calibration = calibration_report(root)
     for row in rows:
@@ -147,6 +154,9 @@ def audit_series(root: Path) -> dict:
         "books_registered": len(rows),
         "source_registry_entries": len(allowed),
         "environment_variation_families": variation_report["variation_families"],
+        "environment_component_catalogs": environment_report["component_catalogs"],
+        "environment_components": environment_report["total_components"],
+        "environment_overlays": environment_report["overlay_count"],
         "golden_five_calibration": calibration,
         "production_ready_books": sum(1 for row in rows if row["production_ready"]),
         "mass_generation_ready_books": sum(
