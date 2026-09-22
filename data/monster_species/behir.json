@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "behir",
+  "display_name": "Behir",
+  "taxonomy": {
+    "family": "behir",
+    "creature_type": "monstrosity",
+    "default_size": "huge"
+  },
+  "visual_identity": {
+    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head, and a body built to coil.",
+    "silhouette": "Very long snake-like torso in strong curves, numerous paired legs along the sides, horned head raised from the body.",
+    "head_features": "Long reptilian head with strong jaws, backward horns or spines, alert eyes, and no wings.",
+    "body_shape": "Serpentine segmented torso with many pairs of short legs spaced along its length and a tapering tail.",
+    "surface": "Large simple scales or ridge plates with minimal texture.",
+    "signature_gear": [],
+    "attitude": [
+      "coiling",
+      "predatory",
+      "charged",
+      "territorial"
+    ],
+    "must_keep": [
+      "many pairs of legs",
+      "long serpentine body",
+      "horned reptilian head",
+      "no wings"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "four-legged dragon proportions",
+      "centipede insect head",
+      "humanoid arms",
+      "smooth legless snake",
+      "dense scales"
+    ]
+  },
+  "accuracy_checks": [
+    "many legs are obvious",
+    "body reads serpentine not centipede",
+    "head is reptilian",
+    "no wings appear",
+    "scale detail remains colorable"
+  ]
+}
