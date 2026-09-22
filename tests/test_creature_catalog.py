@@ -48,7 +48,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertNotIn("creature_type", raw)
 
         spec = resolve_monster_spec("bugbear-stalker")
-        self.assertEqual(spec["monster_contract"], "black-ink-monster-v2")
+        self.assertEqual(spec["monster_contract"], "black-ink-monster-v4")
         self.assertTrue(spec["catalog"]["minimal_recipe"])
         self.assertEqual(spec["family"], "bugbear")
         self.assertEqual(spec["size"], "medium")
@@ -60,9 +60,9 @@ class CreatureCatalogTests(unittest.TestCase):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
         text = build_prompt(page)
-        self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", text)
+        self.assertIn("MONSTER DRIFT CORRECTIONS", text)
         self.assertIn("gorilla, ape-man, or primate", text)
-        self.assertIn("CORRECTION:", text)
+        self.assertIn("->", text)
 
     def test_all_family_profiles_pass_expanded_dna_audit(self):
         from catalog_audit import audit_monster_catalog
@@ -75,10 +75,10 @@ class CreatureCatalogTests(unittest.TestCase):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
         text = build_prompt(page)
-        self.assertIn("CANONICAL LIMBS / EXTREMITIES", text)
-        self.assertIn("CANONICAL SIZE IMPRESSION", text)
-        self.assertIn("CANONICAL NATURAL POSTURE", text)
-        self.assertIn("CANONICAL BEHAVIOR STYLE", text)
+        self.assertIn("MONSTER BRIEF — AUTHORITATIVE", text)
+        self.assertIn("Limbs:", text)
+        self.assertIn("Natural posture:", text)
+        self.assertNotIn("CANONICAL BEHAVIOR STYLE", text)
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
         self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
 
