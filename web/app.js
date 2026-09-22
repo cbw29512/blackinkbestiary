@@ -56,6 +56,9 @@ function render(d) {
     && !worker.running
     && Boolean(p.monster_spec_id);
 
+  qs("#bookId").textContent = d.tome.tome_id || "Active Book";
+  qs("#bookTitle").textContent = d.tome.title || "Untitled";
+
   qs("#progress").innerHTML = `
     <div><strong>${d.progress.approved}/${d.progress.total}</strong></div>
     <div>pages approved</div>
@@ -121,6 +124,7 @@ function render(d) {
   `;
 
   qs("#brief").innerHTML = `
+    <h3>Archetype</h3><p>${esc((p.archetype || "default_scene").replaceAll("_", " "))}</p>
     <h3>Moment</h3><p>${esc(p.moment)}</p>
     <h3>Identity</h3>${list(p.identity_rules)}
     <h3>Must Include</h3>${list(p.must_include)}
@@ -152,7 +156,8 @@ function render(d) {
     qs("#statusLine").innerHTML = `<span class="error"><strong>Generation stopped:</strong> ${esc(s.generation_error.message)}</span>`;
   } else if (c) {
     const mode = c.generation_mode ? ` · Mode: <strong>${esc(c.generation_mode.replaceAll("_", " "))}</strong>` : "";
-    qs("#statusLine").innerHTML = `Attempt <strong>${c.attempt}</strong>${mode} · QA: <strong>${esc(c.qa_status)}</strong> · Supervisor: <strong>${esc(c.supervisor_status)}</strong>`;
+    const retry = c.technical_retry ? ` · Auto-retries: <strong>${c.technical_retry}</strong>` : "";
+    qs("#statusLine").innerHTML = `Attempt <strong>${c.attempt}</strong>${mode}${retry} · QA: <strong>${esc(c.qa_status)}</strong> · Supervisor: <strong>${esc(c.supervisor_status)}</strong>`;
   } else if (!p.monster_spec_id) {
     qs("#statusLine").innerHTML = `<strong>Identity gate:</strong> canonical monster spec required before this page can generate.`;
   } else {
