@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "giant-bat",
+  "family_profile": "bat",
+  "display_name": "Giant Bat",
+  "size": "large",
+  "creature_type": "giant beast",
+  "visual_identity": {
+    "core_identity": "An enormous cave bat with a broad membrane wingspan, powerful clawed feet, and unmistakable natural bat anatomy.",
+    "silhouette": "Wide folded or partly opened wings, hanging inverted body, large pointed ears, narrow torso, clawed feet gripping overhead rock.",
+    "body_shape": "Light flying mammal body with very long finger-boned wings and compact torso.",
+    "must_keep": [
+      "very large wings",
+      "inverted hanging posture",
+      "clawed roosting feet"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "humanoid arms",
+      "vampire clothing",
+      "insect anatomy"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "Large enough that wingspan and roosting feet dominate a substantial cave or chamber area.",
+    "behavior_style": [
+      "hanging from a ceiling",
+      "launching from a visible roost",
+      "banking through cavern air",
+      "clinging to a broad overhead support"
+    ]
+  },
+  "accuracy_checks": [
+    "large scale is obvious",
+    "roost contact is believable",
+    "natural bat anatomy remains intact"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "dragon_bat_drift",
+      "symptom": "giant bat gains dragonlike wings/head",
+      "correction": "restore true bat membrane wings, natural bat face, and compact mammal torso"
+    }
+  ],
+  "locomotion": {
+    "can_fly": true
+  }
+}
