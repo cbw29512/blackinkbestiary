@@ -1,0 +1,57 @@
+{
+  "monster_id": "troll",
+  "monster_name": "Troll",
+  "family": "troll",
+  "size": "large",
+  "creature_type": "giant humanoid",
+  "visual_identity": {
+    "core_identity": "A tall predatory cave giant with a narrow torso, very long clawed arms, powerful regeneration, and a wary hatred of fire.",
+    "silhouette": "Lanky tall body, long arms reaching near the knees, hunched shoulders, large clawed hands and feet.",
+    "head_features": "Long coarse face, pronounced nose and brow, wide predatory mouth with sharp teeth, deep-set eyes.",
+    "body_shape": "Lean but powerful giant with elongated limbs, broad hands, and slightly stooped posture.",
+    "surface": "Tough uneven skin with sparse wart-like marks; avoid dense scales or fur.",
+    "signature_gear": [
+      "minimal ragged loincloth",
+      "simple scavenged belt"
+    ],
+    "attitude": [
+      "hungry",
+      "suspicious",
+      "feral",
+      "fire-wary"
+    ],
+    "must_keep": [
+      "very long arms",
+      "lanky giant proportions",
+      "large claws",
+      "predatory face",
+      "regeneration-friendly tough body"
+    ],
+    "must_avoid": [
+      "ogre belly",
+      "orc armor",
+      "reptilian scales",
+      "cute features",
+      "short arms",
+      "dense skin texture"
+    ]
+  },
+  "default_habitats": [
+    "cave fire pits",
+    "underground ravines",
+    "damp dungeon chambers"
+  ],
+  "accuracy_checks": [
+    "body reads lanky rather than ogre-bulky",
+    "arms are distinctly long",
+    "claws are clear",
+    "face is predatory",
+    "fire relationship can read visually",
+    "silhouette remains simple"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  }
+}
