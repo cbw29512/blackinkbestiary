@@ -51,7 +51,7 @@ class PlatformQualityTests(unittest.TestCase):
         self.assertEqual(recommended_action(ROOT, ["grounding unclear"]), "modify")
         self.assertEqual(recommended_action(ROOT, ["airborne action unclear"]), "modify")
         directives = expand_defect_tags(ROOT, ["grounding unclear", "airborne action unclear"])
-        self.assertTrue(any("support plane" in item for item in directives))
+        self.assertTrue(any("support/contact" in item for item in directives))
         self.assertTrue(any("stable natural" in item for item in directives))
 
     def test_page_polish_defects_stay_on_modify(self):
