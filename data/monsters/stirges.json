@@ -1,57 +1,18 @@
 {
+  "schema_version": 3,
   "monster_id": "stirges",
   "monster_name": "Stirges",
-  "family": "stirge",
-  "size": "tiny",
-  "creature_type": "flying blood-feeding beasts",
-  "visual_identity": {
-    "core_identity": "A small swarm of ugly flying blood-feeders combining batlike wings with long needle proboscises and grasping feet.",
-    "silhouette": "Several small airborne bodies with outspread membrane wings and long straight proboscises projecting from their faces.",
-    "head_features": "Small animal-like head dominated by a long needle feeding tube, simple eyes, no humanoid expression.",
-    "body_shape": "Compact flying body with membranous wings, small legs or grasping feet, and narrow abdomen.",
-    "surface": "Smooth membrane wings and sparse body texture; avoid dense insect detail.",
-    "signature_gear": [],
-    "attitude": [
-      "hungry",
-      "darting",
-      "clingy",
-      "swarming"
-    ],
-    "must_keep": [
-      "long needle proboscis",
-      "membranous wings",
-      "small flying body",
-      "multiple creatures",
-      "predatory feeding posture"
-    ],
-    "must_avoid": [
-      "ordinary bats",
-      "mosquito-only anatomy",
-      "feathered birds",
-      "cute faces",
-      "huge swarm clutter",
-      "humanoid features"
-    ]
+  "species_profile": "stirges",
+  "locomotion": {
+    "can_fly": true
   },
+  "variant_traits": [
+    "blood-feeding",
+    "small swarm"
+  ],
   "default_habitats": [
     "dungeon cells",
     "cave ceilings",
     "abandoned underground rooms"
-  ],
-  "accuracy_checks": [
-    "proboscises are unmistakable",
-    "wings remain visible",
-    "multiple creatures read separately",
-    "sleeping target is not obscured",
-    "swarm stays colorable",
-    "creatures are not mistaken for bats"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "locomotion": {
-    "can_fly": true
-  }
+  ]
 }
