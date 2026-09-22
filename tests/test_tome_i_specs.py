@@ -37,6 +37,14 @@ class TomeISpecTests(unittest.TestCase):
             self.assertTrue(spec["accuracy_checks"])
             self.assertTrue(page["must_include"])
 
+    def test_every_page_uses_monster_first_visual_hierarchy(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            composition = page.get("composition", "").lower()
+            self.assertIn("large centered or near-centered dominant focal subject", composition, page["page_id"])
+            self.assertIn("55–72% of page height", page.get("composition", ""), page["page_id"])
+            self.assertIn("two to four large supporting forms", composition, page["page_id"])
+
     def test_page_requirements_are_concrete(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         forbidden_placeholders = {"one clear story moment", "large open areas to color"}
