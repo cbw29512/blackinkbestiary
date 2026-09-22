@@ -1,0 +1,76 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "darkmantle",
+  "display_name": "Darkmantle",
+  "taxonomy": {
+    "family": "darkmantle",
+    "creature_type": "cave aberration",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A ceiling-dwelling ambush creature that resembles a leathery stalactite-clinging mantle until it peels away and drops.",
+    "silhouette": "Flattened manta-like leathery body with broad mantle edges and several short dangling tentacles beneath.",
+    "head_features": "Small central underside head or beak-like mouth largely hidden beneath the mantle.",
+    "body_shape": "Compact central body under a wide flexible mantle with short gripping tentacles.",
+    "limb_structure": "No humanoid limbs; short gripping tentacles hang beneath a broad mantle body. Ceiling contact must visibly support resting poses.",
+    "surface": "Leathery membrane with sparse folds and simple underside texture.",
+    "must_keep": [
+      "broad mantle shape",
+      "ceiling-clinging posture",
+      "dangling tentacles",
+      "non-humanoid body",
+      "stalactite camouflage"
+    ],
+    "must_avoid": [
+      "bat ears",
+      "bird feathers",
+      "octopus-only body",
+      "humanoid face",
+      "large dragon wings",
+      "dense membrane veins"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as mantle-like cave predator",
+    "ceiling relationship is obvious",
+    "tentacles are visible",
+    "shape differs from a bat",
+    "body is compact"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "bat_drift",
+      "symptom": "darkmantle becomes a bat",
+      "correction": "remove ears and bat body; restore broad mantle and short underside tentacles"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "tentacles dominate into octopus anatomy",
+      "correction": "keep a compact mantle body with only short gripping tentacles"
+    },
+    {
+      "id": "floating_drift",
+      "symptom": "resting creature hangs with no ceiling contact",
+      "correction": "show clear attachment to overhead rock or supported flying posture"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Small compact ceiling predator whose broad mantle is wider than its central body.",
+    "natural_posture": "Clinging directly to overhead rock or peeling away with support/contact still visually understandable.",
+    "behavior_style": [
+      "clinging beneath a ceiling",
+      "peeling from a stalactite cluster",
+      "dropping from a visible overhead support",
+      "hovering close to cave structure"
+    ],
+    "environment_fit": [
+      "limestone ceilings",
+      "stalactite caverns",
+      "vaulted underground spaces"
+    ]
+  },
+  "locomotion": {
+    "can_fly": true
+  }
+}
