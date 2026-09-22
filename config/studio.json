@@ -11,5 +11,6 @@
   "coloring_page_standard": "config/coloring_page_standard.json",
   "universal_page_contract": "config/universal_page_contract.json",
   "universal_monster_contract": "config/universal_monster_contract.json",
-  "kdp_print_standard": "config/kdp_print_standard.json"
+  "kdp_print_standard": "config/kdp_print_standard.json",
+  "content_scope": "config/content_scope.json"
 }
