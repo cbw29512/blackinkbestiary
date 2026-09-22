@@ -18,6 +18,16 @@ PAGE SPEC → LOCAL AI → QA → SUPERVISOR → HUMAN REVIEW
 
 A page cannot advance until it is approved and locked.
 
+Approved pages are copied into strict book order under:
+
+```
+web/approved/Tome-I/I-01.png
+web/approved/Tome-I/I-02.png
+...
+```
+
+Candidate attempts remain under `web/candidates/`; only human-approved pages enter the ordered book folder.
+
 ## Product Rules
 
 - One current page at a time.

@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import argparse
+import filecmp
 import json
 import mimetypes
+import shutil
 import threading
 import webbrowser
 from datetime import datetime, timezone
@@ -17,6 +19,7 @@ DATA_DIR = ROOT / "data"
 TOME_FILE = DATA_DIR / "tome-I.json"
 STATE_FILE = DATA_DIR / "production-state.json"
 REVIEWS_FILE = DATA_DIR / "reviews.jsonl"
+APPROVED_ROOT = WEB_DIR / "approved"
 
 VALID_DECISIONS = {"approve", "modify", "regenerate"}
 ACTIVE_STATES = {
@@ -113,6 +116,7 @@ def public_state():
                 "page_id": page["page_id"],
                 "monster_name": page["monster_name"],
                 "status": state["pages"][page["page_id"]]["status"],
+                "approved_image_path": state["pages"][page["page_id"]].get("approved_image_path"),
             }
             for page in tome["pages"]
         ],
@@ -123,6 +127,47 @@ def append_review(entry):
     REVIEWS_FILE.parent.mkdir(parents=True, exist_ok=True)
     with REVIEWS_FILE.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(entry) + "\n")
+
+
+def tome_folder_name(tome) -> str:
+    tome_id = str(tome.get("tome_id", "TOME-I")).strip()
+    if tome_id.upper().startswith("TOME-"):
+        return "Tome-" + tome_id.split("-", 1)[1]
+    return tome_id or "Tome-I"
+
+
+def archive_approved_candidate(tome, page_id: str, candidate: dict) -> str:
+    image_path = str(candidate.get("image_path", "")).strip()
+    if not image_path:
+        raise ValueError("Candidate has no image_path")
+
+    relative = Path(image_path)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError("Candidate image_path must stay inside the Studio web folder")
+
+    source = (WEB_DIR / relative).resolve()
+    web_root = WEB_DIR.resolve()
+    if source != web_root and web_root not in source.parents:
+        raise ValueError("Candidate image is outside the Studio web folder")
+    if not source.exists() or not source.is_file():
+        raise ValueError(f"Candidate image file does not exist: {image_path}")
+    if source.suffix.lower() != ".png":
+        raise ValueError("Approved production pages must be PNG files")
+
+    destination_dir = APPROVED_ROOT / tome_folder_name(tome)
+    destination_dir.mkdir(parents=True, exist_ok=True)
+    destination = destination_dir / f"{page_id}.png"
+
+    if destination.exists():
+        if not filecmp.cmp(source, destination, shallow=False):
+            raise ValueError(
+                f"Approved page already exists with different artwork: "
+                f"{destination.relative_to(WEB_DIR).as_posix()}"
+            )
+    else:
+        shutil.copy2(source, destination)
+
+    return destination.relative_to(WEB_DIR).as_posix()
 
 
 def apply_decision(decision: str, notes: str = "", quick_tags=None):
@@ -141,8 +186,10 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
             raise ValueError("Cannot approve without a current candidate")
         if page_state["status"] != "awaiting_human":
             raise ValueError("Page must be awaiting human review before approval")
+        approved_image_path = archive_approved_candidate(tome, page_id, candidate)
         page_state["status"] = "locked"
         page_state["approved_candidate"] = candidate
+        page_state["approved_image_path"] = approved_image_path
         page_state["approved_at"] = utc_now()
         page_state["last_decision"] = "approve"
 
@@ -168,6 +215,7 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         "page_id": page_id,
         "decision": decision,
         "candidate": candidate,
+        "approved_image_path": page_state.get("approved_image_path"),
         "notes": notes.strip(),
         "quick_tags": quick_tags,
         "timestamp": utc_now(),

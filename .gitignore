@@ -3,6 +3,11 @@ __pycache__/
 .DS_Store
 web/candidates/*
 !web/candidates/.gitkeep
+web/approved/*
+!web/approved/.gitkeep
+!web/approved/Tome-I/
+web/approved/Tome-I/*
+!web/approved/Tome-I/.gitkeep
 .blackink-tools/
 .blackink-comfy/
 data/local-environment.json
