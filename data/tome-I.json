@@ -372,14 +372,19 @@
       "habitat": "Ceiling crack above dungeon hall",
       "moment": "Dropping into an ambush",
       "identity_rules": [
-        "Must be immediately recognizable as Bugbear Warrior",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
+        "Unmistakable bugbear: long-armed shaggy goblinoid, not ape, sasquatch, bear, or generic brute",
+        "Pointed goblinoid ears and broad goblinoid nose remain readable through controlled shaggy hair",
+        "Powerful long-limbed body with ambush-predator posture rather than bodybuilder portrait stance"
       ],
       "must_include": [
         "long-armed shaggy bugbear warrior",
         "dropping from a ceiling crack",
         "ambush posture",
-        "dungeon hall below"
+        "dungeon hall below",
+        "visible ceiling breach or launch point directly above or behind the bugbear",
+        "clear downward dropping trajectory",
+        "bent knees or reaching limbs consistent with a landing ambush",
+        "sparse falling rubble or dust-line cues showing motion"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -388,7 +393,10 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "neutral standing pose suspended in midair",
+        "feet floating above floor with no readable fall or jump",
+        "sasquatch or ape-man face"
       ],
       "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
@@ -400,12 +408,12 @@
       },
       "reference_image": null,
       "monster_spec_id": "bugbear-warrior",
-      "archetype": "stealth_scene",
+      "archetype": "vertical_ambush_scene",
       "environment_profile_id": "underground.collapsed-ceiling-hall",
       "environment_variant": {
         "landmark": "large ceiling breach with hanging stone slab",
         "framing": "upward-looking hall view emphasizing the broken roof",
-        "interaction": "bugbear drops from the breach into the hall below"
+        "interaction": "bugbear drops through the visible ceiling breach with bent landing posture and sparse falling debris toward the hall below"
       }
     },
     {

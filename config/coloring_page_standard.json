@@ -46,7 +46,9 @@
     "Background depth should come from overlap and perspective of large forms, not from filling empty space with tiny objects.",
     "Do not add a decorative rectangular artwork frame or inset page border; use clean white page margins only.",
     "Secondary creatures may support a story beat, but they must remain smaller, simpler, and visually subordinate to the primary monster.",
-    "Represent repeated materials such as coins, chainmail, scales, masonry, fur, webs, and rubble with selective marks and larger grouped regions rather than exhaustive tiny repetition."
+    "Represent repeated materials such as coins, chainmail, scales, masonry, fur, webs, and rubble with selective marks and larger grouped regions rather than exhaustive tiny repetition.",
+    "Every creature must have readable physical grounding: visible contact with a support surface, or explicit and believable airborne/hanging motion logic.",
+    "A creature in midair may not use a neutral standing pose; center of gravity, limb gesture, and source/trajectory cues must explain why it is airborne."
   ],
   "environment_object_scale": {
     "major_objects": "large enough to color comfortably and recognize at thumbnail size",
@@ -63,7 +65,9 @@
     "background is empty because detail reduction removed all habitat cues",
     "decorative rectangular artwork border or inset page frame",
     "secondary figures compete with the primary monster for attention",
-    "repeated micro-patterns turn large colorable surfaces into many tiny cells"
+    "repeated micro-patterns turn large colorable surfaces into many tiny cells",
+    "creature appears to hover because feet or body do not contact any support and no airborne action is readable",
+    "falling or jumping creature uses a static standing pose in midair"
   ],
   "reference_composition": {
     "source": "user-approved visual references",
