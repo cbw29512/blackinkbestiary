@@ -28,7 +28,8 @@
       "cute object face",
       "unnecessary eyes or mouth",
       "ornate micro-detail"
-    ]
+    ],
+    "limb_structure": "Use only articulation that the original object plausibly possesses. Armor may articulate at its joints, a sword has no limbs, a rug folds and curls, and no invented biological or robot limbs are added."
   },
   "accuracy_checks": [
     "object identity reads before added magical motion",
@@ -52,5 +53,19 @@
       "symptom": "object gains cute eyes, smile, or cartoon face",
       "correction": "remove facial features and express motion through articulation, levitation, folding, or posture"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Scale is inherited from the original object; the creature should feel like an animated real object rather than a newly invented body.",
+    "natural_posture": "Supported, hanging, folded, standing, or levitating in a way that follows the object's construction and center of mass.",
+    "behavior_style": [
+      "remaining still until the object visibly awakens",
+      "guarding or blocking a location",
+      "moving through the object's own joints, folds, orientation, or magical force"
+    ],
+    "environment_fit": [
+      "armories and guard halls",
+      "shrines, vaults, and ceremonial chambers",
+      "workshops, ruins, or furnished rooms appropriate to the original object"
+    ]
+  }
 }
