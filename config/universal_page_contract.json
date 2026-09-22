@@ -94,5 +94,22 @@
       "midair"
     ],
     "rule": "Coloring pages favor stable natural poses. Non-flying creatures must be visibly supported by the environment and may not be shown falling, jumping, leaping, dropping, hovering, or frozen in midair. Creatures with locomotion.can_fly=true may use controlled natural flight, but the pose must remain calm, readable, and easy to color."
+  },
+  "product_scope": {
+    "primary_subjects": 1,
+    "source_scope": "2024 SRD monsters only",
+    "repeat_rule": "Monster repeats are permitted only when the resolved page recipe is materially different in environment profile, landmark, framing, interaction, moment, and physical state."
+  },
+  "approval_gate": {
+    "thumbnail_pillars": [
+      "monster_identity",
+      "environment_identity",
+      "story_moment"
+    ],
+    "colorability": true,
+    "line_art_purity": true,
+    "environment_uniqueness": true,
+    "print_layout": true,
+    "rule": "All gates must pass before Approve & Lock."
   }
 }
