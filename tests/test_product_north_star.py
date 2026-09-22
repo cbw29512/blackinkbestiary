@@ -65,6 +65,16 @@ class ProductNorthStarTests(unittest.TestCase):
         self.assertIn("environment variation depth", tracker)
         self.assertIn("Golden Five", tracker)
 
+    def test_colorability_outranks_story_complexity(self):
+        page = json.loads((ROOT / "config" / "universal_page_contract.json").read_text(encoding="utf-8"))
+        coloring = json.loads((ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8"))
+        story = json.loads((ROOT / "config" / "universal_story_contract.json").read_text(encoding="utf-8"))
+        self.assertEqual(page["production_priority"][0], "colorability")
+        self.assertEqual(coloring["priority_order"][0], "fun and satisfying to color")
+        self.assertIn("colorability wins", story["priority_rule"].lower())
+        self.assertEqual(story["story_budget"]["primary_beats"], 1)
+        self.assertEqual(story["story_budget"]["environment_interactions"], [1, 1])
+
 
 if __name__ == "__main__":
     unittest.main()
