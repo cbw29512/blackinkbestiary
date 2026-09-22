@@ -35,6 +35,7 @@ def main():
 
     for role, name in config["templates"].items():
         entry = {"name": name}
+        path = None
         try:
             if role == "text_to_image":
                 path = OUT / f"{name}.blackink.json"
@@ -77,7 +78,7 @@ def main():
             print(f"[FAIL] {role}: {name}")
             print(f"       {exc}")
 
-        entry["path"] = str(path) if "path" in locals() else None
+        entry["path"] = str(path) if path else None
         results[role] = entry
 
     REPORT.parent.mkdir(parents=True, exist_ok=True)
