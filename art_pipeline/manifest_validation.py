@@ -1,17 +1,18 @@
 from __future__ import annotations
 
+import math
 from pathlib import Path
 
 try:
     from .quality_system import archetype_rules
     from .monster_catalog import resolve_monster_spec
     from .environment_catalog import environment_fingerprint, resolve_environment_profile
-    from .page_contract import missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from .page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
 except ImportError:
     from quality_system import archetype_rules
     from monster_catalog import resolve_monster_spec
     from environment_catalog import environment_fingerprint, resolve_environment_profile
-    from page_contract import missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
 
 
 REQUIRED_PAGE_FIELDS = {"page_id", "order", "monster_spec_id", "moment", "archetype"}
@@ -86,6 +87,10 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
     seen_orders: set[int] = set()
     seen_backgrounds: dict[str, str] = {}
     seen_pages: dict[str, str] = {}
+    profile_counts: dict[str, int] = {}
+    consecutive_profile = None
+    consecutive_count = 0
+    max_consecutive_seen: dict[str, int] = {}
 
     for page in pages:
         page_id = str(page.get("page_id") or "").strip() or "<missing>"
@@ -130,6 +135,18 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         except RuntimeError as exc:
             errors.append(f"{page_id}: page contract resolution failed: {exc}")
 
+        profile_id = str(page.get("environment_profile_id") or "").strip()
+        profile_counts[profile_id] = profile_counts.get(profile_id, 0) + 1
+        if profile_id == consecutive_profile:
+            consecutive_count += 1
+        else:
+            consecutive_profile = profile_id
+            consecutive_count = 1
+        max_consecutive_seen[profile_id] = max(
+            max_consecutive_seen.get(profile_id, 0),
+            consecutive_count,
+        )
+
         fingerprint = environment_fingerprint(page)
         if fingerprint in seen_backgrounds:
             errors.append(f"{page_id}: background duplicates {seen_backgrounds[fingerprint]}")
@@ -148,4 +165,19 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
 
     if seen_orders and seen_orders != set(range(1, len(pages) + 1)):
         errors.append("page order must be contiguous starting at 1")
+
+    diversity = (load_page_contract(root / "config" / "universal_page_contract.json").get("environment_diversity") or {})
+    share = float(diversity.get("max_profile_share", 1.0))
+    minimum = int(diversity.get("minimum_repeat_allowance", 1))
+    max_consecutive = int(diversity.get("max_consecutive_same_profile", len(pages) or 1))
+    max_occurrences = max(minimum, math.ceil((len(pages) or 1) * share))
+    for profile_id, count in sorted(profile_counts.items()):
+        if count > max_occurrences:
+            errors.append(
+                f"environment profile {profile_id!r} used {count} times; maximum is {max_occurrences}"
+            )
+        if max_consecutive_seen.get(profile_id, 0) > max_consecutive:
+            errors.append(
+                f"environment profile {profile_id!r} repeats more than {max_consecutive} consecutive pages"
+            )
     return errors
