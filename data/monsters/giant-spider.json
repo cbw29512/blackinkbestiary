@@ -1,57 +1,12 @@
 {
+  "schema_version": 3,
   "monster_id": "giant-spider",
   "monster_name": "Giant Spider",
-  "family": "spider",
-  "size": "large",
-  "creature_type": "giant arachnid",
-  "visual_identity": {
-    "core_identity": "A huge web-building spider with a clear two-part arachnid body, eight long legs, and an ambush posture at the center of a web.",
-    "silhouette": "Large rounded abdomen behind a smaller cephalothorax, eight long jointed legs radiating outward.",
-    "head_features": "Arachnid cephalothorax with multiple simple eyes and visible fangs, no humanoid face.",
-    "body_shape": "Two main body sections with eight legs attached to the front section; abdomen elevated slightly.",
-    "surface": "Sparse short hairs and simple abdominal markings; web lines kept broad and readable.",
-    "signature_gear": [],
-    "attitude": [
-      "patient",
-      "still",
-      "predatory",
-      "web-bound"
-    ],
-    "must_keep": [
-      "eight legs",
-      "two-part spider body",
-      "fangs",
-      "web-center posture",
-      "large readable abdomen"
-    ],
-    "must_avoid": [
-      "insect six-leg anatomy",
-      "human eyes",
-      "wolf-like fur",
-      "cartoon smile",
-      "dense web clutter",
-      "extra limbs"
-    ]
-  },
+  "family_profile": "spider",
+  "species_profile": "giant-spider",
   "default_habitats": [
     "web-filled halls",
     "cave ceilings",
     "abandoned chambers"
-  ],
-  "accuracy_checks": [
-    "eight legs are countable",
-    "body reads true spider",
-    "web center is obvious",
-    "monster remains dominant over web",
-    "fangs are visible",
-    "page preserves negative space"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "spider"
+  ]
 }
