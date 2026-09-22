@@ -1,0 +1,72 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "lich",
+  "display_name": "Lich",
+  "taxonomy": {
+    "family": "lich",
+    "creature_type": "undead spellcaster",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "An ancient skeletal spellcaster preserved by forbidden magic, combining unmistakable undead anatomy with deliberate arcane intelligence.",
+    "silhouette": "Tall robed skeletal humanoid with exposed skull and hands, one deliberate spellcasting gesture, robes falling in simple vertical shapes.",
+    "head_features": "Bare or partly hooded skull with deep sockets, intact jaw, and severe ancient profile.",
+    "body_shape": "Dry skeletal humanoid frame under decayed layered robes, bony hands visible, upright commanding posture.",
+    "limb_structure": "Two skeletal arms and two skeletal legs beneath robes; hands and skull must remain visibly bony and anatomically coherent.",
+    "surface": "Clean bone planes and torn fabric edges; no gore, slime, or dense decay.",
+    "must_keep": [
+      "skeletal skull",
+      "bony hands",
+      "decayed robes",
+      "spellcasting posture",
+      "intelligent undead bearing"
+    ],
+    "must_avoid": [
+      "zombie flesh",
+      "cartoon skeleton grin",
+      "full knight armor",
+      "vampire fangs",
+      "graphic gore",
+      "ornate clutter hiding bones"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as intelligent undead caster",
+    "skull and hands are clearly skeletal",
+    "spellcasting action is clear",
+    "robes remain simple and colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "zombie_drift",
+      "symptom": "lich gains fleshy decayed face",
+      "correction": "restore skeletal skull and dry bone anatomy"
+    },
+    {
+      "id": "cartoon_skeleton_drift",
+      "symptom": "face becomes smiling mascot skeleton",
+      "correction": "use severe skull proportions and commanding posture"
+    },
+    {
+      "id": "armor_clutter",
+      "symptom": "ornate armor hides skeletal identity",
+      "correction": "return to simple decayed robes with exposed skull and hands"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Medium humanoid scale but visually imposing through upright posture and deliberate command of nearby ritual space.",
+    "natural_posture": "Standing or seated with feet/body fully supported; gestures are deliberate rather than explosive.",
+    "behavior_style": [
+      "casting beside a ritual focus",
+      "guarding a phylactery or relic",
+      "standing over an altar or vault feature",
+      "turning toward an intruder"
+    ],
+    "environment_fit": [
+      "phylactery vaults",
+      "ancient crypts",
+      "deep arcane chambers and ritual spaces"
+    ]
+  }
+}
