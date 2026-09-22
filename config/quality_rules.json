@@ -104,6 +104,18 @@
     "monster off-center": {
       "action": "modify",
       "directive": "Rebalance the composition so the monster is centered or near-centered in the primary visual field. Preserve believable interaction with the environment and avoid making the background symmetrical merely for decoration."
+    },
+    "artwork border present": {
+      "action": "modify",
+      "directive": "Remove any decorative rectangular artwork frame, inset picture border, or printed-page box line. Preserve normal blank page margins and do not crop or redesign the successful scene."
+    },
+    "secondary figures compete": {
+      "action": "modify",
+      "directive": "Keep the primary monster large, centered or near-centered, and clearly dominant. Shrink, simplify, push back, or remove nonessential secondary figures so they support the story without creating competing focal subjects."
+    },
+    "repeated micro-pattern overload": {
+      "action": "modify",
+      "directive": "Simplify repeated small patterns such as chainmail scales, coin piles, tiny bricks, map cracks, shelf clutter, fur strokes, webs, or rubble. Replace them with fewer larger colorable regions while preserving the material and scene identity."
     }
   }
 }
