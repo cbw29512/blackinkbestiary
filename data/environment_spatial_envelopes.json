@@ -1,0 +1,714 @@
+{
+  "schema_version": 1,
+  "registry_id": "black-ink-spatial-envelope-v1",
+  "purpose": "Keep rooms and natural spaces geometrically specific before scenery components are selected.",
+  "matching_rule": "Resolve one primary envelope from the selected environment profile. Explicit profile spatial_envelope may override inference. Monster data never selects the envelope.",
+  "envelopes": {
+    "low_crawlway": {
+      "priority": 100,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "crawlway",
+        "low dungeon service"
+      ],
+      "plan_shape": "very narrow linear passage",
+      "proportions": "length clearly exceeds width; ceiling is visibly low enough to feel cramped",
+      "ceiling": "low continuous stone/timber overhead plane must remain visible",
+      "openings": "one main travel axis with at most one small niche, barred opening, drain, or turn",
+      "focal_zone": "monster and one story object occupy the travel lane without turning it into a room",
+      "camera": "eye-level or slightly low one-point perspective emphasizing confinement",
+      "must_show": [
+        "both side boundaries",
+        "low overhead boundary",
+        "clear floor travel lane"
+      ],
+      "must_not_drift": [
+        "normal-height hallway",
+        "broad chamber",
+        "grand hall",
+        "open cavern"
+      ]
+    },
+    "narrow_built_corridor": {
+      "priority": 90,
+      "families": [
+        "underground",
+        "undead-sites"
+      ],
+      "terms": [
+        "corridor",
+        "passage",
+        "labyrinth",
+        "catacomb passage",
+        "floor-grate"
+      ],
+      "plan_shape": "narrow linear built passage",
+      "proportions": "length visibly exceeds width; parallel side boundaries remain readable",
+      "ceiling": "continuous built ceiling or arch system should appear in-frame when possible",
+      "openings": "one primary travel axis; side doors, niches, or bars remain subordinate",
+      "focal_zone": "story hazard or fixture is embedded in the passage rather than floating in open space",
+      "camera": "one-point or mild two-point perspective with strong recession",
+      "must_show": [
+        "two side boundaries",
+        "clear floor lane",
+        "far turn, doorway, gate, or vanishing depth"
+      ],
+      "must_not_drift": [
+        "square room",
+        "open courtyard",
+        "natural cave",
+        "featureless modern hallway"
+      ]
+    },
+    "built_hall_gallery": {
+      "priority": 80,
+      "families": [
+        "underground",
+        "giant-territories"
+      ],
+      "terms": [
+        "hall",
+        "gallery",
+        "giant hall",
+        "display gallery",
+        "stone gallery",
+        "mushroom hall"
+      ],
+      "plan_shape": "elongated chamber wider than a corridor",
+      "proportions": "noticeably wider than a passage but still organized around a strong long axis",
+      "ceiling": "visible high or medium-height overhead structure appropriate to the material",
+      "openings": "one dominant entry/exit axis plus limited side bays",
+      "focal_zone": "one major furnishing, display, landmark, or story object anchors the space",
+      "camera": "three-quarter or centered long-axis view",
+      "must_show": [
+        "broad floor area",
+        "lateral wall structure",
+        "clear destination or far boundary"
+      ],
+      "must_not_drift": [
+        "tight corridor",
+        "empty box room",
+        "ballroom scale unless giant hall"
+      ]
+    },
+    "compact_built_room": {
+      "priority": 70,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "antechamber",
+        "armory",
+        "pantry",
+        "prison cell",
+        "war room",
+        "henhouse",
+        "treasure vault",
+        "phylactery vault",
+        "chapel"
+      ],
+      "plan_shape": "small or medium enclosed room",
+      "proportions": "width and depth are comparable; room boundaries should feel close enough to define purpose",
+      "ceiling": "one coherent overhead system; not an undefined void",
+      "openings": "one principal doorway plus at most one subordinate opening",
+      "focal_zone": "one purpose-defining furnishing or landmark occupies a clear wall or center zone",
+      "camera": "corner or doorway view that reveals at least three bounding surfaces",
+      "must_show": [
+        "rear or side boundary",
+        "floor-to-wall junction",
+        "purpose-defining object"
+      ],
+      "must_not_drift": [
+        "long corridor",
+        "huge ceremonial hall",
+        "generic empty cube"
+      ]
+    },
+    "circular_built_chamber": {
+      "priority": 95,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "rotunda",
+        "cistern"
+      ],
+      "plan_shape": "circular or polygonal chamber",
+      "proportions": "centralized room with radial organization rather than a straight axis",
+      "ceiling": "domed, vaulted, or circularly framed overhead structure",
+      "openings": "few perimeter openings spaced around the curved wall",
+      "focal_zone": "central pillar, well, basin, statue, or floor feature",
+      "camera": "off-center view showing curvature and central anchor",
+      "must_show": [
+        "curved/perimeter wall read",
+        "central feature",
+        "radial or circular floor organization"
+      ],
+      "must_not_drift": [
+        "straight corridor",
+        "rectangular empty room"
+      ]
+    },
+    "stair_space": {
+      "priority": 100,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "spiral stair",
+        "stone stair"
+      ],
+      "plan_shape": "vertical circulation space",
+      "proportions": "stairs dominate the composition and create unmistakable rise/descent",
+      "ceiling": "tight stair enclosure or open shaft edge must be defined",
+      "openings": "landings or turns are limited and clearly connected by steps",
+      "focal_zone": "monster occupies a landing or stair run, not flat unrelated floor",
+      "camera": "diagonal or vertical perspective emphasizing elevation change",
+      "must_show": [
+        "continuous step sequence",
+        "visible rise/fall",
+        "landing, wall, newel, or shaft reference"
+      ],
+      "must_not_drift": [
+        "flat corridor",
+        "grand palace staircase",
+        "random steps with no destination"
+      ]
+    },
+    "vertical_shaft": {
+      "priority": 100,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "well shaft",
+        "mine shaft",
+        "vertical"
+      ],
+      "plan_shape": "deep vertical opening",
+      "proportions": "vertical dimension dominates horizontal floor area",
+      "ceiling": "open upward/downward shaft continuation or overhead hoist framing",
+      "openings": "one rim/landing plus optional side access",
+      "focal_zone": "shaft opening is the major environmental form",
+      "camera": "high-angle, low-angle, or cutaway-like perspective showing depth",
+      "must_show": [
+        "continuous rim or landing",
+        "visible vertical drop/rise",
+        "strong depth cue"
+      ],
+      "must_not_drift": [
+        "flat grate",
+        "ordinary room",
+        "shallow pit"
+      ]
+    },
+    "fortified_threshold": {
+      "priority": 100,
+      "families": [
+        "underground",
+        "giant-territories"
+      ],
+      "terms": [
+        "fortified gate",
+        "gate",
+        "mausoleum threshold"
+      ],
+      "plan_shape": "defensive threshold between two spaces",
+      "proportions": "opening and jambs dominate width; wall mass feels thick",
+      "ceiling": "heavy lintel, arch, or gate structure overhead",
+      "openings": "one primary gate/opening only; guard recesses remain secondary",
+      "focal_zone": "gate, portcullis, or doorway mechanism",
+      "camera": "approach view aligned toward or across the threshold",
+      "must_show": [
+        "thick threshold structure",
+        "clear before/after sides",
+        "gate or closure element"
+      ],
+      "must_not_drift": [
+        "generic doorway",
+        "open hall with no defensive read"
+      ]
+    },
+    "collapsed_built_space": {
+      "priority": 95,
+      "families": [
+        "underground",
+        "undead-sites"
+      ],
+      "terms": [
+        "collapsed",
+        "ruined chapel",
+        "ruin"
+      ],
+      "plan_shape": "formerly coherent built space disrupted by one major failure zone",
+      "proportions": "original room/passage geometry remains legible around the damage",
+      "ceiling": "one major breach or failed overhead section, not total destruction",
+      "openings": "collapse creates one new gap or blocked route",
+      "focal_zone": "large structural break with few massive pieces",
+      "camera": "angle that shows both intact architecture and damage",
+      "must_show": [
+        "surviving original geometry",
+        "one major break",
+        "few large debris forms"
+      ],
+      "must_not_drift": [
+        "rubble field with no room identity",
+        "hundreds of small stones"
+      ]
+    },
+    "natural_tunnel": {
+      "priority": 85,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "lava tube",
+        "mine tunnel",
+        "earthen burrow"
+      ],
+      "plan_shape": "elongated enclosed tunnel",
+      "proportions": "longer than wide with naturally or excavated continuous side/overhead boundaries",
+      "ceiling": "curved, rough-cut, or packed-earth ceiling clearly visible",
+      "openings": "one travel axis with occasional side pocket",
+      "focal_zone": "one geological or utility landmark along the route",
+      "camera": "strong tunnel recession",
+      "must_show": [
+        "continuous enclosure",
+        "visible tunnel depth",
+        "material-specific wall/ceiling form"
+      ],
+      "must_not_drift": [
+        "square masonry corridor unless profile is built",
+        "wide cavern"
+      ]
+    },
+    "natural_cavern": {
+      "priority": 60,
+      "families": [
+        "underground",
+        "dragon-lairs"
+      ],
+      "terms": [
+        "cavern",
+        "cave",
+        "grotto",
+        "hoard cavern"
+      ],
+      "plan_shape": "irregular enclosed natural chamber",
+      "proportions": "width and height expand beyond a tunnel, with asymmetric rock boundaries",
+      "ceiling": "natural roof line visible or strongly implied; not a flat built ceiling",
+      "openings": "one or two natural passages/openings only",
+      "focal_zone": "one large geological, water, lair, or shrine feature",
+      "camera": "three-quarter view showing floor shelf, wall mass, and roof/arch relationship",
+      "must_show": [
+        "irregular wall geometry",
+        "natural floor plane",
+        "one depth opening or shelf"
+      ],
+      "must_not_drift": [
+        "brick room",
+        "symmetrical hallway",
+        "featureless rock backdrop"
+      ]
+    },
+    "boulder_void": {
+      "priority": 100,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "talus boulder"
+      ],
+      "plan_shape": "irregular void between massive angular boulders",
+      "proportions": "space is constrained by large blocks rather than continuous walls",
+      "ceiling": "stacked boulders create tight overhead gaps",
+      "openings": "multiple irregular squeeze gaps but one readable route",
+      "focal_zone": "one large block or squeeze opening",
+      "camera": "close three-quarter view emphasizing block scale",
+      "must_show": [
+        "several huge angular blocks",
+        "irregular negative gaps",
+        "tight route"
+      ],
+      "must_not_drift": [
+        "smooth cave",
+        "masonry chamber"
+      ]
+    },
+    "sea_cave_envelope": {
+      "priority": 100,
+      "families": [
+        "underground",
+        "ocean"
+      ],
+      "terms": [
+        "sea cave"
+      ],
+      "plan_shape": "rock chamber or tunnel directly connected to open water",
+      "proportions": "one dominant wave-cut opening and broad wet ledge/water edge",
+      "ceiling": "natural fractured arch/roof",
+      "openings": "ocean connection must be obvious",
+      "focal_zone": "wave-cut mouth, pool, or ledge",
+      "camera": "angle showing both cave interior and water connection",
+      "must_show": [
+        "natural rock arch",
+        "visible water/open-sea connection",
+        "wet ledge or pool"
+      ],
+      "must_not_drift": [
+        "dry inland cave",
+        "masonry tunnel"
+      ]
+    },
+    "forest_clearing_grove": {
+      "priority": 70,
+      "families": [
+        "forest",
+        "mythic-sites"
+      ],
+      "terms": [
+        "clearing",
+        "grove",
+        "birch grove",
+        "sacred grove"
+      ],
+      "plan_shape": "open central ground enclosed by trees or standing natural markers",
+      "proportions": "open center is broader than surrounding paths; edge vegetation frames rather than fills it",
+      "ceiling": "canopy opens enough to show sky/light gap",
+      "openings": "two or three implied woodland exits maximum",
+      "focal_zone": "stump, standing stone, sacred tree, or open center",
+      "camera": "ground-level three-quarter view with readable enclosure edge",
+      "must_show": [
+        "open central coloring area",
+        "tree/stone perimeter",
+        "canopy or sky opening"
+      ],
+      "must_not_drift": [
+        "dense wall of foliage",
+        "generic indoor room"
+      ]
+    },
+    "forest_path_edge": {
+      "priority": 65,
+      "families": [
+        "forest"
+      ],
+      "terms": [
+        "hardwood forest",
+        "stream crossing",
+        "bog",
+        "hollow tree",
+        "overgrown forest ruin"
+      ],
+      "plan_shape": "woodland path, edge, or pocket organized around one landmark",
+      "proportions": "clear travel or open zone remains visible between large natural forms",
+      "ceiling": "tree canopy or branch framing remains sparse and readable",
+      "openings": "one main path/stream direction plus one secondary recess",
+      "focal_zone": "stream, hollow tree, ruin, bog edge, or root landmark",
+      "camera": "low three-quarter view preserving path/edge depth",
+      "must_show": [
+        "foreground ground plane",
+        "large trunk/root/rock forms",
+        "clear depth lane"
+      ],
+      "must_not_drift": [
+        "wall-to-wall foliage",
+        "leaf texture field"
+      ]
+    },
+    "ravine_pass": {
+      "priority": 80,
+      "families": [
+        "forest",
+        "giant-territories",
+        "wilderness"
+      ],
+      "terms": [
+        "ravine",
+        "mountain pass"
+      ],
+      "plan_shape": "linear natural cut between high side masses",
+      "proportions": "depth axis is strong; side walls/slopes visibly constrain movement",
+      "ceiling": "open sky unless overhang is profile-specific",
+      "openings": "one main route forward/back",
+      "focal_zone": "ledge, streambed, bridge, boulder, or pass marker",
+      "camera": "long-axis perspective emphasizing side height and route depth",
+      "must_show": [
+        "two side elevations",
+        "clear route floor",
+        "open sky strip or distant gap"
+      ],
+      "must_not_drift": [
+        "flat plain",
+        "generic cave"
+      ]
+    },
+    "open_landscape": {
+      "priority": 50,
+      "families": [
+        "wilderness",
+        "mythic-sites",
+        "giant-territories"
+      ],
+      "terms": [
+        "valley",
+        "grassland",
+        "badlands",
+        "battlefield",
+        "ruined settlement",
+        "remote peak",
+        "enchanted valley"
+      ],
+      "plan_shape": "open exterior terrain",
+      "proportions": "broad horizontal ground and visible horizon/depth layers",
+      "ceiling": "open sky",
+      "openings": "not room-like; routes are implied by terrain",
+      "focal_zone": "one terrain landmark, ruin, tree, ridge, or structure cluster",
+      "camera": "wide three-quarter ground-level view",
+      "must_show": [
+        "horizon or distant depth band",
+        "foreground terrain",
+        "one dominant landmark"
+      ],
+      "must_not_drift": [
+        "enclosed room",
+        "crowded background"
+      ]
+    },
+    "riverbank_water_edge": {
+      "priority": 85,
+      "families": [
+        "wilderness",
+        "forest",
+        "mythic-sites"
+      ],
+      "terms": [
+        "riverbank",
+        "stream crossing",
+        "pool",
+        "water"
+      ],
+      "plan_shape": "land-water boundary with one readable crossing or bend",
+      "proportions": "water occupies one broad shape; banks remain simple",
+      "ceiling": "open exterior sky/canopy as appropriate",
+      "openings": "one main water direction and one bank route",
+      "focal_zone": "ford, pool, bridge, root, stone, or bank landmark",
+      "camera": "oblique view making shoreline geometry obvious",
+      "must_show": [
+        "clear water edge",
+        "opposite/adjacent bank or crossing",
+        "depth along water direction"
+      ],
+      "must_not_drift": [
+        "featureless open water",
+        "tiny ripple clutter"
+      ]
+    },
+    "reef_shelf": {
+      "priority": 80,
+      "families": [
+        "ocean"
+      ],
+      "terms": [
+        "coral reef",
+        "coral garden",
+        "tidepool shelf",
+        "seamount slope"
+      ],
+      "plan_shape": "broad underwater shelf or terrace beside open water",
+      "proportions": "one solid terrain plane plus one open-water depth zone",
+      "ceiling": "open water above",
+      "openings": "one major channel, edge, or drop-off",
+      "focal_zone": "coral head, terrace edge, tidepool basin, or seamount landmark",
+      "camera": "oblique underwater view showing shelf and open water",
+      "must_show": [
+        "solid shelf/terrain plane",
+        "open-water negative space",
+        "one depth edge/channel"
+      ],
+      "must_not_drift": [
+        "flat aquarium backdrop",
+        "coral clutter"
+      ]
+    },
+    "kelp_lane": {
+      "priority": 100,
+      "families": [
+        "ocean"
+      ],
+      "terms": [
+        "kelp forest"
+      ],
+      "plan_shape": "vertical kelp stands framing an open swimming lane",
+      "proportions": "tall plant forms flank rather than fill the central lane",
+      "ceiling": "water surface or kelp canopy implied above",
+      "openings": "one obvious midwater route",
+      "focal_zone": "open lane with one large kelp/rock landmark",
+      "camera": "forward-swim perspective",
+      "must_show": [
+        "vertical kelp boundaries",
+        "open central water lane",
+        "visible depth"
+      ],
+      "must_not_drift": [
+        "solid wall of kelp",
+        "seabed-only composition"
+      ]
+    },
+    "wreck_field": {
+      "priority": 100,
+      "families": [
+        "ocean"
+      ],
+      "terms": [
+        "shipwreck"
+      ],
+      "plan_shape": "open underwater ruin field organized around one major hull fragment",
+      "proportions": "one large wreck mass anchors the scene; open water remains around it",
+      "ceiling": "open water",
+      "openings": "hull opening, rib gap, or deck break provides depth",
+      "focal_zone": "major hull section, mast, anchor, or rib structure",
+      "camera": "three-quarter exterior/interior-edge view",
+      "must_show": [
+        "recognizable wreck structure",
+        "open-water spacing",
+        "one entry/depth opening"
+      ],
+      "must_not_drift": [
+        "random timber pile",
+        "intact modern ship"
+      ]
+    },
+    "open_water_dropoff": {
+      "priority": 100,
+      "families": [
+        "ocean"
+      ],
+      "terms": [
+        "open-water drop-off",
+        "hydrothermal vent",
+        "mangrove lagoon"
+      ],
+      "plan_shape": "open aquatic space organized around one boundary feature",
+      "proportions": "large negative-space water region dominates",
+      "ceiling": "open water/surface",
+      "openings": "depth is conveyed by drop, roots, vent field, or horizon",
+      "focal_zone": "drop edge, root arcade, or vent chimney",
+      "camera": "oblique view with clear depth plane",
+      "must_show": [
+        "large open-water area",
+        "one strong boundary/landmark",
+        "depth cue"
+      ],
+      "must_not_drift": [
+        "busy reef",
+        "closed cave unless profile says cave"
+      ]
+    },
+    "graveyard_field": {
+      "priority": 100,
+      "families": [
+        "undead-sites"
+      ],
+      "terms": [
+        "graveyard"
+      ],
+      "plan_shape": "exterior burial ground with a readable path among sparse markers",
+      "proportions": "open path/ground areas remain larger than grave-marker clusters",
+      "ceiling": "open sky with optional sparse tree framing",
+      "openings": "path bends toward gate, mausoleum, or deeper graves",
+      "focal_zone": "gate, mausoleum, large marker, or dead tree",
+      "camera": "ground-level path view",
+      "must_show": [
+        "burial markers",
+        "path/open ground",
+        "one depth destination"
+      ],
+      "must_not_drift": [
+        "crypt interior",
+        "dense tombstone wallpaper"
+      ]
+    },
+    "sacred_built_space": {
+      "priority": 90,
+      "families": [
+        "mythic-sites",
+        "undead-sites"
+      ],
+      "terms": [
+        "temple",
+        "chapel",
+        "shrine"
+      ],
+      "plan_shape": "purposeful sacred enclosure or platform",
+      "proportions": "space organizes toward one ritual focal point",
+      "ceiling": "arch, canopy, broken roof, or open sacred sky condition must be explicit",
+      "openings": "one ceremonial approach and limited side openings",
+      "focal_zone": "altar, plinth, idol, sacred tree/stone, or ritual basin",
+      "camera": "approach or three-quarter view preserving focal hierarchy",
+      "must_show": [
+        "clear ritual focal object",
+        "approach axis",
+        "architectural/natural enclosure"
+      ],
+      "must_not_drift": [
+        "generic hall",
+        "random ruin with no sacred read"
+      ]
+    },
+    "giant_hall_envelope": {
+      "priority": 110,
+      "families": [
+        "giant-territories"
+      ],
+      "terms": [
+        "giant hall"
+      ],
+      "plan_shape": "overscaled built hall",
+      "proportions": "doors, stairs, furnishings, and masonry visibly exceed ordinary humanoid scale",
+      "ceiling": "very high overhead structure with broad beams/arches",
+      "openings": "few enormous thresholds",
+      "focal_zone": "one giant-size furnishing or monument",
+      "camera": "low angle or wide three-quarter view emphasizing scale",
+      "must_show": [
+        "at least one unmistakable scale cue",
+        "broad open floor",
+        "huge threshold or furnishing"
+      ],
+      "must_not_drift": [
+        "ordinary human hall",
+        "cluttered miniature props"
+      ]
+    },
+    "dragon_lair_space": {
+      "priority": 105,
+      "families": [
+        "dragon-lairs"
+      ],
+      "terms": [
+        "lair",
+        "caldera",
+        "cliff nest",
+        "hoard cavern",
+        "swamp dragon"
+      ],
+      "plan_shape": "large creature habitat organized around one resting, hoard, perch, or territorial zone",
+      "proportions": "dragon-scale landmark and open body space dominate",
+      "ceiling": "family/profile-specific sky, cave roof, roots, or caldera walls",
+      "openings": "one or two enormous movement routes",
+      "focal_zone": "nest, perch, hoard, lava channel, root island, or relic",
+      "camera": "wide three-quarter view preserving full creature silhouette",
+      "must_show": [
+        "clear lair-use feature",
+        "large open body space",
+        "one scale-defining boundary"
+      ],
+      "must_not_drift": [
+        "ordinary room",
+        "tiny cluttered den"
+      ]
+    }
+  }
+}
