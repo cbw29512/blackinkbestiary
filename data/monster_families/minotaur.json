@@ -27,7 +27,8 @@
       "tiny horns",
       "full bull quadruped body",
       "dense fur"
-    ]
+    ],
+    "limb_structure": "Powerful humanoid arms, two bipedal legs, and hooved feet beneath a bull-headed humanoid frame; never four-legged or centaur-shaped."
   },
   "accuracy_checks": [
     "bull head and horns dominate identity",
@@ -46,5 +47,20 @@
       "symptom": "body becomes four-legged bull/centaur",
       "correction": "restore bipedal humanoid torso and legs with hooved feet"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Large, broad, imposing humanoid whose bull head and horn span create scale without turning the body into a quadruped.",
+    "natural_posture": "Wide grounded stance, controlled turn through a corridor, guarded crouch, or deliberate horn-forward threat with both feet visibly supporting the body.",
+    "behavior_style": [
+      "patrolling a maze or junction",
+      "guarding a gate, passage, or chamber",
+      "lowering horns and shoulders in a controlled threat",
+      "navigating oversized stone architecture with deliberate weight"
+    ],
+    "environment_fit": [
+      "labyrinth corridors and junctions",
+      "large ruined stone halls",
+      "underground gates, arenas, and chambers with strong maze geometry"
+    ]
+  }
 }
