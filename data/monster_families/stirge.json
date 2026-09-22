@@ -1,0 +1,74 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "stirge",
+  "display_name": "Stirge",
+  "taxonomy": {
+    "family": "stirge",
+    "creature_type": "flying blood-feeding beast",
+    "default_size": "tiny"
+  },
+  "visual_identity": {
+    "core_identity": "A tiny ugly flying blood-feeder combining membranous wings with a long needle proboscis and grasping feet.",
+    "silhouette": "Small airborne body with outspread membrane wings and long straight proboscis projecting forward.",
+    "head_features": "Small animal-like head dominated by a long needle feeding tube, simple eyes, no humanoid expression.",
+    "body_shape": "Compact flying body with membranous wings, small grasping feet, and narrow abdomen.",
+    "limb_structure": "One pair of membrane wings and small grasping legs/feet; long proboscis projects from the head.",
+    "surface": "Smooth membrane wings and sparse body texture.",
+    "must_keep": [
+      "long needle proboscis",
+      "membranous wings",
+      "small flying body",
+      "predatory feeding posture"
+    ],
+    "must_avoid": [
+      "ordinary bat",
+      "mosquito-only anatomy",
+      "feathered bird",
+      "cute face",
+      "humanoid features",
+      "dense wing veins"
+    ]
+  },
+  "accuracy_checks": [
+    "proboscis is unmistakable",
+    "wings remain visible",
+    "creature is not mistaken for bat",
+    "body remains tiny and colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "bat_drift",
+      "symptom": "proboscis disappears and creature becomes bat",
+      "correction": "restore long needle proboscis and stranger blood-feeding silhouette"
+    },
+    {
+      "id": "mosquito_drift",
+      "symptom": "body becomes six-legged insect",
+      "correction": "restore compact beastlike body with membranous wings and grasping feet"
+    },
+    {
+      "id": "swarm_clutter",
+      "symptom": "too many stirges create unreadable page",
+      "correction": "use only a few large distinct individuals for coloring"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Tiny flying predator; size is shown by nearby sleeper, bars, ceiling, or architectural features.",
+    "natural_posture": "Flying with clear wing spread, clinging to a surface, or feeding with visible contact.",
+    "behavior_style": [
+      "circling below a ceiling",
+      "clinging near a sleeping target",
+      "flying from a cell or cave opening",
+      "feeding with clear proboscis contact"
+    ],
+    "environment_fit": [
+      "dungeon cells",
+      "cave ceilings",
+      "abandoned underground rooms and enclosed roosting spaces"
+    ]
+  },
+  "locomotion": {
+    "can_fly": true
+  }
+}
