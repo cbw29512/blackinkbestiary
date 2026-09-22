@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "cockatrice",
+  "display_name": "Cockatrice",
+  "taxonomy": {
+    "family": "cockatrice",
+    "creature_type": "monstrosity",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A small vicious rooster-reptile hybrid combining a cock's head and comb with leathery wings, clawed feet, and a serpentine tail.",
+    "silhouette": "Compact birdlike body, raised leathery wings, rooster head with comb, two clawed legs, and long curling reptilian tail.",
+    "head_features": "Rooster-like head with hooked beak, prominent comb and wattles, and fierce eyes.",
+    "body_shape": "Small feathered torso transitioning into leathery wings and a scaled curling tail, with birdlike clawed legs.",
+    "surface": "Sparse feathers on torso, smooth wing membranes, and simple tail scales.",
+    "signature_gear": [],
+    "attitude": [
+      "agitated",
+      "territorial",
+      "hissing",
+      "threatening"
+    ],
+    "must_keep": [
+      "rooster head and comb",
+      "leathery wings",
+      "clawed bird legs",
+      "serpentine tail",
+      "small hybrid silhouette"
+    ],
+    "must_avoid": [
+      "ordinary chicken",
+      "full dragon body",
+      "four-legged lizard",
+      "feathered angel wings",
+      "cute farm-bird look",
+      "dense feathers"
+    ]
+  },
+  "accuracy_checks": [
+    "hybrid identity is obvious",
+    "comb and beak are clear",
+    "wings differ from ordinary bird wings",
+    "tail is reptilian",
+    "creature stays small and colorable"
+  ]
+}
