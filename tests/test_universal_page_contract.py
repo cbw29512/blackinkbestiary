@@ -123,12 +123,30 @@ class UniversalPageContractTests(unittest.TestCase):
         resolved = resolve_page_spec(page, ROOT)
         self.assertTrue(resolved["locomotion"]["can_fly"])
 
-    def test_nonflyer_can_fall_without_being_marked_flying(self):
+    def test_unstable_jump_or_fall_pose_is_rejected(self):
+        page = self.minimal_page()
+        page["physicality"] = {
+            "mode": "falling",
+            "support": "no support",
+            "motion": "dropping downward",
+        }
+        tome = {
+            "tome_id": "TEST-FALL",
+            "title": "Fall Test",
+            "theme": "test",
+            "total_pages": 1,
+            "pages": [page],
+        }
+        errors = validate_manifest(ROOT, tome, ROOT / "data" / "monsters")
+        self.assertTrue(any("unstable coloring pose" in error for error in errors))
+
+    def test_i08_is_now_stably_grounded(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-08")
         resolved = resolve_page_spec(page, ROOT)
         self.assertFalse(resolved["locomotion"]["can_fly"])
-        self.assertEqual(resolved["physicality"]["mode"], "falling")
+        self.assertEqual(resolved["physicality"]["mode"], "grounded")
+        self.assertIn("both feet", resolved["physicality"]["support"])
 
     def test_all_registered_books_share_one_contract(self):
         series = json.loads((ROOT / "data" / "series.json").read_text(encoding="utf-8"))
