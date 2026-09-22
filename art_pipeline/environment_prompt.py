@@ -5,6 +5,7 @@ from pathlib import Path
 try:
     from .environment_catalog import load_environment_contract, resolve_environment_profile
     from .environment_components import assemble_environment_palette
+    from .environment_spatial import resolve_spatial_envelope
     from .quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -14,6 +15,7 @@ try:
 except ImportError:
     from environment_catalog import load_environment_contract, resolve_environment_profile
     from environment_components import assemble_environment_palette
+    from environment_spatial import resolve_spatial_envelope
     from quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -66,6 +68,7 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     variant = page.get("environment_variant") or {}
     identity = profile.get("resolved_identity") or {}
     palette = assemble_environment_palette(page, root)
+    envelope = resolve_spatial_envelope(profile)
     component_lines = [
         f"SELECTED {group.replace('_', ' ').upper()}: {item.get('text', '')}."
         for group, item in palette["components"].items()
@@ -81,6 +84,15 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
         _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
         f"ENVIRONMENT SPATIAL READ: {identity.get('spatial_read', '')}.",
+        f"SPACE ENVELOPE: {envelope['envelope_id']}.",
+        f"SPACE PLAN SHAPE: {envelope.get('plan_shape', '')}.",
+        f"SPACE PROPORTIONS: {envelope.get('proportions', '')}.",
+        f"SPACE CEILING / OVERHEAD: {envelope.get('ceiling', '')}.",
+        f"SPACE OPENINGS: {envelope.get('openings', '')}.",
+        f"SPACE FOCAL ZONE: {envelope.get('focal_zone', '')}.",
+        f"SPACE CAMERA: {envelope.get('camera', '')}.",
+        _items("SPACE MUST SHOW", envelope.get("must_show")),
+        _items("SPACE DRIFT FAILURES", envelope.get("must_not_drift")),
         _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", load_environment_contract().get("prompt_rules")),
         f"ENVIRONMENT ACCURACY: {profile['description']}",
         _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
@@ -108,12 +120,17 @@ def environment_checklist(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}
     identity = profile.get("resolved_identity") or {}
+    envelope = resolve_spatial_envelope(profile)
     checks = [
         f"Environment matches profile: {profile['name']}",
         f"Spatial type reads without the monster: {identity.get('spatial_type', '')}",
         f"Material language is visible: {identity.get('material_language', '')}",
         f"At least one unmistakable location marker is visible: {', '.join(identity.get('identity_markers') or [])}",
         f"Spatial geometry reads correctly: {identity.get('spatial_read', '')}",
+        f"Space envelope matches: {envelope['envelope_id']} — {envelope.get('plan_shape', '')}",
+        f"Space proportions read correctly: {envelope.get('proportions', '')}",
+        f"Space overhead/ceiling reads correctly: {envelope.get('ceiling', '')}",
+        f"Space does not drift into: {', '.join(envelope.get('must_not_drift') or [])}",
         f"Unique landmark is visible: {variant.get('landmark', '')}",
         f"Framing differs from repeated generic backgrounds: {variant.get('framing', '')}",
         f"Monster/environment interaction reads clearly: {variant.get('interaction', '')}",
