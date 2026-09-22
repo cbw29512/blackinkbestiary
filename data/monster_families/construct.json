@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "construct",
+  "display_name": "Animated Construct",
+  "taxonomy": {
+    "family": "construct",
+    "creature_type": "construct",
+    "default_size": "variable"
+  },
+  "visual_identity": {
+    "core_identity": "A nonliving object or assembled object animated by magic. The object itself remains the creature; no hidden biological body is required.",
+    "silhouette": "Primary silhouette remains the animated object's recognizable shape, with motion coming from articulation, levitation, folding, or magical force.",
+    "head_features": "No biological head unless the object itself includes a helmet or face-like structure; never add flesh, animal anatomy, or a hidden humanoid face by default.",
+    "body_shape": "Built from the object's original structure: armor plates, weapon geometry, textile sheet, statue, tool, or other constructed form.",
+    "surface": "Material identity remains clear through broad simple metal, wood, stone, or textile regions with restrained decorative detail.",
+    "must_keep": [
+      "recognizable original object",
+      "no biological body added",
+      "motion consistent with object construction",
+      "material identity remains readable",
+      "large simple colorable surfaces"
+    ],
+    "must_avoid": [
+      "hidden humanoid wearer",
+      "robot machinery unless canonically required",
+      "animal anatomy",
+      "cute object face",
+      "unnecessary eyes or mouth",
+      "ornate micro-detail"
+    ]
+  },
+  "accuracy_checks": [
+    "object identity reads before added magical motion",
+    "no accidental biological creature appears",
+    "movement logic fits the object's structure",
+    "material surfaces remain easy to color"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "possessed_object_drift",
+      "symptom": "a ghost, hand, or hidden creature appears to operate the object",
+      "correction": "remove the operator and make the object itself visibly animated"
+    },
+    {
+      "id": "robot_drift",
+      "symptom": "construct gains gears, pistons, or mechanical robot anatomy",
+      "correction": "restore the original medieval/fantasy object structure without invented machinery"
+    },
+    {
+      "id": "mascot_drift",
+      "symptom": "object gains cute eyes, smile, or cartoon face",
+      "correction": "remove facial features and express motion through articulation, levitation, folding, or posture"
+    }
+  ]
+}
