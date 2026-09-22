@@ -16,12 +16,17 @@ def _set_widget(node: dict, index: int, value) -> None:
 
 def _edit_definition(workflow: dict) -> dict:
     subgraphs = (workflow.get("definitions") or {}).get("subgraphs") or []
-    matches = [
-        item for item in subgraphs
-        if isinstance(item, dict)
-        and "image edit" in str(item.get("name", "")).lower()
-        and "flux.2 klein 4b distilled" in str(item.get("name", "")).lower()
-    ]
+    matches = []
+    for item in subgraphs:
+        if not isinstance(item, dict):
+            continue
+        name = str(item.get("name", "")).lower()
+        image_inputs = [
+            entry for entry in (item.get("inputs") or [])
+            if isinstance(entry, dict) and entry.get("type") == "IMAGE"
+        ]
+        if "image edit" in name and "flux.2 klein 4b distilled" in name and len(image_inputs) == 1:
+            matches.append(item)
     if len(matches) != 1:
         names = [item.get("name") for item in subgraphs if isinstance(item, dict)]
         raise RuntimeError(f"Expected one distilled FLUX image-edit definition, found: {names}")
