@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "ogre-zombie",
+  "display_name": "Ogre Zombie",
+  "taxonomy": {
+    "family": "ogre",
+    "creature_type": "undead giant humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A dead ogre animated into a slow hulking corpse, preserving huge ogre proportions while showing restrained unmistakable undeath.",
+    "silhouette": "Massive slumped giant with drooping shoulders, uneven gait, and thick heavy limbs.",
+    "head_features": "Broad ogre face with sunken eyes, slack jaw, and damaged but recognizable features without graphic gore.",
+    "body_shape": "Huge heavy ogre frame with sagging posture, stiff joints, and asymmetrical undead movement.",
+    "surface": "Sparse torn skin and a few simplified corpse marks; never dense gore or decay texture.",
+    "signature_gear": [
+      "simple broken restraints or torn wraps"
+    ],
+    "attitude": [
+      "mindless",
+      "slow",
+      "relentless",
+      "vacant"
+    ],
+    "must_keep": [
+      "huge ogre scale",
+      "broad heavy anatomy",
+      "obvious undead posture",
+      "restrained corpse damage"
+    ],
+    "must_avoid": [
+      "graphic gore",
+      "skeletal-only body",
+      "fast athletic pose",
+      "troll proportions",
+      "ornate gear",
+      "dense decay texture"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as ogre and zombie simultaneously",
+    "large scale remains obvious",
+    "undeath is clear without gore",
+    "movement looks slow and heavy",
+    "coloring areas remain open"
+  ]
+}
