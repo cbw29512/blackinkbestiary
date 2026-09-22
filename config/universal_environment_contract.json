@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
-  "contract_id": "black-ink-environment-v1",
-  "purpose": "Make every background immediately identifiable, accurate, unique, and colorable without bloating page recipes.",
+  "schema_version": 2,
+  "contract_id": "black-ink-environment-v2",
+  "purpose": "Make every background immediately identifiable, accurate, varied, unique, and colorable without bloating page recipes.",
   "identity_test": "If the monster were removed, a reviewer should still identify the kind of place at thumbnail size.",
   "resolved_identity": {
     "spatial_type": "What kind of place/space this is: corridor, crawlway, cavern, crypt, forest clearing, reef, wreck, shrine, etc.",
@@ -9,13 +9,31 @@
     "identity_markers": "One to three unmistakable location cues that prove the setting without clutter.",
     "spatial_read": "The geometry/depth/scale cue that makes the space read correctly around the monster."
   },
+  "variation_depth": {
+    "registry_path": "data/environment_variation_families.json",
+    "required_pools": [
+      "geometry_pool",
+      "landmark_pool",
+      "prop_pool",
+      "interaction_pool",
+      "anti_repetition_rules"
+    ],
+    "minimum_options_per_pool": 4,
+    "ownership_rule": "Environment-family variation supplies reusable options. The resolved environment profile and explicit page variant remain authoritative.",
+    "selection_rule": "Use only family options compatible with the resolved profile. Never force an option that changes the named place.",
+    "colorability_rule": "Variation must come from a few large structural choices, not from extra tiny objects or texture."
+  },
   "prompt_rules": [
     "State spatial type, material language, identity markers, and spatial read explicitly.",
     "Use at least one large structural cue and one unmistakable location marker.",
     "The environment must remain identifiable if the monster is mentally removed.",
     "Do not use smooth featureless walls, generic room boxes, or vague scenery when a more specific setting is required.",
     "Environment cues must be large enough to color comfortably and visually secondary to the monster.",
-    "At least one environment feature must participate in the story moment."
+    "At least one environment feature must participate in the story moment.",
+    "Use the family variation palette only when compatible with the named profile and explicit page variant.",
+    "Vary geometry before adding more props or texture.",
+    "Use at most one dominant environmental landmark and one supporting prop unless the page remains highly open.",
+    "Negative space is intentional coloring space; do not fill it simply to make the scene busier."
   ],
   "automatic_failures": [
     "setting type cannot be identified at thumbnail size",
@@ -23,7 +41,9 @@
     "materials do not match the named place",
     "no unmistakable location marker is visible",
     "spatial geometry contradicts the named environment",
-    "background could be swapped with an unrelated page without changing the scene"
+    "background could be swapped with an unrelated page without changing the scene",
+    "composition repeats the same environment geometry without a page-specific reason",
+    "variation adds tiny clutter, texture, or props that make the page less enjoyable to color"
   ],
   "minimal_page_inputs": [
     "environment_profile_id",
@@ -31,5 +51,5 @@
     "environment_variant.framing",
     "environment_variant.interaction"
   ],
-  "inheritance_rule": "Environment profiles own reusable place identity. Page recipes add only the unique landmark, framing, and monster/environment interaction."
+  "inheritance_rule": "Environment profiles own reusable place identity. Environment-family variation owns reusable composition variety. Page recipes add only the unique landmark, framing, and monster/environment interaction."
 }

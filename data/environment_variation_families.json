@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "registry_id": "black-ink-environment-variation-v1",
+  "purpose": "Give every environment family enough reusable composition variety to avoid repeated rooms, caves, forests, and aquatic backdrops while keeping pages simple to color.",
+  "selection_rule": "Use only options compatible with the resolved environment profile and explicit page variant. Family variation expands choices; it never overrides the named place.",
+  "families": {
+    "underground": {
+      "geometry_pool": [
+        "low linear passage with a visible turn or offset",
+        "broad chamber with one side alcove and an open central lane",
+        "split-level cavern or room with one strong ledge",
+        "circular or curved chamber organized around one central form",
+        "collapsed transition with a single readable surviving gap",
+        "narrow approach opening into a wider chamber",
+        "vertical shaft, stair, or drop with one safe readable landing",
+        "arched wall-bay rhythm with an uncluttered floor path"
+      ],
+      "landmark_pool": [
+        "massive stone doorway or portcullis",
+        "stone well, cistern, or broad drain feature",
+        "broken stair or large change in floor level",
+        "single pillar, dais, plinth, or central stone feature",
+        "collapsed wall or ceiling breach",
+        "simple shrine, altar, or burial recess",
+        "large storage rack, worktable, or treasure container",
+        "bridge, ledge, or threshold over a visible drop"
+      ],
+      "prop_pool": [
+        "one chest, crate, barrel, or sack group",
+        "one iron torch bracket or wall ring",
+        "one bench, table, rack, or simple furnishing",
+        "one rope, ladder, chain anchor, or pulley element",
+        "one cart, wheel, or mining support element",
+        "one shield, armor stand, or broad weapon rack",
+        "one coffin, reliquary, or stone storage box",
+        "one grate, gutter, or utility fitting"
+      ],
+      "interaction_pool": [
+        "monster peers around a turn or through a threshold",
+        "monster steps over a grate, rubble block, or floor break",
+        "monster braces against or leans around a large structural form",
+        "monster reaches toward or guards the dominant landmark",
+        "monster pushes, drags, carries, or searches one large prop",
+        "monster emerges through a crawl gap, doorway, arch, or breach",
+        "monster climbs or descends a clearly readable stair, ladder, or ledge",
+        "monster blocks or occupies a doorway, bridge, landing, or narrow lane"
+      ],
+      "anti_repetition_rules": [
+        "Do not reuse the same corridor camera angle on adjacent pages.",
+        "Rotate between linear, open-room, vertical, curved, collapsed, and split-level spatial reads.",
+        "Use at most one dominant landmark and one supporting prop unless the page remains very open.",
+        "Never add small masonry, rubble, treasure, or bone texture merely to fill empty space."
+      ]
+    },
+    "forest": {
+      "geometry_pool": [
+        "open clearing framed by two or three large trunks",
+        "root-arched lane with a visible path beyond",
+        "stream crossing with one readable bank transition",
+        "ravine or slope edge with a strong diagonal",
+        "bog edge with open water and sparse trunks",
+        "fallen-log corridor creating a foreground-to-background line",
+        "hollow-tree pocket with exposed roots",
+        "overgrown ruin pocket embedded in woodland"
+      ],
+      "landmark_pool": [
+        "giant stump or hollow trunk",
+        "large exposed root arch",
+        "single mossy boulder or stone outcrop",
+        "fallen log crossing the scene",
+        "stream bend or small pool",
+        "broken stone arch or wall remnant",
+        "standing stone or simple woodland shrine marker",
+        "one distinctive twisted or split tree"
+      ],
+      "prop_pool": [
+        "one broad fern or shrub mass",
+        "one small cluster of large mushrooms",
+        "one vine band crossing stone or trunk",
+        "one reed or grass clump",
+        "one pile of broad fallen leaves",
+        "one broken branch or piece of deadwood",
+        "one simple basket, marker, or abandoned camp object when story-appropriate",
+        "one patch of broad flowers or groundcover"
+      ],
+      "interaction_pool": [
+        "monster steps through or under a root arch",
+        "monster crosses or reaches over a stream edge",
+        "monster uses a trunk, boulder, or ruin as partial cover",
+        "monster climbs onto a log, root, or low rock shelf",
+        "monster investigates a hollow trunk or ruin opening",
+        "monster pushes through one broad plant mass",
+        "monster pauses beside a standing stone, stump, or stream landmark",
+        "monster carries or steals one simple object along the forest path"
+      ],
+      "anti_repetition_rules": [
+        "Alternate enclosed tree framing with open clearings, water edges, slopes, and ruin pockets.",
+        "Do not repeat the same two-trunk frame on consecutive pages.",
+        "Represent foliage as broad masses, not leaf-by-leaf wallpaper.",
+        "Keep one clear visual lane around the monster for comfortable coloring."
+      ]
+    },
+    "giant-territories": {
+      "geometry_pool": [
+        "narrow mountain pass between towering walls",
+        "overscaled hall with a single giant-size furnishing",
+        "open ruined street with one broken structure",
+        "deep ravine with a ledge and broad streambed",
+        "quarry-like rock shelf with stepped stone planes",
+        "boulder field with a clear walking lane",
+        "fortified gate or bridge sized for enormous occupants",
+        "high plateau edge with distant scale references"
+      ],
+      "landmark_pool": [
+        "massive doorway or gate",
+        "oversized table, bench, throne, or stair",
+        "house-sized boulder",
+        "broken cottage wall or ruined tower section",
+        "huge bridge beam or gate timber",
+        "large quarry face or cliff shelf",
+        "giant-size firepit or stone ring",
+        "single monumental pillar or marker"
+      ],
+      "prop_pool": [
+        "oversized barrel, bucket, or chest",
+        "broken cart or wagon wheel",
+        "thick chain or iron hook",
+        "large timber beam",
+        "giant shield, tool, or weapon laid aside",
+        "large sack or bundle",
+        "single ruined roof section or door",
+        "one broad cooking pot or work object"
+      ],
+      "interaction_pool": [
+        "monster ducks under or passes through an oversized threshold",
+        "monster lifts, drags, or rests against one massive prop",
+        "monster steps over a ruined wall, beam, or cart",
+        "monster occupies a narrow pass, bridge, or gate",
+        "monster reaches toward a giant-size furnishing or landmark",
+        "monster climbs a broad ledge or huge stair",
+        "monster pushes through a broken settlement opening",
+        "monster stands beside a scale landmark that clearly communicates enormous size"
+      ],
+      "anti_repetition_rules": [
+        "Every page must include a strong scale cue, but rotate which cue supplies scale.",
+        "Alternate built, rocky, ruined-settlement, ravine, and plateau compositions.",
+        "Use large simple debris, never fields of tiny destruction.",
+        "Keep the monster dominant even when architecture is oversized."
+      ]
+    },
+    "mythic-sites": {
+      "geometry_pool": [
+        "monumental stair leading to a simple platform",
+        "circular grove or stone ring with open center",
+        "high mountain shelf with distant horizon",
+        "open valley framed by one natural arch",
+        "ruined courtyard with two large architectural remnants",
+        "terraced shrine space with one clear ascent",
+        "cave-temple threshold opening into daylight",
+        "sacred pool or stream bend with broad open banks"
+      ],
+      "landmark_pool": [
+        "large altar or ritual plinth",
+        "pair of standing stones",
+        "broken idol or monumental statue fragment",
+        "single giant crystal or unusual natural stone",
+        "ancient arch or ceremonial doorway",
+        "weathered shrine marker or pillar",
+        "sacred tree or root-wrapped stone",
+        "broad pool, basin, or stream crossing"
+      ],
+      "prop_pool": [
+        "one offering bowl or basket",
+        "one simple banner, ribbon, or hanging cloth",
+        "one stone tablet or carved slab",
+        "one brazier or lantern form",
+        "one abandoned staff, shield, or relic",
+        "one cluster of large flowers or fungi",
+        "one rope bridge or simple ceremonial rail",
+        "one broken pedestal fragment"
+      ],
+      "interaction_pool": [
+        "monster approaches or circles the main altar or plinth",
+        "monster passes between standing stones or through an arch",
+        "monster examines, guards, or reaches toward one relic",
+        "monster climbs the shrine stair or terrace",
+        "monster rests beside a sacred pool, tree, or stone",
+        "monster emerges from a temple or cave threshold",
+        "monster moves beneath one monumental natural landmark",
+        "monster disturbs or carries one simple offering object"
+      ],
+      "anti_repetition_rules": [
+        "Rotate between architectural, natural, elevated, watery, and ruined sacred spaces.",
+        "Use monumental shapes instead of dense magical decoration.",
+        "Do not use sparkle, rune, or carving confetti to imply magic.",
+        "Preserve large quiet areas for coloring around the focal landmark."
+      ]
+    },
+    "ocean": {
+      "geometry_pool": [
+        "kelp corridor with an open midwater lane",
+        "reef shelf with a broad sand channel",
+        "vertical drop-off wall beside open water",
+        "wreck opening framed by large hull ribs",
+        "sea-cave arch opening to brighter water",
+        "seamount terrace with a clear slope",
+        "mangrove-root arcade in shallow water",
+        "tidepool or rocky shelf with one large pool"
+      ],
+      "landmark_pool": [
+        "large anchor or wreck beam",
+        "single massive coral head or fan",
+        "hydrothermal vent chimney",
+        "submerged cave arch",
+        "large mangrove root arch",
+        "volcanic ledge or seamount terrace",
+        "broad kelp cluster with visible holdfasts",
+        "distinct sand channel or tidepool basin"
+      ],
+      "prop_pool": [
+        "one sponge column or anemone group",
+        "one rope, chain, mast, or hull fragment",
+        "one shell cluster drawn as a few large forms",
+        "one driftwood or timber piece",
+        "one broad sea-grass or kelp secondary cluster",
+        "one rock plate or isolated coral form",
+        "one vent plume shape",
+        "one large broken amphora or chest only when wreck-appropriate"
+      ],
+      "interaction_pool": [
+        "monster swims through a root, kelp, wreck, or cave opening",
+        "monster rests on or grips a broad rock or wreck ledge",
+        "monster circles or guards one coral, vent, anchor, or wreck landmark",
+        "monster emerges from behind a hull rib, rock arch, or kelp mass",
+        "monster crosses a broad sand or open-water channel",
+        "monster uses a large kelp blade, coral head, or root as partial cover",
+        "monster moves along a drop-off, seamount, or reef edge",
+        "monster occupies the boundary between shallow structure and open water"
+      ],
+      "anti_repetition_rules": [
+        "Alternate structured habitats with open-water compositions.",
+        "Do not repeat generic seabed-plus-bubbles framing.",
+        "Use a few large aquatic forms instead of schools of tiny fish or coral confetti.",
+        "Open water is useful negative space; do not fill it merely for detail."
+      ]
+    },
+    "undead-sites": {
+      "geometry_pool": [
+        "graveyard path between a few large markers",
+        "catacomb aisle with broad burial niches",
+        "ruined chapel interior with a broken central axis",
+        "open battlefield earthwork with sparse relics",
+        "crypt chamber organized around one sarcophagus",
+        "mausoleum or cemetery gate threshold",
+        "sunken burial court with one change in level",
+        "collapsed sacred passage with one readable breach"
+      ],
+      "landmark_pool": [
+        "large sarcophagus or stone coffin",
+        "broken altar or chapel arch",
+        "small group of broad gravestones",
+        "cemetery gate or mausoleum doorway",
+        "fallen battle banner or large shield",
+        "arched burial niche or ossuary recess",
+        "gnarled dead tree or root mass",
+        "single memorial statue or funerary pillar"
+      ],
+      "prop_pool": [
+        "one urn, lantern, or candle stand",
+        "one broken pew or bench",
+        "one broad shield, banner, or siege timber",
+        "one chain, gate bar, or iron bracket",
+        "one simple coffin lid or stone slab",
+        "one mound of earth or fallen masonry",
+        "one abandoned offering bowl or relic",
+        "one cracked door or gate panel"
+      ],
+      "interaction_pool": [
+        "monster rises or emerges beside a grave, coffin, or niche",
+        "monster passes through a chapel, crypt, or cemetery threshold",
+        "monster reaches around a large arch, stone, or memorial",
+        "monster guards or approaches an altar, coffin, or funerary marker",
+        "monster steps over one battlefield relic or fallen slab",
+        "monster pulls, carries, or disturbs one simple burial object",
+        "monster uses a broken wall, tree, or tomb as partial cover",
+        "monster occupies a path, aisle, or gate with a clear destination"
+      ],
+      "anti_repetition_rules": [
+        "Rotate exterior burial grounds, interior crypts, sacred ruins, and battlefield spaces.",
+        "Never use skull wallpaper, corpse crowds, or gore as environment texture.",
+        "Keep funerary symbolism large and sparse.",
+        "Use one strong haunted-location marker rather than many tiny spooky props."
+      ]
+    },
+    "wilderness": {
+      "geometry_pool": [
+        "broad valley with layered cliffs",
+        "open grassland with long horizon",
+        "riverbank with one strong bend",
+        "badlands gully with layered rock",
+        "rocky shelf above a lower plain",
+        "shallow ravine or wash crossing",
+        "natural ford between broad stones",
+        "windswept ridge with one sheltering outcrop"
+      ],
+      "landmark_pool": [
+        "single large rock outcrop",
+        "distinct river bend or ford",
+        "lone tree or large dead snag",
+        "layered hoodoo or mesa edge",
+        "fallen log or driftwood form",
+        "large boulder pair framing a path",
+        "distant ridge or cliff face",
+        "single natural arch or eroded opening"
+      ],
+      "prop_pool": [
+        "one reed, grass, or shrub mass",
+        "one broad patch of flowers or groundcover",
+        "one piece of driftwood or deadwood",
+        "one simple trail marker or abandoned pack when story-appropriate",
+        "one broad mud, sand, or gravel bank",
+        "one large root or branch",
+        "one shallow puddle or pool",
+        "one simple rock cairn"
+      ],
+      "interaction_pool": [
+        "monster crosses a ford, wash, or shallow river edge",
+        "monster climbs onto or around one rock outcrop",
+        "monster uses a tree, boulder, or ridge as partial cover",
+        "monster follows a visible trail through open ground",
+        "monster investigates one log, pool, or natural opening",
+        "monster steps down a gully or broad bank",
+        "monster pauses beside a landmark that clearly locates the terrain",
+        "monster carries, drags, or guards one simple object in the open landscape"
+      ],
+      "anti_repetition_rules": [
+        "Alternate open, enclosed, watery, rocky, elevated, and eroded compositions.",
+        "Do not fill grassland or desert negative space with repetitive marks.",
+        "Use only a few large vegetation or rock groups.",
+        "Keep the horizon and terrain bands simple enough to create broad coloring regions."
+      ]
+    },
+    "dragon-lairs": {
+      "geometry_pool": [
+        "volcanic basin with one dominant lava channel",
+        "high cliff shelf with a clear drop-off",
+        "vaulted hoard cavern with an open central floor",
+        "shallow swamp island among large root arches",
+        "rock amphitheater with one elevated perch",
+        "deep cavern threshold with a monumental arch",
+        "ruined stronghold chamber adapted as a lair",
+        "thermal or mineral shelf with one broad pool"
+      ],
+      "landmark_pool": [
+        "broad nest bowl or sleeping hollow",
+        "one large treasure mound or chest",
+        "lava channel or vent opening",
+        "massive cliff edge or stone perch",
+        "giant root arch or fallen swamp log",
+        "broken pillar, arch, or ruined gate",
+        "single enormous bone or relic shape",
+        "mineral pool, crystal shelf, or volcanic plate"
+      ],
+      "prop_pool": [
+        "one broad treasure pile rather than individual coins",
+        "one chest, shield, banner, or large relic",
+        "one broken pillar or masonry block",
+        "one nest material mass",
+        "one large bone or horn",
+        "one root, log, or reed island",
+        "one volcanic rock plate or vent",
+        "one simple chain, gate fragment, or architectural remnant"
+      ],
+      "interaction_pool": [
+        "dragon curls around, guards, or reaches toward one hoard landmark",
+        "dragon braces on a cliff, rock shelf, or ruined platform",
+        "dragon steps over or beside one broad lava or water channel",
+        "dragon emerges through a cavern, gate, or root-arch opening",
+        "dragon settles into or rises from a nest bowl or sleeping hollow",
+        "dragon grips or examines one large relic",
+        "dragon occupies a dominant perch overlooking open space",
+        "dragon moves between a large structural cue and a clear lair landmark"
+      ],
+      "anti_repetition_rules": [
+        "Rotate perch, nest, hoard, volcanic, swamp, ruin, and cavern compositions.",
+        "Do not depict every dragon with the same treasure pile and cave arch.",
+        "Treasure must read as broad colorable masses, never coin-by-coin texture.",
+        "The lair supports scale and story but must remain secondary to the dragon silhouette."
+      ]
+    }
+  }
+}

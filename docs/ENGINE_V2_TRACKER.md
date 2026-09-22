@@ -112,7 +112,7 @@ These are engine feedback, not isolated page problems.
 
 1. story-moment engine: one readable static beat instead of portrait/prop posing — **implemented; colorability has priority over story complexity**
 2. family DNA audit across every repeated monster family — **implemented; all 14 reusable family profiles pass the expanded DNA contract and catalog audit**
-3. environment variation depth across every book family
+3. environment variation depth across every book family — **implemented; all 8 environment families now inherit geometry, landmark, prop, interaction, and anti-repetition pools**
 4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented; review state records failed and preserved dimensions**
 5. Golden Five reference pages before mass regeneration
 
@@ -189,4 +189,19 @@ Variant monster JSON remains minimal. A variant may use `scene_overrides` only w
 
 **Validation:** the first complete 14-family state passed Studio checks on the branch.
 
-**Next hardening priority:** environment variation depth across every book family, then Golden Five reference pages.
+**Next hardening priority:** Golden Five reference pages, then controlled Tome I regeneration.
+
+
+## 2026-09-22 Environment Variation Depth Update
+
+Environment variety is now a first-class universal engine layer rather than an informal prompt preference.
+
+- added `data/environment_variation_families.json` covering all 8 environment families
+- each family now owns reusable geometry, landmark, prop, interaction, and anti-repetition pools
+- the resolved named environment profile and page-specific variant remain authoritative
+- generation prompts receive the compatible family palette but are told to vary large geometry before adding detail
+- colorability remains the governing constraint: variation may not be created through micro-props, texture, or clutter
+- series readiness now fails if an environment family has no valid variation definition
+- CI validates the registry and regression tests verify complete family coverage
+
+**Next hardening priority:** build the Golden Five reference pages and use them to calibrate the generation/review loop before mass rebuilding Tome I.

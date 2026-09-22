@@ -5,12 +5,14 @@ from pathlib import Path
 
 try:
     from .book_registry import load_series, plan_path
+    from .catalog_audit import audit_environment_variation_catalog
     from .manifest_validation import validate_manifest
     from .page_contract import missing_required_paths, page_uniqueness_fingerprint
     from .state_validation import validate_state
     from .source_scope import load_monster_registry
 except ImportError:
     from book_registry import load_series, plan_path
+    from catalog_audit import audit_environment_variation_catalog
     from manifest_validation import validate_manifest
     from page_contract import missing_required_paths, page_uniqueness_fingerprint
     from state_validation import validate_state
@@ -94,6 +96,12 @@ def audit_series(root: Path) -> dict:
             )
         rows.append(row)
 
+    variation_report = audit_environment_variation_catalog(root)
+    if not variation_report["pass"]:
+        structural_errors.extend(
+            f"environment variation: {error}" for error in variation_report["errors"]
+        )
+
     registry = load_monster_registry(root)
     allowed = set((registry.get("monsters") or {}).keys())
     used = set()
@@ -124,6 +132,7 @@ def audit_series(root: Path) -> dict:
         "series_id": series.get("series_id"),
         "books_registered": len(rows),
         "source_registry_entries": len(allowed),
+        "environment_variation_families": variation_report["variation_families"],
         "production_ready_books": sum(1 for row in rows if row["production_ready"]),
         "books": rows,
         "errors": structural_errors,
