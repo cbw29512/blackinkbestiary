@@ -18,6 +18,12 @@ PAGE SPEC → LOCAL AI → QA → SUPERVISOR → HUMAN REVIEW
 
 A page cannot advance until it is approved and locked.
 
+The Studio drives the local worker directly:
+- **Approve & Lock** archives the approved PNG and automatically starts the next canonical page.
+- **Modify** stores the review notes and automatically starts a revised attempt.
+- **Regenerate** keeps the same page and automatically starts a fresh attempt.
+- **Generate Current Page** is the manual retry/fallback control.
+
 Approved pages are copied into strict book order under:
 
 ```
