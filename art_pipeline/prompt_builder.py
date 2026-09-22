@@ -9,9 +9,11 @@ except ImportError:
 
 try:
     from .environment_prompt import environment_checklist, environment_prompt_sections
+    from .physicality_prompt import physicality_checklist, physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
 except ImportError:
     from environment_prompt import environment_checklist, environment_prompt_sections
+    from physicality_prompt import physicality_checklist, physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,6 +64,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         f"HABITAT: {page['habitat']}.",
         *environment_prompt_sections(page, ROOT),
         f"MOMENT: {page['moment']}.",
+        *physicality_sections(page),
         f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
         _items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules")),
@@ -119,6 +122,7 @@ def build_supervisor_checklist(page: dict) -> list[str]:
         "No text, border, logo, or watermark",
     ]
     checks.extend(environment_checklist(page, ROOT))
+    checks.extend(physicality_checklist(page))
     if spec:
         checks.extend(f"Identity check: {item}" for item in spec.get("accuracy_checks", []))
     for item in page.get("must_include", []):
