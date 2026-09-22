@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "purple-worm",
+  "display_name": "Purple Worm",
+  "taxonomy": {
+    "family": "purple worm",
+    "creature_type": "monstrosity",
+    "default_size": "gargantuan"
+  },
+  "visual_identity": {
+    "core_identity": "A colossal subterranean worm whose immense segmented body and circular tooth-filled maw define its identity.",
+    "silhouette": "Huge cylindrical segmented body with the front dominated by a round open maw.",
+    "head_features": "No separate skull; front is a circular muscular mouth ringed with inward-pointing teeth.",
+    "body_shape": "Extremely thick worm body with repeated broad segments and no limbs.",
+    "surface": "Large simple segmented plates or folds with minimal fine texture.",
+    "signature_gear": [],
+    "attitude": [
+      "burrowing",
+      "consuming",
+      "relentless",
+      "colossal"
+    ],
+    "must_keep": [
+      "circular maw",
+      "massive scale",
+      "segmented worm body",
+      "no legs"
+    ],
+    "must_avoid": [
+      "dragon head",
+      "snake face with lips",
+      "limbs",
+      "humanoid eyes",
+      "too many tiny teeth",
+      "dense segment detail"
+    ]
+  },
+  "accuracy_checks": [
+    "maw dominates identity",
+    "worm body has no limbs",
+    "segments are broad and simple",
+    "teeth remain colorable",
+    "scale reads as colossal"
+  ]
+}
