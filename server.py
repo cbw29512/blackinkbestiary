@@ -5,6 +5,8 @@ import filecmp
 import json
 import mimetypes
 import shutil
+import subprocess
+import sys
 import threading
 import webbrowser
 from datetime import datetime, timezone
@@ -21,12 +23,17 @@ STATE_FILE = DATA_DIR / "production-state.json"
 REVIEWS_FILE = DATA_DIR / "reviews.jsonl"
 APPROVED_ROOT = WEB_DIR / "approved"
 MONSTER_DIR = DATA_DIR / "monsters"
+GENERATOR_SCRIPT = ROOT / "scripts" / "generate_current_page.py"
+GENERATOR_LOG = DATA_DIR / "generation-worker.log"
+_GENERATION_LOCK = threading.Lock()
+_GENERATION_PROCESS = None
 
 VALID_DECISIONS = {"approve", "modify", "regenerate"}
 ACTIVE_STATES = {
     "queued", "generating", "qa_review", "supervisor_review",
-    "awaiting_human", "modify_requested", "regenerate_requested",
+    "awaiting_human", "modify_requested", "regenerate_requested", "generation_failed",
 }
+GENERATABLE_STATES = {"queued", "modify_requested", "regenerate_requested", "generation_failed"}
 
 
 def utc_now() -> str:
@@ -128,6 +135,53 @@ def comfy_health():
         return {"connected": False, "url": "http://127.0.0.1:8188", "error": str(exc)}
 
 
+def worker_python() -> str:
+    local = ROOT / ".blackink-tools" / "Scripts" / "python.exe"
+    return str(local) if local.exists() else sys.executable
+
+
+def generation_worker_status():
+    global _GENERATION_PROCESS
+    with _GENERATION_LOCK:
+        process = _GENERATION_PROCESS
+        if process is None:
+            return {"running": False, "pid": None}
+        code = process.poll()
+        if code is None:
+            return {"running": True, "pid": process.pid}
+        _GENERATION_PROCESS = None
+        return {"running": False, "pid": None, "last_exit_code": code}
+
+
+def start_generation_worker():
+    global _GENERATION_PROCESS
+    state = load_state()
+    page_id = state["current_page_id"]
+    status = state["pages"][page_id]["status"]
+    if status not in GENERATABLE_STATES:
+        raise ValueError(f"Current page is not ready to generate: {status}")
+    if not GENERATOR_SCRIPT.exists():
+        raise ValueError("Generation worker script is missing")
+
+    with _GENERATION_LOCK:
+        if _GENERATION_PROCESS is not None and _GENERATION_PROCESS.poll() is None:
+            return {"started": False, "running": True, "pid": _GENERATION_PROCESS.pid}
+
+        GENERATOR_LOG.parent.mkdir(parents=True, exist_ok=True)
+        log = GENERATOR_LOG.open("a", encoding="utf-8")
+        creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if sys.platform == "win32" else 0
+        process = subprocess.Popen(
+            [worker_python(), str(GENERATOR_SCRIPT)],
+            cwd=ROOT,
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            creationflags=creationflags,
+        )
+        log.close()
+        _GENERATION_PROCESS = process
+        return {"started": True, "running": True, "pid": process.pid, "page_id": page_id}
+
+
 def public_state():
     tome = load_tome()
     state = load_state()
@@ -146,6 +200,7 @@ def public_state():
         "current_monster_spec": public_monster_spec(current),
         "current_state": state["pages"][state["current_page_id"]],
         "current_page_id": state["current_page_id"],
+        "generation_worker": generation_worker_status(),
         "ordered_pages": [
             {
                 "page_id": page["page_id"],
@@ -326,6 +381,9 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/comfy-health":
                 self.send_json(comfy_health())
                 return
+            if path == "/api/generation-status":
+                self.send_json(generation_worker_status())
+                return
             self.serve_static(path)
         except Exception as exc:
             self.send_json({"error": str(exc)}, HTTPStatus.INTERNAL_SERVER_ERROR)
@@ -335,11 +393,21 @@ class Handler(BaseHTTPRequestHandler):
         try:
             payload = self.read_body_json()
             if path == "/api/decision":
-                self.send_json(apply_decision(
-                    payload.get("decision", ""),
+                decision = payload.get("decision", "")
+                result = apply_decision(
+                    decision,
                     payload.get("notes", ""),
                     payload.get("quick_tags", []),
-                ))
+                )
+                if decision in VALID_DECISIONS and result["current_state"]["status"] in GENERATABLE_STATES:
+                    result["generation_worker"] = start_generation_worker()
+                self.send_json(result)
+                return
+            if path == "/api/generate":
+                worker = start_generation_worker()
+                result = public_state()
+                result["generation_worker"] = worker
+                self.send_json(result)
                 return
             if path == "/api/candidate":
                 self.send_json(register_candidate(payload))
