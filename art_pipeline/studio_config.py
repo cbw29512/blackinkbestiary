@@ -67,6 +67,11 @@ def active_book_paths(root: Path) -> dict[str, Path]:
             config["universal_environment_contract"],
             "universal environment contract",
         ),
+        "universal_story_contract": resolve_root_path(
+            root,
+            config["universal_story_contract"],
+            "universal story contract",
+        ),
         "kdp_print_standard": resolve_root_path(
             root,
             config["kdp_print_standard"],
