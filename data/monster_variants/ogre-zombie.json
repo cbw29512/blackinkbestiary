@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "ogre-zombie",
+  "family_profile": "ogre",
+  "display_name": "Ogre Zombie",
+  "size": "large",
+  "creature_type": "undead giant humanoid",
+  "visual_identity": {
+    "core_identity": "A dead ogre animated into a slow hulking corpse, preserving huge ogre proportions while showing restrained unmistakable undeath.",
+    "silhouette": "Massive slumped giant with drooping shoulders, uneven gait, thick limbs, and dragging chains.",
+    "head_features": "Broad ogre face with sunken eyes and slack jaw; damaged but recognizable and non-gory.",
+    "body_shape": "Huge heavy ogre frame with sagging posture, stiff joints, and asymmetrical undead movement.",
+    "surface": "Sparse torn skin, a few exposed bone edges or stitched tears, kept clean and non-gory for coloring.",
+    "signature_gear": [
+      "dragging chains",
+      "torn simple wraps",
+      "broken belt or shackles"
+    ],
+    "attitude": [
+      "mindless",
+      "slow",
+      "relentless",
+      "vacant"
+    ],
+    "must_keep": [
+      "obvious undead posture",
+      "dragging chains",
+      "restrained corpse damage"
+    ],
+    "must_avoid": [
+      "graphic gore",
+      "skeletal-only body",
+      "fast athletic pose",
+      "dense decay texture"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Heavy slumped stance with stiff asymmetrical movement and full ground support.",
+    "behavior_style": [
+      "shambling through a large passage",
+      "dragging chains across the floor",
+      "pushing through a broken doorway",
+      "standing vacant in a ruined holding area"
+    ]
+  },
+  "accuracy_checks": [
+    "undeath is obvious without gore",
+    "ogre scale and bulk remain intact",
+    "chains or shackles read clearly"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "skeleton_drift",
+      "symptom": "ogre zombie loses flesh and becomes skeleton",
+      "correction": "restore massive ogre corpse anatomy with only restrained damage"
+    },
+    {
+      "id": "gore_drift",
+      "symptom": "corpse damage becomes graphic",
+      "correction": "simplify wounds to sparse tears, exposed edges, and slack undead posture"
+    }
+  ]
+}
