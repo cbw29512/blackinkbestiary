@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "contract_id": "black-ink-monster-v1",
+  "schema_version": 3,
+  "contract_id": "black-ink-monster-v2",
   "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
   "minimal_recipe_required": [
     "monster_id",
@@ -41,7 +41,8 @@
     "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment.",
     "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
     "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
-    "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit."
+    "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
+    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -58,5 +59,28 @@
     "scene_identity.environment_fit",
     "accuracy_checks",
     "known_failure_modes"
-  ]
+  ],
+  "scalability_rule": "Hundreds of monster recipes remain small. Creature files own identity, variant traits, behavior tendencies, locomotion, and habitat compatibility; reusable scenery belongs exclusively to the environment engine.",
+  "environment_ownership": {
+    "monster_may_define": [
+      "default_habitats",
+      "scene_identity.environment_fit",
+      "variant-specific environment preferences when truly unique"
+    ],
+    "monster_must_not_define": [
+      "wall systems",
+      "floor systems",
+      "ceiling systems",
+      "lighting fixtures",
+      "generic traps",
+      "generic furniture",
+      "generic ruins",
+      "generic vegetation",
+      "reef dressing",
+      "burial dressing",
+      "lair dressing",
+      "environment depth cues"
+    ],
+    "rule": "If a visual element could be reused by another creature in the same place, it belongs in the universal environment engine: family/profile/component/overlay system."
+  }
 }

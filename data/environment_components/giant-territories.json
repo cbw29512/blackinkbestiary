@@ -1,0 +1,855 @@
+{
+  "schema_version": 1,
+  "family_id": "giant-territories",
+  "display_name": "Giant Territory Environment Component Library",
+  "purpose": "Reusable giant-scale halls, passes, ravines, ruins, quarries, boulder fields, gates, and plateaus.",
+  "context_rules": [
+    {
+      "terms": [
+        "mountain",
+        "pass"
+      ],
+      "add": [
+        "mountain",
+        "pass"
+      ]
+    },
+    {
+      "terms": [
+        "hall"
+      ],
+      "add": [
+        "hall",
+        "built"
+      ]
+    },
+    {
+      "terms": [
+        "ruined",
+        "settlement"
+      ],
+      "add": [
+        "ruin",
+        "settlement"
+      ]
+    },
+    {
+      "terms": [
+        "ravine"
+      ],
+      "add": [
+        "ravine",
+        "natural"
+      ]
+    },
+    {
+      "terms": [
+        "quarry"
+      ],
+      "add": [
+        "quarry",
+        "rock"
+      ]
+    },
+    {
+      "terms": [
+        "boulder"
+      ],
+      "add": [
+        "boulder",
+        "natural"
+      ]
+    },
+    {
+      "terms": [
+        "gate",
+        "fortified",
+        "bridge"
+      ],
+      "add": [
+        "fortified",
+        "built"
+      ]
+    },
+    {
+      "terms": [
+        "plateau"
+      ],
+      "add": [
+        "plateau",
+        "elevated"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Every giant-territory page needs a large scale cue, but the cue must rotate across pages.",
+    "Oversized architecture and props use broad simple shapes; giant scale does not justify clutter.",
+    "Built and natural giant spaces should feel physically huge while the monster remains the focal subject.",
+    "Use debris as a few massive objects rather than many small fragments."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "narrow mountain pass between towering walls",
+        "contexts": [
+          "mountain",
+          "pass"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "overscaled hall with a single giant-size furnishing",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "open ruined street with one broken structure",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "deep ravine with a ledge and broad streambed",
+        "contexts": [
+          "ravine",
+          "natural"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "quarry-like rock shelf with stepped stone planes",
+        "contexts": [
+          "quarry",
+          "rock"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "boulder field with a clear walking lane",
+        "contexts": [
+          "boulder",
+          "natural"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "fortified gate or bridge sized for enormous occupants",
+        "contexts": [
+          "built",
+          "fortified"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "high plateau edge with distant scale references",
+        "contexts": [
+          "plateau",
+          "elevated"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "towering cliff faces with broad vertical planes",
+        "contexts": [
+          "mountain",
+          "ravine"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "oversized dressed masonry blocks",
+        "contexts": [
+          "built",
+          "hall"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "weathered settlement stone and timber with large broken faces",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "layered quarry rock with broad cut planes",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "house-sized boulders with simple angular surfaces",
+        "contexts": [
+          "boulder"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "massive gate timbers or bridge beams",
+        "contexts": [
+          "built",
+          "fortified"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "windswept plateau rock with broad worn edges",
+        "contexts": [
+          "plateau"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "giant hall floor and wall panels scaled far beyond human proportions",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "broad mountain trail between cliff walls",
+        "contexts": [
+          "mountain",
+          "pass"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "giant-sized floor slabs with few deep joints",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "ruined settlement street with a few massive debris blocks",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "ravine shelf with one lower stream channel",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "quarry terrace with stepped rock bands",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "boulder lane with open ground between large stones",
+        "contexts": [
+          "boulder"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "bridge deck or fortified threshold with huge planks or slabs",
+        "contexts": [
+          "built",
+          "fortified"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "plateau ground with one dominant drop edge",
+        "contexts": [
+          "plateau",
+          "elevated"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "cliff walls pinch inward above a pass",
+        "contexts": [
+          "mountain",
+          "pass"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "huge hall beams or stone arches spaced broadly apart",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "broken settlement roofline or tower remnant",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "ravine overhang creating one large shadowed shelf",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "quarry wall lip or crane beam silhouette",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "leaning house-sized boulder forming a natural arch",
+        "contexts": [
+          "boulder"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "massive gate lintel or bridge support above the path",
+        "contexts": [
+          "fortified",
+          "built"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "open plateau sky used as negative space",
+        "contexts": [
+          "plateau",
+          "elevated"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "open daylight through a mountain pass",
+        "contexts": [
+          "mountain",
+          "pass"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "single giant brazier or wall fire bowl",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "light through a broken roof or ruined tower opening",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "reflected light from ravine water",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "sun across broad quarry terraces",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "bright sky gaps between boulders",
+        "contexts": [
+          "boulder"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "large gate torch or beacon fixture",
+        "contexts": [
+          "fortified",
+          "built"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "low horizon light across a plateau",
+        "contexts": [
+          "plateau"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "massive doorway or gate frame",
+        "contexts": [
+          "built",
+          "fortified"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "oversized stair, bench, throne, or table",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "broken cottage wall or ruined tower section",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "huge bridge beam or retaining wall",
+        "contexts": [
+          "fortified",
+          "ravine"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "quarry shelf, ramp, or broad cut step",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "boulder arch or narrow rock passage",
+        "contexts": [
+          "boulder",
+          "natural"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "giant-sized fence, palisade, or gate leaf",
+        "contexts": [
+          "settlement",
+          "fortified"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "monumental pillar or marker stone",
+        "contexts": [
+          "hall",
+          "plateau"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "massive doorway or gate",
+        "contexts": [
+          "built",
+          "fortified"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "oversized throne, table, bench, or stair",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "house-sized boulder",
+        "contexts": [
+          "boulder",
+          "natural"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "broken cottage or tower section",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "huge bridge or gate timber",
+        "contexts": [
+          "fortified"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "large quarry face or cliff shelf",
+        "contexts": [
+          "quarry",
+          "mountain"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "giant-size firepit or stone ring",
+        "contexts": [
+          "settlement",
+          "lair"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "single monumental pillar or marker",
+        "contexts": [
+          "plateau",
+          "hall"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "oversized barrel, bucket, or chest",
+        "contexts": [
+          "hall",
+          "settlement"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "broken cart or wagon wheel scaled for giants",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "thick chain or iron hook",
+        "contexts": [
+          "built",
+          "quarry"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "large timber beam",
+        "contexts": [
+          "built",
+          "ruin"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "giant shield, tool, or weapon laid aside",
+        "contexts": [
+          "hall",
+          "military"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "large sack or bundle",
+        "contexts": [
+          "settlement",
+          "lair"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "single ruined roof section or door",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one broad cooking pot or work object",
+        "contexts": [
+          "hall",
+          "settlement"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "cliff-edge path with a broad visible drop",
+        "contexts": [
+          "mountain",
+          "plateau"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "unstable giant boulder at a pass edge",
+        "contexts": [
+          "boulder",
+          "pass"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "broken bridge section with one clear gap",
+        "contexts": [
+          "fortified",
+          "ravine"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "collapsed giant wall with a few massive blocks",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "quarry ledge with one dangerous cut or drop",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "ravine crossing over a lower streambed",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "heavy gate or portcullis channel sized for giants",
+        "contexts": [
+          "fortified"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "large firepit, forge edge, or hot work zone",
+        "contexts": [
+          "hall",
+          "settlement"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "mountain pass bends behind a cliff face",
+        "contexts": [
+          "mountain",
+          "pass"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "giant hall doorway reveals another overscaled room",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "ruined street leads toward a broken tower",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "ravine shelf overlooks a lower stream channel",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "quarry terraces step down into depth",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "boulder lane opens to a distant valley",
+        "contexts": [
+          "boulder"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "bridge or gate frames a far side structure",
+        "contexts": [
+          "fortified"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "plateau edge reveals distant terrain below",
+        "contexts": [
+          "plateau",
+          "elevated"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few wind marks or sparse grass at a pass edge",
+        "contexts": [
+          "mountain",
+          "plateau"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "soot halo around one giant brazier",
+        "contexts": [
+          "hall",
+          "built"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "broad dust patch at one ruined collapse",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "simple water ripples in a ravine stream",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "few broad quarry tool marks",
+        "contexts": [
+          "quarry"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "moss or lichen patch on one giant boulder",
+        "contexts": [
+          "boulder"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "weathered wood grain on one gate beam",
+        "contexts": [
+          "fortified"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "clean distant horizon behind giant-scale forms",
+        "contexts": [
+          "plateau"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "monster ducks under or passes through an oversized threshold",
+        "contexts": [
+          "hall",
+          "fortified"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "monster lifts, drags, or rests against one massive prop",
+        "contexts": [
+          "hall",
+          "settlement"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "monster steps over a ruined wall, beam, or cart",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "monster occupies a narrow pass, bridge, or gate",
+        "contexts": [
+          "mountain",
+          "fortified"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "monster reaches toward a giant-size furnishing or landmark",
+        "contexts": [
+          "hall"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "monster climbs a broad ledge or huge stair",
+        "contexts": [
+          "quarry",
+          "hall"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "monster pushes through a broken settlement opening",
+        "contexts": [
+          "ruin",
+          "settlement"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "monster stands beside a scale landmark that clearly communicates enormous size",
+        "contexts": [
+          "universal"
+        ]
+      }
+    ]
+  }
+}

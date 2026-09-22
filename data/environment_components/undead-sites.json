@@ -1,0 +1,828 @@
+{
+  "schema_version": 1,
+  "family_id": "undead-sites",
+  "display_name": "Undead Site Environment Component Library",
+  "purpose": "Reusable burial, chapel, battlefield, graveyard, catacomb, crypt, and mausoleum scenery.",
+  "context_rules": [
+    {
+      "terms": [
+        "graveyard"
+      ],
+      "add": [
+        "graveyard",
+        "exterior"
+      ]
+    },
+    {
+      "terms": [
+        "catacomb"
+      ],
+      "add": [
+        "catacomb",
+        "interior"
+      ]
+    },
+    {
+      "terms": [
+        "chapel"
+      ],
+      "add": [
+        "chapel",
+        "ruin"
+      ]
+    },
+    {
+      "terms": [
+        "battlefield"
+      ],
+      "add": [
+        "battlefield",
+        "exterior"
+      ]
+    },
+    {
+      "terms": [
+        "crypt"
+      ],
+      "add": [
+        "crypt",
+        "interior"
+      ]
+    },
+    {
+      "terms": [
+        "mausoleum"
+      ],
+      "add": [
+        "graveyard",
+        "threshold"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Funerary identity comes from substantial architecture and markers, not skull wallpaper.",
+    "Use one or two large spooky forms and preserve open coloring regions.",
+    "Gore and corpse clutter are not environmental texture.",
+    "Ruins should remain readable as former chapels, tombs, gates, or battleworks."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "graveyard path between a few large markers",
+        "contexts": [
+          "graveyard",
+          "exterior"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "catacomb aisle with broad burial niches",
+        "contexts": [
+          "catacomb",
+          "interior"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "ruined chapel nave with one broken central axis",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "open battlefield earthwork with sparse relics",
+        "contexts": [
+          "battlefield",
+          "exterior"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "crypt chamber organized around one sarcophagus",
+        "contexts": [
+          "crypt",
+          "interior"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "mausoleum or cemetery gate threshold",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "sunken burial court with one change in level",
+        "contexts": [
+          "graveyard",
+          "crypt"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "collapsed sacred passage with one readable breach",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "weathered grave stones with broad faces",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "heavy catacomb masonry with large recessed niches",
+        "contexts": [
+          "catacomb"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "cracked chapel stone with restrained broken edges",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "packed battlefield earth with a few broad trenches",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "massive crypt blocks with deep joints",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "aged mausoleum stone with simple carved panels",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "root-broken burial wall with large exposed stones",
+        "contexts": [
+          "graveyard",
+          "ruin"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "charred or weathered battlefield timber used sparingly",
+        "contexts": [
+          "battlefield"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "graveyard path with broad dirt and stone bands",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "catacomb floor slabs with one clear aisle",
+        "contexts": [
+          "catacomb"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "broken chapel floor with a few large surviving tiles",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "battlefield earthworks with one trench or mound",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "crypt floor slabs centered on a tomb",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "mausoleum threshold step with large stone treads",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "sunken burial court with broad lower floor",
+        "contexts": [
+          "graveyard",
+          "crypt"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "collapsed passage floor with a few massive blocks",
+        "contexts": [
+          "ruin"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "bare tree branches framing a graveyard sky",
+        "contexts": [
+          "graveyard",
+          "exterior"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "catacomb barrel vault with broad stone spans",
+        "contexts": [
+          "catacomb",
+          "interior"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "broken chapel roof opening to the sky",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "open battlefield sky with sparse broken stakes",
+        "contexts": [
+          "battlefield",
+          "exterior"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "low crypt vault with one strong arch",
+        "contexts": [
+          "crypt",
+          "interior"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "mausoleum arch or lintel above a threshold",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "large root breaking through a ceiling or wall",
+        "contexts": [
+          "graveyard",
+          "ruin"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "collapsed sacred arch with a clean opening",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "single cemetery lantern or torch near a gate",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "wall candle niche with one or two large holders",
+        "contexts": [
+          "catacomb",
+          "crypt"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "daylight through a broken chapel roof",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "open battlefield daylight with strong horizon space",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "single funerary brazier or lantern beside a tomb",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "light through a mausoleum doorway",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "moonlit sky opening used as negative space",
+        "contexts": [
+          "graveyard",
+          "exterior"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "one shaft of light through a collapse breach",
+        "contexts": [
+          "ruin",
+          "chapel"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "cemetery gate or iron fence section with broad bars",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "arched burial niche or ossuary recess",
+        "contexts": [
+          "catacomb"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "broken chapel arch or doorway",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "battlefield trench, earthwork, or broken palisade",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "sarcophagus recess or crypt arch",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "mausoleum doorway with heavy stone jambs",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "root-wrapped tomb wall or memorial base",
+        "contexts": [
+          "graveyard",
+          "ruin"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "collapsed stair or burial passage threshold",
+        "contexts": [
+          "crypt",
+          "ruin"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "single large sarcophagus or stone coffin",
+        "contexts": [
+          "crypt",
+          "catacomb"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "broken altar or chapel arch",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "small group of broad gravestones",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "cemetery gate or mausoleum doorway",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "fallen battle banner or large shield",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "arched burial niche or memorial recess",
+        "contexts": [
+          "catacomb"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "gnarled dead tree or root mass",
+        "contexts": [
+          "graveyard",
+          "exterior"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "single memorial statue or funerary pillar",
+        "contexts": [
+          "graveyard",
+          "crypt"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "one urn, lantern, or candle stand",
+        "contexts": [
+          "crypt",
+          "catacomb"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "one broken pew or bench",
+        "contexts": [
+          "chapel"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "one broad shield, banner, or siege timber",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "one chain, gate bar, or iron bracket",
+        "contexts": [
+          "graveyard",
+          "crypt"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "single coffin lid or stone slab",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "one mound of earth or fallen masonry",
+        "contexts": [
+          "graveyard",
+          "ruin"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "one abandoned offering bowl or relic",
+        "contexts": [
+          "chapel",
+          "crypt"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one cracked door or gate panel",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "open grave or sunken burial pit with a broad rim",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "collapsed catacomb wall with a clear unstable block mass",
+        "contexts": [
+          "catacomb",
+          "ruin"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "broken chapel floor opening into a lower crypt",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "battlefield trench or stake line with clear spacing",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "cracked sarcophagus lid or tomb threshold creating a tripping edge",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "rusted cemetery gate partly fallen across the path",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "root-broken masonry creating a narrow unstable gap",
+        "contexts": [
+          "graveyard",
+          "ruin"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "collapsed stair descending into darkness",
+        "contexts": [
+          "crypt",
+          "ruin"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "graveyard path curves behind a mausoleum or tree",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "catacomb aisle recedes through repeating large arches",
+        "contexts": [
+          "catacomb"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "chapel doorway opens to exterior ruins beyond",
+        "contexts": [
+          "chapel"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "battlefield trench leads toward a distant earthwork",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "crypt arch reveals a second burial chamber",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "mausoleum threshold frames a darker interior",
+        "contexts": [
+          "graveyard",
+          "threshold"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "sunken court shows a lower burial level",
+        "contexts": [
+          "graveyard",
+          "crypt"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "collapsed passage leaves one deep surviving opening",
+        "contexts": [
+          "ruin"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few broad moss patches on grave or wall stone",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "single cobweb swath in a catacomb corner",
+        "contexts": [
+          "catacomb"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "sparse dust around one chapel collapse",
+        "contexts": [
+          "chapel",
+          "ruin"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "wind-bent grass around battlefield relics",
+        "contexts": [
+          "battlefield"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "one candle-smoke or soot mark near a crypt fixture",
+        "contexts": [
+          "crypt"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "large root intrusion around a grave marker",
+        "contexts": [
+          "graveyard"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "few fallen leaves gathered along a cemetery path",
+        "contexts": [
+          "graveyard",
+          "exterior"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "clean darkness in a tomb opening rather than hatch shading",
+        "contexts": [
+          "crypt",
+          "catacomb"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "monster rises or emerges beside a grave, coffin, or niche",
+        "contexts": [
+          "graveyard",
+          "crypt",
+          "catacomb"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "monster passes through a chapel, crypt, or cemetery threshold",
+        "contexts": [
+          "chapel",
+          "crypt",
+          "graveyard"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "monster reaches around a large arch, stone, or memorial",
+        "contexts": [
+          "universal"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "monster guards or approaches an altar, coffin, or funerary marker",
+        "contexts": [
+          "chapel",
+          "crypt"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "monster steps over one battlefield relic or fallen slab",
+        "contexts": [
+          "battlefield",
+          "ruin"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "monster pulls, carries, or disturbs one simple burial object",
+        "contexts": [
+          "graveyard",
+          "crypt"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "monster uses a broken wall, tree, or tomb as partial cover",
+        "contexts": [
+          "graveyard",
+          "ruin"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "monster occupies a path, aisle, or gate with a clear destination",
+        "contexts": [
+          "graveyard",
+          "catacomb",
+          "threshold"
+        ]
+      }
+    ]
+  }
+}

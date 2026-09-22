@@ -1,7 +1,7 @@
 {
-  "schema_version": 2,
-  "contract_id": "black-ink-environment-v2",
-  "purpose": "Make every background immediately identifiable, accurate, varied, unique, and colorable without bloating page recipes.",
+  "schema_version": 3,
+  "contract_id": "black-ink-environment-v3",
+  "purpose": "Scale premium, recognizable, highly varied coloring-book environments across hundreds of monsters while keeping monster and page JSON small.",
   "identity_test": "If the monster were removed, a reviewer should still identify the kind of place at thumbnail size.",
   "resolved_identity": {
     "spatial_type": "What kind of place/space this is: corridor, crawlway, cavern, crypt, forest clearing, reef, wreck, shrine, etc.",
@@ -21,7 +21,9 @@
     "minimum_options_per_pool": 4,
     "ownership_rule": "Environment-family variation supplies reusable options. The resolved environment profile and explicit page variant remain authoritative.",
     "selection_rule": "Use only family options compatible with the resolved profile. Never force an option that changes the named place.",
-    "colorability_rule": "Variation must come from a few large structural choices, not from extra tiny objects or texture."
+    "colorability_rule": "Variation must come from a few large structural choices, not from extra tiny objects or texture.",
+    "status": "legacy_compatibility",
+    "note": "Retained for backward compatibility and coarse family diversity audits. New generation uses the v3 component_engine and overlay_engine."
   },
   "prompt_rules": [
     "State spatial type, material language, identity markers, and spatial read explicitly.",
@@ -51,5 +53,61 @@
     "environment_variant.framing",
     "environment_variant.interaction"
   ],
-  "inheritance_rule": "Environment profiles own reusable place identity. Environment-family variation owns reusable composition variety. Page recipes add only the unique landmark, framing, and monster/environment interaction."
+  "inheritance_rule": "Environment family owns reusable visual language; profile owns place identity; component catalogs own scalable scenery; overlays own cross-family themes; page recipes own only the unique story landmark/framing/interaction.",
+  "scalability_rule": "Creature data declares identity and habitat compatibility. Reusable scenery, construction, terrain, lighting, hazards, props, depth cues, lair dressing, and environmental interactions belong to the universal environment engine.",
+  "component_engine": {
+    "catalog_dir": "data/environment_components",
+    "overlay_path": "data/environment_overlays.json",
+    "required_groups": [
+      "spatial_archetypes",
+      "primary_surfaces",
+      "ground_planes",
+      "overhead_features",
+      "lighting_features",
+      "structural_features",
+      "landmarks",
+      "secondary_features",
+      "hazards",
+      "depth_features",
+      "atmosphere_features",
+      "interaction_patterns"
+    ],
+    "minimum_options_per_group": 6,
+    "context_rule": "Component compatibility is resolved from the environment profile and reusable context triggers, not from monster-specific scenery JSON.",
+    "deterministic_selection": "A stable page/profile key selects a reproducible palette so reruns can be diagnosed while different pages naturally rotate components.",
+    "prompt_budget": "Select a compact compatible palette; never dump the entire library into the image prompt.",
+    "colorability_rule": "Every selected component must create large or medium readable coloring regions. Micro-detail is never used as the source of variety.",
+    "page_authority": "Explicit page landmark, framing, and interaction remain authoritative and override selected palette suggestions."
+  },
+  "overlay_engine": {
+    "purpose": "Reusable environmental modifiers such as lair, ruin, sacred, military, burial, trap, treasure, fungal, settlement, and weathered can apply across multiple environment families.",
+    "inference": "Infer overlays from profile identity, page moment, and explicit environment variant; allow future explicit environment_overlays without requiring them.",
+    "ownership_rule": "Overlays add compatible environmental character but never change the base family or named profile."
+  },
+  "assembly_budget": {
+    "core_groups": [
+      "spatial_archetypes",
+      "primary_surfaces",
+      "ground_planes",
+      "overhead_features",
+      "lighting_features",
+      "structural_features",
+      "depth_features"
+    ],
+    "accent_groups": [
+      "landmarks",
+      "secondary_features",
+      "atmosphere_features"
+    ],
+    "conditional_groups": [
+      "hazards"
+    ],
+    "story_group": "interaction_patterns",
+    "major_environment_forms": [
+      2,
+      4
+    ],
+    "selected_accents": 2,
+    "rule": "The engine may know hundreds of components, but a single page uses only a few strong forms. Library depth creates variety; it must not create clutter."
+  }
 }

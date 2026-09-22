@@ -65,6 +65,20 @@ class ProductNorthStarTests(unittest.TestCase):
         self.assertIn("environment variation depth", tracker)
         self.assertIn("Golden Five", tracker)
 
+    def test_environment_v3_is_built_for_hundreds_of_monsters(self):
+        environment = json.loads(
+            (ROOT / "config" / "universal_environment_contract.json").read_text(encoding="utf-8")
+        )
+        monster = json.loads(
+            (ROOT / "config" / "universal_monster_contract.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(environment["contract_id"], "black-ink-environment-v3")
+        self.assertIn("component_engine", environment)
+        self.assertIn("overlay_engine", environment)
+        self.assertEqual(len(environment["component_engine"]["required_groups"]), 12)
+        self.assertIn("Hundreds of monster recipes remain small", monster["scalability_rule"])
+        self.assertIn("environment engine", monster["environment_ownership"]["rule"].lower())
+
     def test_colorability_outranks_story_complexity(self):
         page = json.loads((ROOT / "config" / "universal_page_contract.json").read_text(encoding="utf-8"))
         coloring = json.loads((ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8"))

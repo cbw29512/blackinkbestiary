@@ -4,7 +4,7 @@ from pathlib import Path
 
 try:
     from .environment_catalog import load_environment_contract, resolve_environment_profile
-    from .environment_variation import resolve_family_variation
+    from .environment_components import assemble_environment_palette
     from .quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -13,7 +13,7 @@ try:
     )
 except ImportError:
     from environment_catalog import load_environment_contract, resolve_environment_profile
-    from environment_variation import resolve_family_variation
+    from environment_components import assemble_environment_palette
     from quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -35,7 +35,16 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}
     identity = profile.get("resolved_identity") or {}
-    family_variation = resolve_family_variation(profile.get("environment_family"))
+    palette = assemble_environment_palette(page, root)
+    component_lines = [
+        f"SELECTED {group.replace('_', ' ').upper()}: {item.get('text', '')}."
+        for group, item in palette["components"].items()
+    ]
+    overlay_rules = [
+        rule
+        for overlay in palette["overlays"]
+        for rule in overlay.get("directives") or []
+    ]
     return [
         f"ENVIRONMENT PROFILE: {profile['name']}.",
         f"ENVIRONMENT SPATIAL TYPE: {identity.get('spatial_type', '')}.",
@@ -47,12 +56,15 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
         _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
         _items("ENVIRONMENT ERRORS TO AVOID", profile.get("must_avoid")),
-        _items("FAMILY GEOMETRY VARIATION POOL", family_variation.get("geometry_pool")),
-        _items("FAMILY LANDMARK VARIATION POOL", family_variation.get("landmark_pool")),
-        _items("FAMILY PROP VARIATION POOL", family_variation.get("prop_pool")),
-        _items("FAMILY STORY-INTERACTION POOL", family_variation.get("interaction_pool")),
-        _items("FAMILY ANTI-REPETITION RULES", family_variation.get("anti_repetition_rules")),
-        "VARIATION PRIORITY: preserve the named environment and explicit page variant; vary large geometry before adding props or texture.",
+        _items("ENVIRONMENT ASSEMBLY CONTEXTS", palette.get("contexts")),
+        *component_lines,
+        _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules),
+        _items("FAMILY ENVIRONMENT QUALITY RULES", palette.get("family_quality_rules")),
+        (
+            "ENVIRONMENT PALETTE RULE: these selected components are a compatible design palette, "
+            "not permission to clutter the page. Use only the few forms needed for a premium, readable, "
+            "highly colorable setting. Explicit page landmark, framing, and interaction remain authoritative."
+        ),
         f"UNIQUE BACKGROUND LANDMARK: {variant.get('landmark', '')}.",
         f"UNIQUE BACKGROUND FRAMING: {variant.get('framing', '')}.",
         f"MONSTER / ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",

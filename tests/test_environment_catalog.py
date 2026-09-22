@@ -7,7 +7,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from environment_catalog import environment_fingerprint, resolve_environment_profile
-from environment_variation import load_variation_registry, resolve_family_variation
+from environment_components import assembly_fingerprint, assemble_environment_palette
+from environment_engine_audit import audit_environment_engine
+from environment_variation import load_variation_registry
 from prompt_builder import build_prompt
 from quality_system import coloring_page_directives
 
@@ -64,6 +66,23 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("UNIVERSAL ENVIRONMENT IDENTITY RULES", text)
         self.assertIn("flagstone floor", text)
 
+    def test_i02_shrine_keeper_stays_limestone_cave_not_dungeon_corridor(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-02")
+        palette = assemble_environment_palette(page, ROOT)
+        text = build_prompt(page)
+        self.assertIn("natural", palette["contexts"])
+        self.assertIn("cave", palette["contexts"])
+        self.assertIn("limestone", palette["contexts"])
+        self.assertIn("HABITAT: Limestone Drip Cave", text)
+        self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
+        self.assertIn("dragon skull", text.lower())
+        self.assertIn("coin", text.lower())
+        self.assertIn("ACTIVE ENVIRONMENT OVERLAY RULES", text)
+        self.assertIn("PAGE RECIPE LOCK", text)
+        self.assertIn("low flowstone altar with dragon skull and coin offerings", text)
+        self.assertIn("raises a coin toward the natural rock shrine", text)
+        self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
+
     def test_tome_i_background_fingerprints_are_unique(self):
         fingerprints = [environment_fingerprint(page) for page in self.tome["pages"]]
         self.assertEqual(len(fingerprints), len(set(fingerprints)))
@@ -96,17 +115,38 @@ class EnvironmentCatalogTests(unittest.TestCase):
             ):
                 self.assertGreaterEqual(len(family[key]), 4, f"{family_id}:{key}")
 
-    def test_prompt_includes_family_variation_without_overriding_page_variant(self):
+    def test_v3_component_engine_scales_across_every_environment_family(self):
+        report = audit_environment_engine(ROOT)
+        self.assertTrue(report["pass"], report["errors"])
+        self.assertEqual(report["environment_families"], 8)
+        self.assertEqual(report["component_catalogs"], 8)
+        self.assertGreaterEqual(report["total_components"], 800)
+        self.assertGreaterEqual(report["overlay_count"], 8)
+
+    def test_prompt_uses_selected_palette_not_entire_component_library(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-03")
-        profile = resolve_environment_profile(page["environment_profile_id"])
-        variation = resolve_family_variation(profile["environment_family"])
-        self.assertTrue(variation["geometry_pool"])
         text = build_prompt(page)
-        self.assertIn("FAMILY GEOMETRY VARIATION POOL", text)
-        self.assertIn("FAMILY LANDMARK VARIATION POOL", text)
-        self.assertIn("FAMILY STORY-INTERACTION POOL", text)
-        self.assertIn("VARIATION PRIORITY", text)
+        self.assertIn("SELECTED SPATIAL ARCHETYPES", text)
+        self.assertIn("SELECTED PRIMARY SURFACES", text)
+        self.assertIn("SELECTED LIGHTING FEATURES", text)
+        self.assertIn("ENVIRONMENT PALETTE RULE", text)
+        self.assertNotIn("FAMILY GEOMETRY VARIATION POOL", text)
         self.assertIn(page["environment_variant"]["landmark"], text)
+
+    def test_trap_page_automatically_receives_hazard_and_trap_overlay(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertIn("hazards", palette["components"])
+        self.assertIn("lighting_features", palette["components"])
+        self.assertIn("ground_planes", palette["components"])
+        self.assertIn("trap", palette["contexts"])
+        self.assertTrue(any(item["overlay_id"] == "trap_zone" for item in palette["overlays"]))
+
+    def test_environment_component_assembly_is_deterministic_and_unique(self):
+        first = [assembly_fingerprint(page, ROOT) for page in self.tome["pages"]]
+        second = [assembly_fingerprint(page, ROOT) for page in self.tome["pages"]]
+        self.assertEqual(first, second)
+        self.assertEqual(len(first), len(set(first)))
 
     def test_prompt_contains_environment_variant_and_large_colorable_forms(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-47")

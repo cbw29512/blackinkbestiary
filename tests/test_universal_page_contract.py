@@ -48,6 +48,14 @@ class UniversalPageContractTests(unittest.TestCase):
         self.assertTrue(page["must_avoid"])
         self.assertEqual(page["_resolved"]["contract_id"], "black-ink-page-v1")
 
+    def test_canonical_catalog_names_override_stale_page_display_fields(self):
+        raw = self.minimal_page()
+        raw["monster_name"] = "Wrong Creature Name"
+        raw["habitat"] = "Generic Hallway"
+        page = resolve_page_spec(raw, ROOT)
+        self.assertEqual(page["monster_name"], "Kobold Warrior")
+        self.assertEqual(page["habitat"], "Trapped Stone Corridor")
+
     def test_minimal_recipe_generates_complete_prompt(self):
         text = build_prompt(self.minimal_page())
         self.assertIn("SUBJECT: Kobold Warrior", text)

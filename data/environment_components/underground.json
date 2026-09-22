@@ -1,0 +1,1410 @@
+{
+  "schema_version": 1,
+  "family_id": "underground",
+  "display_name": "Underground, Cave & Dungeon Component Library",
+  "purpose": "Deep reusable scenery library for dungeon, cave, mine, crypt, burrow, and subterranean pages.",
+  "context_rules": [
+    {
+      "terms": [
+        "corridor",
+        "passage",
+        "hall",
+        "gallery",
+        "labyrinth",
+        "antechamber",
+        "stair",
+        "gate",
+        "rotunda",
+        "vault",
+        "armory",
+        "prison",
+        "cistern",
+        "catacomb",
+        "crypt",
+        "chapel",
+        "pantry",
+        "barracks",
+        "war-room",
+        "service"
+      ],
+      "add": [
+        "built",
+        "dungeon"
+      ]
+    },
+    {
+      "terms": [
+        "cave",
+        "cavern",
+        "tube",
+        "grotto"
+      ],
+      "add": [
+        "natural",
+        "cave"
+      ]
+    },
+    {
+      "terms": [
+        "mine"
+      ],
+      "add": [
+        "mine",
+        "excavated"
+      ]
+    },
+    {
+      "terms": [
+        "burrow",
+        "earth"
+      ],
+      "add": [
+        "natural",
+        "earth",
+        "burrow"
+      ]
+    },
+    {
+      "terms": [
+        "trap",
+        "trapped"
+      ],
+      "add": [
+        "trap"
+      ]
+    },
+    {
+      "terms": [
+        "crypt",
+        "catacomb",
+        "burial",
+        "phylactery"
+      ],
+      "add": [
+        "burial"
+      ]
+    },
+    {
+      "terms": [
+        "chapel",
+        "shrine",
+        "phylactery"
+      ],
+      "add": [
+        "sacred"
+      ]
+    },
+    {
+      "terms": [
+        "armory",
+        "barracks",
+        "war-room",
+        "fortified"
+      ],
+      "add": [
+        "military"
+      ]
+    },
+    {
+      "terms": [
+        "treasure",
+        "vault",
+        "hoard"
+      ],
+      "add": [
+        "treasure"
+      ]
+    },
+    {
+      "terms": [
+        "web"
+      ],
+      "add": [
+        "webbed"
+      ]
+    },
+    {
+      "terms": [
+        "fungal",
+        "mushroom"
+      ],
+      "add": [
+        "fungal"
+      ]
+    },
+    {
+      "terms": [
+        "river",
+        "cistern",
+        "well",
+        "grate",
+        "sea-cave"
+      ],
+      "add": [
+        "water"
+      ]
+    },
+    {
+      "terms": [
+        "collapsed",
+        "refuse",
+        "abandoned"
+      ],
+      "add": [
+        "collapsed",
+        "ruin"
+      ]
+    },
+    {
+      "terms": [
+        "crystal"
+      ],
+      "add": [
+        "crystal"
+      ]
+    },
+    {
+      "terms": [
+        "basalt",
+        "lava"
+      ],
+      "add": [
+        "volcanic"
+      ]
+    },
+    {
+      "terms": [
+        "limestone"
+      ],
+      "add": [
+        "limestone"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Built dungeon pages need deliberate wall, floor, overhead, fixture, and depth design; stone blocks alone are not enough.",
+    "Torches, sconces, grates, doors, traps, racks, and furnishings are premium coloring objects, not filler.",
+    "Natural caves use geology rather than masonry and favor a few large formations.",
+    "Trap pages must show cause-and-effect with large readable mechanisms.",
+    "Use only a small subset of the library on one page; comprehensive library depth exists to create variety across many pages."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "low service passage with visible turn and close overhead clearance",
+        "contexts": [
+          "built",
+          "corridor",
+          "utility"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "straight fortified corridor opening into a side alcove",
+        "contexts": [
+          "built",
+          "corridor",
+          "military"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "arched dungeon hall with one broad open walking lane",
+        "contexts": [
+          "built",
+          "hall"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "circular chamber organized around a single central feature",
+        "contexts": [
+          "built",
+          "rotunda"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "split-level chamber with one ledge, stair, or raised platform",
+        "contexts": [
+          "built",
+          "chamber"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "collapsed transition with one readable surviving gap",
+        "contexts": [
+          "built",
+          "ruin",
+          "collapsed"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "tight prison or catacomb aisle with repeated large wall bays",
+        "contexts": [
+          "built",
+          "burial",
+          "prison"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "mine drift with rough-cut walls and heavy timber framing",
+        "contexts": [
+          "mine",
+          "excavated"
+        ]
+      },
+      {
+        "id": "spatial-09",
+        "text": "broad natural cavern shelf beside a deeper opening",
+        "contexts": [
+          "natural",
+          "cave"
+        ]
+      },
+      {
+        "id": "spatial-10",
+        "text": "rounded lava-tube passage with a strong curved ceiling",
+        "contexts": [
+          "natural",
+          "volcanic",
+          "cave"
+        ]
+      },
+      {
+        "id": "spatial-11",
+        "text": "packed-earth burrow widening into a simple chamber",
+        "contexts": [
+          "natural",
+          "burrow",
+          "earth"
+        ]
+      },
+      {
+        "id": "spatial-12",
+        "text": "river or cistern passage organized around one broad water channel",
+        "contexts": [
+          "water",
+          "built",
+          "natural"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "large dressed-stone blocks with restrained irregular joints",
+        "contexts": [
+          "built",
+          "dungeon"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "rough-cut masonry with a few broad chipped edges",
+        "contexts": [
+          "built",
+          "utility"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "oversized ancient masonry with worn block faces",
+        "contexts": [
+          "built",
+          "ancient"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "damp fitted stone with sparse water staining",
+        "contexts": [
+          "built",
+          "water"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "heavy burial stone with broad recessed panels",
+        "contexts": [
+          "built",
+          "burial"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "rough excavated rock showing broad tool-cut planes",
+        "contexts": [
+          "mine",
+          "excavated"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "rounded limestone walls with a few smooth erosion bands",
+        "contexts": [
+          "natural",
+          "limestone",
+          "cave"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "ropy basalt wall bands with broad volcanic forms",
+        "contexts": [
+          "natural",
+          "volcanic",
+          "cave"
+        ]
+      },
+      {
+        "id": "surface-09",
+        "text": "stacked angular boulders forming irregular wall planes",
+        "contexts": [
+          "natural",
+          "boulder",
+          "cave"
+        ]
+      },
+      {
+        "id": "surface-10",
+        "text": "packed earth walls with large root impressions",
+        "contexts": [
+          "natural",
+          "burrow",
+          "earth"
+        ]
+      },
+      {
+        "id": "surface-11",
+        "text": "broad fungal-damp rock surfaces with a few shelf forms",
+        "contexts": [
+          "natural",
+          "fungal",
+          "cave"
+        ]
+      },
+      {
+        "id": "surface-12",
+        "text": "faceted mineral rock faces with only a few large crystal interruptions",
+        "contexts": [
+          "natural",
+          "crystal",
+          "cave"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "broad flagstone slabs aligned to corridor perspective",
+        "contexts": [
+          "built",
+          "dungeon",
+          "corridor"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "large trap-integrated floor slabs with one readable mechanism zone",
+        "contexts": [
+          "built",
+          "trap"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "worn drill or guard floor with broad stone panels",
+        "contexts": [
+          "built",
+          "military"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "wide stone gutter or drainage channel crossing simple slabs",
+        "contexts": [
+          "built",
+          "water",
+          "utility"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "heavy funerary floor slabs with sparse joints",
+        "contexts": [
+          "built",
+          "burial"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "radial stone floor wedges around a central chamber feature",
+        "contexts": [
+          "built",
+          "rotunda"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "rough cave floor with a few broad shelves instead of pebble texture",
+        "contexts": [
+          "natural",
+          "cave"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "large basalt plates with smooth-to-ropy transitions",
+        "contexts": [
+          "natural",
+          "volcanic"
+        ]
+      },
+      {
+        "id": "ground-09",
+        "text": "packed soil floor with one mound, furrow, or excavation break",
+        "contexts": [
+          "natural",
+          "earth",
+          "burrow"
+        ]
+      },
+      {
+        "id": "ground-10",
+        "text": "mine floor with two simple rail lines or broad timber sleepers",
+        "contexts": [
+          "mine",
+          "excavated"
+        ]
+      },
+      {
+        "id": "ground-11",
+        "text": "shallow water edge with a clean stone or mud bank",
+        "contexts": [
+          "water"
+        ]
+      },
+      {
+        "id": "ground-12",
+        "text": "large stair treads or descending step bands",
+        "contexts": [
+          "built",
+          "stair"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "low stone lintels emphasizing cramped dungeon scale",
+        "contexts": [
+          "built",
+          "corridor",
+          "utility"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "heavy timber ceiling beams spaced broadly apart",
+        "contexts": [
+          "built",
+          "utility",
+          "mine"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "simple barrel-vaulted stone ceiling",
+        "contexts": [
+          "built",
+          "hall",
+          "burial"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "arched ceiling ribs with large clean spans between them",
+        "contexts": [
+          "built",
+          "sacred",
+          "hall"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "single ceiling breach with a readable ledge above",
+        "contexts": [
+          "built",
+          "collapsed",
+          "ruin"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "large natural cave arch with open rock bands",
+        "contexts": [
+          "natural",
+          "cave"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "stacked boulder ceiling forming one tight squeeze",
+        "contexts": [
+          "natural",
+          "boulder"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "large root crossing through packed earth overhead",
+        "contexts": [
+          "natural",
+          "earth",
+          "burrow"
+        ]
+      },
+      {
+        "id": "overhead-09",
+        "text": "open shaft, well, or skylight above one clear landing",
+        "contexts": [
+          "shaft",
+          "built",
+          "natural"
+        ]
+      },
+      {
+        "id": "overhead-10",
+        "text": "two or three broad web sheets spanning corners or arches",
+        "contexts": [
+          "webbed"
+        ]
+      },
+      {
+        "id": "overhead-11",
+        "text": "few oversized fungal shelves or caps breaking the ceiling line",
+        "contexts": [
+          "fungal",
+          "natural"
+        ]
+      },
+      {
+        "id": "overhead-12",
+        "text": "mineral or crystal overhang using a few large facets",
+        "contexts": [
+          "crystal",
+          "natural"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "simple iron torch sconce with a strong bracket silhouette",
+        "contexts": [
+          "built",
+          "universal"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "caged wall lantern with broad metal frame and clear glass panels",
+        "contexts": [
+          "built",
+          "military",
+          "utility"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "heavy ring-mounted torch beside a doorway or passage",
+        "contexts": [
+          "built",
+          "prison",
+          "utility"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "small wall brazier or fire bowl mounted in a stone niche",
+        "contexts": [
+          "built",
+          "sacred"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "pair of restrained shrine candle stands with large simple forms",
+        "contexts": [
+          "built",
+          "sacred",
+          "burial"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "single hanging lantern or chain lantern at a work area",
+        "contexts": [
+          "built",
+          "mine",
+          "utility"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "light entering through a shaft or ceiling breach as open white space",
+        "contexts": [
+          "shaft",
+          "collapsed",
+          "natural"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "large glowing fungal cap or shelf used as one soft light landmark",
+        "contexts": [
+          "fungal",
+          "natural"
+        ]
+      },
+      {
+        "id": "lighting-09",
+        "text": "crystal face catching light without adding sparkle clutter",
+        "contexts": [
+          "crystal",
+          "natural"
+        ]
+      },
+      {
+        "id": "lighting-10",
+        "text": "reflected light from a broad pool, cistern, or underground river",
+        "contexts": [
+          "water"
+        ]
+      },
+      {
+        "id": "lighting-11",
+        "text": "dark tunnel mouth framed by one nearby practical light source",
+        "contexts": [
+          "universal"
+        ]
+      },
+      {
+        "id": "lighting-12",
+        "text": "soot-marked wall torch zone with one sturdy fantasy-era fixture",
+        "contexts": [
+          "built",
+          "dungeon"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "heavy arched doorway with deep stone jambs",
+        "contexts": [
+          "built",
+          "dungeon"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "broad portcullis or barred gate with simple vertical bars",
+        "contexts": [
+          "built",
+          "military"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "barred utility or prison opening set into thick masonry",
+        "contexts": [
+          "built",
+          "prison",
+          "utility"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "reinforced timber-and-stone support frame",
+        "contexts": [
+          "mine",
+          "built"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "large side alcove or service niche with a clear purpose",
+        "contexts": [
+          "built",
+          "utility"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "single support pillar or central newel with broad faces",
+        "contexts": [
+          "built",
+          "rotunda",
+          "stair"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "wide drain grate or floor channel integrated into masonry",
+        "contexts": [
+          "built",
+          "water",
+          "utility"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "stone well rim, cistern edge, or circular shaft opening",
+        "contexts": [
+          "built",
+          "water",
+          "shaft"
+        ]
+      },
+      {
+        "id": "structure-09",
+        "text": "simple bridge, ledge, or threshold over a visible drop",
+        "contexts": [
+          "built",
+          "natural",
+          "shaft"
+        ]
+      },
+      {
+        "id": "structure-10",
+        "text": "broken wall breach framed by a few massive surviving blocks",
+        "contexts": [
+          "built",
+          "collapsed",
+          "ruin"
+        ]
+      },
+      {
+        "id": "structure-11",
+        "text": "rough timber shelf, rack, or work frame attached to stone",
+        "contexts": [
+          "built",
+          "utility",
+          "storage"
+        ]
+      },
+      {
+        "id": "structure-12",
+        "text": "large natural rock arch or squeeze opening",
+        "contexts": [
+          "natural",
+          "cave",
+          "burrow"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "open pit trap with a broad stone rim and large readable spikes",
+        "contexts": [
+          "trap",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "stone altar or shrine plinth with one large symbolic shape",
+        "contexts": [
+          "sacred",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "single sarcophagus or monumental coffin",
+        "contexts": [
+          "burial",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "large weapon or shield rack with only a few broad silhouettes",
+        "contexts": [
+          "military",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "wide cistern basin or underground pool edge",
+        "contexts": [
+          "water",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "large treasure chest or secure reliquary on a simple plinth",
+        "contexts": [
+          "treasure",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "central map or work table with a broad uncluttered top",
+        "contexts": [
+          "military",
+          "utility"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "improvised throne or raised stone seat",
+        "contexts": [
+          "lair",
+          "built",
+          "natural"
+        ]
+      },
+      {
+        "id": "landmark-09",
+        "text": "single statue, idol, or display plinth",
+        "contexts": [
+          "sacred",
+          "gallery",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-10",
+        "text": "mine cart, hoist frame, or large ore bin",
+        "contexts": [
+          "mine",
+          "excavated"
+        ]
+      },
+      {
+        "id": "landmark-11",
+        "text": "giant root or root arch breaking through stone or earth",
+        "contexts": [
+          "natural",
+          "earth"
+        ]
+      },
+      {
+        "id": "landmark-12",
+        "text": "one large crystal formation or mineral column",
+        "contexts": [
+          "crystal",
+          "natural"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "two or three large sacks, crocks, or storage jars grouped together",
+        "contexts": [
+          "storage",
+          "utility",
+          "built"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "one heavy chain, wall ring, or anchor point",
+        "contexts": [
+          "built",
+          "prison",
+          "utility"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "two large shields or armor pieces displayed clearly",
+        "contexts": [
+          "military",
+          "built"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "simple bunk, bench, or stone pallet",
+        "contexts": [
+          "barracks",
+          "prison",
+          "built"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "one crate-and-barrel group with broad panels and hoops",
+        "contexts": [
+          "storage",
+          "built"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "single broken cart, wheel, or timber beam",
+        "contexts": [
+          "ruin",
+          "mine",
+          "built"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "one rope, ladder, or pulley element with a clear silhouette",
+        "contexts": [
+          "shaft",
+          "mine",
+          "utility"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one broad web sheet attached to a large arch or corner",
+        "contexts": [
+          "webbed"
+        ]
+      },
+      {
+        "id": "secondary-09",
+        "text": "two or three oversized mushrooms with large caps",
+        "contexts": [
+          "fungal",
+          "natural"
+        ]
+      },
+      {
+        "id": "secondary-10",
+        "text": "few large rubble blocks gathered at one damage point",
+        "contexts": [
+          "collapsed",
+          "ruin"
+        ]
+      },
+      {
+        "id": "secondary-11",
+        "text": "single reliquary, urn, or funerary container",
+        "contexts": [
+          "burial",
+          "sacred"
+        ]
+      },
+      {
+        "id": "secondary-12",
+        "text": "simple trough, feed bowl, or utility work object",
+        "contexts": [
+          "utility",
+          "lair"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "visible tripwire crossing the path into one large pit or trigger zone",
+        "contexts": [
+          "trap",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "large pressure plate linked visually to one nearby hazard",
+        "contexts": [
+          "trap",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "broad spiked pit with simple repeated spike forms",
+        "contexts": [
+          "trap",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "heavy dropping portcullis or gate channel above the path",
+        "contexts": [
+          "trap",
+          "military",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "single falling-block or collapsing-ceiling trigger zone",
+        "contexts": [
+          "trap",
+          "collapsed",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "large web snare stretched between obvious anchor points",
+        "contexts": [
+          "trap",
+          "webbed"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "unstable ledge or broken bridge edge over a clear drop",
+        "contexts": [
+          "shaft",
+          "ruin",
+          "natural"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "flood or sluice grate with one obvious water-release channel",
+        "contexts": [
+          "trap",
+          "water",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-09",
+        "text": "loose rubble choke point with a clear unstable mass",
+        "contexts": [
+          "collapsed",
+          "natural",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-10",
+        "text": "deep shaft, well opening, or stair drop protected by a broad rim",
+        "contexts": [
+          "shaft",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-11",
+        "text": "large swinging timber or stone obstacle with a simple arc path",
+        "contexts": [
+          "trap",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-12",
+        "text": "single dangerous crack, fissure, or lava edge used as terrain hazard",
+        "contexts": [
+          "natural",
+          "volcanic"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "corridor makes a hard turn behind the monster",
+        "contexts": [
+          "built",
+          "corridor"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "side arch reveals a second chamber without clutter",
+        "contexts": [
+          "built",
+          "hall"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "broad stair descends into a darker lower level",
+        "contexts": [
+          "built",
+          "stair"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "distant gate or doorway closes the perspective line",
+        "contexts": [
+          "built",
+          "corridor"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "forked passage or T-intersection creates a clear choice of paths",
+        "contexts": [
+          "built",
+          "labyrinth"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "overhead opening or shaft creates vertical depth",
+        "contexts": [
+          "shaft",
+          "built",
+          "natural"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "large cell bars reveal a deeper recess behind them",
+        "contexts": [
+          "built",
+          "prison"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "chamber doorway opens into a visibly larger room",
+        "contexts": [
+          "built",
+          "chamber"
+        ]
+      },
+      {
+        "id": "depth-09",
+        "text": "drop shaft or well mouth shows a deep open center",
+        "contexts": [
+          "shaft"
+        ]
+      },
+      {
+        "id": "depth-10",
+        "text": "short bridge or ledge crosses a visible lower space",
+        "contexts": [
+          "shaft",
+          "natural",
+          "built"
+        ]
+      },
+      {
+        "id": "depth-11",
+        "text": "cave mouth narrows into a distant dark opening",
+        "contexts": [
+          "natural",
+          "cave"
+        ]
+      },
+      {
+        "id": "depth-12",
+        "text": "background alcove or niche provides one secondary depth layer",
+        "contexts": [
+          "universal"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few broad damp streaks or drip marks on stone",
+        "contexts": [
+          "water",
+          "built",
+          "cave"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "one large root intrusion crossing a wall or ceiling",
+        "contexts": [
+          "earth",
+          "natural",
+          "ruin"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "single dust shaft or open white beam from a breach",
+        "contexts": [
+          "collapsed",
+          "shaft"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "one broad cobweb swath in an unused corner",
+        "contexts": [
+          "webbed",
+          "abandoned"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "two or three oversized fungal forms at one edge",
+        "contexts": [
+          "fungal"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "broad mineral band or flowstone patch",
+        "contexts": [
+          "limestone",
+          "natural"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "small soot halo around one torch fixture",
+        "contexts": [
+          "built",
+          "dungeon"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "single straw, bedding, or refuse mass drawn as a broad shape",
+        "contexts": [
+          "utility",
+          "lair"
+        ]
+      },
+      {
+        "id": "atmosphere-09",
+        "text": "one restrained moss or lichen patch on an old damp surface",
+        "contexts": [
+          "ancient",
+          "water"
+        ]
+      },
+      {
+        "id": "atmosphere-10",
+        "text": "few simple water ripples around a pool or cistern edge",
+        "contexts": [
+          "water"
+        ]
+      },
+      {
+        "id": "atmosphere-11",
+        "text": "broad broken edge and sparse dust around one collapse zone",
+        "contexts": [
+          "collapsed",
+          "ruin"
+        ]
+      },
+      {
+        "id": "atmosphere-12",
+        "text": "clean negative-space darkness at a tunnel mouth rather than hatch shading",
+        "contexts": [
+          "universal"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "monster uses a doorway, corner, or alcove as believable cover",
+        "contexts": [
+          "built",
+          "corridor"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "monster touches, tests, triggers, or repairs one large trap element",
+        "contexts": [
+          "trap"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "monster carries or drags one large sack, chest, relic, or tool through the space",
+        "contexts": [
+          "utility",
+          "treasure",
+          "lair"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "monster guards a gate, shrine, chest, stair, bridge, or narrow approach",
+        "contexts": [
+          "universal"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "monster peers through bars, around a turn, or through a breach",
+        "contexts": [
+          "built",
+          "prison",
+          "ruin"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "monster climbs or descends a broad stair, ladder, ledge, or shaft landing",
+        "contexts": [
+          "stair",
+          "shaft"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "monster feeds, nests, rests, or stores objects at one clear lair feature",
+        "contexts": [
+          "lair"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "monster searches a rack, crate, shelf, altar, or worktable",
+        "contexts": [
+          "utility",
+          "storage",
+          "sacred"
+        ]
+      },
+      {
+        "id": "interaction-09",
+        "text": "monster emerges from a burrow, cave mouth, drain, doorway, or collapsed gap",
+        "contexts": [
+          "natural",
+          "burrow",
+          "ruin"
+        ]
+      },
+      {
+        "id": "interaction-10",
+        "text": "monster occupies the edge of a pool, river, cistern, or drain channel",
+        "contexts": [
+          "water"
+        ]
+      },
+      {
+        "id": "interaction-11",
+        "text": "monster blocks a chokepoint while remaining fully grounded and readable",
+        "contexts": [
+          "corridor",
+          "military"
+        ]
+      },
+      {
+        "id": "interaction-12",
+        "text": "monster interacts with one large environmental feature that explains the page story",
+        "contexts": [
+          "universal"
+        ]
+      }
+    ]
+  }
+}

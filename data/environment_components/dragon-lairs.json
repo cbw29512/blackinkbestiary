@@ -1,0 +1,862 @@
+{
+  "schema_version": 1,
+  "family_id": "dragon-lairs",
+  "display_name": "Dragon Lair Environment Component Library",
+  "purpose": "Reusable volcanic, cliff, hoard-cavern, swamp, ruin, nest, perch, and thermal-lair scenery.",
+  "context_rules": [
+    {
+      "terms": [
+        "volcanic",
+        "caldera"
+      ],
+      "add": [
+        "volcanic",
+        "caldera"
+      ]
+    },
+    {
+      "terms": [
+        "cliff",
+        "nest"
+      ],
+      "add": [
+        "cliff",
+        "elevated",
+        "lair"
+      ]
+    },
+    {
+      "terms": [
+        "hoard",
+        "cavern"
+      ],
+      "add": [
+        "hoard",
+        "cave",
+        "treasure"
+      ]
+    },
+    {
+      "terms": [
+        "swamp"
+      ],
+      "add": [
+        "swamp",
+        "water",
+        "lair"
+      ]
+    },
+    {
+      "terms": [
+        "ruin",
+        "stronghold"
+      ],
+      "add": [
+        "ruin",
+        "built",
+        "lair"
+      ]
+    },
+    {
+      "terms": [
+        "thermal",
+        "mineral"
+      ],
+      "add": [
+        "volcanic",
+        "water",
+        "lair"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Dragon scale is communicated by large environmental landmarks, not tiny scenery.",
+    "Hoard treasure is drawn as broad masses and containers, never coin-by-coin texture.",
+    "Lair identity should show repeated creature use through one clear nest, perch, hoard, relic, or resting feature.",
+    "Architecture and geology support the dragon silhouette instead of competing with it."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "volcanic basin organized around one broad lava channel",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "high cliff shelf with a clear drop and one dominant perch",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "vaulted hoard cavern with an open central floor",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "shallow swamp island among large root arches",
+        "contexts": [
+          "swamp",
+          "water"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "rock amphitheater with one elevated resting shelf",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "deep cavern threshold with a monumental arch",
+        "contexts": [
+          "cave",
+          "lair"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "ruined stronghold chamber adapted as a dragon lair",
+        "contexts": [
+          "ruin",
+          "built",
+          "lair"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "thermal or mineral shelf with one broad pool",
+        "contexts": [
+          "volcanic",
+          "water",
+          "lair"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "broad volcanic rock plates with a few large cracks",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "weathered cliff stone with strong ledge planes",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "large cavern rock faces with restrained mineral bands",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "mud, root, and broad wet-stone surfaces",
+        "contexts": [
+          "swamp",
+          "water"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "layered amphitheater rock with simple terraces",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "massive cave arch surfaces with few large formations",
+        "contexts": [
+          "cave",
+          "lair"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "ruined fortress masonry with broad broken faces",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "mineral shelf stone around one broad thermal pool",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "large volcanic plates beside one lava channel",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "cliff shelf with a broad resting or launch area",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "open cavern floor around a single hoard mass",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "swamp island with broad mud and root forms",
+        "contexts": [
+          "swamp",
+          "water"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "rock terrace with one nest or resting hollow",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "cave threshold floor leading toward a deep chamber",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "ruined hall slabs with only a few major debris blocks",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "thermal shelf with one clean pool edge",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "caldera wall or volcanic arch framing the upper page",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "open cliff sky used as strong negative space",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "high cavern vault with a few broad rock ribs",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "large swamp roots and branches framing the island",
+        "contexts": [
+          "swamp"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "rock overhang above a resting shelf",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "monumental cave arch spanning the lair threshold",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "broken stronghold vault or beam remnant",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "steam opening or rock overhang near a thermal pool",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "lava glow from one broad channel without gray shading",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "bright open sky beyond a cliff perch",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "light entering from a distant cavern mouth",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "reflected light from swamp water",
+        "contexts": [
+          "swamp",
+          "water"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "sunlight across a rock amphitheater opening",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "daylight at a cave threshold",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "light through a ruined stronghold breach",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "steam-lit or mineral-bright pool edge kept simple",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "large volcanic arch or ledge",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "stone perch or cliff lip",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "vaulted cavern opening or rock pillar",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "giant root arch or fallen swamp trunk",
+        "contexts": [
+          "swamp"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "broad nest bowl or stone resting hollow",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "monumental cavern gate or threshold",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "broken pillar, gate, or fortress wall",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "mineral terrace or rock basin around a pool",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "broad nest bowl or sleeping hollow",
+        "contexts": [
+          "lair",
+          "rock"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "one large treasure mound or chest",
+        "contexts": [
+          "hoard",
+          "treasure"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "lava channel or vent opening",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "massive cliff edge or stone perch",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "giant root arch or fallen swamp log",
+        "contexts": [
+          "swamp",
+          "water"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "broken pillar, arch, or ruined gate",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "single enormous bone or relic shape",
+        "contexts": [
+          "lair",
+          "hoard"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "mineral pool, crystal shelf, or volcanic plate",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "one broad treasure pile rather than individual coins",
+        "contexts": [
+          "hoard",
+          "treasure"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "one chest, shield, banner, or large relic",
+        "contexts": [
+          "hoard",
+          "ruin"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "one broken pillar or masonry block",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "one nest-material mass made of broad branches or hides",
+        "contexts": [
+          "lair",
+          "nest"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "one large bone or horn",
+        "contexts": [
+          "lair"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "one root, log, or reed island",
+        "contexts": [
+          "swamp",
+          "water"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "one volcanic rock plate or vent",
+        "contexts": [
+          "volcanic"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one simple chain, gate fragment, or architectural remnant",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "broad lava channel with a clear safe edge",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "cliff drop beside a stable perch",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "unstable hoard shelf or rock ledge with a few large falling blocks",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "deep swamp pool or soft mud edge with a clear boundary",
+        "contexts": [
+          "swamp",
+          "water"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "broken rock shelf with one visible fissure",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "narrow cave threshold beside a deep crevice",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "collapsed stronghold wall with a few massive stones",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "hot spring or vent basin with one obvious dangerous edge",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "caldera channel curves toward a distant vent wall",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "cliff shelf overlooks a lower valley or sea of clouds",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "hoard cavern opens toward a deeper vault",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "swamp roots layer foreground and background islands",
+        "contexts": [
+          "swamp"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "rock amphitheater terraces recede behind the perch",
+        "contexts": [
+          "rock",
+          "lair"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "cave threshold frames a deeper chamber",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "ruined stronghold doorway reveals another broken hall",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "thermal shelf steps down toward a lower pool",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few broad heat-wave or steam shapes near lava",
+        "contexts": [
+          "volcanic",
+          "caldera"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "simple cloud or wind bands around a cliff edge",
+        "contexts": [
+          "cliff"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "one mineral or crystal patch on a cavern wall",
+        "contexts": [
+          "hoard",
+          "cave"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "few reeds, moss masses, or water ripples in swamp space",
+        "contexts": [
+          "swamp"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "single soot or scorch zone near a resting shelf",
+        "contexts": [
+          "lair",
+          "rock"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "clean dark cave opening used as negative space",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "sparse dust around one ruined wall break",
+        "contexts": [
+          "ruin",
+          "built"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "single steam plume at a thermal pool",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "dragon curls around, guards, or reaches toward one hoard landmark",
+        "contexts": [
+          "hoard",
+          "treasure"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "dragon braces on a cliff, rock shelf, or ruined platform",
+        "contexts": [
+          "cliff",
+          "rock",
+          "ruin"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "dragon steps over or beside one broad lava or water channel",
+        "contexts": [
+          "volcanic",
+          "water"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "dragon emerges through a cavern, gate, or root-arch opening",
+        "contexts": [
+          "cave",
+          "ruin",
+          "swamp"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "dragon settles into or rises from a nest bowl or sleeping hollow",
+        "contexts": [
+          "lair",
+          "nest"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "dragon grips or examines one large relic",
+        "contexts": [
+          "hoard",
+          "lair"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "dragon occupies a dominant perch overlooking open space",
+        "contexts": [
+          "cliff",
+          "elevated"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "dragon moves between a large structural cue and a clear lair landmark",
+        "contexts": [
+          "lair",
+          "universal"
+        ]
+      }
+    ]
+  }
+}

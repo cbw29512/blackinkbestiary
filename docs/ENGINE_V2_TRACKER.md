@@ -246,3 +246,49 @@ The local Studio now exposes the isolated Golden Five calibration lane directly.
 - Golden Five UI/controller/service code is kept modular under the project's 150-line ceiling for new modules
 
 The production page queue remains independent and cannot be advanced by calibration actions.
+
+
+## 2026-09-22 Environment Engine V3 — Hundreds-of-Monsters Scale
+
+The environment system has been promoted from broad family variation pools to a component-library architecture intended to support hundreds of monsters without bloating monster JSON.
+
+New hierarchy:
+
+**environment family -> named profile -> reusable component library -> reusable overlays -> tiny page recipe**
+
+Current reusable environment inventory:
+
+- 8 environment-family component catalogs
+- 12 required component groups per family
+- 816 reusable environment components total
+- 144 underground / dungeon / cave components
+- 96 components in each of the other seven families
+- 11 reusable cross-family overlays
+
+Required component groups now cover spatial archetypes, surfaces, ground, overheads, lighting, structures, landmarks, secondary features, hazards, depth, atmosphere, and interaction patterns.
+
+Generation receives only a selected compatible palette, not the full library. This keeps prompts focused while letting the library become very large.
+
+Cross-family overlays currently include lair, trap zone, ruin, sacred, military, burial, treasure, fungal, aquatic, weathered, and settlement. Scene archetypes may activate overlays automatically.
+
+### Ownership rule
+
+Monster files may describe habitat compatibility, but reusable scenery belongs exclusively to the environment engine.
+
+If another creature could use the same wall, floor, torch, trap, furnishing, ruin, vegetation, reef feature, burial dressing, lair feature, or depth cue, it must not be copied into monster JSON.
+
+### Authority rule
+
+Once a page selects an environment profile, that profile overrides all general monster habitat preferences.
+
+The Kobold Shrine-Keeper calibration exposed this conflict: attractive dungeon-corridor art was still a failure because I-02 requires a low limestone cave shrine with its specific offering story. The prompt no longer injects family environment-fit text as scene-generation authority.
+
+Canonical monster and environment catalog names now override stale display strings left in legacy page recipes.
+
+### Environment quality rule
+
+Walls, floors, ceilings, torches, traps, gates, roots, coral, tombs, furniture, ruins, pools, and other environment elements are premium coloring objects, not filler.
+
+Environment variety must come from stronger structure, material design, fixtures, depth, and composition—not tiny texture.
+
+See `docs/ENVIRONMENT_ENGINE_V3.md` for the persistent architecture specification.

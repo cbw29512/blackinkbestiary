@@ -61,7 +61,6 @@ def _canonical_sections(spec: dict | None) -> list[str]:
         f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}".strip(),
         f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}".strip(),
         _items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style")),
-        _items("CANONICAL ENVIRONMENT FIT", scene.get("environment_fit")),
         _items("VARIANT TRAITS", spec.get("variant_traits")),
         _items("CANONICAL GEAR", visual.get("signature_gear")),
         _items("CANONICAL ATTITUDE", visual.get("attitude")),
@@ -79,6 +78,11 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         "Create ONE printable fantasy monster coloring-book page.",
         f"SUBJECT: {page['monster_name']}.",
         *_canonical_sections(spec),
+        (
+            "PAGE ENVIRONMENT AUTHORITY: the named HABITAT and resolved environment profile below are mandatory and "
+            "override all general creature habitat preferences. Creature-family environment_fit data is planning-only "
+            "and must never replace, broaden, or reinterpret this selected page environment."
+        ),
         f"HABITAT: {page['habitat']}.",
         *environment_prompt_sections(page, ROOT),
         f"MOMENT: {page['moment']}.",
@@ -125,6 +129,17 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(_items("LATEST HUMAN QUICK CHANGES", tags))
             sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
 
+    variant = page.get("environment_variant") or {}
+    required = "; ".join(str(item) for item in page.get("must_include") or [])
+    sections.append(
+        "PAGE RECIPE LOCK — NON-NEGOTIABLE: "
+        f"environment={page['habitat']}; "
+        f"moment={page['moment']}; "
+        f"landmark={variant.get('landmark', '')}; "
+        f"interaction={variant.get('interaction', '')}; "
+        f"required elements={required}. "
+        "Universal family/component libraries may enrich these requirements but may not replace them."
+    )
     sections.append(
         "Final test: COLORABILITY IS THE GOVERNING CONSTRAINT. The page must first be inviting and satisfying to color, "
         "with broad open regions, clean line hierarchy, and no fiddly density. Under that constraint, the monster must be "
