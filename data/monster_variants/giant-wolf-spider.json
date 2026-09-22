@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "giant-wolf-spider",
+  "family_profile": "spider",
+  "display_name": "Giant Wolf Spider",
+  "size": "medium",
+  "creature_type": "giant arachnid",
+  "visual_identity": {
+    "core_identity": "A large ground-hunting wolf spider adapted for ambush rather than web-building, with a stockier body and prominent forward-facing eyes.",
+    "silhouette": "Low muscular spider body, sturdy eight legs, compact abdomen, flattened stalking posture.",
+    "head_features": "Broad cephalothorax with several eyes including a prominent forward-facing pair and short powerful fangs.",
+    "body_shape": "Stockier than a web spider, with thick jointed legs and compact abdomen built for sudden movement.",
+    "surface": "Sparse coarse hair tufts on legs and body; no dense furry mass.",
+    "must_keep": [
+      "prominent forward eyes",
+      "stocky hunting-spider body",
+      "flattened ambush pose",
+      "minimal web use"
+    ],
+    "must_avoid": [
+      "giant orb web",
+      "wolf mammal features",
+      "fluffy fur overload",
+      "oversized abdomen"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Low to the ground on eight sturdy legs with clear floor or rock contact.",
+    "behavior_style": [
+      "stalking along a floor edge",
+      "waiting beside rubble",
+      "crossing a rocky shelf",
+      "ambushing from a low crevice"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as hunting spider rather than web spider",
+    "no mammal features appear",
+    "eight legs remain countable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "wolf_mammal_drift",
+      "symptom": "wolf wording creates muzzle, ears, paws, or fur mass",
+      "correction": "remove all mammal features and restore true arachnid anatomy"
+    },
+    {
+      "id": "orbweb_drift",
+      "symptom": "large web becomes main scene",
+      "correction": "keep web use minimal and emphasize ground-hunting posture"
+    }
+  ]
+}
