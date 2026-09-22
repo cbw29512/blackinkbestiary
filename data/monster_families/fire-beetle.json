@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "fire-beetle",
+  "display_name": "Fire Beetle",
+  "taxonomy": {
+    "family": "fire beetle",
+    "creature_type": "giant insect",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "An oversized beetle with a heavy oval shell and prominent luminous gland structures that remain recognizable in black-and-white line art.",
+    "silhouette": "Low oval beetle body, domed wing cases, six stout legs, short antennae, broad head.",
+    "head_features": "Compact insect head with mandibles, short antennae, and distinct rounded gland bulges near the head.",
+    "body_shape": "Three-part insect body with hard domed elytra, six legs, and compact abdomen.",
+    "limb_structure": "Exactly six insect legs attached to the thorax; no spider leg count, mammal paws, or humanoid limbs.",
+    "surface": "Large smooth armor plates with restrained segment lines; gland areas outlined clearly rather than shaded.",
+    "must_keep": [
+      "six insect legs",
+      "domed beetle shell",
+      "visible luminous gland shapes",
+      "mandibles",
+      "low beetle posture"
+    ],
+    "must_avoid": [
+      "spider anatomy",
+      "four legs",
+      "dragon features",
+      "glowing text effects",
+      "dense shell texture",
+      "cute ladybug styling"
+    ]
+  },
+  "accuracy_checks": [
+    "reads immediately as giant beetle",
+    "six legs are clear",
+    "gland structures are visible",
+    "shell remains colorable",
+    "no extra fantasy anatomy obscures beetle identity"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "spider_drift",
+      "symptom": "beetle gains eight legs",
+      "correction": "restore exactly six stout insect legs and domed elytra"
+    },
+    {
+      "id": "cute_beetle_drift",
+      "symptom": "body becomes ladybug-like or mascot-like",
+      "correction": "restore heavy mandibles, broad head, and predatory beetle proportions"
+    },
+    {
+      "id": "glow_clutter",
+      "symptom": "light effect becomes shading or decorative rays",
+      "correction": "show gland shape through outline and keep surrounding page open"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Small but oversized insect, large enough for shell and legs to read clearly against mine or tunnel features.",
+    "natural_posture": "Low and fully supported on six legs while foraging or climbing.",
+    "behavior_style": [
+      "foraging near ore or stone",
+      "crossing a mine floor",
+      "climbing a broad rock face",
+      "pausing beside a large tunnel feature"
+    ],
+    "environment_fit": [
+      "abandoned mines",
+      "dark tunnels",
+      "ore chambers and rocky underground workspaces"
+    ]
+  }
+}
