@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "black-pudding",
+  "family_profile": "ooze",
+  "display_name": "Black Pudding",
+  "size": "large",
+  "creature_type": "ooze",
+  "visual_identity": {
+    "core_identity": "A heavy corrosive dungeon ooze that flows as an irregular low mass and destroys metal on contact.",
+    "silhouette": "Broad spreading puddle-like mass with lobed edges and sagging drips around obstacles.",
+    "body_shape": "Amorphous viscous mass with no fixed anatomy; shape conforms around bars and floor openings.",
+    "surface": "Dark-associated ooze represented by strong outer contour and sparse internal lines, never solid black fill.",
+    "must_keep": [
+      "amorphous ooze shape",
+      "corroding metal contact",
+      "dripping edges",
+      "low spreading mass"
+    ],
+    "must_avoid": [
+      "solid black page area",
+      "dense shading",
+      "cute slime face"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Low spreading mass fully supported by floor, grate, wall base, or other contacted architecture.",
+    "behavior_style": [
+      "flowing around metal",
+      "pooling through a grate",
+      "spreading beneath a doorway",
+      "corroding one large metal object"
+    ]
+  },
+  "accuracy_checks": [
+    "no face appears",
+    "metal contact is readable",
+    "interior remains colorable despite the name black pudding"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "black_fill_drift",
+      "symptom": "ooze becomes solid black shape",
+      "correction": "use outline-driven white interior with sparse contour marks"
+    },
+    {
+      "id": "tentacle_drift",
+      "symptom": "ooze becomes tentacle monster",
+      "correction": "restore broad low viscous mass with simple lobed edges"
+    }
+  ]
+}
