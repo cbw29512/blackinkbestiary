@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "lich",
+  "display_name": "Lich",
+  "taxonomy": {
+    "family": "lich",
+    "creature_type": "undead spellcaster",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "An ancient skeletal spellcaster preserved by forbidden magic, combining unmistakable undead anatomy with deliberate arcane intelligence.",
+    "silhouette": "Tall robed skeletal humanoid with narrow shoulders, exposed skull and hands, and simple vertical robe shapes.",
+    "head_features": "Bare or partly hooded skull with deep empty sockets or small magical pinpoints, intact jaw, and severe ancient profile.",
+    "body_shape": "Dry skeletal humanoid frame under decayed layered robes with bony hands clearly visible.",
+    "surface": "Clean bone planes and torn fabric edges; no gore, slime, or dense decay.",
+    "signature_gear": [
+      "simple arcane staff or wand if unobtrusive",
+      "few ancient jewelry or robe fasteners"
+    ],
+    "attitude": [
+      "commanding",
+      "cold",
+      "intelligent",
+      "ancient"
+    ],
+    "must_keep": [
+      "skeletal skull",
+      "bony hands",
+      "decayed robes",
+      "intelligent undead bearing"
+    ],
+    "must_avoid": [
+      "zombie flesh",
+      "cartoon skeleton grin",
+      "full knight armor",
+      "vampire fangs",
+      "graphic gore",
+      "ornate clutter hiding bones"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as intelligent undead caster",
+    "skull and hands are clearly skeletal",
+    "robes remain simple and colorable",
+    "undead anatomy is not obscured"
+  ]
+}
