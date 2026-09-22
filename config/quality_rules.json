@@ -116,6 +116,14 @@
     "repeated micro-pattern overload": {
       "action": "modify",
       "directive": "Simplify repeated small patterns such as chainmail scales, coin piles, tiny bricks, map cracks, shelf clutter, fur strokes, webs, or rubble. Replace them with fewer larger colorable regions while preserving the material and scene identity."
+    },
+    "grounding unclear": {
+      "action": "modify",
+      "directive": "Make the creature's physical relationship to the environment unmistakable. If standing, feet or body must visibly contact the floor, ledge, wall, perch, or other support plane. If jumping, falling, flying, or hanging, show a believable launch/support point, directional body gesture, and clear motion or suspension logic so the creature never appears to hover accidentally."
+    },
+    "airborne action unclear": {
+      "action": "modify",
+      "directive": "Keep the scene but convert the suspended standing pose into unmistakable airborne action. Show the source point above or behind, bend the body into a dynamic trajectory, use limbs and center-of-gravity consistent with falling or leaping, and add sparse motion/debris cues without clutter."
     }
   }
 }
