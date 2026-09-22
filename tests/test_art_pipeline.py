@@ -24,6 +24,12 @@ class PromptTests(unittest.TestCase):
             "must_include": ["pit"],
             "must_avoid": ["gray"],
             "composition": "portrait",
+            "environment_profile_id": "underground.trapped-stone-corridor",
+            "environment_variant": {
+                "landmark": "open pit beside torch bracket",
+                "framing": "tight corridor perspective",
+                "interaction": "tripwire triggers the pit",
+            },
         }
         text = build_prompt(page)
         self.assertIn("Kobold Warrior", text)
@@ -40,6 +46,12 @@ class PromptTests(unittest.TestCase):
             "must_include": ["stolen ham"],
             "must_avoid": ["modern kitchen"],
             "composition": "portrait",
+            "environment_profile_id": "underground.rough-stone-pantry",
+            "environment_variant": {
+                "landmark": "large food shelves",
+                "framing": "pantry corner",
+                "interaction": "goblin steals food from storage",
+            },
         }
         text = build_edit_prompt(
             page,
@@ -87,6 +99,12 @@ class PromptTests(unittest.TestCase):
             "must_include": [],
             "must_avoid": [],
             "composition": "portrait",
+            "environment_profile_id": "underground.limestone-drip-cave",
+            "environment_variant": {
+                "landmark": "large flowstone shelf",
+                "framing": "low cave chamber",
+                "interaction": "kobold waits beside the rock shelf",
+            },
         }
         text = build_prompt(page, {"text": "simplify walls", "quick_tags": ["more white space"]})
         self.assertIn("simplify walls", text)
