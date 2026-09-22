@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "grick",
+  "display_name": "Grick",
+  "taxonomy": {
+    "family": "grick",
+    "creature_type": "cave aberration",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A wormlike subterranean ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak.",
+    "silhouette": "Thick serpentine body rising from rubble, front end opening into four evenly spaced tentacles around the mouth.",
+    "head_features": "No normal head; four muscular facial tentacles frame a small hard beak at the exact center.",
+    "body_shape": "Long heavy worm body with subtle segmented folds and no legs.",
+    "limb_structure": "No legs or arms; exactly four facial tentacles surround the central beak.",
+    "surface": "Rubbery ringed skin with restrained segment lines.",
+    "must_keep": [
+      "four facial tentacles",
+      "central beak",
+      "wormlike body",
+      "no legs",
+      "ambush posture"
+    ],
+    "must_avoid": [
+      "octopus body",
+      "snake head",
+      "more than four face tentacles",
+      "humanoid eyes",
+      "insect legs",
+      "dense ring texture"
+    ]
+  },
+  "accuracy_checks": [
+    "four tentacles are countable",
+    "beak sits at center",
+    "body reads wormlike",
+    "no legs appear",
+    "silhouette remains simple"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "tentacle_count_drift",
+      "symptom": "face gains too many tentacles",
+      "correction": "restore exactly four facial tentacles around central beak"
+    },
+    {
+      "id": "snake_drift",
+      "symptom": "normal reptile head appears",
+      "correction": "remove snake head and restore four-part facial opening around beak"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "whole body becomes tentacled cephalopod",
+      "correction": "restore long legless worm body"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Medium heavy worm whose body can rise from rubble or coil along a cave floor without filling the whole chamber.",
+    "natural_posture": "Body rests on and coils against floor, rubble, or rock while the four facial tentacles open forward.",
+    "behavior_style": [
+      "lurking in rubble",
+      "coiling beside a cave wall",
+      "raising its beaked face from debris",
+      "guarding a narrow ambush gap"
+    ],
+    "environment_fit": [
+      "collapsed tunnels",
+      "rubble piles",
+      "deep caves and rocky underground passages"
+    ]
+  }
+}
