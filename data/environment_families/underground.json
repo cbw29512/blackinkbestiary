@@ -721,22 +721,37 @@
       ]
     },
     "underground.service-crawlway": {
-      "name": "Low Service Crawlway",
-      "description": "A cramped built or partly excavated secondary passage intended for access and maintenance rather than grand traffic.",
+      "name": "Low Dungeon Service Crawlway",
+      "description": "A cramped purpose-built dungeon service passage with unmistakable stone construction, low overhead clearance, and practical utility fittings.",
+      "identity": {
+        "spatial_type": "low purpose-built dungeon service crawlway",
+        "material_language": "rough-cut dressed stone block walls, broad flagstone floor slabs, and a heavy timber or stone lintel ceiling",
+        "identity_markers": [
+          "iron wall torch sconce or empty iron bracket",
+          "masonry utility ring",
+          "narrow service niche, barred utility opening, or drain recess"
+        ],
+        "spatial_read": "the ceiling is visibly low, the walls are narrow, and corridor perspective makes the passage read as part of a dungeon rather than a generic hallway"
+      },
       "visual_cues": [
-        "low overhead clearance",
-        "narrow wall spacing",
-        "single wall niche or support",
-        "worn floor path"
+        "visibly low stone or timber ceiling",
+        "rough-cut dressed stone block walls",
+        "broad flagstone floor slabs",
+        "one simple iron dungeon fixture"
       ],
       "colorable_forms": [
-        "large wall planes",
-        "simple ceiling beam or arch",
-        "broad floor strip"
+        "large stone wall blocks",
+        "broad flagstone slabs",
+        "one large ceiling beam or lintel",
+        "one or two simple iron fixtures"
       ],
       "must_avoid": [
+        "smooth featureless hallway walls",
+        "normal-height corridor",
+        "modern drywall or office hallway",
         "grand hall scale",
-        "dense decorative masonry"
+        "dense decorative masonry",
+        "generic empty box room"
       ]
     },
     "underground.stone-stair": {
