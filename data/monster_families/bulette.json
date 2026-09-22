@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "bulette",
+  "display_name": "Bulette",
+  "taxonomy": {
+    "family": "bulette",
+    "creature_type": "armored burrowing beast",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A massive land-shark-like burrowing beast with a plated body, prominent dorsal fin, four powerful legs, and a broad predatory head.",
+    "silhouette": "Low barrel-bodied quadruped, high armored back with shark-like dorsal fin, thick forelegs, wedge-shaped head.",
+    "head_features": "Broad blunt predatory head with heavy jaws, small eyes, and armored brow.",
+    "body_shape": "Four-legged compact powerhouse with deep chest, short thick neck, plated back, and digging claws.",
+    "limb_structure": "Exactly four powerful digging legs under a low armored torso; no insect legs, fins replacing limbs, or wings.",
+    "surface": "Large overlapping armor plates with sparse seams and minimal texture.",
+    "must_keep": [
+      "prominent dorsal fin",
+      "four powerful legs",
+      "armored back",
+      "broad jaws",
+      "land-burrowing posture"
+    ],
+    "must_avoid": [
+      "actual fish body",
+      "six insect legs",
+      "dragon wings",
+      "long snake body",
+      "humanoid traits",
+      "dense plate texture"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as land predator not aquatic shark",
+    "dorsal fin is obvious",
+    "four legs are present",
+    "soil-cutting movement is clear",
+    "armor remains colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "shark_drift",
+      "symptom": "body becomes aquatic fish or loses legs",
+      "correction": "restore four powerful legs, digging claws, and terrestrial armored body"
+    },
+    {
+      "id": "insect_drift",
+      "symptom": "bulette gains six or more arthropod legs",
+      "correction": "restore exactly four beastlike digging legs"
+    },
+    {
+      "id": "armor_clutter",
+      "symptom": "plate seams become dense coloring noise",
+      "correction": "use few large overlapping armor plates"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Large, low, and massively heavy; the dorsal fin and armored back dominate a broad ground-level silhouette.",
+    "natural_posture": "All four legs planted or body partly supported by displaced earth during burrowing emergence.",
+    "behavior_style": [
+      "bursting through loose earth while supported",
+      "charging along a subterranean shelf",
+      "bracing at a collapsed tunnel",
+      "pushing through soil or rubble"
+    ],
+    "environment_fit": [
+      "loose-earth caverns",
+      "subterranean fields",
+      "collapsed tunnels and broad burrow routes"
+    ]
+  }
+}
