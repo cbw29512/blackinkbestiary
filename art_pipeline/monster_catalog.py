@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
 FAMILY_DIR = ROOT / "data" / "monster_families"
+CONTRACT_FILE = ROOT / "config" / "universal_monster_contract.json"
 
 
 def _read_json(path: Path) -> dict:
@@ -23,16 +25,20 @@ def _merge_unique(base, override):
     return result
 
 
-def _merge_dict(base: dict, override: dict) -> dict:
-    merged = dict(base or {})
+def _merge_dict(base: dict, override: dict | None) -> dict:
+    merged = deepcopy(base or {})
     for key, value in (override or {}).items():
         if isinstance(value, dict) and isinstance(merged.get(key), dict):
             merged[key] = _merge_dict(merged[key], value)
         elif isinstance(value, list) and isinstance(merged.get(key), list):
             merged[key] = _merge_unique(merged[key], value)
         else:
-            merged[key] = value
+            merged[key] = deepcopy(value)
     return merged
+
+
+def load_monster_contract(path: Path = CONTRACT_FILE) -> dict:
+    return _read_json(path)
 
 
 def family_profile_path(spec: dict, family_dir: Path = FAMILY_DIR) -> Path | None:
@@ -41,6 +47,34 @@ def family_profile_path(spec: dict, family_dir: Path = FAMILY_DIR) -> Path | Non
         return None
     path = family_dir / f"{profile_id}.json"
     return path if path.exists() else None
+
+
+def _apply_contract_defaults(resolved: dict, contract: dict) -> dict:
+    defaults = contract.get("defaults") or {}
+    visual_defaults = defaults.get("visual_identity") or {}
+    resolved["visual_identity"] = _merge_dict(
+        visual_defaults,
+        resolved.get("visual_identity") or {},
+    )
+    resolved["default_habitats"] = _merge_unique(
+        defaults.get("default_habitats"),
+        resolved.get("default_habitats"),
+    )
+    resolved["locomotion"] = _merge_dict(
+        defaults.get("locomotion") or {},
+        resolved.get("locomotion") or {},
+    )
+    return resolved
+
+
+def _apply_minimal_recipe(resolved: dict, raw: dict) -> dict:
+    visual = resolved.get("visual_identity") or {}
+    overrides = raw.get("visual_overrides") or {}
+    if overrides:
+        visual = _merge_dict(visual, overrides)
+    resolved["visual_identity"] = visual
+    resolved["variant_traits"] = list(raw.get("variant_traits") or [])
+    return resolved
 
 
 def resolve_monster_spec(
@@ -60,19 +94,52 @@ def resolve_monster_spec(
     if raw.get("monster_id") != spec_id:
         raise RuntimeError(f"Monster spec ID mismatch in {path}")
 
+    contract = load_monster_contract(ROOT / "config" / "universal_monster_contract.json")
     family_path = family_profile_path(raw, family_dir)
     family = _read_json(family_path) if family_path else {}
+
     resolved = _merge_dict(family, raw)
+    resolved = _apply_contract_defaults(resolved, contract)
+    resolved = _apply_minimal_recipe(resolved, raw)
+
+    taxonomy = family.get("taxonomy") or {}
+    resolved["family"] = raw.get("family") or taxonomy.get("family") or raw.get("family_profile")
+    resolved["size"] = raw.get("size") or taxonomy.get("default_size") or ""
+    resolved["creature_type"] = raw.get("creature_type") or taxonomy.get("creature_type") or ""
     resolved["schema_version"] = int(raw.get("schema_version") or 1)
-    resolved["identity_version"] = int(raw.get("identity_version") or 1)
+    resolved["identity_version"] = int(raw.get("identity_version") or family.get("identity_version") or 1)
+    resolved["monster_contract"] = contract.get("contract_id")
     resolved["catalog"] = {
         "monster_file": path.relative_to(ROOT).as_posix()
         if ROOT in path.resolve().parents else str(path),
         "family_profile": family_path.relative_to(ROOT).as_posix()
         if family_path and ROOT in family_path.resolve().parents else None,
         "family_identity_version": family.get("identity_version"),
+        "minimal_recipe": not bool(raw.get("visual_identity")),
     }
     return resolved
+
+
+def minimal_recipe_errors(
+    spec_id: str,
+    monster_dir: Path = MONSTER_DIR,
+    family_dir: Path = FAMILY_DIR,
+) -> list[str]:
+    path = monster_dir / f"{spec_id}.json"
+    if not path.exists():
+        return [f"Monster spec not found: {path}"]
+    raw = _read_json(path)
+    if int(raw.get("schema_version") or 1) < 3:
+        return []
+    contract = load_monster_contract(ROOT / "config" / "universal_monster_contract.json")
+    errors = []
+    for field in contract.get("minimal_recipe_required") or []:
+        if not str(raw.get(field) or "").strip():
+            errors.append(f"{spec_id}: minimal monster recipe missing {field}")
+    family_path = family_profile_path(raw, family_dir)
+    if not family_path:
+        errors.append(f"{spec_id}: minimal monster recipe requires a valid family_profile")
+    return errors
 
 
 def load_monster_for_page(
