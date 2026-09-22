@@ -18,6 +18,7 @@ from urllib.parse import unquote, urlparse
 
 from art_pipeline.rebuild_state import activate_rebuild_source
 from art_pipeline.manifest_validation import validate_manifest
+from art_pipeline.page_contract import resolve_manifest
 from art_pipeline.environment_catalog import resolve_environment_profile
 from art_pipeline.monster_catalog import load_monster_for_page
 from art_pipeline.quality_system import expand_defect_tags, recommended_action
@@ -62,7 +63,7 @@ def load_tome():
     errors = validate_manifest(ROOT, tome, MONSTER_DIR)
     if errors:
         raise ValueError("Production manifest invalid: " + " | ".join(errors))
-    return tome
+    return resolve_manifest(tome, ROOT)
 
 
 def load_state():
