@@ -7,10 +7,10 @@ import threading
 import urllib.request
 from pathlib import Path
 
-from .studio_store import DATA_DIR, ROOT, load_state, load_tome, page_by_id
+from . import studio_store as store
 
-GENERATOR_SCRIPT = ROOT / "scripts" / "generate_current_page.py"
-GENERATOR_LOG = DATA_DIR / "generation-worker.log"
+GENERATOR_SCRIPT = store.ROOT / "scripts" / "generate_current_page.py"
+GENERATOR_LOG = store.DATA_DIR / "generation-worker.log"
 GENERATABLE_STATES = {
     "queued",
     "modify_requested",
@@ -46,7 +46,7 @@ def comfy_health() -> dict:
 
 
 def worker_python() -> str:
-    local = ROOT / ".blackink-tools" / "Scripts" / "python.exe"
+    local = store.ROOT / ".blackink-tools" / "Scripts" / "python.exe"
     return str(local) if local.exists() else sys.executable
 
 
@@ -65,10 +65,10 @@ def generation_worker_status() -> dict:
 
 def start_generation_worker() -> dict:
     global _GENERATION_PROCESS
-    state = load_state()
-    tome = load_tome()
+    state = store.load_state()
+    tome = store.load_tome()
     page_id = state["current_page_id"]
-    page = page_by_id(tome, page_id)
+    page = store.page_by_id(tome, page_id)
     status = state["pages"][page_id]["status"]
 
     if status not in GENERATABLE_STATES:
@@ -100,7 +100,7 @@ def start_generation_worker() -> dict:
             )
             process = subprocess.Popen(
                 [worker_python(), str(GENERATOR_SCRIPT)],
-                cwd=ROOT,
+                cwd=store.ROOT,
                 stdout=log,
                 stderr=subprocess.STDOUT,
                 creationflags=creationflags,
