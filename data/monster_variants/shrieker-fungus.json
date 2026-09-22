@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "shrieker-fungus",
+  "family_profile": "fungus",
+  "display_name": "Shrieker Fungus",
+  "size": "medium",
+  "creature_type": "giant fungus",
+  "visual_identity": {
+    "core_identity": "A stationary cave fungus whose thick stalk and broad cap contain a mouthlike gill opening that produces an alarm shriek.",
+    "silhouette": "Large mushroom silhouette with stout stalk, broad cap, and opened underside gill cavity.",
+    "head_features": "No animal head; the underside of the cap opens like a simple resonant gill chamber.",
+    "body_shape": "Single rooted mushroom body with thick stalk and cap, no arms or legs.",
+    "limb_structure": "No limbs; the entire body remains rooted and mushroom-shaped.",
+    "surface": "Smooth cap with sparse spots or folds and simple gill lines underneath.",
+    "must_keep": [
+      "mushroom silhouette",
+      "rooted stalk",
+      "open gill-mouth",
+      "visible shriek motion"
+    ],
+    "must_avoid": [
+      "walking legs",
+      "tentacles",
+      "cute mushroom eyes",
+      "dense gill texture",
+      "toothed animal mouth"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Rigidly rooted with cap and stalk fully supported by ground or substrate.",
+    "behavior_style": [
+      "opening underside gill chamber",
+      "shrinking or swelling while rooted",
+      "shrieking beside a cave route",
+      "reacting from a fixed fungal patch"
+    ]
+  },
+  "accuracy_checks": [
+    "mushroom silhouette remains dominant",
+    "opening reads as gill chamber not animal face",
+    "no limbs appear"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "face_drift",
+      "symptom": "gill opening becomes animal mouth with eyes",
+      "correction": "remove face and keep opening on underside of mushroom cap"
+    },
+    {
+      "id": "walking_drift",
+      "symptom": "fungus gains legs",
+      "correction": "restore rooted stalk and fixed base"
+    }
+  ]
+}
