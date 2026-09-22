@@ -22,6 +22,10 @@ CANDIDATE_DIR = WEB_DIR / "candidates"
 STUDIO_URL = "http://127.0.0.1:8765"
 
 
+class TechnicalQAError(RuntimeError):
+    """Generated image exists, but failed deterministic production QA."""
+
+
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -118,7 +122,7 @@ def collect_output(client, images: list[dict], page_id: str, attempt: int, inspe
         if accepted is None and report.get("pass"):
             accepted = destination
     if accepted is None:
-        raise RuntimeError(
+        raise TechnicalQAError(
             f"No output passed production QA: {[item.get('reasons') for item in reports]}"
         )
     return accepted.relative_to(WEB_DIR).as_posix()
