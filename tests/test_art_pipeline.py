@@ -7,7 +7,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from prompt_builder import build_edit_prompt, build_prompt, load_monster_spec
+from edit_prompt import build_edit_prompt
+from prompt_builder import build_prompt, load_monster_spec
 from image_edit_profile import prepare_distilled_image_edit
 from workflow_adapter import PROMPT_TOKEN, SEED_TOKEN, prepare_workflow, validate_template
 from qa import inspect_png
