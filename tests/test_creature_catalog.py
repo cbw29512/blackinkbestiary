@@ -64,6 +64,23 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("gorilla, ape-man, or primate", text)
         self.assertIn("CORRECTION:", text)
 
+    def test_all_family_profiles_pass_expanded_dna_audit(self):
+        from catalog_audit import audit_monster_catalog
+
+        report = audit_monster_catalog(ROOT)
+        self.assertEqual(report["errors"], [])
+        self.assertTrue(report["pass"])
+
+    def test_family_scene_dna_is_injected_into_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
+        text = build_prompt(page)
+        self.assertIn("CANONICAL LIMBS / EXTREMITIES", text)
+        self.assertIn("CANONICAL SIZE IMPRESSION", text)
+        self.assertIn("CANONICAL NATURAL POSTURE", text)
+        self.assertIn("CANONICAL BEHAVIOR STYLE", text)
+        self.assertIn("CANONICAL ENVIRONMENT FIT", text)
+
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
         keep = spec["visual_identity"]["must_keep"]
