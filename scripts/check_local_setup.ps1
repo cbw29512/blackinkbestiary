@@ -59,15 +59,19 @@ if (Test-Path $installationsFile) {
 }
 
 Write-Host ""
-Write-Host "[4/4] Black-Ink worker files"
+Write-Host "[4/4] Black-Ink generation files"
 $root = Split-Path -Parent $PSScriptRoot
 $required = @(
-    "art_pipeline\worker.py",
+    "art_pipeline\generation_runtime.py",
+    "art_pipeline\candidate_runner.py",
     "art_pipeline\comfy_client.py",
     "art_pipeline\prompt_builder.py",
-    "art_pipeline\workflow_adapter.py",
+    "art_pipeline\calibration_service.py",
+    "scripts\generate_current_page.py",
+    "scripts\generate_golden_page.py",
     "data\tome-I.json",
-    "data\production-state.json"
+    "data\production-state.json",
+    "data\golden-five-state.json"
 )
 $missing = @()
 foreach ($rel in $required) {
@@ -75,7 +79,7 @@ foreach ($rel in $required) {
     if (-not (Test-Path $full)) { $missing += $rel }
 }
 if ($missing.Count -eq 0) {
-    Write-Host "  OK - Production worker files present" -ForegroundColor Green
+    Write-Host "  OK - Production and Golden Five generation files present" -ForegroundColor Green
 } else {
     Write-Host "  MISSING FILES:" -ForegroundColor Red
     foreach ($item in $missing) { Write-Host "    - $item" }
