@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from monster_catalog import resolve_monster_spec
+from prompt_builder import build_prompt
 
 
 class CreatureCatalogTests(unittest.TestCase):
@@ -54,6 +55,14 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertEqual(spec["creature_type"], "goblinoid humanoid")
         self.assertIn("ape face or primate muzzle", spec["visual_identity"]["must_avoid"])
         self.assertIn("ape_drift", {item["id"] for item in spec["known_failure_modes"]})
+
+    def test_family_failure_modes_drive_bugbear_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
+        text = build_prompt(page)
+        self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", text)
+        self.assertIn("gorilla, ape-man, or primate", text)
+        self.assertIn("CORRECTION:", text)
 
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
