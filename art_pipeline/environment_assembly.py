@@ -30,6 +30,7 @@ def infer_overlays(page: dict, profile: dict, root: Path = ROOT) -> list[dict]:
         str(profile.get("environment_id") or ""),
         str(profile.get("name") or ""),
         str(page.get("moment") or ""),
+        str(page.get("archetype") or ""),
         str(variant.get("landmark") or ""),
         str(variant.get("framing") or ""),
         str(variant.get("interaction") or ""),
