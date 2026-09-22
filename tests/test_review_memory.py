@@ -48,6 +48,21 @@ class ReviewMemoryTests(unittest.TestCase):
         server.load_tome = self.old_load_tome
         self.temp.cleanup()
 
+    def test_composition_defect_routes_modify_to_regenerate(self):
+        server.register_candidate({
+            "page_id": "I-01",
+            "image_path": "candidates/test.png",
+            "generation_mode": "text_to_image",
+        })
+        server.apply_decision("modify", "composition is fundamentally wrong", ["composition wrong"])
+
+        state = server.load_state()
+        self.assertEqual(state["pages"]["I-01"]["status"], "regenerate_requested")
+        record = json.loads(server.REVIEWS_FILE.read_text(encoding="utf-8").strip())
+        self.assertEqual(record["requested_decision"], "modify")
+        self.assertEqual(record["decision"], "regenerate")
+        self.assertEqual(record["routing_recommendation"], "regenerate")
+
     def test_modify_records_structured_defect_intelligence(self):
         server.register_candidate({
             "page_id": "I-01",
