@@ -1,7 +1,7 @@
 {
-  "schema_version": 3,
-  "contract_id": "black-ink-monster-v2",
-  "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
+  "schema_version": 4,
+  "contract_id": "black-ink-monster-v4",
+  "purpose": "Scale accurate monster identity across hundreds of creatures while keeping production recipes tiny. Broad family DNA, species identity, variant recipe, and page scene are separate layers.",
   "minimal_recipe_required": [
     "monster_id",
     "monster_name",
@@ -26,23 +26,34 @@
     "scene_identity": {
       "behavior_style": [],
       "environment_fit": []
+    },
+    "render_identity": {
+      "subject_mode": "unspecified",
+      "expected_count": "unspecified"
+    },
+    "anatomy": {
+      "body_plan": "unspecified",
+      "support_logic": "unspecified"
     }
   },
   "resolution_order": [
     "universal monster defaults",
-    "family profile",
-    "minimal monster recipe",
-    "optional visual overrides"
+    "broad family/archetype profile when present",
+    "species identity profile when present",
+    "tiny monster/variant recipe",
+    "explicit recipe overrides only for true variant differences",
+    "page scene recipe owns the exact environment/action/props"
   ],
   "rules": [
-    "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
-    "Monster recipes should only state what differs from the family.",
-    "Known family failure modes must be injected into generation and review, not merely stored.",
-    "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment.",
-    "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
-    "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
-    "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
-    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it."
+    "Broad family profiles own reusable anatomy and anti-drift intelligence shared by multiple species or variants.",
+    "Species identity profiles own canonical creature-specific anatomy and may inherit a broad family profile.",
+    "Monster recipes own only ID/name/profile references plus true variant deltas.",
+    "Page recipes own the exact habitat, composition, props, support, interaction, and story moment.",
+    "Known failure modes must be active generation/review corrections, not passive documentation.",
+    "Identity data must not contain page-only scene requirements such as a particular pillar, pedestal, key, victim, room, trap, or altar.",
+    "Reusable scenery must never be copied into monster recipes or identity profiles.",
+    "Environment-fit metadata is planning-only once a page environment profile has been selected.",
+    "New production monsters should use schema v4; schema v1-v3 are migration compatibility only."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -60,7 +71,7 @@
     "accuracy_checks",
     "known_failure_modes"
   ],
-  "scalability_rule": "Hundreds of monster recipes remain small. Creature files own identity, variant traits, behavior tendencies, locomotion, and habitat compatibility; reusable scenery belongs exclusively to the environment engine.",
+  "scalability_rule": "Hundreds of monster recipes remain tiny pointers plus true variant deltas. Reusable anatomy lives in family/species identity profiles; reusable scenery lives only in the environment engine; exact action and props live only in the page recipe.",
   "environment_ownership": {
     "monster_may_define": [
       "default_habitats",
@@ -82,5 +93,81 @@
       "environment depth cues"
     ],
     "rule": "If a visual element could be reused by another creature in the same place, it belongs in the universal environment engine: family/profile/component/overlay system."
+  },
+  "v4_recipe_required": [
+    "monster_id",
+    "monster_name",
+    "identity_profile"
+  ],
+  "v4_recipe_optional": [
+    "family_profile",
+    "variant_traits",
+    "visual_overrides",
+    "scene_overrides",
+    "render_overrides",
+    "anatomy_overrides",
+    "locomotion"
+  ],
+  "v4_recipe_forbidden_fields": [
+    "visual_identity",
+    "accuracy_checks",
+    "known_failure_modes",
+    "reference",
+    "taxonomy",
+    "family",
+    "size",
+    "creature_type"
+  ],
+  "identity_profile_engine": {
+    "directory": "data/monster_identity_profiles",
+    "purpose": "Species-level canonical identity that may inherit a broad family profile but does not own a specific page composition.",
+    "parent_field": "extends_family",
+    "fallback_rule": "For simple species with no separate species file, identity_profile may resolve directly to an existing family profile.",
+    "ownership": [
+      "species-specific silhouette, anatomy, body plan, appendages, surface treatment, and scale",
+      "species-specific must-keep and must-avoid traits",
+      "species-specific accuracy checks and known failure corrections",
+      "species-level locomotion and support logic",
+      "species-level render mode such as single, swarm, amorphous, object, fragment, or split form"
+    ],
+    "forbidden_ownership": [
+      "specific room geometry",
+      "specific wall/floor/lighting design",
+      "page-only props",
+      "one page's exact victim, key, pillar, pedestal, altar, or trap",
+      "one page's exact pose or story interaction"
+    ]
+  },
+  "prompt_budget": {
+    "monster_brief_max_words": 105,
+    "identity_anchor_limit": 7,
+    "drift_failure_limit": 6,
+    "failure_correction_limit": 4,
+    "rule": "Generation receives one concise authoritative MONSTER BRIEF plus a small set of identity anchors and drift corrections; full catalog prose remains available for QA."
+  },
+  "render_identity": {
+    "subject_modes": [
+      "single",
+      "swarm",
+      "object",
+      "amorphous",
+      "fragment",
+      "split",
+      "multi-part",
+      "unspecified"
+    ],
+    "rule": "Subject mode describes how the creature should read as a coloring-book focal subject and prevents one-monster composition rules from breaking swarms, animated objects, oozes, detached limbs, or split forms."
+  },
+  "anatomy_engine": {
+    "purpose": "Structured anatomy supplements prose for creatures whose correctness depends on counts or unusual body plans.",
+    "recommended_fields": [
+      "body_plan",
+      "limb_count",
+      "wing_count",
+      "tail",
+      "special_appendages",
+      "support_logic"
+    ],
+    "rule": "Use structured anatomy when limb count, wings, tentacles, segments, multiple bodies, or unusual support are identity-critical. Prose remains authoritative for nuance."
   }
 }
