@@ -39,7 +39,7 @@ class PlatformQualityTests(unittest.TestCase):
     def test_environment_standard_is_global_and_actionable(self):
         directives = environment_directives(ROOT)
         checks = environment_approval_checks(ROOT)
-        self.assertTrue(any("co-equal storytelling pillars" in item for item in directives))
+        self.assertTrue(any("Colorability is the governing product constraint" in item for item in directives))
         self.assertTrue(any("two to four" in item.lower() for item in directives))
         self.assertTrue(any("without reading the caption" in item for item in checks))
 
