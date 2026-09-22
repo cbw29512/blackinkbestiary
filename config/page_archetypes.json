@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "archetypes": {
-    "default_scene": "One dominant monster, one readable action, and a simple habitat that supports rather than competes with the subject.",
-    "trap_scene": "Show clear cause-and-effect: the trap trigger and trap result must both be readable. The monster remains the focal subject and trap geometry stays simple.",
-    "stealth_scene": "Use a low or concealed pose, clear line of sight, and restrained background detail. Avoid turning the scene into a static portrait.",
-    "swarm_scene": "Use a strong directional flow with distinct readable individuals and deliberate negative space. Never form an unreadable solid mass.",
-    "reveal_scene": "Preserve the disguise or hidden form while making the reveal moment unmistakable with one clear transformation cue.",
-    "boss_scene": "Use a commanding silhouette, stronger posture, and one rank-defining prop. Avoid excessive throne, treasure, or costume clutter.",
-    "lair_scene": "Establish the creature's habitat with two or three large environmental cues while keeping the monster dominant.",
-    "object_monster": "Keep the disguised object's original form readable while adding only the minimum living features needed to reveal the threat.",
-    "large_scale_scene": "Use architecture or environment as a scale reference. Keep the giant creature simple enough that its full silhouette remains readable.",
-    "action_scene": "Prioritize gesture and cause-and-effect. Props must support the action and should not dominate the monster.",
-    "horror_scene": "Use unsettling anatomy and pose without gore. Keep line art clean, printable, and spacious enough to color."
+    "default_scene": "Balance three equal reads: unmistakable monster, unmistakable environment, unmistakable story moment. Use two to four strong setting anchors and make at least one of them interact with the action.",
+    "trap_scene": "Make the trap part of the architecture or terrain: trigger, mechanism, and consequence must be spatially readable. The trapped environment and the trap-maker are equally important.",
+    "stealth_scene": "Use environment geometry for concealment: ledges, shadows, openings, cover, or tight passages must explain how stealth works. Preserve readable depth and habitat identity.",
+    "swarm_scene": "Use the environment to channel the swarm's movement through a shaft, grate, tunnel, ceiling, water, or other structure. Keep distinct individuals and deliberate negative space.",
+    "reveal_scene": "The setting must explain the disguise or reveal: perch, wall, pedestal, rubble, architecture, or habitat surface remains readable before and after the reveal.",
+    "boss_scene": "Give the boss a commanding environment with two or three rank- or lair-defining anchors. Avoid empty portrait staging and avoid treasure or architecture clutter that overwhelms the scene.",
+    "lair_scene": "Treat the lair as half the page's storytelling value. Use two to four habitat-specific forms and show how the creature occupies, guards, feeds, nests, or moves through them.",
+    "object_monster": "The surrounding environment must support the disguised object's normal purpose before the reveal. Keep the room or structure believable enough that the disguise makes sense.",
+    "large_scale_scene": "Use architecture, terrain, or environmental structures as explicit scale references. The environment must remain readable enough to sell the creature's size.",
+    "action_scene": "Stage the action through the setting rather than in empty space. Terrain, architecture, or a story prop should affect pose, movement, danger, or direction.",
+    "horror_scene": "Use unsettling environmental context without gore: confinement, decay, water, crypt architecture, fungus, refuse, or other habitat cues should reinforce the creature while remaining clean and colorable."
   }
 }
