@@ -1,0 +1,59 @@
+{
+  "monster_id": "goblin-warrior",
+  "monster_name": "Goblin Warrior",
+  "family": "goblin",
+  "size": "small",
+  "creature_type": "goblinoid humanoid",
+  "visual_identity": {
+    "core_identity": "A small aggressive goblinoid fighter who relies on speed, dirty tricks, and scavenged weapons rather than heavy strength.",
+    "silhouette": "Small wiry fighter with oversized pointed ears, bent knees, ready stance, and a weapon held close.",
+    "head_features": "Large pointed ears, short nose, angular cheeks, sharp chin, wide toothy mouth, intense eyes.",
+    "body_shape": "Compact thin-limbed humanoid, agile rather than muscular.",
+    "surface": "Mostly smooth skin with restrained facial creases and scars.",
+    "signature_gear": [
+      "short sword or crude blade",
+      "small shield or light scavenged armor",
+      "belt pouches",
+      "simple boots or wraps"
+    ],
+    "attitude": [
+      "aggressive",
+      "cunning",
+      "nervous energy",
+      "ready to flee or strike"
+    ],
+    "must_keep": [
+      "large pointed ears",
+      "short goblinoid face",
+      "small agile frame",
+      "scavenged martial gear",
+      "clear humanoid hands and feet"
+    ],
+    "must_avoid": [
+      "kobold snout",
+      "tail",
+      "heavy knight armor",
+      "large orc body",
+      "cute mascot look",
+      "excessive armor detail"
+    ]
+  },
+  "default_habitats": [
+    "narrow dungeon crawlways",
+    "guard posts",
+    "ruined underground halls"
+  ],
+  "accuracy_checks": [
+    "ears are clearly oversized and pointed",
+    "face reads goblin not kobold",
+    "body stays small and agile",
+    "weapon and light armor read clearly",
+    "pose suggests dirty-fighting readiness",
+    "background does not overwhelm silhouette"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference guides goblin anatomy; Black-Ink style controls line art."
+  }
+}
