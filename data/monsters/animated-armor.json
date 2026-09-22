@@ -1,60 +1,6 @@
 {
+  "schema_version": 4,
   "monster_id": "animated-armor",
   "monster_name": "Animated Armor",
-  "family": "construct",
-  "size": "medium",
-  "creature_type": "construct",
-  "visual_identity": {
-    "core_identity": "An empty suit of medieval plate armor moving under magical force, with no visible wearer inside.",
-    "silhouette": "Full humanoid armor silhouette in a deliberate stepping pose, rigid plates separated by dark empty gaps.",
-    "head_features": "Closed or partially open helmet with empty darkness where a face would be; no eyes or flesh.",
-    "body_shape": "Articulated breastplate, pauldrons, gauntlets, greaves, and boots moving as a complete hollow suit.",
-    "surface": "Broad simple metal plates with a few dents and edge lines, avoiding ornate engraving.",
-    "signature_gear": [
-      "complete plate suit",
-      "simple pedestal or display stand"
-    ],
-    "attitude": [
-      "silent",
-      "mechanical",
-      "guarding",
-      "relentless"
-    ],
-    "must_keep": [
-      "empty armor",
-      "recognizable plate suit",
-      "no visible body inside",
-      "articulated movement",
-      "pedestal origin"
-    ],
-    "must_avoid": [
-      "human face",
-      "skeleton inside",
-      "robot machinery",
-      "ornate tournament armor",
-      "floating separate pieces",
-      "dense reflections"
-    ]
-  },
-  "default_habitats": [
-    "display halls",
-    "crypt galleries",
-    "dungeon guard chambers"
-  ],
-  "accuracy_checks": [
-    "emptiness inside helmet is clear",
-    "armor reads as one moving construct",
-    "pedestal relationship is visible",
-    "plate anatomy is plausible",
-    "no wearer appears",
-    "metal surfaces remain open for coloring"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "construct"
+  "identity_profile": "animated-armor"
 }
