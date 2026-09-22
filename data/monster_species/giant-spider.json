@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "giant-spider",
+  "display_name": "Giant Spider",
+  "taxonomy": {
+    "family": "spider",
+    "creature_type": "giant arachnid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A huge web-building spider with a clear two-part arachnid body, eight long legs, and an ambush-ready web-spider form.",
+    "silhouette": "Large rounded abdomen behind a smaller cephalothorax with exactly eight long jointed legs radiating outward.",
+    "head_features": "Arachnid cephalothorax with multiple simple eyes and visible fangs; no humanoid face.",
+    "body_shape": "Two main body sections with eight legs attached to the front section; abdomen slightly elevated.",
+    "surface": "Sparse short hairs and simple abdominal markings; no dense furry mass.",
+    "signature_gear": [],
+    "attitude": [
+      "patient",
+      "still",
+      "predatory",
+      "web-bound"
+    ],
+    "must_keep": [
+      "eight legs",
+      "two-part spider body",
+      "fangs",
+      "large readable abdomen"
+    ],
+    "must_avoid": [
+      "insect six-leg anatomy",
+      "human eyes",
+      "wolf-like fur",
+      "cartoon smile",
+      "extra limbs",
+      "dense hair"
+    ]
+  },
+  "accuracy_checks": [
+    "eight legs are countable",
+    "body reads true spider",
+    "fangs are visible",
+    "large body stays easy to color"
+  ]
+}
