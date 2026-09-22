@@ -1,5 +1,24 @@
 # Black-Ink Production Platform
 
+## Universal Page Contract
+
+`config/universal_page_contract.json` is the single page-construction contract for every tome and any future Black-Ink book.
+
+Resolution order:
+
+1. universal page defaults
+2. monster-family identity
+3. monster-variant identity
+4. environment family/profile
+5. scene archetype
+6. page-unique recipe fields
+7. latest human corrections
+
+A production page does not need to repeat monster name, habitat prose, composition boilerplate, global coloring rules, or global avoid rules. The resolver derives them. The unique recipe keeps only the facts that genuinely make the page different: monster, environment subtype, story moment, landmark, framing, interaction, and physicality.
+
+Book length is a registry setting, not an engine constant. The current eight books use 50 pages, while future books may use any positive page count.
+
+
 The Studio is a reusable coloring-book production engine. Tome I is the active book, not a special-case implementation.
 
 ## Active Book Data Schema
