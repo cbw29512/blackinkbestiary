@@ -43,6 +43,7 @@ Candidate attempts remain under `web/candidates/`; only human-approved pages ent
 ## Documentation
 
 - [Production System](docs/MONSTER_COLORING_SYSTEM.md)
+- [Canonical Monster Spec Standard](docs/MONSTER_SPEC_STANDARD.md)
 - [Style Bible](docs/STYLE_BIBLE.md)
 - [Tome I Manifest](docs/TOME_I_MANIFEST.md)
 - [Logo Brief](docs/LOGO_BRIEF.md)
