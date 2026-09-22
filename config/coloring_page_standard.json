@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "purpose": "Keep every Black-Ink page easy and satisfying to color while preserving strong monster, environment, and story identity.",
+  "purpose": "Keep every Black-Ink page easy and satisfying to color: the monster is the large centered focal subject, while an accurate varied environment frames and supports the story.",
   "benchmark_notes": [
     "Comparable bold-and-easy coloring books emphasize large, bold, simple designs and easy-to-color spaces.",
     "Black-Ink keeps that accessibility but uses richer fantasy environments and stronger creature identity."
@@ -8,25 +8,26 @@
   "composition_targets": {
     "primary_subject": {
       "preferred_page_height_fraction": [
-        0.42,
-        0.68
+        0.55,
+        0.72
       ],
-      "hard_max_page_height_fraction": 0.78,
-      "rule": "The monster should be immediately readable and substantial, but should not consume the page so completely that the habitat cannot read."
+      "hard_max_page_height_fraction": 0.82,
+      "placement": "centered or near-centered in the primary visual field",
+      "rule": "The monster is the largest and first-read object on the page. Keep it centered or near-centered, substantial, and easy to color, while leaving enough surrounding page area for the habitat and story interaction to remain unmistakable."
     },
     "environment": {
       "preferred_major_cues": [
         2,
         4
       ],
-      "rule": "Use two to four large environment-defining objects or structures, plus open supporting shapes. Avoid dozens of tiny decorative props."
+      "rule": "Use two to four large environment-defining objects or structures arranged around, behind, or beneath the monster. They must establish the habitat without competing with the monster for visual dominance."
     },
     "story_prop": {
       "preferred_count": [
         1,
         2
       ],
-      "rule": "Story-critical props must be large enough to recognize and color comfortably, but should not compete with the monster unless the scene archetype requires it."
+      "rule": "Story-critical props must be large enough to recognize and color comfortably, but remain visually subordinate to the monster unless the story explicitly depends on scale contrast."
     },
     "negative_space": {
       "target": "high",
@@ -34,11 +35,13 @@
     }
   },
   "shape_rules": [
+    "The monster is the dominant central focal shape and should be the first thing the eye reads.",
     "Favor broad contiguous coloring regions over tiny enclosed islands.",
     "Use bold outer contours and lighter interior detail.",
     "Avoid micro-texture such as repeated scales, fur strokes, cracks, pebbles, bubbles, leaves, or barnacles unless only a few are needed for identity.",
     "Break large environment forms into a small number of medium-to-large colorable regions.",
-    "Do not let a single prop or foreground object block more of the page than the monster unless the composition intentionally uses scale contrast.",
+    "Frame the monster with environment forms instead of placing equally dominant objects beside it.",
+    "Do not let a single prop or foreground object rival or block the monster unless the composition intentionally uses scale contrast.",
     "Background depth should come from overlapping large forms and perspective, not from filling empty space with tiny objects."
   ],
   "environment_object_scale": {
@@ -47,6 +50,7 @@
     "tiny_objects": "avoid unless essential to the story or identity"
   },
   "automatic_failures": [
+    "monster is small, off-center without narrative purpose, or visually secondary to the environment",
     "monster fills nearly the entire page and erases habitat identity",
     "environment consists mostly of tiny repeated details",
     "too many small enclosed coloring cells",
