@@ -1,15 +1,14 @@
 {
+  "schema_version": 3,
   "monster_id": "ogre",
   "monster_name": "Ogre",
-  "family": "ogre",
-  "size": "large",
-  "creature_type": "giant humanoid",
-  "visual_identity": {
-    "core_identity": "A huge crude giant humanoid whose enormous body, heavy limbs, and simple expression communicate brute strength and poor fit in human-sized spaces.",
-    "silhouette": "Very large broad torso, thick limbs, heavy belly, oversized hands and feet, stooped posture under low architecture.",
-    "head_features": "Broad heavy face, low brow, wide nose, large jaw, small eyes, simple coarse features.",
-    "body_shape": "Massive thick-limbed humanoid with broad chest, heavy belly, and awkward giant proportions.",
-    "surface": "Bare skin with sparse scars and simple folds; minimal texture.",
+  "family_profile": "ogre",
+  "variant_traits": [
+    "crude giant",
+    "brutish",
+    "clumsy"
+  ],
+  "visual_overrides": {
     "signature_gear": [
       "crude cloth or hide wrap",
       "thick belt",
@@ -21,42 +20,6 @@
       "irritable",
       "brutish",
       "clumsy"
-    ],
-    "must_keep": [
-      "huge scale",
-      "thick limbs",
-      "broad heavy face",
-      "oversized hands and feet",
-      "crude simple clothing"
-    ],
-    "must_avoid": [
-      "troll-like lanky limbs",
-      "orc tusks",
-      "bodybuilder definition",
-      "tiny human proportions",
-      "ornate armor",
-      "excessive skin texture"
     ]
-  },
-  "default_habitats": [
-    "cramped dungeon stairs",
-    "cave lairs",
-    "ruined halls"
-  ],
-  "accuracy_checks": [
-    "ogre scale is obvious against architecture",
-    "body is massive rather than lanky",
-    "head is broad and coarse",
-    "clothing is simple",
-    "pose can read awkward or clumsy",
-    "background reinforces size"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "ogre"
+  }
 }
