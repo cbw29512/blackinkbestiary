@@ -1,58 +1,6 @@
 {
+  "schema_version": 3,
   "monster_id": "drider",
   "monster_name": "Drider",
-  "family": "drider",
-  "size": "large",
-  "creature_type": "monstrous humanoid",
-  "visual_identity": {
-    "core_identity": "A humanoid upper body fused directly to the body of a giant spider, combining deliberate weapon use with eight-legged arachnid movement.",
-    "silhouette": "Humanoid torso rising from the front of a broad spider abdomen, eight long spider legs radiating below and around, bow held above.",
-    "head_features": "Elven or severe humanoid face with pointed ears, long hair or simple head covering, no insect head.",
-    "body_shape": "Humanlike chest and arms merge at the waist into a giant spider cephalothorax and abdomen with eight legs.",
-    "surface": "Humanoid skin and cloth kept simple; spider lower body uses sparse hair and broad plates.",
-    "signature_gear": [
-      "bow",
-      "quiver",
-      "simple underground armor or straps"
-    ],
-    "attitude": [
-      "calculating",
-      "predatory",
-      "aloof",
-      "watchful"
-    ],
-    "must_keep": [
-      "humanoid upper torso",
-      "giant spider lower body",
-      "eight spider legs",
-      "visible fusion at waist",
-      "ranged weapon"
-    ],
-    "must_avoid": [
-      "centaur horse body",
-      "two separate creatures",
-      "human legs",
-      "six spider legs",
-      "full insect head",
-      "overly ornate armor"
-    ]
-  },
-  "default_habitats": [
-    "webbed chapels",
-    "underground ruins",
-    "high cavern walls"
-  ],
-  "accuracy_checks": [
-    "fusion between torso and spider body is clear",
-    "eight legs are readable",
-    "bow aiming downward matches scene",
-    "no human legs appear",
-    "upper body stays humanoid",
-    "webs do not overwhelm anatomy"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  "family_profile": "drider"
 }

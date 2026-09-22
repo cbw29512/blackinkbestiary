@@ -1,0 +1,83 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "centipede",
+  "display_name": "Giant Centipede",
+  "taxonomy": {
+    "family": "centipede",
+    "creature_type": "giant arthropod",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "An oversized predatory centipede defined by its long segmented body, one pair of legs per visible segment, and large front poison claws.",
+    "silhouette": "Long flexible segmented body forming an S-curve or coil, with many evenly spaced legs creating a saw-tooth edge.",
+    "head_features": "Small armored head with simple antennae and strong curved forcipule-like poison claws near the mouth.",
+    "body_shape": "Many repeated trunk segments, each bearing one visible pair of legs, tapering toward the rear.",
+    "surface": "Simple armored segment plates with minimal texture.",
+    "signature_gear": [],
+    "attitude": [
+      "coiling",
+      "searching",
+      "predatory",
+      "quick"
+    ],
+    "must_keep": [
+      "long segmented body",
+      "many paired legs",
+      "front poison claws",
+      "antennae",
+      "low arthropod posture"
+    ],
+    "must_avoid": [
+      "millipede round body",
+      "scorpion tail",
+      "spider abdomen",
+      "dragon head",
+      "too many tiny textures",
+      "human features"
+    ],
+    "limb_structure": "Many body segments each carry one pair of legs, with antennae and front poison claws distinct from walking legs."
+  },
+  "accuracy_checks": [
+    "centipede segmentation is obvious",
+    "legs repeat along body",
+    "front claws are visible",
+    "old bone interaction reads clearly",
+    "body is not mistaken for snake",
+    "line density remains manageable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "drift_1",
+      "symptom": "creature drifts toward millipede round body",
+      "correction": "remove millipede round body; restore long segmented body, many paired legs, front poison claws"
+    },
+    {
+      "id": "drift_2",
+      "symptom": "creature drifts toward scorpion tail",
+      "correction": "remove scorpion tail; restore long segmented body, many paired legs, front poison claws"
+    },
+    {
+      "id": "drift_3",
+      "symptom": "creature drifts toward spider abdomen",
+      "correction": "remove spider abdomen; restore long segmented body, many paired legs, front poison claws"
+    }
+  ],
+  "locomotion": {
+    "can_fly": false
+  },
+  "scene_identity": {
+    "size_impression": "small creature whose scale should read through its canonical silhouette: Long flexible segmented body forming an S-curve or coil, with many evenly spaced legs creating a saw-tooth edge.",
+    "natural_posture": "Low S-curve crawl with many legs contacting the ground or wall along the segmented body.",
+    "behavior_style": [
+      "coiling through rubble",
+      "probing with antennae",
+      "crawling along wall or floor with repeated leg contact"
+    ],
+    "environment_fit": [
+      "catacomb niches",
+      "damp cellars",
+      "bone-strewn tunnels"
+    ]
+  }
+}

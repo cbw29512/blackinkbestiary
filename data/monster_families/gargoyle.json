@@ -1,0 +1,83 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "gargoyle",
+  "display_name": "Gargoyle",
+  "taxonomy": {
+    "family": "gargoyle",
+    "creature_type": "stone monstrosity",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A squat winged stone predator disguised as architectural sculpture until it begins to move.",
+    "silhouette": "Broad crouched humanoid body, folded batlike wings, horned head, clawed hands and feet, heavy stone posture.",
+    "head_features": "Grotesque stone face with short horns, heavy brow, broad nose, fanged mouth, no soft flesh details.",
+    "body_shape": "Compact muscular humanoid carved from stone, thick forearms, bent legs, folded wings.",
+    "surface": "Stone planes with a few cracks and chipped edges, not dense masonry texture.",
+    "signature_gear": [],
+    "attitude": [
+      "motionless",
+      "watchful",
+      "sudden",
+      "territorial"
+    ],
+    "must_keep": [
+      "stone body",
+      "folded wings",
+      "horned grotesque head",
+      "clawed limbs",
+      "architectural perch"
+    ],
+    "must_avoid": [
+      "dragon body",
+      "angelic human face",
+      "feathers",
+      "living flesh texture",
+      "huge wings hiding body",
+      "ornate cathedral clutter"
+    ],
+    "limb_structure": "Two humanoid arms, two clawed legs, and one pair of batlike wings; no extra limbs or quadruped dragon anatomy."
+  },
+  "accuracy_checks": [
+    "reads as stone sculpture becoming alive",
+    "wings remain visible",
+    "one foot or hand leaves perch",
+    "stone texture is sparse",
+    "humanoid gargoyle silhouette is clear",
+    "gate remains secondary"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "drift_1",
+      "symptom": "creature drifts toward dragon body",
+      "correction": "remove dragon body; restore stone body, folded wings, horned grotesque head"
+    },
+    {
+      "id": "drift_2",
+      "symptom": "creature drifts toward angelic human face",
+      "correction": "remove angelic human face; restore stone body, folded wings, horned grotesque head"
+    },
+    {
+      "id": "drift_3",
+      "symptom": "creature drifts toward feathers",
+      "correction": "remove feathers; restore stone body, folded wings, horned grotesque head"
+    }
+  ],
+  "locomotion": {
+    "can_fly": true
+  },
+  "scene_identity": {
+    "size_impression": "medium creature whose scale should read through its canonical silhouette: Broad crouched humanoid body, folded batlike wings, horned head, clawed hands and feet, heavy stone posture.",
+    "natural_posture": "Crouched on a stone perch with clear hand/foot contact or launching with wings while retaining heavy stone body logic.",
+    "behavior_style": [
+      "posing as stone architecture",
+      "crouching on a gate or ledge",
+      "beginning to move while retaining stone weight"
+    ],
+    "environment_fit": [
+      "stone gates",
+      "crypt entrances",
+      "underground arches"
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "cockatrice",
+  "display_name": "Cockatrice",
+  "taxonomy": {
+    "family": "cockatrice",
+    "creature_type": "monstrosity",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A small vicious rooster-reptile hybrid combining a cock's head and comb with leathery wings, clawed feet, and a serpentine tail.",
+    "silhouette": "Compact birdlike body, raised leathery wings, rooster head with comb, two clawed legs, long curling reptilian tail.",
+    "head_features": "Rooster-like head with hooked beak, prominent comb and wattles, fierce eyes.",
+    "body_shape": "Small feathered torso transitioning into leathery wings and a scaled curling tail, with birdlike clawed legs.",
+    "surface": "Sparse feathers on torso, smooth wing membranes, simple tail scales.",
+    "signature_gear": [],
+    "attitude": [
+      "agitated",
+      "territorial",
+      "hissing",
+      "threatening"
+    ],
+    "must_keep": [
+      "rooster head and comb",
+      "leathery wings",
+      "clawed bird legs",
+      "serpentine tail",
+      "small hybrid silhouette"
+    ],
+    "must_avoid": [
+      "ordinary chicken",
+      "full dragon body",
+      "four-legged lizard",
+      "feathered angel wings",
+      "cute farm-bird look",
+      "dense feathers"
+    ],
+    "limb_structure": "Two clawed birdlike legs support the body; two leathery wings provide flight and the long reptilian tail remains distinct."
+  },
+  "accuracy_checks": [
+    "hybrid identity is obvious",
+    "comb and beak are clear",
+    "wings differ from ordinary bird wings",
+    "tail is reptilian",
+    "petrified mouse reads clearly",
+    "creature stays small and colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "drift_1",
+      "symptom": "creature drifts toward ordinary chicken",
+      "correction": "remove ordinary chicken; restore rooster head and comb, leathery wings, clawed bird legs"
+    },
+    {
+      "id": "drift_2",
+      "symptom": "creature drifts toward full dragon body",
+      "correction": "remove full dragon body; restore rooster head and comb, leathery wings, clawed bird legs"
+    },
+    {
+      "id": "drift_3",
+      "symptom": "creature drifts toward four-legged lizard",
+      "correction": "remove four-legged lizard; restore rooster head and comb, leathery wings, clawed bird legs"
+    }
+  ],
+  "locomotion": {
+    "can_fly": false
+  },
+  "scene_identity": {
+    "size_impression": "small creature whose scale should read through its canonical silhouette: Compact birdlike body, raised leathery wings, rooster head with comb, two clawed legs, long curling reptilian tail.",
+    "natural_posture": "Small aggressive two-legged stance or short wing-assisted hop with feet, wings, and tail all physically readable.",
+    "behavior_style": [
+      "strutting or threatening with wings raised",
+      "guarding a crude nest or pen",
+      "lunging with beak while tail stays readable"
+    ],
+    "environment_fit": [
+      "improvised henhouses",
+      "dungeon pens",
+      "ruined underground farms"
+    ]
+  }
+}

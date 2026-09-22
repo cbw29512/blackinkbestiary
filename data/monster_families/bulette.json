@@ -1,0 +1,83 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "bulette",
+  "display_name": "Bulette",
+  "taxonomy": {
+    "family": "bulette",
+    "creature_type": "armored burrowing beast",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A massive land-shark-like burrowing beast with a plated body, prominent dorsal fin, four powerful legs, and a broad predatory head.",
+    "silhouette": "Low barrel-bodied quadruped, high armored back with shark-like dorsal fin, thick forelegs, wedge-shaped head.",
+    "head_features": "Broad blunt predatory head with heavy jaws, small eyes, and armored brow; no aquatic gills required.",
+    "body_shape": "Four-legged compact powerhouse with deep chest, short thick neck, plated back, and digging claws.",
+    "surface": "Large overlapping armor plates with sparse seams and minimal texture.",
+    "signature_gear": [],
+    "attitude": [
+      "charging",
+      "burrowing",
+      "explosive",
+      "predatory"
+    ],
+    "must_keep": [
+      "prominent dorsal fin",
+      "four powerful legs",
+      "armored back",
+      "broad jaws",
+      "land-burrowing posture"
+    ],
+    "must_avoid": [
+      "actual fish body",
+      "six insect legs",
+      "dragon wings",
+      "long snake body",
+      "humanoid traits",
+      "dense plate texture"
+    ],
+    "limb_structure": "Exactly four powerful quadruped legs with digging claws support the barrel body; dorsal fin is part of the back, not an extra limb."
+  },
+  "accuracy_checks": [
+    "reads as land predator not aquatic shark",
+    "dorsal fin is obvious",
+    "four legs are present",
+    "soil-cutting movement is clear",
+    "armor remains colorable",
+    "body feels heavy and subterranean"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "drift_1",
+      "symptom": "creature drifts toward actual fish body",
+      "correction": "remove actual fish body; restore prominent dorsal fin, four powerful legs, armored back"
+    },
+    {
+      "id": "drift_2",
+      "symptom": "creature drifts toward six insect legs",
+      "correction": "remove six insect legs; restore prominent dorsal fin, four powerful legs, armored back"
+    },
+    {
+      "id": "drift_3",
+      "symptom": "creature drifts toward dragon wings",
+      "correction": "remove dragon wings; restore prominent dorsal fin, four powerful legs, armored back"
+    }
+  ],
+  "locomotion": {
+    "can_fly": false
+  },
+  "scene_identity": {
+    "size_impression": "large creature whose scale should read through its canonical silhouette: Low barrel-bodied quadruped, high armored back with shark-like dorsal fin, thick forelegs, wedge-shaped head.",
+    "natural_posture": "Heavy four-legged stance, digging brace, or earth-emergence with all body weight visibly supported by ground.",
+    "behavior_style": [
+      "burrowing beneath loose ground",
+      "bracing before a charge",
+      "emerging through a broad earth break"
+    ],
+    "environment_fit": [
+      "loose-earth caverns",
+      "subterranean fields",
+      "collapsed tunnels"
+    ]
+  }
+}

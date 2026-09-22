@@ -1,0 +1,87 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "drider",
+  "display_name": "Drider",
+  "taxonomy": {
+    "family": "drider",
+    "creature_type": "monstrous humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A humanoid upper body fused directly to the body of a giant spider, combining deliberate weapon use with eight-legged arachnid movement.",
+    "silhouette": "Humanoid torso rising from the front of a broad spider abdomen, eight long spider legs radiating below and around, bow held above.",
+    "head_features": "Elven or severe humanoid face with pointed ears, long hair or simple head covering, no insect head.",
+    "body_shape": "Humanlike chest and arms merge at the waist into a giant spider cephalothorax and abdomen with eight legs.",
+    "surface": "Humanoid skin and cloth kept simple; spider lower body uses sparse hair and broad plates.",
+    "signature_gear": [
+      "bow",
+      "quiver",
+      "simple underground armor or straps"
+    ],
+    "attitude": [
+      "calculating",
+      "predatory",
+      "aloof",
+      "watchful"
+    ],
+    "must_keep": [
+      "humanoid upper torso",
+      "giant spider lower body",
+      "eight spider legs",
+      "visible fusion at waist",
+      "ranged weapon"
+    ],
+    "must_avoid": [
+      "centaur horse body",
+      "two separate creatures",
+      "human legs",
+      "six spider legs",
+      "full insect head",
+      "overly ornate armor"
+    ],
+    "limb_structure": "Two humanoid arms emerge from the upper torso; exactly eight spider legs attach to the arachnid lower body; no human legs appear."
+  },
+  "accuracy_checks": [
+    "fusion between torso and spider body is clear",
+    "eight legs are readable",
+    "bow aiming downward matches scene",
+    "no human legs appear",
+    "upper body stays humanoid",
+    "webs do not overwhelm anatomy"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "drift_1",
+      "symptom": "creature drifts toward centaur horse body",
+      "correction": "remove centaur horse body; restore humanoid upper torso, giant spider lower body, eight spider legs"
+    },
+    {
+      "id": "drift_2",
+      "symptom": "creature drifts toward two separate creatures",
+      "correction": "remove two separate creatures; restore humanoid upper torso, giant spider lower body, eight spider legs"
+    },
+    {
+      "id": "drift_3",
+      "symptom": "creature drifts toward human legs",
+      "correction": "remove human legs; restore humanoid upper torso, giant spider lower body, eight spider legs"
+    }
+  ],
+  "locomotion": {
+    "can_fly": false
+  },
+  "scene_identity": {
+    "size_impression": "large creature whose scale should read through its canonical silhouette: Humanoid torso rising from the front of a broad spider abdomen, eight long spider legs radiating below and around, bow held above.",
+    "natural_posture": "Stable eight-legged spider stance on floor, wall, or web support with humanoid torso balanced above the cephalothorax.",
+    "behavior_style": [
+      "aiming a ranged weapon from a supported spider stance",
+      "watching from a webbed ledge",
+      "moving across wall or floor on eight legs"
+    ],
+    "environment_fit": [
+      "webbed chapels",
+      "underground ruins",
+      "high cavern walls"
+    ]
+  }
+}

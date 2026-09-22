@@ -1,57 +1,6 @@
 {
+  "schema_version": 3,
   "monster_id": "darkmantle",
   "monster_name": "Darkmantle",
-  "family": "darkmantle",
-  "size": "small",
-  "creature_type": "cave aberration",
-  "visual_identity": {
-    "core_identity": "A ceiling-dwelling ambush creature that resembles a leathery stalactite-clinging mantle until it peels away and drops.",
-    "silhouette": "Flattened manta-like leathery body with broad mantle edges and several short dangling tentacles beneath.",
-    "head_features": "Small central underside head or beak-like mouth largely hidden beneath the mantle, with simple predatory features.",
-    "body_shape": "Compact central body under a wide flexible mantle, short gripping tentacles, no humanoid limbs.",
-    "surface": "Leathery membrane with sparse folds and simple underside texture.",
-    "signature_gear": [],
-    "attitude": [
-      "still",
-      "camouflaged",
-      "sudden",
-      "predatory"
-    ],
-    "must_keep": [
-      "broad mantle shape",
-      "ceiling-clinging posture",
-      "dangling tentacles",
-      "non-humanoid body",
-      "stalactite camouflage"
-    ],
-    "must_avoid": [
-      "bat ears",
-      "bird feathers",
-      "octopus-only body",
-      "humanoid face",
-      "large dragon wings",
-      "dense membrane veins"
-    ]
-  },
-  "default_habitats": [
-    "limestone ceilings",
-    "stalactite caverns",
-    "dark dungeon vaults"
-  ],
-  "accuracy_checks": [
-    "reads as mantle-like cave predator",
-    "ceiling relationship is obvious",
-    "tentacles are visible",
-    "shape differs from a bat",
-    "body is compact",
-    "linework remains open"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "locomotion": {
-    "can_fly": true
-  }
+  "family_profile": "darkmantle"
 }

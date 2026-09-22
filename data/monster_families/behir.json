@@ -1,0 +1,83 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "behir",
+  "display_name": "Behir",
+  "taxonomy": {
+    "family": "behir",
+    "creature_type": "monstrosity",
+    "default_size": "huge"
+  },
+  "visual_identity": {
+    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head, and a body built to coil through caverns.",
+    "silhouette": "Very long snake-like torso wrapped in coils, numerous paired legs along the sides, horned head raised from the coil.",
+    "head_features": "Long reptilian head with strong jaws, backward horns or spines, alert eyes, no wings.",
+    "body_shape": "Serpentine segmented torso with many pairs of short legs spaced along its length and a tapering tail.",
+    "surface": "Large simple scales or ridge plates with minimal texture.",
+    "signature_gear": [],
+    "attitude": [
+      "coiling",
+      "predatory",
+      "charged",
+      "territorial"
+    ],
+    "must_keep": [
+      "many pairs of legs",
+      "long serpentine body",
+      "horned reptilian head",
+      "no wings",
+      "cavern-coiling posture"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "four-legged dragon proportions",
+      "centipede insect head",
+      "humanoid arms",
+      "smooth legless snake",
+      "dense scales"
+    ],
+    "limb_structure": "Many pairs of short reptilian legs run along the long serpentine torso; the body is not legless and never has wings."
+  },
+  "accuracy_checks": [
+    "many legs are obvious",
+    "body reads serpentine not centipede",
+    "head is reptilian",
+    "no wings appear",
+    "crystal coil composition is readable",
+    "lightning remains secondary to anatomy"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "drift_1",
+      "symptom": "creature drifts toward dragon wings",
+      "correction": "remove dragon wings; restore many pairs of legs, long serpentine body, horned reptilian head"
+    },
+    {
+      "id": "drift_2",
+      "symptom": "creature drifts toward four-legged dragon proportions",
+      "correction": "remove four-legged dragon proportions; restore many pairs of legs, long serpentine body, horned reptilian head"
+    },
+    {
+      "id": "drift_3",
+      "symptom": "creature drifts toward centipede insect head",
+      "correction": "remove centipede insect head; restore many pairs of legs, long serpentine body, horned reptilian head"
+    }
+  ],
+  "locomotion": {
+    "can_fly": false
+  },
+  "scene_identity": {
+    "size_impression": "huge creature whose scale should read through its canonical silhouette: Very long snake-like torso wrapped in coils, numerous paired legs along the sides, horned head raised from the coil.",
+    "natural_posture": "Coiled or stretched through cavern space with many legs visibly contacting rock while the head rises from the body curve.",
+    "behavior_style": [
+      "coiling through cavern geometry",
+      "watching from a ledge or crystal formation",
+      "advancing with many legs along rock"
+    ],
+    "environment_fit": [
+      "crystal caverns",
+      "deep caves",
+      "subterranean cliffs"
+    ]
+  }
+}

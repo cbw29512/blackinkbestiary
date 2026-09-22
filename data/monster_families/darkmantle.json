@@ -1,0 +1,83 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "darkmantle",
+  "display_name": "Darkmantle",
+  "taxonomy": {
+    "family": "darkmantle",
+    "creature_type": "cave aberration",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A ceiling-dwelling ambush creature that resembles a leathery stalactite-clinging mantle until it peels away and drops.",
+    "silhouette": "Flattened manta-like leathery body with broad mantle edges and several short dangling tentacles beneath.",
+    "head_features": "Small central underside head or beak-like mouth largely hidden beneath the mantle, with simple predatory features.",
+    "body_shape": "Compact central body under a wide flexible mantle, short gripping tentacles, no humanoid limbs.",
+    "surface": "Leathery membrane with sparse folds and simple underside texture.",
+    "signature_gear": [],
+    "attitude": [
+      "still",
+      "camouflaged",
+      "sudden",
+      "predatory"
+    ],
+    "must_keep": [
+      "broad mantle shape",
+      "ceiling-clinging posture",
+      "dangling tentacles",
+      "non-humanoid body",
+      "stalactite camouflage"
+    ],
+    "must_avoid": [
+      "bat ears",
+      "bird feathers",
+      "octopus-only body",
+      "humanoid face",
+      "large dragon wings",
+      "dense membrane veins"
+    ],
+    "limb_structure": "A broad mantle body with several short gripping tentacles beneath; no humanoid arms or legs and no bat-style separate limbs."
+  },
+  "accuracy_checks": [
+    "reads as mantle-like cave predator",
+    "ceiling relationship is obvious",
+    "tentacles are visible",
+    "shape differs from a bat",
+    "body is compact",
+    "linework remains open"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "drift_1",
+      "symptom": "creature drifts toward bat ears",
+      "correction": "remove bat ears; restore broad mantle shape, ceiling-clinging posture, dangling tentacles"
+    },
+    {
+      "id": "drift_2",
+      "symptom": "creature drifts toward bird feathers",
+      "correction": "remove bird feathers; restore broad mantle shape, ceiling-clinging posture, dangling tentacles"
+    },
+    {
+      "id": "drift_3",
+      "symptom": "creature drifts toward octopus-only body",
+      "correction": "remove octopus-only body; restore broad mantle shape, ceiling-clinging posture, dangling tentacles"
+    }
+  ],
+  "locomotion": {
+    "can_fly": true
+  },
+  "scene_identity": {
+    "size_impression": "small creature whose scale should read through its canonical silhouette: Flattened manta-like leathery body with broad mantle edges and several short dangling tentacles beneath.",
+    "natural_posture": "Clinging flat to ceiling or peeling away from a visible attachment point; tentacles hang beneath the supported mantle.",
+    "behavior_style": [
+      "clinging motionless to overhead stone",
+      "peeling away from a stalactite or ceiling",
+      "dropping only with a clear support relationship"
+    ],
+    "environment_fit": [
+      "limestone ceilings",
+      "stalactite caverns",
+      "dark dungeon vaults"
+    ]
+  }
+}
