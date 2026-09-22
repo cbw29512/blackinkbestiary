@@ -114,7 +114,7 @@ These are engine feedback, not isolated page problems.
 2. family DNA audit across every repeated monster family — **implemented; all 14 reusable family profiles pass the expanded DNA contract and catalog audit**
 3. environment variation depth across every book family — **implemented; all 8 environment families now inherit geometry, landmark, prop, interaction, and anti-repetition pools**
 4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented; review state records failed and preserved dimensions**
-5. Golden Five reference pages before mass regeneration
+5. Golden Five reference pages before mass regeneration — **calibration gate implemented; human-approved reference pages still required**
 
 ## Working Rule
 
@@ -205,3 +205,28 @@ Environment variety is now a first-class universal engine layer rather than an i
 - CI validates the registry and regression tests verify complete family coverage
 
 **Next hardening priority:** build the Golden Five reference pages and use them to calibrate the generation/review loop before mass rebuilding Tome I.
+
+
+## 2026-09-22 Golden Five Calibration Gate
+
+The Golden Five are now an isolated calibration lane rather than normal Tome I production pages.
+
+Calibration set:
+
+- I-01 Kobold Warrior — small humanoid identity, trap storytelling, dungeon perspective
+- I-24 Gelatinous Cube — ooze volume, corridor scale, sparse internal objects
+- I-27 Mimic Chest — object-monster identity, vault clarity, subordinate reaching-hand story cue
+- I-38 Ankheg — burrower anatomy, earthen setting, dynamic but visibly supported emergence
+- I-40 Rust Monster — unusual insectoid identity, armory material interaction without weapon clutter
+
+Rules:
+
+- calibration state is stored separately from `data/production-state.json`
+- Golden Five generation cannot advance or lock normal Tome I pages
+- all six review dimensions must pass before a calibration page locks
+- normal Tome I generation beyond its first page is blocked until all five calibration pages are approved
+- series reporting now distinguishes structural `production_ready` from human-validated `mass_generation_ready`
+- the stale I-01 `modify_requested` state with no source candidate was reset to a clean `queued` state
+- I-38 explicitly requires a half-emerged supported pose; the story may feel dynamic but may not become a midair freeze-frame
+
+**Next action:** generate and ruthlessly review the five calibration pages. Only after all five lock does controlled Tome I mass rebuilding begin.
