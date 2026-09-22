@@ -47,4 +47,9 @@ def active_book_paths(root: Path) -> dict[str, Path]:
             config["environment_standard"],
             "environment standard",
         ),
+        "coloring_page_standard": resolve_root_path(
+            root,
+            config["coloring_page_standard"],
+            "coloring page standard",
+        ),
     }
