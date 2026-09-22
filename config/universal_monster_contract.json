@@ -1,13 +1,14 @@
 {
-  "schema_version": 3,
-  "contract_id": "black-ink-monster-v2",
-  "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
+  "schema_version": 4,
+  "contract_id": "black-ink-monster-v3",
+  "purpose": "Keep hundreds of monster JSON recipes tiny while preserving reusable family DNA and reusable variant DNA.",
   "minimal_recipe_required": [
     "monster_id",
     "monster_name",
     "family_profile"
   ],
   "minimal_recipe_optional": [
+    "variant_profile",
     "variant_traits",
     "locomotion",
     "visual_overrides",
@@ -31,18 +32,18 @@
   "resolution_order": [
     "universal monster defaults",
     "family profile",
+    "optional reusable variant profile",
     "minimal monster recipe",
-    "optional visual overrides"
+    "optional exceptional overrides"
   ],
   "rules": [
-    "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
-    "Monster recipes should only state what differs from the family.",
-    "Known family failure modes must be injected into generation and review, not merely stored.",
-    "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment.",
-    "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
-    "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
-    "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
-    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it."
+    "Family profile owns anatomy and behavior shared by the species/family.",
+    "Variant profile owns reusable anatomy, geometry, condition, swarm form, object form, or other identity that differs materially from the family.",
+    "Monster recipes should contain only identifiers, selected family/variant profiles, concise traits, locomotion exceptions, and truly one-off overrides.",
+    "Page recipes own scene-specific props, selected environment, exact action, support, and story interaction.",
+    "Known family and variant failure modes must be injected into generation and review.",
+    "Never copy reusable scenery into family, variant, or monster recipes.",
+    "If a distinction could apply to multiple pages or future monsters, promote it to family DNA or variant DNA instead of repeating it."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -60,7 +61,7 @@
     "accuracy_checks",
     "known_failure_modes"
   ],
-  "scalability_rule": "Hundreds of monster recipes remain small. Creature files own identity, variant traits, behavior tendencies, locomotion, and habitat compatibility; reusable scenery belongs exclusively to the environment engine.",
+  "scalability_rule": "Hundreds of monsters resolve through reusable family DNA and variant DNA. Individual monster recipes remain small and reusable scenery remains exclusively in the environment engine.",
   "environment_ownership": {
     "monster_may_define": [
       "default_habitats",
@@ -82,5 +83,24 @@
       "environment depth cues"
     ],
     "rule": "If a visual element could be reused by another creature in the same place, it belongs in the universal environment engine: family/profile/component/overlay system."
+  },
+  "variant_profile": {
+    "directory": "data/monster_variants",
+    "required": [
+      "variant_id",
+      "family_profile"
+    ],
+    "optional": [
+      "display_name",
+      "size",
+      "creature_type",
+      "visual_identity",
+      "scene_identity",
+      "accuracy_checks",
+      "known_failure_modes",
+      "locomotion"
+    ],
+    "ownership_rule": "Use variant DNA for reusable differences such as undead form, swarm form, ooze geometry, disguised-object form, construct object type, detached limb, or skeletal form.",
+    "family_lock": "A variant profile must declare the same family_profile as the monster recipe that references it."
   }
 }
