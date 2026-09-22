@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "bulette",
+  "display_name": "Bulette",
+  "taxonomy": {
+    "family": "bulette",
+    "creature_type": "armored burrowing beast",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A massive land-shark-like burrowing beast with a plated body, prominent dorsal fin, four powerful legs, and a broad predatory head.",
+    "silhouette": "Low barrel-bodied quadruped, high armored back with shark-like dorsal fin, thick forelegs, wedge-shaped head.",
+    "head_features": "Broad blunt predatory head with heavy jaws, small eyes, and armored brow.",
+    "body_shape": "Four-legged compact powerhouse with deep chest, short thick neck, plated back, and digging claws.",
+    "surface": "Large overlapping armor plates with sparse seams and minimal texture.",
+    "signature_gear": [],
+    "attitude": [
+      "charging",
+      "burrowing",
+      "explosive",
+      "predatory"
+    ],
+    "must_keep": [
+      "prominent dorsal fin",
+      "four powerful legs",
+      "armored back",
+      "broad jaws",
+      "land-burrowing posture"
+    ],
+    "must_avoid": [
+      "actual fish body",
+      "six insect legs",
+      "dragon wings",
+      "long snake body",
+      "humanoid traits",
+      "dense plate texture"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as land predator not aquatic shark",
+    "dorsal fin is obvious",
+    "four legs are present",
+    "armor remains colorable",
+    "body feels heavy and subterranean"
+  ]
+}
