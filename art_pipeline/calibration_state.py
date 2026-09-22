@@ -58,9 +58,27 @@ def register_calibration_candidate(
     entry["attempt"] = attempt
     entry["current_candidate"] = candidate
     entry["status"] = "awaiting_human"
+    entry.pop("generation_error", None)
     entry.setdefault("attempt_history", []).append(candidate)
     save_calibration_state(state, root)
     return candidate
+
+
+def set_calibration_generation_error(
+    root: Path,
+    page_id: str,
+    message: str | None,
+) -> dict:
+    state = load_calibration_state(root)
+    if page_id not in state.get("pages", {}):
+        raise RuntimeError(f"{page_id} is not in Golden Five calibration state")
+    entry = state["pages"][page_id]
+    if message:
+        entry["generation_error"] = {"message": str(message), "at": utc_now()}
+    else:
+        entry.pop("generation_error", None)
+    save_calibration_state(state, root)
+    return entry
 
 
 def approve_calibration_candidate(root: Path, page_id: str, notes: str = "") -> dict:

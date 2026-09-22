@@ -76,6 +76,7 @@ function renderGoldenView(data, page) {
     </div>
     ${worker.running ? `<p class="golden-worker">Generating ${goldenEsc(worker.page_id)} locally...</p>` : ""}
     ${worker.reason === "local_generation_preflight_failed" ? '<p class="error">Local artist is not generation-ready. See the readiness status at the top of the Studio.</p>' : ""}
+    ${page.generation_error?.message ? `<p class="error"><strong>Generation failed:</strong> ${goldenEsc(page.generation_error.message)}</p>` : ""}
     ${locked ? '<p class="golden-pass">This reference page passed all six quality dimensions.</p>' : ""}
     <p id="goldenError" class="error"></p>
   `;
