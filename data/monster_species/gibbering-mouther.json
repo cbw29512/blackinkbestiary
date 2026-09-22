@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "gibbering-mouther",
+  "display_name": "Gibbering Mouther",
+  "taxonomy": {
+    "family": "gibbering mouther",
+    "creature_type": "aberration",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "An amorphous crawling aberration formed from a lumpy fleshlike mass covered in many unrelated eyes and mouths.",
+    "silhouette": "Low spreading irregular mound with several protruding mouths and eyes distributed across its surface and no stable limbs.",
+    "head_features": "No single head; multiple mouths of different sizes and several eyes are scattered across the mass.",
+    "body_shape": "Soft shapeless crawling mound with pseudopod-like lower edges, never resolving into humanoid anatomy.",
+    "surface": "Smooth folds with sparse bumps; mouths and eyes provide identity without dense gore.",
+    "signature_gear": [],
+    "attitude": [
+      "churning",
+      "babbling",
+      "hungry",
+      "chaotic"
+    ],
+    "must_keep": [
+      "many mouths",
+      "multiple scattered eyes",
+      "amorphous body",
+      "no single head",
+      "crawling low silhouette"
+    ],
+    "must_avoid": [
+      "graphic gore",
+      "human torso",
+      "single giant face",
+      "tentacle octopus form",
+      "solid black shading",
+      "too many tiny mouths causing clutter"
+    ]
+  },
+  "accuracy_checks": [
+    "multiple mouths are clearly separate",
+    "eyes are scattered rather than forming one face",
+    "body remains amorphous",
+    "gore stays restrained",
+    "negative space remains usable"
+  ]
+}
