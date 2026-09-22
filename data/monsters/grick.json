@@ -1,54 +1,6 @@
 {
+  "schema_version": 3,
   "monster_id": "grick",
   "monster_name": "Grick",
-  "family": "grick",
-  "size": "medium",
-  "creature_type": "cave aberration",
-  "visual_identity": {
-    "core_identity": "A wormlike subterranean ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak.",
-    "silhouette": "Thick serpentine body rising from rubble, front end opening into four evenly spaced tentacles around the mouth.",
-    "head_features": "No normal head; four muscular facial tentacles frame a small hard beak at the exact center.",
-    "body_shape": "Long heavy worm body with subtle segmented folds and no legs.",
-    "surface": "Rubbery ringed skin with restrained segment lines.",
-    "signature_gear": [],
-    "attitude": [
-      "hidden",
-      "coiled",
-      "sudden",
-      "predatory"
-    ],
-    "must_keep": [
-      "four facial tentacles",
-      "central beak",
-      "wormlike body",
-      "no legs",
-      "rubble ambush posture"
-    ],
-    "must_avoid": [
-      "octopus body",
-      "snake head",
-      "more than four face tentacles",
-      "humanoid eyes",
-      "insect legs",
-      "dense ring texture"
-    ]
-  },
-  "default_habitats": [
-    "collapsed tunnels",
-    "rubble piles",
-    "deep caves"
-  ],
-  "accuracy_checks": [
-    "four tentacles are countable",
-    "beak sits at center",
-    "body reads wormlike",
-    "no legs appear",
-    "rubble concealment is clear",
-    "silhouette remains simple"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  "family_profile": "grick"
 }
