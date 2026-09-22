@@ -3,7 +3,7 @@ $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 
 Write-Host ""
-Write-Host "Black-Ink Bestiary — One-Click Local AI Install" -ForegroundColor Cyan
+Write-Host "Black-Ink Bestiary - One-Click Local AI Install" -ForegroundColor Cyan
 Write-Host "=================================================="
 
 # Step 1: project-local comfy-cli
