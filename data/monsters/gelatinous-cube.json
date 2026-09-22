@@ -1,57 +1,7 @@
 {
+  "schema_version": 3,
   "monster_id": "gelatinous-cube",
   "monster_name": "Gelatinous Cube",
-  "family": "ooze",
-  "size": "large",
-  "creature_type": "ooze",
-  "visual_identity": {
-    "core_identity": "A nearly transparent cube-shaped dungeon ooze whose straight corridor-filling edges and suspended debris make its body readable.",
-    "silhouette": "Large rectangular cube occupying most of a ten-foot corridor, with subtly rippling edges and a flat forward face.",
-    "head_features": "No head or face; identity comes entirely from the cube form and suspended contents.",
-    "body_shape": "Uniform gelatinous cube with faint internal bubbles and objects suspended at different depths.",
-    "surface": "Mostly clear open white interior with only sparse contour ripples and bubbles.",
-    "signature_gear": [],
-    "attitude": [
-      "silent",
-      "relentless",
-      "featureless",
-      "engulfing"
-    ],
-    "must_keep": [
-      "clear cube geometry",
-      "transparent-looking open interior",
-      "suspended bones",
-      "suspended key",
-      "corridor-filling scale"
-    ],
-    "must_avoid": [
-      "face or eyes",
-      "slime tentacles",
-      "solid black fill",
-      "rounded blob silhouette",
-      "decorative reflections",
-      "dense bubbles"
-    ]
-  },
-  "default_habitats": [
-    "ten-foot stone corridors",
-    "square dungeon passages",
-    "underground halls"
-  ],
-  "accuracy_checks": [
-    "cube edges are unmistakable",
-    "corridor scale explains size",
-    "bones and key appear inside not in front",
-    "interior stays mostly white",
-    "no face is added",
-    "outline remains simple"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "ooze"
+  "family_profile": "ooze",
+  "variant_profile": "gelatinous-cube"
 }
