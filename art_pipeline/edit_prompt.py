@@ -8,9 +8,11 @@ try:
 except ImportError:
     from style_rules import STYLE_RULES
 try:
-    from .quality_system import archetype_directive, environment_directives, expand_defect_tags
+    from .environment_prompt import environment_prompt_sections
+    from .quality_system import archetype_directive, expand_defect_tags
 except ImportError:
-    from quality_system import archetype_directive, environment_directives, expand_defect_tags
+    from environment_prompt import environment_prompt_sections
+    from quality_system import archetype_directive, expand_defect_tags
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -27,7 +29,7 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
         f"SUBJECT MUST REMAIN: {page['monster_name']}.",
         *_canonical_sections(spec),
         f"HABITAT MUST READ AS: {page['habitat']}.",
-        _items("GLOBAL ENVIRONMENT STANDARD", environment_directives(ROOT)),
+        *environment_prompt_sections(page, ROOT),
         (
             "ENVIRONMENT PRESERVATION RULE: Preserve successful setting identity, perspective, scale references, "
             "and story-critical environmental interactions. Simplify clutter only; never flatten the scene into a generic backdrop."
