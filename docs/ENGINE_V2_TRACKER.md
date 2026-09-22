@@ -25,11 +25,12 @@ Every final page must:
 - preserve the 8.5 × 11 portrait KDP-safe composition
 - feel unique beside the other pages in the book
 
-Approval requires all three thumbnail pillars:
+Approval requires all three thumbnail pillars, but **colorability is the first production constraint**:
 
-1. monster identity
-2. environment identity
-3. story moment
+1. fun and satisfying to color
+2. monster identity
+3. environment identity
+4. one simple memorable story moment
 
 ## Universal Engine Ownership
 
@@ -109,7 +110,7 @@ These are engine feedback, not isolated page problems.
 
 ### Current hardening priorities
 
-1. story-moment engine: one readable static beat instead of portrait/prop posing
+1. story-moment engine: one readable static beat instead of portrait/prop posing — **implemented; colorability has priority over story complexity**
 2. family DNA audit across every repeated monster family
 3. environment variation depth across every book family
 4. Modify/Regenerate routing based on passed vs failed pillars
@@ -142,3 +143,23 @@ This file is the persistent project checkpoint. Update it whenever:
 - the next production priority changes
 
 Do not let chat-only decisions become the sole source of truth.
+
+
+## Story vs. Coloring Rule
+
+Story helps sell the page, but the product is a coloring book.
+
+Priority:
+
+1. fun and satisfying to color
+2. recognizable monster
+3. unmistakable environment
+4. one simple memorable story beat
+
+If a stronger story requires extra figures, tiny props, dense texture, unstable motion, or more enclosed coloring cells, simplify the story instead.
+
+Preferred story formula:
+
+**one clear verb + simple body language + one environmental interaction**
+
+Do not turn a coloring page into a busy narrative illustration.
