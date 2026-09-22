@@ -17,13 +17,17 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from art_pipeline.rebuild_state import activate_rebuild_source
+from art_pipeline.manifest_validation import validate_manifest
+from art_pipeline.quality_system import expand_defect_tags, recommended_action
+from art_pipeline.studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
 DATA_DIR = ROOT / "data"
-TOME_FILE = DATA_DIR / "tome-I.json"
-STATE_FILE = DATA_DIR / "production-state.json"
-REVIEWS_FILE = DATA_DIR / "reviews.jsonl"
+_BOOK_PATHS = active_book_paths(ROOT)
+TOME_FILE = _BOOK_PATHS["manifest"]
+STATE_FILE = _BOOK_PATHS["state"]
+REVIEWS_FILE = _BOOK_PATHS["reviews"]
 APPROVED_ROOT = WEB_DIR / "approved"
 MONSTER_DIR = DATA_DIR / "monsters"
 GENERATOR_SCRIPT = ROOT / "scripts" / "generate_current_page.py"
@@ -55,7 +59,11 @@ def write_json(path: Path, payload) -> None:
 
 
 def load_tome():
-    return read_json(TOME_FILE)
+    tome = read_json(TOME_FILE)
+    errors = validate_manifest(ROOT, tome, MONSTER_DIR)
+    if errors:
+        raise ValueError("Production manifest invalid: " + " | ".join(errors))
+    return tome
 
 
 def load_state():
@@ -315,13 +323,20 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         }
 
     state["updated_at"] = utc_now()
+    page = page_by_id(tome, page_id) or {}
     append_review({
+        "book_id": tome.get("tome_id"),
+        "book_title": tome.get("title"),
         "page_id": page_id,
+        "monster_name": page.get("monster_name"),
+        "archetype": page.get("archetype"),
         "decision": decision,
+        "routing_recommendation": recommended_action(ROOT, quick_tags) if quick_tags else decision,
         "candidate": candidate,
         "approved_image_path": page_state.get("approved_image_path"),
         "notes": notes.strip(),
         "quick_tags": quick_tags,
+        "remediation_directives": expand_defect_tags(ROOT, quick_tags),
         "timestamp": utc_now(),
     })
     write_json(STATE_FILE, state)
