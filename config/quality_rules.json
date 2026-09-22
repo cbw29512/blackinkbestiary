@@ -11,7 +11,7 @@
     },
     "simpler background": {
       "action": "modify",
-      "directive": "Simplify the environment to a few clear habitat-defining shapes. Preserve perspective and story-critical objects while removing background clutter."
+      "directive": "Simplify nonessential environmental detail without removing habitat-defining anchors, spatial depth, or story-critical environmental features."
     },
     "clearer anatomy": {
       "action": "modify",
@@ -48,6 +48,48 @@
     "composition wrong": {
       "action": "regenerate",
       "directive": "Rebuild the composition around one dominant monster, one clear story beat, and only the habitat elements needed to support that moment."
+    },
+    "stronger environment identity": {
+      "action": "modify",
+      "directive": "Strengthen the setting using its required environmental anchors, architecture, terrain, props, and depth. The location must be recognizable even without relying on the monster."
+    },
+    "environment too empty": {
+      "action": "modify",
+      "directive": "Add a small number of large, habitat-specific environmental forms that create foreground, midground, or background interest without filling the page with tiny detail."
+    },
+    "environment too generic": {
+      "action": "modify",
+      "directive": "Replace generic walls, floor, or empty space with the page's specific environmental anchors. Preserve clean coloring areas while making the location unmistakable."
+    },
+    "environment story disconnected": {
+      "action": "modify",
+      "directive": "Make the monster physically interact with the setting or story-critical environmental feature so the action belongs to this location rather than appearing pasted onto a background."
+    },
+    "environment too cluttered": {
+      "action": "modify",
+      "directive": "Remove nonessential environmental marks and props while preserving every habitat-defining anchor and the setting's large colorable shapes."
+    },
+    "environment perspective unclear": {
+      "action": "modify",
+      "directive": "Clarify floor, wall, ceiling, depth, and object placement so the setting reads as a coherent physical space without adding decorative detail."
+    },
+    "wrong environment": {
+      "action": "regenerate",
+      "directive": "Regenerate the scene around the required environment identity and anchors. The setting is fundamentally wrong and must be rebuilt together with the monster and story moment."
     }
+  },
+  "principles": {
+    "three_equal_gates": [
+      "monster identity is clear and anatomically believable",
+      "environment identity is clear, specific, and worth coloring",
+      "story moment is immediately readable through interaction"
+    ],
+    "environment_standard": [
+      "environment is a co-equal storytelling subject, not filler",
+      "setting should remain identifiable even if the monster were hidden",
+      "use two to four strong environmental anchors rather than generic clutter",
+      "monster and environment must physically interact when the story allows",
+      "environment should provide large, distinct coloring shapes and depth"
+    ]
   }
 }
