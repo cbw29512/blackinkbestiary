@@ -7,9 +7,11 @@ from pathlib import Path
 
 try:
     from .manifest_validation import validate_manifest
+    from .page_contract import resolve_page_spec
     from .studio_config import active_book_paths
 except ImportError:
     from manifest_validation import validate_manifest
+    from page_contract import resolve_page_spec
     from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,7 +50,7 @@ def current_context():
     state = read_json(STATE_FILE)
     page_id = state["current_page_id"]
     page = next(item for item in tome["pages"] if item["page_id"] == page_id)
-    return page, state["pages"][page_id]
+    return resolve_page_spec(page, ROOT), state["pages"][page_id]
 
 
 def set_page_status(page_id: str, status: str, error: str | None = None) -> None:
