@@ -53,6 +53,7 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
         page.get("monster_spec_id"),
         root / "data" / "monsters",
         root / "data" / "monster_families",
+        root / "data" / "monster_variants",
     )
     environment = resolve_environment_profile(
         page.get("environment_profile_id"),
@@ -89,6 +90,8 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
         "contract_id": contract.get("contract_id"),
         "monster_identity_version": monster.get("identity_version"),
         "monster_family_profile": (monster.get("catalog") or {}).get("family_profile"),
+        "monster_variant_profile": (monster.get("catalog") or {}).get("variant_profile"),
+        "monster_variant_identity_version": (monster.get("catalog") or {}).get("variant_identity_version"),
         "environment_profile": environment.get("environment_id"),
         "environment_family": environment.get("environment_family"),
     }
