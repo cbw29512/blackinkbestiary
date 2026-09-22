@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "otyugh",
+  "display_name": "Otyugh",
+  "taxonomy": {
+    "family": "otyugh",
+    "creature_type": "aberration",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A refuse-dwelling aberration with three stout legs, two long grasping tentacles, one elevated eyestalk, and a broad central mouth.",
+    "silhouette": "Low bulky central body supported by three legs, two long tentacles reaching outward, single eyestalk rising above.",
+    "head_features": "No separate head; one elevated eye and a huge mouth occupy the central body.",
+    "body_shape": "Round heavy torso with three thick legs and two flexible grasping tentacles.",
+    "limb_structure": "Exactly three weight-bearing legs, two long grasping tentacles, and one eyestalk; no extra arms or octopus anatomy.",
+    "surface": "Tough hide with sparse folds and warts kept simple.",
+    "must_keep": [
+      "three legs",
+      "two long tentacles",
+      "single eyestalk",
+      "large central mouth",
+      "low bulky posture"
+    ],
+    "must_avoid": [
+      "two-legged humanoid body",
+      "multiple eye stalks",
+      "octopus eight tentacles",
+      "dragon anatomy",
+      "graphic filth detail",
+      "dense skin texture"
+    ]
+  },
+  "accuracy_checks": [
+    "three-leg anatomy is readable",
+    "two grasping tentacles are distinct",
+    "single eyestalk is visible",
+    "mouth is central",
+    "creature remains the focal point"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "leg_count_drift",
+      "symptom": "otyugh has two or four legs",
+      "correction": "restore exactly three stout weight-bearing legs"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "tentacle count multiplies",
+      "correction": "restore exactly two grasping tentacles plus one eyestalk"
+    },
+    {
+      "id": "eye_drift",
+      "symptom": "multiple eye stalks appear",
+      "correction": "restore one elevated eyestalk"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Large low bulky body occupying substantial refuse-pit or sewer floor area.",
+    "natural_posture": "Supported on all three legs while two tentacles reach independently and the eyestalk surveys above.",
+    "behavior_style": [
+      "scavenging in a refuse pit",
+      "reaching toward one large discarded object",
+      "guarding a sewer niche",
+      "occupying a broad waste channel"
+    ],
+    "environment_fit": [
+      "refuse pits",
+      "sewers",
+      "dungeon privies and waste chambers"
+    ]
+  }
+}
