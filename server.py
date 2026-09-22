@@ -18,6 +18,7 @@ from urllib.parse import unquote, urlparse
 
 from art_pipeline.rebuild_state import activate_rebuild_source
 from art_pipeline.manifest_validation import validate_manifest
+from art_pipeline.environment_catalog import resolve_environment_profile
 from art_pipeline.monster_catalog import load_monster_for_page
 from art_pipeline.quality_system import expand_defect_tags, recommended_action
 from art_pipeline.studio_config import active_book_paths
@@ -93,6 +94,13 @@ def public_monster_spec(page: dict):
     reference["resolved_image"] = resolved
     payload["reference"] = reference
     return payload
+
+
+def public_environment_profile(page: dict):
+    profile_id = str(page.get("environment_profile_id") or "").strip()
+    if not profile_id:
+        return None
+    return resolve_environment_profile(profile_id)
 
 
 def active_page_ids(state):
@@ -192,6 +200,7 @@ def public_state():
         "progress": {"approved": approved, "total": tome["total_pages"]},
         "current_page": current,
         "current_monster_spec": public_monster_spec(current),
+        "current_environment_profile": public_environment_profile(current),
         "current_state": state["pages"][state["current_page_id"]],
         "current_page_id": state["current_page_id"],
         "generation_worker": generation_worker_status(),
