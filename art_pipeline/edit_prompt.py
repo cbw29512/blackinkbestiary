@@ -15,10 +15,12 @@ try:
     from .environment_prompt import environment_prompt_sections
     from .physicality_prompt import physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
+    from .story_prompt import story_sections
 except ImportError:
     from environment_prompt import environment_prompt_sections
     from physicality_prompt import physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
+    from story_prompt import story_sections
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -42,6 +44,7 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
             "and story-critical environmental interactions. Simplify clutter only; never flatten the scene into a generic backdrop."
         ),
         f"STORY MOMENT MUST READ AS: {page['moment']}.",
+        *story_sections(page, ROOT),
         *physicality_sections(page),
         f"SCENE ARCHETYPE MUST REMAIN: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",

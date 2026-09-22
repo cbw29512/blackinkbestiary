@@ -32,7 +32,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     },
     {
       "book_id": "TOME-II",
@@ -61,7 +62,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     },
     {
       "book_id": "TOME-III",
@@ -90,7 +92,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     },
     {
       "book_id": "TOME-IV",
@@ -119,7 +122,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     },
     {
       "book_id": "TOME-V",
@@ -148,7 +152,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     },
     {
       "book_id": "TOME-VI",
@@ -177,7 +182,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     },
     {
       "book_id": "TOME-VII",
@@ -206,7 +212,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     },
     {
       "book_id": "TOME-VIII",
@@ -235,7 +242,8 @@
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
       "content_scope": "config/content_scope.json",
-      "environment_contract": "config/universal_environment_contract.json"
+      "environment_contract": "config/universal_environment_contract.json",
+      "story_contract": "config/universal_story_contract.json"
     }
   ],
   "default_target_pages": 50,
@@ -250,5 +258,6 @@
     "goal": "Production-quality KDP coloring books featuring accurate SRD monsters in distinctive natural habitats, lairs, or believable territories."
   },
   "print_standard": "config/kdp_print_standard.json",
-  "environment_contract": "config/universal_environment_contract.json"
+  "environment_contract": "config/universal_environment_contract.json",
+  "story_contract": "config/universal_story_contract.json"
 }

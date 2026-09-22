@@ -52,6 +52,29 @@ class ProductNorthStarTests(unittest.TestCase):
         for page in tome["pages"]:
             self.assertTrue(monster_allowed(page["monster_spec_id"], ROOT), page["page_id"])
 
+    def test_all_books_inherit_story_engine(self):
+        series = json.loads((ROOT / "data" / "series.json").read_text(encoding="utf-8"))
+        self.assertEqual(series["story_contract"], "config/universal_story_contract.json")
+        for book in series["books"]:
+            self.assertEqual(book["story_contract"], "config/universal_story_contract.json")
+
+    def test_engine_tracker_exists_and_names_current_priorities(self):
+        tracker = (ROOT / "docs" / "ENGINE_V2_TRACKER.md").read_text(encoding="utf-8")
+        self.assertIn("story-moment engine", tracker)
+        self.assertIn("family DNA audit", tracker)
+        self.assertIn("environment variation depth", tracker)
+        self.assertIn("Golden Five", tracker)
+
+    def test_colorability_outranks_story_complexity(self):
+        page = json.loads((ROOT / "config" / "universal_page_contract.json").read_text(encoding="utf-8"))
+        coloring = json.loads((ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8"))
+        story = json.loads((ROOT / "config" / "universal_story_contract.json").read_text(encoding="utf-8"))
+        self.assertEqual(page["production_priority"][0], "colorability")
+        self.assertEqual(coloring["priority_order"][0], "fun and satisfying to color")
+        self.assertIn("colorability wins", story["priority_rule"].lower())
+        self.assertEqual(story["story_budget"]["primary_beats"], 1)
+        self.assertEqual(story["story_budget"]["environment_interactions"], [1, 1])
+
 
 if __name__ == "__main__":
     unittest.main()
