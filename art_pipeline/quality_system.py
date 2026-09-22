@@ -3,7 +3,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from studio_config import active_book_paths
+try:
+    from .studio_config import active_book_paths
+except ImportError:
+    from studio_config import active_book_paths
 
 
 def _load(path: Path) -> dict:
