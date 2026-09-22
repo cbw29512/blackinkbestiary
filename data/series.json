@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "series_id": "black-ink-bestiary",
+  "series_title": "Black-Ink Bestiary",
+  "tagline": "Fantasy Monsters in Their Natural Habitat",
+  "target_pages_per_book": 50,
+  "production_rule": "Monster identity + environment identity + story moment are co-equal. No book enters production until its full manifest and canonical creature coverage pass audit.",
+  "books": [
+    {
+      "book_id": "TOME-I",
+      "title": "Caves & Dungeons",
+      "status": "production",
+      "target_pages": 50,
+      "theme": "Fantasy monsters in underground lairs, caves, ruins, and dungeon spaces",
+      "environment_scope": [
+        "dungeons",
+        "caves",
+        "underground ruins",
+        "mines",
+        "crypt access",
+        "subterranean lairs"
+      ],
+      "manifest_path": "data/tome-I.json",
+      "state_path": "data/production-state.json",
+      "reviews_path": "data/reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    },
+    {
+      "book_id": "TOME-II",
+      "title": "Dark Forest Creatures",
+      "status": "setup_ready",
+      "target_pages": 50,
+      "theme": "Predators, fey threats, goblinoids, beasts, and strange creatures in dark woodland habitats",
+      "environment_scope": [
+        "ancient forests",
+        "deep woods",
+        "overgrown ruins",
+        "hollow trees",
+        "forest streams",
+        "moonlit clearings"
+      ],
+      "manifest_path": "data/books/tome-II.json",
+      "state_path": "data/books/tome-II-state.json",
+      "reviews_path": "data/books/tome-II-reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    },
+    {
+      "book_id": "TOME-III",
+      "title": "Fantasy Beasts",
+      "status": "setup_ready",
+      "target_pages": 50,
+      "theme": "Classic fantasy beasts and wilderness monsters shown where they naturally hunt, nest, graze, stalk, or defend territory",
+      "environment_scope": [
+        "wild hills",
+        "grasslands",
+        "rocky valleys",
+        "enchanted wilderness",
+        "riverbanks",
+        "remote ruins"
+      ],
+      "manifest_path": "data/books/tome-III.json",
+      "state_path": "data/books/tome-III-state.json",
+      "reviews_path": "data/books/tome-III-reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    },
+    {
+      "book_id": "TOME-IV",
+      "title": "Dragons",
+      "status": "setup_ready",
+      "target_pages": 50,
+      "theme": "Dragons, drakes, wyverns, and draconic threats in distinctive lairs and landscapes",
+      "environment_scope": [
+        "mountain lairs",
+        "volcanic caverns",
+        "ancient ruins",
+        "cliff nests",
+        "swamps",
+        "hoard chambers"
+      ],
+      "manifest_path": "data/books/tome-IV.json",
+      "state_path": "data/books/tome-IV-state.json",
+      "reviews_path": "data/books/tome-IV-reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    },
+    {
+      "book_id": "TOME-V",
+      "title": "Undead",
+      "status": "setup_ready",
+      "target_pages": 50,
+      "theme": "Undead creatures in crypts, graveyards, catacombs, haunted ruins, and cursed places",
+      "environment_scope": [
+        "crypts",
+        "graveyards",
+        "catacombs",
+        "haunted ruins",
+        "abandoned chapels",
+        "cursed battlefields"
+      ],
+      "manifest_path": "data/books/tome-V.json",
+      "state_path": "data/books/tome-V-state.json",
+      "reviews_path": "data/books/tome-V-reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    },
+    {
+      "book_id": "TOME-VI",
+      "title": "Creatures of the Deep",
+      "status": "setup_ready",
+      "target_pages": 50,
+      "theme": "Aquatic, coastal, marsh, and deep-water monsters in believable wet environments",
+      "environment_scope": [
+        "reefs",
+        "shipwrecks",
+        "sea caves",
+        "underwater ruins",
+        "coastal cliffs",
+        "marshes and swamps"
+      ],
+      "manifest_path": "data/books/tome-VI.json",
+      "state_path": "data/books/tome-VI-state.json",
+      "reviews_path": "data/books/tome-VI-reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    },
+    {
+      "book_id": "TOME-VII",
+      "title": "Mythical Beasts",
+      "status": "setup_ready",
+      "target_pages": 50,
+      "theme": "Legendary and myth-inspired creatures in iconic wild, sacred, ruined, and enchanted settings",
+      "environment_scope": [
+        "lost temples",
+        "enchanted valleys",
+        "sacred groves",
+        "ancient ruins",
+        "remote peaks",
+        "legendary roads"
+      ],
+      "manifest_path": "data/books/tome-VII.json",
+      "state_path": "data/books/tome-VII-state.json",
+      "reviews_path": "data/books/tome-VII-reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    },
+    {
+      "book_id": "TOME-VIII",
+      "title": "Giants & Brutes",
+      "status": "setup_ready",
+      "target_pages": 50,
+      "theme": "Giants, ogres, trolls, massive humanoids, and brute monsters shown at convincing scale in their territories",
+      "environment_scope": [
+        "mountain passes",
+        "giant halls",
+        "badlands",
+        "fortresses",
+        "ravines",
+        "ruined settlements"
+      ],
+      "manifest_path": "data/books/tome-VIII.json",
+      "state_path": "data/books/tome-VIII-state.json",
+      "reviews_path": "data/books/tome-VIII-reviews.jsonl",
+      "creature_catalog": "data/monsters",
+      "family_catalog": "data/monster_families",
+      "style_standard": "docs/STYLE_BIBLE.md",
+      "environment_standard": "config/environment_standard.json"
+    }
+  ]
+}
