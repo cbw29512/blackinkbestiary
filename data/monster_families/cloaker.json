@@ -1,0 +1,76 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "cloaker",
+  "display_name": "Cloaker",
+  "taxonomy": {
+    "family": "cloaker",
+    "creature_type": "cave aberration",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A living cave predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature.",
+    "silhouette": "Wide triangular mantle body with winglike sides, narrow trailing tail, and compact underside face.",
+    "head_features": "Small predatory underside face integrated into the mantle rather than mounted on a neck.",
+    "body_shape": "Flat flexible ray-like body with broad leathery wings and one long whip-like tail.",
+    "limb_structure": "No humanoid limbs; broad mantle edges function as wings and one long tail trails behind. When hanging, visible contact supports the body.",
+    "surface": "Smooth leathery membrane with sparse folds and rib lines.",
+    "must_keep": [
+      "cloak-like folded silhouette",
+      "broad leathery wings",
+      "integrated underside face",
+      "long tail",
+      "hanging disguise"
+    ],
+    "must_avoid": [
+      "ordinary bat anatomy",
+      "feathers",
+      "humanoid arms",
+      "dragon head",
+      "multiple tentacles",
+      "dense membrane veins"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as a living cloak rather than bat",
+    "hanging disguise is believable",
+    "broad mantle shape is clear",
+    "tail is visible",
+    "face remains secondary"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "bat_drift",
+      "symptom": "cloaker becomes ordinary giant bat",
+      "correction": "restore broad cloak-like mantle, integrated underside face, and long tail"
+    },
+    {
+      "id": "floating_drift",
+      "symptom": "hanging cloaker has no attachment or support",
+      "correction": "show visible wall/ceiling contact or grounded unfolding posture"
+    },
+    {
+      "id": "tentacle_drift",
+      "symptom": "body becomes multi-tentacled aberration",
+      "correction": "remove extra tentacles and restore single tail plus mantle wings"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Large broad mantle whose width dominates more than body thickness.",
+    "natural_posture": "Hanging flush against wall or ceiling, draped over a surface, or flying with broad mantle fully readable.",
+    "behavior_style": [
+      "hanging in disguise",
+      "peeling away from a wall or ceiling",
+      "unfolding from a supported perch",
+      "gliding through a broad cavern"
+    ],
+    "environment_fit": [
+      "cave walls and ceilings",
+      "vaulted underground rooms",
+      "large stone surfaces where cloak-like camouflage reads"
+    ]
+  },
+  "locomotion": {
+    "can_fly": true
+  }
+}
