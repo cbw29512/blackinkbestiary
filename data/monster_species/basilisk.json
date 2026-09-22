@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "basilisk",
+  "display_name": "Basilisk",
+  "taxonomy": {
+    "family": "basilisk",
+    "creature_type": "monstrosity",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A squat heavy reptilian monster with eight sturdy legs and a fixed predatory stare associated with petrification.",
+    "silhouette": "Low broad lizardlike body on eight short legs, thick tail, heavy head held forward.",
+    "head_features": "Broad reptilian head with strong brow, wide jaw, small teeth, and intense forward-facing eyes.",
+    "body_shape": "Stocky scaled reptile with exactly eight legs, low belly, and thick tapering tail.",
+    "surface": "Large simple scales or armored skin plates used sparingly.",
+    "signature_gear": [],
+    "attitude": [
+      "still",
+      "watchful",
+      "predatory",
+      "staring"
+    ],
+    "must_keep": [
+      "eight legs",
+      "heavy reptilian body",
+      "thick tail",
+      "direct stare",
+      "low squat posture"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "two or four legs",
+      "serpent-only body",
+      "humanoid face",
+      "horned dragon head",
+      "dense tiny scales"
+    ]
+  },
+  "accuracy_checks": [
+    "eight legs are countable or strongly readable",
+    "stare is central to identity",
+    "body is squat not serpentine",
+    "no wings appear",
+    "scale texture stays simple"
+  ]
+}
