@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "defects": {
+    "more white space": {
+      "action": "modify",
+      "directive": "Increase large uninterrupted white coloring regions. Remove secondary texture and nonessential interior marks without weakening the subject silhouette."
+    },
+    "less detail": {
+      "action": "modify",
+      "directive": "Reduce tiny texture, decorative marks, and secondary line density. Keep only anatomy, story-critical props, and simple habitat cues."
+    },
+    "simpler background": {
+      "action": "modify",
+      "directive": "Simplify the environment to a few clear habitat-defining shapes. Preserve perspective and story-critical objects while removing background clutter."
+    },
+    "clearer anatomy": {
+      "action": "modify",
+      "directive": "Correct anatomy and limb structure while preserving the successful pose and composition. Make joints, extremities, and body proportions easy to read."
+    },
+    "stronger monster identity": {
+      "action": "modify",
+      "directive": "Strengthen the canonical silhouette, head features, body proportions, and signature anatomy so the creature is unmistakable at thumbnail size."
+    },
+    "stronger outer contour": {
+      "action": "modify",
+      "directive": "Strengthen the main subject's outer contour and reduce competing interior lines so the creature separates clearly from the background."
+    },
+    "lighter interior lines": {
+      "action": "modify",
+      "directive": "Reduce interior line weight and density while keeping the outer contour bold and readable."
+    },
+    "story beat unclear": {
+      "action": "modify",
+      "directive": "Make the required story moment immediately readable through pose, cause-and-effect, and placement of the key prop or environmental interaction."
+    },
+    "required prop missing": {
+      "action": "modify",
+      "directive": "Add the missing required prop in a clear, plausible position without redesigning successful anatomy, framing, or habitat."
+    },
+    "pose too stiff": {
+      "action": "modify",
+      "directive": "Keep the composition but improve gesture, weight shift, and expression so the pose communicates the intended action rather than a static character portrait."
+    },
+    "focal subject weak": {
+      "action": "modify",
+      "directive": "Make the monster the dominant focal subject by reducing competing object scale, background contrast, and visual tangents."
+    },
+    "composition wrong": {
+      "action": "regenerate",
+      "directive": "Rebuild the composition around one dominant monster, one clear story beat, and only the habitat elements needed to support that moment."
+    }
+  }
+}
