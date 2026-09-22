@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "cockatrice",
+  "display_name": "Cockatrice",
+  "taxonomy": {
+    "family": "cockatrice",
+    "creature_type": "monstrosity",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A small vicious rooster-reptile hybrid combining a cock's head and comb with leathery wings, clawed feet, and a serpentine tail.",
+    "silhouette": "Compact birdlike body, raised leathery wings, rooster head with comb, two clawed legs, long curling reptilian tail.",
+    "head_features": "Rooster-like head with hooked beak, prominent comb and wattles, fierce eyes.",
+    "body_shape": "Small feathered torso transitioning into leathery wings and a scaled curling tail.",
+    "limb_structure": "Two clawed birdlike legs and one pair of leathery wings; long reptilian tail. No extra quadruped legs.",
+    "surface": "Sparse feathers on torso, smooth wing membranes, simple tail scales.",
+    "must_keep": [
+      "rooster head and comb",
+      "leathery wings",
+      "clawed bird legs",
+      "serpentine tail",
+      "small hybrid silhouette"
+    ],
+    "must_avoid": [
+      "ordinary chicken",
+      "full dragon body",
+      "four-legged lizard",
+      "feathered angel wings",
+      "cute farm-bird look",
+      "dense feathers"
+    ]
+  },
+  "accuracy_checks": [
+    "hybrid identity is obvious",
+    "comb and beak are clear",
+    "wings differ from ordinary bird wings",
+    "tail is reptilian",
+    "creature stays small and colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "chicken_drift",
+      "symptom": "cockatrice becomes ordinary rooster",
+      "correction": "restore leathery wings, reptilian tail, and monstrous predatory proportions"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "body becomes four-legged dragon",
+      "correction": "restore two birdlike legs, rooster head, and hybrid body"
+    },
+    {
+      "id": "cute_drift",
+      "symptom": "farm-bird styling becomes mascot-like",
+      "correction": "use fierce eyes, hooked beak, and predatory posture"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Small compact hybrid, clearly smaller than humanoids and furniture while remaining dangerous.",
+    "natural_posture": "Grounded on two clawed legs or flying with a believable perch/launch relationship.",
+    "behavior_style": [
+      "hissing from a perch",
+      "guarding a pen or ruin",
+      "stalking near petrified remains",
+      "flapping from a grounded launch point"
+    ],
+    "environment_fit": [
+      "ruined pens and underground farms",
+      "small cave or dungeon enclosures",
+      "rocky recesses"
+    ]
+  }
+}
