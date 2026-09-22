@@ -47,6 +47,31 @@ def environment_approval_checks(root: Path) -> list[str]:
         if str(item).strip()
     ]
 
+
+def coloring_page_standard(root: Path) -> dict:
+    return _load(active_book_paths(root)["coloring_page_standard"])
+
+
+def coloring_page_directives(root: Path) -> list[str]:
+    payload = coloring_page_standard(root)
+    directives = []
+    subject = (payload.get("composition_targets") or {}).get("primary_subject") or {}
+    environment = (payload.get("composition_targets") or {}).get("environment") or {}
+    if subject.get("rule"):
+        directives.append(str(subject["rule"]))
+    if environment.get("rule"):
+        directives.append(str(environment["rule"]))
+    directives.extend(str(item) for item in payload.get("shape_rules") or [])
+    return [item.strip() for item in directives if str(item).strip()]
+
+
+def coloring_page_failures(root: Path) -> list[str]:
+    return [
+        str(item).strip()
+        for item in coloring_page_standard(root).get("automatic_failures") or []
+        if str(item).strip()
+    ]
+
 def expand_defect_tags(root: Path, tags) -> list[str]:
     rules = defect_rules(root)
     directives = []
