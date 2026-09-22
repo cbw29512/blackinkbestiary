@@ -8,19 +8,11 @@ except ImportError:
     from monster_catalog import load_monster_for_page
 
 try:
-    from .quality_system import (
-        archetype_directive,
-        environment_approval_checks,
-        environment_directives,
-        expand_defect_tags,
-    )
+    from .environment_prompt import environment_checklist, environment_prompt_sections
+    from .quality_system import archetype_directive, expand_defect_tags
 except ImportError:
-    from quality_system import (
-        archetype_directive,
-        environment_approval_checks,
-        environment_directives,
-        expand_defect_tags,
-    )
+    from environment_prompt import environment_checklist, environment_prompt_sections
+    from quality_system import archetype_directive, expand_defect_tags
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
@@ -68,7 +60,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         f"SUBJECT: {page['monster_name']}.",
         *_canonical_sections(spec),
         f"HABITAT: {page['habitat']}.",
-        _items("GLOBAL ENVIRONMENT STANDARD", environment_directives(ROOT)),
+        *environment_prompt_sections(page, ROOT),
         f"MOMENT: {page['moment']}.",
         f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
@@ -119,18 +111,13 @@ def build_supervisor_checklist(page: dict) -> list[str]:
         f"Habitat reads as: {page['habitat']}",
         f"Scene moment reads as: {page['moment']}",
         "Monster is immediately readable and visually clear",
-        "Environment is specific and immediately readable, not a generic backdrop",
-        "Environment includes two to four strong habitat-defining cues",
-        "At least one environmental feature participates in the story moment",
-        "Monster and environment share believable perspective and scale",
-        "Environment is enjoyable to color without becoming cluttered",
         "Large open white coloring regions",
         "Outer contours stronger than interior detail",
         "No grayscale wash or painterly shading",
         "No dense crosshatching or excessive tiny texture",
         "No text, border, logo, or watermark",
     ]
-    checks.extend(f"Environment check: {item}" for item in environment_approval_checks(ROOT))
+    checks.extend(environment_checklist(page, ROOT))
     if spec:
         checks.extend(f"Identity check: {item}" for item in spec.get("accuracy_checks", []))
     for item in page.get("must_include", []):
