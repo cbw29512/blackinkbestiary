@@ -37,6 +37,8 @@ def build_book_record(
         "style_standard": "docs/STYLE_BIBLE.md",
         "environment_standard": "config/environment_standard.json",
         "coloring_page_standard": "config/coloring_page_standard.json",
+        "kdp_print_standard": "config/kdp_print_standard.json",
+        "content_scope": "config/content_scope.json",
     }
 
 
@@ -75,6 +77,8 @@ def build_book_plan(book: dict, page_prefix: str) -> dict:
         "environment_scope": deepcopy(book.get("environment_scope", [])),
         "page_contract": "black-ink-page-v1",
         "monster_contract": "black-ink-monster-v1",
+        "print_standard": "black-ink-kdp-8.5x11-v1",
+        "source_scope": "2024 SRD",
         "production_contract": {
             "page_engine": "config/universal_page_contract.json",
             "monster_engine": "config/universal_monster_contract.json",
