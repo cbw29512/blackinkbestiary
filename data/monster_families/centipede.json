@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "centipede",
+  "display_name": "Centipede",
+  "taxonomy": {
+    "family": "centipede",
+    "creature_type": "giant arthropod",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A predatory centipede defined by a long segmented body, one pair of legs per visible trunk segment, antennae, and strong front poison claws.",
+    "silhouette": "Long flexible segmented body forming an S-curve or coil, with many evenly spaced legs creating a saw-tooth edge.",
+    "head_features": "Small armored head with simple antennae and strong curved forcipule-like poison claws.",
+    "body_shape": "Many repeated trunk segments, each bearing one visible pair of legs, tapering toward the rear.",
+    "limb_structure": "One pair of walking legs per visible trunk segment plus front poison claws; never spider-like eight-leg anatomy.",
+    "surface": "Simple armored segment plates with minimal texture.",
+    "must_keep": [
+      "long segmented body",
+      "many paired legs",
+      "front poison claws",
+      "antennae",
+      "low arthropod posture"
+    ],
+    "must_avoid": [
+      "millipede round body",
+      "scorpion tail",
+      "spider abdomen",
+      "dragon head",
+      "too many tiny textures",
+      "human features"
+    ]
+  },
+  "accuracy_checks": [
+    "centipede segmentation is obvious",
+    "legs repeat along body",
+    "front claws are visible",
+    "body is not mistaken for snake",
+    "line density remains manageable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "snake_drift",
+      "symptom": "legs disappear and body reads as snake",
+      "correction": "restore repeated leg pairs along visible segments"
+    },
+    {
+      "id": "spider_drift",
+      "symptom": "body compresses into eight-legged spider",
+      "correction": "restore long segmented trunk with many paired legs"
+    },
+    {
+      "id": "microdetail_drift",
+      "symptom": "segments and legs become tiny repetitive clutter",
+      "correction": "simplify visible segments and keep leg rhythm large enough to color"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Oversized arthropod long enough to coil around a niche or object while remaining smaller than major dungeon architecture.",
+    "natural_posture": "Body fully supported along floor, wall, bone pile, or other surface with repeated legs contacting the substrate.",
+    "behavior_style": [
+      "coiling through a niche",
+      "crawling over broad debris",
+      "following a wall edge",
+      "investigating a large bone or object"
+    ],
+    "environment_fit": [
+      "damp cellars and catacomb niches",
+      "tunnels and floor edges",
+      "rock or debris zones with clear crawling surfaces"
+    ]
+  }
+}
