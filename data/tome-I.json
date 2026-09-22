@@ -71,7 +71,28 @@
         ]
       },
       "monster_spec_id": "kobold-warrior",
-      "archetype": "trap_scene"
+      "archetype": "trap_scene",
+      "environment": {
+        "identity": "trapped dressed-stone ambush corridor",
+        "anchors": [
+          "large fitted stone blocks",
+          "wall torches in simple sconces",
+          "visible tripwire anchored across the passage",
+          "opened floor pit with wooden spikes"
+        ],
+        "interaction": "the kobold operates and reacts to a trap physically built into the corridor",
+        "coloring_value": [
+          "broad stone faces",
+          "clear floor slabs",
+          "simple torch shapes",
+          "large readable pit geometry"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-02",
@@ -107,7 +128,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "kobold-shrine-keeper",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment": {
+        "identity": "low cave shrine built from scavenged dungeon relics",
+        "anchors": [
+          "rough rock alcove",
+          "simple low shrine platform",
+          "dragon-skull relic",
+          "scattered coin offerings"
+        ],
+        "interaction": "the shrine-keeper raises a coin directly toward the shrine as part of the ritual",
+        "coloring_value": [
+          "large rock planes",
+          "simple shrine surface",
+          "separate coin clusters",
+          "open cave wall areas"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-03",
@@ -143,7 +185,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "goblin-minion",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "rough medieval dungeon kitchen and pantry",
+        "anchors": [
+          "stone or timber storage shelves",
+          "hanging or stacked food stores",
+          "simple work table or counter",
+          "older rough floor and wall construction"
+        ],
+        "interaction": "the goblin runs through the pantry carrying stolen food, using the room as part of the chase",
+        "coloring_value": [
+          "large cabinet or shelf faces",
+          "simple sacks and jars",
+          "open floor area",
+          "broad wall planes"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-04",
@@ -179,7 +242,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "goblin-warrior",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "tight dungeon crawlway designed for close-quarters movement",
+        "anchors": [
+          "narrow stone walls",
+          "low ceiling",
+          "simple wall niche or torch point",
+          "lantern on the floor"
+        ],
+        "interaction": "the goblin kicks the lantern so the corridor itself becomes darker and more dangerous",
+        "coloring_value": [
+          "large wall blocks",
+          "clear floor path",
+          "simple lantern silhouette",
+          "strong tunnel depth"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-05",
@@ -215,7 +299,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "goblin-boss",
-      "archetype": "boss_scene"
+      "archetype": "boss_scene",
+      "environment": {
+        "identity": "rough cave hall converted into a goblin command room",
+        "anchors": [
+          "improvised throne",
+          "wooden chest used as a platform",
+          "rough cave walls",
+          "small pile of keys or scavenged trophies"
+        ],
+        "interaction": "the boss uses the chest and throne area to physically establish rank in the lair",
+        "coloring_value": [
+          "broad cave surfaces",
+          "simple throne planes",
+          "large chest panels",
+          "open floor around the boss"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-06",
@@ -251,7 +356,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "hobgoblin-warrior",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "underground military barracks tunnel",
+        "anchors": [
+          "repeating stone tunnel supports",
+          "weapon rack or shield storage",
+          "simple bunk or gear area",
+          "clear drill lane"
+        ],
+        "interaction": "the hobgoblin formation uses the tunnel width to practice a shield wall",
+        "coloring_value": [
+          "broad shields",
+          "large stone courses",
+          "simple rack shapes",
+          "clear floor lane"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-07",
@@ -287,7 +413,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "hobgoblin-captain",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "cave war room used for tunnel planning",
+        "anchors": [
+          "rough strategy table",
+          "large tunnel map",
+          "stone wall alcove",
+          "few military markers"
+        ],
+        "interaction": "the captain drives a dagger into the map, making the environment part of the command action",
+        "coloring_value": [
+          "large table surface",
+          "simple map sheet",
+          "broad cave wall planes",
+          "few readable markers"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-08",
@@ -322,7 +469,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "bugbear-warrior",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment": {
+        "identity": "dungeon hall beneath a broken ceiling fissure",
+        "anchors": [
+          "high stone hall walls",
+          "large ceiling crack",
+          "fallen rubble below",
+          "clear landing space"
+        ],
+        "interaction": "the bugbear drops from the ceiling break into the hall as an ambush",
+        "coloring_value": [
+          "large wall stones",
+          "simple crack silhouette",
+          "broad floor slabs",
+          "few rubble shapes"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-09",
@@ -358,7 +526,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "bugbear-stalker",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment": {
+        "identity": "low cramped crawlway built for concealment",
+        "anchors": [
+          "low ceiling stones",
+          "tight side walls",
+          "dark side opening or bend",
+          "drag marks on floor"
+        ],
+        "interaction": "the bugbear uses the cramped passage to stay hidden while dragging the sack",
+        "coloring_value": [
+          "large low ceiling slabs",
+          "simple floor path",
+          "broad wall planes",
+          "few drag-mark lines"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-10",
@@ -394,7 +583,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "ogre",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "human-sized spiral stair too small for a giant body",
+        "anchors": [
+          "tight central stair column",
+          "curving stone steps",
+          "narrow enclosing walls",
+          "low overhead clearance"
+        ],
+        "interaction": "the ogre is visibly wedged against the architecture, proving the stair is too small",
+        "coloring_value": [
+          "large stair treads",
+          "broad curved wall sections",
+          "simple central column",
+          "clear negative space around body"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-11",
@@ -430,7 +640,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "ogre-zombie",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment": {
+        "identity": "dark cramped dungeon stairwell",
+        "anchors": [
+          "narrow descending steps",
+          "close stone walls",
+          "simple wall rings or chain anchors",
+          "deep lower landing"
+        ],
+        "interaction": "the zombie descends while its chains scrape and drag along the stair",
+        "coloring_value": [
+          "large step faces",
+          "broad wall stones",
+          "simple chain curves",
+          "clear descending depth"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-12",
@@ -466,7 +697,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "troll",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "cave chamber organized around a dangerous fire pit",
+        "anchors": [
+          "large stone fire ring",
+          "rough cave walls",
+          "few scattered stones",
+          "open standing area opposite fire"
+        ],
+        "interaction": "the troll watches its wound close while keeping wary distance from the fire",
+        "coloring_value": [
+          "broad cave planes",
+          "large fire-ring stones",
+          "simple flame shapes",
+          "open floor area"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-13",
@@ -502,7 +754,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "troll-limb",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment": {
+        "identity": "bare stone dungeon floor after a violent encounter",
+        "anchors": [
+          "large flagstones",
+          "dropped axe",
+          "few scrape marks",
+          "open surrounding floor"
+        ],
+        "interaction": "the severed troll arm crawls across the flagstones toward the dropped axe",
+        "coloring_value": [
+          "large floor tiles",
+          "clear axe silhouette",
+          "minimal debris",
+          "wide white floor regions"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-14",
@@ -538,7 +811,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "darkmantle",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment": {
+        "identity": "limestone cavern ceiling dense with natural stalactites",
+        "anchors": [
+          "large stalactites",
+          "rough ceiling shelf",
+          "lantern below",
+          "open drop space beneath creature"
+        ],
+        "interaction": "the darkmantle peels from a stalactite directly above the lantern-lit area",
+        "coloring_value": [
+          "large stalactite shapes",
+          "broad cave ceiling planes",
+          "simple lantern shape",
+          "open air space"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-15",
@@ -574,7 +868,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "stirges",
-      "archetype": "swarm_scene"
+      "archetype": "swarm_scene",
+      "environment": {
+        "identity": "small dungeon prison cell",
+        "anchors": [
+          "iron bars",
+          "simple sleeping pallet",
+          "stone wall and floor",
+          "cell door or lock area"
+        ],
+        "interaction": "the stirges feed around the sleeping prisoner within the confined cell",
+        "coloring_value": [
+          "large stone surfaces",
+          "simple bar spacing",
+          "broad pallet shape",
+          "open wall areas"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-16",
@@ -610,7 +925,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-bat",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment": {
+        "identity": "high cavern spanning an underground river",
+        "anchors": [
+          "rock ceiling ledge",
+          "wide dark river channel",
+          "opposite cave wall",
+          "few large stalactites"
+        ],
+        "interaction": "the giant bat hangs over the river from a clear ceiling grip",
+        "coloring_value": [
+          "broad rock planes",
+          "large water channel",
+          "simple hanging rock forms",
+          "open air around wings"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-17",
@@ -646,7 +982,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "bat-swarm",
-      "archetype": "swarm_scene"
+      "archetype": "swarm_scene",
+      "environment": {
+        "identity": "vertical stone well shaft",
+        "anchors": [
+          "circular stone rim",
+          "deep shaft walls",
+          "open central void",
+          "few wall ledges"
+        ],
+        "interaction": "the bat swarm erupts upward through the shaft and uses its vertical geometry to define movement",
+        "coloring_value": [
+          "large circular rim",
+          "broad shaft stones",
+          "open center",
+          "simple depth bands"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-18",
@@ -682,7 +1039,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-rat",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment": {
+        "identity": "collapsed dungeon pantry reclaimed as a nest",
+        "anchors": [
+          "burst grain sacks",
+          "broken shelves",
+          "nest material",
+          "cracked pantry wall"
+        ],
+        "interaction": "the giant rat defends a nest built directly among the spilled stores",
+        "coloring_value": [
+          "large sack shapes",
+          "simple shelf boards",
+          "broad wall areas",
+          "clear nest mass"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-19",
@@ -718,7 +1096,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "rat-swarm",
-      "archetype": "swarm_scene"
+      "archetype": "swarm_scene",
+      "environment": {
+        "identity": "stone dungeon floor built around a metal grate",
+        "anchors": [
+          "large floor slabs",
+          "rectangular or round grate",
+          "dark opening beneath",
+          "simple wall base"
+        ],
+        "interaction": "the rats pour through the grate so the architecture channels the swarm",
+        "coloring_value": [
+          "large floor tiles",
+          "simple grate bars",
+          "open surrounding stone",
+          "clear directional path"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-20",
@@ -754,7 +1153,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-centipede",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment": {
+        "identity": "catacomb wall lined with coffin niches",
+        "anchors": [
+          "stone burial niche",
+          "simple coffin edge",
+          "old bone",
+          "repeating masonry recesses"
+        ],
+        "interaction": "the centipede uncoils from the niche and wraps around a bone from the burial space",
+        "coloring_value": [
+          "broad niche blocks",
+          "simple coffin planes",
+          "large bone shape",
+          "open wall surfaces"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-21",
@@ -790,7 +1210,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-fire-beetle",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment": {
+        "identity": "abandoned mine tunnel with exposed rock and timber support",
+        "anchors": [
+          "rough mine walls",
+          "simple support beams",
+          "ore cart track or tool niche",
+          "dark tunnel depth"
+        ],
+        "interaction": "the beetle's glands illuminate the mine surfaces around it",
+        "coloring_value": [
+          "large timber beams",
+          "broad rock faces",
+          "simple floor track",
+          "open tunnel depth"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-22",
@@ -826,7 +1267,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-spider",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment": {
+        "identity": "dungeon hall overtaken by a single large web",
+        "anchors": [
+          "stone hall opening",
+          "large radial web",
+          "two or three wall anchor points",
+          "clear floor below"
+        ],
+        "interaction": "the spider occupies the center of a web visibly anchored to the hall",
+        "coloring_value": [
+          "broad wall blocks",
+          "large web sectors",
+          "open floor planes",
+          "clear arch or doorway"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-23",
@@ -862,7 +1324,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-wolf-spider",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment": {
+        "identity": "treasure alcove beneath a low dungeon ceiling",
+        "anchors": [
+          "treasure chest below",
+          "broad ceiling slab",
+          "side wall recess",
+          "open drop space"
+        ],
+        "interaction": "the wolf spider flattens against the ceiling directly above the chest",
+        "coloring_value": [
+          "large ceiling plane",
+          "simple chest panels",
+          "broad wall blocks",
+          "open air gap"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-24",
@@ -898,7 +1381,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "gelatinous-cube",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment": {
+        "identity": "straight ten-foot dressed-stone corridor",
+        "anchors": [
+          "parallel stone walls",
+          "large floor slabs",
+          "square doorway or depth opening",
+          "simple wall seams"
+        ],
+        "interaction": "the cube fills the corridor width, making the architecture define its transparent edges and scale",
+        "coloring_value": [
+          "large wall blocks",
+          "broad floor tiles",
+          "open interior cube area",
+          "simple corridor depth"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-25",
@@ -934,7 +1438,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "black-pudding",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "damp dungeon cistern built around corroding metalwork",
+        "anchors": [
+          "floor grate or cistern lip",
+          "simple iron bars",
+          "wet stone floor",
+          "drain opening"
+        ],
+        "interaction": "the pudding climbs through and visibly corrodes the metal barrier",
+        "coloring_value": [
+          "large stone surfaces",
+          "simple bar spacing",
+          "broad grate geometry",
+          "open ooze contour areas"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-26",
@@ -970,7 +1495,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "ochre-jelly",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "steep stone dungeon stair",
+        "anchors": [
+          "large stair treads",
+          "close side walls",
+          "upper landing",
+          "few moisture cracks"
+        ],
+        "interaction": "the two jelly halves occupy different steps while both continue upward",
+        "coloring_value": [
+          "large step faces",
+          "broad wall planes",
+          "open landing",
+          "simple shadow-free depth"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-27",
@@ -1006,7 +1552,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "mimic-chest",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment": {
+        "identity": "stone treasure vault designed to make a chest look ordinary",
+        "anchors": [
+          "vault wall blocks",
+          "simple treasure chest position",
+          "few coin or crate shapes",
+          "clear reaching path"
+        ],
+        "interaction": "the chest disguise belongs naturally in the vault before the mouth opens around the reaching hand",
+        "coloring_value": [
+          "large chest panels",
+          "broad stone walls",
+          "simple floor tiles",
+          "few large treasure shapes"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-28",
@@ -1042,7 +1609,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "mimic-door",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment": {
+        "identity": "torch-lit dungeon hall lined with functional doors",
+        "anchors": [
+          "stone wall courses",
+          "door frame",
+          "simple hinges or iron bands",
+          "wall torch"
+        ],
+        "interaction": "the mimic remains embedded in the doorway while the handle and hidden eye reveal the threat",
+        "coloring_value": [
+          "large door panels",
+          "broad wall stones",
+          "simple torch shape",
+          "clear frame geometry"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-29",
@@ -1078,7 +1666,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "animated-armor",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment": {
+        "identity": "formal dungeon display hall with armor pedestals",
+        "anchors": [
+          "raised pedestal",
+          "repeating wall alcoves",
+          "simple display plinths",
+          "open aisle"
+        ],
+        "interaction": "the animated armor steps down from the pedestal, turning the display environment into the action",
+        "coloring_value": [
+          "large pedestal faces",
+          "broad wall panels",
+          "open aisle floor",
+          "simple alcove shapes"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-30",
@@ -1114,7 +1723,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "flying-sword",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment": {
+        "identity": "circular dungeon rotunda centered on a damaged pillar",
+        "anchors": [
+          "cracked central pillar",
+          "curved wall",
+          "round floor pattern",
+          "open orbit space"
+        ],
+        "interaction": "the sword circles the pillar at throat height so the room's geometry defines its motion",
+        "coloring_value": [
+          "large pillar planes",
+          "broad curved wall",
+          "simple floor rings",
+          "open air around sword"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-31",
@@ -1150,7 +1780,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "rug-of-smothering",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment": {
+        "identity": "noble crypt with restrained funeral decoration",
+        "anchors": [
+          "stone sarcophagus or tomb niche",
+          "large floor rug",
+          "simple columns or wall panels",
+          "open burial chamber floor"
+        ],
+        "interaction": "the rug lifts from its normal place in the crypt and wraps the victim",
+        "coloring_value": [
+          "broad rug pattern areas",
+          "large tomb surfaces",
+          "simple column faces",
+          "open floor"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-32",
@@ -1186,7 +1837,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "gargoyle",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment": {
+        "identity": "fortified stone dungeon gate",
+        "anchors": [
+          "heavy gate arch",
+          "stone perch or statue plinth",
+          "large masonry blocks",
+          "door or portcullis geometry"
+        ],
+        "interaction": "the gargoyle leaves its architectural perch and becomes part of the gate's defense",
+        "coloring_value": [
+          "broad stone blocks",
+          "large arch surfaces",
+          "simple perch shape",
+          "open gate space"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-33",
@@ -1222,7 +1894,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "labyrinth-minotaur",
-      "archetype": "large_scale_scene"
+      "archetype": "large_scale_scene",
+      "environment": {
+        "identity": "repeating stone maze intersection",
+        "anchors": [
+          "identical corridor openings",
+          "large block walls",
+          "clear crossing floor lines",
+          "simple ceiling or arch repetition"
+        ],
+        "interaction": "the minotaur fills the junction so the maze geometry frames and contains its size",
+        "coloring_value": [
+          "broad wall blocks",
+          "large floor slabs",
+          "clear corridor openings",
+          "strong perspective"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-34",
@@ -1258,7 +1951,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "minotaur-skeleton",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment": {
+        "identity": "dark labyrinth turn with repeating masonry",
+        "anchors": [
+          "blind corner",
+          "large stone blocks",
+          "narrow floor path",
+          "deep shadow-free corridor opening"
+        ],
+        "interaction": "the skeleton emerges around the corner, using the maze turn for the reveal",
+        "coloring_value": [
+          "broad wall planes",
+          "large floor stones",
+          "simple corner geometry",
+          "open passage depth"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-35",
@@ -1294,7 +2008,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "roper",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment": {
+        "identity": "natural cavern crowded with stalagmites",
+        "anchors": [
+          "large stalagmites",
+          "rough cave floor",
+          "high rock wall",
+          "open gaps between formations"
+        ],
+        "interaction": "the roper disguises itself among the stalagmites and attacks from that camouflage",
+        "coloring_value": [
+          "large rock cones",
+          "broad cave floor",
+          "simple wall planes",
+          "open spaces between formations"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-36",
@@ -1331,7 +2066,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "cloaker",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment": {
+        "identity": "quiet dungeon antechamber with hanging storage or hooks",
+        "anchors": [
+          "wall hook or peg rail",
+          "simple stone walls",
+          "doorway into next room",
+          "clear floor"
+        ],
+        "interaction": "the cloaker peels directly from a wall hook where it could plausibly have been mistaken for cloth",
+        "coloring_value": [
+          "broad wall blocks",
+          "simple hook line",
+          "large doorway shape",
+          "open floor area"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-37",
@@ -1367,7 +2123,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "grick",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment": {
+        "identity": "collapsed stone tunnel choked with rubble",
+        "anchors": [
+          "large broken stones",
+          "partial wall collapse",
+          "dark opening in rubble",
+          "remaining floor path"
+        ],
+        "interaction": "the grick pushes its tentacled head out through the collapsed stones",
+        "coloring_value": [
+          "large rubble chunks",
+          "broad wall planes",
+          "simple tunnel opening",
+          "open path"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-38",
@@ -1404,7 +2181,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "ankheg",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "earthen burrow tunnel beneath dungeon ground",
+        "anchors": [
+          "packed earth walls",
+          "broken floor crust",
+          "burrow opening",
+          "few roots or stones"
+        ],
+        "interaction": "the ankheg bursts through the floor so broken earth and burrow geometry sell the emergence",
+        "coloring_value": [
+          "large earth planes",
+          "simple cracked floor pieces",
+          "broad tunnel opening",
+          "few large stones"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-39",
@@ -1441,7 +2239,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "bulette",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "loose-earth cavern floor shaped by subterranean movement",
+        "anchors": [
+          "wide soil floor",
+          "earth ridge or wake",
+          "rock wall",
+          "clear surfacing point"
+        ],
+        "interaction": "the bulette's dorsal fin cuts a wake through the soil before the body surfaces",
+        "coloring_value": [
+          "broad earth regions",
+          "large rock faces",
+          "simple wake lines",
+          "open cavern floor"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-40",
@@ -1478,7 +2297,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "rust-monster",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment": {
+        "identity": "abandoned armory alcove filled with ruined metal",
+        "anchors": [
+          "simple weapon rack",
+          "pile of corroded weapons",
+          "stone alcove",
+          "open floor around feeding area"
+        ],
+        "interaction": "the rust monster feeds directly on the armory's stored metal",
+        "coloring_value": [
+          "large weapon silhouettes",
+          "broad stone walls",
+          "simple rack planes",
+          "open floor"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-41",
@@ -1515,7 +2355,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "otyugh",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment": {
+        "identity": "refuse pit beneath dungeon privies",
+        "anchors": [
+          "large garbage mound",
+          "drain or chute opening",
+          "wet stone retaining wall",
+          "few broken containers"
+        ],
+        "interaction": "the otyugh rises from and physically occupies the refuse pile",
+        "coloring_value": [
+          "large refuse shapes",
+          "broad wall surfaces",
+          "simple chute geometry",
+          "open space around tentacles"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-42",
@@ -1552,7 +2413,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "gibbering-mouther",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment": {
+        "identity": "flooded stone dungeon cell",
+        "anchors": [
+          "shallow water plane",
+          "iron bars or cell opening",
+          "stone wall",
+          "visible ripples"
+        ],
+        "interaction": "the mouther churns through the water, making ripples across the cell floor",
+        "coloring_value": [
+          "large water area",
+          "broad stone planes",
+          "simple bar spacing",
+          "clear ripple bands"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-43",
@@ -1588,7 +2470,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "basilisk",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment": {
+        "identity": "underground gallery crowded with petrified figures",
+        "anchors": [
+          "two or three stone statues",
+          "broad gallery wall",
+          "floor plinths",
+          "open viewing aisle"
+        ],
+        "interaction": "the basilisk's stare visibly connects the living target to the statue-filled setting",
+        "coloring_value": [
+          "large statue shapes",
+          "broad wall panels",
+          "simple plinth faces",
+          "open aisle"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-44",
@@ -1625,7 +2528,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "cockatrice",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "improvised underground henhouse",
+        "anchors": [
+          "simple nesting boxes",
+          "rough fencing or pen rail",
+          "straw or feed area",
+          "petrified mouse near floor"
+        ],
+        "interaction": "the cockatrice occupies the pen and reacts beside the petrified mouse",
+        "coloring_value": [
+          "large box faces",
+          "simple rail shapes",
+          "broad floor area",
+          "few straw clusters"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-45",
@@ -1661,7 +2585,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "purple-worm",
-      "archetype": "large_scale_scene"
+      "archetype": "large_scale_scene",
+      "environment": {
+        "identity": "deep mine shaft narrowed by a colossal burrow",
+        "anchors": [
+          "timber mine supports",
+          "rough tunnel walls",
+          "broken track or shaft edge",
+          "deep opening"
+        ],
+        "interaction": "the worm's maw fills the mine tunnel so the supports and shaft provide scale",
+        "coloring_value": [
+          "large timber beams",
+          "broad rock walls",
+          "simple track lines",
+          "open maw-facing tunnel"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-46",
@@ -1698,7 +2643,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "drider",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment": {
+        "identity": "abandoned underground chapel overtaken by webs",
+        "anchors": [
+          "stone altar or dais",
+          "arched chapel opening",
+          "large web sheets",
+          "high ceiling support"
+        ],
+        "interaction": "the drider hangs from the chapel's webbed upper structure while aiming down into the sacred space",
+        "coloring_value": [
+          "large arch shapes",
+          "broad altar planes",
+          "simple web sectors",
+          "open floor below"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-47",
@@ -1735,7 +2701,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "behir",
-      "archetype": "large_scale_scene"
+      "archetype": "large_scale_scene",
+      "environment": {
+        "identity": "crystal cavern built around a large crystal column",
+        "anchors": [
+          "central crystal column",
+          "broad cave walls",
+          "few large crystal clusters",
+          "open coil space"
+        ],
+        "interaction": "the behir wraps around the column and uses it as the center of the lightning-filled composition",
+        "coloring_value": [
+          "large crystal facets",
+          "broad cave planes",
+          "open floor",
+          "simple lightning paths"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-48",
@@ -1772,7 +2759,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "shrieker-fungus",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment": {
+        "identity": "underground hall dominated by giant mushrooms",
+        "anchors": [
+          "two or three large mushroom forms",
+          "broad cave floor",
+          "stone or root wall",
+          "open air around caps"
+        ],
+        "interaction": "the shrieker grows as part of the fungal hall and broadcasts its alarm through the space",
+        "coloring_value": [
+          "large mushroom caps",
+          "broad stalk shapes",
+          "open cave floor",
+          "simple wall planes"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-49",
@@ -1809,7 +2817,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "violet-fungus",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment": {
+        "identity": "same fungal cavern family with a clearer danger zone",
+        "anchors": [
+          "large mushrooms",
+          "dropped torch",
+          "broad cave floor",
+          "simple fungal clusters"
+        ],
+        "interaction": "the violet fungus lashes tendrils toward the torch lying within its cavern territory",
+        "coloring_value": [
+          "large caps and stalks",
+          "broad floor area",
+          "simple torch shape",
+          "open tendril paths"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     },
     {
       "page_id": "I-50",
@@ -1847,7 +2876,28 @@
       },
       "reference_image": null,
       "monster_spec_id": "lich",
-      "archetype": "boss_scene"
+      "archetype": "boss_scene",
+      "environment": {
+        "identity": "deep underground vault built to protect a phylactery",
+        "anchors": [
+          "central phylactery pedestal or niche",
+          "heavy stone vault walls",
+          "arcane door or seal geometry",
+          "clear casting space"
+        ],
+        "interaction": "the lich guards the phylactery as the room's central protected object while casting",
+        "coloring_value": [
+          "large pedestal planes",
+          "broad vault stones",
+          "simple seal shapes",
+          "open floor around final confrontation"
+        ],
+        "must_avoid": [
+          "generic empty backdrop",
+          "modern architecture or fixtures",
+          "tiny decorative clutter that does not identify the setting"
+        ]
+      }
     }
   ]
 }
