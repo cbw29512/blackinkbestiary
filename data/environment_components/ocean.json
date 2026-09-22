@@ -1,0 +1,842 @@
+{
+  "schema_version": 1,
+  "family_id": "ocean",
+  "display_name": "Ocean & Aquatic Environment Component Library",
+  "purpose": "Reusable scenery for reef, kelp, wreck, deep water, sea cave, vent, seamount, mangrove, and tidepool pages.",
+  "context_rules": [
+    {
+      "terms": [
+        "kelp"
+      ],
+      "add": [
+        "kelp"
+      ]
+    },
+    {
+      "terms": [
+        "reef",
+        "coral"
+      ],
+      "add": [
+        "reef"
+      ]
+    },
+    {
+      "terms": [
+        "deep",
+        "dropoff"
+      ],
+      "add": [
+        "deep",
+        "dropoff"
+      ]
+    },
+    {
+      "terms": [
+        "wreck"
+      ],
+      "add": [
+        "wreck",
+        "ruin"
+      ]
+    },
+    {
+      "terms": [
+        "cave"
+      ],
+      "add": [
+        "cave",
+        "rock"
+      ]
+    },
+    {
+      "terms": [
+        "vent"
+      ],
+      "add": [
+        "vent",
+        "deep"
+      ]
+    },
+    {
+      "terms": [
+        "seamount"
+      ],
+      "add": [
+        "seamount",
+        "deep"
+      ]
+    },
+    {
+      "terms": [
+        "mangrove",
+        "lagoon"
+      ],
+      "add": [
+        "mangrove",
+        "shallow"
+      ]
+    },
+    {
+      "terms": [
+        "tidepool"
+      ],
+      "add": [
+        "tidepool",
+        "shallow"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Open water is intentional negative space and must not be filled with bubbles, fish, or coral confetti.",
+    "Coral, kelp, wreck timbers, roots, rocks, and vents are large colorable forms.",
+    "Aquatic depth must read through a few strong layers, openings, or drop-offs.",
+    "Use only a few distinct habitat structures so the monster remains dominant."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "kelp corridor with an open midwater lane",
+        "contexts": [
+          "kelp",
+          "water"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "reef shelf with a broad sand channel",
+        "contexts": [
+          "reef",
+          "shallow"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "vertical drop-off wall beside open water",
+        "contexts": [
+          "dropoff",
+          "deep"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "wreck opening framed by large hull ribs",
+        "contexts": [
+          "wreck",
+          "ruin"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "sea-cave arch opening to brighter water",
+        "contexts": [
+          "cave",
+          "rock"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "seamount terrace with a clear slope",
+        "contexts": [
+          "seamount",
+          "deep"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "mangrove-root arcade in shallow water",
+        "contexts": [
+          "mangrove",
+          "shallow"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "tidepool or rocky shelf organized around one large pool",
+        "contexts": [
+          "tidepool",
+          "shallow"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "broad reef rock plates with a few large coral forms",
+        "contexts": [
+          "reef"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "smooth sand shelf with simple ripple bands",
+        "contexts": [
+          "shallow",
+          "sand"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "dark cliff or drop-off rock with large vertical planes",
+        "contexts": [
+          "dropoff",
+          "deep"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "weathered wreck timber with broad planks and ribs",
+        "contexts": [
+          "wreck",
+          "ruin"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "wave-cut cave rock with rounded openings",
+        "contexts": [
+          "cave",
+          "rock"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "volcanic seamount rock with broad stepped terraces",
+        "contexts": [
+          "seamount",
+          "vent"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "thick mangrove roots with large clean bark planes",
+        "contexts": [
+          "mangrove"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "tide-worn rock shelves with broad pool edges",
+        "contexts": [
+          "tidepool"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "broad sand channel between reef forms",
+        "contexts": [
+          "reef",
+          "sand"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "flat coral-rock shelf with few large plates",
+        "contexts": [
+          "reef"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "open water below a cliff edge used as negative space",
+        "contexts": [
+          "dropoff",
+          "deep"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "wreck deck or seabed with only a few large timbers",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "rocky cave floor with one broad sediment patch",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "seamount terrace with simple gravel-free rock planes",
+        "contexts": [
+          "seamount"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "mud-sand lagoon floor beneath root arches",
+        "contexts": [
+          "mangrove",
+          "shallow"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "tidepool shelf with one large water basin",
+        "contexts": [
+          "tidepool",
+          "shallow"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "broad kelp canopy with large blades and open gaps",
+        "contexts": [
+          "kelp"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "open water column with sparse light shafts",
+        "contexts": [
+          "reef",
+          "dropoff"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "wreck beams crossing overhead with clear spacing",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "sea-cave roof arch with one strong stone span",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "mangrove roots and branches framing the water surface",
+        "contexts": [
+          "mangrove"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "shallow-water surface line visible above the monster",
+        "contexts": [
+          "shallow"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "deep-water darkness represented as clean open space, not shading",
+        "contexts": [
+          "deep"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "large coral overhang with one readable underside",
+        "contexts": [
+          "reef"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "sun shafts through shallow water as broad white bands",
+        "contexts": [
+          "shallow",
+          "reef"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "bright open-water background behind darker reef forms",
+        "contexts": [
+          "reef"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "light entering through a wreck opening",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "sea-cave mouth providing one strong bright opening",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "surface light broken by mangrove roots",
+        "contexts": [
+          "mangrove"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "vent glow or mineral brightness kept to one large source",
+        "contexts": [
+          "vent",
+          "deep"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "soft horizon light over a seamount terrace",
+        "contexts": [
+          "seamount"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "tidepool sky reflection used as open coloring space",
+        "contexts": [
+          "tidepool"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "large wreck rib or mast section",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "submerged cave arch or stone window",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "massive root arch creating a shallow-water threshold",
+        "contexts": [
+          "mangrove"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "reef ledge with one broad overhang",
+        "contexts": [
+          "reef"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "volcanic vent chimney with a simple silhouette",
+        "contexts": [
+          "vent",
+          "seamount"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "anchor, chain, or beam used as one large structural cue",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "rock cleft forming a narrow swim-through",
+        "contexts": [
+          "rock",
+          "reef"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "tidepool rim or shelf break defining the scene",
+        "contexts": [
+          "tidepool"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "large anchor or wreck beam",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "single massive coral head or sea fan",
+        "contexts": [
+          "reef"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "hydrothermal vent chimney",
+        "contexts": [
+          "vent",
+          "deep"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "submerged cave arch",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "large mangrove root arch",
+        "contexts": [
+          "mangrove"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "volcanic ledge or seamount terrace",
+        "contexts": [
+          "seamount"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "broad kelp cluster with visible holdfasts",
+        "contexts": [
+          "kelp"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "distinct sand channel or tidepool basin",
+        "contexts": [
+          "shallow",
+          "tidepool"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "one sponge column or anemone group with large lobes",
+        "contexts": [
+          "reef"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "one rope, chain, mast, or hull fragment",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "one shell cluster drawn as a few large forms",
+        "contexts": [
+          "shallow",
+          "tidepool"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "single driftwood or timber piece",
+        "contexts": [
+          "mangrove",
+          "wreck"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "one broad sea-grass or kelp secondary cluster",
+        "contexts": [
+          "kelp",
+          "shallow"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "one rock plate or isolated coral form",
+        "contexts": [
+          "reef",
+          "rock"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "one vent plume shape with open surrounding water",
+        "contexts": [
+          "vent"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one large broken amphora or chest only when wreck-appropriate",
+        "contexts": [
+          "wreck",
+          "treasure"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "narrow wreck opening with one broken beam edge",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "strong current channel shown by broad flow direction",
+        "contexts": [
+          "dropoff",
+          "reef"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "sharp reef crevice or coral gap with simple large forms",
+        "contexts": [
+          "reef"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "deep drop-off edge with clear open-water void",
+        "contexts": [
+          "dropoff",
+          "deep"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "vent field with one dominant hot chimney and sparse surrounding forms",
+        "contexts": [
+          "vent"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "tangled root passage with one clear route through",
+        "contexts": [
+          "mangrove"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "wave-cut cave squeeze with a broad stone threshold",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "tidepool shelf drop with one obvious water-filled gap",
+        "contexts": [
+          "tidepool"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "kelp lane recedes toward open water",
+        "contexts": [
+          "kelp"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "reef shelf drops into a blue-water void represented by white negative space",
+        "contexts": [
+          "reef",
+          "dropoff"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "wreck doorway or rib opening reveals deeper hull space",
+        "contexts": [
+          "wreck"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "cave mouth frames brighter water beyond",
+        "contexts": [
+          "cave"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "seamount slope descends into open depth",
+        "contexts": [
+          "seamount",
+          "deep"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "mangrove roots layer foreground and background arches",
+        "contexts": [
+          "mangrove"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "sand channel curves behind a coral landmark",
+        "contexts": [
+          "reef",
+          "sand"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "tidepool shelf reveals a second lower pool or ocean edge",
+        "contexts": [
+          "tidepool"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few broad water-current lines around a major form",
+        "contexts": [
+          "water",
+          "universal"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "small bubble group limited to one interaction point",
+        "contexts": [
+          "water"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "single floating kelp ribbon or leaf band",
+        "contexts": [
+          "kelp"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "light sediment cloud near one disturbed seabed spot",
+        "contexts": [
+          "sand",
+          "wreck"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "vent plume kept as one large simple shape",
+        "contexts": [
+          "vent"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "surface ripple bands visible from below",
+        "contexts": [
+          "shallow"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "sparse suspended particles omitted from most open water",
+        "contexts": [
+          "deep"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "one patch of sea grass or anemone movement used as accent",
+        "contexts": [
+          "reef",
+          "shallow"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "monster swims through a root, kelp, wreck, or cave opening",
+        "contexts": [
+          "water",
+          "universal"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "monster rests on or grips a broad rock or wreck ledge",
+        "contexts": [
+          "reef",
+          "wreck"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "monster circles or guards one coral, vent, anchor, or wreck landmark",
+        "contexts": [
+          "reef",
+          "vent",
+          "wreck"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "monster emerges from behind a hull rib, rock arch, or kelp mass",
+        "contexts": [
+          "wreck",
+          "cave",
+          "kelp"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "monster crosses a broad sand or open-water channel",
+        "contexts": [
+          "reef",
+          "sand"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "monster uses a large kelp blade, coral head, or root as partial cover",
+        "contexts": [
+          "kelp",
+          "reef",
+          "mangrove"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "monster moves along a drop-off, seamount, or reef edge",
+        "contexts": [
+          "dropoff",
+          "seamount"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "monster occupies the boundary between shallow structure and open water",
+        "contexts": [
+          "shallow",
+          "reef"
+        ]
+      }
+    ]
+  }
+}
