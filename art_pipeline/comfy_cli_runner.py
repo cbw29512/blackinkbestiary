@@ -108,7 +108,7 @@ class ComfyCli:
 
     def validate_workflow(self, workflow: Path):
         return self.run(
-            "workflow", "validate", str(workflow),
+            "workflow", "validate", "--workflow", str(workflow),
             expect_json=True,
             where="local",
         )
