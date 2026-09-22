@@ -77,12 +77,21 @@ def _apply_minimal_recipe(resolved: dict, raw: dict) -> dict:
     if overrides:
         visual = _merge_dict(visual, overrides)
     resolved["visual_identity"] = visual
+
     scene = resolved.get("scene_identity") or {}
     scene_overrides = raw.get("scene_overrides") or {}
     if scene_overrides:
         scene = _merge_dict(scene, scene_overrides)
     resolved["scene_identity"] = scene
+
+    resolved["locomotion"] = _merge_dict(
+        resolved.get("locomotion") or {},
+        raw.get("locomotion") or {},
+    )
     resolved["variant_traits"] = list(raw.get("variant_traits") or [])
+    resolved["environment_compatibility"] = deepcopy(
+        raw.get("environment_compatibility") or {}
+    )
     return resolved
 
 
@@ -111,10 +120,13 @@ def resolve_monster_spec(
     resolved = _apply_contract_defaults(resolved, contract)
     resolved = _apply_minimal_recipe(resolved, raw)
 
-    taxonomy = family.get("taxonomy") or {}
-    resolved["family"] = raw.get("family") or taxonomy.get("family") or raw.get("family_profile")
-    resolved["size"] = raw.get("size") or taxonomy.get("default_size") or ""
-    resolved["creature_type"] = raw.get("creature_type") or taxonomy.get("creature_type") or ""
+    taxonomy = _merge_dict(
+        family.get("taxonomy") or {},
+        raw.get("taxonomy_overrides") or {},
+    )
+    resolved["family"] = taxonomy.get("family") or raw.get("family_profile")
+    resolved["size"] = taxonomy.get("default_size") or ""
+    resolved["creature_type"] = taxonomy.get("creature_type") or ""
     resolved["schema_version"] = int(raw.get("schema_version") or 1)
     resolved["identity_version"] = int(raw.get("identity_version") or family.get("identity_version") or 1)
     resolved["monster_contract"] = contract.get("contract_id")
@@ -138,16 +150,39 @@ def minimal_recipe_errors(
     if not path.exists():
         return [f"Monster spec not found: {path}"]
     raw = _read_json(path)
-    if int(raw.get("schema_version") or 1) < 3:
-        return []
     contract = load_monster_contract(ROOT / "config" / "universal_monster_contract.json")
     errors = []
+
+    if int(raw.get("schema_version") or 1) < 3:
+        errors.append(f"{spec_id}: legacy monster recipe must migrate to schema_version 3")
+        return errors
+
     for field in contract.get("minimal_recipe_required") or []:
         if not str(raw.get(field) or "").strip():
             errors.append(f"{spec_id}: minimal monster recipe missing {field}")
+
     family_path = family_profile_path(raw, family_dir)
     if not family_path:
         errors.append(f"{spec_id}: minimal monster recipe requires a valid family_profile")
+
+    allowed = set(contract.get("allowed_recipe_keys") or [])
+    if allowed:
+        unknown = sorted(set(raw) - allowed)
+        if unknown:
+            errors.append(f"{spec_id}: recipe contains non-minimal keys: {', '.join(unknown)}")
+
+    forbidden = set(contract.get("forbidden_recipe_keys") or [])
+    leaked = sorted(forbidden.intersection(raw))
+    if leaked:
+        errors.append(f"{spec_id}: recipe duplicates family-owned data: {', '.join(leaked)}")
+
+    limits = contract.get("recipe_limits") or {}
+    if len(raw.get("variant_traits") or []) > int(limits.get("max_variant_traits") or 8):
+        errors.append(f"{spec_id}: too many variant_traits")
+    if len(raw.get("visual_overrides") or {}) > int(limits.get("max_visual_override_keys") or 6):
+        errors.append(f"{spec_id}: visual_overrides too broad; promote reusable identity to family profile")
+    if len(raw.get("scene_overrides") or {}) > int(limits.get("max_scene_override_keys") or 4):
+        errors.append(f"{spec_id}: scene_overrides too broad; promote reusable identity to family profile")
     return errors
 
 
