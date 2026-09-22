@@ -1,56 +1,8 @@
 {
+  "schema_version": 3,
   "monster_id": "gargoyle",
   "monster_name": "Gargoyle",
-  "family": "gargoyle",
-  "size": "medium",
-  "creature_type": "stone monstrosity",
-  "visual_identity": {
-    "core_identity": "A squat winged stone predator disguised as architectural sculpture until it begins to move.",
-    "silhouette": "Broad crouched humanoid body, folded batlike wings, horned head, clawed hands and feet, heavy stone posture.",
-    "head_features": "Grotesque stone face with short horns, heavy brow, broad nose, fanged mouth, no soft flesh details.",
-    "body_shape": "Compact muscular humanoid carved from stone, thick forearms, bent legs, folded wings.",
-    "surface": "Stone planes with a few cracks and chipped edges, not dense masonry texture.",
-    "signature_gear": [],
-    "attitude": [
-      "motionless",
-      "watchful",
-      "sudden",
-      "territorial"
-    ],
-    "must_keep": [
-      "stone body",
-      "folded wings",
-      "horned grotesque head",
-      "clawed limbs",
-      "architectural perch"
-    ],
-    "must_avoid": [
-      "dragon body",
-      "angelic human face",
-      "feathers",
-      "living flesh texture",
-      "huge wings hiding body",
-      "ornate cathedral clutter"
-    ]
-  },
-  "default_habitats": [
-    "stone gates",
-    "crypt entrances",
-    "underground arches"
-  ],
-  "accuracy_checks": [
-    "reads as stone sculpture becoming alive",
-    "wings remain visible",
-    "one foot or hand leaves perch",
-    "stone texture is sparse",
-    "humanoid gargoyle silhouette is clear",
-    "gate remains secondary"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
+  "family_profile": "gargoyle",
   "locomotion": {
     "can_fly": true
   }
