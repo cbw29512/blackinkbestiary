@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "kobold",
+  "display_name": "Kobold",
+  "taxonomy": {
+    "family": "kobold",
+    "creature_type": "reptilian humanoid",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A small lean reptilian humanoid built for traps, pack tactics, and underground survival rather than brute strength.",
+    "silhouette": "Short wiry reptilian body, long balancing tail, narrow shoulders, slightly hunched alert posture, clawed hands and long clawed feet.",
+    "head_features": "Long narrow draconic snout, small sharp teeth, pronounced brow, swept horn nubs or short head spines, alert predatory eyes.",
+    "body_shape": "Lean torso and limbs with clear reptilian anatomy and light digitigrade-looking legs.",
+    "surface": "Sparse simplified scales with large open coloring regions.",
+    "must_keep": [
+      "long reptilian snout",
+      "visible tail",
+      "horn nubs or head spines",
+      "lean reptilian silhouette",
+      "clawed hands and feet",
+      "small dangerous scale"
+    ],
+    "must_avoid": [
+      "goblin-like round head",
+      "furry body",
+      "cute mascot proportions",
+      "bulky ogre-like build",
+      "dragon wings",
+      "dense scale texture"
+    ]
+  },
+  "accuracy_checks": [
+    "long draconic snout is obvious",
+    "tail is visible",
+    "horns or head spines are visible",
+    "body reads reptilian rather than furry",
+    "small wiry silhouette is preserved"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "goblin_drift",
+      "symptom": "head becomes round and goblin-like",
+      "correction": "restore long narrow draconic snout, reptilian brow, horn nubs, and visible tail"
+    },
+    {
+      "id": "dragonborn_drift",
+      "symptom": "body becomes large heroic dragon-person",
+      "correction": "reduce size and mass; restore small wiry trap-maker proportions"
+    },
+    {
+      "id": "over_scaled",
+      "symptom": "dense scale texture hurts coloring space",
+      "correction": "keep scales sparse and use broad open body regions"
+    }
+  ]
+}
