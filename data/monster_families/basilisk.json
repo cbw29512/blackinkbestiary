@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "basilisk",
+  "display_name": "Basilisk",
+  "taxonomy": {
+    "family": "basilisk",
+    "creature_type": "monstrosity",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A squat heavy reptilian monster with eight sturdy legs and a fixed predatory stare associated with petrification.",
+    "silhouette": "Low broad lizardlike body on eight short legs, thick tail, heavy head held forward.",
+    "head_features": "Broad reptilian head with strong brow, wide jaw, small teeth, and intense forward-facing eyes.",
+    "body_shape": "Stocky scaled reptile with exactly eight legs, low belly, and thick tapering tail.",
+    "limb_structure": "Exactly eight short sturdy reptilian legs arranged as four pairs beneath a low heavy body; no wings or humanoid limbs.",
+    "surface": "Large simple scales or armored skin plates used sparingly.",
+    "must_keep": [
+      "eight legs",
+      "heavy reptilian body",
+      "thick tail",
+      "direct stare",
+      "low squat posture"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "two or four legs",
+      "serpent-only body",
+      "humanoid face",
+      "horned dragon head",
+      "dense tiny scales"
+    ]
+  },
+  "accuracy_checks": [
+    "eight legs are countable or strongly readable",
+    "stare is central to identity",
+    "body is squat not serpentine",
+    "no wings appear",
+    "scale texture stays simple"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "leg_count_drift",
+      "symptom": "basilisk has four or six legs",
+      "correction": "restore exactly eight short reptilian legs"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "basilisk becomes a small dragon",
+      "correction": "remove wings and heroic dragon proportions; restore squat low body and thick tail"
+    },
+    {
+      "id": "serpent_drift",
+      "symptom": "body becomes legless or snake-like",
+      "correction": "restore broad lizardlike torso and all eight legs"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Medium but heavy, low, and broad; its eight-legged spread makes it occupy significant floor space.",
+    "natural_posture": "Crouched low with head forward and all weight visibly supported by multiple legs.",
+    "behavior_style": [
+      "holding a fixed stare",
+      "creeping among stone remains",
+      "guarding a rocky lair",
+      "pausing beside petrified remains"
+    ],
+    "environment_fit": [
+      "rocky underground lairs",
+      "ruined galleries",
+      "stone chambers where petrification evidence can read clearly"
+    ]
+  }
+}
