@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "stirges",
+  "display_name": "Stirges",
+  "taxonomy": {
+    "family": "stirge",
+    "creature_type": "flying blood-feeding beasts",
+    "default_size": "tiny"
+  },
+  "visual_identity": {
+    "core_identity": "Small ugly flying blood-feeders combining batlike membrane wings with long needle proboscises and grasping feet.",
+    "silhouette": "Several small airborne bodies with outspread membrane wings and long straight proboscises projecting from their faces.",
+    "head_features": "Small animal-like head dominated by a long needle feeding tube, simple eyes, and no humanoid expression.",
+    "body_shape": "Compact flying body with membranous wings, small grasping feet, and narrow abdomen.",
+    "surface": "Smooth membrane wings and sparse body texture; avoid dense insect detail.",
+    "signature_gear": [],
+    "attitude": [
+      "hungry",
+      "darting",
+      "clingy",
+      "swarming"
+    ],
+    "must_keep": [
+      "long needle proboscis",
+      "membranous wings",
+      "small flying body",
+      "multiple creatures"
+    ],
+    "must_avoid": [
+      "ordinary bats",
+      "mosquito-only anatomy",
+      "feathered birds",
+      "cute faces",
+      "huge swarm clutter",
+      "humanoid features"
+    ]
+  },
+  "accuracy_checks": [
+    "proboscises are unmistakable",
+    "wings remain visible",
+    "multiple creatures read separately",
+    "swarm stays colorable",
+    "creatures are not mistaken for bats"
+  ]
+}
