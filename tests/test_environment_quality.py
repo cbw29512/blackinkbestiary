@@ -44,7 +44,7 @@ class EnvironmentQualityTests(unittest.TestCase):
         avoid = " ".join(self.goblin_page["must_avoid"]).lower()
         self.assertIn("modern household", avoid)
         self.assertIn("generic pantry", avoid)
-        self.assertTrue(any("stone" in item.lower() for item in self.goblin_page["must_include"]))
+        prompt = build_prompt(self.goblin_page).lower()\n        self.assertIn("rough stone pantry", prompt)\n        self.assertIn("large food shelves", prompt)
 
     def test_environment_review_checks_exist(self):
         directives = environment_directives(ROOT)
