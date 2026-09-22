@@ -95,6 +95,41 @@ class UniversalPageContractTests(unittest.TestCase):
             [],
         )
 
+    def test_nonflyer_cannot_use_powered_flight(self):
+        page = self.minimal_page()
+        page["physicality"] = {
+            "mode": "flying",
+            "support": "unsupported in open air",
+            "motion": "hovering",
+        }
+        tome = {
+            "tome_id": "TEST-FLIGHT",
+            "title": "Flight Test",
+            "theme": "test",
+            "total_pages": 1,
+            "pages": [page],
+        }
+        errors = validate_manifest(ROOT, tome, ROOT / "data" / "monsters")
+        self.assertTrue(any("non-flying creature" in error for error in errors))
+
+    def test_flying_family_can_use_powered_flight(self):
+        page = self.minimal_page()
+        page["monster_spec_id"] = "giant-bat"
+        page["physicality"] = {
+            "mode": "flying",
+            "support": "airborne by wing-powered flight",
+            "motion": "banking through the cavern",
+        }
+        resolved = resolve_page_spec(page, ROOT)
+        self.assertTrue(resolved["locomotion"]["can_fly"])
+
+    def test_nonflyer_can_fall_without_being_marked_flying(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-08")
+        resolved = resolve_page_spec(page, ROOT)
+        self.assertFalse(resolved["locomotion"]["can_fly"])
+        self.assertEqual(resolved["physicality"]["mode"], "falling")
+
     def test_all_registered_books_share_one_contract(self):
         series = json.loads((ROOT / "data" / "series.json").read_text(encoding="utf-8"))
         self.assertEqual(series["page_contract"], "config/universal_page_contract.json")
