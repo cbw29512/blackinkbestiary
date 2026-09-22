@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "violet-fungus",
+  "display_name": "Violet Fungus",
+  "visual_identity": {
+    "core_identity": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body.",
+    "silhouette": "Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
+    "head_features": "No head, eyes, or mouth; cap remains mushroom-like.",
+    "body_shape": "Rooted fungal stalk with cap and four or more flexible tendrils emerging around the upper stalk.",
+    "surface": "Simple cap and stalk with sparse spots; tendrils smooth and uncluttered.",
+    "signature_gear": [],
+    "attitude": [
+      "still",
+      "reaching",
+      "reactive",
+      "predatory"
+    ],
+    "must_keep": [
+      "mushroom body",
+      "multiple long tendrils",
+      "rooted posture",
+      "no face",
+      "clear contrast between cap and tendrils"
+    ],
+    "must_avoid": [
+      "humanoid face",
+      "walking feet",
+      "octopus body",
+      "teeth",
+      "solid black tendrils",
+      "dense fungal texture"
+    ]
+  },
+  "accuracy_checks": [
+    "mushroom identity remains obvious",
+    "tendrils are long and distinct",
+    "no face appears",
+    "tendrils do not tangle into clutter"
+  ]
+}
