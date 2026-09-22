@@ -1,62 +1,15 @@
 {
+  "schema_version": 3,
   "monster_id": "flying-sword",
   "monster_name": "Flying Sword",
-  "family": "construct",
-  "size": "small",
-  "creature_type": "construct",
-  "visual_identity": {
-    "core_identity": "A normal-looking weapon animated by magic, flying and attacking with no hand, arm, or visible wielder.",
-    "silhouette": "Single sword suspended horizontally or diagonally in open air with a clear motion arc.",
-    "head_features": "No head or face.",
-    "body_shape": "One complete sword with blade, guard, grip, and pommel; the weapon itself is the creature.",
-    "surface": "Clean metal blade and simple hilt with minimal decorative marks.",
-    "signature_gear": [
-      "single sword only"
-    ],
-    "attitude": [
-      "precise",
-      "guarding",
-      "swift",
-      "unnatural"
-    ],
-    "must_keep": [
-      "one complete sword",
-      "no wielder",
-      "clear airborne position",
-      "simple readable hilt",
-      "motion around pillar"
-    ],
-    "must_avoid": [
-      "ghost holding sword",
-      "multiple swords",
-      "eyes on blade",
-      "arms or hands",
-      "overly ornate runes",
-      "motion clutter"
-    ]
+  "family_profile": "construct",
+  "species_profile": "flying-sword",
+  "locomotion": {
+    "can_fly": true
   },
   "default_habitats": [
     "rotundas",
     "armories",
     "guarded vaults"
-  ],
-  "accuracy_checks": [
-    "sword is visibly unsupported",
-    "pillar orbit reads clearly",
-    "weapon remains dominant",
-    "no hidden hand appears",
-    "blade silhouette is clean",
-    "background stays secondary"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "construct",
-  "locomotion": {
-    "can_fly": true
-  }
+  ]
 }
