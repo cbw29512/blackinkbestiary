@@ -34,6 +34,10 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
         self.assertGreaterEqual(report["source_registry_entries"], 50)
         tome_i = next(row for row in report["books"] if row["book_id"] == "TOME-I")
         self.assertTrue(tome_i["production_ready"])
+        self.assertTrue(tome_i["calibration_required"])
+        self.assertFalse(tome_i["calibration_complete"])
+        self.assertFalse(tome_i["mass_generation_ready"])
+        self.assertFalse(report["golden_five_calibration"]["production_calibrated"])
         future = [row for row in report["books"] if row["book_id"] != "TOME-I"]
         self.assertTrue(all(not row["production_ready"] for row in future))
 

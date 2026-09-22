@@ -64,8 +64,10 @@ No page after the current page enters production until the current page is appro
 ## Current Production State
 
 - **Current page:** I-01
-- **Status:** MODIFY / establish Golden Style
-- **Do not advance:** until I-01 completes the full production loop and is approved.
+- **Status:** QUEUED / clean rebuild start
+- **Calibration gate:** Golden Five must pass before mass generation beyond the first production page.
+- **Golden Five:** I-01, I-24, I-27, I-38, I-40.
+- **Isolation rule:** calibration attempts do not advance or lock normal Tome I production state.
 
 ## Existing Reference Art from the Earlier Prototype
 

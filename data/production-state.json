@@ -5,7 +5,7 @@
   "complete": false,
   "pages": {
     "I-01": {
-      "status": "modify_requested",
+      "status": "queued",
       "attempt": 0,
       "current_candidate": null,
       "approved_candidate": null,

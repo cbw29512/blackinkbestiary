@@ -5,6 +5,7 @@ from pathlib import Path
 
 try:
     from .book_registry import load_series, plan_path
+    from .calibration_gate import calibration_report
     from .catalog_audit import audit_environment_variation_catalog
     from .manifest_validation import validate_manifest
     from .page_contract import missing_required_paths, page_uniqueness_fingerprint
@@ -12,6 +13,7 @@ try:
     from .source_scope import load_monster_registry
 except ImportError:
     from book_registry import load_series, plan_path
+    from calibration_gate import calibration_report
     from catalog_audit import audit_environment_variation_catalog
     from manifest_validation import validate_manifest
     from page_contract import missing_required_paths, page_uniqueness_fingerprint
@@ -102,6 +104,18 @@ def audit_series(root: Path) -> dict:
             f"environment variation: {error}" for error in variation_report["errors"]
         )
 
+    calibration = calibration_report(root)
+    for row in rows:
+        row["calibration_required"] = row["book_id"] == "TOME-I"
+        row["calibration_complete"] = (
+            calibration["production_calibrated"]
+            if row["calibration_required"]
+            else True
+        )
+        row["mass_generation_ready"] = (
+            row["production_ready"] and row["calibration_complete"]
+        )
+
     registry = load_monster_registry(root)
     allowed = set((registry.get("monsters") or {}).keys())
     used = set()
@@ -133,7 +147,11 @@ def audit_series(root: Path) -> dict:
         "books_registered": len(rows),
         "source_registry_entries": len(allowed),
         "environment_variation_families": variation_report["variation_families"],
+        "golden_five_calibration": calibration,
         "production_ready_books": sum(1 for row in rows if row["production_ready"]),
+        "mass_generation_ready_books": sum(
+            1 for row in rows if row["mass_generation_ready"]
+        ),
         "books": rows,
         "errors": structural_errors,
     }

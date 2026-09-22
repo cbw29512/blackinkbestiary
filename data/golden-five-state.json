@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "calibration_id": "golden-five-v1",
+  "updated_at": null,
+  "complete": false,
+  "pages": {
+    "I-01": {
+      "status": "pending",
+      "attempt": 0,
+      "current_candidate": null,
+      "approved_candidate": null,
+      "review_dimensions": {
+        "colorability": null,
+        "monster_identity": null,
+        "environment_identity": null,
+        "story_moment": null,
+        "physical_grounding": null,
+        "print_layout": null
+      },
+      "review_notes": null
+    },
+    "I-24": {
+      "status": "pending",
+      "attempt": 0,
+      "current_candidate": null,
+      "approved_candidate": null,
+      "review_dimensions": {
+        "colorability": null,
+        "monster_identity": null,
+        "environment_identity": null,
+        "story_moment": null,
+        "physical_grounding": null,
+        "print_layout": null
+      },
+      "review_notes": null
+    },
+    "I-27": {
+      "status": "pending",
+      "attempt": 0,
+      "current_candidate": null,
+      "approved_candidate": null,
+      "review_dimensions": {
+        "colorability": null,
+        "monster_identity": null,
+        "environment_identity": null,
+        "story_moment": null,
+        "physical_grounding": null,
+        "print_layout": null
+      },
+      "review_notes": null
+    },
+    "I-38": {
+      "status": "pending",
+      "attempt": 0,
+      "current_candidate": null,
+      "approved_candidate": null,
+      "review_dimensions": {
+        "colorability": null,
+        "monster_identity": null,
+        "environment_identity": null,
+        "story_moment": null,
+        "physical_grounding": null,
+        "print_layout": null
+      },
+      "review_notes": null
+    },
+    "I-40": {
+      "status": "pending",
+      "attempt": 0,
+      "current_candidate": null,
+      "approved_candidate": null,
+      "review_dimensions": {
+        "colorability": null,
+        "monster_identity": null,
+        "environment_identity": null,
+        "story_moment": null,
+        "physical_grounding": null,
+        "print_layout": null
+      },
+      "review_notes": null
+    }
+  }
+}
