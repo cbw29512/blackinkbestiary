@@ -292,3 +292,18 @@ Walls, floors, ceilings, torches, traps, gates, roots, coral, tombs, furniture, 
 Environment variety must come from stronger structure, material design, fixtures, depth, and composition—not tiny texture.
 
 See `docs/ENVIRONMENT_ENGINE_V3.md` for the persistent architecture specification.
+
+
+## 2026-09-22 Monster V3 Recipe Enforcement
+
+Schema-v3 monster recipes are now treated as strict recipes rather than permissive resolved documents.
+
+- the universal monster contract remains the schema authority
+- the normal catalog audit now executes the recipe-policy audit
+- family-owned fields such as `visual_identity`, `scene_identity`, `accuracy_checks`, and `known_failure_modes` are hard failures when copied into schema-v3+ monster files
+- unapproved top-level fields and empty override blocks are hard failures
+- the audit reports minimal-v3 count, legacy family-backed migration candidates, and standalone legacy monsters
+- regression coverage injects forbidden family anatomy into a v3 recipe and requires rejection
+- new/modified audit modules remain within the 150-line modularity ceiling
+
+**Validation status:** code-level enforcement is implemented on the branch, but GitHub Actions jobs are currently failing before runner assignment with no executed steps. Do not treat the branch as CI-certified until a complete workflow run executes.
