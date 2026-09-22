@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "registry_id": "black-ink-2024-srd-project-roster",
+  "source_scope": "2024 SRD",
+  "purpose": "Project whitelist for monster IDs permitted in Black-Ink production. Monster recipes remain minimal; source eligibility is centralized here.",
+  "publication_note": "This whitelist enforces project scope. Final commercial release still requires a source/license review of the roster and required attribution.",
+  "monsters": {
+    "kobold-warrior": {
+      "status": "allowed"
+    },
+    "kobold-shrine-keeper": {
+      "status": "allowed"
+    },
+    "goblin-minion": {
+      "status": "allowed"
+    },
+    "goblin-warrior": {
+      "status": "allowed"
+    },
+    "goblin-boss": {
+      "status": "allowed"
+    },
+    "hobgoblin-warrior": {
+      "status": "allowed"
+    },
+    "hobgoblin-captain": {
+      "status": "allowed"
+    },
+    "bugbear-warrior": {
+      "status": "allowed"
+    },
+    "bugbear-stalker": {
+      "status": "allowed"
+    },
+    "ogre": {
+      "status": "allowed"
+    },
+    "ogre-zombie": {
+      "status": "allowed"
+    },
+    "troll": {
+      "status": "allowed"
+    },
+    "troll-limb": {
+      "status": "allowed"
+    },
+    "darkmantle": {
+      "status": "allowed"
+    },
+    "stirges": {
+      "status": "allowed"
+    },
+    "giant-bat": {
+      "status": "allowed"
+    },
+    "bat-swarm": {
+      "status": "allowed"
+    },
+    "giant-rat": {
+      "status": "allowed"
+    },
+    "rat-swarm": {
+      "status": "allowed"
+    },
+    "giant-centipede": {
+      "status": "allowed"
+    },
+    "giant-fire-beetle": {
+      "status": "allowed"
+    },
+    "giant-spider": {
+      "status": "allowed"
+    },
+    "giant-wolf-spider": {
+      "status": "allowed"
+    },
+    "gelatinous-cube": {
+      "status": "allowed"
+    },
+    "black-pudding": {
+      "status": "allowed"
+    },
+    "ochre-jelly": {
+      "status": "allowed"
+    },
+    "mimic-chest": {
+      "status": "allowed"
+    },
+    "mimic-door": {
+      "status": "allowed"
+    },
+    "animated-armor": {
+      "status": "allowed"
+    },
+    "flying-sword": {
+      "status": "allowed"
+    },
+    "rug-of-smothering": {
+      "status": "allowed"
+    },
+    "gargoyle": {
+      "status": "allowed"
+    },
+    "labyrinth-minotaur": {
+      "status": "allowed"
+    },
+    "minotaur-skeleton": {
+      "status": "allowed"
+    },
+    "roper": {
+      "status": "allowed"
+    },
+    "cloaker": {
+      "status": "allowed"
+    },
+    "grick": {
+      "status": "allowed"
+    },
+    "ankheg": {
+      "status": "allowed"
+    },
+    "bulette": {
+      "status": "allowed"
+    },
+    "rust-monster": {
+      "status": "allowed"
+    },
+    "otyugh": {
+      "status": "allowed"
+    },
+    "gibbering-mouther": {
+      "status": "allowed"
+    },
+    "basilisk": {
+      "status": "allowed"
+    },
+    "cockatrice": {
+      "status": "allowed"
+    },
+    "purple-worm": {
+      "status": "allowed"
+    },
+    "drider": {
+      "status": "allowed"
+    },
+    "behir": {
+      "status": "allowed"
+    },
+    "shrieker-fungus": {
+      "status": "allowed"
+    },
+    "violet-fungus": {
+      "status": "allowed"
+    },
+    "lich": {
+      "status": "allowed"
+    }
+  }
+}

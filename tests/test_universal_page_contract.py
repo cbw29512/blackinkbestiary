@@ -80,6 +80,10 @@ class UniversalPageContractTests(unittest.TestCase):
         self.assertEqual(len(plan["slots"]), 24)
         self.assertNotIn("habitat", plan["slots"][0])
         self.assertNotIn("composition", plan["slots"][0])
+        self.assertEqual(book["kdp_print_standard"], "config/kdp_print_standard.json")
+        self.assertEqual(book["content_scope"], "config/content_scope.json")
+        self.assertEqual(plan["print_standard"], "black-ink-kdp-8.5x11-v1")
+        self.assertEqual(plan["source_scope"], "2024 SRD")
 
     def test_completed_plan_promotes_to_minimal_manifest(self):
         book = build_book_record("TOME-IX", "Test Tome", "test", 1, ["dungeon"])
@@ -152,6 +156,7 @@ class UniversalPageContractTests(unittest.TestCase):
         series = json.loads((ROOT / "data" / "series.json").read_text(encoding="utf-8"))
         self.assertEqual(series["page_contract"], "config/universal_page_contract.json")
         self.assertEqual(series["monster_contract"], "config/universal_monster_contract.json")
+        self.assertEqual(series["print_standard"], "config/kdp_print_standard.json")
         self.assertTrue(all(
             book["page_contract"] == "config/universal_page_contract.json"
             and book["monster_contract"] == "config/universal_monster_contract.json"

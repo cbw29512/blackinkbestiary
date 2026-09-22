@@ -23,6 +23,7 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
         report = audit_series(ROOT)
         self.assertTrue(report["pass"])
         self.assertEqual(report["books_registered"], 8)
+        self.assertGreaterEqual(report["source_registry_entries"], 50)
         tome_i = next(row for row in report["books"] if row["book_id"] == "TOME-I")
         self.assertTrue(tome_i["production_ready"])
         future = [row for row in report["books"] if row["book_id"] != "TOME-I"]

@@ -3,7 +3,7 @@
   "series_id": "black-ink-bestiary",
   "series_title": "Black-Ink Bestiary",
   "tagline": "Fantasy Monsters in Their Natural Habitat",
-  "production_rule": "Every book inherits the universal page contract. Each page supplies only its unique monster, environment profile, landmark/framing/interaction, story moment, scene archetype, and physicality. Book page count is configured per book.",
+  "production_rule": "All books inherit the universal monster engine, universal page engine, environment catalog, and KDP print standard. Books are environment-led with monster-family variety. Page recipes store only unique scene facts; engines and catalogs supply shared intelligence.",
   "books": [
     {
       "book_id": "TOME-I",
@@ -29,7 +29,9 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     },
     {
       "book_id": "TOME-II",
@@ -55,7 +57,9 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     },
     {
       "book_id": "TOME-III",
@@ -81,7 +85,9 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     },
     {
       "book_id": "TOME-IV",
@@ -107,7 +113,9 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     },
     {
       "book_id": "TOME-V",
@@ -133,7 +141,9 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     },
     {
       "book_id": "TOME-VI",
@@ -159,7 +169,9 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     },
     {
       "book_id": "TOME-VII",
@@ -185,7 +197,9 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     },
     {
       "book_id": "TOME-VIII",
@@ -211,10 +225,21 @@
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
       "page_contract": "config/universal_page_contract.json",
-      "monster_contract": "config/universal_monster_contract.json"
+      "monster_contract": "config/universal_monster_contract.json",
+      "kdp_print_standard": "config/kdp_print_standard.json",
+      "content_scope": "config/content_scope.json"
     }
   ],
   "default_target_pages": 50,
   "page_contract": "config/universal_page_contract.json",
-  "monster_contract": "config/universal_monster_contract.json"
+  "monster_contract": "config/universal_monster_contract.json",
+  "product_scope": {
+    "ruleset": "2024 SRD",
+    "books": 8,
+    "organization": "hybrid_environment_led",
+    "target_pages_per_book": "approximately 50",
+    "repeat_policy": "A monster may repeat across books only when environment, story moment, framing, and interaction are materially different.",
+    "goal": "Production-quality KDP coloring books featuring accurate SRD monsters in distinctive natural habitats, lairs, or believable territories."
+  },
+  "print_standard": "config/kdp_print_standard.json"
 }

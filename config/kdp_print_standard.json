@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "standard_id": "black-ink-kdp-8.5x11-v1",
+  "purpose": "Final print/export contract for Black-Ink Bestiary interiors.",
+  "trim": {
+    "width_inches": 8.5,
+    "height_inches": 11,
+    "orientation": "portrait",
+    "bleed": false
+  },
+  "raster_export": {
+    "dpi": 300,
+    "width_px": 2550,
+    "height_px": 3300,
+    "color_mode": "grayscale_or_monochrome_line_art",
+    "background": "white"
+  },
+  "safe_layout": {
+    "outer_white_margin_inches": 0.375,
+    "gutter_safe_margin_inches": 0.5,
+    "rule": "Keep all essential monster anatomy, story props, and environment-defining forms comfortably inside the safe area. No artwork or linework should rely on trim-edge contact."
+  },
+  "working_art": {
+    "minimum_width_px": 768,
+    "minimum_height_px": 1024,
+    "target_aspect_ratio": 0.7727,
+    "ratio_tolerance": 0.04,
+    "rule": "Working generation may use lower resolution, but must preserve the final 8.5x11 portrait composition so export does not require destructive cropping."
+  },
+  "page_content": {
+    "dominant_subjects": 1,
+    "rule": "One primary monster is the dominant subject. Secondary creatures are allowed only when the scene requires them and they remain visually subordinate."
+  }
+}

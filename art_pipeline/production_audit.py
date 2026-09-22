@@ -22,7 +22,7 @@ def audit_active_book(root: Path) -> dict:
     checks = []
     errors = []
 
-    for label in ("manifest", "state", "quality_rules", "page_archetypes", "environment_standard", "coloring_page_standard", "universal_page_contract", "universal_monster_contract"):
+    for label in ("manifest", "state", "quality_rules", "page_archetypes", "environment_standard", "coloring_page_standard", "universal_page_contract", "universal_monster_contract", "kdp_print_standard", "content_scope"):
         path = paths[label]
         ok = path.exists() and path.is_file()
         checks.append({"check": f"{label}_exists", "pass": ok, "path": str(path)})

@@ -13,7 +13,8 @@
       ],
       "hard_max_page_height_fraction": 0.82,
       "placement": "centered or near-centered in the primary visual field",
-      "rule": "The monster is the largest and first-read object on the page, centered or near-centered, normally occupying about 60–75% of page height. Keep the full or nearly full silhouette readable while leaving a surrounding environmental frame."
+      "rule": "Exactly one primary monster is the dominant focal subject, centered or near-centered, normally occupying about 60–75% of page height. Secondary creatures may appear only when required by the scene and must remain clearly subordinate.",
+      "count": 1
     },
     "environment": {
       "preferred_major_cues": [
@@ -67,7 +68,9 @@
     "secondary figures compete with the primary monster for attention",
     "repeated micro-patterns turn large colorable surfaces into many tiny cells",
     "creature appears to hover because feet or body do not contact any support and no airborne action is readable",
-    "falling or jumping creature uses a static standing pose in midair"
+    "falling or jumping creature uses a static standing pose in midair",
+    "more than one competing primary monster",
+    "essential anatomy or story prop crosses the print safe area"
   ],
   "reference_composition": {
     "source": "user-approved visual references",

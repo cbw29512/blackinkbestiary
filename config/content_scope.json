@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "allowed_monster_scope": "2024 SRD",
+  "monster_source_registry": "data/monster_source_registry.json",
+  "organization_model": "hybrid_environment_led",
+  "repeat_policy": "Monster IDs may recur across books only when the resolved environment, landmark, framing, interaction, moment, and physical state are materially different.",
+  "book_policy": "Books are primarily organized by environment/location theme while retaining monster-family variety.",
+  "publication_gate": "Only source-whitelisted monster IDs may enter production."
+}

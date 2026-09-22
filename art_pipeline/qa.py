@@ -9,7 +9,7 @@ from png_content_qa import inspect_line_art
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 
-def inspect_png(path: Path, target_ratio: float = 3 / 4, ratio_tolerance: float = 0.08) -> dict:
+def inspect_png(path: Path, target_ratio: float = 8.5 / 11, ratio_tolerance: float = 0.04) -> dict:
     raw = path.read_bytes()
     result = {
         "path": str(path),
@@ -71,3 +71,15 @@ def inspect_candidate(path: str | Path) -> dict:
     if path.suffix.lower() == ".png":
         return inspect_png(path)
     return {"path": str(path), "exists": True, "pass": False, "reasons": ["unsupported_format"]}
+
+
+def inspect_kdp_export(path: str | Path) -> dict:
+    result = inspect_candidate(path)
+    if not result.get("exists") or result.get("format") != "png":
+        return result
+    exact = result.get("width") == 2550 and result.get("height") == 3300
+    result["kdp_exact_dimensions"] = exact
+    if not exact and "kdp_export_dimensions" not in result["reasons"]:
+        result["reasons"].append("kdp_export_dimensions")
+    result["pass"] = not result["reasons"]
+    return result
