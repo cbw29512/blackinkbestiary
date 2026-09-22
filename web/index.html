@@ -44,6 +44,13 @@
             <button type="button" data-tag="pose too stiff">Pose stiff</button>
             <button type="button" data-tag="focal subject weak">Weak focus</button>
             <button type="button" data-tag="composition wrong">Composition wrong</button>
+            <button type="button" data-tag="stronger environment identity">Stronger environment</button>
+            <button type="button" data-tag="environment too empty">Environment too empty</button>
+            <button type="button" data-tag="environment too generic">Environment too generic</button>
+            <button type="button" data-tag="environment story disconnected">Environment disconnected</button>
+            <button type="button" data-tag="environment too cluttered">Environment cluttered</button>
+            <button type="button" data-tag="environment perspective unclear">Environment perspective</button>
+            <button type="button" data-tag="wrong environment">Wrong environment</button>
           </div>
           <div class="actions">
             <button id="approve" class="approve" type="button">Approve & Lock</button>
@@ -54,6 +61,10 @@
           <p class="rule">Approve only when the page is final.</p>
         </div>
         <details class="audit-section" open>
+          <summary>Environment audit</summary>
+          <div class="brief-card" id="environmentPanel"></div>
+        </details>
+        <details class="audit-section">
           <summary>Monster identity audit</summary>
           <div class="reference-card" id="referencePanel"></div>
         </details>
@@ -64,6 +75,7 @@
       </aside>
     </section>
   </main>
+  <script src="render.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
