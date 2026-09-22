@@ -3,10 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 
 try:
-    from .environment_catalog import resolve_environment_profile
+    from .environment_catalog import load_environment_contract, resolve_environment_profile
     from .environment_spatial import resolve_spatial_envelope
 except ImportError:
-    from environment_catalog import resolve_environment_profile
+    from environment_catalog import load_environment_contract, resolve_environment_profile
     from environment_spatial import resolve_spatial_envelope
 
 
@@ -16,6 +16,13 @@ def _clean(value) -> str:
 
 def _first(values, limit: int) -> list[str]:
     return [_clean(item) for item in (values or []) if _clean(item)][:limit]
+
+
+def _clip_words(value: str, limit: int) -> str:
+    words = _clean(value).split()
+    if len(words) <= limit:
+        return " ".join(words)
+    return " ".join(words[:limit]).rstrip(",;:")
 
 
 def build_room_brief(page: dict, root: Path) -> dict:
@@ -29,13 +36,13 @@ def build_room_brief(page: dict, root: Path) -> dict:
     must_show = _first(envelope.get("must_show"), 3)
     drift = _first(envelope.get("must_not_drift"), 4)
 
-    shape = _clean(envelope.get("plan_shape"))
-    proportions = _clean(envelope.get("proportions"))
-    material = _clean(identity.get("material_language"))
-    ceiling = _clean(envelope.get("ceiling"))
-    openings = _clean(envelope.get("openings"))
-    focal = _clean(envelope.get("focal_zone"))
-    camera = _clean(envelope.get("camera"))
+    shape = _clip_words(envelope.get("plan_shape"), 10)
+    proportions = _clip_words(envelope.get("proportions"), 14)
+    material = _clip_words(identity.get("material_language"), 14)
+    ceiling = _clip_words(envelope.get("ceiling"), 12)
+    openings = _clip_words(envelope.get("openings"), 12)
+    focal = _clip_words(envelope.get("focal_zone"), 12)
+    camera = _clip_words(envelope.get("camera"), 10)
 
     brief = (
         f"{profile['name']}: {shape}; {proportions}. "
@@ -45,6 +52,12 @@ def build_room_brief(page: dict, root: Path) -> dict:
         f"Focal organization: {focal}. "
         f"View: {camera}."
     )
+    contract = load_environment_contract(root / "config" / "universal_environment_contract.json")
+    maximum = int((contract.get("room_brief_engine") or {}).get("max_words") or 95)
+    if len(brief.split()) > maximum:
+        raise RuntimeError(
+            f"ROOM BRIEF for {profile['environment_id']} exceeds {maximum} words"
+        )
     return {
         "profile_name": profile["name"],
         "envelope_id": envelope["envelope_id"],
