@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "contract_id": "black-ink-story-v1",
+  "purpose": "Make every page communicate one clear, static, colorable story beat instead of a generic character portrait.",
+  "principles": [
+    "One page communicates one primary beat.",
+    "The beat must be readable from body language, prop use, and environment interaction at thumbnail size.",
+    "Prefer stable actions such as stalking, guarding, feeding, hiding, dragging, inspecting, climbing with contact, tending, watching, threatening, or using an object.",
+    "Avoid neutral portrait poses where the monster merely stands and holds props.",
+    "Avoid simultaneous unrelated actions.",
+    "The environment must participate in the beat rather than acting as wallpaper.",
+    "Story clarity must not require falling, jumping, or chaotic midair action."
+  ],
+  "required_inputs": [
+    "moment",
+    "environment_variant.interaction",
+    "physicality.mode",
+    "physicality.motion"
+  ],
+  "automatic_failures": [
+    "monster reads as posing for a portrait instead of doing the stated moment",
+    "story depends only on a held prop with no readable body language",
+    "environment does not participate in the moment",
+    "multiple competing story beats are present",
+    "moment requires unstable jump/fall action to be understood",
+    "stated moment is not visually distinguishable at thumbnail size"
+  ],
+  "review_questions": [
+    "What single verb describes what the monster is doing?",
+    "Can that action be identified without reading the caption?",
+    "Does at least one environment feature participate?",
+    "Does the pose remain stable and easy to color?",
+    "Would removing the prop destroy the entire story read? If yes, strengthen body/environment interaction."
+  ]
+}
