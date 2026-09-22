@@ -33,9 +33,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -95,9 +97,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -116,24 +120,34 @@
       "habitat": "Dungeon kitchen and pantry",
       "moment": "Running away with a stolen ham",
       "identity_rules": [
-        "Must be immediately recognizable as Goblin Minion",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
+        "Unmistakably goblin: oversized pointed ears, broad flattened nose, angular scrappy face, wide irregular-toothed grin",
+        "Small wiry slightly hunched scavenger body; not heroic, cute, furry, elf-like, or imp-like",
+        "Sparse hair only; no furry or fluffy silhouette"
       ],
       "must_include": [
-        "small wiry goblin minion",
+        "small wiry unmistakably goblin minion",
         "clearly visible stolen ham tucked under one arm",
-        "running-away pose",
-        "rough medieval dungeon kitchen",
-        "simple pantry shelves and food stores"
+        "darting or hunched running-away pose",
+        "rough medieval-fantasy dungeon kitchen built into stone",
+        "simple pantry shelves with sacks, crocks, hanging food, or crude storage",
+        "at least one environmental cue showing the pantry is being raided or scavenged"
       ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat",
+        "modern household cabinetry or appliances",
+        "clean suburban kitchen appearance",
+        "cute elf-child face",
+        "imp or devil face",
+        "furry or fluffy goblin anatomy",
+        "generic pantry that could be a modern home"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -167,9 +181,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -203,9 +219,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -239,9 +257,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -275,9 +295,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -310,9 +332,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -346,9 +370,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -382,9 +408,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -418,9 +446,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -454,9 +484,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -490,9 +522,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -526,9 +560,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -562,9 +598,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -598,9 +636,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -634,9 +674,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -670,9 +712,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -706,9 +750,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -742,9 +788,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -778,9 +826,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -814,9 +864,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -850,9 +902,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -886,9 +940,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -922,9 +978,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -958,9 +1016,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -994,9 +1054,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1030,9 +1092,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1066,9 +1130,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1102,9 +1168,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1138,9 +1206,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1174,9 +1244,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1210,9 +1282,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1246,9 +1320,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1282,9 +1358,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1319,9 +1397,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1355,9 +1435,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1392,9 +1474,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1429,9 +1513,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1466,9 +1552,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1503,9 +1591,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1540,9 +1630,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1576,9 +1668,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1613,9 +1707,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1649,9 +1745,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1686,9 +1784,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1723,9 +1823,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1760,9 +1862,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1797,9 +1901,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1835,9 +1941,11 @@
         "dense crosshatching",
         "decorative border",
         "text inside the artwork",
-        "clutter that competes with the monster"
+        "generic or empty background",
+        "environment disconnected from the story moment",
+        "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster is the dominant subject; habitat clearly readable; simple supporting background.",
+      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
