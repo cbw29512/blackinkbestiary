@@ -76,6 +76,26 @@
     "wrong monster identity": {
       "action": "regenerate",
       "directive": "Regenerate from the canonical creature specification because the current subject is fundamentally off-model. Rebuild the head, silhouette, body proportions, posture, and signature anatomy so the creature is unmistakable at thumbnail size before preserving any scene details."
+    },
+    "background reused": {
+      "action": "regenerate",
+      "directive": "Recompose the page using the assigned environment profile but a clearly different landmark, framing, depth structure, and monster/environment interaction from nearby pages. Do not reuse the same room, cave wall, seabed, corridor, or horizon layout."
+    },
+    "objects too small": {
+      "action": "modify",
+      "directive": "Enlarge story-critical props and major environmental forms into a few bold, simple, easy-to-color shapes. Remove tiny secondary objects that create fiddly coloring regions."
+    },
+    "monster too large": {
+      "action": "modify",
+      "directive": "Reduce the monster's page coverage enough for the assigned habitat, landmark, and story interaction to read clearly. Keep the creature substantial but restore meaningful environment around it."
+    },
+    "environment objects too large": {
+      "action": "modify",
+      "directive": "Reduce any single foreground or environmental object that blocks monster anatomy or consumes the composition. Keep major objects large and easy to color, but subordinate them to the three-pillar scene balance."
+    },
+    "too many tiny coloring regions": {
+      "action": "modify",
+      "directive": "Merge or remove micro-detail, repeated texture, tiny enclosed islands, and small decorative shapes. Preserve identity using fewer medium-to-large colorable regions."
     }
   }
 }
