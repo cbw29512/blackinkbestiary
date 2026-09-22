@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "rat",
+  "display_name": "Rat",
+  "taxonomy": {
+    "family": "rat",
+    "creature_type": "beast",
+    "default_size": "variable"
+  },
+  "visual_identity": {
+    "core_identity": "Natural dungeon rats with pointed snouts, rounded ears, incisors, whiskers, low quadruped bodies, and long mostly hairless tails.",
+    "silhouette": "Low rodent body, arched back, pointed snout, rounded ears, long tapering tail.",
+    "head_features": "Long rat snout, rounded ears, small eyes, whiskers, visible incisors on foreground animals.",
+    "body_shape": "Lean four-legged rodent anatomy with small forepaws and stronger hind legs.",
+    "surface": "Short coarse fur indicated sparingly; tail mostly hairless.",
+    "must_keep": [
+      "pointed rat snout",
+      "rounded ears",
+      "long naked tail",
+      "rodent incisors",
+      "four-legged rodent anatomy"
+    ],
+    "must_avoid": [
+      "wolf body",
+      "mouse-cute proportions",
+      "human hands",
+      "horns",
+      "dense fur hatching",
+      "oversized saber fangs"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as rat rather than generic furry beast",
+    "tail and rounded ears are visible",
+    "rodent posture remains low and quadrupedal"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "mouse_drift",
+      "symptom": "rat becomes cute with oversized round features",
+      "correction": "lengthen snout, sharpen body proportions, and keep expression wary or hungry"
+    },
+    {
+      "id": "wolf_drift",
+      "symptom": "rat develops canine body or paws",
+      "correction": "restore low rodent body, small forepaws, rounded ears, and long naked tail"
+    }
+  ]
+}
