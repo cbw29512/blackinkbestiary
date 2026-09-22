@@ -4,6 +4,11 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
+try:
+    from .monster_catalog import minimal_recipe_errors, resolve_monster_spec
+except ImportError:
+    from monster_catalog import minimal_recipe_errors, resolve_monster_spec
+
 REQUIRED_VISUAL = {
     "core_identity",
     "silhouette",
@@ -33,6 +38,11 @@ def audit_monster_catalog(root: Path) -> dict:
             errors.append(f"{path.name}: invalid JSON: {exc}")
             continue
         specs.append((path, spec))
+        errors.extend(minimal_recipe_errors(path.stem, monster_dir, family_dir))
+        try:
+            resolve_monster_spec(path.stem, monster_dir, family_dir)
+        except RuntimeError as exc:
+            errors.append(f"{path.name}: could not resolve through universal engine: {exc}")
         family = str(spec.get("family_profile") or spec.get("family") or "").strip()
         if family:
             groups[family].append((path, spec))
