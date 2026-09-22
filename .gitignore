@@ -13,3 +13,5 @@ web/approved/Tome-I/*
 data/local-environment.json
 data/template-validation.json
 art_pipeline/workflows/official/*.json
+
+data/generation-worker.log
