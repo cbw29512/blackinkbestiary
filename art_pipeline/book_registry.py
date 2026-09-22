@@ -48,7 +48,7 @@ def book_setup_status(book: dict, root: Path = ROOT) -> dict:
         "manifest_exists": manifest.exists(),
         "state_exists": state.exists(),
         "reviews_exists": reviews.exists(),
-        "production_files_complete": manifest.exists() and state.exists() and reviews.exists(),
+        "production_files_complete": manifest.exists() and state.exists(),
     }
 
 
