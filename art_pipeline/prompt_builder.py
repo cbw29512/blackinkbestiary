@@ -4,9 +4,11 @@ from pathlib import Path
 
 try:
     from .monster_catalog import load_monster_for_page
+    from .monster_prompt import monster_prompt_sections, monster_review_checks
     from .page_contract import resolve_page_spec
 except ImportError:
     from monster_catalog import load_monster_for_page
+    from monster_prompt import monster_prompt_sections, monster_review_checks
     from page_contract import resolve_page_spec
 
 try:
@@ -40,44 +42,13 @@ def _items(label: str, values) -> str:
 def load_monster_spec(page: dict) -> dict | None:
     return load_monster_for_page(page)
 
-def _canonical_sections(spec: dict | None) -> list[str]:
-    if not spec:
-        return []
-    visual = spec.get("visual_identity") or {}
-    scene = spec.get("scene_identity") or {}
-    failures = [
-        f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
-        for item in spec.get("known_failure_modes", [])
-        if item.get("symptom") and item.get("correction")
-    ]
-    sections = [
-        f"CANONICAL CREATURE TYPE: {spec.get('creature_type', '')}; size {spec.get('size', '')}.",
-        f"CANONICAL CORE IDENTITY: {visual.get('core_identity', '')}".strip(),
-        f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}".strip(),
-        f"CANONICAL HEAD: {visual.get('head_features', '')}".strip(),
-        f"CANONICAL BODY: {visual.get('body_shape', '')}".strip(),
-        f"CANONICAL LIMBS / EXTREMITIES: {visual.get('limb_structure', '')}".strip(),
-        f"CANONICAL SURFACE: {visual.get('surface', '')}".strip(),
-        f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}".strip(),
-        f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}".strip(),
-        _items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style")),
-        _items("VARIANT TRAITS", spec.get("variant_traits")),
-        _items("CANONICAL GEAR", visual.get("signature_gear")),
-        _items("CANONICAL ATTITUDE", visual.get("attitude")),
-        _items("IDENTITY FEATURES THAT MUST SURVIVE STYLIZATION", visual.get("must_keep")),
-        _items("IDENTITY ERRORS TO AVOID", visual.get("must_avoid")),
-        _items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
-    ]
-    return [part for part in sections if part and not part.endswith(":")]
-
-
 def build_prompt(page: dict, review_notes: dict | None = None) -> str:
     page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
         f"SUBJECT: {page['monster_name']}.",
-        *_canonical_sections(spec),
+        *monster_prompt_sections(spec, ROOT),
         (
             "PAGE ENVIRONMENT AUTHORITY: the named HABITAT and resolved environment profile below are mandatory and "
             "override all general creature habitat preferences. Creature-family environment_fit data is planning-only "
@@ -169,13 +140,7 @@ def build_supervisor_checklist(page: dict) -> list[str]:
     checks.extend(environment_checklist(page, ROOT))
     checks.extend(story_checklist(page, ROOT))
     checks.extend(physicality_checklist(page))
-    if spec:
-        checks.extend(f"Identity check: {item}" for item in spec.get("accuracy_checks", []))
-        checks.extend(
-            f"Reject identity drift: {item.get('symptom')}"
-            for item in spec.get("known_failure_modes", [])
-            if item.get("symptom")
-        )
+    checks.extend(monster_review_checks(spec))
     for item in page.get("must_include", []):
         checks.append(f"Required element present: {item}")
     return checks
