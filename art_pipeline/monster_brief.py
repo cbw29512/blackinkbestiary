@@ -35,15 +35,18 @@ def build_monster_brief(spec: dict, root: Path) -> dict:
     surface = _clip(visual.get("surface"), 12)
     posture = _clip(scene.get("natural_posture"), 14)
 
-    brief = (
-        f"{spec.get('monster_name', '')}: {core}. "
-        f"Silhouette: {silhouette}. "
-        f"Head: {head}. "
-        f"Body: {body}. "
-        f"Limbs: {limbs}. "
-        f"Surface: {surface}. "
-        f"Natural posture: {posture}."
-    )
+    sentences = [f"{spec.get('monster_name', '')}: {core}." if core else str(spec.get("monster_name") or "")]
+    for label, value in (
+        ("Silhouette", silhouette),
+        ("Head", head),
+        ("Body", body),
+        ("Limbs", limbs),
+        ("Surface", surface),
+        ("Natural posture", posture),
+    ):
+        if value:
+            sentences.append(f"{label}: {value}.")
+    brief = " ".join(item for item in sentences if item)
     maximum = int(budget.get("monster_brief_max_words") or 105)
     if len(brief.split()) > maximum:
         raise RuntimeError(
