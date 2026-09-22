@@ -31,6 +31,30 @@ def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def find_prompt_id(value):
+    if isinstance(value, dict):
+        if isinstance(value.get("prompt_id"), str):
+            return value["prompt_id"]
+        for child in value.values():
+            found = find_prompt_id(child)
+            if found:
+                return found
+    elif isinstance(value, list):
+        for child in value:
+            found = find_prompt_id(child)
+            if found:
+                return found
+    return None
+
+
+def get_current():
+    tome = read_json(TOME_FILE)
+    state = read_json(STATE_FILE)
+    page_id = state["current_page_id"]
+    page = next(p for p in tome["pages"] if p["page_id"] == page_id)
+    return page, state["pages"][page_id]
+
+
 def diffusion_model_filename(config: dict) -> str:
     for model in config["models"]:
         if model.get("folder") == "diffusion_models":
