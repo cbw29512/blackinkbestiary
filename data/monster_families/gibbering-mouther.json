@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "gibbering-mouther",
+  "display_name": "Gibbering Mouther",
+  "taxonomy": {
+    "family": "gibbering mouther",
+    "creature_type": "aberration",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "An amorphous crawling aberration formed from a lumpy fleshlike mass covered in many unrelated eyes and mouths.",
+    "silhouette": "Low spreading irregular mound with several protruding mouths and eyes distributed across its surface, no stable limbs.",
+    "head_features": "No single head; multiple mouths of different sizes and several eyes are scattered across the mass.",
+    "body_shape": "Soft shapeless crawling mound with pseudopod-like lower edges, never resolving into humanoid anatomy.",
+    "limb_structure": "No fixed limbs or joints; the lower edge spreads and crawls as one amorphous supported mass.",
+    "surface": "Smooth folds with sparse bumps; mouths and eyes provide identity without dense gore.",
+    "must_keep": [
+      "many mouths",
+      "multiple scattered eyes",
+      "amorphous body",
+      "no single head",
+      "crawling low silhouette"
+    ],
+    "must_avoid": [
+      "graphic gore",
+      "human torso",
+      "single giant face",
+      "tentacle octopus form",
+      "solid black shading",
+      "too many tiny mouths causing clutter"
+    ]
+  },
+  "accuracy_checks": [
+    "multiple mouths are clearly separate",
+    "eyes are scattered rather than forming one face",
+    "body remains amorphous",
+    "gore stays restrained",
+    "negative space remains usable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "single_face_drift",
+      "symptom": "eyes and mouths organize into one normal face",
+      "correction": "redistribute multiple unrelated eyes and mouths across the amorphous mass"
+    },
+    {
+      "id": "gore_overload",
+      "symptom": "surface becomes graphic fleshy detail",
+      "correction": "use smooth broad folds and only a few large mouths and eyes"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "body turns into tentacled cephalopod",
+      "correction": "restore low crawling mound with no stable tentacle anatomy"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Medium spreading mass whose width is defined by contact with floor, water, or drain edges.",
+    "natural_posture": "Fully supported as a low crawling or pooling body against the ground or shallow water.",
+    "behavior_style": [
+      "crawling through shallow water",
+      "spreading across a drain edge",
+      "pressing around a broad obstacle",
+      "occupying a damp chamber lane"
+    ],
+    "environment_fit": [
+      "flooded cells",
+      "caverns",
+      "dungeon drains and wet underground passages"
+    ]
+  }
+}
