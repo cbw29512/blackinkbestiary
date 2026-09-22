@@ -9,6 +9,7 @@ try:
     from .catalog_audit import audit_environment_variation_catalog
     from .environment_engine_audit import audit_environment_engine
     from .manifest_validation import validate_manifest
+    from .monster_engine_audit import audit_monster_engine
     from .page_contract import missing_required_paths, page_uniqueness_fingerprint
     from .state_validation import validate_state
     from .source_scope import load_monster_registry
@@ -18,6 +19,7 @@ except ImportError:
     from catalog_audit import audit_environment_variation_catalog
     from environment_engine_audit import audit_environment_engine
     from manifest_validation import validate_manifest
+    from monster_engine_audit import audit_monster_engine
     from page_contract import missing_required_paths, page_uniqueness_fingerprint
     from state_validation import validate_state
     from source_scope import load_monster_registry
@@ -111,6 +113,7 @@ def audit_series(root: Path) -> dict:
             f"environment engine: {error}" for error in environment_report["errors"]
         )
 
+    monster_report = audit_monster_engine(root)
     calibration = calibration_report(root)
     for row in rows:
         row["calibration_required"] = row["book_id"] == "TOME-I"
@@ -119,8 +122,11 @@ def audit_series(root: Path) -> dict:
             if row["calibration_required"]
             else True
         )
+        row["monster_identity_ready"] = monster_report["production_identity_ready"]
         row["mass_generation_ready"] = (
-            row["production_ready"] and row["calibration_complete"]
+            row["production_ready"]
+            and row["calibration_complete"]
+            and row["monster_identity_ready"]
         )
 
     registry = load_monster_registry(root)
@@ -157,6 +163,7 @@ def audit_series(root: Path) -> dict:
         "environment_component_catalogs": environment_report["component_catalogs"],
         "environment_components": environment_report["total_components"],
         "environment_overlays": environment_report["overlay_count"],
+        "monster_engine": monster_report,
         "golden_five_calibration": calibration,
         "production_ready_books": sum(1 for row in rows if row["production_ready"]),
         "mass_generation_ready_books": sum(
