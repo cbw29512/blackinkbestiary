@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
 FAMILY_DIR = ROOT / "data" / "monster_families"
+VARIANT_DIR = ROOT / "data" / "monster_variants"
 CONTRACT_FILE = ROOT / "config" / "universal_monster_contract.json"
 
 
@@ -46,6 +47,14 @@ def family_profile_path(spec: dict, family_dir: Path = FAMILY_DIR) -> Path | Non
     if not profile_id:
         return None
     path = family_dir / f"{profile_id}.json"
+    return path if path.exists() else None
+
+
+def variant_profile_path(spec: dict, variant_dir: Path = VARIANT_DIR) -> Path | None:
+    variant_id = str(spec.get("variant_profile") or "").strip()
+    if not variant_id:
+        return None
+    path = variant_dir / f"{variant_id}.json"
     return path if path.exists() else None
 
 
@@ -90,6 +99,7 @@ def resolve_monster_spec(
     spec_id: str,
     monster_dir: Path = MONSTER_DIR,
     family_dir: Path = FAMILY_DIR,
+    variant_dir: Path = VARIANT_DIR,
 ) -> dict:
     spec_id = str(spec_id or "").strip()
     if not spec_id:
@@ -106,8 +116,16 @@ def resolve_monster_spec(
     contract = load_monster_contract(ROOT / "config" / "universal_monster_contract.json")
     family_path = family_profile_path(raw, family_dir)
     family = _read_json(family_path) if family_path else {}
+    variant_path = variant_profile_path(raw, variant_dir)
+    variant = _read_json(variant_path) if variant_path else {}
+    if variant and variant.get("family_profile") != raw.get("family_profile"):
+        raise RuntimeError(
+            f"Variant {raw.get('variant_profile')!r} requires family "
+            f"{variant.get('family_profile')!r}, not {raw.get('family_profile')!r}"
+        )
 
-    resolved = _merge_dict(family, raw)
+    resolved = _merge_dict(family, variant)
+    resolved = _merge_dict(resolved, raw)
     resolved = _apply_contract_defaults(resolved, contract)
     resolved = _apply_minimal_recipe(resolved, raw)
 
@@ -123,7 +141,10 @@ def resolve_monster_spec(
         if ROOT in path.resolve().parents else str(path),
         "family_profile": family_path.relative_to(ROOT).as_posix()
         if family_path and ROOT in family_path.resolve().parents else None,
+        "variant_profile": variant_path.relative_to(ROOT).as_posix()
+        if variant_path and ROOT in variant_path.resolve().parents else None,
         "family_identity_version": family.get("identity_version"),
+        "variant_identity_version": variant.get("identity_version"),
         "minimal_recipe": not bool(raw.get("visual_identity")),
     }
     return resolved
@@ -133,6 +154,7 @@ def minimal_recipe_errors(
     spec_id: str,
     monster_dir: Path = MONSTER_DIR,
     family_dir: Path = FAMILY_DIR,
+    variant_dir: Path = VARIANT_DIR,
 ) -> list[str]:
     path = monster_dir / f"{spec_id}.json"
     if not path.exists():
@@ -148,6 +170,18 @@ def minimal_recipe_errors(
     family_path = family_profile_path(raw, family_dir)
     if not family_path:
         errors.append(f"{spec_id}: minimal monster recipe requires a valid family_profile")
+    variant_id = str(raw.get("variant_profile") or "").strip()
+    if variant_id:
+        variant_path = variant_dir / f"{variant_id}.json"
+        if not variant_path.exists():
+            errors.append(f"{spec_id}: variant_profile {variant_id!r} does not exist")
+        else:
+            variant = _read_json(variant_path)
+            if variant.get("family_profile") != raw.get("family_profile"):
+                errors.append(
+                    f"{spec_id}: variant_profile {variant_id!r} belongs to "
+                    f"{variant.get('family_profile')!r}, not {raw.get('family_profile')!r}"
+                )
     return errors
 
 
