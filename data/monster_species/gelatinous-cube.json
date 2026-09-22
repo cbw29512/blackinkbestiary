@@ -32,7 +32,6 @@
   },
   "accuracy_checks": [
     "cube edges are unmistakable",
-    "corridor scale explains size",
     "interior stays mostly white",
     "no face is added",
     "outline remains simple"
