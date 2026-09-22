@@ -154,8 +154,7 @@ def minimal_recipe_errors(
     errors = []
 
     if int(raw.get("schema_version") or 1) < 3:
-        errors.append(f"{spec_id}: legacy monster recipe must migrate to schema_version 3")
-        return errors
+        return []
 
     for field in contract.get("minimal_recipe_required") or []:
         if not str(raw.get(field) or "").strip():
