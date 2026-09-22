@@ -33,28 +33,24 @@ try {
 }
 
 Write-Host ""
-Write-Host "[3/4] Comfy Desktop instance"
-$installationsFile = Join-Path $env:APPDATA "Comfy Desktop\installations.json"
-if (Test-Path $installationsFile) {
-    try {
-        $installs = Get-Content $installationsFile -Raw | ConvertFrom-Json
-        $target = $installs | Where-Object { $_.name -eq "Black-Ink Bestiary" -and $_.installPath } | Select-Object -First 1
-        if (-not $target) {
-            $target = $installs | Where-Object { $_.sourceId -ne "cloud" -and $_.installPath } | Select-Object -First 1
-        }
-        if ($target) {
-            Write-Host "  OK - $($target.name)" -ForegroundColor Green
-            Write-Host "  Path - $($target.installPath)"
-        } else {
-            Write-Host "  MISSING - no local Comfy Desktop instance found in installations.json" -ForegroundColor Red
-            $ok = $false
-        }
-    } catch {
-        Write-Host "  ERROR - could not parse installations.json" -ForegroundColor Red
+Write-Host "[3/4] Black-Ink ComfyUI workspace"
+$root = Split-Path -Parent $PSScriptRoot
+$configPath = Join-Path $root "config\local_ai_stack.json"
+try {
+    $config = Get-Content $configPath -Raw | ConvertFrom-Json
+    $workspace = Join-Path $root $config.workspace
+    $comfyRoot = Join-Path $workspace "ComfyUI"
+    $mainPy = Join-Path $comfyRoot "main.py"
+    if (Test-Path $mainPy) {
+        Write-Host "  OK - project-local ComfyUI workspace found" -ForegroundColor Green
+        Write-Host "  Path - $comfyRoot"
+    } else {
+        Write-Host "  MISSING - project-local ComfyUI workspace not installed" -ForegroundColor Red
+        Write-Host "  Expected - $mainPy"
         $ok = $false
     }
-} else {
-    Write-Host "  MISSING - %APPDATA%\Comfy Desktop\installations.json not found" -ForegroundColor Red
+} catch {
+    Write-Host "  ERROR - could not read config\local_ai_stack.json" -ForegroundColor Red
     $ok = $false
 }
 
