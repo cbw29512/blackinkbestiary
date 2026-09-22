@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "registry_id": "black-ink-scene-relationships-v1",
+  "purpose": "Make required objects and environment features relate physically and narratively instead of merely coexisting in the frame.",
+  "rules": {
+    "wall_mounted_fixture": {
+      "trigger_terms": [
+        "wall torch",
+        "wall sconce",
+        "torch bracket",
+        "wall lantern",
+        "lantern niche"
+      ],
+      "directives": [
+        "The fixture visibly touches and is supported by the wall through a bracket, ring, plate, hook, or niche.",
+        "The fixture must not become a freestanding post, floor lamp, or floating object."
+      ]
+    },
+    "tripwire_trigger": {
+      "trigger_terms": [
+        "tripwire"
+      ],
+      "directives": [
+        "The wire visibly crosses the traversable path at ankle or shin height.",
+        "At least one anchor point is visible on wall, floor, stake, or mechanism.",
+        "The wire visibly leads to or explains the triggered hazard; it is not merely a rope held by the monster."
+      ]
+    },
+    "pit_interrupts_route": {
+      "trigger_terms": [
+        "pit",
+        "pit trap",
+        "punji pit"
+      ],
+      "directives": [
+        "The pit opening is cut into the floor plane and visibly interrupts or threatens the normal travel route.",
+        "The rim is structurally clear and the interior hazard is readable without tiny repetitive detail.",
+        "Do not place the pit harmlessly off to the side unless the page recipe explicitly says side pit."
+      ]
+    },
+    "pressure_plate_route": {
+      "trigger_terms": [
+        "pressure plate"
+      ],
+      "directives": [
+        "The pressure plate is part of the walkable floor and lies where a traveler could plausibly step on it.",
+        "Its relationship to the hazard is visually understandable."
+      ]
+    },
+    "offering_to_shrine": {
+      "trigger_terms": [
+        "offering",
+        "raises a coin",
+        "raises a copper coin",
+        "shrine"
+      ],
+      "directives": [
+        "The offered object is visibly separate from the hand and readable as the stated object.",
+        "The gesture clearly aims toward the altar, shrine, idol, skull, relic, or ritual focal point receiving the offering.",
+        "The sacred focal point and offered object must not merge into unrelated props."
+      ]
+    },
+    "object_on_support": {
+      "trigger_terms": [
+        "on a chest",
+        "on the chest",
+        "on a plinth",
+        "on the altar",
+        "on a table",
+        "atop a chest"
+      ],
+      "directives": [
+        "The supported object or creature visibly contacts the named supporting surface.",
+        "No hovering gap or ambiguous overlap may separate object from support."
+      ]
+    },
+    "hanging_from_support": {
+      "trigger_terms": [
+        "hanging",
+        "suspended",
+        "web-hanging"
+      ],
+      "directives": [
+        "Visible contact or attachment points connect the subject to the stated overhead support.",
+        "The body weight must read as carried by the support rather than floating."
+      ]
+    },
+    "emerging_from_opening": {
+      "trigger_terms": [
+        "emerging",
+        "emerges",
+        "half-emerged",
+        "burrow opening",
+        "cave mouth"
+      ],
+      "directives": [
+        "The body visibly intersects the opening boundary in a physically believable way.",
+        "A substantial supported portion remains connected to floor, earth, water, wall, or opening rather than appearing airborne."
+      ]
+    },
+    "guarding_focal_object": {
+      "trigger_terms": [
+        "guarding",
+        "guards",
+        "guard",
+        "protecting"
+      ],
+      "directives": [
+        "The guarded object or threshold is positioned close enough to the subject that the protective relationship reads instantly.",
+        "Body orientation, gaze, or stance points toward the approach to the guarded feature."
+      ]
+    },
+    "using_cover": {
+      "trigger_terms": [
+        "cover",
+        "peers around",
+        "peering around",
+        "lurking beside",
+        "hiding behind"
+      ],
+      "directives": [
+        "The subject overlaps the cover edge enough to show concealment while keeping the silhouette readable.",
+        "The cover must be a real environment form, not an unexplained foreground shape."
+      ]
+    },
+    "carrying_object": {
+      "trigger_terms": [
+        "carrying",
+        "carries",
+        "dragging",
+        "drags",
+        "stolen ham",
+        "sack"
+      ],
+      "directives": [
+        "The carried object visibly contacts the hand, arm, shoulder, rope, or body supporting it.",
+        "Its silhouette stays distinct enough to identify the object without text."
+      ]
+    },
+    "interaction_contact": {
+      "trigger_terms": [
+        "kicks",
+        "kicking",
+        "touches",
+        "pulls",
+        "pushes",
+        "grips",
+        "grabbing",
+        "reaches toward",
+        "reaching toward"
+      ],
+      "directives": [
+        "The acting limb visibly contacts or clearly reaches toward the named target.",
+        "The target remains distinct from the limb and surrounding props."
+      ]
+    }
+  },
+  "prompt_budget": {
+    "max_active_rules": 4,
+    "rule": "Select only rules triggered by the current page recipe. Relationship precision must not become prompt clutter."
+  }
+}
