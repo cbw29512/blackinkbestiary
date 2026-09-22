@@ -34,6 +34,24 @@ web/approved/Tome-I/I-02.png
 
 Candidate attempts remain under `web/candidates/`; only human-approved pages enter the ordered book folder.
 
+## Product North Star
+
+Black-Ink Bestiary is an eight-book line of approximately 50-page, 2024-SRD-monster coloring books. Books are primarily organized by environment/location while retaining monster-family variety.
+
+Every finished page must have:
+
+- one large, accurate, dominant monster
+- a distinctive believable habitat, lair, or territory
+- a clear story moment readable at thumbnail size
+- a stable natural pose appropriate for a static coloring page
+- large, clean, satisfying coloring regions
+- pure black line art on white
+- a composition that preserves 8.5 × 11 KDP-safe output
+
+The universal monster engine supplies reusable creature identity and anti-drift logic. The universal page engine supplies composition, environment, physicality, coloring, and approval rules. Monster and page JSON should contain only the small amount of information that makes that subject or scene unique.
+
+The current production print target is 8.5 × 11 inches, portrait, non-bleed, 300 DPI final raster equivalent (2550 × 3300 px). Working-generation images may be smaller but must preserve that aspect and safe composition.
+
 ## Universal Monster Engine
 
 New monster files are intentionally tiny. `config/universal_monster_contract.json` resolves a minimal monster recipe through reusable family DNA.
