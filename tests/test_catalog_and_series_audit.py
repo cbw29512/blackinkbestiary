@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from catalog_audit import audit_monster_catalog
+from catalog_audit import audit_environment_variation_catalog, audit_monster_catalog
 from manifest_validation import validate_manifest
 from series_readiness import audit_series
 
@@ -19,8 +19,16 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
         self.assertTrue(report["pass"])
         self.assertGreaterEqual(report["family_profiles"], 10)
 
+    def test_environment_variation_registry_covers_every_family(self):
+        report = audit_environment_variation_catalog(ROOT)
+        self.assertTrue(report["pass"])
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["environment_families"], 8)
+        self.assertEqual(report["variation_families"], 8)
+
     def test_series_readiness_is_honest(self):
         report = audit_series(ROOT)
+        self.assertEqual(report["environment_variation_families"], 8)
         self.assertTrue(report["pass"])
         self.assertEqual(report["books_registered"], 8)
         self.assertGreaterEqual(report["source_registry_entries"], 50)
