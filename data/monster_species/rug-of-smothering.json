@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "rug-of-smothering",
+  "display_name": "Rug of Smothering",
+  "visual_identity": {
+    "core_identity": "An apparently decorative floor rug animated into a flexible constricting sheet that wraps victims with no face or limbs.",
+    "silhouette": "Large rectangular textile lifting in a curling wave, corners and edges folding around a central victim.",
+    "head_features": "No head, eyes, or mouth; menace comes from folding motion.",
+    "body_shape": "Flat woven rectangle capable of bending, rolling, and wrapping while keeping identifiable rug edges.",
+    "surface": "Broad simple geometric or heraldic pattern with large colorable areas, fringe kept sparse.",
+    "signature_gear": [],
+    "attitude": [
+      "sudden",
+      "constricting",
+      "silent",
+      "deceptive"
+    ],
+    "must_keep": [
+      "rectangular rug identity",
+      "folding sheet motion",
+      "simple textile pattern",
+      "no face"
+    ],
+    "must_avoid": [
+      "carpet monster mouth",
+      "tentacles",
+      "solid fabric black fill",
+      "overly intricate pattern",
+      "humanoid limbs",
+      "flying carpet pose"
+    ]
+  },
+  "accuracy_checks": [
+    "still reads as rug",
+    "wrapping motion is clear",
+    "pattern remains simple",
+    "no face is added",
+    "large coloring regions remain"
+  ]
+}
