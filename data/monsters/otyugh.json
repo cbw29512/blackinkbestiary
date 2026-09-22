@@ -1,54 +1,6 @@
 {
+  "schema_version": 3,
   "monster_id": "otyugh",
   "monster_name": "Otyugh",
-  "family": "otyugh",
-  "size": "large",
-  "creature_type": "aberration",
-  "visual_identity": {
-    "core_identity": "A filthy refuse-dwelling aberration with three stout legs, two long grasping tentacles, one elevated eyestalk, and a broad central mouth.",
-    "silhouette": "Low bulky central body supported by three legs, two long tentacles reaching outward, single eye stalk rising above.",
-    "head_features": "No separate head; one elevated eye and a huge mouth lined with blunt irregular teeth occupy the central body.",
-    "body_shape": "Round heavy torso with three thick legs and two flexible grasping tentacles.",
-    "surface": "Tough hide with sparse folds, warts, and garbage residue kept simple.",
-    "signature_gear": [],
-    "attitude": [
-      "scavenging",
-      "territorial",
-      "watchful",
-      "grasping"
-    ],
-    "must_keep": [
-      "three legs",
-      "two long tentacles",
-      "single eyestalk",
-      "large central mouth",
-      "refuse-pit posture"
-    ],
-    "must_avoid": [
-      "two-legged humanoid body",
-      "multiple eye stalks",
-      "octopus eight tentacles",
-      "dragon anatomy",
-      "graphic filth detail",
-      "dense skin texture"
-    ]
-  },
-  "default_habitats": [
-    "refuse pits",
-    "sewers",
-    "dungeon privies"
-  ],
-  "accuracy_checks": [
-    "three-leg anatomy is readable",
-    "two grasping tentacles are distinct",
-    "single eyestalk is visible",
-    "mouth is central",
-    "garbage setting is clear without clutter",
-    "creature remains the focal point"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  "family_profile": "otyugh"
 }
