@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "mimic",
+  "display_name": "Mimic",
+  "taxonomy": {
+    "family": "mimic",
+    "creature_type": "shapechanging monstrosity",
+    "default_size": "variable"
+  },
+  "visual_identity": {
+    "core_identity": "Predatory shapechangers that remain convincingly recognizable as the object they imitate while revealing organic seams, mouth, tongue, eye, or pseudopod details.",
+    "silhouette": "Primary silhouette remains the disguised object; monster anatomy emerges from existing panels, seams, hinges, or hardware.",
+    "head_features": "No separate animal or humanoid head; facial elements integrate into the object.",
+    "body_shape": "Object structure stays readable while selected parts flex or transform organically.",
+    "surface": "Object material remains dominant with restrained fleshy reveal details.",
+    "must_keep": [
+      "recognizable disguised object",
+      "integrated organic reveal",
+      "object structure preserved",
+      "predatory transformation"
+    ],
+    "must_avoid": [
+      "separate monster head",
+      "generic four-legged beast body",
+      "cute object face",
+      "full transformation that destroys object identity",
+      "excess slime"
+    ]
+  },
+  "accuracy_checks": [
+    "object reads before monster details",
+    "reveal emerges from object structure",
+    "no unrelated creature anatomy replaces the disguise"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "generic_monster_drift",
+      "symptom": "mimic becomes a creature standing behind or inside the object",
+      "correction": "merge mouth, eye, tongue, and organic seams into the object itself"
+    },
+    {
+      "id": "cartoon_object_drift",
+      "symptom": "object receives a cute face",
+      "correction": "use predatory irregular reveal integrated into seams and hardware"
+    }
+  ]
+}
