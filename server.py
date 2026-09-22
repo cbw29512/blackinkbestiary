@@ -20,6 +20,7 @@ from art_pipeline.rebuild_state import activate_rebuild_source
 from art_pipeline.manifest_validation import validate_manifest
 from art_pipeline.quality_system import expand_defect_tags, recommended_action
 from art_pipeline.studio_config import active_book_paths
+from art_pipeline.state_validation import ACTIVE_STATES, assert_valid_state
 
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
@@ -36,10 +37,6 @@ _GENERATION_LOCK = threading.Lock()
 _GENERATION_PROCESS = None
 
 VALID_DECISIONS = {"approve", "modify", "regenerate"}
-ACTIVE_STATES = {
-    "queued", "generating", "qa_review", "supervisor_review",
-    "awaiting_human", "modify_requested", "regenerate_requested", "generation_failed",
-}
 GENERATABLE_STATES = {"queued", "modify_requested", "regenerate_requested", "generation_failed"}
 
 
@@ -112,21 +109,7 @@ def active_page_ids(state):
 
 
 def validate_state(tome, state):
-    ids = [p["page_id"] for p in tome["pages"]]
-    if len(ids) != tome["total_pages"]:
-        raise ValueError("Manifest page count does not match total_pages")
-    if len(ids) != len(set(ids)):
-        raise ValueError("Duplicate page IDs in manifest")
-    if state["current_page_id"] not in ids:
-        raise ValueError("Current page is not in the manifest")
-    if set(state["pages"].keys()) != set(ids):
-        raise ValueError("Production state page IDs do not match manifest")
-    active = active_page_ids(state)
-    if len(active) > 1:
-        raise ValueError(f"More than one active page: {active}")
-    if active and active[0] != state["current_page_id"]:
-        raise ValueError("Active page does not match current_page_id")
-
+    assert_valid_state(tome, state)
 
 def comfy_health():
     url = "http://127.0.0.1:8188/system_stats"
