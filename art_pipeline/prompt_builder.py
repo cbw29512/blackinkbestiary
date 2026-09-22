@@ -4,8 +4,10 @@ from pathlib import Path
 
 try:
     from .monster_catalog import load_monster_for_page
+    from .page_contract import resolve_page_spec
 except ImportError:
     from monster_catalog import load_monster_for_page
+    from page_contract import resolve_page_spec
 
 try:
     from .environment_prompt import environment_checklist, environment_prompt_sections
@@ -56,6 +58,7 @@ def _canonical_sections(spec: dict | None) -> list[str]:
 
 
 def build_prompt(page: dict, review_notes: dict | None = None) -> str:
+    page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
@@ -109,6 +112,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
 
 
 def build_supervisor_checklist(page: dict) -> list[str]:
+    page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
     checks = [
         f"Clearly recognizable as {page['monster_name']}",
