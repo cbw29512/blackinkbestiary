@@ -113,7 +113,7 @@ These are engine feedback, not isolated page problems.
 1. story-moment engine: one readable static beat instead of portrait/prop posing — **implemented; colorability has priority over story complexity**
 2. family DNA audit across every repeated monster family
 3. environment variation depth across every book family
-4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented on `feat/colorability-first-review-gate`; review state now records failed and preserved dimensions**
+4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented; review state records failed and preserved dimensions**
 5. Golden Five reference pages before mass regeneration
 
 ## Working Rule
