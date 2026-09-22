@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "minotaur-skeleton",
+  "family_profile": "minotaur",
+  "display_name": "Minotaur Skeleton",
+  "size": "large",
+  "creature_type": "undead monstrous humanoid",
+  "visual_identity": {
+    "core_identity": "The animated skeleton of a minotaur, preserving the horned bull skull and massive humanoid bone structure without flesh.",
+    "silhouette": "Tall skeletal humanoid frame topped by a broad horned bull skull, large rib cage, long bones, and heavy feet.",
+    "head_features": "Large bovine skull with long muzzle cavity, empty eye sockets, and prominent curved horns.",
+    "body_shape": "Heavy humanoid skeleton with broad rib cage and large limb bones, clearly larger than a human skeleton.",
+    "limb_structure": "Two skeletal arms and two skeletal legs beneath a bull skull; hooved skeletal lower anatomy where readable.",
+    "surface": "Clean bone shapes with sparse cracks, no gore or hanging flesh.",
+    "must_keep": [
+      "bull skull",
+      "large horns",
+      "skeletal humanoid body",
+      "empty eye sockets",
+      "large scale"
+    ],
+    "must_avoid": [
+      "fleshy minotaur",
+      "human skull",
+      "goat skull",
+      "graphic gore",
+      "tiny human skeleton proportions",
+      "ornate armor"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Wide grounded skeletal stance with deliberate weight and horn-forward threat.",
+    "behavior_style": [
+      "patrolling a maze",
+      "guarding a stone junction",
+      "raising a simple damaged weapon",
+      "turning through a labyrinth passage"
+    ]
+  },
+  "accuracy_checks": [
+    "bull skull remains unmistakable",
+    "body is skeletal not fleshy",
+    "scale remains larger than human"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "human_skeleton_drift",
+      "symptom": "bull skull becomes human skull",
+      "correction": "restore elongated bovine skull and large curved horns"
+    },
+    {
+      "id": "flesh_drift",
+      "symptom": "living minotaur musculature returns",
+      "correction": "show clean exposed skeleton throughout the body"
+    }
+  ]
+}
