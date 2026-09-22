@@ -8,11 +8,13 @@ try:
     from .manifest_validation import validate_manifest
     from .page_contract import missing_required_paths
     from .state_validation import validate_state
+    from .source_scope import load_monster_registry
 except ImportError:
     from book_registry import load_series, plan_path
     from manifest_validation import validate_manifest
     from page_contract import missing_required_paths
     from state_validation import validate_state
+    from source_scope import load_monster_registry
 
 
 def _read(path: Path) -> dict:
@@ -92,10 +94,23 @@ def audit_series(root: Path) -> dict:
             )
         rows.append(row)
 
+    registry = load_monster_registry(root)
+    allowed = set((registry.get("monsters") or {}).keys())
+    used = set()
+    for row in rows:
+        if row.get("manifest_exists"):
+            book = next(item for item in series["books"] if item["book_id"] == row["book_id"])
+            manifest = _read(root / book["manifest_path"])
+            used.update(page.get("monster_spec_id") for page in manifest.get("pages", []))
+    unknown = sorted(item for item in used if item and item not in allowed)
+    if unknown:
+        structural_errors.append("production manifests use monsters outside source roster: " + ", ".join(unknown))
+
     return {
         "pass": not structural_errors,
         "series_id": series.get("series_id"),
         "books_registered": len(rows),
+        "source_registry_entries": len(allowed),
         "production_ready_books": sum(1 for row in rows if row["production_ready"]),
         "books": rows,
         "errors": structural_errors,
