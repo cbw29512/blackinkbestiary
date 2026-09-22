@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "family_id": "underground",
+  "display_name": "Underground, Cave & Dungeon Environments",
+  "profiles": {
+    "underground.limestone-drip-cave": {
+      "name": "Limestone Drip Cave",
+      "description": "Solution cave with rounded limestone walls and selective speleothems.",
+      "visual_cues": [
+        "arched limestone passage",
+        "large stalactites and stalagmites",
+        "flowstone shelf",
+        "shallow mineral pool"
+      ],
+      "colorable_forms": [
+        "broad rock faces",
+        "large mineral formations",
+        "simple pool shape"
+      ],
+      "must_avoid": [
+        "basalt tube texture",
+        "dense tiny cave popcorn",
+        "generic square dungeon"
+      ]
+    },
+    "underground.basalt-lava-tube": {
+      "name": "Basalt Lava Tube",
+      "description": "Volcanic tunnel left by drained lava, with dark smooth-to-ropy rock forms and occasional collapse openings.",
+      "visual_cues": [
+        "rounded tube ceiling",
+        "ropy basalt floor",
+        "collapsed skylight",
+        "lava-drip formations"
+      ],
+      "colorable_forms": [
+        "large curved wall bands",
+        "broad basalt shelves",
+        "simple skylight opening"
+      ],
+      "must_avoid": [
+        "limestone stalactite forest",
+        "brick corridor"
+      ]
+    },
+    "underground.talus-boulder-cave": {
+      "name": "Talus Boulder Cave",
+      "description": "Irregular voids between large fallen angular boulders with tight squeezes and broken sightlines.",
+      "visual_cues": [
+        "house-sized angular blocks",
+        "tight crawl gaps",
+        "stacked boulder ceiling",
+        "multiple irregular openings"
+      ],
+      "colorable_forms": [
+        "large angular boulders",
+        "simple shadow gaps"
+      ],
+      "must_avoid": [
+        "smooth tube walls",
+        "regular masonry"
+      ]
+    },
+    "underground.sea-cave": {
+      "name": "Wave-Cut Sea Cave",
+      "description": "Coastal cave eroded along fractures by waves, with a wet rock floor and visible ocean connection.",
+      "visual_cues": [
+        "fractured rock arch",
+        "wave-cut opening",
+        "wet ledges",
+        "tide pool or surf edge"
+      ],
+      "colorable_forms": [
+        "large cliff planes",
+        "single arch opening",
+        "broad water shapes"
+      ],
+      "must_avoid": [
+        "dry mine props",
+        "stalagmite-heavy inland cave"
+      ]
+    },
+    "underground.underground-river-cavern": {
+      "name": "Underground River Cavern",
+      "description": "Large natural chamber shaped around a flowing subterranean river.",
+      "visual_cues": [
+        "broad river channel",
+        "eroded banks",
+        "stone shelf",
+        "high cave roof"
+      ],
+      "colorable_forms": [
+        "large water ribbons",
+        "broad rock shelves",
+        "few ceiling formations"
+      ],
+      "must_avoid": [
+        "tiny pebble fields",
+        "square corridor"
+      ]
+    },
+    "underground.crystal-cavern": {
+      "name": "Crystal Cavern",
+      "description": "Natural chamber punctuated by a limited number of large crystalline growths.",
+      "visual_cues": [
+        "large faceted crystal columns",
+        "broken crystal cluster",
+        "rock pedestal",
+        "reflective pool or ledge"
+      ],
+      "colorable_forms": [
+        "large crystal facets",
+        "broad rock faces"
+      ],
+      "must_avoid": [
+        "hundreds of tiny crystals",
+        "gem wallpaper"
+      ]
+    },
+    "underground.fungal-cavern": {
+      "name": "Fungal Cavern",
+      "description": "Damp cave chamber dominated by a few large mushroom and shelf-fungus forms.",
+      "visual_cues": [
+        "oversized mushroom caps",
+        "shelf fungus on rock",
+        "spore puff or damp pool",
+        "root-like mycelial strands"
+      ],
+      "colorable_forms": [
+        "large caps",
+        "thick stalks",
+        "broad stone surfaces"
+      ],
+      "must_avoid": [
+        "hundreds of tiny mushrooms",
+        "garden-like neat rows"
+      ]
+    },
+    "underground.mine-tunnel": {
+      "name": "Abandoned Mine Tunnel",
+      "description": "Excavated rock passage supported by rough timber and practical mining remains.",
+      "visual_cues": [
+        "rough-cut walls",
+        "timber supports",
+        "ore cart rail or track",
+        "tool niche or broken cart"
+      ],
+      "colorable_forms": [
+        "large timber beams",
+        "broad rock cuts",
+        "simple track lines"
+      ],
+      "must_avoid": [
+        "modern machinery",
+        "perfect castle masonry"
+      ]
+    },
+    "underground.dressed-stone-corridor": {
+      "name": "Dressed-Stone Corridor",
+      "description": "Purpose-built dungeon passage of fitted blocks and flagstones.",
+      "visual_cues": [
+        "fitted block walls",
+        "flagstone floor",
+        "torch brackets",
+        "doorway or alcove"
+      ],
+      "colorable_forms": [
+        "large masonry blocks",
+        "broad floor slabs",
+        "simple wall fixtures"
+      ],
+      "must_avoid": [
+        "natural cave stalactites",
+        "modern hallway"
+      ]
+    },
+    "underground.trapped-stone-corridor": {
+      "name": "Trapped Stone Corridor",
+      "description": "Built passage whose architecture visibly supports hazards and trap mechanisms.",
+      "visual_cues": [
+        "flagstone seams",
+        "anchor holes or grooves",
+        "wall torch",
+        "pit or pressure section"
+      ],
+      "colorable_forms": [
+        "large wall blocks",
+        "broad trap opening",
+        "simple mechanism pieces"
+      ],
+      "must_avoid": [
+        "invisible trap logic",
+        "tiny mechanical clutter"
+      ]
+    },
+    "underground.barracks-passage": {
+      "name": "Underground Barracks Passage",
+      "description": "Fortified corridor widened for guards, drills, and stored military equipment.",
+      "visual_cues": [
+        "shield or spear rack",
+        "bunk niches",
+        "worn drill floor",
+        "reinforced doorway"
+      ],
+      "colorable_forms": [
+        "large shields",
+        "simple bunks",
+        "broad wall planes"
+      ],
+      "must_avoid": [
+        "domestic bedroom look",
+        "empty generic hall"
+      ]
+    },
+    "underground.catacomb-niches": {
+      "name": "Catacomb Niche Hall",
+      "description": "Burial passage lined with large wall niches, stone coffins, or bone repositories.",
+      "visual_cues": [
+        "arched burial niches",
+        "stone coffin",
+        "simple ossuary shelf",
+        "narrow aisle"
+      ],
+      "colorable_forms": [
+        "large niche arches",
+        "coffin slabs",
+        "broad stone surfaces"
+      ],
+      "must_avoid": [
+        "tiny skull wallpaper",
+        "ornate church nave"
+      ]
+    },
+    "underground.cistern": {
+      "name": "Dungeon Cistern",
+      "description": "Stone water-storage chamber with channels, grates, and damp masonry.",
+      "visual_cues": [
+        "large water basin",
+        "stone channel",
+        "iron grate",
+        "damp wall stains rendered sparsely"
+      ],
+      "colorable_forms": [
+        "broad water area",
+        "large masonry",
+        "simple grate bars"
+      ],
+      "must_avoid": [
+        "modern plumbing",
+        "dense pipework"
+      ]
+    },
+    "underground.rotunda": {
+      "name": "Dungeon Rotunda",
+      "description": "Circular built chamber organized around a central pillar, well, statue, or floor motif.",
+      "visual_cues": [
+        "curved masonry wall",
+        "central pillar",
+        "radial floor joints",
+        "arched exits"
+      ],
+      "colorable_forms": [
+        "large curved wall sections",
+        "single dominant pillar",
+        "broad floor wedges"
+      ],
+      "must_avoid": [
+        "busy mosaic detail",
+        "square hallway composition"
+      ]
+    },
+    "underground.crypt": {
+      "name": "Stone Crypt",
+      "description": "Burial chamber with substantial tomb architecture and restrained funerary decoration.",
+      "visual_cues": [
+        "stone sarcophagus",
+        "arched tomb recess",
+        "heavy floor slabs",
+        "simple funerary relief"
+      ],
+      "colorable_forms": [
+        "large sarcophagus planes",
+        "broad arches",
+        "simple relief shapes"
+      ],
+      "must_avoid": [
+        "dozens of tiny skulls",
+        "modern cemetery props"
+      ]
+    },
+    "underground.armory": {
+      "name": "Abandoned Armory",
+      "description": "Dungeon storage area for weapons and armor with practical racks and ruined metal.",
+      "visual_cues": [
+        "large weapon rack",
+        "armor stand",
+        "wooden chest",
+        "broken shields or spears"
+      ],
+      "colorable_forms": [
+        "large shields",
+        "simple weapon silhouettes",
+        "broad chest panels"
+      ],
+      "must_avoid": [
+        "dense pile of tiny weapons",
+        "modern firearms"
+      ]
+    },
+    "underground.refuse-pit": {
+      "name": "Refuse Pit",
+      "description": "Sunken waste area beneath a dungeon with large discarded objects and organic debris kept visually simple.",
+      "visual_cues": [
+        "sunken pit edge",
+        "broken crate or barrel",
+        "large refuse mounds",
+        "drain or privy chute"
+      ],
+      "colorable_forms": [
+        "broad pit shape",
+        "large discarded objects",
+        "simple mounds"
+      ],
+      "must_avoid": [
+        "tiny trash confetti",
+        "graphic filth"
+      ]
+    },
+    "underground.webbed-chapel": {
+      "name": "Webbed Underground Chapel",
+      "description": "Small subterranean sacred space partly abandoned and overtaken by webs.",
+      "visual_cues": [
+        "simple altar",
+        "two or three arches",
+        "large web sheets",
+        "broken pew or shrine"
+      ],
+      "colorable_forms": [
+        "broad arches",
+        "large web spans",
+        "simple altar block"
+      ],
+      "must_avoid": [
+        "cathedral-scale clutter",
+        "dense lace-like webbing"
+      ]
+    }
+  }
+}
