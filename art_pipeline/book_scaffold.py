@@ -33,6 +33,7 @@ def build_book_record(
         "family_catalog": "data/monster_families",
         "environment_catalog": "data/environment_families",
         "page_contract": "config/universal_page_contract.json",
+        "monster_contract": "config/universal_monster_contract.json",
         "style_standard": "docs/STYLE_BIBLE.md",
         "environment_standard": "config/environment_standard.json",
         "coloring_page_standard": "config/coloring_page_standard.json",
@@ -73,9 +74,11 @@ def build_book_plan(book: dict, page_prefix: str) -> dict:
         "theme": book.get("theme", ""),
         "environment_scope": deepcopy(book.get("environment_scope", [])),
         "page_contract": "black-ink-page-v1",
+        "monster_contract": "black-ink-monster-v1",
         "production_contract": {
-            "universal": "config/universal_page_contract.json",
-            "rule": "Slots store unique page recipe data only; universal and catalog data fill the rest.",
+            "page_engine": "config/universal_page_contract.json",
+            "monster_engine": "config/universal_monster_contract.json",
+            "rule": "Slots store unique page recipe data only; universal engines and reusable catalogs fill the rest.",
         },
         "slots": [build_page_slot(page_prefix, i) for i in range(1, target + 1)],
     }
