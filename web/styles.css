@@ -23,3 +23,6 @@
 .reference-placeholder strong{color:var(--cream);margin-bottom:6px}.reference-placeholder span{font-size:.82rem;max-width:28rem}
 .identity-core{color:var(--cream);line-height:1.45}.identity-facts{margin:10px 0}.identity-facts dt{color:var(--gold);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;margin-top:9px}.identity-facts dd{margin:3px 0 0;color:var(--muted);font-size:.9rem;line-height:1.4}
 .reference-card h4{color:var(--gold);margin:14px 0 4px;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em}.reference-card li{color:var(--muted);font-size:.88rem}.reference-card ul{padding-left:20px}.reference-rule{border-top:1px solid var(--line);padding-top:10px;color:var(--muted);font-size:.78rem;font-style:italic}
+
+.generate{border:1px solid var(--gold);color:var(--gold)}
+.status-line strong{color:var(--cream)}

@@ -179,6 +179,8 @@ APPROVE / MODIFY / REGENERATE
 - Mark page locked.
 - Preserve all attempt history.
 - Advance exactly one page.
+- If the next page has a canonical monster spec, automatically start its local generation.
+- If the next page has no canonical monster spec yet, stop at the identity gate instead of guessing.
 
 ### MODIFY
 
@@ -186,13 +188,13 @@ APPROVE / MODIFY / REGENERATE
 - Preserve what the reviewer says to keep.
 - Apply only requested changes.
 - Use the current best image as a reference when appropriate.
-- Generate a new attempt.
+- Automatically start a new local attempt after the decision is saved.
 
 ### REGENERATE
 
 - Stay on the same page.
 - Treat the current result as fundamentally wrong.
-- Create a fresh attempt from the page spec and approved style references.
+- Automatically create a fresh local attempt from the page spec and approved style references.
 
 ---
 
