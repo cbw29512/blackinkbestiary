@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "contract_id": "black-ink-monster-v2",
+  "schema_version": 4,
+  "contract_id": "black-ink-monster-v3",
   "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
   "minimal_recipe_required": [
     "monster_id",
@@ -8,6 +8,7 @@
     "family_profile"
   ],
   "minimal_recipe_optional": [
+    "species_profile",
     "variant_traits",
     "locomotion",
     "visual_overrides",
@@ -31,8 +32,9 @@
   "resolution_order": [
     "universal monster defaults",
     "family profile",
+    "optional species profile",
     "minimal monster recipe",
-    "optional visual overrides"
+    "small variant overrides"
   ],
   "rules": [
     "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
@@ -42,7 +44,9 @@
     "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
     "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
     "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
-    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it."
+    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it.",
+    "Inline visual_identity, accuracy_checks, known_failure_modes, size, creature_type, and reference blocks are legacy-only and forbidden in schema-v3+ monster recipes.",
+    "Do not create a fake one-monster family merely to make a recipe small; use a species profile beneath the nearest reusable family when the family is broader than the creature."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -60,7 +64,7 @@
     "accuracy_checks",
     "known_failure_modes"
   ],
-  "scalability_rule": "Hundreds of monster recipes remain small. Creature files own identity, variant traits, behavior tendencies, locomotion, and habitat compatibility; reusable scenery belongs exclusively to the environment engine.",
+  "scalability_rule": "Hundreds of monster recipes remain tiny. Shared anatomy and anti-drift live in family DNA; exact reusable creature identity lives in an optional species profile; recipes contain only IDs and true variant differences.",
   "environment_ownership": {
     "monster_may_define": [
       "default_habitats",
@@ -82,5 +86,26 @@
       "environment depth cues"
     ],
     "rule": "If a visual element could be reused by another creature in the same place, it belongs in the universal environment engine: family/profile/component/overlay system."
-  }
+  },
+  "species_profile": {
+    "directory": "data/monster_species",
+    "purpose": "Carry exact reusable creature/silhouette identity when a broad family profile is not specific enough.",
+    "use_when": "Use a species profile when two or more creatures share family DNA but differ materially in silhouette, anatomy, surface behavior, or object form.",
+    "rule": "Species profiles may refine family DNA but must not contain page-specific scenery, room layout, story props, or environment dressing.",
+    "examples": [
+      "construct -> flying sword / animated armor / rug of smothering",
+      "ooze -> gelatinous cube / black pudding / ochre jelly",
+      "fungus -> shrieker fungus / violet fungus",
+      "mimic -> chest mimic / door mimic"
+    ]
+  },
+  "recipe_forbidden_fields": [
+    "visual_identity",
+    "accuracy_checks",
+    "known_failure_modes",
+    "reference",
+    "family",
+    "size",
+    "creature_type"
+  ]
 }
