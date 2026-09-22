@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "giant-bat",
+  "display_name": "Giant Bat",
+  "taxonomy": {
+    "family": "bat",
+    "creature_type": "giant beast",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "An enormous natural cave bat with broad membrane wings, powerful clawed feet, and unmistakable bat anatomy.",
+    "silhouette": "Large compact bat torso with very broad finger-boned membrane wings and clawed hind feet.",
+    "head_features": "Natural bat face with large ears and short muzzle; no draconic or humanoid features.",
+    "body_shape": "Light flying mammal body scaled up without becoming dragon-heavy.",
+    "surface": "Short body fur and smooth wing membranes with minimal vein detail.",
+    "signature_gear": [],
+    "attitude": [
+      "alert",
+      "roosting",
+      "startled",
+      "watchful"
+    ],
+    "must_keep": [
+      "natural bat anatomy",
+      "very large wings",
+      "large ears",
+      "clawed roosting feet"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "humanoid arms",
+      "vampire clothing",
+      "horns",
+      "insect anatomy",
+      "dense fur texture"
+    ]
+  },
+  "accuracy_checks": [
+    "reads immediately as giant bat",
+    "wings use elongated finger structure",
+    "scale is obvious",
+    "open wing areas are colorable"
+  ]
+}
