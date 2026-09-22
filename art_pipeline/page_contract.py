@@ -78,6 +78,13 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
         defaults.get("coloring_rules") or {},
         page.get("coloring_rules"),
     )
+    locomotion_defaults = {
+        "can_fly": bool((contract.get("locomotion") or {}).get("default_can_fly", False))
+    }
+    resolved["locomotion"] = _merge_dict(
+        locomotion_defaults,
+        monster.get("locomotion") or {},
+    )
     resolved["_resolved"] = {
         "contract_id": contract.get("contract_id"),
         "monster_identity_version": monster.get("identity_version"),

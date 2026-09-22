@@ -55,5 +55,8 @@
   },
   "schema_version": 2,
   "identity_version": 1,
-  "family_profile": "construct"
+  "family_profile": "construct",
+  "locomotion": {
+    "can_fly": true
+  }
 }

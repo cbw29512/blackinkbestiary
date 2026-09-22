@@ -47,5 +47,8 @@
       "symptom": "wings become feathered",
       "correction": "remove feathers and restore continuous skin membranes"
     }
-  ]
+  ],
+  "locomotion": {
+    "can_fly": true
+  }
 }
