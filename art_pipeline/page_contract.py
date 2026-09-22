@@ -105,3 +105,31 @@ def missing_required_paths(page: dict, root: Path = ROOT) -> list[str]:
         if value is None or (isinstance(value, str) and not value.strip()):
             missing.append(dotted)
     return missing
+
+
+def resolve_manifest(tome: dict, root: Path = ROOT) -> dict:
+    resolved = deepcopy(tome)
+    resolved["pages"] = [resolve_page_spec(page, root) for page in tome.get("pages", [])]
+    resolved["page_contract"] = load_page_contract(
+        root / "config" / "universal_page_contract.json"
+    ).get("contract_id")
+    return resolved
+
+
+def page_uniqueness_fingerprint(page: dict, root: Path = ROOT) -> str:
+    resolved = resolve_page_spec(page, root)
+    variant = resolved.get("environment_variant") or {}
+    physicality = resolved.get("physicality") or {}
+    values = [
+        resolved.get("monster_spec_id"),
+        resolved.get("environment_profile_id"),
+        variant.get("landmark"),
+        variant.get("framing"),
+        variant.get("interaction"),
+        resolved.get("moment"),
+        physicality.get("mode"),
+    ]
+    return "|".join(
+        " ".join(str(value or "").strip().lower().split())
+        for value in values
+    )
