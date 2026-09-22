@@ -1,0 +1,54 @@
+{
+  "monster_id": "giant-fire-beetle",
+  "monster_name": "Giant Fire Beetle",
+  "family": "fire beetle",
+  "size": "small",
+  "creature_type": "giant insect",
+  "visual_identity": {
+    "core_identity": "An oversized beetle with a heavy oval shell and prominent luminous gland structures that make it recognizable even in black-and-white line art.",
+    "silhouette": "Low oval beetle body, domed wing cases, six stout legs, short antennae, broad head.",
+    "head_features": "Compact insect head with mandibles, short antennae, and distinct rounded gland bulges near the head.",
+    "body_shape": "Three-part insect body with hard domed elytra, six legs, and a compact abdomen.",
+    "surface": "Large smooth armor plates with restrained segment lines; gland areas outlined clearly rather than shaded.",
+    "signature_gear": [],
+    "attitude": [
+      "foraging",
+      "steady",
+      "defensive",
+      "unhurried"
+    ],
+    "must_keep": [
+      "six insect legs",
+      "domed beetle shell",
+      "visible luminous gland shapes",
+      "mandibles",
+      "low beetle posture"
+    ],
+    "must_avoid": [
+      "spider anatomy",
+      "four legs",
+      "dragon features",
+      "glowing text effects",
+      "dense shell texture",
+      "cute ladybug styling"
+    ]
+  },
+  "default_habitats": [
+    "abandoned mines",
+    "dark tunnels",
+    "ore chambers"
+  ],
+  "accuracy_checks": [
+    "reads immediately as giant beetle",
+    "six legs are clear",
+    "gland structures are visible",
+    "mine setting benefits from implied glow",
+    "shell remains colorable",
+    "no extra fantasy anatomy obscures beetle identity"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  }
+}

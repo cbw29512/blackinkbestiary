@@ -1,0 +1,54 @@
+{
+  "monster_id": "giant-centipede",
+  "monster_name": "Giant Centipede",
+  "family": "centipede",
+  "size": "small",
+  "creature_type": "giant arthropod",
+  "visual_identity": {
+    "core_identity": "An oversized predatory centipede defined by its long segmented body, one pair of legs per visible segment, and large front poison claws.",
+    "silhouette": "Long flexible segmented body forming an S-curve or coil, with many evenly spaced legs creating a saw-tooth edge.",
+    "head_features": "Small armored head with simple antennae and strong curved forcipule-like poison claws near the mouth.",
+    "body_shape": "Many repeated trunk segments, each bearing one visible pair of legs, tapering toward the rear.",
+    "surface": "Simple armored segment plates with minimal texture.",
+    "signature_gear": [],
+    "attitude": [
+      "coiling",
+      "searching",
+      "predatory",
+      "quick"
+    ],
+    "must_keep": [
+      "long segmented body",
+      "many paired legs",
+      "front poison claws",
+      "antennae",
+      "low arthropod posture"
+    ],
+    "must_avoid": [
+      "millipede round body",
+      "scorpion tail",
+      "spider abdomen",
+      "dragon head",
+      "too many tiny textures",
+      "human features"
+    ]
+  },
+  "default_habitats": [
+    "catacomb niches",
+    "damp cellars",
+    "bone-strewn tunnels"
+  ],
+  "accuracy_checks": [
+    "centipede segmentation is obvious",
+    "legs repeat along body",
+    "front claws are visible",
+    "old bone interaction reads clearly",
+    "body is not mistaken for snake",
+    "line density remains manageable"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  }
+}

@@ -3,6 +3,8 @@ from __future__ import annotations
 import struct
 from pathlib import Path
 
+from png_content_qa import inspect_line_art
+
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
@@ -50,6 +52,13 @@ def inspect_png(path: Path, target_ratio: float = 3 / 4, ratio_tolerance: float 
         result["reasons"].append("resolution_too_small")
     if len(raw) < 20_000:
         result["reasons"].append("suspiciously_small_file")
+
+    content = inspect_line_art(path)
+    result["content_qa"] = content
+    if not content.get("supported"):
+        result["reasons"].append("content_qa_unsupported")
+    else:
+        result["reasons"].extend(content.get("reasons", []))
 
     result["pass"] = not result["reasons"]
     return result

@@ -20,12 +20,13 @@
         "devious trap-maker; not cute"
       ],
       "must_include": [
-        "kobold",
+        "small wiry kobold",
         "oversized spear",
-        "tripwire",
-        "punji pit",
+        "visible tripwire across the corridor",
+        "opened punji pit with wooden spikes",
         "wall torch",
-        "tight dressed-stone corridor"
+        "tight dressed-stone corridor",
+        "cackling trap-maker expression"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -82,10 +83,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Kobold Shrine-Keeper",
-        "Low cave shrine with coins and dragon skull prop",
-        "one clear story moment",
-        "large open areas to color"
+        "lean kobold shrine-keeper",
+        "copper coin held up as an offering",
+        "low cave shrine",
+        "scattered coins",
+        "dragon skull shrine prop"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -116,10 +118,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Goblin Minion",
-        "Dungeon kitchen and pantry",
-        "one clear story moment",
-        "large open areas to color"
+        "small wiry goblin minion",
+        "clearly visible stolen ham tucked under one arm",
+        "running-away pose",
+        "rough medieval dungeon kitchen",
+        "simple pantry shelves and food stores"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -150,10 +153,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Goblin Warrior",
-        "Narrow dungeon crawlway",
-        "one clear story moment",
-        "large open areas to color"
+        "small goblin warrior",
+        "crude blade and small shield",
+        "lantern being kicked over",
+        "narrow dungeon crawlway",
+        "darkening-hall story beat"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -184,10 +188,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Goblin Boss",
-        "Cave hall with improvised throne",
-        "one clear story moment",
-        "large open areas to color"
+        "small goblin boss",
+        "bent sword pointing outward",
+        "standing on a chest",
+        "improvised cave throne",
+        "keys or scavenged trophies showing rank"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -218,10 +223,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Hobgoblin Warrior",
-        "Underground barracks tunnel",
-        "one clear story moment",
-        "large open areas to color"
+        "disciplined hobgoblin warrior",
+        "shield-wall drill",
+        "multiple overlapping shields",
+        "underground barracks tunnel",
+        "military posture"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -238,7 +244,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "hobgoblin-warrior"
     },
     {
       "page_id": "I-07",
@@ -251,10 +258,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Hobgoblin Captain",
-        "Cave war room",
-        "one clear story moment",
-        "large open areas to color"
+        "hobgoblin captain",
+        "dagger pinning a tunnel map",
+        "cave war-room table",
+        "simple military gear",
+        "commanding posture"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -271,7 +279,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "hobgoblin-captain"
     },
     {
       "page_id": "I-08",
@@ -284,10 +293,10 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Bugbear Warrior",
-        "Ceiling crack above dungeon hall",
-        "one clear story moment",
-        "large open areas to color"
+        "long-armed shaggy bugbear warrior",
+        "dropping from a ceiling crack",
+        "ambush posture",
+        "dungeon hall below"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -304,7 +313,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "bugbear-warrior"
     },
     {
       "page_id": "I-09",
@@ -317,10 +327,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Bugbear Stalker",
-        "Low crawlway",
-        "one clear story moment",
-        "large open areas to color"
+        "shaggy bugbear stalker",
+        "dragged sack",
+        "finger-to-mouth silence signal",
+        "low crawlway",
+        "stealthy crouched posture"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -337,7 +348,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "bugbear-stalker"
     },
     {
       "page_id": "I-10",
@@ -350,10 +362,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Ogre",
-        "Too-small spiral dungeon stair",
-        "one clear story moment",
-        "large open areas to color"
+        "massive ogre",
+        "too-small spiral stair",
+        "body visibly wedged between walls",
+        "crude dungeon setting",
+        "awkward frustrated pose"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -370,7 +383,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "ogre"
     },
     {
       "page_id": "I-11",
@@ -383,10 +397,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Ogre Zombie",
-        "Dark cramped dungeon stair",
-        "one clear story moment",
-        "large open areas to color"
+        "large ogre zombie",
+        "dragging chains",
+        "cramped dark stair",
+        "slow shuffling descent",
+        "restrained undead damage without gore"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -403,7 +418,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "ogre-zombie"
     },
     {
       "page_id": "I-12",
@@ -416,10 +432,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Troll",
-        "Cave fire pit",
-        "one clear story moment",
-        "large open areas to color"
+        "lanky troll",
+        "cave fire pit",
+        "visible closing wound",
+        "hostile glare toward fire",
+        "long clawed arms"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -436,7 +453,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "troll"
     },
     {
       "page_id": "I-13",
@@ -449,10 +467,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Troll Limb",
-        "Bare dungeon flagstones",
-        "one clear story moment",
-        "large open areas to color"
+        "severed troll arm",
+        "clawed hand crawling under its own power",
+        "dropped axe",
+        "bare dungeon flagstones",
+        "non-gory magical severed-limb presentation"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -469,7 +488,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "troll-limb"
     },
     {
       "page_id": "I-14",
@@ -482,10 +502,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Darkmantle",
-        "Limestone cave ceiling",
-        "one clear story moment",
-        "large open areas to color"
+        "darkmantle disguised against a stalactite",
+        "leathery mantle body",
+        "dangling tentacles",
+        "lantern below",
+        "limestone cave ceiling"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -502,7 +523,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "darkmantle"
     },
     {
       "page_id": "I-15",
@@ -515,10 +537,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Stirges",
-        "Dungeon cell",
-        "one clear story moment",
-        "large open areas to color"
+        "several stirges",
+        "long needle proboscises",
+        "batlike wings",
+        "sleeping prisoner",
+        "dungeon cell"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -535,7 +558,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "stirges"
     },
     {
       "page_id": "I-16",
@@ -548,10 +572,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Giant Bat",
-        "Cavern above underground river",
-        "one clear story moment",
-        "large open areas to color"
+        "single giant bat",
+        "partly wrapped hanging wings",
+        "cavern ceiling",
+        "underground river below",
+        "large readable bat silhouette"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -568,7 +593,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "giant-bat"
     },
     {
       "page_id": "I-17",
@@ -581,10 +607,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Bat Swarm",
-        "Vertical dungeon well shaft",
-        "one clear story moment",
-        "large open areas to color"
+        "swarm of bats",
+        "bats erupting upward",
+        "vertical dungeon well shaft",
+        "clear spiral movement",
+        "open center for readability"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -601,7 +628,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "bat-swarm"
     },
     {
       "page_id": "I-18",
@@ -614,10 +642,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Giant Rat",
-        "Collapsed dungeon pantry",
-        "one clear story moment",
-        "large open areas to color"
+        "giant rat",
+        "defensive nest posture",
+        "burst grain sacks",
+        "collapsed dungeon pantry",
+        "visible nest material"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -634,7 +663,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "giant-rat"
     },
     {
       "page_id": "I-19",
@@ -647,10 +677,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Rat Swarm",
-        "Dungeon floor grate",
-        "one clear story moment",
-        "large open areas to color"
+        "many rats",
+        "rats pouring through a floor grate",
+        "flowing swarm shape",
+        "dungeon flagstones",
+        "clear grate opening"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -667,7 +698,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "rat-swarm"
     },
     {
       "page_id": "I-20",
@@ -680,10 +712,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Giant Centipede",
-        "Catacomb coffin niche",
-        "one clear story moment",
-        "large open areas to color"
+        "giant centipede",
+        "many segmented legs",
+        "coiled body around an old bone",
+        "catacomb coffin niche",
+        "clear mandibles"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -700,7 +733,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "giant-centipede"
     },
     {
       "page_id": "I-21",
@@ -713,10 +747,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Giant Fire Beetle",
-        "Abandoned mine tunnel",
-        "one clear story moment",
-        "large open areas to color"
+        "giant fire beetle",
+        "large beetle shell",
+        "visible luminous gland shapes",
+        "abandoned mine tunnel",
+        "gland light illuminating nearby rock"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -733,7 +768,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "giant-fire-beetle"
     },
     {
       "page_id": "I-22",
@@ -746,10 +782,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Giant Spider",
-        "Web-filled dungeon hall",
-        "one clear story moment",
-        "large open areas to color"
+        "giant spider",
+        "large radial web",
+        "spider at web center",
+        "web-filled dungeon hall",
+        "clear eight-legged silhouette"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -766,7 +803,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "giant-spider"
     },
     {
       "page_id": "I-23",
@@ -779,10 +817,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Giant Wolf Spider",
-        "Ceiling above a treasure chest",
-        "one clear story moment",
-        "large open areas to color"
+        "giant wolf spider",
+        "stocky hairy hunting-spider body",
+        "flattened against ceiling",
+        "treasure chest below",
+        "large forward-facing eyes"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -799,7 +838,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "giant-wolf-spider"
     },
     {
       "page_id": "I-24",
@@ -812,10 +852,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Gelatinous Cube",
-        "Ten-foot dressed-stone corridor",
-        "one clear story moment",
-        "large open areas to color"
+        "translucent gelatinous cube",
+        "square cube edges filling corridor",
+        "bones suspended inside",
+        "key suspended inside",
+        "ten-foot dressed-stone corridor"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -832,7 +873,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "gelatinous-cube"
     },
     {
       "page_id": "I-25",
@@ -845,10 +887,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Black Pudding",
-        "Dungeon cistern / floor grate",
-        "one clear story moment",
-        "large open areas to color"
+        "irregular black-pudding ooze",
+        "corroding metal bars",
+        "floor grate or cistern edge",
+        "acid damage on metal",
+        "outline-driven ooze shape without a giant solid-black blob"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -865,7 +908,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "black-pudding"
     },
     {
       "page_id": "I-26",
@@ -878,10 +922,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Ochre Jelly",
-        "Dungeon stair",
-        "one clear story moment",
-        "large open areas to color"
+        "two ochre-jelly halves",
+        "both split halves moving independently",
+        "dungeon stair",
+        "viscous irregular outlines",
+        "clear split story beat"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -898,7 +943,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "ochre-jelly"
     },
     {
       "page_id": "I-27",
@@ -911,10 +957,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Mimic — Chest",
-        "Treasure vault",
-        "one clear story moment",
-        "large open areas to color"
+        "treasure-chest mimic",
+        "chest lid transformed into toothed mouth",
+        "long tongue",
+        "reaching hand near the mouth",
+        "treasure vault"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -931,7 +978,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "mimic-chest"
     },
     {
       "page_id": "I-28",
@@ -944,10 +992,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Mimic — Door",
-        "Torch-lit dungeon hall",
-        "one clear story moment",
-        "large open areas to color"
+        "door mimic",
+        "door surface still recognizable",
+        "hidden eye in the wood",
+        "tongue-shaped handle",
+        "torch-lit dungeon hall"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -964,7 +1013,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "mimic-door"
     },
     {
       "page_id": "I-29",
@@ -977,10 +1027,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Animated Armor",
-        "Pedestal-lined dungeon hall",
-        "one clear story moment",
-        "large open areas to color"
+        "empty animated suit of armor",
+        "no visible wearer",
+        "stepping off a pedestal",
+        "pedestal-lined dungeon hall",
+        "clear articulated plate armor"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -997,7 +1048,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "animated-armor"
     },
     {
       "page_id": "I-30",
@@ -1010,10 +1062,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Flying Sword",
-        "Dungeon rotunda",
-        "one clear story moment",
-        "large open areas to color"
+        "single flying sword",
+        "no hand holding it",
+        "sword orbiting a cracked pillar",
+        "throat-height placement",
+        "dungeon rotunda"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1030,7 +1083,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "flying-sword"
     },
     {
       "page_id": "I-31",
@@ -1043,10 +1097,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Rug of Smothering",
-        "Noble crypt",
-        "one clear story moment",
-        "large open areas to color"
+        "living rug rearing from the floor",
+        "rug curling around a victim",
+        "noble crypt",
+        "decorative pattern kept simple",
+        "smothering motion clearly readable"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1063,7 +1118,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "rug-of-smothering"
     },
     {
       "page_id": "I-32",
@@ -1076,10 +1132,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Gargoyle",
-        "Stone dungeon gate",
-        "one clear story moment",
-        "large open areas to color"
+        "stone gargoyle",
+        "horned winged humanoid silhouette",
+        "one foot leaving a gate perch",
+        "stone dungeon gate",
+        "cracked stone texture kept sparse"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1096,7 +1153,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "gargoyle"
     },
     {
       "page_id": "I-33",
@@ -1109,10 +1167,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Labyrinth Minotaur",
-        "Identical stone maze corridors",
-        "one clear story moment",
-        "large open areas to color"
+        "bull-headed minotaur",
+        "large curved horns",
+        "two-handed axe",
+        "maze intersection",
+        "massive humanoid body with hooved feet"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1129,7 +1188,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "labyrinth-minotaur"
     },
     {
       "page_id": "I-34",
@@ -1142,10 +1202,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Minotaur Skeleton",
-        "Dark labyrinth corridor",
-        "one clear story moment",
-        "large open areas to color"
+        "minotaur skeleton",
+        "horned bull skull",
+        "skeletal humanoid body",
+        "dark labyrinth corner",
+        "empty eye sockets"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1162,7 +1223,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "minotaur-skeleton"
     },
     {
       "page_id": "I-35",
@@ -1175,10 +1237,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Roper",
-        "Stalagmite cavern",
-        "one clear story moment",
-        "large open areas to color"
+        "stalagmite-shaped roper",
+        "single central eye",
+        "large toothed mouth",
+        "multiple long sticky tendrils",
+        "stalagmite cavern camouflage"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1195,7 +1258,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "roper"
     },
     {
       "page_id": "I-36",
@@ -1208,10 +1272,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Cloaker",
-        "Dungeon antechamber",
-        "one clear story moment",
-        "large open areas to color"
+        "living cloaker",
+        "manta-like cloak silhouette",
+        "wide leathery wings",
+        "long tail",
+        "peeling from a wall hook",
+        "dungeon antechamber"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1228,7 +1294,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "cloaker"
     },
     {
       "page_id": "I-37",
@@ -1241,10 +1308,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Grick",
-        "Collapsed tunnel rubble",
-        "one clear story moment",
-        "large open areas to color"
+        "grick",
+        "thick wormlike body",
+        "four tentacles around a central beak",
+        "collapsed tunnel rubble",
+        "ambush emergence"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1261,7 +1329,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "grick"
     },
     {
       "page_id": "I-38",
@@ -1274,10 +1343,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Ankheg",
-        "Earthen tunnel / burrow",
-        "one clear story moment",
-        "large open areas to color"
+        "ankheg",
+        "large burrowing insect body",
+        "heavy mandibles",
+        "segmented armored plates",
+        "bursting through earthen floor",
+        "burrow tunnel"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1294,7 +1365,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "ankheg"
     },
     {
       "page_id": "I-39",
@@ -1307,10 +1379,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Bulette",
-        "Loose-earth cavern",
-        "one clear story moment",
-        "large open areas to color"
+        "bulette",
+        "armored land-shark body",
+        "prominent dorsal fin",
+        "four powerful legs",
+        "fin cutting through loose earth",
+        "surfacing from cavern floor"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1327,7 +1401,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "bulette"
     },
     {
       "page_id": "I-40",
@@ -1340,10 +1415,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Rust Monster",
-        "Abandoned armory alcove",
-        "one clear story moment",
-        "large open areas to color"
+        "rust monster",
+        "low armored insectoid body",
+        "very long feeler antennae",
+        "ruined metal weapons",
+        "abandoned armory alcove",
+        "feeding-on-metal story beat"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1360,7 +1437,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "rust-monster"
     },
     {
       "page_id": "I-41",
@@ -1373,10 +1451,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Otyugh",
-        "Refuse pit beneath dungeon privies",
-        "one clear story moment",
-        "large open areas to color"
+        "otyugh",
+        "three thick legs",
+        "two long grasping tentacles",
+        "single elevated eyestalk",
+        "wide central mouth",
+        "refuse pit and garbage"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1393,7 +1473,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "otyugh"
     },
     {
       "page_id": "I-42",
@@ -1406,10 +1487,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Gibbering Mouther",
-        "Flooded dungeon cell",
-        "one clear story moment",
-        "large open areas to color"
+        "gibbering mouther",
+        "amorphous crawling mass",
+        "many distinct mouths",
+        "several scattered eyes",
+        "flooded dungeon cell",
+        "rippling water around the creature"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1426,7 +1509,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "gibbering-mouther"
     },
     {
       "page_id": "I-43",
@@ -1439,10 +1523,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Basilisk",
-        "Statue-filled underground gallery",
-        "one clear story moment",
-        "large open areas to color"
+        "eight-legged basilisk",
+        "heavy lizardlike body",
+        "direct petrifying stare",
+        "statue-filled underground gallery",
+        "small creature partly turning to stone"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1459,7 +1544,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "basilisk"
     },
     {
       "page_id": "I-44",
@@ -1472,10 +1558,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Cockatrice",
-        "Improvised dungeon henhouse",
-        "one clear story moment",
-        "large open areas to color"
+        "cockatrice",
+        "rooster-like head and comb",
+        "reptilian or batlike wings",
+        "serpentine tail",
+        "petrified mouse",
+        "improvised dungeon henhouse"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1492,7 +1580,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "cockatrice"
     },
     {
       "page_id": "I-45",
@@ -1505,10 +1594,11 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Purple Worm",
-        "Mine shaft / deep tunnel",
-        "one clear story moment",
-        "large open areas to color"
+        "colossal purple worm",
+        "circular ringed maw",
+        "segmented worm body",
+        "maw filling a mine tunnel",
+        "deep shaft scale"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1525,7 +1615,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "purple-worm"
     },
     {
       "page_id": "I-46",
@@ -1538,10 +1629,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Drider",
-        "Webbed underground chapel",
-        "one clear story moment",
-        "large open areas to color"
+        "drider",
+        "humanoid upper torso",
+        "giant spider lower body with eight legs",
+        "bow aimed downward",
+        "hanging overhead",
+        "webbed underground chapel"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1558,7 +1651,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "drider"
     },
     {
       "page_id": "I-47",
@@ -1571,10 +1665,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Behir",
-        "Crystal cavern",
-        "one clear story moment",
-        "large open areas to color"
+        "behir",
+        "long serpentine reptile",
+        "many pairs of legs",
+        "horned head",
+        "coiled around crystal column",
+        "lightning arcing around body"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1591,7 +1687,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "behir"
     },
     {
       "page_id": "I-48",
@@ -1604,10 +1701,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Shrieker Fungus",
-        "Underground mushroom hall",
-        "one clear story moment",
-        "large open areas to color"
+        "shrieker fungus",
+        "large mushroom body",
+        "open gill-mouth beneath cap",
+        "visible vibration or shriek motion lines",
+        "underground mushroom hall",
+        "no humanoid face or limbs"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1624,7 +1723,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "shrieker-fungus"
     },
     {
       "page_id": "I-49",
@@ -1637,10 +1737,12 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Violet Fungus",
-        "Same fungal cavern family",
-        "one clear story moment",
-        "large open areas to color"
+        "violet fungus",
+        "large fungus body",
+        "multiple long whipping tendrils",
+        "dropped torch",
+        "fungal cavern",
+        "no humanoid face"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1657,7 +1759,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "violet-fungus"
     },
     {
       "page_id": "I-50",
@@ -1670,10 +1773,13 @@
         "Use clear fantasy-monster anatomy and a strong silhouette"
       ],
       "must_include": [
-        "Lich",
-        "Deep underground phylactery vault",
-        "one clear story moment",
-        "large open areas to color"
+        "lich",
+        "skeletal undead spellcaster",
+        "decayed robes",
+        "visible phylactery object",
+        "spellcasting hand",
+        "deep underground vault",
+        "commanding final-page composition"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -1690,7 +1796,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "lich"
     }
   ]
 }

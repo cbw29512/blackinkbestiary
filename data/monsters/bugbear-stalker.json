@@ -1,0 +1,59 @@
+{
+  "monster_id": "bugbear-stalker",
+  "monster_name": "Bugbear Stalker",
+  "family": "bugbear",
+  "size": "medium",
+  "creature_type": "goblinoid humanoid",
+  "visual_identity": {
+    "core_identity": "A stealth-focused bugbear using its long reach and shaggy outline to move silently through cramped underground spaces.",
+    "silhouette": "Tall crouched figure compressed into a low passage, very long arms, shaggy shoulders, one hand signaling silence.",
+    "head_features": "Broad goblinoid face, small watchful eyes, pointed ears, coarse hair framing the head.",
+    "body_shape": "Long-limbed powerful humanoid folded into a stealthy crouch, with oversized hands and feet.",
+    "surface": "Sparse shaggy fur patches and simple hide surfaces without dense texture.",
+    "signature_gear": [
+      "dark simple hide wraps",
+      "dragged sack",
+      "small utility knife",
+      "rope"
+    ],
+    "attitude": [
+      "silent",
+      "watchful",
+      "predatory",
+      "patient"
+    ],
+    "must_keep": [
+      "long arms",
+      "shaggy bugbear identity",
+      "stealth crouch",
+      "large hands",
+      "goblinoid face"
+    ],
+    "must_avoid": [
+      "bear-animal anatomy",
+      "short goblin proportions",
+      "massive ogre belly",
+      "bright ornate gear",
+      "dense fur hatching",
+      "reptilian features"
+    ]
+  },
+  "default_habitats": [
+    "low crawlways",
+    "dark cave passages",
+    "dungeon ambush routes"
+  ],
+  "accuracy_checks": [
+    "silence gesture reads clearly",
+    "sack is visible",
+    "low passage scale is believable",
+    "long-arm silhouette remains obvious",
+    "face reads goblinoid",
+    "scene stays simple enough to color"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  }
+}
