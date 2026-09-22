@@ -27,6 +27,10 @@
         <div class="art-frame" id="artFrame"></div>
       </section>
       <aside class="review-sidebar" aria-label="Page review controls">
+        <details class="audit-section golden-section" open>
+          <summary>Golden Five calibration</summary>
+          <div id="goldenFive" class="golden-card" aria-live="polite">Loading calibration...</div>
+        </details>
         <div class="decision-card">
           <div id="statusLine" class="status-line"></div>
           <label for="notes"><strong>Fix this page</strong></label>
@@ -84,5 +88,6 @@
     </section>
   </main>
   <script src="app.js"></script>
+  <script src="golden-five.js"></script>
 </body>
 </html>
