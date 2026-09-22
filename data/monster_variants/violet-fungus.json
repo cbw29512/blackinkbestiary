@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "violet-fungus",
+  "family_profile": "fungus",
+  "display_name": "Violet Fungus",
+  "size": "medium",
+  "creature_type": "giant fungus",
+  "visual_identity": {
+    "core_identity": "A rooted predatory fungus that resembles a large mushroom until several long whip-like tendrils lash from its body.",
+    "silhouette": "Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
+    "body_shape": "Rooted fungal stalk with cap and four or more flexible tendrils emerging around the upper stalk.",
+    "limb_structure": "No walking limbs; only variant-specific whip-like tendrils extend from the rooted fungal body.",
+    "surface": "Simple cap and stalk with sparse spots; tendrils smooth and uncluttered.",
+    "must_keep": [
+      "mushroom body",
+      "multiple long tendrils",
+      "rooted posture",
+      "clear contrast between cap and tendrils"
+    ],
+    "must_avoid": [
+      "walking feet",
+      "octopus body",
+      "teeth",
+      "solid black tendrils"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Rooted firmly to floor or soil while tendrils arc outward.",
+    "behavior_style": [
+      "lashing from a fixed root point",
+      "reaching across a cave lane",
+      "reacting beside a fungal cluster",
+      "guarding a damp passage"
+    ]
+  },
+  "accuracy_checks": [
+    "fungal body remains primary",
+    "root contact is clear",
+    "tendrils do not turn body into octopus"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "octopus_drift",
+      "symptom": "fungus becomes tentacled animal",
+      "correction": "restore mushroom cap/stalk as dominant body and keep tendrils as secondary extensions"
+    },
+    {
+      "id": "walking_drift",
+      "symptom": "fungus gains legs",
+      "correction": "restore fixed rooted base"
+    }
+  ]
+}
