@@ -123,8 +123,10 @@ class StateTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             server.register_candidate({"page_id": "I-02", "image_path": "candidates/test.png"})
 
+    @patch("server.local_generation_preflight")
     @patch("server.subprocess.Popen")
-    def test_generation_worker_starts_once_for_current_spec_page(self, popen):
+    def test_generation_worker_starts_once_for_current_spec_page(self, popen, preflight):
+        preflight.return_value = {"ready_for_generation": True}
         process = Mock()
         process.pid = 4321
         process.poll.return_value = None
@@ -138,6 +140,21 @@ class StateTests(unittest.TestCase):
         self.assertEqual(popen.call_count, 1)
         argv = popen.call_args.args[0]
         self.assertEqual(Path(argv[1]), server.GENERATOR_SCRIPT)
+
+    @patch("server.local_generation_preflight")
+    @patch("server.subprocess.Popen")
+    def test_generation_worker_refuses_when_local_preflight_fails(self, popen, preflight):
+        preflight.return_value = {
+            "ready_for_generation": False,
+            "required_models_missing": ["vae.safetensors"],
+        }
+
+        result = server.start_generation_worker()
+
+        self.assertFalse(result["started"])
+        self.assertEqual(result["reason"], "local_generation_preflight_failed")
+        self.assertEqual(result["preflight"]["required_models_missing"], ["vae.safetensors"])
+        popen.assert_not_called()
 
     @patch("server.subprocess.Popen")
     def test_generation_worker_refuses_page_without_canonical_spec(self, popen):
