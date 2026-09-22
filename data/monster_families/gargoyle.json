@@ -1,0 +1,75 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "gargoyle",
+  "display_name": "Gargoyle",
+  "taxonomy": {
+    "family": "gargoyle",
+    "creature_type": "stone monstrosity",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A squat winged stone predator disguised as architectural sculpture until it begins to move.",
+    "silhouette": "Broad crouched humanoid body, folded batlike wings, horned head, clawed hands and feet, heavy stone posture.",
+    "head_features": "Grotesque stone face with short horns, heavy brow, broad nose, and fanged mouth.",
+    "body_shape": "Compact muscular humanoid carved from stone, thick forearms, bent legs, folded wings.",
+    "limb_structure": "Two stone arms, two clawed stone legs, and one pair of batlike wings attached to the back.",
+    "surface": "Stone planes with a few cracks and chipped edges, not dense masonry texture.",
+    "must_keep": [
+      "stone body",
+      "folded wings",
+      "horned grotesque head",
+      "clawed limbs",
+      "architectural-perch identity"
+    ],
+    "must_avoid": [
+      "dragon body",
+      "angelic human face",
+      "feathers",
+      "living flesh texture",
+      "huge wings hiding body",
+      "ornate cathedral clutter"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as stone sculpture becoming alive",
+    "wings remain visible",
+    "stone texture is sparse",
+    "humanoid gargoyle silhouette is clear"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "gargoyle becomes quadruped dragon",
+      "correction": "restore crouched humanoid torso, two arms, two legs, and back wings"
+    },
+    {
+      "id": "angel_drift",
+      "symptom": "face/body becomes idealized winged human",
+      "correction": "restore grotesque horned stone features and heavy crouch"
+    },
+    {
+      "id": "texture_overload",
+      "symptom": "stone cracks cover every surface",
+      "correction": "use broad stone planes with only a few cracks and chips"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Medium dense stone humanoid whose weight is reinforced by architecture and a substantial perch.",
+    "natural_posture": "Crouched on a stone support, gripping architecture, or launching with at least one clear contact point.",
+    "behavior_style": [
+      "posing as architecture",
+      "peeling from a gate or arch",
+      "crouching on a broad perch",
+      "guarding a stone threshold"
+    ],
+    "environment_fit": [
+      "stone gates and arches",
+      "crypt entrances",
+      "ruined masonry and underground architectural thresholds"
+    ]
+  },
+  "locomotion": {
+    "can_fly": true
+  }
+}
