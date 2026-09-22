@@ -6,5 +6,6 @@
     "reviews": "data/reviews.jsonl"
   },
   "quality_rules": "config/quality_rules.json",
-  "page_archetypes": "config/page_archetypes.json"
+  "page_archetypes": "config/page_archetypes.json",
+  "environment_standard": "config/environment_standard.json"
 }
