@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "giant-rat",
+  "family_profile": "rat",
+  "display_name": "Giant Rat",
+  "size": "small",
+  "creature_type": "giant beast",
+  "visual_identity": {
+    "core_identity": "An oversized dungeon rat with low rodent posture, long naked tail, strong incisors, and defensive scavenger behavior.",
+    "silhouette": "Low four-legged rodent, arched back, long tapering tail, pointed snout, rounded ears.",
+    "must_keep": [
+      "oversized rat scale",
+      "large incisors",
+      "long naked tail"
+    ],
+    "must_avoid": [
+      "wolf body",
+      "mouse-cute proportions",
+      "fantasy horns"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "Larger than an ordinary rat but still low and small relative to dungeon architecture.",
+    "behavior_style": [
+      "defending a nest",
+      "scavenging near stored food",
+      "squeezing through a low opening",
+      "climbing low rubble"
+    ]
+  },
+  "accuracy_checks": [
+    "oversized scale reads without becoming canine",
+    "tail remains visible",
+    "rodent anatomy remains natural"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "wolf_drift",
+      "symptom": "giant rat becomes canine predator",
+      "correction": "restore pointed rat snout, rounded ears, incisors, low body, and naked tail"
+    }
+  ]
+}
