@@ -23,6 +23,7 @@ jobs:
           python -m json.tool config/environment_standard.json > /dev/null
           python -m json.tool config/coloring_page_standard.json > /dev/null
           python -m json.tool config/universal_page_contract.json > /dev/null
+          python -m json.tool config/universal_monster_contract.json > /dev/null
           python -m json.tool data/series.json > /dev/null
           python -m unittest discover -s tests -v
           python scripts/audit_active_book.py
