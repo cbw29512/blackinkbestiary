@@ -2170,7 +2170,7 @@
       "page_id": "I-49",
       "order": 49,
       "monster_name": "Violet Fungus",
-      "habitat": "Same fungal cavern family",
+      "habitat": "Damp fungal cavern with shelf fungus wall and shallow pool",
       "moment": "Tendrils reaching toward a dropped torch",
       "identity_rules": [
         "Must be immediately recognizable as Violet Fungus",
