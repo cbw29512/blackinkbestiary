@@ -18,6 +18,7 @@ def main() -> int:
     parser.add_argument("monster_id")
     parser.add_argument("monster_name")
     parser.add_argument("family_profile")
+    parser.add_argument("--variant", default="", help="Optional reusable variant profile ID")
     parser.add_argument("--traits", default="", help="Comma-separated variant traits")
     args = parser.parse_args()
 
@@ -29,6 +30,20 @@ def main() -> int:
     if not family_path.exists():
         print(f"REFUSED: unknown family profile {args.family_profile!r}")
         return 2
+
+    variant_id = args.variant.strip()
+    if variant_id:
+        variant_path = ROOT / "data" / "monster_variants" / f"{variant_id}.json"
+        if not variant_path.exists():
+            print(f"REFUSED: unknown variant profile {variant_id!r}")
+            return 5
+        variant = json.loads(variant_path.read_text(encoding="utf-8"))
+        if variant.get("family_profile") != args.family_profile:
+            print(
+                f"REFUSED: variant {variant_id!r} belongs to "
+                f"{variant.get('family_profile')!r}, not {args.family_profile!r}"
+            )
+            return 6
 
     path = MONSTER_DIR / f"{args.monster_id}.json"
     if path.exists():
@@ -42,6 +57,8 @@ def main() -> int:
         "monster_name": args.monster_name,
         "family_profile": args.family_profile,
     }
+    if variant_id:
+        payload["variant_profile"] = variant_id
     if traits:
         payload["variant_traits"] = traits
 
