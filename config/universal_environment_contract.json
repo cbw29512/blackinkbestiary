@@ -21,7 +21,9 @@
     "minimum_options_per_pool": 4,
     "ownership_rule": "Environment-family variation supplies reusable options. The resolved environment profile and explicit page variant remain authoritative.",
     "selection_rule": "Use only family options compatible with the resolved profile. Never force an option that changes the named place.",
-    "colorability_rule": "Variation must come from a few large structural choices, not from extra tiny objects or texture."
+    "colorability_rule": "Variation must come from a few large structural choices, not from extra tiny objects or texture.",
+    "status": "legacy_compatibility",
+    "note": "Retained for backward compatibility and coarse family diversity audits. New generation uses the v3 component_engine and overlay_engine."
   },
   "prompt_rules": [
     "State spatial type, material language, identity markers, and spatial read explicitly.",
