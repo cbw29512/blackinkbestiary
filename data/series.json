@@ -31,7 +31,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     },
     {
       "book_id": "TOME-II",
@@ -59,7 +60,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     },
     {
       "book_id": "TOME-III",
@@ -87,7 +89,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     },
     {
       "book_id": "TOME-IV",
@@ -115,7 +118,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     },
     {
       "book_id": "TOME-V",
@@ -143,7 +147,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     },
     {
       "book_id": "TOME-VI",
@@ -171,7 +176,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     },
     {
       "book_id": "TOME-VII",
@@ -199,7 +205,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     },
     {
       "book_id": "TOME-VIII",
@@ -227,7 +234,8 @@
       "page_contract": "config/universal_page_contract.json",
       "monster_contract": "config/universal_monster_contract.json",
       "kdp_print_standard": "config/kdp_print_standard.json",
-      "content_scope": "config/content_scope.json"
+      "content_scope": "config/content_scope.json",
+      "environment_contract": "config/universal_environment_contract.json"
     }
   ],
   "default_target_pages": 50,
@@ -241,5 +249,6 @@
     "repeat_policy": "A monster may repeat across books only when environment, story moment, framing, and interaction are materially different.",
     "goal": "Production-quality KDP coloring books featuring accurate SRD monsters in distinctive natural habitats, lairs, or believable territories."
   },
-  "print_standard": "config/kdp_print_standard.json"
+  "print_standard": "config/kdp_print_standard.json",
+  "environment_contract": "config/universal_environment_contract.json"
 }
