@@ -2,21 +2,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .studio_store import (
-    STATE_FILE,
-    load_state,
-    load_tome,
-    utc_now,
-    validate_state,
-    write_json,
-)
+from . import studio_store as store
 
 
 def register_candidate(payload: dict) -> dict:
     from .studio_production import public_state
 
-    tome, state = load_tome(), load_state()
-    validate_state(tome, state)
+    tome, state = store.load_tome(), store.load_state()
+    store.validate_state(tome, state)
     page_id = payload.get("page_id")
     if page_id != state["current_page_id"]:
         raise ValueError("Candidate can only be registered for the current page")
@@ -39,12 +32,12 @@ def register_candidate(payload: dict) -> dict:
         "generation_mode": payload.get("generation_mode", "unknown"),
         "technical_retry": int(payload.get("technical_retry", 0)),
         "source": payload.get("source"),
-        "created_at": utc_now(),
+        "created_at": store.utc_now(),
     }
     entry["attempt"] = attempt
     entry["current_candidate"] = candidate
     entry.setdefault("attempt_history", []).append(candidate)
     entry["status"] = "awaiting_human"
-    state["updated_at"] = utc_now()
-    write_json(STATE_FILE, state)
+    state["updated_at"] = store.utc_now()
+    store.write_json(store.STATE_FILE, state)
     return public_state()
