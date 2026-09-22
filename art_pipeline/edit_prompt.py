@@ -4,6 +4,10 @@ from pathlib import Path
 
 from prompt_builder import _canonical_sections, _items, load_monster_spec
 try:
+    from .page_contract import resolve_page_spec
+except ImportError:
+    from page_contract import resolve_page_spec
+try:
     from .style_rules import STYLE_RULES
 except ImportError:
     from style_rules import STYLE_RULES
@@ -21,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
     """Build a preservation-first prompt for editing the current candidate."""
+    page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
     sections = [
         "EDIT THE PROVIDED CURRENT COLORING PAGE. Do not redesign it from scratch.",
