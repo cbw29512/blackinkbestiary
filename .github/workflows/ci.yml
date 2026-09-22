@@ -18,4 +18,5 @@ jobs:
           python -m json.tool data/tome-I.json > /dev/null
           python -m json.tool data/production-state.json > /dev/null
           python -m unittest discover -s tests -v
+          python -m compileall -q art_pipeline scripts server.py
           node --check web/app.js
