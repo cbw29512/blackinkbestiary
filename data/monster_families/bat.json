@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "bat",
+  "display_name": "Bat",
+  "taxonomy": {
+    "family": "bat",
+    "creature_type": "beast",
+    "default_size": "variable"
+  },
+  "visual_identity": {
+    "core_identity": "Natural cave bats with unmistakable membrane wings supported by elongated finger bones, pointed ears, compact mammal bodies, and clawed roosting feet.",
+    "silhouette": "Compact torso, broad membrane wings, large ears, clawed hind feet; swarm variants repeat the same anatomy at smaller scale.",
+    "head_features": "Natural bat face with short muzzle and prominent ears, never humanoid or draconic.",
+    "body_shape": "Light flying mammal body with wings formed by elongated fingers and thin membranes.",
+    "surface": "Short restrained body fur and smooth wing membranes with minimal vein detail.",
+    "must_keep": [
+      "natural bat anatomy",
+      "membrane wings with elongated fingers",
+      "large ears",
+      "compact mammal torso",
+      "clawed feet"
+    ],
+    "must_avoid": [
+      "dragon wings",
+      "bird feathers",
+      "humanoid arms",
+      "horns",
+      "insect anatomy",
+      "vampire clothing"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as bat immediately",
+    "wing structure is mammalian",
+    "no dragon or bird anatomy appears",
+    "fur and membrane detail stay simple"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "wings or head become draconic",
+      "correction": "restore natural bat ears, short muzzle, finger-boned membrane wings, and mammal torso"
+    },
+    {
+      "id": "bird_drift",
+      "symptom": "wings become feathered",
+      "correction": "remove feathers and restore continuous skin membranes"
+    }
+  ]
+}

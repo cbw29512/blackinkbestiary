@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "fungus",
+  "display_name": "Fungus",
+  "taxonomy": {
+    "family": "fungus",
+    "creature_type": "giant fungus",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "Rooted giant fungal organisms whose mushroom structure remains primary even when they shriek, lash tendrils, or act as predators.",
+    "silhouette": "Thick rooted stalk or fungal base with broad cap, shelf, or colony forms; no walking humanoid body.",
+    "head_features": "No animal or human head; cap, gills, pores, or tendrils provide variant identity.",
+    "body_shape": "Rooted fungal body with variant-specific cap, stalk, shelves, tendrils, or resonant opening.",
+    "surface": "Simple cap and stalk surfaces with sparse gill, spot, or pore detail.",
+    "must_keep": [
+      "rooted fungal anatomy",
+      "recognizable mushroom or fungus structure",
+      "no humanoid face",
+      "broad simple cap/stalk forms"
+    ],
+    "must_avoid": [
+      "walking human legs",
+      "cute mushroom eyes",
+      "animal head",
+      "dense gill texture",
+      "octopus body replacing fungus"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as fungus first",
+    "base is visibly rooted",
+    "no accidental humanoid or animal face appears",
+    "large fungal forms remain easy to color"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "mascot_drift",
+      "symptom": "fungus gains cute eyes or face",
+      "correction": "remove facial features and restore cap/gill/tendril-based identity"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "tendril fungus loses mushroom form",
+      "correction": "keep a strong rooted cap-and-stalk body and make tendrils secondary"
+    }
+  ]
+}

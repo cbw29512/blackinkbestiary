@@ -67,5 +67,11 @@
     ],
     "rule": "Pages may reuse a monster family or environment family, but should not reuse the same resolved combination of subject, place, landmark, framing, interaction, action, and physical state unless intentionally designed as a paired scene."
   },
-  "inheritance_rule": "When a universal rule improves, every tome inherits it automatically. Tome manifests should store only page-specific exceptions instead of copying universal boilerplate."
+  "inheritance_rule": "When a universal rule improves, every tome and future book inherits it automatically. Tome manifests store only page-specific recipes and exceptions.",
+  "environment_diversity": {
+    "max_profile_share": 0.08,
+    "minimum_repeat_allowance": 2,
+    "max_consecutive_same_profile": 2,
+    "rule": "A concrete environment profile may recur when appropriate, but must not dominate the book. For a 50-page tome, the same profile may appear at most four times. Consecutive use is capped at two pages. Unique landmarks, framing, interaction, and physicality are still required on every occurrence."
+  }
 }

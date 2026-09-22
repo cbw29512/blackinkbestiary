@@ -26,5 +26,6 @@ jobs:
           python -m json.tool data/series.json > /dev/null
           python -m unittest discover -s tests -v
           python scripts/audit_active_book.py
+          python scripts/audit_series.py
           python -m compileall -q art_pipeline scripts server.py
           node --check web/app.js

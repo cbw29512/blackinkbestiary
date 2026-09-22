@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "minotaur",
+  "display_name": "Minotaur",
+  "taxonomy": {
+    "family": "minotaur",
+    "creature_type": "monstrous humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "Large bull-headed humanoids defined by a bovine head, sweeping horns, powerful humanoid torso, and hooved lower anatomy.",
+    "silhouette": "Broad humanoid shoulders under a large horned bull head; powerful legs end in hooves.",
+    "head_features": "Bovine head with long muzzle, flared nostrils, bovine ears, heavy brow, and prominent curved horns.",
+    "body_shape": "Massive humanoid torso and arms with powerful legs; never a centaur body.",
+    "surface": "Short restrained hide or clean bone structure for undead variants.",
+    "must_keep": [
+      "bull head identity",
+      "large curved horns",
+      "large humanoid frame",
+      "hooved feet or skeletal equivalent"
+    ],
+    "must_avoid": [
+      "human head",
+      "goat head",
+      "centaur body",
+      "tiny horns",
+      "full bull quadruped body",
+      "dense fur"
+    ]
+  },
+  "accuracy_checks": [
+    "bull head and horns dominate identity",
+    "body remains humanoid below the neck",
+    "large scale is obvious",
+    "no goat or centaur drift"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "goat_drift",
+      "symptom": "head becomes goat-like",
+      "correction": "broaden bovine muzzle, nostrils, skull mass, and sweeping bull horns"
+    },
+    {
+      "id": "centaur_drift",
+      "symptom": "body becomes four-legged bull/centaur",
+      "correction": "restore bipedal humanoid torso and legs with hooved feet"
+    }
+  ]
+}
