@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from environment_catalog import environment_fingerprint, resolve_environment_profile
+from environment_variation import load_variation_registry, resolve_family_variation
 from prompt_builder import build_prompt
 from quality_system import coloring_page_directives
 
@@ -81,6 +82,31 @@ class EnvironmentCatalogTests(unittest.TestCase):
         ]
         profiles = [resolve_environment_profile(profile_id) for profile_id in expected]
         self.assertEqual(len({profile["name"] for profile in profiles}), len(expected))
+
+    def test_every_environment_family_has_deep_variation_pools(self):
+        registry = load_variation_registry()
+        self.assertEqual(len(registry["families"]), 8)
+        for family_id, family in registry["families"].items():
+            for key in (
+                "geometry_pool",
+                "landmark_pool",
+                "prop_pool",
+                "interaction_pool",
+                "anti_repetition_rules",
+            ):
+                self.assertGreaterEqual(len(family[key]), 4, f"{family_id}:{key}")
+
+    def test_prompt_includes_family_variation_without_overriding_page_variant(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-03")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        variation = resolve_family_variation(profile["environment_family"])
+        self.assertTrue(variation["geometry_pool"])
+        text = build_prompt(page)
+        self.assertIn("FAMILY GEOMETRY VARIATION POOL", text)
+        self.assertIn("FAMILY LANDMARK VARIATION POOL", text)
+        self.assertIn("FAMILY STORY-INTERACTION POOL", text)
+        self.assertIn("VARIATION PRIORITY", text)
+        self.assertIn(page["environment_variant"]["landmark"], text)
 
     def test_prompt_contains_environment_variant_and_large_colorable_forms(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-47")
