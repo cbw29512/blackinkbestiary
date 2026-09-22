@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 try:
-    from .environment_catalog import resolve_environment_profile
+    from .environment_catalog import load_environment_contract, resolve_environment_profile
     from .quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -11,7 +11,7 @@ try:
         environment_directives,
     )
 except ImportError:
-    from environment_catalog import resolve_environment_profile
+    from environment_catalog import load_environment_contract, resolve_environment_profile
     from quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -39,6 +39,7 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
         _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
         f"ENVIRONMENT SPATIAL READ: {identity.get('spatial_read', '')}.",
+        _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", load_environment_contract().get("prompt_rules")),
         f"ENVIRONMENT ACCURACY: {profile['description']}",
         _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
         _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
