@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from quality_system import archetype_rules
+try:
+    from .quality_system import archetype_rules
+except ImportError:
+    from quality_system import archetype_rules
 
 
 REQUIRED_PAGE_FIELDS = {
