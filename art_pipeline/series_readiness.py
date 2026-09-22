@@ -6,7 +6,7 @@ from pathlib import Path
 try:
     from .book_registry import load_series, plan_path
     from .calibration_gate import calibration_report
-    from .catalog_audit import audit_environment_variation_catalog
+    from .catalog_audit import audit_environment_variation_catalog, audit_monster_catalog
     from .environment_engine_audit import audit_environment_engine
     from .manifest_validation import validate_manifest
     from .page_contract import missing_required_paths, page_uniqueness_fingerprint
@@ -15,7 +15,7 @@ try:
 except ImportError:
     from book_registry import load_series, plan_path
     from calibration_gate import calibration_report
-    from catalog_audit import audit_environment_variation_catalog
+    from catalog_audit import audit_environment_variation_catalog, audit_monster_catalog
     from environment_engine_audit import audit_environment_engine
     from manifest_validation import validate_manifest
     from page_contract import missing_required_paths, page_uniqueness_fingerprint
@@ -100,6 +100,12 @@ def audit_series(root: Path) -> dict:
             )
         rows.append(row)
 
+    monster_report = audit_monster_catalog(root)
+    if not monster_report["pass"]:
+        structural_errors.extend(
+            f"monster catalog: {error}" for error in monster_report["errors"]
+        )
+
     variation_report = audit_environment_variation_catalog(root)
     if not variation_report["pass"]:
         structural_errors.extend(
@@ -153,6 +159,11 @@ def audit_series(root: Path) -> dict:
         "series_id": series.get("series_id"),
         "books_registered": len(rows),
         "source_registry_entries": len(allowed),
+        "monster_family_profiles": monster_report["family_profiles"],
+        "monster_species_profiles": monster_report["species_profiles"],
+        "monster_legacy_specs": len(monster_report["legacy_specs"]),
+        "monster_inline_identity_specs": len(monster_report["inline_identity_specs"]),
+        "monster_catalog_scale_ready": monster_report["scale_ready"],
         "environment_variation_families": variation_report["variation_families"],
         "environment_component_catalogs": environment_report["component_catalogs"],
         "environment_components": environment_report["total_components"],
