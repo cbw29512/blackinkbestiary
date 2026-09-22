@@ -47,6 +47,14 @@ class PlatformQualityTests(unittest.TestCase):
         self.assertEqual(recommended_action(ROOT, ["environment generic"]), "modify")
         self.assertEqual(recommended_action(ROOT, ["wrong environment"]), "regenerate")
 
+    def test_page_polish_defects_stay_on_modify(self):
+        self.assertEqual(recommended_action(ROOT, ["artwork border present"]), "modify")
+        self.assertEqual(recommended_action(ROOT, ["secondary figures compete"]), "modify")
+        self.assertEqual(recommended_action(ROOT, ["repeated micro-pattern overload"]), "modify")
+        directives = expand_defect_tags(ROOT, ["artwork border present", "repeated micro-pattern overload"])
+        self.assertTrue(any("rectangular artwork frame" in item for item in directives))
+        self.assertTrue(any("chainmail" in item for item in directives))
+
     def test_composition_failure_recommends_regenerate(self):
         self.assertEqual(recommended_action(ROOT, ["composition wrong"]), "regenerate")
         self.assertEqual(recommended_action(ROOT, ["wrong monster identity"]), "regenerate")
