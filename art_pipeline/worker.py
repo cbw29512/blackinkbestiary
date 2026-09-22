@@ -11,9 +11,11 @@ from prompt_builder import build_prompt, build_supervisor_checklist
 from workflow_adapter import load_workflow, prepare_workflow, validate_template
 try:
     from .manifest_validation import validate_manifest
+    from .page_contract import resolve_page_spec
     from .studio_config import active_book_paths
 except ImportError:
     from manifest_validation import validate_manifest
+    from page_contract import resolve_page_spec
     from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
