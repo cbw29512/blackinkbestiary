@@ -1,0 +1,847 @@
+{
+  "schema_version": 1,
+  "family_id": "mythic-sites",
+  "display_name": "Mythic Site Environment Component Library",
+  "purpose": "Reusable temple, grove, remote peak, enchanted valley, sacred water, cave-shrine, and ancient-ruin scenery.",
+  "context_rules": [
+    {
+      "terms": [
+        "temple"
+      ],
+      "add": [
+        "temple",
+        "built"
+      ]
+    },
+    {
+      "terms": [
+        "grove"
+      ],
+      "add": [
+        "grove",
+        "natural"
+      ]
+    },
+    {
+      "terms": [
+        "peak"
+      ],
+      "add": [
+        "peak",
+        "elevated"
+      ]
+    },
+    {
+      "terms": [
+        "valley"
+      ],
+      "add": [
+        "valley",
+        "enchanted"
+      ]
+    },
+    {
+      "terms": [
+        "ruin"
+      ],
+      "add": [
+        "ruin"
+      ]
+    },
+    {
+      "terms": [
+        "sacred",
+        "shrine",
+        "ritual"
+      ],
+      "add": [
+        "sacred"
+      ]
+    },
+    {
+      "terms": [
+        "pool",
+        "stream"
+      ],
+      "add": [
+        "water"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Mythic quality comes from monumental composition and distinctive forms, not dense magical decoration.",
+    "Use one sacred or unusual landmark as the environmental focal support.",
+    "Runes, sparkles, carvings, and symbols must stay sparse and large.",
+    "Natural and built sacred spaces should remain highly colorable with quiet surrounding areas."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "monumental stair leading to a simple ritual platform",
+        "contexts": [
+          "temple",
+          "built"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "circular sacred grove or stone ring with open center",
+        "contexts": [
+          "grove",
+          "natural"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "high mountain shelf with a distant horizon",
+        "contexts": [
+          "peak",
+          "elevated"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "open valley framed by one natural arch",
+        "contexts": [
+          "valley",
+          "enchanted"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "ruined courtyard with two large architectural remnants",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "terraced shrine space with one clear ascent",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "cave-temple threshold opening into daylight",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "sacred pool or stream bend with broad open banks",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "weathered temple stone with broad ceremonial panels",
+        "contexts": [
+          "temple",
+          "built"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "ancient standing-stone surfaces with simple erosion",
+        "contexts": [
+          "grove",
+          "sacred"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "high mountain rock with broad exposed faces",
+        "contexts": [
+          "peak",
+          "rock"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "smooth valley stone and earth bands with a few unusual formations",
+        "contexts": [
+          "valley",
+          "enchanted"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "ruined masonry with large broken edges",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "terrace stone with broad step and wall planes",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "cave rock merging visibly into built shrine stone",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "pool-edge stone with large root or bank forms",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "broad ceremonial paving leading toward one landmark",
+        "contexts": [
+          "temple"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "open grove floor with moss and root masses",
+        "contexts": [
+          "grove"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "rock shelf with one clean cliff edge",
+        "contexts": [
+          "peak"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "broad valley floor with simple path or stream line",
+        "contexts": [
+          "valley"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "ruined courtyard slabs with few large breaks",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "terraced steps or ritual platforms",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "cave-temple threshold floor changing from rock to masonry",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "sacred pool bank with broad water edge",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "monumental arch or lintel above a ritual threshold",
+        "contexts": [
+          "temple"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "large tree crowns framing a sacred grove opening",
+        "contexts": [
+          "grove"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "open mountain sky with one rock overhang",
+        "contexts": [
+          "peak"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "natural arch or unusual cliff form above a valley path",
+        "contexts": [
+          "valley"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "broken temple roof or arch opening",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "simple canopy, banner beam, or stone crosspiece at a shrine",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "cave roof framing built sacred architecture",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "tree branches or rock arch framing a sacred pool",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "one large brazier or ceremonial fire bowl",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "sunlight through a grove canopy opening",
+        "contexts": [
+          "grove"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "bright mountain horizon used as negative space",
+        "contexts": [
+          "peak"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "soft open valley light around one unusual landmark",
+        "contexts": [
+          "valley"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "light entering through a ruined temple breach",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "single lantern, candle stand, or flame niche near an altar",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "daylight at a cave-temple mouth",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "reflected light from a sacred pool or stream",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "ancient arch or ceremonial doorway",
+        "contexts": [
+          "temple",
+          "built"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "pair of standing stones defining a grove threshold",
+        "contexts": [
+          "grove",
+          "sacred"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "stone stair or ledge climbing a remote peak",
+        "contexts": [
+          "peak"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "natural rock arch or terrace in an enchanted valley",
+        "contexts": [
+          "valley"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "broken colonnade or courtyard wall",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "altar terrace, plinth, or ritual dais",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "built shrine doorway set into natural cave rock",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "stone basin, bridge, or bank crossing at sacred water",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "large altar or ritual plinth",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "pair of standing stones",
+        "contexts": [
+          "grove",
+          "sacred"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "broken idol or monumental statue fragment",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "single giant crystal or unusual natural stone",
+        "contexts": [
+          "valley",
+          "enchanted"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "ancient arch or ceremonial doorway",
+        "contexts": [
+          "temple"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "weathered shrine marker or pillar",
+        "contexts": [
+          "temple",
+          "grove"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "sacred tree or root-wrapped stone",
+        "contexts": [
+          "grove"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "broad pool, basin, or stream crossing",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "one offering bowl or basket",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "one simple banner, ribbon, or hanging cloth",
+        "contexts": [
+          "temple"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "one stone tablet or carved slab",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "one brazier or lantern form",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "one abandoned staff, shield, or relic",
+        "contexts": [
+          "temple",
+          "valley"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "one cluster of large flowers or fungi",
+        "contexts": [
+          "grove",
+          "valley"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "one rope bridge or simple ceremonial rail",
+        "contexts": [
+          "peak",
+          "temple"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one broken pedestal fragment",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "broken ritual stair with one clear missing section",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "root-covered sacred path with a broad trip edge",
+        "contexts": [
+          "grove"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "high mountain ledge with a visible drop",
+        "contexts": [
+          "peak"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "unstable natural arch or rock shelf in a valley",
+        "contexts": [
+          "valley"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "collapsed temple block zone with few massive stones",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "ritual basin, trench, or fire channel with clear boundary",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "cave threshold fissure or steep step",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "deep sacred pool edge with one readable descent",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "temple doorway frames a deeper sanctuary",
+        "contexts": [
+          "temple"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "standing stones frame a distant grove opening",
+        "contexts": [
+          "grove"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "peak shelf overlooks a lower mountain layer",
+        "contexts": [
+          "peak"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "natural arch frames a distant valley feature",
+        "contexts": [
+          "valley"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "ruined courtyard opens toward a broken interior hall",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "terraced shrine steps lead upward to a focal landmark",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "cave-temple entrance reveals daylight or deeper shrine space",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "pool or stream bends behind roots or stone markers",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few broad moss or lichen patches on ancient stone",
+        "contexts": [
+          "temple",
+          "grove"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "one hanging cloth or vine moving in open air",
+        "contexts": [
+          "temple",
+          "grove"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "simple cloud or mist band around a high peak",
+        "contexts": [
+          "peak"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "few unusual flowers, crystals, or grasses as one accent group",
+        "contexts": [
+          "valley",
+          "enchanted"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "sparse dust around one ruined temple break",
+        "contexts": [
+          "temple",
+          "ruin"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "single soot halo around a ritual flame",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "one mineral or root band where cave and temple meet",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "simple ripples around a sacred pool landmark",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "monster approaches or circles the main altar or plinth",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "monster passes between standing stones or through an arch",
+        "contexts": [
+          "grove",
+          "temple"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "monster examines, guards, or reaches toward one relic",
+        "contexts": [
+          "temple",
+          "valley"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "monster climbs the shrine stair, terrace, or mountain shelf",
+        "contexts": [
+          "peak",
+          "temple"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "monster rests beside a sacred pool, tree, or stone",
+        "contexts": [
+          "grove",
+          "water"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "monster emerges from a temple or cave threshold",
+        "contexts": [
+          "temple",
+          "cave"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "monster moves beneath one monumental natural landmark",
+        "contexts": [
+          "valley",
+          "peak"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "monster disturbs or carries one simple offering object",
+        "contexts": [
+          "temple",
+          "sacred"
+        ]
+      }
+    ]
+  }
+}
