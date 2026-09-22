@@ -9,7 +9,7 @@ from png_content_qa import inspect_line_art
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 
-def inspect_png(path: Path, target_ratio: float = 3 / 4, ratio_tolerance: float = 0.08) -> dict:
+def inspect_png(path: Path, target_ratio: float = 8.5 / 11, ratio_tolerance: float = 0.04) -> dict:
     raw = path.read_bytes()
     result = {
         "path": str(path),
