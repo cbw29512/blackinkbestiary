@@ -124,6 +124,10 @@
     "airborne action unclear": {
       "action": "modify",
       "directive": "Replace unstable midair action with a stable natural coloring pose. Non-flyers must be visibly supported. True flyers may remain airborne only in controlled natural flight with clear readable anatomy."
+    },
+    "environment ambiguous": {
+      "action": "modify",
+      "directive": "Make the setting identifiable without relying on the monster or caption. Strengthen the spatial type, dominant materials, and one or two unmistakable location markers. Replace smooth generic walls or vague scenery with large, colorable, setting-specific forms while preserving the successful monster."
     }
   }
 }
