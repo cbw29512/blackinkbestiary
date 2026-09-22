@@ -397,8 +397,8 @@
       "page_id": "I-08",
       "order": 8,
       "monster_name": "Bugbear Warrior",
-      "habitat": "Ceiling crack above dungeon hall",
-      "moment": "Dropping into an ambush",
+      "habitat": "Collapsed-ceiling dungeon hall",
+      "moment": "Lurking beneath a broken ceiling, ready to ambush",
       "identity_rules": [
         "Unmistakable bugbear: long-armed shaggy goblinoid, not ape, sasquatch, bear, or generic brute",
         "Pointed goblinoid ears and broad goblinoid nose remain readable through controlled shaggy hair",
@@ -406,13 +406,11 @@
       ],
       "must_include": [
         "long-armed shaggy bugbear warrior",
-        "dropping from a ceiling crack",
-        "ambush posture",
-        "dungeon hall below",
-        "visible ceiling breach or launch point directly above or behind the bugbear",
-        "clear downward dropping trajectory",
-        "bent knees or reaching limbs consistent with a landing ambush",
-        "sparse falling rubble or dust-line cues showing motion"
+        "stable grounded ambush posture",
+        "both feet visibly planted on the dungeon floor or large rubble",
+        "large broken ceiling breach overhead",
+        "fallen masonry used as cover",
+        "dungeon hall perspective"
       ],
       "must_avoid": [
         "grayscale wash",
@@ -422,9 +420,9 @@
         "generic or empty background",
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat",
-        "neutral standing pose suspended in midair",
-        "feet floating above floor with no readable fall or jump",
-        "sasquatch or ape-man face"
+        "sasquatch or ape-man face",
+        "jumping, falling, dropping, or hovering pose",
+        "unsupported feet"
       ],
       "coloring_rules": {
         "outer_contour": "bold",
@@ -435,17 +433,17 @@
       },
       "reference_image": null,
       "monster_spec_id": "bugbear-warrior",
-      "archetype": "vertical_ambush_scene",
+      "archetype": "stealth_scene",
       "environment_profile_id": "underground.collapsed-ceiling-hall",
       "environment_variant": {
-        "landmark": "large ceiling breach with hanging stone slab",
-        "framing": "upward-looking hall view emphasizing the broken roof",
-        "interaction": "bugbear drops through the visible ceiling breach with bent landing posture and sparse falling debris toward the hall below"
+        "landmark": "large ceiling breach with fallen masonry beneath it",
+        "framing": "ground-level hall view with the bugbear centered beneath the damaged ceiling",
+        "interaction": "bugbear uses the fallen masonry and broken hall architecture as cover while waiting in ambush"
       },
       "physicality": {
-        "mode": "falling",
-        "support": "no support while airborne; visible ceiling breach is the launch point",
-        "motion": "clear downward trajectory with bent landing limbs and sparse falling rubble"
+        "mode": "grounded",
+        "support": "both feet visibly planted on the stone floor or large rubble",
+        "motion": "low braced ambush stance with weight clearly carried through the legs"
       }
     },
     {
