@@ -80,6 +80,29 @@ Do **not** copy:
 
 Black-Ink house style always overrides the rendering style of the reference.
 
+## Coloring Scale Rule
+
+Black-Ink follows a bold-and-easy readability target without becoming preschool-simple.
+
+- Monster should be substantial, but usually leave enough page area for the habitat to read.
+- Use 2–4 major environmental forms.
+- Favor medium-to-large contiguous coloring regions over tiny enclosed cells.
+- Story-critical props must be large enough to identify and color comfortably.
+- Background depth comes from overlapping large forms and perspective, not micro-detail.
+- If simplifying a page, remove clutter before removing habitat identity.
+
+## Background Variety Rule
+
+A broad environment family is never the full background brief.
+
+Each page needs:
+- a specific environment profile
+- one unique landmark
+- a distinct framing choice
+- one monster/environment interaction
+
+Exact duplicate environment fingerprints fail validation. Similar habitat families may recur only when the page reads as a genuinely different place or composition.
+
 ## Habitat Rule
 
 The environment is not filler. It is one of three co-equal pillars on every page:
