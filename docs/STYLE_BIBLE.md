@@ -80,6 +80,16 @@ Do **not** copy:
 
 Black-Ink house style always overrides the rendering style of the reference.
 
+## Stable Pose Rule
+
+Black-Ink is a coloring-book system, not an action freeze-frame system.
+
+- Non-flying creatures must use stable, naturally supported poses.
+- Do not show non-flyers jumping, falling, dropping, hovering, or frozen in midair.
+- True flying creatures may use controlled natural flight only when anatomy stays clear and easy to color.
+- Prefer standing, stalking, crouching, guarding, feeding, climbing with visible contact, hanging with visible support, perching, coiling, swimming, burrowing, or other naturally supported states.
+- The monster should look like it belongs in the environment, not like it was caught between animation frames.
+
 ## Coloring Scale Rule
 
 Black-Ink follows a bold-and-easy readability target without becoming preschool-simple.
