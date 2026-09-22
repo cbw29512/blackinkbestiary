@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "ochre-jelly",
+  "display_name": "Ochre Jelly",
+  "visual_identity": {
+    "core_identity": "A viscous amoeboid dungeon ooze known for splitting into separate living masses when struck.",
+    "silhouette": "Two irregular low jelly masses with rounded lobes and stringy connective drips, both clearly moving.",
+    "head_features": "No head, eyes, or face.",
+    "body_shape": "Soft amorphous blobs with uneven edges, sagging folds, and no fixed limbs.",
+    "surface": "Mostly open interiors with a few contour ripples and drip lines.",
+    "signature_gear": [],
+    "attitude": [
+      "creeping",
+      "dividing",
+      "mindless",
+      "persistent"
+    ],
+    "must_keep": [
+      "two distinct split halves",
+      "amorphous jelly anatomy",
+      "no face",
+      "viscous rounded edges",
+      "shared visual identity between halves"
+    ],
+    "must_avoid": [
+      "single unsplit blob",
+      "solid black fill",
+      "eyes or smile",
+      "sharp spikes",
+      "humanoid limbs",
+      "dense internal texture"
+    ]
+  },
+  "accuracy_checks": [
+    "two halves are clearly independent",
+    "no facial features appear",
+    "ooze remains colorable",
+    "split behavior is obvious without caption"
+  ]
+}
