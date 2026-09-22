@@ -8,11 +8,11 @@ from pathlib import Path
 try:
     from .calibration_gate import calibration_paths, calibration_report, load_calibration_config
     from .local_preflight import local_generation_preflight
-    from .calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate
+    from .calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate, set_calibration_generation_error
 except ImportError:
     from calibration_gate import calibration_paths, calibration_report, load_calibration_config
     from local_preflight import local_generation_preflight
-    from calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate
+    from calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate, set_calibration_generation_error
 LOGGER = logging.getLogger(__name__)
 _LOCK = threading.Lock()
 _PROCESS: subprocess.Popen | None = None
@@ -64,6 +64,7 @@ def public_calibration_state(root: Path) -> dict:
             "approved_candidate": entry.get("approved_candidate"),
             "review_dimensions": entry.get("review_dimensions") or {},
             "review_notes": entry.get("review_notes"),
+            "generation_error": entry.get("generation_error"),
         })
     return {
         "report": calibration_report(root),
@@ -88,6 +89,7 @@ def start_calibration_worker(root: Path, page_id: str) -> dict:
     script = root / "scripts" / "generate_golden_page.py"
     if not script.exists():
         raise ValueError("Golden Five generator script is missing")
+    set_calibration_generation_error(root, page_id, None)
     with _LOCK:
         if _PROCESS is not None and _PROCESS.poll() is None:
             return {"started": False, "running": True, "pid": _PROCESS.pid,
