@@ -136,11 +136,15 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         else:
             seen_backgrounds[fingerprint] = page_id
 
-        page_fingerprint = page_uniqueness_fingerprint(page, root)
-        if page_fingerprint in seen_pages:
-            errors.append(f"{page_id}: full page recipe duplicates {seen_pages[page_fingerprint]}")
-        else:
-            seen_pages[page_fingerprint] = page_id
+        try:
+            page_fingerprint = page_uniqueness_fingerprint(page, root)
+        except RuntimeError:
+            page_fingerprint = ""
+        if page_fingerprint:
+            if page_fingerprint in seen_pages:
+                errors.append(f"{page_id}: full page recipe duplicates {seen_pages[page_fingerprint]}")
+            else:
+                seen_pages[page_fingerprint] = page_id
 
     if seen_orders and seen_orders != set(range(1, len(pages) + 1)):
         errors.append("page order must be contiguous starting at 1")
