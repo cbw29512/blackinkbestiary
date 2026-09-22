@@ -66,6 +66,20 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("UNIVERSAL ENVIRONMENT IDENTITY RULES", text)
         self.assertIn("flagstone floor", text)
 
+    def test_i02_shrine_keeper_stays_limestone_cave_not_dungeon_corridor(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-02")
+        palette = assemble_environment_palette(page, ROOT)
+        text = build_prompt(page)
+        self.assertIn("natural", palette["contexts"])
+        self.assertIn("cave", palette["contexts"])
+        self.assertIn("limestone", palette["contexts"])
+        self.assertIn("HABITAT: Limestone Drip Cave", text)
+        self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
+        self.assertIn("dragon skull", text.lower())
+        self.assertIn("coin", text.lower())
+        self.assertIn("ACTIVE ENVIRONMENT OVERLAY RULES", text)
+        self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
+
     def test_tome_i_background_fingerprints_are_unique(self):
         fingerprints = [environment_fingerprint(page) for page in self.tome["pages"]]
         self.assertEqual(len(fingerprints), len(set(fingerprints)))
