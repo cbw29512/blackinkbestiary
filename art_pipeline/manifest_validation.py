@@ -6,14 +6,14 @@ from pathlib import Path
 try:
     from .quality_system import archetype_rules
     from .monster_catalog import minimal_recipe_errors, resolve_monster_spec
-    from .environment_catalog import environment_fingerprint, resolve_environment_profile
+    from .environment_catalog import environment_fingerprint, environment_identity_errors, resolve_environment_profile
     from .page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
     from .physicality_prompt import locomotion_errors
     from .source_scope import source_scope_errors
 except ImportError:
     from quality_system import archetype_rules
     from monster_catalog import minimal_recipe_errors, resolve_monster_spec
-    from environment_catalog import environment_fingerprint, resolve_environment_profile
+    from environment_catalog import environment_fingerprint, environment_identity_errors, resolve_environment_profile
     from page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
     from physicality_prompt import locomotion_errors
     from source_scope import source_scope_errors
@@ -59,7 +59,8 @@ def _validate_environment(page: dict) -> list[str]:
     errors = []
     profile_id = str(page.get("environment_profile_id") or "").strip()
     try:
-        resolve_environment_profile(profile_id)
+        profile = resolve_environment_profile(profile_id)
+        errors.extend(f"{page_id}: {item}" for item in environment_identity_errors(profile))
     except RuntimeError as exc:
         errors.append(f"{page_id}: {exc}")
 
