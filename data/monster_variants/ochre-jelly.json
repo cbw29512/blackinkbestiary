@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "ochre-jelly",
+  "family_profile": "ooze",
+  "display_name": "Ochre Jelly",
+  "size": "large",
+  "creature_type": "ooze",
+  "visual_identity": {
+    "core_identity": "A viscous amoeboid dungeon ooze known for splitting into separate living masses when struck.",
+    "silhouette": "Two irregular low jelly masses with rounded lobes and stringy connective drips, both clearly moving.",
+    "body_shape": "Soft amorphous blobs with uneven edges, sagging folds, and no fixed limbs.",
+    "surface": "Mostly open interiors with a few contour ripples and drip lines.",
+    "must_keep": [
+      "two distinct split halves",
+      "viscous rounded edges",
+      "shared visual identity between halves"
+    ],
+    "must_avoid": [
+      "single unsplit blob",
+      "sharp spikes",
+      "dense internal texture"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Both halves remain fully supported on floor or contacted surfaces.",
+    "behavior_style": [
+      "splitting around one obstacle",
+      "creeping as two related masses",
+      "flowing across broad floor slabs",
+      "dividing near a doorway"
+    ]
+  },
+  "accuracy_checks": [
+    "two halves are distinct",
+    "both remain faceless",
+    "interiors stay open and colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "unsplit_drift",
+      "symptom": "only one blob appears",
+      "correction": "show two clearly separate but visually related jelly masses"
+    },
+    {
+      "id": "face_drift",
+      "symptom": "one half gains eyes or mouth",
+      "correction": "remove all facial features"
+    }
+  ]
+}
