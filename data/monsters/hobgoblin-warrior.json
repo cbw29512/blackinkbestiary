@@ -1,15 +1,13 @@
 {
+  "schema_version": 3,
   "monster_id": "hobgoblin-warrior",
   "monster_name": "Hobgoblin Warrior",
-  "family": "hobgoblin",
-  "size": "medium",
-  "creature_type": "goblinoid humanoid",
-  "visual_identity": {
-    "core_identity": "A disciplined martial goblinoid with a controlled soldierly bearing, more organized and sturdier than a goblin but not orc-like.",
-    "silhouette": "Medium athletic humanoid, squared shoulders, upright military stance, compact disciplined posture behind shield and weapon.",
-    "head_features": "Angular goblinoid face, pointed ears smaller than a goblin's exaggerated ears, strong brow, short nose, stern eyes.",
-    "body_shape": "Lean athletic humanoid with balanced proportions and trained posture rather than oversized muscles.",
-    "surface": "Mostly smooth skin with sparse scars; armor surfaces kept broad and simple.",
+  "family_profile": "hobgoblin",
+  "variant_traits": [
+    "rank-and-file disciplined soldier",
+    "practical shield-and-weapon fighter"
+  ],
+  "visual_overrides": {
     "signature_gear": [
       "simple scale or lamellar armor",
       "medium shield",
@@ -21,42 +19,6 @@
       "alert",
       "coordinated",
       "stern"
-    ],
-    "must_keep": [
-      "goblinoid pointed ears",
-      "medium athletic build",
-      "disciplined military posture",
-      "practical shield and weapon",
-      "organized equipment"
-    ],
-    "must_avoid": [
-      "orc tusks",
-      "huge bodybuilder build",
-      "tiny goblin proportions",
-      "ornate plate armor",
-      "reptilian features",
-      "chaotic mismatched silhouette"
     ]
-  },
-  "default_habitats": [
-    "underground barracks",
-    "fortified tunnels",
-    "military dungeon posts"
-  ],
-  "accuracy_checks": [
-    "reads as trained hobgoblin soldier",
-    "shield and weapon are practical and readable",
-    "body is medium and athletic",
-    "face is goblinoid not orcish",
-    "equipment looks organized",
-    "pose supports formation fighting"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "hobgoblin"
+  }
 }
