@@ -9,12 +9,14 @@ try:
     from .environment_catalog import environment_fingerprint, resolve_environment_profile
     from .page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
     from .physicality_prompt import locomotion_errors
+    from .source_scope import source_scope_errors
 except ImportError:
     from quality_system import archetype_rules
     from monster_catalog import minimal_recipe_errors, resolve_monster_spec
     from environment_catalog import environment_fingerprint, resolve_environment_profile
     from page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
     from physicality_prompt import locomotion_errors
+    from source_scope import source_scope_errors
 
 
 REQUIRED_PAGE_FIELDS = {"page_id", "order", "monster_spec_id", "moment", "archetype"}
@@ -36,6 +38,7 @@ def _validate_spec(monster_dir: Path, page: dict) -> list[str]:
 
     errors = []
     errors.extend(minimal_recipe_errors(spec_id, monster_dir))
+    errors.extend(source_scope_errors(spec_id, ROOT))
     explicit_name = str(page.get("monster_name") or "").strip()
     if explicit_name and spec.get("monster_name") != explicit_name:
         errors.append(f"{page_id}: explicit monster_name conflicts with catalog")
