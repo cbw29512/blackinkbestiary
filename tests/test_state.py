@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 import server
 
@@ -12,12 +13,19 @@ class StateTests(unittest.TestCase):
         self.old_web_dir = server.WEB_DIR
         self.old_approved_root = server.APPROVED_ROOT
         self.old_load_tome = server.load_tome
+        self.old_generator_script = server.GENERATOR_SCRIPT
+        self.old_generator_log = server.GENERATOR_LOG
+        self.old_generation_process = server._GENERATION_PROCESS
         self.temp = tempfile.TemporaryDirectory()
         base = Path(self.temp.name)
         server.STATE_FILE = base / "state.json"
         server.REVIEWS_FILE = base / "reviews.jsonl"
         server.WEB_DIR = base / "web"
         server.APPROVED_ROOT = server.WEB_DIR / "approved"
+        server.GENERATOR_SCRIPT = base / "generate.py"
+        server.GENERATOR_SCRIPT.write_text("print('test')\n", encoding="utf-8")
+        server.GENERATOR_LOG = base / "worker.log"
+        server._GENERATION_PROCESS = None
         (server.WEB_DIR / "candidates").mkdir(parents=True, exist_ok=True)
         server.write_json(server.STATE_FILE, {
             "current_page_id": "I-01",
@@ -34,8 +42,8 @@ class StateTests(unittest.TestCase):
             "theme": "test",
             "total_pages": 2,
             "pages": [
-                {"page_id": "I-01", "order": 1, "monster_name": "Kobold"},
-                {"page_id": "I-02", "order": 2, "monster_name": "Goblin"},
+                {"page_id": "I-01", "order": 1, "monster_name": "Kobold", "monster_spec_id": "kobold-warrior"},
+                {"page_id": "I-02", "order": 2, "monster_name": "Goblin", "monster_spec_id": "goblin-minion"},
             ],
         }
 
@@ -44,6 +52,9 @@ class StateTests(unittest.TestCase):
         server.REVIEWS_FILE = self.old_reviews
         server.WEB_DIR = self.old_web_dir
         server.APPROVED_ROOT = self.old_approved_root
+        server.GENERATOR_SCRIPT = self.old_generator_script
+        server.GENERATOR_LOG = self.old_generator_log
+        server._GENERATION_PROCESS = self.old_generation_process
         server.load_tome = self.old_load_tome
         self.temp.cleanup()
 
@@ -89,6 +100,34 @@ class StateTests(unittest.TestCase):
     def test_reject_candidate_for_future_page(self):
         with self.assertRaises(ValueError):
             server.register_candidate({"page_id": "I-02", "image_path": "candidates/test.png"})
+
+    @patch("server.subprocess.Popen")
+    def test_generation_worker_starts_once_for_current_spec_page(self, popen):
+        process = Mock()
+        process.pid = 4321
+        process.poll.return_value = None
+        popen.return_value = process
+
+        first = server.start_generation_worker()
+        second = server.start_generation_worker()
+
+        self.assertTrue(first["started"])
+        self.assertFalse(second["started"])
+        self.assertEqual(popen.call_count, 1)
+        argv = popen.call_args.args[0]
+        self.assertEqual(Path(argv[1]), server.GENERATOR_SCRIPT)
+
+    @patch("server.subprocess.Popen")
+    def test_generation_worker_refuses_page_without_canonical_spec(self, popen):
+        tome = server.load_tome()
+        tome["pages"][0].pop("monster_spec_id", None)
+        server.load_tome = lambda: tome
+
+        result = server.start_generation_worker()
+
+        self.assertFalse(result["started"])
+        self.assertEqual(result["reason"], "canonical_monster_spec_required")
+        popen.assert_not_called()
 
 
 if __name__ == "__main__":
