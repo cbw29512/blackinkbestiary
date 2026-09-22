@@ -34,6 +34,24 @@ web/approved/Tome-I/I-02.png
 
 Candidate attempts remain under `web/candidates/`; only human-approved pages enter the ordered book folder.
 
+## Universal Monster Engine
+
+New monster files are intentionally tiny. `config/universal_monster_contract.json` resolves a minimal monster recipe through reusable family DNA.
+
+Typical new monster:
+
+```json
+{
+  "schema_version": 3,
+  "monster_id": "bugbear-scout",
+  "monster_name": "Bugbear Scout",
+  "family_profile": "bugbear",
+  "variant_traits": ["scout", "watchful"]
+}
+```
+
+The family supplies anatomy, anti-drift rules, locomotion, accuracy checks, and known failure corrections. The page supplies only scene-specific information. Use `python scripts/scaffold_monster.py ...` to create new recipes.
+
 ## Universal Page Engine
 
 Every Black-Ink book uses `config/universal_page_contract.json`.

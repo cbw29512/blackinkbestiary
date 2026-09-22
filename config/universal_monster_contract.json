@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "contract_id": "black-ink-monster-v1",
+  "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
+  "minimal_recipe_required": [
+    "monster_id",
+    "monster_name",
+    "family_profile"
+  ],
+  "minimal_recipe_optional": [
+    "variant_traits",
+    "locomotion",
+    "visual_overrides",
+    "default_habitats"
+  ],
+  "defaults": {
+    "visual_identity": {
+      "signature_gear": [],
+      "attitude": []
+    },
+    "default_habitats": [],
+    "locomotion": {
+      "can_fly": false
+    }
+  },
+  "resolution_order": [
+    "universal monster defaults",
+    "family profile",
+    "minimal monster recipe",
+    "optional visual overrides"
+  ],
+  "rules": [
+    "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
+    "Monster recipes should only state what differs from the family.",
+    "Known family failure modes must be injected into generation and review, not merely stored.",
+    "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment."
+  ]
+}

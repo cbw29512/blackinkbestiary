@@ -253,3 +253,12 @@ class QATests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_prompt_injects_family_failure_modes_for_minimal_monster(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
+        text = build_prompt(page)
+        self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", text)
+        self.assertIn("gorilla, ape-man, or primate", text)
+        self.assertIn("CORRECTION:", text)
+

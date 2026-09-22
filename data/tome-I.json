@@ -396,42 +396,16 @@
     {
       "page_id": "I-08",
       "order": 8,
-      "monster_name": "Bugbear Warrior",
-      "habitat": "Collapsed-ceiling dungeon hall",
       "moment": "Lurking beneath a broken ceiling, ready to ambush",
-      "identity_rules": [
-        "Unmistakable bugbear: long-armed shaggy goblinoid, not ape, sasquatch, bear, or generic brute",
-        "Pointed goblinoid ears and broad goblinoid nose remain readable through controlled shaggy hair",
-        "Powerful long-limbed body with ambush-predator posture rather than bodybuilder portrait stance"
-      ],
       "must_include": [
-        "long-armed shaggy bugbear warrior",
-        "stable grounded ambush posture",
-        "both feet visibly planted on the dungeon floor or large rubble",
         "large broken ceiling breach overhead",
         "fallen masonry used as cover",
         "dungeon hall perspective"
       ],
       "must_avoid": [
-        "grayscale wash",
-        "dense crosshatching",
-        "decorative border",
-        "text inside the artwork",
-        "generic or empty background",
-        "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat",
-        "sasquatch or ape-man face",
-        "jumping, falling, dropping, or hovering pose",
-        "unsupported feet"
+        "unsupported feet",
+        "jumping, falling, dropping, or hovering pose"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "bugbear-warrior",
       "archetype": "stealth_scene",
       "environment_profile_id": "underground.collapsed-ceiling-hall",
@@ -449,37 +423,16 @@
     {
       "page_id": "I-09",
       "order": 9,
-      "monster_name": "Bugbear Stalker",
-      "habitat": "Low crawlway",
       "moment": "Dragging a sack and signaling for silence",
-      "identity_rules": [
-        "Must be immediately recognizable as Bugbear Stalker",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
-        "shaggy bugbear stalker",
         "dragged sack",
         "finger-to-mouth silence signal",
-        "low crawlway",
-        "stealthy crouched posture"
+        "visibly low crawlway forcing a crouch"
       ],
       "must_avoid": [
-        "grayscale wash",
-        "dense crosshatching",
-        "decorative border",
-        "text inside the artwork",
-        "generic or empty background",
-        "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "normal-height hallway",
+        "upright relaxed stance"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "bugbear-stalker",
       "archetype": "stealth_scene",
       "environment_profile_id": "underground.service-crawlway",

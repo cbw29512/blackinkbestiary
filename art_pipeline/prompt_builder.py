@@ -42,6 +42,11 @@ def _canonical_sections(spec: dict | None) -> list[str]:
     if not spec:
         return []
     visual = spec.get("visual_identity") or {}
+    failures = [
+        f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
+        for item in spec.get("known_failure_modes", [])
+        if item.get("symptom") and item.get("correction")
+    ]
     sections = [
         f"CANONICAL CREATURE TYPE: {spec.get('creature_type', '')}; size {spec.get('size', '')}.",
         f"CANONICAL CORE IDENTITY: {visual.get('core_identity', '')}".strip(),
@@ -49,10 +54,12 @@ def _canonical_sections(spec: dict | None) -> list[str]:
         f"CANONICAL HEAD: {visual.get('head_features', '')}".strip(),
         f"CANONICAL BODY: {visual.get('body_shape', '')}".strip(),
         f"CANONICAL SURFACE: {visual.get('surface', '')}".strip(),
+        _items("VARIANT TRAITS", spec.get("variant_traits")),
         _items("CANONICAL GEAR", visual.get("signature_gear")),
         _items("CANONICAL ATTITUDE", visual.get("attitude")),
         _items("IDENTITY FEATURES THAT MUST SURVIVE STYLIZATION", visual.get("must_keep")),
         _items("IDENTITY ERRORS TO AVOID", visual.get("must_avoid")),
+        _items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
     ]
     return [part for part in sections if part and not part.endswith(":")]
 
@@ -129,6 +136,11 @@ def build_supervisor_checklist(page: dict) -> list[str]:
     checks.extend(physicality_checklist(page))
     if spec:
         checks.extend(f"Identity check: {item}" for item in spec.get("accuracy_checks", []))
+        checks.extend(
+            f"Reject identity drift: {item.get('symptom')}"
+            for item in spec.get("known_failure_modes", [])
+            if item.get("symptom")
+        )
     for item in page.get("must_include", []):
         checks.append(f"Required element present: {item}")
     return checks

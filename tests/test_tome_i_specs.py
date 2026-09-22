@@ -31,7 +31,8 @@ class TomeISpecTests(unittest.TestCase):
             self.assertTrue(page.get("monster_spec_id"), page["page_id"])
             spec = load_monster_spec(page)
             self.assertEqual(spec["monster_id"], page["monster_spec_id"])
-            self.assertEqual(spec["monster_name"], page["monster_name"])
+            resolved = resolve_page_spec(page, ROOT)
+            self.assertEqual(spec["monster_name"], resolved["monster_name"])
             self.assertTrue(required_visual.issubset(spec["visual_identity"]))
             self.assertTrue(spec["visual_identity"]["must_keep"])
             self.assertTrue(spec["visual_identity"]["must_avoid"])
@@ -66,7 +67,7 @@ class TomeISpecTests(unittest.TestCase):
                 requirements.intersection(forbidden_placeholders),
                 f"{page['page_id']} still has placeholder requirements",
             )
-            self.assertGreaterEqual(len(requirements), 4, page["page_id"])
+            self.assertGreaterEqual(len(requirements), 3, page["page_id"])
 
 
 if __name__ == "__main__":
