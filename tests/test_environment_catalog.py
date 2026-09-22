@@ -78,6 +78,9 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("dragon skull", text.lower())
         self.assertIn("coin", text.lower())
         self.assertIn("ACTIVE ENVIRONMENT OVERLAY RULES", text)
+        self.assertIn("PAGE RECIPE LOCK", text)
+        self.assertIn("low flowstone altar with dragon skull and coin offerings", text)
+        self.assertIn("raises a coin toward the natural rock shrine", text)
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
 
     def test_tome_i_background_fingerprints_are_unique(self):
