@@ -72,6 +72,10 @@
     "modern setting drift": {
       "action": "modify",
       "directive": "Remove modern-looking domestic, industrial, or contemporary design cues that do not belong in the intended fantasy setting. Replace them with believable period-appropriate or fantastical equivalents."
+    },
+    "wrong monster identity": {
+      "action": "regenerate",
+      "directive": "Regenerate from the canonical creature specification because the current subject is fundamentally off-model. Rebuild the head, silhouette, body proportions, posture, and signature anatomy so the creature is unmistakable at thumbnail size before preserving any scene details."
     }
   }
 }
