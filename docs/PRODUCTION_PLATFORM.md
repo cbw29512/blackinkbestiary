@@ -63,7 +63,7 @@ The production audit rejects missing fields, duplicate IDs/orders, missing canon
 
 ### Environment standard
 
-`config/environment_standard.json` is global across all books. Every page must satisfy three co-equal storytelling pillars:
+`config/environment_standard.json` is global across all books. Colorability is the governing constraint; beneath it, every page must independently satisfy three visual requirements:
 
 - unmistakable monster identity — visually dominant, large, and centered or near-centered
 - unmistakable environment identity — supportive framing around the monster
