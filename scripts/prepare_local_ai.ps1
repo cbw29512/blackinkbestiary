@@ -42,7 +42,7 @@ $DoctorCode = $LASTEXITCODE
 
 Write-Host ""
 if ($DoctorCode -eq 0) {
-    Write-Host "Core local stack is present. Next step is template validation / smoke test." -ForegroundColor Green
+    Write-Host "Core local stack is present. Next step is template validation and Golden Five calibration." -ForegroundColor Green
 } else {
     Write-Host "The doctor report above shows the next missing machine-specific item." -ForegroundColor Yellow
 }

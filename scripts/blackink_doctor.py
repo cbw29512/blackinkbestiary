@@ -2,26 +2,33 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import platform
-import shutil
 import subprocess
 import sys
-import urllib.error
-import urllib.parse
-import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from local_preflight import local_generation_preflight
+
 CONFIG = ROOT / "config" / "local_ai_stack.json"
 REPORT = ROOT / "data" / "local-environment.json"
+LOGGER = logging.getLogger("blackink-doctor")
 
 
-def get_json(url: str, timeout: float = 3.0):
-    with urllib.request.urlopen(url, timeout=timeout) as response:
-        return json.loads(response.read().decode("utf-8"))
+def _read_config() -> dict:
+    try:
+        return json.loads(CONFIG.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        LOGGER.exception("Could not load local AI configuration")
+        raise RuntimeError(f"Could not load local AI configuration: {exc}") from exc
 
 
-def command_version(command: str):
+def command_version(command: str | None) -> dict:
+    if not command:
+        return {"ok": False, "error": "not found"}
     try:
         result = subprocess.run(
             [command, "--version"],
@@ -30,158 +37,99 @@ def command_version(command: str):
             timeout=10,
             check=False,
         )
-        text = (result.stdout or result.stderr or "").strip()
-        return {"ok": result.returncode == 0, "text": text, "returncode": result.returncode}
-    except Exception as exc:
+        output = (result.stdout or result.stderr or "").strip()
+        return {
+            "ok": result.returncode == 0,
+            "text": output,
+            "returncode": result.returncode,
+        }
+    except (OSError, subprocess.SubprocessError) as exc:
+        LOGGER.info("Could not query comfy-cli version: %s", exc)
         return {"ok": False, "error": str(exc)}
 
 
-def find_comfy():
-    candidates = []
-    path_hit = shutil.which("comfy")
-    if path_hit:
-        candidates.append(Path(path_hit))
-    local = ROOT / ".blackink-tools" / "Scripts" / "comfy.exe"
-    if local.exists():
-        candidates.append(local)
-    for candidate in candidates:
-        if candidate.exists():
-            return str(candidate)
-    return None
-
-
-def server_probe(base_url: str, required_models: list[dict]):
-    result = {"connected": False, "url": base_url}
-    try:
-        stats = get_json(base_url.rstrip("/") + "/system_stats")
-    except Exception as exc:
-        result["error"] = str(exc)
-        return result
-
-    result["connected"] = True
-    result["system"] = stats.get("system", {})
-    result["devices"] = stats.get("devices", [])
-    result["models"] = {}
-
-    for spec in required_models:
-        folder = spec["folder"]
-        try:
-            names = get_json(base_url.rstrip("/") + "/models/" + urllib.parse.quote(folder))
-        except Exception as exc:
-            result["models"][folder] = {"error": str(exc), "files": []}
-            continue
-        result["models"][folder] = {
-            "files": names,
-            "required": spec["filename"],
-            "present": spec["filename"] in names,
-        }
-    return result
-
-
-def status_line(label: str, ok: bool, detail: str = ""):
+def status_line(label: str, ok: bool, detail: str = "") -> None:
     mark = "OK" if ok else "WAIT"
     suffix = f" — {detail}" if detail else ""
     print(f"[{mark:4}] {label}{suffix}")
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Black-Ink Bestiary local AI doctor")
-    parser.add_argument("--json", action="store_true", help="Print the full report as JSON")
-    args = parser.parse_args()
-
-    config = json.loads(CONFIG.read_text(encoding="utf-8"))
-    py_ok = sys.version_info >= (3, 10)
-    comfy_bin = find_comfy()
-    comfy_version = command_version(comfy_bin) if comfy_bin else {"ok": False, "error": "not found"}
-    server = server_probe(config["comfy_url"], config["models"])
-
-    missing = []
-    if server.get("connected"):
-        for spec in config["models"]:
-            folder = spec["folder"]
-            entry = server.get("models", {}).get(folder, {})
-            if not entry.get("present"):
-                missing.append(spec["filename"])
-    else:
-        missing = [spec["filename"] for spec in config["models"]]
-
-    system = server.get("system", {})
-    devices = server.get("devices", [])
-    primary = devices[0] if devices else {}
-    vram_total = primary.get("vram_total")
-    vram_gb = round(vram_total / (1024 ** 3), 1) if isinstance(vram_total, (int, float)) else None
-
-    report = {
-        "ready_for_model_download": bool(py_ok and comfy_bin),
-        "ready_for_generation": bool(py_ok and comfy_bin and server.get("connected") and not missing),
-        "python": {
-            "ok": py_ok,
-            "version": platform.python_version(),
-            "executable": sys.executable,
-        },
-        "comfy_cli": {
-            "found": bool(comfy_bin),
-            "path": comfy_bin,
-            "version_result": comfy_version,
-            "pinned_version": config["comfy_cli_version"],
-        },
-        "comfyui": server,
-        "gpu": {
-            "name": primary.get("name"),
-            "vram_gb": vram_gb,
-        },
-        "required_models_missing": missing,
-        "templates": config["templates"],
-        "policy": config["production_policy"],
+def enriched_report() -> dict:
+    config = _read_config()
+    report = local_generation_preflight(ROOT)
+    cli_version = command_version(report.get("comfy_cli_path"))
+    report["ready_for_model_download"] = bool(
+        report["checks"]["python"] and report["checks"]["comfy_cli"]
+    )
+    report["comfy_cli"] = {
+        "found": report["checks"]["comfy_cli"],
+        "path": report.get("comfy_cli_path"),
+        "version_result": cli_version,
+        "pinned_version": config.get("comfy_cli_version"),
     }
+    report["policy"] = config.get("production_policy") or {}
+    report["workspace"] = config.get("workspace")
+    return report
 
-    REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
-    if args.json:
-        print(json.dumps(report, indent=2))
-        return 0 if report["ready_for_generation"] else 2
-
+def print_report(report: dict) -> None:
     print()
     print("Black-Ink Bestiary — Local AI Doctor")
     print("====================================")
-    status_line("Python 3.10+", py_ok, platform.python_version())
-    status_line("Pinned comfy-cli available", bool(comfy_bin), comfy_bin or "project tool not installed yet")
-    if comfy_bin:
-        status_line("comfy-cli responds", comfy_version.get("ok", False), comfy_version.get("text") or comfy_version.get("error", ""))
+    status_line("Python 3.10+", report["checks"]["python"], platform.python_version())
+    cli = report["comfy_cli"]
+    status_line("Pinned comfy-cli available", cli["found"], cli.get("path") or "not installed")
+    status_line(
+        "comfy-cli responds",
+        cli["version_result"].get("ok", False),
+        cli["version_result"].get("text") or cli["version_result"].get("error", ""),
+    )
+    status_line("ComfyUI local server", report["checks"]["comfyui_server"], report["comfy_url"])
+    if report["checks"]["comfyui_server"]:
+        status_line("ComfyUI version", True, str(report.get("comfyui_version") or "unknown"))
+        device = (report.get("devices") or [{}])[0]
+        status_line("GPU", bool(device), str(device.get("name") or "unknown"))
 
-    status_line("ComfyUI local server", server.get("connected", False), config["comfy_url"])
-    if server.get("connected"):
-        status_line("ComfyUI version", True, str(system.get("comfyui_version", "unknown")))
-        status_line("PyTorch", True, str(system.get("pytorch_version", "unknown")))
-        status_line("GPU", bool(primary), f"{primary.get('name', 'unknown')} / {vram_gb or '?'} GB VRAM")
-        argv = system.get("argv") or []
-        if argv:
-            print("       launch args: " + " ".join(str(x) for x in argv))
-
-    if server.get("connected"):
-        for spec in config["models"]:
-            entry = server.get("models", {}).get(spec["folder"], {})
-            status_line(
-                spec["filename"],
-                entry.get("present", False),
-                f"models/{spec['folder']}",
-            )
-    else:
-        print("[WAIT] Model checks — start ComfyUI first so its active model paths can be queried")
+    for model in report.get("models") or []:
+        status_line(
+            model["filename"],
+            model["present"],
+            f"models/{model['folder']}",
+        )
+    status_line("Official templates configured", report["checks"]["templates_configured"])
+    status_line("Golden Five generator present", report["checks"]["golden_generator"])
+    status_line("Workflow directory present", report["checks"]["workflow_directory"])
 
     print()
     if report["ready_for_generation"]:
-        print("RESULT: CORE MODEL FILES PRESENT. Ready for official-template validation and I-01 smoke test.")
-    elif py_ok and comfy_bin and not server.get("connected"):
-        print("RESULT: TOOLING READY. ComfyUI must be installed/opened before the next automatic checks.")
-    elif py_ok and comfy_bin and server.get("connected") and missing:
-        print("RESULT: COMFYUI READY. Required FLUX model files are missing; downloader can install them next.")
+        print("RESULT: LOCAL ARTIST IS GENERATION-READY.")
+    elif report["checks"]["comfyui_server"] and report["required_models_missing"]:
+        print("RESULT: COMFYUI IS RUNNING, BUT REQUIRED MODEL FILES ARE MISSING.")
+    elif not report["checks"]["comfyui_server"]:
+        print("RESULT: LOCAL TOOLING MAY BE PRESENT, BUT COMFYUI IS NOT REACHABLE.")
     else:
-        print("RESULT: LOCAL TOOL BOOTSTRAP REQUIRED.")
-
+        print("RESULT: LOCAL GENERATION PREFLIGHT FAILED. Review the WAIT items above.")
     print(f"Machine report saved to: {REPORT}")
-    return 0 if report["ready_for_generation"] else 2
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Black-Ink Bestiary local AI doctor")
+    parser.add_argument("--json", action="store_true", help="Print the full report as JSON")
+    args = parser.parse_args()
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    try:
+        report = enriched_report()
+        REPORT.parent.mkdir(parents=True, exist_ok=True)
+        REPORT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        if args.json:
+            print(json.dumps(report, indent=2))
+        else:
+            print_report(report)
+        return 0 if report["ready_for_generation"] else 2
+    except Exception as exc:
+        LOGGER.exception("Black-Ink local doctor failed")
+        print(f"DOCTOR FAILED: {exc}")
+        return 1
 
 
 if __name__ == "__main__":

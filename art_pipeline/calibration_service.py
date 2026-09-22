@@ -7,18 +7,12 @@ import threading
 from pathlib import Path
 try:
     from .calibration_gate import calibration_paths, calibration_report, load_calibration_config
-    from .calibration_state import (
-        approve_calibration_candidate,
-        load_calibration_state,
-        reject_calibration_candidate,
-    )
+    from .local_preflight import local_generation_preflight
+    from .calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate
 except ImportError:
     from calibration_gate import calibration_paths, calibration_report, load_calibration_config
-    from calibration_state import (
-        approve_calibration_candidate,
-        load_calibration_state,
-        reject_calibration_candidate,
-    )
+    from local_preflight import local_generation_preflight
+    from calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate
 LOGGER = logging.getLogger(__name__)
 _LOCK = threading.Lock()
 _PROCESS: subprocess.Popen | None = None
@@ -44,12 +38,7 @@ def calibration_worker_status() -> dict:
         page_id = _ACTIVE_PAGE_ID
         _PROCESS = None
         _ACTIVE_PAGE_ID = None
-        return {
-            "running": False,
-            "pid": None,
-            "page_id": page_id,
-            "last_exit_code": code,
-        }
+        return {"running": False, "pid": None, "page_id": page_id, "last_exit_code": code}
 def public_calibration_state(root: Path) -> dict:
     config = load_calibration_config(root / "config" / "golden_five_calibration.json")
     paths = calibration_paths(root, config)
@@ -88,6 +77,10 @@ def start_calibration_worker(root: Path, page_id: str) -> dict:
     valid_ids = {item["page_id"] for item in config.get("cases", [])}
     if page_id not in valid_ids:
         raise ValueError(f"{page_id} is not a Golden Five calibration page")
+    preflight = local_generation_preflight(root)
+    if not preflight["ready_for_generation"]:
+        return {"started": False, "running": False, "page_id": page_id,
+                "reason": "local_generation_preflight_failed", "preflight": preflight}
     state = load_calibration_state(root)
     status = state["pages"][page_id].get("status")
     if status not in {"pending", "regenerate_requested"}:
@@ -97,12 +90,8 @@ def start_calibration_worker(root: Path, page_id: str) -> dict:
         raise ValueError("Golden Five generator script is missing")
     with _LOCK:
         if _PROCESS is not None and _PROCESS.poll() is None:
-            return {
-                "started": False,
-                "running": True,
-                "pid": _PROCESS.pid,
-                "page_id": _ACTIVE_PAGE_ID,
-            }
+            return {"started": False, "running": True, "pid": _PROCESS.pid,
+                    "page_id": _ACTIVE_PAGE_ID}
         log_path = root / "data" / "golden-five-worker.log"
         try:
             log = log_path.open("a", encoding="utf-8")
@@ -120,7 +109,6 @@ def start_calibration_worker(root: Path, page_id: str) -> dict:
             raise RuntimeError(f"Could not start Golden Five worker: {exc}") from exc
         _ACTIVE_PAGE_ID = page_id
         return {"started": True, "running": True, "pid": _PROCESS.pid, "page_id": page_id}
-
 def review_calibration(
     root: Path,
     page_id: str,

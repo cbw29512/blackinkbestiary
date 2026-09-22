@@ -94,4 +94,4 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host ""
 Write-Host "BLACK-INK LOCAL AI STACK IS READY." -ForegroundColor Green
-Write-Host "Next: run the I-01 smoke test from the production worker."
+Write-Host "Next: open the Studio and generate the Golden Five calibration pages."
