@@ -186,7 +186,8 @@
     "Torches, sconces, grates, doors, traps, racks, and furnishings are premium coloring objects, not filler.",
     "Natural caves use geology rather than masonry and favor a few large formations.",
     "Trap pages must show cause-and-effect with large readable mechanisms.",
-    "Use only a small subset of the library on one page; comprehensive library depth exists to create variety across many pages."
+    "Use only a small subset of the library on one page; comprehensive library depth exists to create variety across many pages.",
+    "Fixture anchoring must be literal: wall torches and wall sconces visibly attach to masonry with a bracket, ring, plate, or niche; they must not drift into freestanding floor lamps or posts."
   ],
   "groups": {
     "spatial_archetypes": [

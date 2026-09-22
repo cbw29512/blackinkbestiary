@@ -37,7 +37,9 @@
       "directives": [
         "The trap mechanism must be visually understandable at a glance.",
         "Use large structural trap parts integrated into the environment.",
-        "Avoid clockwork clutter, tiny gears, or invisible cause-and-effect."
+        "Avoid clockwork clutter, tiny gears, or invisible cause-and-effect.",
+        "A tripwire must visibly cross the walking path at believable ankle or shin height and visibly connect to, release, or explain the triggered hazard.",
+        "Do not replace a tripwire with a rope held only by the monster, a vertical cord, or an unexplained line ending inside the trap."
       ],
       "component_bias": [
         "hazards",

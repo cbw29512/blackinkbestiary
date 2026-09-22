@@ -9,12 +9,16 @@ try:
         load_component_catalog,
         load_overlay_registry,
     )
+    from .environment_catalog import resolve_environment_profile
+    from .environment_spatial import spatial_envelope_errors
 except ImportError:
     from environment_component_catalog import (
         component_catalog_errors,
         load_component_catalog,
         load_overlay_registry,
     )
+    from environment_catalog import resolve_environment_profile
+    from environment_spatial import spatial_envelope_errors
 
 
 def _family_ids(root: Path) -> set[str]:
@@ -50,6 +54,19 @@ def audit_environment_engine(root: Path) -> dict:
     for family_id in sorted(component_ids - family_ids):
         errors.append(f"component catalog has unknown environment family {family_id!r}")
 
+    profile_count = 0
+    for path in sorted((root / "data" / "environment_families").glob("*.json")):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        for profile_id in (payload.get("profiles") or {}):
+            profile_count += 1
+            profile = resolve_environment_profile(
+                profile_id,
+                root / "data" / "environment_families",
+            )
+            errors.extend(
+                f"{profile_id}: {error}" for error in spatial_envelope_errors(profile)
+            )
+
     try:
         overlays = load_overlay_registry(root).get("overlays") or {}
     except RuntimeError as exc:
@@ -64,6 +81,7 @@ def audit_environment_engine(root: Path) -> dict:
         "component_catalogs": len(component_ids),
         "total_components": total_components,
         "overlay_count": len(overlays),
+        "profile_count": profile_count,
         "group_counts": group_counts,
         "errors": errors,
     }

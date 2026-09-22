@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 from environment_catalog import environment_fingerprint, resolve_environment_profile
 from environment_components import assembly_fingerprint, assemble_environment_palette
 from environment_engine_audit import audit_environment_engine
+from environment_spatial import resolve_spatial_envelope
 from environment_variation import load_variation_registry
 from prompt_builder import build_prompt
 from quality_system import coloring_page_directives
@@ -66,10 +67,35 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("UNIVERSAL ENVIRONMENT IDENTITY RULES", text)
         self.assertIn("flagstone floor", text)
 
+    def test_i01_resolves_to_narrow_built_corridor_envelope(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        envelope = resolve_spatial_envelope(profile)
+        text = build_prompt(page)
+        self.assertEqual(envelope["envelope_id"], "narrow_built_corridor")
+        self.assertIn("length visibly exceeds width", envelope["proportions"])
+        self.assertIn("SPACE ENVELOPE: narrow_built_corridor", text)
+        self.assertIn("two side boundaries", text)
+        self.assertIn("square room", text)
+
+    def test_every_environment_profile_resolves_a_spatial_envelope(self):
+        count = 0
+        for path in sorted((ROOT / "data" / "environment_families").glob("*.json")):
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            for profile_id in payload.get("profiles", {}):
+                count += 1
+                profile = resolve_environment_profile(profile_id)
+                envelope = resolve_spatial_envelope(profile)
+                self.assertTrue(envelope["plan_shape"], profile_id)
+                self.assertTrue(envelope["must_show"], profile_id)
+                self.assertTrue(envelope["must_not_drift"], profile_id)
+        self.assertGreaterEqual(count, 70)
     def test_i02_shrine_keeper_stays_limestone_cave_not_dungeon_corridor(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-02")
         palette = assemble_environment_palette(page, ROOT)
         text = build_prompt(page)
+        envelope = resolve_spatial_envelope(resolve_environment_profile(page["environment_profile_id"]))
+        self.assertEqual(envelope["envelope_id"], "natural_cavern")
         self.assertIn("natural", palette["contexts"])
         self.assertIn("cave", palette["contexts"])
         self.assertIn("limestone", palette["contexts"])
@@ -133,6 +159,14 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertNotIn("FAMILY GEOMETRY VARIATION POOL", text)
         self.assertIn(page["environment_variant"]["landmark"], text)
 
+    def test_i01_requires_literal_wall_mount_and_readable_tripwire(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(page)
+        self.assertIn("REQUIRED OBJECT PHYSICAL RULES", text)
+        self.assertIn("visibly attach to the wall", text)
+        self.assertIn("never draw it as a freestanding floor torch", text)
+        self.assertIn("tripwire must visibly cross the traversable path", text)
+        self.assertIn("cause-and-effect reads instantly", text)
     def test_trap_page_automatically_receives_hazard_and_trap_overlay(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         palette = assemble_environment_palette(page, ROOT)
