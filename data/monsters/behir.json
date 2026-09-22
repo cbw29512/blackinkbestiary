@@ -1,54 +1,6 @@
 {
+  "schema_version": 3,
   "monster_id": "behir",
   "monster_name": "Behir",
-  "family": "behir",
-  "size": "huge",
-  "creature_type": "monstrosity",
-  "visual_identity": {
-    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head, and a body built to coil through caverns.",
-    "silhouette": "Very long snake-like torso wrapped in coils, numerous paired legs along the sides, horned head raised from the coil.",
-    "head_features": "Long reptilian head with strong jaws, backward horns or spines, alert eyes, no wings.",
-    "body_shape": "Serpentine segmented torso with many pairs of short legs spaced along its length and a tapering tail.",
-    "surface": "Large simple scales or ridge plates with minimal texture.",
-    "signature_gear": [],
-    "attitude": [
-      "coiling",
-      "predatory",
-      "charged",
-      "territorial"
-    ],
-    "must_keep": [
-      "many pairs of legs",
-      "long serpentine body",
-      "horned reptilian head",
-      "no wings",
-      "cavern-coiling posture"
-    ],
-    "must_avoid": [
-      "dragon wings",
-      "four-legged dragon proportions",
-      "centipede insect head",
-      "humanoid arms",
-      "smooth legless snake",
-      "dense scales"
-    ]
-  },
-  "default_habitats": [
-    "crystal caverns",
-    "deep caves",
-    "subterranean cliffs"
-  ],
-  "accuracy_checks": [
-    "many legs are obvious",
-    "body reads serpentine not centipede",
-    "head is reptilian",
-    "no wings appear",
-    "crystal coil composition is readable",
-    "lightning remains secondary to anatomy"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  "family_profile": "behir"
 }
