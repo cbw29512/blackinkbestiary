@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from prompt_builder import STYLE_RULES, _canonical_sections, _items, load_monster_spec
+from prompt_builder import _canonical_sections, _items, load_monster_spec
+try:
+    from .style_rules import STYLE_RULES
+except ImportError:
+    from style_rules import STYLE_RULES
 try:
     from .quality_system import archetype_directive, environment_directives, expand_defect_tags
 except ImportError:
