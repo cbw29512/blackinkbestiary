@@ -1,6 +1,9 @@
 {
+  "schema_version": 2,
+  "identity_version": 1,
   "monster_id": "bugbear-warrior",
   "monster_name": "Bugbear Warrior",
+  "family_profile": "bugbear",
   "family": "bugbear",
   "size": "medium",
   "creature_type": "goblinoid humanoid",
