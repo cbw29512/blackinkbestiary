@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "bat-swarm",
+  "family_profile": "bat",
+  "display_name": "Bat Swarm",
+  "size": "swarm",
+  "creature_type": "swarm of tiny beasts",
+  "visual_identity": {
+    "core_identity": "A dense but readable cloud of ordinary cave bats moving as one turbulent mass through confined underground air.",
+    "silhouette": "Many small bat silhouettes arranged in a clear spiral, funnel, or directional stream with negative space between groups.",
+    "body_shape": "Repeated small natural bat bodies in varied wing positions with no oversized leader.",
+    "must_keep": [
+      "many distinct bats",
+      "clear swarm movement",
+      "strong directional flow",
+      "negative space between clusters"
+    ],
+    "must_avoid": [
+      "solid black cloud",
+      "single giant bat",
+      "bird flock",
+      "insect swarm",
+      "unreadable overlap"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "The swarm occupies a broad air volume while individual bats stay small and distinguishable.",
+    "natural_posture": "Individuals remain in believable flight or roost contact; the group follows one readable flow.",
+    "behavior_style": [
+      "spiraling from a cave opening",
+      "surging through an arch",
+      "lifting from a ceiling roost",
+      "flowing around a large obstacle"
+    ]
+  },
+  "accuracy_checks": [
+    "individual bats remain readable",
+    "one directional flow is obvious",
+    "no giant leader dominates"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "black_cloud_drift",
+      "symptom": "swarm becomes solid dark mass",
+      "correction": "separate bats into readable clusters with white gaps"
+    },
+    {
+      "id": "leader_drift",
+      "symptom": "one giant bat dominates",
+      "correction": "keep individuals similar small scale and emphasize group flow"
+    }
+  ],
+  "locomotion": {
+    "can_fly": true
+  }
+}
