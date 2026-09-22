@@ -1,0 +1,58 @@
+{
+  "monster_id": "labyrinth-minotaur",
+  "monster_name": "Labyrinth Minotaur",
+  "family": "minotaur",
+  "size": "large",
+  "creature_type": "monstrous humanoid",
+  "visual_identity": {
+    "core_identity": "A massive bull-headed humanoid built for charging through maze corridors, defined by sweeping horns, hooves, and a heavy axe.",
+    "silhouette": "Very broad shoulders, bull head with wide horns, thick humanoid torso, powerful legs ending in hooves, two-handed axe.",
+    "head_features": "Bull head with long muzzle, flared nostrils, heavy brow, bovine ears, large curved horns.",
+    "body_shape": "Large muscular humanoid torso and arms with powerful legs and hooved feet; animal head only, not full bull body.",
+    "surface": "Short sparse body hair with simple hide areas; no dense fur.",
+    "signature_gear": [
+      "large two-handed axe",
+      "simple belt or harness",
+      "minimal labyrinth-worn gear"
+    ],
+    "attitude": [
+      "aggressive",
+      "territorial",
+      "relentless",
+      "charging"
+    ],
+    "must_keep": [
+      "bull head",
+      "large curved horns",
+      "hooved feet",
+      "massive humanoid body",
+      "large axe"
+    ],
+    "must_avoid": [
+      "centaur body",
+      "human head",
+      "goat features",
+      "tiny horns",
+      "full plate armor",
+      "dense fur texture"
+    ]
+  },
+  "default_habitats": [
+    "stone labyrinths",
+    "maze intersections",
+    "underground arenas"
+  ],
+  "accuracy_checks": [
+    "bull head is unmistakable",
+    "horns frame silhouette",
+    "hooves are visible",
+    "axe scale matches body",
+    "maze intersection remains readable",
+    "body is large and powerful"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  }
+}
