@@ -26,6 +26,7 @@
     "note": "Retained for backward compatibility and coarse family diversity audits. New generation uses the v3 component_engine and overlay_engine."
   },
   "prompt_rules": [
+    "Lock the spatial envelope before selecting scenery: define plan shape, proportions, ceiling/overhead, openings, focal zone, and camera so the place cannot drift into a generic room.",
     "State spatial type, material language, identity markers, and spatial read explicitly.",
     "Use at least one large structural cue and one unmistakable location marker.",
     "The environment must remain identifiable if the monster is mentally removed.",
@@ -45,7 +46,10 @@
     "spatial geometry contradicts the named environment",
     "background could be swapped with an unrelated page without changing the scene",
     "composition repeats the same environment geometry without a page-specific reason",
-    "variation adds tiny clutter, texture, or props that make the page less enjoyable to color"
+    "variation adds tiny clutter, texture, or props that make the page less enjoyable to color",
+    "room or space proportions contradict the resolved spatial envelope",
+    "ceiling, wall boundaries, openings, or depth cues make the selected corridor/chamber/cave/exterior type ambiguous",
+    "environment props are attractive but arranged inside the wrong spatial geometry"
   ],
   "minimal_page_inputs": [
     "environment_profile_id",
@@ -109,5 +113,22 @@
     ],
     "selected_accents": 2,
     "rule": "The engine may know hundreds of components, but a single page uses only a few strong forms. Library depth creates variety; it must not create clutter."
+  },
+  "spatial_engine": {
+    "registry_path": "data/environment_spatial_envelopes.json",
+    "purpose": "Resolve a strict geometric envelope before scenery components are selected so corridors, rooms, caves, exterior spaces, and aquatic spaces cannot drift into generic compositions.",
+    "authority_rule": "The selected environment profile determines the spatial envelope. Monster data and reusable component palettes may decorate the envelope but may not change its fundamental geometry.",
+    "required_fields": [
+      "plan_shape",
+      "proportions",
+      "ceiling",
+      "openings",
+      "focal_zone",
+      "camera",
+      "must_show",
+      "must_not_drift"
+    ],
+    "sequence": "profile -> spatial envelope -> component palette -> overlays -> page-specific landmark/framing/interaction",
+    "review_rule": "A page fails environment QA if its bounding geometry, proportions, ceiling/overhead condition, openings, or focal-zone organization contradict the resolved spatial envelope."
   }
 }
