@@ -17,6 +17,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from art_pipeline.rebuild_state import activate_rebuild_source
+from art_pipeline.calibration_gate import calibration_report
 from art_pipeline.manifest_validation import validate_manifest
 from art_pipeline.page_contract import resolve_manifest
 from art_pipeline.environment_catalog import resolve_environment_profile
@@ -154,6 +155,16 @@ def start_generation_worker():
     page_id = state["current_page_id"]
     page = page_by_id(tome, page_id)
     status = state["pages"][page_id]["status"]
+    first_page_id = tome["pages"][0]["page_id"]
+    calibration = calibration_report(ROOT)
+    if page_id != first_page_id and not calibration["production_calibrated"]:
+        return {
+            "started": False,
+            "running": False,
+            "page_id": page_id,
+            "reason": "golden_five_calibration_required",
+            "calibration": calibration,
+        }
     if status not in GENERATABLE_STATES:
         raise ValueError(f"Current page is not ready to generate: {status}")
     if not page or not page.get("monster_spec_id"):
@@ -205,6 +216,7 @@ def public_state():
         "current_state": state["pages"][state["current_page_id"]],
         "current_page_id": state["current_page_id"],
         "generation_worker": generation_worker_status(),
+        "golden_five_calibration": calibration_report(ROOT),
         "ordered_pages": [
             {
                 "page_id": page["page_id"],
