@@ -32,8 +32,13 @@ def load_environment_for_page(page: dict) -> dict:
 def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}
+    identity = profile.get("resolved_identity") or {}
     return [
         f"ENVIRONMENT PROFILE: {profile['name']}.",
+        f"ENVIRONMENT SPATIAL TYPE: {identity.get('spatial_type', '')}.",
+        f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
+        _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
+        f"ENVIRONMENT SPATIAL READ: {identity.get('spatial_read', '')}.",
         f"ENVIRONMENT ACCURACY: {profile['description']}",
         _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
         _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
@@ -49,8 +54,13 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
 def environment_checklist(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}
+    identity = profile.get("resolved_identity") or {}
     checks = [
         f"Environment matches profile: {profile['name']}",
+        f"Spatial type reads without the monster: {identity.get('spatial_type', '')}",
+        f"Material language is visible: {identity.get('material_language', '')}",
+        f"At least one unmistakable location marker is visible: {', '.join(identity.get('identity_markers') or [])}",
+        f"Spatial geometry reads correctly: {identity.get('spatial_read', '')}",
         f"Unique landmark is visible: {variant.get('landmark', '')}",
         f"Framing differs from repeated generic backgrounds: {variant.get('framing', '')}",
         f"Monster/environment interaction reads clearly: {variant.get('interaction', '')}",
