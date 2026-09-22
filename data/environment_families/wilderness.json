@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "family_id": "wilderness",
+  "display_name": "General Fantasy Wilderness",
+  "profiles": {
+    "wilderness.rocky-valley": {
+      "name": "Rocky Valley",
+      "description": "Broad valley with layered cliffs, boulder groups, and open ground.",
+      "visual_cues": [
+        "two cliff faces",
+        "large boulder group",
+        "open trail",
+        "distant ridge"
+      ],
+      "colorable_forms": [
+        "broad rock planes",
+        "open ground"
+      ],
+      "must_avoid": [
+        "tiny scree everywhere"
+      ]
+    },
+    "wilderness.grassland": {
+      "name": "Open Grassland",
+      "description": "Wide plain with few strong natural landmarks and distant horizon.",
+      "visual_cues": [
+        "broad grass bands",
+        "single rock outcrop",
+        "few tall grass clumps",
+        "distant hills"
+      ],
+      "colorable_forms": [
+        "open grass areas",
+        "large sky/ground divisions"
+      ],
+      "must_avoid": [
+        "forest density"
+      ]
+    },
+    "wilderness.riverbank": {
+      "name": "Wild Riverbank",
+      "description": "Natural bank shaped by water, roots, large stones, and reeds.",
+      "visual_cues": [
+        "river curve",
+        "rooted bank",
+        "two large stones",
+        "reed clump"
+      ],
+      "colorable_forms": [
+        "broad water band",
+        "large roots",
+        "simple plants"
+      ],
+      "must_avoid": [
+        "tiny pebble detail"
+      ]
+    },
+    "wilderness.badlands": {
+      "name": "Eroded Badlands",
+      "description": "Dry eroded terrain with layered hoodoos, gullies, and open flats.",
+      "visual_cues": [
+        "layered rock pillar",
+        "gully",
+        "broad dry flat",
+        "distant mesa"
+      ],
+      "colorable_forms": [
+        "large strata bands",
+        "open flats"
+      ],
+      "must_avoid": [
+        "lush vegetation"
+      ]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "purpose": "Keep every Black-Ink page easy and satisfying to color: the monster is the large centered focal subject, while an accurate varied environment frames and supports the story.",
+  "benchmark_notes": [
+    "Comparable bold-and-easy coloring books emphasize large, bold, simple designs and easy-to-color spaces.",
+    "Black-Ink keeps that accessibility but uses richer fantasy environments and stronger creature identity."
+  ],
+  "composition_targets": {
+    "primary_subject": {
+      "preferred_page_height_fraction": [
+        0.6,
+        0.75
+      ],
+      "hard_max_page_height_fraction": 0.82,
+      "placement": "centered or near-centered in the primary visual field",
+      "rule": "The monster is the largest and first-read object on the page, centered or near-centered, normally occupying about 60–75% of page height. Keep the full or nearly full silhouette readable while leaving a surrounding environmental frame."
+    },
+    "environment": {
+      "preferred_major_cues": [
+        2,
+        4
+      ],
+      "rule": "Use two to four large environment-defining forms arranged around and behind the monster. The habitat must read clearly but remain visually secondary."
+    },
+    "story_prop": {
+      "preferred_count": [
+        1,
+        2
+      ],
+      "rule": "Story-critical props must be large enough to recognize and color comfortably, but remain visually subordinate to the monster unless the story explicitly depends on scale contrast."
+    },
+    "negative_space": {
+      "target": "high",
+      "rule": "Preserve broad white regions between major shapes so marker and pencil users can color without fighting line density."
+    }
+  },
+  "shape_rules": [
+    "The monster is the dominant central focal shape and should be the first thing the eye reads.",
+    "Keep the full or nearly full monster silhouette visible; avoid cropping major anatomy unless the page concept explicitly requires a close-up.",
+    "Favor broad contiguous coloring regions over tiny enclosed islands.",
+    "Use bold outer contours and lighter simpler interior detail.",
+    "Build the environment from a few large colorable forms such as arches, rocks, trees, ruins, doors, stairs, pillars, shelves, or ledges.",
+    "Avoid micro-texture such as repeated scales, fur strokes, cracks, pebbles, bubbles, leaves, barnacles, bricks, coins, or rubble unless only a few are needed for identity.",
+    "Frame the monster with environment forms instead of placing equally dominant objects beside it.",
+    "Story-critical props must remain readable but visually subordinate to the monster.",
+    "Background depth should come from overlap and perspective of large forms, not from filling empty space with tiny objects."
+  ],
+  "environment_object_scale": {
+    "major_objects": "large enough to color comfortably and recognize at thumbnail size",
+    "secondary_objects": "medium simple shapes; use sparingly",
+    "tiny_objects": "avoid unless essential to the story or identity"
+  },
+  "automatic_failures": [
+    "monster is small, off-center without narrative purpose, or visually secondary to the environment",
+    "monster fills nearly the entire page and erases habitat identity",
+    "environment consists mostly of tiny repeated details",
+    "too many small enclosed coloring cells",
+    "story-critical object is too small to recognize",
+    "large foreground object blocks monster anatomy without narrative purpose",
+    "background is empty because detail reduction removed all habitat cues"
+  ],
+  "reference_composition": {
+    "source": "user-approved visual references",
+    "monster_page_height_target": [
+      0.6,
+      0.75
+    ],
+    "monster_hard_max_page_height": 0.82,
+    "placement": "centered or near-centered; full or nearly full silhouette visible",
+    "environment_role": "frame the monster around and behind it using large readable shapes",
+    "environment_major_forms": [
+      2,
+      4
+    ],
+    "prop_rule": "story props readable but visually subordinate to the monster",
+    "line_rule": "strong outer contour, simpler interior detail, broad white coloring regions"
+  }
+}

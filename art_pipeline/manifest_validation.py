@@ -1,17 +1,21 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 try:
     from .quality_system import archetype_rules
+    from .monster_catalog import resolve_monster_spec
+    from .environment_catalog import environment_fingerprint, resolve_environment_profile
 except ImportError:
     from quality_system import archetype_rules
+    from monster_catalog import resolve_monster_spec
+    from environment_catalog import environment_fingerprint, resolve_environment_profile
 
 
 REQUIRED_PAGE_FIELDS = {
     "page_id", "order", "monster_name", "habitat", "moment",
     "must_include", "must_avoid", "monster_spec_id", "archetype",
+    "environment_profile_id", "environment_variant",
 }
 REQUIRED_VISUAL_FIELDS = {
     "core_identity", "silhouette", "head_features", "body_shape", "surface",
@@ -19,19 +23,17 @@ REQUIRED_VISUAL_FIELDS = {
 }
 
 
-def _validate_spec(spec_path: Path, page: dict) -> list[str]:
+def _validate_spec(monster_dir: Path, page: dict) -> list[str]:
     page_id = page["page_id"]
     spec_id = str(page.get("monster_spec_id") or "").strip()
-    if not spec_id or not spec_path.exists():
-        return [f"{page_id}: canonical monster spec missing: {spec_id}"]
+    if not spec_id:
+        return [f"{page_id}: canonical monster spec missing"]
     try:
-        spec = json.loads(spec_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        return [f"{page_id}: invalid monster spec {spec_id}: {exc}"]
+        spec = resolve_monster_spec(spec_id, monster_dir)
+    except RuntimeError as exc:
+        return [f"{page_id}: {exc}"]
 
     errors = []
-    if spec.get("monster_id") != spec_id:
-        errors.append(f"{page_id}: monster spec ID mismatch")
     if spec.get("monster_name") != page.get("monster_name"):
         errors.append(f"{page_id}: monster spec name mismatch")
     visual = spec.get("visual_identity") or {}
@@ -46,6 +48,20 @@ def _validate_spec(spec_path: Path, page: dict) -> list[str]:
         errors.append(f"{page_id}: monster spec accuracy_checks cannot be empty")
     return errors
 
+def _validate_environment(page: dict) -> list[str]:
+    page_id = page["page_id"]
+    errors = []
+    profile_id = str(page.get("environment_profile_id") or "").strip()
+    try:
+        resolve_environment_profile(profile_id)
+    except RuntimeError as exc:
+        errors.append(f"{page_id}: {exc}")
+
+    variant = page.get("environment_variant") or {}
+    for field in ("landmark", "framing", "interaction"):
+        if not str(variant.get(field) or "").strip():
+            errors.append(f"{page_id}: environment_variant.{field} is required")
+    return errors
 
 def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
     errors: list[str] = []
@@ -59,6 +75,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
     archetypes = archetype_rules(root)
     seen_ids: set[str] = set()
     seen_orders: set[int] = set()
+    seen_backgrounds: dict[str, str] = {}
 
     for page in pages:
         page_id = str(page.get("page_id") or "").strip() or "<missing>"
@@ -91,8 +108,13 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         if archetype not in archetypes:
             errors.append(f"{page_id}: unknown archetype {archetype!r}")
 
-        spec_id = str(page.get("monster_spec_id") or "").strip()
-        errors.extend(_validate_spec(monster_dir / f"{spec_id}.json", page))
+        errors.extend(_validate_spec(monster_dir, page))
+        errors.extend(_validate_environment(page))
+        fingerprint = environment_fingerprint(page)
+        if fingerprint in seen_backgrounds:
+            errors.append(f"{page_id}: background duplicates {seen_backgrounds[fingerprint]}")
+        else:
+            seen_backgrounds[fingerprint] = page_id
 
     if seen_orders and seen_orders != set(range(1, len(pages) + 1)):
         errors.append("page order must be contiguous starting at 1")

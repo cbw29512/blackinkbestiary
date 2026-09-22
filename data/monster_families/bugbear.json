@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "bugbear",
+  "display_name": "Bugbear",
+  "taxonomy": {
+    "family": "bugbear",
+    "creature_type": "goblinoid humanoid",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A tall long-armed shaggy goblinoid ambush predator: imposing and hairy, but unmistakably goblinoid rather than ape, sasquatch, bear, or generic brute.",
+    "silhouette": "Tall broad-shouldered humanoid with disproportionately long arms, large hands, slightly hunched predatory posture, pointed ears, and shaggy hair concentrated around head, shoulders, forearms, and back.",
+    "head_features": "Heavy goblinoid face with broad flattened nose, low brow, deep-set eyes, pointed ears, pronounced cheek structure, and a short goblinoid muzzle area rather than an ape muzzle.",
+    "body_shape": "Powerful long-limbed humanoid with broad shoulders and long reach; muscular but not bodybuilder-thick, with forward-leaning stealth posture.",
+    "surface": "Coarse shaggy hair in controlled patches; chest, face, hands, and major anatomy stay readable. Never a full-body sasquatch coat.",
+    "must_keep": [
+      "very long arms",
+      "pointed goblinoid ears",
+      "broad goblinoid nose",
+      "large hands",
+      "shaggy but readable silhouette",
+      "ambush-predator posture"
+    ],
+    "must_avoid": [
+      "ape face",
+      "gorilla proportions",
+      "sasquatch or Bigfoot silhouette",
+      "bear muzzle",
+      "full-body dense fur coat",
+      "generic caveman face",
+      "heroic bodybuilder stance"
+    ]
+  },
+  "accuracy_checks": [
+    "face reads goblinoid before ape-like",
+    "arms are visibly longer than normal humanoid arms",
+    "pointed ears remain readable through hair",
+    "fur supports silhouette without hiding anatomy",
+    "posture reads ambush predator rather than portrait model"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "sasquatch_drift",
+      "symptom": "creature reads as Bigfoot or sasquatch",
+      "correction": "reduce full-body fur, restore pointed goblinoid ears and broad flattened goblinoid nose, strengthen scavenged gear and ambush posture"
+    },
+    {
+      "id": "ape_drift",
+      "symptom": "face or body becomes gorilla-like",
+      "correction": "remove primate muzzle and knuckle-walking cues; restore humanoid torso, goblinoid face, and long-armed upright ambusher anatomy"
+    },
+    {
+      "id": "bear_drift",
+      "symptom": "head becomes ursine",
+      "correction": "remove bear muzzle and rounded bear ears; restore pointed ears and goblinoid facial planes"
+    },
+    {
+      "id": "portrait_drift",
+      "symptom": "pose becomes static heroic portrait",
+      "correction": "use a forward lean, crouch, concealment, or active ambush gesture"
+    }
+  ]
+}

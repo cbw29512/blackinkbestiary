@@ -1,0 +1,776 @@
+{
+  "schema_version": 1,
+  "book_id": "TOME-VIII",
+  "title": "Giants & Brutes",
+  "status": "setup_ready",
+  "target_pages": 50,
+  "theme": "Giants, ogres, trolls, massive humanoids, and brute monsters shown at convincing scale in their territories",
+  "environment_scope": [
+    "mountain passes",
+    "giant halls",
+    "badlands",
+    "fortresses",
+    "ravines",
+    "ruined settlements"
+  ],
+  "production_contract": {
+    "creature_identity": "canonical monster JSON resolved through reusable family profiles",
+    "environment": "specific habitat with two to four large readable cues",
+    "story": "one clear story moment interacting with the environment",
+    "approval": "human approval required before lock and advance",
+    "environment_accuracy": "environment_profile_id must resolve through data/environment_families and use a page-unique landmark/framing/interaction fingerprint",
+    "colorability": "major monster and environment forms must follow config/coloring_page_standard.json"
+  },
+  "slots": [
+    {
+      "page_id": "VIII-01",
+      "order": 1,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-02",
+      "order": 2,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-03",
+      "order": 3,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-04",
+      "order": 4,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-05",
+      "order": 5,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-06",
+      "order": 6,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-07",
+      "order": 7,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-08",
+      "order": 8,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-09",
+      "order": 9,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-10",
+      "order": 10,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-11",
+      "order": 11,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-12",
+      "order": 12,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-13",
+      "order": 13,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-14",
+      "order": 14,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-15",
+      "order": 15,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-16",
+      "order": 16,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-17",
+      "order": 17,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-18",
+      "order": 18,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-19",
+      "order": 19,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-20",
+      "order": 20,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-21",
+      "order": 21,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-22",
+      "order": 22,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-23",
+      "order": 23,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-24",
+      "order": 24,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-25",
+      "order": 25,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-26",
+      "order": 26,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-27",
+      "order": 27,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-28",
+      "order": 28,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-29",
+      "order": 29,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-30",
+      "order": 30,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-31",
+      "order": 31,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-32",
+      "order": 32,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-33",
+      "order": 33,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-34",
+      "order": 34,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-35",
+      "order": 35,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-36",
+      "order": 36,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-37",
+      "order": 37,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-38",
+      "order": 38,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-39",
+      "order": 39,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-40",
+      "order": 40,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-41",
+      "order": 41,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-42",
+      "order": 42,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-43",
+      "order": 43,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-44",
+      "order": 44,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-45",
+      "order": 45,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-46",
+      "order": 46,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-47",
+      "order": 47,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-48",
+      "order": 48,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-49",
+      "order": 49,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    },
+    {
+      "page_id": "VIII-50",
+      "order": 50,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
+    }
+  ]
+}

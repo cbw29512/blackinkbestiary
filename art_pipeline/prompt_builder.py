@@ -1,22 +1,18 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 try:
-    from .quality_system import (
-        archetype_directive,
-        environment_approval_checks,
-        environment_directives,
-        expand_defect_tags,
-    )
+    from .monster_catalog import load_monster_for_page
 except ImportError:
-    from quality_system import (
-        archetype_directive,
-        environment_approval_checks,
-        environment_directives,
-        expand_defect_tags,
-    )
+    from monster_catalog import load_monster_for_page
+
+try:
+    from .environment_prompt import environment_checklist, environment_prompt_sections
+    from .quality_system import archetype_directive, expand_defect_tags
+except ImportError:
+    from environment_prompt import environment_checklist, environment_prompt_sections
+    from quality_system import archetype_directive, expand_defect_tags
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
@@ -36,17 +32,7 @@ def _items(label: str, values) -> str:
 
 
 def load_monster_spec(page: dict) -> dict | None:
-    spec_id = str(page.get("monster_spec_id", "")).strip()
-    if not spec_id:
-        return None
-    path = MONSTER_DIR / f"{spec_id}.json"
-    if not path.exists():
-        raise RuntimeError(f"Monster spec not found: {path}")
-    spec = json.loads(path.read_text(encoding="utf-8"))
-    if spec.get("monster_id") != spec_id:
-        raise RuntimeError(f"Monster spec ID mismatch in {path}")
-    return spec
-
+    return load_monster_for_page(page)
 
 def _canonical_sections(spec: dict | None) -> list[str]:
     if not spec:
@@ -74,7 +60,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         f"SUBJECT: {page['monster_name']}.",
         *_canonical_sections(spec),
         f"HABITAT: {page['habitat']}.",
-        _items("GLOBAL ENVIRONMENT STANDARD", environment_directives(ROOT)),
+        *environment_prompt_sections(page, ROOT),
         f"MOMENT: {page['moment']}.",
         f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
@@ -109,7 +95,8 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
 
     sections.append(
-        "Final test: all three pillars must pass independently at thumbnail size: the monster is unmistakable, "
+        "Final test: the monster is the large centered or near-centered dominant focal subject and is unmistakable at thumbnail size. "
+        "All three storytelling pillars must pass independently: "
         "the environment is unmistakably the named habitat and worth coloring, and the story moment is unmistakable. "
         "Monster and environment must feel physically connected through perspective, scale, and interaction. "
         "The finished page must still contain generous clean white areas for coloring."
@@ -124,19 +111,14 @@ def build_supervisor_checklist(page: dict) -> list[str]:
         f"Clearly recognizable as {page['monster_name']}",
         f"Habitat reads as: {page['habitat']}",
         f"Scene moment reads as: {page['moment']}",
-        "Monster is immediately readable and visually clear",
-        "Environment is specific and immediately readable, not a generic backdrop",
-        "Environment includes two to four strong habitat-defining cues",
-        "At least one environmental feature participates in the story moment",
-        "Monster and environment share believable perspective and scale",
-        "Environment is enjoyable to color without becoming cluttered",
+        "Monster is large, centered or near-centered, and visually dominant",
         "Large open white coloring regions",
         "Outer contours stronger than interior detail",
         "No grayscale wash or painterly shading",
         "No dense crosshatching or excessive tiny texture",
         "No text, border, logo, or watermark",
     ]
-    checks.extend(f"Environment check: {item}" for item in environment_approval_checks(ROOT))
+    checks.extend(environment_checklist(page, ROOT))
     if spec:
         checks.extend(f"Identity check: {item}" for item in spec.get("accuracy_checks", []))
     for item in page.get("must_include", []):

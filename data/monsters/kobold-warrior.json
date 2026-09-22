@@ -1,6 +1,9 @@
 {
+  "schema_version": 2,
+  "identity_version": 1,
   "monster_id": "kobold-warrior",
   "monster_name": "Kobold Warrior",
+  "family_profile": "kobold",
   "family": "kobold",
   "size": "small",
   "creature_type": "reptilian humanoid",

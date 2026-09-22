@@ -36,7 +36,7 @@ Candidate attempts remain under `web/candidates/`; only human-approved pages ent
 
 ## Production Platform
 
-The Studio is now book-configurable. `config/studio.json` selects the active book manifest, state file, and review log. Shared quality behavior lives in `config/quality_rules.json` and `config/page_archetypes.json`, so fixes improve future books without duplicating Python logic.
+The Studio is now book-configurable. `data/series.json` registers eight books, while `config/studio.json` selects the active production book. Shared creature identity, environment accuracy, colorability, defect routing, and scene archetypes live in reusable JSON catalogs so fixes improve future books without duplicating Python logic.
 
 Before starting production on any active book:
 
@@ -57,8 +57,9 @@ See [Production Platform](docs/PRODUCTION_PLATFORM.md) for the data contract and
 - One current page at a time.
 - Pages stay in strict book order.
 - Pure black line art on white.
-- Large open spaces to color.
-- Monster shown in a natural habitat or believable lair.
+- Large, bold, simple coloring regions with a substantial monster and 2–4 major environment forms.
+- Monster shown in an accurate natural habitat or believable lair selected from a specific environment profile.
+- Backgrounds must vary by landmark, framing, depth structure, or monster/environment interaction; broad labels like "cave" or "ocean" are not enough.
 - No grayscale wash, painterly shading, decorative border, or text in the artwork.
 - Approved pages are immutable until deliberately unlocked.
 - AI proposes; the human reviewer makes the final decision.
@@ -68,6 +69,7 @@ See [Production Platform](docs/PRODUCTION_PLATFORM.md) for the data contract and
 
 - [Production System](docs/MONSTER_COLORING_SYSTEM.md)
 - [Canonical Monster Spec Standard](docs/MONSTER_SPEC_STANDARD.md)
+- [Environment & Background Standard](docs/ENVIRONMENT_CATALOG.md)
 - [Style Bible](docs/STYLE_BIBLE.md)
 - [Tome I Manifest](docs/TOME_I_MANIFEST.md)
 - [Logo Brief](docs/LOGO_BRIEF.md)

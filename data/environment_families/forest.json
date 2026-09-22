@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "family_id": "forest",
+  "display_name": "Forest Environments",
+  "profiles": {
+    "forest.ancient-hardwood": {
+      "name": "Ancient Hardwood Forest",
+      "description": "Mature broadleaf woodland with massive trunks and layered understory.",
+      "visual_cues": [
+        "two or three huge trunks",
+        "root buttresses",
+        "fern or shrub masses",
+        "fallen log"
+      ],
+      "colorable_forms": [
+        "large bark panels",
+        "broad leaf clusters",
+        "root shapes"
+      ],
+      "must_avoid": [
+        "wall of tiny leaves"
+      ]
+    },
+    "forest.conifer-ravine": {
+      "name": "Conifer Ravine",
+      "description": "Steep evergreen forest cut by rock and a narrow stream.",
+      "visual_cues": [
+        "tall conifer trunks",
+        "rock ravine wall",
+        "stream ribbon",
+        "fallen timber"
+      ],
+      "colorable_forms": [
+        "large trunk bands",
+        "broad rock faces",
+        "simple water shape"
+      ],
+      "must_avoid": [
+        "tropical foliage"
+      ]
+    },
+    "forest.birch-grove": {
+      "name": "Birch Grove",
+      "description": "Open grove of pale straight trunks with sparse understory and clear sightlines.",
+      "visual_cues": [
+        "white-barked trunks",
+        "leaf clusters high above",
+        "grassy or mossy floor",
+        "single fallen branch"
+      ],
+      "colorable_forms": [
+        "broad trunks",
+        "simple leaf masses"
+      ],
+      "must_avoid": [
+        "dense jungle"
+      ]
+    },
+    "forest.hollow-tree": {
+      "name": "Hollow Ancient Tree",
+      "description": "Forest microhabitat centered on a giant hollow trunk and exposed roots.",
+      "visual_cues": [
+        "huge hollow trunk",
+        "root arch",
+        "fungus shelf",
+        "leaf litter masses"
+      ],
+      "colorable_forms": [
+        "large wood panels",
+        "root shapes",
+        "few fungus forms"
+      ],
+      "must_avoid": [
+        "tiny twig clutter"
+      ]
+    },
+    "forest.foggy-bog-edge": {
+      "name": "Foggy Woodland Bog",
+      "description": "Wet forest edge with shallow water, hummocks, and sparse twisted trees.",
+      "visual_cues": [
+        "shallow bog water",
+        "moss hummocks",
+        "twisted trunks",
+        "reed clumps"
+      ],
+      "colorable_forms": [
+        "large water shapes",
+        "simple reeds",
+        "broad trunks"
+      ],
+      "must_avoid": [
+        "dry woodland floor"
+      ]
+    },
+    "forest.overgrown-ruin": {
+      "name": "Overgrown Forest Ruin",
+      "description": "Old masonry overtaken by roots, vines, and tree growth.",
+      "visual_cues": [
+        "broken wall",
+        "root crossing stone",
+        "large vine mass",
+        "collapsed arch"
+      ],
+      "colorable_forms": [
+        "large blocks",
+        "root bands",
+        "broad vine leaves"
+      ],
+      "must_avoid": [
+        "clean active castle"
+      ]
+    },
+    "forest.moonlit-clearing": {
+      "name": "Moonlit Clearing",
+      "description": "Open forest pocket framed by trees and a few strong natural landmarks.",
+      "visual_cues": [
+        "tree-ring frame",
+        "large stone or stump",
+        "meadow patch",
+        "moon-visible sky opening"
+      ],
+      "colorable_forms": [
+        "broad grass area",
+        "large trunks",
+        "single landmark"
+      ],
+      "must_avoid": [
+        "empty white void"
+      ]
+    },
+    "forest.stream-crossing": {
+      "name": "Forest Stream Crossing",
+      "description": "Woodland scene organized around a shallow stream, stones, and roots.",
+      "visual_cues": [
+        "stream ribbon",
+        "large stepping stones",
+        "rooted bank",
+        "one fallen trunk"
+      ],
+      "colorable_forms": [
+        "broad water bands",
+        "large rocks",
+        "root shapes"
+      ],
+      "must_avoid": [
+        "dozens of pebbles"
+      ]
+    }
+  }
+}

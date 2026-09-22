@@ -50,6 +50,7 @@ function render(d) {
   const s = d.current_state;
   const c = s.current_candidate;
   const m = d.current_monster_spec;
+  const e = d.current_environment_profile;
   const worker = d.generation_worker || {};
   const generating = s.status === "generating" || worker.running;
   const canGenerate = ["queued", "modify_requested", "regenerate_requested", "generation_failed"].includes(s.status)
@@ -125,6 +126,14 @@ function render(d) {
 
   qs("#brief").innerHTML = `
     <h3>Archetype</h3><p>${esc((p.archetype || "default_scene").replaceAll("_", " "))}</p>
+    <h3>Environment Profile</h3>
+    <p><strong>${esc(e?.name || p.environment_profile_id || "Unassigned")}</strong></p>
+    <p>${esc(e?.description || "")}</p>
+    ${e ? list(e.visual_cues) : ""}
+    <h3>Unique Background Variant</h3>
+    <p><strong>Landmark:</strong> ${esc(p.environment_variant?.landmark || "")}</p>
+    <p><strong>Framing:</strong> ${esc(p.environment_variant?.framing || "")}</p>
+    <p><strong>Interaction:</strong> ${esc(p.environment_variant?.interaction || "")}</p>
     <h3>Moment</h3><p>${esc(p.moment)}</p>
     <h3>Identity</h3>${list(p.identity_rules)}
     <h3>Must Include</h3>${list(p.must_include)}

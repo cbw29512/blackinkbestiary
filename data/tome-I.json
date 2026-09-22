@@ -73,7 +73,13 @@
         ]
       },
       "monster_spec_id": "kobold-warrior",
-      "archetype": "trap_scene"
+      "archetype": "trap_scene",
+      "environment_profile_id": "underground.trapped-stone-corridor",
+      "environment_variant": {
+        "landmark": "open punji pit beside a torch bracket",
+        "framing": "tight one-point corridor perspective",
+        "interaction": "kobold is physically beside the visible tripwire and triggered pit"
+      }
     },
     {
       "page_id": "I-02",
@@ -111,7 +117,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "kobold-shrine-keeper",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment_profile_id": "underground.limestone-drip-cave",
+      "environment_variant": {
+        "landmark": "low flowstone altar with dragon skull and coin offerings",
+        "framing": "low ceiling alcove framed by two large limestone formations",
+        "interaction": "kobold raises a coin toward the natural rock shrine"
+      }
     },
     {
       "page_id": "I-03",
@@ -157,7 +169,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "goblin-minion",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.rough-stone-pantry",
+      "environment_variant": {
+        "landmark": "open timber food shelves and one heavy worktable",
+        "framing": "three-quarter pantry corner with broad shelf faces",
+        "interaction": "goblin runs through the storage space carrying a stolen ham"
+      }
     },
     {
       "page_id": "I-04",
@@ -195,7 +213,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "goblin-warrior",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.dressed-stone-corridor",
+      "environment_variant": {
+        "landmark": "wall lantern niche beside a narrow turn",
+        "framing": "low-angle narrow passage with a visible bend",
+        "interaction": "goblin kicks the lantern into the corridor to darken the route"
+      }
     },
     {
       "page_id": "I-05",
@@ -233,7 +257,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "goblin-boss",
-      "archetype": "boss_scene"
+      "archetype": "boss_scene",
+      "environment_profile_id": "underground.throne-grotto",
+      "environment_variant": {
+        "landmark": "rock dais with improvised throne and chest",
+        "framing": "wide grotto view centered on a rough stone ledge",
+        "interaction": "goblin boss stands atop the chest and commands from the scavenged throne area"
+      }
     },
     {
       "page_id": "I-06",
@@ -271,7 +301,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "hobgoblin-warrior",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.barracks-passage",
+      "environment_variant": {
+        "landmark": "large shield rack beside worn drill lane",
+        "framing": "long lateral barracks passage with repeating support bays",
+        "interaction": "hobgoblin leads a shield-wall drill through the marked floor lane"
+      }
     },
     {
       "page_id": "I-07",
@@ -309,7 +345,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "hobgoblin-captain",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.war-room",
+      "environment_variant": {
+        "landmark": "central map table backed by a natural cave wall",
+        "framing": "over-table three-quarter view with two tunnel exits",
+        "interaction": "captain pins a dagger into the map while gear hangs from nearby rock pegs"
+      }
     },
     {
       "page_id": "I-08",
@@ -346,7 +388,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "bugbear-warrior",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment_profile_id": "underground.collapsed-ceiling-hall",
+      "environment_variant": {
+        "landmark": "large ceiling breach with hanging stone slab",
+        "framing": "upward-looking hall view emphasizing the broken roof",
+        "interaction": "bugbear drops from the breach into the hall below"
+      }
     },
     {
       "page_id": "I-09",
@@ -384,7 +432,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "bugbear-stalker",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment_profile_id": "underground.service-crawlway",
+      "environment_variant": {
+        "landmark": "low support beam and narrow squeeze beside a wall niche",
+        "framing": "compressed side-on crawlway framing",
+        "interaction": "bugbear drags a sack while ducking under the low passage"
+      }
     },
     {
       "page_id": "I-10",
@@ -422,7 +476,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "ogre",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.spiral-stair",
+      "environment_variant": {
+        "landmark": "tight inner column and outer curved wall",
+        "framing": "vertical spiral framing that exaggerates cramped radius",
+        "interaction": "ogre is visibly wedged between stair wall and central column"
+      }
     },
     {
       "page_id": "I-11",
@@ -460,7 +520,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "ogre-zombie",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment_profile_id": "underground.spiral-stair",
+      "environment_variant": {
+        "landmark": "broken chain anchor and deep stairwell turn",
+        "framing": "downward-looking spiral with a darker lower landing",
+        "interaction": "ogre zombie shuffles down while chains scrape the steps"
+      }
     },
     {
       "page_id": "I-12",
@@ -498,7 +564,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "troll",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.limestone-drip-cave",
+      "environment_variant": {
+        "landmark": "large fire pit beneath a smoke-darkened overhang",
+        "framing": "open cave chamber with fire pit offset from center",
+        "interaction": "troll watches its wound close while keeping distance from the fire"
+      }
     },
     {
       "page_id": "I-13",
@@ -536,7 +608,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "troll-limb",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment_profile_id": "underground.dressed-stone-corridor",
+      "environment_variant": {
+        "landmark": "dropped axe beside broad flagstone joints",
+        "framing": "ground-level framing focused on wide floor slabs",
+        "interaction": "severed troll arm crawls across the stones toward the axe"
+      }
     },
     {
       "page_id": "I-14",
@@ -574,7 +652,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "darkmantle",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment_profile_id": "underground.limestone-drip-cave",
+      "environment_variant": {
+        "landmark": "single large stalactite above a hanging lantern",
+        "framing": "upward ceiling composition with open air beneath",
+        "interaction": "darkmantle peels away from the stalactite directly over the lantern"
+      }
     },
     {
       "page_id": "I-15",
@@ -612,7 +696,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "stirges",
-      "archetype": "swarm_scene"
+      "archetype": "swarm_scene",
+      "environment_profile_id": "underground.prison-cell",
+      "environment_variant": {
+        "landmark": "heavy barred door and stone sleeping pallet",
+        "framing": "frontal cell view with broad bars framing the scene",
+        "interaction": "stirges feed around the prisoner inside the confined cell"
+      }
     },
     {
       "page_id": "I-16",
@@ -650,7 +740,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-bat",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment_profile_id": "underground.underground-river-cavern",
+      "environment_variant": {
+        "landmark": "broad river channel beneath a high roost ledge",
+        "framing": "vertical cavern composition with water low and ceiling high",
+        "interaction": "giant bat hangs from the ceiling directly above the river"
+      }
     },
     {
       "page_id": "I-17",
@@ -688,7 +784,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "bat-swarm",
-      "archetype": "swarm_scene"
+      "archetype": "swarm_scene",
+      "environment_profile_id": "underground.well-shaft",
+      "environment_variant": {
+        "landmark": "deep circular shaft rim with one rope bracket",
+        "framing": "strong upward spiral perspective from inside the shaft",
+        "interaction": "bat swarm erupts upward through the well opening"
+      }
     },
     {
       "page_id": "I-18",
@@ -726,7 +828,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-rat",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment_profile_id": "underground.rough-stone-pantry",
+      "environment_variant": {
+        "landmark": "collapsed shelf over burst grain sacks",
+        "framing": "low corner view with a broken storage wall",
+        "interaction": "giant rat defends a nest built into spilled grain and torn sacks"
+      }
     },
     {
       "page_id": "I-19",
@@ -764,7 +872,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "rat-swarm",
-      "archetype": "swarm_scene"
+      "archetype": "swarm_scene",
+      "environment_profile_id": "underground.floor-grate",
+      "environment_variant": {
+        "landmark": "large rectangular drain grate with stone gutter",
+        "framing": "top-down angled floor composition centered on the grate",
+        "interaction": "rat swarm pours through the opening and spreads across flagstones"
+      }
     },
     {
       "page_id": "I-20",
@@ -802,7 +916,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-centipede",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment_profile_id": "underground.catacomb-niches",
+      "environment_variant": {
+        "landmark": "large coffin niche with one old bone",
+        "framing": "side-wall burial niche framing",
+        "interaction": "centipede uncoils around the bone inside the niche"
+      }
     },
     {
       "page_id": "I-21",
@@ -840,7 +960,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-fire-beetle",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment_profile_id": "underground.mine-tunnel",
+      "environment_variant": {
+        "landmark": "heavy timber support with broken cart rail",
+        "framing": "deep tunnel view with a single support frame",
+        "interaction": "fire beetle lights the rough-cut tunnel around the abandoned track"
+      }
     },
     {
       "page_id": "I-22",
@@ -878,7 +1004,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-spider",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment_profile_id": "underground.webbed-hall",
+      "environment_variant": {
+        "landmark": "one broad radial web spanning a large arch",
+        "framing": "frontal hall arch used as the web frame",
+        "interaction": "giant spider waits at the web center while floor remains open"
+      }
     },
     {
       "page_id": "I-23",
@@ -916,7 +1048,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "giant-wolf-spider",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment_profile_id": "underground.treasure-vault",
+      "environment_variant": {
+        "landmark": "large chest beneath a broad ceiling beam",
+        "framing": "low chest-level view looking upward to the ceiling",
+        "interaction": "wolf spider flattens overhead directly above the treasure chest"
+      }
     },
     {
       "page_id": "I-24",
@@ -954,7 +1092,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "gelatinous-cube",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment_profile_id": "underground.dressed-stone-corridor",
+      "environment_variant": {
+        "landmark": "square corridor bay defined by large fitted blocks",
+        "framing": "straight-on ten-foot corridor framing",
+        "interaction": "gelatinous cube fills the passage with bones and key suspended inside"
+      }
     },
     {
       "page_id": "I-25",
@@ -992,7 +1136,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "black-pudding",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.cistern",
+      "environment_variant": {
+        "landmark": "large grate beside a broad stone water basin",
+        "framing": "angled cistern edge with bars in foreground",
+        "interaction": "black pudding climbs through and visibly corrodes the metal bars"
+      }
     },
     {
       "page_id": "I-26",
@@ -1030,7 +1180,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "ochre-jelly",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.stone-stair",
+      "environment_variant": {
+        "landmark": "wide lower landing with a cracked side wall",
+        "framing": "up-stair perspective with large simple treads",
+        "interaction": "two ochre-jelly halves climb independently up the steps"
+      }
     },
     {
       "page_id": "I-27",
@@ -1068,7 +1224,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "mimic-chest",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment_profile_id": "underground.treasure-vault",
+      "environment_variant": {
+        "landmark": "single oversized treasure chest on a stone plinth",
+        "framing": "tight three-quarter vault composition around the chest",
+        "interaction": "mimic chest opens around a reaching hand"
+      }
     },
     {
       "page_id": "I-28",
@@ -1106,7 +1268,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "mimic-door",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment_profile_id": "underground.dressed-stone-corridor",
+      "environment_variant": {
+        "landmark": "heavy wooden door set in a torch-lit arch",
+        "framing": "straight-on doorway composition with wall blocks visible",
+        "interaction": "door mimic reveals hidden eye and tongue-handle within the architecture"
+      }
     },
     {
       "page_id": "I-29",
@@ -1144,7 +1312,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "animated-armor",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment_profile_id": "underground.display-gallery",
+      "environment_variant": {
+        "landmark": "large armor pedestal between two wall bays",
+        "framing": "formal gallery perspective with spaced display plinths",
+        "interaction": "animated armor steps down from its own pedestal"
+      }
     },
     {
       "page_id": "I-30",
@@ -1182,7 +1356,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "flying-sword",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment_profile_id": "underground.rotunda",
+      "environment_variant": {
+        "landmark": "cracked central pillar with radial floor joints",
+        "framing": "circular room composition centered on the pillar",
+        "interaction": "flying sword orbits the pillar at throat height"
+      }
     },
     {
       "page_id": "I-31",
@@ -1220,7 +1400,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "rug-of-smothering",
-      "archetype": "object_monster"
+      "archetype": "object_monster",
+      "environment_profile_id": "underground.crypt",
+      "environment_variant": {
+        "landmark": "large sarcophagus and broad floor rug",
+        "framing": "low crypt interior with tomb recess behind",
+        "interaction": "rug rears from the floor and wraps a victim beside the sarcophagus"
+      }
     },
     {
       "page_id": "I-32",
@@ -1258,7 +1444,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "gargoyle",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment_profile_id": "underground.fortified-gate",
+      "environment_variant": {
+        "landmark": "massive arch with gargoyle perch and heavy gate",
+        "framing": "low upward view emphasizing defensive threshold",
+        "interaction": "gargoyle steps off the stone perch into the gate passage"
+      }
     },
     {
       "page_id": "I-33",
@@ -1296,7 +1488,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "labyrinth-minotaur",
-      "archetype": "large_scale_scene"
+      "archetype": "large_scale_scene",
+      "environment_profile_id": "underground.labyrinth",
+      "environment_variant": {
+        "landmark": "four-way intersection with one chipped corner marker",
+        "framing": "wide intersection framing showing multiple maze routes",
+        "interaction": "minotaur fills the crossing with axe ready"
+      }
     },
     {
       "page_id": "I-34",
@@ -1334,7 +1532,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "minotaur-skeleton",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment_profile_id": "underground.labyrinth",
+      "environment_variant": {
+        "landmark": "tight blind corner with a wall crack landmark",
+        "framing": "corner reveal composition different from the open intersection",
+        "interaction": "minotaur skeleton turns into view from the dark side passage"
+      }
     },
     {
       "page_id": "I-35",
@@ -1372,7 +1576,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "roper",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment_profile_id": "underground.limestone-drip-cave",
+      "environment_variant": {
+        "landmark": "cluster of three large stalagmites around a central false formation",
+        "framing": "low cavern floor view with open ceiling space",
+        "interaction": "roper disguises itself among the stalagmites and strikes with tendrils"
+      }
     },
     {
       "page_id": "I-36",
@@ -1411,7 +1621,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "cloaker",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment_profile_id": "underground.antechamber",
+      "environment_variant": {
+        "landmark": "large wall hook beside a broad doorway",
+        "framing": "side-wall chamber framing with open floor",
+        "interaction": "cloaker peels from the hook like a living cloak"
+      }
     },
     {
       "page_id": "I-37",
@@ -1449,7 +1665,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "grick",
-      "archetype": "reveal_scene"
+      "archetype": "reveal_scene",
+      "environment_profile_id": "underground.collapsed-tunnel",
+      "environment_variant": {
+        "landmark": "massive fallen block forming a narrow rubble gap",
+        "framing": "low rubble-level framing through the surviving passage",
+        "interaction": "grick emerges from behind the large collapsed stones"
+      }
     },
     {
       "page_id": "I-38",
@@ -1488,7 +1710,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "ankheg",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.earthen-burrow",
+      "environment_variant": {
+        "landmark": "large root crossing above a fresh soil mound",
+        "framing": "ground-level tunnel view with packed earth walls",
+        "interaction": "ankheg bursts upward through the loose floor beneath the root"
+      }
     },
     {
       "page_id": "I-39",
@@ -1527,7 +1755,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "bulette",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.loose-earth-cavern",
+      "environment_variant": {
+        "landmark": "broad soil ridge crossing the cavern floor",
+        "framing": "side-on open cavern framing with exposed rock bank",
+        "interaction": "bulette dorsal fin cuts through the earth before surfacing"
+      }
     },
     {
       "page_id": "I-40",
@@ -1566,7 +1800,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "rust-monster",
-      "archetype": "lair_scene"
+      "archetype": "lair_scene",
+      "environment_profile_id": "underground.armory",
+      "environment_variant": {
+        "landmark": "large weapon rack and two ruined shields",
+        "framing": "three-quarter alcove view with broad rack panels",
+        "interaction": "rust monster feeds directly on the damaged metal pile"
+      }
     },
     {
       "page_id": "I-41",
@@ -1605,7 +1845,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "otyugh",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment_profile_id": "underground.refuse-pit",
+      "environment_variant": {
+        "landmark": "sunken refuse pit beneath one large chute",
+        "framing": "high edge view looking into the pit",
+        "interaction": "otyugh rises from broad refuse mounds and reaches toward the rim"
+      }
     },
     {
       "page_id": "I-42",
@@ -1644,7 +1890,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "gibbering-mouther",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment_profile_id": "underground.prison-cell",
+      "environment_variant": {
+        "landmark": "half-flooded cell with broad waterline and heavy bars",
+        "framing": "low water-level view through the barred opening",
+        "interaction": "gibbering mouther churns the flooded floor and sends ripples to the walls"
+      }
     },
     {
       "page_id": "I-43",
@@ -1682,7 +1934,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "basilisk",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment_profile_id": "underground.stone-gallery",
+      "environment_variant": {
+        "landmark": "two large statues flanking a central aisle",
+        "framing": "long gallery view with open center lane",
+        "interaction": "basilisk stares down the aisle as a small creature petrifies"
+      }
     },
     {
       "page_id": "I-44",
@@ -1721,7 +1979,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "cockatrice",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.crude-henhouse",
+      "environment_variant": {
+        "landmark": "large wooden slat pen with straw mound",
+        "framing": "low pen-level view against rough stone wall",
+        "interaction": "cockatrice raises wings beside a petrified mouse inside the crude enclosure"
+      }
     },
     {
       "page_id": "I-45",
@@ -1759,7 +2023,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "purple-worm",
-      "archetype": "large_scale_scene"
+      "archetype": "large_scale_scene",
+      "environment_profile_id": "underground.mine-shaft",
+      "environment_variant": {
+        "landmark": "deep timber-braced shaft with a single rail platform",
+        "framing": "straight tunnel-to-shaft perspective emphasizing huge depth",
+        "interaction": "purple worm maw fills the mine route and dwarfs the support beams"
+      }
     },
     {
       "page_id": "I-46",
@@ -1798,7 +2068,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "drider",
-      "archetype": "stealth_scene"
+      "archetype": "stealth_scene",
+      "environment_profile_id": "underground.webbed-chapel",
+      "environment_variant": {
+        "landmark": "simple altar under one large arch crossed by broad web sheets",
+        "framing": "upward chapel view with altar low and ceiling high",
+        "interaction": "drider hangs from the webbed arch and aims downward"
+      }
     },
     {
       "page_id": "I-47",
@@ -1837,7 +2113,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "behir",
-      "archetype": "large_scale_scene"
+      "archetype": "large_scale_scene",
+      "environment_profile_id": "underground.crystal-cavern",
+      "environment_variant": {
+        "landmark": "single massive crystal column beside a broken cluster",
+        "framing": "spiral composition around the large central crystal",
+        "interaction": "behir coils around the column while lightning arcs between broad facets"
+      }
     },
     {
       "page_id": "I-48",
@@ -1876,13 +2158,19 @@
       },
       "reference_image": null,
       "monster_spec_id": "shrieker-fungus",
-      "archetype": "horror_scene"
+      "archetype": "horror_scene",
+      "environment_profile_id": "underground.mushroom-hall",
+      "environment_variant": {
+        "landmark": "three oversized mushroom caps forming a hall-like canopy",
+        "framing": "wide low-angle fungal aisle with open ground",
+        "interaction": "shrieker fungus opens beneath the largest cap and sends vibration through the hall"
+      }
     },
     {
       "page_id": "I-49",
       "order": 49,
       "monster_name": "Violet Fungus",
-      "habitat": "Same fungal cavern family",
+      "habitat": "Damp fungal cavern with shelf fungus wall and shallow pool",
       "moment": "Tendrils reaching toward a dropped torch",
       "identity_rules": [
         "Must be immediately recognizable as Violet Fungus",
@@ -1915,7 +2203,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "violet-fungus",
-      "archetype": "action_scene"
+      "archetype": "action_scene",
+      "environment_profile_id": "underground.fungal-cavern",
+      "environment_variant": {
+        "landmark": "large shelf fungus wall and shallow damp pool",
+        "framing": "asymmetrical cave composition with broad open floor",
+        "interaction": "violet fungus tendrils reach across the floor toward a dropped torch"
+      }
     },
     {
       "page_id": "I-50",
@@ -1955,7 +2249,13 @@
       },
       "reference_image": null,
       "monster_spec_id": "lich",
-      "archetype": "boss_scene"
+      "archetype": "boss_scene",
+      "environment_profile_id": "underground.phylactery-vault",
+      "environment_variant": {
+        "landmark": "central reliquary plinth beneath a sealed stone arch",
+        "framing": "formal deep-vault composition with strong central axis",
+        "interaction": "lich guards the visible phylactery while casting across the chamber"
+      }
     }
   ]
 }

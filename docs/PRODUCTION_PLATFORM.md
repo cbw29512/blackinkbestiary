@@ -23,6 +23,10 @@ Every page must define:
 - `habitat`
 - `moment`
 - `archetype`
+- `environment_profile_id`
+- `environment_variant.landmark`
+- `environment_variant.framing`
+- `environment_variant.interaction`
 - `must_include[]`
 - `must_avoid[]`
 
@@ -32,7 +36,7 @@ The production audit rejects missing fields, duplicate IDs/orders, missing canon
 
 ### Canonical identity
 
-`data/monsters/*.json` defines anatomy, silhouette, signature gear, keep/avoid rules, and accuracy checks.
+`data/monster_families/*.json` defines reusable creature-family anatomy and failure modes. `data/monsters/*.json` adds variant-specific identity, gear, behavior, habitats, and accuracy checks.
 
 ### Scene archetype
 
@@ -42,11 +46,17 @@ The production audit rejects missing fields, duplicate IDs/orders, missing canon
 
 `config/environment_standard.json` is global across all books. Every page must satisfy three co-equal storytelling pillars:
 
-- unmistakable monster identity
-- unmistakable environment identity
+- unmistakable monster identity — visually dominant, large, and centered or near-centered
+- unmistakable environment identity — supportive framing around the monster
 - unmistakable story moment
 
-The environment must use setting-specific, colorable cues and must participate in the scene rather than function as generic background filler. Simplification removes clutter, not habitat identity.
+The environment must use setting-specific, colorable cues and must participate in the scene rather than function as generic background filler. `data/environment_families/*.json` provides concrete habitat profiles such as limestone drip caves, lava tubes, kelp forests, shipwreck fields, deep-sea coral gardens, and hydrothermal vent fields. Each page adds a unique landmark, framing, and interaction fingerprint. Duplicate background fingerprints fail manifest validation.
+
+Simplification removes clutter, not habitat identity.
+
+### Coloring-page scale standard
+
+`config/coloring_page_standard.json` keeps pages easy to color: a large centered monster as the dominant focal form, 2–4 major supporting environmental forms, sparse secondary objects, and broad open white regions. The system explicitly rejects micro-texture, tiny enclosed coloring islands, and monster scaling that erases the environment.
 
 ### Defect remediation
 
@@ -105,7 +115,7 @@ This creates structured data for future quality analysis without silently overri
 
 ## Starting Another Book
 
-1. Create its manifest and canonical monster specs.
+1. Fill the registered 50-slot book plan with canonical monster specs, concrete environment profiles, and unique background variants.
 2. Give every page a valid archetype and concrete monster, environment, and story requirements.
 3. Point `config/studio.json` at the new manifest/state/reviews files.
 4. Run `python scripts/init_active_book.py`.

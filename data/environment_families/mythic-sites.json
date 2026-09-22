@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "family_id": "mythic-sites",
+  "display_name": "Mythic & Sacred Environments",
+  "profiles": {
+    "mythic.lost-temple": {
+      "name": "Lost Temple",
+      "description": "Ancient ceremonial ruin with a few monumental architectural forms.",
+      "visual_cues": [
+        "large stair",
+        "two columns",
+        "broken idol or altar",
+        "root or vine intrusion"
+      ],
+      "colorable_forms": [
+        "large columns",
+        "broad steps",
+        "simple idol"
+      ],
+      "must_avoid": [
+        "tiny carvings everywhere"
+      ]
+    },
+    "mythic.sacred-grove": {
+      "name": "Sacred Grove",
+      "description": "Natural sanctuary structured by ancient trees, standing stones, and open central ground.",
+      "visual_cues": [
+        "massive trunks",
+        "two standing stones",
+        "open central clearing",
+        "simple offerings"
+      ],
+      "colorable_forms": [
+        "large trunks",
+        "standing stones",
+        "open ground"
+      ],
+      "must_avoid": [
+        "dense shrub wall"
+      ]
+    },
+    "mythic.remote-peak": {
+      "name": "Remote Peak Shrine",
+      "description": "High mountain shelf with weathered stone markers and vast open views.",
+      "visual_cues": [
+        "rock shelf",
+        "standing marker",
+        "distant peaks",
+        "wind-bent tree or banner"
+      ],
+      "colorable_forms": [
+        "broad rock planes",
+        "large sky gaps"
+      ],
+      "must_avoid": [
+        "indoor temple clutter"
+      ]
+    },
+    "mythic.enchanted-valley": {
+      "name": "Enchanted Valley",
+      "description": "Open valley defined by oversized natural landmarks rather than small magical clutter.",
+      "visual_cues": [
+        "large stone arch",
+        "stream curve",
+        "two giant flowers or crystals",
+        "distant ridge"
+      ],
+      "colorable_forms": [
+        "broad valley floor",
+        "large landmark shapes"
+      ],
+      "must_avoid": [
+        "sparkle confetti"
+      ]
+    }
+  }
+}

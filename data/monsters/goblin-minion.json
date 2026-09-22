@@ -1,6 +1,9 @@
 {
+  "schema_version": 2,
+  "identity_version": 1,
   "monster_id": "goblin-minion",
   "monster_name": "Goblin Minion",
+  "family_profile": "goblin",
   "family": "goblin",
   "size": "small",
   "creature_type": "goblinoid humanoid",
