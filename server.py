@@ -268,6 +268,10 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
     if decision not in VALID_DECISIONS:
         raise ValueError("Invalid decision")
     quick_tags = list(quick_tags or [])
+    requested_decision = decision
+    route = recommended_action(ROOT, quick_tags) if quick_tags else decision
+    if decision == "modify" and route == "regenerate":
+        decision = "regenerate"
     tome = load_tome()
     state = load_state()
     validate_state(tome, state)
@@ -313,8 +317,9 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         "page_id": page_id,
         "monster_name": page.get("monster_name"),
         "archetype": page.get("archetype"),
+        "requested_decision": requested_decision,
         "decision": decision,
-        "routing_recommendation": recommended_action(ROOT, quick_tags) if quick_tags else decision,
+        "routing_recommendation": route,
         "candidate": candidate,
         "approved_image_path": page_state.get("approved_image_path"),
         "notes": notes.strip(),
