@@ -26,7 +26,8 @@
       "cute object face",
       "full transformation that destroys object identity",
       "excess slime"
-    ]
+    ],
+    "limb_structure": "No separate biological limbs by default. Tongue, pseudopods, hinges, panels, seams, and hardware emerge from or remain integrated with the disguised object's structure."
   },
   "accuracy_checks": [
     "object reads before monster details",
@@ -44,5 +45,19 @@
       "symptom": "object receives a cute face",
       "correction": "use predatory irregular reveal integrated into seams and hardware"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Reads first at the believable scale of the disguised object; monstrous anatomy must not inflate it into an unrelated beast.",
+    "natural_posture": "The disguised object remains planted, hung, framed, or otherwise physically supported while the reveal opens through existing seams or surfaces.",
+    "behavior_style": [
+      "waiting in a convincing object disguise",
+      "opening a predatory reveal through an existing seam, lid, or panel",
+      "reaching with one integrated tongue or pseudopod while preserving object identity"
+    ],
+    "environment_fit": [
+      "treasure rooms and vaults",
+      "dungeon doors, chambers, and corridors",
+      "storage rooms, ruins, or furnished spaces where the disguised object plausibly belongs"
+    ]
+  }
 }
