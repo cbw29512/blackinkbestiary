@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "ankheg",
+  "display_name": "Ankheg",
+  "taxonomy": {
+    "family": "ankheg",
+    "creature_type": "giant burrowing insect",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A massive burrowing insect predator with a heavily armored segmented body, powerful mandibles, and digging legs.",
+    "silhouette": "Long low insect body with broad armored thorax, tapered abdomen, six strong legs, and large front mandibles.",
+    "head_features": "Armored insect head with oversized paired mandibles, small eyes, and short antennae.",
+    "body_shape": "Three-part insect anatomy with six legs, plated thorax, segmented abdomen, and reinforced forelegs for digging.",
+    "limb_structure": "Exactly six insect legs; front pair are powerful digging limbs, remaining legs support a low grounded body. No wings or extra arachnid legs.",
+    "surface": "Large chitin plates with simple seams and broad open coloring regions.",
+    "must_keep": [
+      "six legs",
+      "large mandibles",
+      "segmented armored abdomen",
+      "burrowing anatomy",
+      "insect silhouette"
+    ],
+    "must_avoid": [
+      "dragon head",
+      "spider eight legs",
+      "scorpion tail",
+      "humanoid face",
+      "wings",
+      "dense shell pattern"
+    ]
+  },
+  "accuracy_checks": [
+    "six legs are visible or clearly implied",
+    "mandibles dominate head identity",
+    "body remains insectoid",
+    "armor plates are broad and colorable",
+    "no dragon features appear"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "spider_drift",
+      "symptom": "ankheg gains eight legs or spider body",
+      "correction": "restore exactly six insect legs and long segmented abdomen"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "head becomes reptilian or draconic",
+      "correction": "restore armored insect head, mandibles, short antennae, and no wings"
+    },
+    {
+      "id": "airborne_burst",
+      "symptom": "burrowing emergence becomes unsupported jump",
+      "correction": "keep lower body visibly supported by earth or burrow opening"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Large insect whose armored body and digging limbs displace substantial earth and fill a broad burrow opening.",
+    "natural_posture": "Low and supported on multiple legs, digging, half-emerged, or braced at a burrow edge.",
+    "behavior_style": [
+      "burrowing through loose earth",
+      "half-emerging from a supported opening",
+      "bracing forelegs against soil",
+      "guarding or crossing an earthen tunnel"
+    ],
+    "environment_fit": [
+      "earthen tunnels and burrows",
+      "loose dungeon floors",
+      "subterranean earth chambers"
+    ]
+  }
+}
