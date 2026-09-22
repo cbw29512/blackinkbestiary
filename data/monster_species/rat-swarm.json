@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "rat-swarm",
+  "display_name": "Rat Swarm",
+  "taxonomy": {
+    "family": "rat",
+    "creature_type": "swarm of tiny beasts",
+    "default_size": "swarm"
+  },
+  "visual_identity": {
+    "core_identity": "A flowing mass of ordinary rats whose individual bodies remain readable while the group moves like a living tide.",
+    "silhouette": "Many low rat bodies overlap in a directional stream, with tails and pointed snouts creating flow without becoming a black mass.",
+    "head_features": "Repeated simple rat heads with pointed snouts, rounded ears, whiskers, and occasional visible incisors.",
+    "body_shape": "Small four-legged rodent forms in varied running poses; no giant leader rat.",
+    "surface": "Minimal fur lines and simple mostly hairless tails.",
+    "signature_gear": [],
+    "attitude": [
+      "surging",
+      "hungry",
+      "panicked",
+      "relentless"
+    ],
+    "must_keep": [
+      "many distinct rats",
+      "clear flowing direction",
+      "visible tails",
+      "rodent silhouettes",
+      "open gaps between animals"
+    ],
+    "must_avoid": [
+      "single giant rat",
+      "solid black pile",
+      "mouse-cartoon faces",
+      "insect swarm",
+      "human features",
+      "excessive overlap"
+    ]
+  },
+  "accuracy_checks": [
+    "individual silhouettes remain readable",
+    "flow direction is obvious",
+    "page preserves white space",
+    "no giant leader dominates"
+  ]
+}
