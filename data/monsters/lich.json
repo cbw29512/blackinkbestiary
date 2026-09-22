@@ -1,58 +1,9 @@
 {
+  "schema_version": 3,
   "monster_id": "lich",
   "monster_name": "Lich",
-  "family": "lich",
-  "size": "medium",
-  "creature_type": "undead spellcaster",
-  "visual_identity": {
-    "core_identity": "An ancient skeletal spellcaster preserved by forbidden magic, combining unmistakable undead anatomy with deliberate arcane intelligence and a guarded phylactery.",
-    "silhouette": "Tall robed skeletal humanoid with narrow shoulders, exposed skull and hands, one spellcasting arm raised, robes falling in simple vertical shapes.",
-    "head_features": "Bare or partly hooded skull with deep empty sockets or small magical pinpoints, intact jaw, severe ancient profile.",
-    "body_shape": "Dry skeletal humanoid frame under decayed layered robes, bony hands visible, upright commanding posture.",
-    "surface": "Clean bone planes and torn fabric edges; no gore, slime, or dense decay.",
-    "signature_gear": [
-      "simple arcane staff or wand if unobtrusive",
-      "visible phylactery object",
-      "few ancient jewelry or robe fasteners"
-    ],
-    "attitude": [
-      "commanding",
-      "cold",
-      "intelligent",
-      "ancient"
-    ],
-    "must_keep": [
-      "skeletal skull",
-      "bony hands",
-      "decayed robes",
-      "spellcasting posture",
-      "visible phylactery nearby"
-    ],
-    "must_avoid": [
-      "zombie flesh",
-      "cartoon skeleton grin",
-      "full knight armor",
-      "vampire fangs",
-      "graphic gore",
-      "ornate clutter hiding bones"
-    ]
-  },
-  "default_habitats": [
-    "phylactery vaults",
-    "ancient crypts",
-    "deep arcane chambers"
-  ],
-  "accuracy_checks": [
-    "reads as intelligent undead caster",
-    "skull and hands are clearly skeletal",
-    "phylactery is visible but secondary",
-    "spellcasting action is clear",
-    "robes remain simple and colorable",
-    "final-page composition feels imposing"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  "family_profile": "lich",
+  "variant_traits": [
+    "undead arcane spellcaster"
+  ]
 }
