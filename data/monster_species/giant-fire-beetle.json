@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "giant-fire-beetle",
+  "display_name": "Giant Fire Beetle",
+  "taxonomy": {
+    "family": "fire beetle",
+    "creature_type": "giant insect",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "An oversized beetle with a heavy oval shell and prominent luminous gland structures recognizable even in black-and-white line art.",
+    "silhouette": "Low oval beetle body, domed wing cases, six stout legs, short antennae, and broad head.",
+    "head_features": "Compact insect head with mandibles, short antennae, and distinct rounded gland bulges near the head.",
+    "body_shape": "Three-part insect body with hard domed elytra, six legs, and compact abdomen.",
+    "surface": "Large smooth armor plates with restrained segment lines; gland areas outlined clearly rather than shaded.",
+    "signature_gear": [],
+    "attitude": [
+      "foraging",
+      "steady",
+      "defensive",
+      "unhurried"
+    ],
+    "must_keep": [
+      "six insect legs",
+      "domed beetle shell",
+      "visible luminous gland shapes",
+      "mandibles",
+      "low beetle posture"
+    ],
+    "must_avoid": [
+      "spider anatomy",
+      "four legs",
+      "dragon features",
+      "glowing text effects",
+      "dense shell texture",
+      "cute ladybug styling"
+    ]
+  },
+  "accuracy_checks": [
+    "reads immediately as giant beetle",
+    "six legs are clear",
+    "gland structures are visible",
+    "shell remains colorable",
+    "no extra fantasy anatomy obscures beetle identity"
+  ]
+}
