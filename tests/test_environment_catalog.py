@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
+from environment_brief import build_room_brief
 from environment_catalog import environment_fingerprint, resolve_environment_profile
 from environment_components import assembly_fingerprint, assemble_environment_palette
 from environment_engine_audit import audit_environment_engine
@@ -110,6 +111,12 @@ class EnvironmentCatalogTests(unittest.TestCase):
             "ENVIRONMENT VISUAL CUES",
         ):
             self.assertNotIn(redundant, text)
+    def test_every_tome_room_brief_stays_under_generation_budget(self):
+        for page in self.tome["pages"]:
+            brief = build_room_brief(page, ROOT)
+            self.assertLessEqual(len(brief["brief"].split()), 95, page["page_id"])
+            self.assertLessEqual(len(brief["proof_cues"]), 5, page["page_id"])
+            self.assertLessEqual(len(brief["drift_failures"]), 4, page["page_id"])
     def test_i02_shrine_keeper_stays_limestone_cave_not_dungeon_corridor(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-02")
         palette = assemble_environment_palette(page, ROOT)
