@@ -139,6 +139,9 @@
     "drift_failure_limit": 4,
     "duplication_rule": "Do not separately repeat spatial type, material language, spatial read, plan shape, proportions, ceiling, openings, focal zone, camera, profile description, and visual cues after the ROOM BRIEF.",
     "specificity_rule": "A room brief must define geometry, scale/proportions, material, overhead condition, openings, focal organization, and camera in compact literal language.",
-    "anti_improvisation_rule": "The image model may decorate inside the brief but may not reinterpret the room into a different corridor, chamber, cave, exterior, aquatic, or sacred-space type."
+    "anti_improvisation_rule": "The image model may decorate inside the brief but may not reinterpret the room into a different corridor, chamber, cave, exterior, aquatic, or sacred-space type.",
+    "max_words": 95,
+    "max_sentences": 7,
+    "brevity_rule": "If the compiled brief exceeds the budget, shorten wording; never solve it by deleting geometry, material, overhead, openings, focal organization, or view."
   }
 }
