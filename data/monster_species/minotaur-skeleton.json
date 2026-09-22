@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "minotaur-skeleton",
+  "display_name": "Minotaur Skeleton",
+  "taxonomy": {
+    "family": "minotaur",
+    "creature_type": "undead monstrous humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "The animated skeleton of a minotaur, preserving the horned bull skull and massive humanoid bone structure without flesh.",
+    "silhouette": "Tall skeletal humanoid frame topped by a broad horned bull skull, long bones, rib cage, and large skeletal lower limbs.",
+    "head_features": "Large bovine skull with long muzzle cavity, empty eye sockets, and prominent curved horns.",
+    "body_shape": "Heavy humanoid skeleton with broad rib cage and large limb bones, clearly larger than a human skeleton.",
+    "surface": "Clean bone shapes with sparse cracks, no gore or hanging flesh.",
+    "signature_gear": [
+      "simple damaged axe or labyrinth weapon",
+      "minimal straps if any"
+    ],
+    "attitude": [
+      "silent",
+      "relentless",
+      "unnatural",
+      "menacing"
+    ],
+    "must_keep": [
+      "bull skull",
+      "large horns",
+      "skeletal humanoid body",
+      "empty eye sockets",
+      "large scale"
+    ],
+    "must_avoid": [
+      "fleshy minotaur",
+      "human skull",
+      "goat skull",
+      "graphic gore",
+      "tiny human skeleton proportions",
+      "ornate armor"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as minotaur skeleton immediately",
+    "bull skull dominates head identity",
+    "large skeleton scale is clear",
+    "horns are intact",
+    "no flesh obscures bones"
+  ]
+}
