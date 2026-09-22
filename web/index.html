@@ -22,37 +22,41 @@
         <div class="panel-head"><p class="eyebrow">Tome I</p><h2>Caves & Dungeons</h2></div>
         <div id="queue" class="queue"></div>
       </aside>
-      <section class="review-panel">
+      <section class="art-panel">
         <div id="pageHeader" class="page-head"></div>
-        <div class="review-grid">
-          <div class="art-frame" id="artFrame"></div>
-          <div class="info-stack">
-            <div class="reference-card" id="referencePanel"></div>
-            <div class="brief-card" id="brief"></div>
-          </div>
-        </div>
+        <div class="art-frame" id="artFrame"></div>
+      </section>
+      <aside class="review-sidebar" aria-label="Page review controls">
         <div class="decision-card">
           <div id="statusLine" class="status-line"></div>
-          <label for="notes"><strong>Modification / regeneration notes</strong></label>
-          <textarea id="notes" rows="3" placeholder="Example: Keep the kobold and trap. Simplify the wall detail and open up more white coloring space."></textarea>
+          <label for="notes"><strong>Fix this page</strong></label>
+          <textarea id="notes" rows="3" placeholder="Describe only what needs to change."></textarea>
           <div class="quick-tags" id="quickTags">
             <button type="button" data-tag="more white space">More white space</button>
             <button type="button" data-tag="less detail">Less detail</button>
             <button type="button" data-tag="simpler background">Simpler background</button>
             <button type="button" data-tag="clearer anatomy">Clearer anatomy</button>
-            <button type="button" data-tag="stronger monster identity">Stronger monster identity</button>
+            <button type="button" data-tag="stronger monster identity">Stronger identity</button>
             <button type="button" data-tag="stronger outer contour">Stronger outline</button>
-            <button type="button" data-tag="lighter interior lines">Lighter interior lines</button>
+            <button type="button" data-tag="lighter interior lines">Lighter lines</button>
           </div>
           <div class="actions">
             <button id="approve" class="approve" type="button">Approve & Lock</button>
-            <button id="modify" class="modify" type="button">Modify This Page</button>
-            <button id="regenerate" class="regenerate" type="button">Regenerate This Page</button>
-            <button id="generate" class="generate" type="button">Generate Current Page</button>
+            <button id="modify" class="modify" type="button">Modify</button>
+            <button id="regenerate" class="regenerate" type="button">Regenerate</button>
+            <button id="generate" class="generate" type="button">Generate</button>
           </div>
-          <p class="rule">The next page stays locked until this page is approved.</p>
+          <p class="rule">Approve only when the page is final.</p>
         </div>
-      </section>
+        <details class="audit-section" open>
+          <summary>Monster identity audit</summary>
+          <div class="reference-card" id="referencePanel"></div>
+        </details>
+        <details class="audit-section">
+          <summary>Page requirements</summary>
+          <div class="brief-card" id="brief"></div>
+        </details>
+      </aside>
     </section>
   </main>
   <script src="app.js"></script>
