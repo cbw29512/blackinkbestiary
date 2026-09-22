@@ -187,6 +187,20 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("never draw it as a freestanding floor torch", text)
         self.assertIn("tripwire must visibly cross the traversable path", text)
         self.assertIn("cause-and-effect reads instantly", text)
+    def test_i01_relationship_rules_lock_tripwire_pit_and_wall_fixture(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(page)
+        self.assertIn("SCENE RELATIONSHIP — WALL MOUNTED FIXTURE", text)
+        self.assertIn("SCENE RELATIONSHIP — TRIPWIRE TRIGGER", text)
+        self.assertIn("SCENE RELATIONSHIP — PIT INTERRUPTS ROUTE", text)
+        self.assertIn("crosses the traversable path", text)
+        self.assertIn("interrupts or threatens the normal travel route", text)
+
+    def test_i02_relationship_rules_lock_offering_to_shrine(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-02")
+        text = build_prompt(page)
+        self.assertIn("SCENE RELATIONSHIP — OFFERING TO SHRINE", text)
+        self.assertIn("gesture clearly aims toward", text)
     def test_trap_page_automatically_receives_hazard_and_trap_overlay(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         palette = assemble_environment_palette(page, ROOT)
