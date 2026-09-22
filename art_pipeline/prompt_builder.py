@@ -104,6 +104,15 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
     if review_notes:
         tags = review_notes.get("quick_tags") or []
         text = (review_notes.get("text") or "").strip()
+        failed_dimensions = review_notes.get("failed_dimensions") or []
+        route = str(review_notes.get("routing_recommendation") or "").strip()
+        if failed_dimensions:
+            sections.append(_items("FAILED QUALITY DIMENSIONS TO REBUILD", failed_dimensions))
+        if route == "regenerate":
+            sections.append(
+                "REGENERATION RULE: rebuild the failed composition from the canonical page recipe. "
+                "Do not preserve a bad layout merely because parts of the previous attempt were attractive."
+            )
         if text:
             sections.append(f"LATEST HUMAN NOTE: {text}")
         if tags:
@@ -111,11 +120,12 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
 
     sections.append(
-        "Final test: the monster is the large centered or near-centered dominant focal subject and is unmistakable at thumbnail size. "
-        "All three storytelling pillars must pass independently: "
-        "the environment is unmistakably the named habitat and worth coloring, and the story moment is unmistakable. "
-        "Monster and environment must feel physically connected through perspective, scale, and interaction. "
-        "The finished page must still contain generous clean white areas for coloring."
+        "Final test: COLORABILITY IS THE GOVERNING CONSTRAINT. The page must first be inviting and satisfying to color, "
+        "with broad open regions, clean line hierarchy, and no fiddly density. Under that constraint, the monster must be "
+        "the large centered or near-centered dominant focal subject and unmistakable at thumbnail size; the environment "
+        "must be unmistakably the named habitat; and one simple story moment must read immediately. Monster and environment "
+        "must feel physically connected through perspective, scale, and interaction. If story or environment detail competes "
+        "with coloring usability, simplify the story/environment detail."
     )
     return "\n\n".join(part for part in sections if part)
 
