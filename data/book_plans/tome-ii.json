@@ -14,13 +14,8 @@
     "moonlit clearings"
   ],
   "production_contract": {
-    "creature_identity": "canonical monster JSON resolved through reusable family profiles",
-    "environment": "specific habitat with two to four large readable cues",
-    "story": "one clear story moment interacting with the environment",
-    "approval": "human approval required before lock and advance",
-    "environment_accuracy": "environment_profile_id must resolve through data/environment_families and use a page-unique landmark/framing/interaction fingerprint",
-    "colorability": "major monster and environment forms must follow config/coloring_page_standard.json",
-    "physicality": "Every production page must declare mode, support/contact, and motion/weight so grounded, hanging, flying, falling, swimming, burrowing, coiling, climbing, and swarming poses are physically readable."
+    "universal": "config/universal_page_contract.json",
+    "rule": "Slots store unique page recipe data only. Monster identity, habitat description, composition, coloring rules, and global avoid rules are resolved by the universal engine."
   },
   "slots": [
     {
@@ -28,7 +23,6 @@
       "order": 1,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -41,14 +35,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-02",
       "order": 2,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -61,14 +55,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-03",
       "order": 3,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -81,14 +75,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-04",
       "order": 4,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -101,14 +95,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-05",
       "order": 5,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -121,14 +115,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-06",
       "order": 6,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -141,14 +135,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-07",
       "order": 7,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -161,14 +155,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-08",
       "order": 8,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -181,14 +175,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-09",
       "order": 9,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -201,14 +195,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-10",
       "order": 10,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -221,14 +215,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-11",
       "order": 11,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -241,14 +235,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-12",
       "order": 12,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -261,14 +255,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-13",
       "order": 13,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -281,14 +275,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-14",
       "order": 14,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -301,14 +295,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-15",
       "order": 15,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -321,14 +315,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-16",
       "order": 16,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -341,14 +335,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-17",
       "order": 17,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -361,14 +355,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-18",
       "order": 18,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -381,14 +375,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-19",
       "order": 19,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -401,14 +395,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-20",
       "order": 20,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -421,14 +415,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-21",
       "order": 21,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -441,14 +435,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-22",
       "order": 22,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -461,14 +455,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-23",
       "order": 23,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -481,14 +475,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-24",
       "order": 24,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -501,14 +495,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-25",
       "order": 25,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -521,14 +515,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-26",
       "order": 26,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -541,14 +535,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-27",
       "order": 27,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -561,14 +555,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-28",
       "order": 28,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -581,14 +575,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-29",
       "order": 29,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -601,14 +595,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-30",
       "order": 30,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -621,14 +615,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-31",
       "order": 31,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -641,14 +635,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-32",
       "order": 32,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -661,14 +655,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-33",
       "order": 33,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -681,14 +675,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-34",
       "order": 34,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -701,14 +695,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-35",
       "order": 35,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -721,14 +715,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-36",
       "order": 36,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -741,14 +735,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-37",
       "order": 37,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -761,14 +755,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-38",
       "order": 38,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -781,14 +775,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-39",
       "order": 39,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -801,14 +795,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-40",
       "order": 40,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -821,14 +815,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-41",
       "order": 41,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -841,14 +835,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-42",
       "order": 42,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -861,14 +855,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-43",
       "order": 43,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -881,14 +875,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-44",
       "order": 44,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -901,14 +895,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-45",
       "order": 45,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -921,14 +915,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-46",
       "order": 46,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -941,14 +935,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-47",
       "order": 47,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -961,14 +955,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-48",
       "order": 48,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -981,14 +975,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-49",
       "order": 49,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -1001,14 +995,14 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     },
     {
       "page_id": "II-50",
       "order": 50,
       "planning_status": "unassigned",
       "monster_spec_id": null,
-      "habitat": null,
       "moment": null,
       "archetype": null,
       "environment_profile_id": null,
@@ -1021,7 +1015,9 @@
         "mode": null,
         "support": null,
         "motion": null
-      }
+      },
+      "page_contract": "black-ink-page-v1"
     }
-  ]
+  ],
+  "page_contract": "black-ink-page-v1"
 }

@@ -52,4 +52,9 @@ def active_book_paths(root: Path) -> dict[str, Path]:
             config["coloring_page_standard"],
             "coloring page standard",
         ),
+        "universal_page_contract": resolve_root_path(
+            root,
+            config["universal_page_contract"],
+            "universal page contract",
+        ),
     }

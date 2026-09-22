@@ -31,7 +31,7 @@ def get_book(book_id: str, path: Path = SERIES_FILE) -> dict:
 
 
 def plan_path(book_id: str, plan_dir: Path = PLAN_DIR) -> Path:
-    slug = str(book_id).lower()
+    slug = str(book_id).strip().lower().replace(" ", "-")
     return plan_dir / f"{slug}.json"
 
 

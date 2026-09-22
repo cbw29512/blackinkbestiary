@@ -11,9 +11,11 @@ from prompt_builder import build_prompt, build_supervisor_checklist
 from workflow_adapter import load_workflow, prepare_workflow, validate_template
 try:
     from .manifest_validation import validate_manifest
+    from .page_contract import resolve_page_spec
     from .studio_config import active_book_paths
 except ImportError:
     from manifest_validation import validate_manifest
+    from page_contract import resolve_page_spec
     from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +39,7 @@ def current_context():
     page_id = state["current_page_id"]
     page = next(page for page in tome["pages"] if page["page_id"] == page_id)
     page_state = state["pages"][page_id]
-    return page, page_state
+    return resolve_page_spec(page, ROOT), page_state
 
 
 def readiness(comfy_url: str):

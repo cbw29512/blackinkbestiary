@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from prompt_builder import load_monster_spec
+from page_contract import resolve_page_spec
 
 
 class TomeISpecTests(unittest.TestCase):
@@ -40,10 +41,12 @@ class TomeISpecTests(unittest.TestCase):
     def test_every_page_uses_monster_first_visual_hierarchy(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         for page in tome["pages"]:
-            composition = page.get("composition", "").lower()
+            resolved = resolve_page_spec(page, ROOT)
+            composition = resolved.get("composition", "").lower()
             self.assertIn("large centered or near-centered dominant focal subject", composition, page["page_id"])
-            self.assertIn("55–72% of page height", page.get("composition", ""), page["page_id"])
+            self.assertIn("60–75% of page height", resolved.get("composition", ""), page["page_id"])
             self.assertIn("two to four large supporting forms", composition, page["page_id"])
+            self.assertNotIn("composition", page, page["page_id"])
 
     def test_every_page_has_explicit_physicality(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))

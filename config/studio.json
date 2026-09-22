@@ -8,5 +8,6 @@
   "quality_rules": "config/quality_rules.json",
   "page_archetypes": "config/page_archetypes.json",
   "environment_standard": "config/environment_standard.json",
-  "coloring_page_standard": "config/coloring_page_standard.json"
+  "coloring_page_standard": "config/coloring_page_standard.json",
+  "universal_page_contract": "config/universal_page_contract.json"
 }

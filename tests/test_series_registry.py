@@ -17,19 +17,23 @@ class SeriesRegistryTests(unittest.TestCase):
         self.assertEqual(series["books"][0]["title"], "Caves & Dungeons")
         self.assertEqual(series["books"][-1]["book_id"], "TOME-VIII")
 
-    def test_future_books_each_have_fifty_planning_slots(self):
+    def test_future_books_use_configured_page_counts_and_minimal_recipes(self):
         series = load_series()
         for book in series["books"][1:]:
             slug = book["book_id"].lower()
             path = ROOT / "data" / "book_plans" / f"{slug}.json"
             plan = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(plan["book_id"], book["book_id"])
-            self.assertEqual(len(plan["slots"]), 50)
+            self.assertEqual(len(plan["slots"]), book["target_pages"])
             self.assertEqual(
                 [slot["order"] for slot in plan["slots"]],
-                list(range(1, 51)),
+                list(range(1, book["target_pages"] + 1)),
             )
+            self.assertEqual(plan["page_contract"], "black-ink-page-v1")
             for slot in plan["slots"]:
+                self.assertEqual(slot["page_contract"], "black-ink-page-v1")
+                self.assertNotIn("habitat", slot)
+                self.assertNotIn("composition", slot)
                 self.assertIn("environment_profile_id", slot)
                 self.assertIn("environment_variant", slot)
                 self.assertEqual(

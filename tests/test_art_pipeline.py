@@ -17,40 +17,49 @@ from qa import inspect_png
 class PromptTests(unittest.TestCase):
     def test_prompt_contains_page_and_style(self):
         page = {
-            "monster_name": "Kobold Warrior",
-            "habitat": "trapped corridor",
+            "page_id": "X-01",
+            "order": 1,
+            "monster_spec_id": "kobold-warrior",
             "moment": "tripwire triggered",
-            "identity_rules": ["snout", "horn nubs"],
+            "archetype": "trap_scene",
             "must_include": ["pit"],
-            "must_avoid": ["gray"],
-            "composition": "portrait",
             "environment_profile_id": "underground.trapped-stone-corridor",
             "environment_variant": {
                 "landmark": "open pit beside torch bracket",
                 "framing": "tight corridor perspective",
                 "interaction": "tripwire triggers the pit",
             },
+            "physicality": {
+                "mode": "grounded",
+                "support": "both feet on the corridor floor",
+                "motion": "leaning toward the triggered wire",
+            },
         }
         text = build_prompt(page)
         self.assertIn("Kobold Warrior", text)
-        self.assertIn("trapped corridor", text)
+        self.assertIn("Trapped Stone Corridor", text)
         self.assertIn("large uninterrupted white regions", text)
 
 
     def test_edit_prompt_is_preservation_first(self):
         page = {
-            "monster_name": "Goblin Minion",
-            "habitat": "dungeon pantry",
+            "page_id": "X-02",
+            "order": 2,
+            "monster_spec_id": "goblin-minion",
             "moment": "running away with a stolen ham",
-            "identity_rules": [],
+            "archetype": "action_scene",
             "must_include": ["stolen ham"],
             "must_avoid": ["modern kitchen"],
-            "composition": "portrait",
             "environment_profile_id": "underground.rough-stone-pantry",
             "environment_variant": {
                 "landmark": "large food shelves",
                 "framing": "pantry corner",
                 "interaction": "goblin steals food from storage",
+            },
+            "physicality": {
+                "mode": "running",
+                "support": "one foot contacts the floor",
+                "motion": "forward escape stride",
             },
         }
         text = build_edit_prompt(
@@ -92,18 +101,21 @@ class PromptTests(unittest.TestCase):
 
     def test_modify_notes_enter_prompt(self):
         page = {
-            "monster_name": "Kobold",
-            "habitat": "cave",
+            "page_id": "X-03",
+            "order": 3,
+            "monster_spec_id": "kobold-warrior",
             "moment": "waiting",
-            "identity_rules": [],
-            "must_include": [],
-            "must_avoid": [],
-            "composition": "portrait",
+            "archetype": "lair_scene",
             "environment_profile_id": "underground.limestone-drip-cave",
             "environment_variant": {
                 "landmark": "large flowstone shelf",
                 "framing": "low cave chamber",
                 "interaction": "kobold waits beside the rock shelf",
+            },
+            "physicality": {
+                "mode": "grounded",
+                "support": "feet contact the cave floor",
+                "motion": "alert waiting stance",
             },
         }
         text = build_prompt(page, {"text": "simplify walls", "quick_tags": ["more white space"]})
