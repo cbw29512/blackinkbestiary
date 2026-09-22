@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
 FAMILY_DIR = ROOT / "data" / "monster_families"
+SPECIES_DIR = ROOT / "data" / "monster_species"
 CONTRACT_FILE = ROOT / "config" / "universal_monster_contract.json"
 
 
@@ -46,6 +47,14 @@ def family_profile_path(spec: dict, family_dir: Path = FAMILY_DIR) -> Path | Non
     if not profile_id:
         return None
     path = family_dir / f"{profile_id}.json"
+    return path if path.exists() else None
+
+
+def species_profile_path(spec: dict, species_dir: Path = SPECIES_DIR) -> Path | None:
+    profile_id = str(spec.get("species_profile") or "").strip()
+    if not profile_id:
+        return None
+    path = species_dir / f"{profile_id}.json"
     return path if path.exists() else None
 
 
@@ -90,6 +99,7 @@ def resolve_monster_spec(
     spec_id: str,
     monster_dir: Path = MONSTER_DIR,
     family_dir: Path = FAMILY_DIR,
+    species_dir: Path = SPECIES_DIR,
 ) -> dict:
     spec_id = str(spec_id or "").strip()
     if not spec_id:
@@ -106,8 +116,11 @@ def resolve_monster_spec(
     contract = load_monster_contract(ROOT / "config" / "universal_monster_contract.json")
     family_path = family_profile_path(raw, family_dir)
     family = _read_json(family_path) if family_path else {}
+    species_path = species_profile_path(raw, species_dir)
+    species = _read_json(species_path) if species_path else {}
 
-    resolved = _merge_dict(family, raw)
+    resolved = _merge_dict(family, species)
+    resolved = _merge_dict(resolved, raw)
     resolved = _apply_contract_defaults(resolved, contract)
     resolved = _apply_minimal_recipe(resolved, raw)
 
@@ -123,7 +136,10 @@ def resolve_monster_spec(
         if ROOT in path.resolve().parents else str(path),
         "family_profile": family_path.relative_to(ROOT).as_posix()
         if family_path and ROOT in family_path.resolve().parents else None,
+        "species_profile": species_path.relative_to(ROOT).as_posix()
+        if species_path and ROOT in species_path.resolve().parents else None,
         "family_identity_version": family.get("identity_version"),
+        "species_identity_version": species.get("identity_version"),
         "minimal_recipe": not bool(raw.get("visual_identity")),
     }
     return resolved
@@ -133,6 +149,7 @@ def minimal_recipe_errors(
     spec_id: str,
     monster_dir: Path = MONSTER_DIR,
     family_dir: Path = FAMILY_DIR,
+    species_dir: Path = SPECIES_DIR,
 ) -> list[str]:
     path = monster_dir / f"{spec_id}.json"
     if not path.exists():
@@ -148,6 +165,17 @@ def minimal_recipe_errors(
     family_path = family_profile_path(raw, family_dir)
     if not family_path:
         errors.append(f"{spec_id}: minimal monster recipe requires a valid family_profile")
+    species_id = str(raw.get("species_profile") or "").strip()
+    if species_id and not species_profile_path(raw, species_dir):
+        errors.append(f"{spec_id}: species_profile {species_id!r} does not exist")
+    for field in contract.get("recipe_forbidden_fields") or []:
+        if field in raw:
+            errors.append(f"{spec_id}: schema-v3+ monster recipe must not inline {field}")
+    allowed = set(contract.get("minimal_recipe_required") or []) | set(
+        contract.get("minimal_recipe_optional") or []
+    )
+    for field in sorted(set(raw) - allowed):
+        errors.append(f"{spec_id}: schema-v3+ monster recipe has unsupported field {field}")
     return errors
 
 
@@ -155,8 +183,9 @@ def load_monster_for_page(
     page: dict,
     monster_dir: Path = MONSTER_DIR,
     family_dir: Path = FAMILY_DIR,
+    species_dir: Path = SPECIES_DIR,
 ) -> dict | None:
     spec_id = str(page.get("monster_spec_id") or "").strip()
     if not spec_id:
         return None
-    return resolve_monster_spec(spec_id, monster_dir, family_dir)
+    return resolve_monster_spec(spec_id, monster_dir, family_dir, species_dir)
