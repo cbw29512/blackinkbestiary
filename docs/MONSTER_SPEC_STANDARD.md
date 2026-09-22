@@ -11,9 +11,11 @@ A reference image is never a composition to copy.
 
 ## Required Monster Spec Fields
 
-Each canonical monster spec lives in `data/monsters/<monster_id>.json`.
+Each canonical monster variant lives in `data/monsters/<monster_id>.json`. Reusable family identity lives in `data/monster_families/<family>.json`. The resolver merges family rules first, then variant-specific overrides.
 
-Required top-level fields:
+Versioned variants may also declare `schema_version`, `identity_version`, and `family_profile`.
+
+Required top-level identity fields:
 
 - `monster_id`
 - `monster_name`
@@ -69,11 +71,13 @@ A Tome page opts into a canonical monster spec with:
 
 The prompt builder then combines, in order:
 
-1. canonical creature identity
-2. page-specific habitat and moment
-3. page must-include / must-avoid rules
-4. Black-Ink Style Bible
-5. latest human review notes
+1. reusable family identity
+2. variant-specific creature identity
+3. page-specific environment profile and unique background variant
+4. page-specific habitat and moment
+5. page must-include / must-avoid rules
+6. Black-Ink Style Bible and coloring-page scale standard
+7. latest human review notes
 
 ## Review Rule
 
