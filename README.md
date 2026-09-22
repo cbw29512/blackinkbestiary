@@ -34,6 +34,33 @@ web/approved/Tome-I/I-02.png
 
 Candidate attempts remain under `web/candidates/`; only human-approved pages enter the ordered book folder.
 
+## Universal Page Engine
+
+Every Black-Ink book uses `config/universal_page_contract.json`.
+
+A new page stores only its unique recipe:
+
+- monster spec
+- environment profile
+- story moment and scene archetype
+- unique landmark, framing, and monster/environment interaction
+- physical state, support/contact, and motion
+
+Monster name, creature-family anatomy, habitat description, composition, coloring rules, global avoid rules, environment accuracy, and house style are inherited automatically. The current eight books all point at this same contract.
+
+New books can use any page count:
+
+```powershell
+python scripts/scaffold_book.py TOME-IX "New Tome" --pages 40 --prefix IX --theme "..." --environment-scope "..."
+```
+
+After every page recipe is filled:
+
+```powershell
+python scripts/promote_book_plan.py TOME-IX
+python scripts/activate_book.py TOME-IX
+```
+
 ## Production Platform
 
 The Studio is now book-configurable. `data/series.json` registers eight books, while `config/studio.json` selects the active production book. Shared creature identity, environment accuracy, colorability, defect routing, and scene archetypes live in reusable JSON catalogs so fixes improve future books without duplicating Python logic.
