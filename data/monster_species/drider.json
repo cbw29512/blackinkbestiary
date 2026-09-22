@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "drider",
+  "display_name": "Drider",
+  "taxonomy": {
+    "family": "drider",
+    "creature_type": "monstrous humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A humanoid upper body fused directly to the body of a giant spider, combining deliberate weapon use with eight-legged arachnid movement.",
+    "silhouette": "Humanoid torso rising from the front of a broad spider body with eight long spider legs radiating below and around.",
+    "head_features": "Severe humanoid face with pointed ears; no insect head.",
+    "body_shape": "Humanoid chest and arms merge at the waist into a giant spider cephalothorax and abdomen with eight legs.",
+    "surface": "Humanoid skin and clothing kept simple; spider lower body uses sparse hair and broad plates.",
+    "signature_gear": [
+      "bow",
+      "quiver",
+      "simple underground armor or straps"
+    ],
+    "attitude": [
+      "calculating",
+      "predatory",
+      "aloof",
+      "watchful"
+    ],
+    "must_keep": [
+      "humanoid upper torso",
+      "giant spider lower body",
+      "eight spider legs",
+      "visible fusion at waist"
+    ],
+    "must_avoid": [
+      "centaur horse body",
+      "two separate creatures",
+      "human legs",
+      "six spider legs",
+      "full insect head",
+      "overly ornate armor"
+    ]
+  },
+  "accuracy_checks": [
+    "fusion between torso and spider body is clear",
+    "eight legs are readable",
+    "no human legs appear",
+    "upper body stays humanoid"
+  ]
+}
