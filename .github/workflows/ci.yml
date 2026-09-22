@@ -49,13 +49,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module:
-          - tests.test_environment_catalog
-          - tests.test_catalog_and_series_audit
-          - tests.test_creature_catalog
-          - tests.test_product_north_star
-          - tests.test_universal_page_contract
-          - tests.test_art_pipeline
+        file:
+          - test_environment_catalog.py
+          - test_catalog_and_series_audit.py
+          - test_creature_catalog.py
+          - test_product_north_star.py
+          - test_universal_page_contract.py
+          - test_art_pipeline.py
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
