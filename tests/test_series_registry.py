@@ -36,6 +36,10 @@ class SeriesRegistryTests(unittest.TestCase):
                     set(slot["environment_variant"]),
                     {"landmark", "framing", "interaction"},
                 )
+                self.assertEqual(
+                    set(slot["physicality"]),
+                    {"mode", "support", "motion"},
+                )
 
     def test_only_existing_production_files_are_reported_ready(self):
         rows = series_status(ROOT)
