@@ -38,6 +38,16 @@ The production audit rejects missing fields, duplicate IDs/orders, missing canon
 
 `config/page_archetypes.json` defines reusable composition logic such as trap scenes, swarms, reveals, bosses, and object monsters.
 
+### Environment standard
+
+`config/environment_standard.json` is global across all books. Every page must satisfy three co-equal storytelling pillars:
+
+- unmistakable monster identity
+- unmistakable environment identity
+- unmistakable story moment
+
+The environment must use setting-specific, colorable cues and must participate in the scene rather than function as generic background filler. Simplification removes clutter, not habitat identity.
+
 ### Defect remediation
 
 `config/quality_rules.json` maps reviewer defect tags to:
@@ -71,7 +81,9 @@ The reviewer still decides whether:
 - anatomy is believable
 - required props are actually present
 - the story beat is readable
-- the habitat reads correctly
+- the habitat is unmistakable and setting-specific
+- monster and environment interact believably
+- the environment is worth coloring rather than generic filler
 - the page is enjoyable to color
 
 Only `Approve & Lock` admits artwork into the ordered book folder.
@@ -94,7 +106,7 @@ This creates structured data for future quality analysis without silently overri
 ## Starting Another Book
 
 1. Create its manifest and canonical monster specs.
-2. Give every page a valid archetype and concrete visual requirements.
+2. Give every page a valid archetype and concrete monster, environment, and story requirements.
 3. Point `config/studio.json` at the new manifest/state/reviews files.
 4. Run `python scripts/init_active_book.py`.
 5. Run `python scripts/audit_active_book.py`.
