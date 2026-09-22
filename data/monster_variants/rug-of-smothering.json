@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "rug-of-smothering",
+  "family_profile": "construct",
+  "display_name": "Rug of Smothering",
+  "size": "large",
+  "creature_type": "construct",
+  "visual_identity": {
+    "core_identity": "An apparently decorative floor rug animated into a flexible constricting sheet with no face or limbs.",
+    "silhouette": "Large rectangular textile lifting in a curling wave, corners and edges folding around a target.",
+    "head_features": "No head, eyes, or mouth; menace comes from folding motion.",
+    "body_shape": "Flat woven rectangle capable of bending, rolling, and wrapping while keeping identifiable rug edges.",
+    "limb_structure": "No limbs; corners and sheet edges provide all movement through folds and wraps.",
+    "surface": "Broad simple geometric or heraldic pattern with large colorable areas, fringe kept sparse.",
+    "must_keep": [
+      "rectangular rug identity",
+      "folding sheet motion",
+      "simple textile pattern",
+      "no face"
+    ],
+    "must_avoid": [
+      "carpet monster mouth",
+      "tentacles",
+      "solid fabric black fill",
+      "overly intricate pattern",
+      "humanoid limbs",
+      "flying carpet pose"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Part of the rug remains visibly connected to or close to the floor while the sheet curls or wraps.",
+    "behavior_style": [
+      "lifting from a floor",
+      "curling around one simple target",
+      "folding across a threshold",
+      "unrolling from a furnished chamber"
+    ]
+  },
+  "accuracy_checks": [
+    "rug remains recognizably rectangular",
+    "pattern stays colorable",
+    "no face or invented limbs appear"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "flying_carpet_drift",
+      "symptom": "rug becomes harmless airborne carpet",
+      "correction": "restore floor-origin constricting fold and wrapping motion"
+    },
+    {
+      "id": "monster_face_drift",
+      "symptom": "eyes or mouth appear in textile",
+      "correction": "remove face; use sheet motion alone for menace"
+    }
+  ]
+}
