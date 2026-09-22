@@ -18,6 +18,11 @@ from urllib.parse import unquote, urlparse
 
 from art_pipeline.rebuild_state import activate_rebuild_source
 from art_pipeline.calibration_gate import calibration_report
+from art_pipeline.calibration_service import (
+    public_calibration_state,
+    review_calibration,
+    start_calibration_worker,
+)
 from art_pipeline.manifest_validation import validate_manifest
 from art_pipeline.page_contract import resolve_manifest
 from art_pipeline.environment_catalog import resolve_environment_profile
@@ -430,6 +435,9 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/generation-status":
                 self.send_json(generation_worker_status())
                 return
+            if path == "/api/golden-five":
+                self.send_json(public_calibration_state(ROOT))
+                return
             self.serve_static(path)
         except Exception as exc:
             self.send_json({"error": str(exc)}, HTTPStatus.INTERNAL_SERVER_ERROR)
@@ -457,6 +465,25 @@ class Handler(BaseHTTPRequestHandler):
                 return
             if path == "/api/candidate":
                 self.send_json(register_candidate(payload))
+                return
+            if path == "/api/golden-five/generate":
+                page_id = str(payload.get("page_id") or "").strip()
+                worker = start_calibration_worker(ROOT, page_id)
+                result = public_calibration_state(ROOT)
+                result["worker"] = worker
+                self.send_json(result)
+                return
+            if path == "/api/golden-five/review":
+                page_id = str(payload.get("page_id") or "").strip()
+                decision = str(payload.get("decision") or "").strip()
+                review_calibration(
+                    ROOT,
+                    page_id,
+                    decision,
+                    payload.get("failed_dimensions") or [],
+                    str(payload.get("notes") or ""),
+                )
+                self.send_json(public_calibration_state(ROOT))
                 return
             self.send_json({"error": "Not found"}, HTTPStatus.NOT_FOUND)
         except ValueError as exc:
