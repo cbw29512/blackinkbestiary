@@ -67,4 +67,9 @@ def active_book_paths(root: Path) -> dict[str, Path]:
             config["kdp_print_standard"],
             "KDP print standard",
         ),
+        "content_scope": resolve_root_path(
+            root,
+            config["content_scope"],
+            "content scope",
+        ),
     }
