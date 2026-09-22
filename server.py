@@ -366,6 +366,7 @@ def register_candidate(payload):
         "qa_status": payload.get("qa_status", "pass"),
         "supervisor_status": payload.get("supervisor_status", "ready_for_human"),
         "generation_mode": payload.get("generation_mode", "unknown"),
+        "technical_retry": int(payload.get("technical_retry", 0)),
         "source": payload.get("source"),
         "created_at": utc_now(),
     }
