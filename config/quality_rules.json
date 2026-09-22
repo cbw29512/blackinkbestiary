@@ -87,7 +87,7 @@
     },
     "monster too large": {
       "action": "modify",
-      "directive": "Reduce the monster's page coverage enough for the assigned habitat, landmark, and story interaction to read clearly. Keep the creature substantial but restore meaningful environment around it."
+      "directive": "Reduce the monster only enough to restore readable habitat and story interaction. Keep it large, centered or near-centered, and clearly the dominant focal subject; do not shrink it into a secondary figure."
     },
     "environment objects too large": {
       "action": "modify",
@@ -96,6 +96,14 @@
     "too many tiny coloring regions": {
       "action": "modify",
       "directive": "Merge or remove micro-detail, repeated texture, tiny enclosed islands, and small decorative shapes. Preserve identity using fewer medium-to-large colorable regions."
+    },
+    "monster too small": {
+      "action": "modify",
+      "directive": "Enlarge the monster into the dominant central focal subject. Preserve the successful environment and story beat, but scale the creature to roughly 55–72% of page height in ordinary scenes while keeping its full silhouette comfortably inside the page."
+    },
+    "monster off-center": {
+      "action": "modify",
+      "directive": "Rebalance the composition so the monster is centered or near-centered in the primary visual field. Preserve believable interaction with the environment and avoid making the background symmetrical merely for decoration."
     }
   }
 }
