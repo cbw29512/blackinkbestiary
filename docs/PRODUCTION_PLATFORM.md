@@ -1,20 +1,30 @@
 # Black-Ink Production Platform
 
-The Studio is a reusable coloring-book production engine. Tome I is the active book, not a special-case implementation.
+Black-Ink is a reusable coloring-book production engine. An active book supplies page data; the same quality engine, generation loop, review workflow, and archive rules apply to every book.
+
+## Core Quality Contract
+
+Every finished page must pass three equal human quality gates:
+
+1. **Monster** — unmistakable identity and believable anatomy.
+2. **Environment** — unmistakable, specific setting that is valuable to color.
+3. **Story** — an immediately readable moment created by the monster interacting with the environment.
+
+The environment is not decorative background filler.
 
 ## Active Book Data Schema
 
-`config/studio.json` points to three book-specific files:
+`config/studio.json` selects the active book's:
 
-- `manifest` — ordered page specifications
-- `state` — runtime production state
-- `reviews` — structured reviewer decisions
+- manifest
+- runtime state
+- structured review log
 
-Changing the active book requires a Studio restart. Python code should not be edited to switch books.
+Changing books requires a Studio restart, not Python changes.
 
 ## Page Schema
 
-Every page must define:
+Every page requires:
 
 - `page_id`
 - `order`
@@ -23,78 +33,99 @@ Every page must define:
 - `habitat`
 - `moment`
 - `archetype`
+- `environment`
 - `must_include[]`
 - `must_avoid[]`
 
-The production audit rejects missing fields, duplicate IDs/orders, missing canonical specs, bad archetypes, and malformed identity specs.
+### Environment Schema
 
-## Global Quality Layers
+Every `environment` object requires:
 
-### Canonical identity
+- `identity` — the specific place the reader should recognize
+- `anchors[]` — at least two visible architectural, terrain, or prop cues
+- `interaction` — how the monster/story physically uses the setting
+- `coloring_value[]` — large setting shapes worth coloring
+- `must_avoid[]` — failures that would make the location generic or incorrect
 
-`data/monsters/*.json` defines anatomy, silhouette, signature gear, keep/avoid rules, and accuracy checks.
+CI rejects pages without a complete environment spec.
+
+## Shared Quality Layers
+
+### Canonical monster identity
+
+`data/monsters/*.json` defines silhouette, anatomy, signature gear, keep/avoid rules, and accuracy checks.
+
+### Environment identity
+
+The page environment spec is injected into both fresh-generation and exact-image edit prompts. Successful habitat anchors are preservation targets during edits.
 
 ### Scene archetype
 
-`config/page_archetypes.json` defines reusable composition logic such as trap scenes, swarms, reveals, bosses, and object monsters.
+`config/page_archetypes.json` defines reusable composition logic for traps, swarms, stealth, reveals, bosses, lairs, object monsters, large-scale scenes, action scenes, and horror scenes.
+
+Archetypes explicitly describe how the environment participates in the scene.
 
 ### Defect remediation
 
-`config/quality_rules.json` maps reviewer defect tags to:
+`config/quality_rules.json` maps reviewer tags to a preferred action and exact corrective directive.
 
-- preferred action (`modify` or `regenerate`)
-- exact remediation directive injected into the next prompt
+Examples:
 
-Local defects preserve the current image through FLUX image editing. Fundamental composition defects route to fresh regeneration.
+- local anatomy/detail/environment defects → exact-image **Modify**
+- wrong overall composition or wrong environment → fresh **Regenerate**
+
+The Studio records both the requested action and the effective routed action.
 
 ### Technical QA
 
-Generated PNGs must satisfy:
+Generated PNGs must satisfy deterministic checks for:
 
-- PNG integrity
-- portrait orientation
-- expected aspect ratio
+- valid PNG structure
+- portrait orientation and expected aspect ratio
 - minimum resolution
 - reasonable file size
 - nonblank line-art content
 - no overwhelmingly dark/solid output
 
-A technical QA failure is retried automatically with a fresh seed before stopping the page.
+Technical failures are retried automatically with a new seed before the page stops.
 
 ## Human Quality Gate
 
-Technical QA does not claim to understand visual semantics.
+Technical QA does not claim to understand semantic image correctness.
 
 The reviewer still decides whether:
 
 - monster identity is correct
 - anatomy is believable
-- required props are actually present
-- the story beat is readable
-- the habitat reads correctly
+- environment identity is correct
+- required environmental anchors are visible
+- monster/environment interaction makes sense
+- required story props are present
+- story moment is clear
 - the page is enjoyable to color
 
-Only `Approve & Lock` admits artwork into the ordered book folder.
+Only **Approve & Lock** admits artwork into the ordered book folder.
 
 ## Review Memory
 
-Every decision records:
+Each review records:
 
 - book and page
 - monster
+- environment identity and anchors
 - scene archetype
-- requested and effective action
+- requested/effective action
 - candidate metadata
 - free-form notes
 - defect tags
 - expanded remediation directives
 
-This creates structured data for future quality analysis without silently overriding human approval.
+This supports future analysis without silently replacing human approval.
 
 ## Starting Another Book
 
-1. Create its manifest and canonical monster specs.
-2. Give every page a valid archetype and concrete visual requirements.
+1. Create the manifest and canonical monster specs.
+2. Give every page a valid archetype, concrete visual requirements, and structured environment spec.
 3. Point `config/studio.json` at the new manifest/state/reviews files.
 4. Run `python scripts/init_active_book.py`.
 5. Run `python scripts/audit_active_book.py`.
@@ -102,8 +133,6 @@ This creates structured data for future quality analysis without silently overri
 
 ## Production Invariant
 
-The intended loop for every book is:
-
-`spec → generate → technical QA → human audit → exact-image modify OR regenerate → approve & lock → next page`
+`spec → generate → technical QA → human three-gate audit → exact-image modify OR regenerate → approve & lock → next page`
 
 No page advances without human approval.
