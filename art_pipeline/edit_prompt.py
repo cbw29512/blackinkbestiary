@@ -64,6 +64,12 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
     if review_notes:
         text = (review_notes.get("text") or "").strip()
         tags = review_notes.get("quick_tags") or []
+        failed_dimensions = review_notes.get("failed_dimensions") or []
+        preserve_dimensions = review_notes.get("preserve_dimensions") or []
+        if preserve_dimensions:
+            sections.append(_items("PASSED QUALITY DIMENSIONS — PRESERVE", preserve_dimensions))
+        if failed_dimensions:
+            sections.append(_items("FAILED QUALITY DIMENSIONS — CORRECT", failed_dimensions))
         if text:
             sections.append(f"HUMAN CORRECTION REQUEST: {text}")
         if tags:
