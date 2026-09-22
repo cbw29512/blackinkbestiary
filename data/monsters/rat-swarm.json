@@ -1,57 +1,12 @@
 {
+  "schema_version": 3,
   "monster_id": "rat-swarm",
   "monster_name": "Rat Swarm",
-  "family": "rat",
-  "size": "swarm",
-  "creature_type": "swarm of tiny beasts",
-  "visual_identity": {
-    "core_identity": "A flowing mass of ordinary dungeon rats whose individual bodies remain readable while the group moves like a living tide.",
-    "silhouette": "Many low rat bodies overlapping in a directional stream, tails and pointed snouts creating motion without becoming a black mass.",
-    "head_features": "Repeated simple rat heads with pointed snouts, rounded ears, whiskers, and visible incisors on a few foreground animals.",
-    "body_shape": "Small four-legged rodent forms in varied running poses; no giant leader rat.",
-    "surface": "Minimal fur lines and simple naked tails.",
-    "signature_gear": [],
-    "attitude": [
-      "surging",
-      "hungry",
-      "panicked",
-      "relentless"
-    ],
-    "must_keep": [
-      "many distinct rats",
-      "clear flowing direction",
-      "visible tails",
-      "rodent silhouettes",
-      "open gaps between animals"
-    ],
-    "must_avoid": [
-      "single giant rat",
-      "solid black pile",
-      "mouse-cartoon faces",
-      "insect swarm",
-      "human features",
-      "excessive overlap"
-    ]
-  },
+  "family_profile": "rat",
+  "species_profile": "rat-swarm",
   "default_habitats": [
     "floor grates",
     "sewers",
     "dungeon kitchens"
-  ],
-  "accuracy_checks": [
-    "rats clearly pour from the grate",
-    "individual silhouettes remain readable",
-    "flow direction is obvious",
-    "background grate remains visible",
-    "page preserves white space",
-    "no giant leader dominates"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "rat"
+  ]
 }
