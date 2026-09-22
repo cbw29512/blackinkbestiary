@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "hobgoblin",
+  "display_name": "Hobgoblin",
+  "taxonomy": {
+    "family": "hobgoblin",
+    "creature_type": "goblinoid humanoid",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A disciplined medium-sized goblinoid soldier: angular, stern, controlled, and martial rather than feral, brutish, or orc-like.",
+    "silhouette": "Medium athletic humanoid with squared shoulders, upright trained posture, long clean limb lines, pointed ears, and organized military equipment.",
+    "head_features": "Angular goblinoid face with a broad but human-scale flattened nose, strong brow, pronounced cheek planes, pointed ears smaller than a goblin's, narrow stern eyes, and a controlled mouth without tusks or an animal muzzle.",
+    "body_shape": "Lean athletic soldierly proportions with trained posture and balanced musculature; sturdier than a goblin but clearly less bulky than an orc or ogre.",
+    "surface": "Mostly smooth skin with sparse scars and little body hair; armor and clothing use broad clean planes.",
+    "must_keep": [
+      "medium athletic goblinoid proportions",
+      "pointed ears smaller than a goblin's exaggerated ears",
+      "angular stern face",
+      "broad flattened goblinoid nose",
+      "disciplined upright posture",
+      "organized military gear"
+    ],
+    "must_avoid": [
+      "orc tusks",
+      "boar-like nose",
+      "ape-like face",
+      "tiny goblin body",
+      "oversized goblin ears",
+      "bodybuilder bulk",
+      "feral crouch",
+      "wild furry silhouette",
+      "cute elf face",
+      "reptilian features"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as disciplined goblinoid soldier before generic fantasy brute",
+    "face is angular and goblinoid but not orcish",
+    "no tusks or animal muzzle",
+    "ears are pointed but proportionally smaller than a goblin's",
+    "body remains medium athletic rather than hulking",
+    "posture and equipment communicate military discipline"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "orc_drift",
+      "symptom": "head or body reads as an orc",
+      "correction": "remove tusks and boar-like features, reduce jaw/brow bulk, restore angular goblinoid face and lean soldierly proportions"
+    },
+    {
+      "id": "goblin_drift",
+      "symptom": "creature becomes small, huge-eared, or scrappy like a goblin",
+      "correction": "increase to medium athletic proportions, reduce ear exaggeration, and restore organized military bearing"
+    },
+    {
+      "id": "brute_drift",
+      "symptom": "body becomes hulking or bodybuilder-like",
+      "correction": "reduce torso and arm mass, lengthen clean limb lines, and emphasize trained posture instead of brute force"
+    },
+    {
+      "id": "elf_drift",
+      "symptom": "face becomes handsome or elf-like",
+      "correction": "restore broad flattened goblinoid nose, heavy brow, angular cheeks, and stern predatory eyes"
+    }
+  ]
+}
