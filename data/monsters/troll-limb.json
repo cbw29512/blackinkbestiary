@@ -1,57 +1,7 @@
 {
+  "schema_version": 3,
   "monster_id": "troll-limb",
   "monster_name": "Troll Limb",
-  "family": "troll",
-  "size": "medium",
-  "creature_type": "regenerating severed giant limb",
-  "visual_identity": {
-    "core_identity": "A severed troll arm still animated by supernatural regeneration, crawling like a grotesque hand-creature without graphic gore.",
-    "silhouette": "Long muscular forearm ending in an oversized clawed hand, fingers acting like legs as the limb crawls.",
-    "head_features": "No head; identity comes from troll skin, long proportions, and large clawed hand.",
-    "body_shape": "Single elongated arm with large hand, bent wrist, and finger-walking posture.",
-    "surface": "Tough troll skin with sparse bumps; severed end simplified and non-gory.",
-    "signature_gear": [],
-    "attitude": [
-      "restless",
-      "grasping",
-      "unnatural",
-      "persistent"
-    ],
-    "must_keep": [
-      "single severed arm only",
-      "oversized clawed hand",
-      "finger-walking motion",
-      "troll-like tough skin",
-      "non-gory severed end"
-    ],
-    "must_avoid": [
-      "full troll body",
-      "graphic blood",
-      "human hand proportions",
-      "tentacle anatomy",
-      "extra limbs",
-      "cartoon glove look"
-    ]
-  },
-  "default_habitats": [
-    "bare dungeon floors",
-    "cave battle sites",
-    "stone corridors"
-  ],
-  "accuracy_checks": [
-    "clearly reads as a crawling severed troll arm",
-    "no extra body appears",
-    "claws are obvious",
-    "movement is readable",
-    "severed end is non-gory",
-    "simple scene supports the limb"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "troll"
+  "family_profile": "troll",
+  "variant_profile": "troll-limb"
 }
