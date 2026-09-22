@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "black-pudding",
+  "display_name": "Black Pudding",
+  "visual_identity": {
+    "core_identity": "A heavy corrosive dungeon ooze that flows as an irregular low mass and destroys metal on contact.",
+    "silhouette": "Broad spreading puddle-like mass with lobed edges, climbing tendrils, and sagging drips around obstacles.",
+    "head_features": "No head, eyes, or face.",
+    "body_shape": "Amorphous viscous mass with no fixed anatomy; shape conforms around bars and floor openings.",
+    "surface": "Smooth dark-associated ooze represented by strong outer contour and sparse internal gloss lines, not a filled black silhouette.",
+    "signature_gear": [],
+    "attitude": [
+      "flowing",
+      "corrosive",
+      "mindless",
+      "relentless"
+    ],
+    "must_keep": [
+      "amorphous ooze shape",
+      "no face",
+      "corroding metal contact",
+      "dripping edges",
+      "low spreading mass"
+    ],
+    "must_avoid": [
+      "solid black page area",
+      "eyes or mouth",
+      "humanoid shape",
+      "tentacle monster body",
+      "dense shading",
+      "cute slime face"
+    ]
+  },
+  "accuracy_checks": [
+    "ooze is distinct from ordinary puddle",
+    "metal corrosion is visible",
+    "body remains outline-driven",
+    "no facial features appear",
+    "dark identity does not destroy coloring space"
+  ]
+}
