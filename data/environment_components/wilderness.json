@@ -1,0 +1,858 @@
+{
+  "schema_version": 1,
+  "family_id": "wilderness",
+  "display_name": "Wilderness Environment Component Library",
+  "purpose": "Reusable scenery for valleys, grasslands, riverbanks, badlands, ridges, ravines, washes, and open-terrain lairs.",
+  "context_rules": [
+    {
+      "terms": [
+        "valley"
+      ],
+      "add": [
+        "valley",
+        "rock"
+      ]
+    },
+    {
+      "terms": [
+        "grassland"
+      ],
+      "add": [
+        "grassland",
+        "open"
+      ]
+    },
+    {
+      "terms": [
+        "river"
+      ],
+      "add": [
+        "river",
+        "water"
+      ]
+    },
+    {
+      "terms": [
+        "badlands"
+      ],
+      "add": [
+        "badlands",
+        "rock"
+      ]
+    },
+    {
+      "terms": [
+        "ravine"
+      ],
+      "add": [
+        "ravine"
+      ]
+    },
+    {
+      "terms": [
+        "ridge"
+      ],
+      "add": [
+        "ridge",
+        "elevated"
+      ]
+    },
+    {
+      "terms": [
+        "ford"
+      ],
+      "add": [
+        "ford",
+        "river"
+      ]
+    },
+    {
+      "terms": [
+        "wash"
+      ],
+      "add": [
+        "wash"
+      ]
+    }
+  ],
+  "family_quality_rules": [
+    "Open terrain should feel spacious; negative space is part of the coloring design.",
+    "Use a few large rock, water, tree, and terrain masses rather than texture fields.",
+    "Terrain geometry must tell the viewer exactly what kind of wilderness location this is.",
+    "Landmarks and hazards should be large enough to color and interact with."
+  ],
+  "groups": {
+    "spatial_archetypes": [
+      {
+        "id": "spatial-01",
+        "text": "broad rocky valley with layered cliff walls",
+        "contexts": [
+          "valley",
+          "rock"
+        ]
+      },
+      {
+        "id": "spatial-02",
+        "text": "open grassland with long horizon and one strong foreground landmark",
+        "contexts": [
+          "grassland",
+          "open"
+        ]
+      },
+      {
+        "id": "spatial-03",
+        "text": "riverbank bend with one readable water edge",
+        "contexts": [
+          "river",
+          "water"
+        ]
+      },
+      {
+        "id": "spatial-04",
+        "text": "badlands gully with layered rock and a clear path",
+        "contexts": [
+          "badlands",
+          "rock"
+        ]
+      },
+      {
+        "id": "spatial-05",
+        "text": "rocky shelf above a lower plain",
+        "contexts": [
+          "shelf",
+          "elevated"
+        ]
+      },
+      {
+        "id": "spatial-06",
+        "text": "shallow ravine or wash crossing",
+        "contexts": [
+          "ravine",
+          "wash"
+        ]
+      },
+      {
+        "id": "spatial-07",
+        "text": "natural ford between broad stones",
+        "contexts": [
+          "river",
+          "ford"
+        ]
+      },
+      {
+        "id": "spatial-08",
+        "text": "windswept ridge with one sheltering outcrop",
+        "contexts": [
+          "ridge",
+          "elevated"
+        ]
+      }
+    ],
+    "primary_surfaces": [
+      {
+        "id": "surface-01",
+        "text": "broad sedimentary cliff bands",
+        "contexts": [
+          "valley",
+          "badlands",
+          "rock"
+        ]
+      },
+      {
+        "id": "surface-02",
+        "text": "large grassland earth planes with sparse vegetation groups",
+        "contexts": [
+          "grassland"
+        ]
+      },
+      {
+        "id": "surface-03",
+        "text": "river-worn stone banks with rounded large forms",
+        "contexts": [
+          "river",
+          "water"
+        ]
+      },
+      {
+        "id": "surface-04",
+        "text": "dry eroded clay walls with broad layered cuts",
+        "contexts": [
+          "badlands",
+          "wash"
+        ]
+      },
+      {
+        "id": "surface-05",
+        "text": "weathered rock shelf with a few large cracks",
+        "contexts": [
+          "shelf",
+          "ridge"
+        ]
+      },
+      {
+        "id": "surface-06",
+        "text": "gravel-free wash walls with large erosion curves",
+        "contexts": [
+          "wash",
+          "ravine"
+        ]
+      },
+      {
+        "id": "surface-07",
+        "text": "smooth ford stones and broad bank surfaces",
+        "contexts": [
+          "ford",
+          "river"
+        ]
+      },
+      {
+        "id": "surface-08",
+        "text": "wind-worn outcrop planes with simple silhouettes",
+        "contexts": [
+          "ridge"
+        ]
+      }
+    ],
+    "ground_planes": [
+      {
+        "id": "ground-01",
+        "text": "broad valley floor with a clear trail lane",
+        "contexts": [
+          "valley"
+        ]
+      },
+      {
+        "id": "ground-02",
+        "text": "open grassland floor shown as large grass masses",
+        "contexts": [
+          "grassland"
+        ]
+      },
+      {
+        "id": "ground-03",
+        "text": "mud, sand, or stone riverbank with one clean water line",
+        "contexts": [
+          "river",
+          "water"
+        ]
+      },
+      {
+        "id": "ground-04",
+        "text": "dry wash floor with a few large stones",
+        "contexts": [
+          "wash",
+          "badlands"
+        ]
+      },
+      {
+        "id": "ground-05",
+        "text": "flat rock shelf with simple joints",
+        "contexts": [
+          "shelf",
+          "ridge"
+        ]
+      },
+      {
+        "id": "ground-06",
+        "text": "ravine floor with one strong channel",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "ground-07",
+        "text": "shallow ford water over broad stones",
+        "contexts": [
+          "ford",
+          "river"
+        ]
+      },
+      {
+        "id": "ground-08",
+        "text": "windswept dirt and grass bands along a ridge",
+        "contexts": [
+          "ridge"
+        ]
+      }
+    ],
+    "overhead_features": [
+      {
+        "id": "overhead-01",
+        "text": "open sky framed by two cliff or rock masses",
+        "contexts": [
+          "valley",
+          "badlands"
+        ]
+      },
+      {
+        "id": "overhead-02",
+        "text": "broad cloud shapes over grassland negative space",
+        "contexts": [
+          "grassland",
+          "open"
+        ]
+      },
+      {
+        "id": "overhead-03",
+        "text": "overhanging bank tree or branch at a river edge",
+        "contexts": [
+          "river"
+        ]
+      },
+      {
+        "id": "overhead-04",
+        "text": "natural rock overhang above a wash or shelf",
+        "contexts": [
+          "wash",
+          "shelf"
+        ]
+      },
+      {
+        "id": "overhead-05",
+        "text": "single natural arch framing the sky",
+        "contexts": [
+          "badlands",
+          "rock"
+        ]
+      },
+      {
+        "id": "overhead-06",
+        "text": "ridge lip or cliff shelf creating a strong top edge",
+        "contexts": [
+          "ridge",
+          "elevated"
+        ]
+      },
+      {
+        "id": "overhead-07",
+        "text": "open horizon with no forced overhead clutter",
+        "contexts": [
+          "open",
+          "grassland"
+        ]
+      },
+      {
+        "id": "overhead-08",
+        "text": "large dead snag or leaning tree framing one corner",
+        "contexts": [
+          "river",
+          "valley"
+        ]
+      }
+    ],
+    "lighting_features": [
+      {
+        "id": "lighting-01",
+        "text": "clean daylight across broad terrain planes",
+        "contexts": [
+          "universal"
+        ]
+      },
+      {
+        "id": "lighting-02",
+        "text": "low sun behind a ridge or outcrop used as negative space",
+        "contexts": [
+          "ridge",
+          "valley"
+        ]
+      },
+      {
+        "id": "lighting-03",
+        "text": "reflected light from a river or ford",
+        "contexts": [
+          "river",
+          "water"
+        ]
+      },
+      {
+        "id": "lighting-04",
+        "text": "open bright grassland sky",
+        "contexts": [
+          "grassland",
+          "open"
+        ]
+      },
+      {
+        "id": "lighting-05",
+        "text": "shadow line under a rock overhang kept broad and unhatched",
+        "contexts": [
+          "shelf",
+          "wash"
+        ]
+      },
+      {
+        "id": "lighting-06",
+        "text": "bright gap through a badlands arch",
+        "contexts": [
+          "badlands"
+        ]
+      },
+      {
+        "id": "lighting-07",
+        "text": "cloud break highlighting one landmark",
+        "contexts": [
+          "valley",
+          "open"
+        ]
+      },
+      {
+        "id": "lighting-08",
+        "text": "water glint represented as simple open shapes, not sparkle clutter",
+        "contexts": [
+          "river",
+          "ford"
+        ]
+      }
+    ],
+    "structural_features": [
+      {
+        "id": "structure-01",
+        "text": "natural rock arch or eroded doorway",
+        "contexts": [
+          "badlands",
+          "rock"
+        ]
+      },
+      {
+        "id": "structure-02",
+        "text": "boulder pair framing a trail",
+        "contexts": [
+          "valley",
+          "ridge"
+        ]
+      },
+      {
+        "id": "structure-03",
+        "text": "river ford with broad stepping stones",
+        "contexts": [
+          "river",
+          "ford"
+        ]
+      },
+      {
+        "id": "structure-04",
+        "text": "fallen log or driftwood crossing one bank",
+        "contexts": [
+          "river"
+        ]
+      },
+      {
+        "id": "structure-05",
+        "text": "rock shelf or ledge providing a perch or boundary",
+        "contexts": [
+          "shelf",
+          "ridge"
+        ]
+      },
+      {
+        "id": "structure-06",
+        "text": "dry wash cut forming a narrow passage",
+        "contexts": [
+          "wash",
+          "ravine"
+        ]
+      },
+      {
+        "id": "structure-07",
+        "text": "simple trail cairn or weathered marker",
+        "contexts": [
+          "open",
+          "grassland"
+        ]
+      },
+      {
+        "id": "structure-08",
+        "text": "lone tree or dead snag creating a vertical landmark",
+        "contexts": [
+          "valley",
+          "grassland"
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark-01",
+        "text": "single large rock outcrop",
+        "contexts": [
+          "rock",
+          "universal"
+        ]
+      },
+      {
+        "id": "landmark-02",
+        "text": "distinct river bend or ford",
+        "contexts": [
+          "river",
+          "water"
+        ]
+      },
+      {
+        "id": "landmark-03",
+        "text": "lone tree or large dead snag",
+        "contexts": [
+          "grassland",
+          "valley"
+        ]
+      },
+      {
+        "id": "landmark-04",
+        "text": "layered hoodoo or mesa edge",
+        "contexts": [
+          "badlands"
+        ]
+      },
+      {
+        "id": "landmark-05",
+        "text": "fallen log or driftwood form",
+        "contexts": [
+          "river"
+        ]
+      },
+      {
+        "id": "landmark-06",
+        "text": "large boulder pair framing a path",
+        "contexts": [
+          "ridge",
+          "valley"
+        ]
+      },
+      {
+        "id": "landmark-07",
+        "text": "distant ridge or cliff face",
+        "contexts": [
+          "elevated",
+          "valley"
+        ]
+      },
+      {
+        "id": "landmark-08",
+        "text": "single natural arch or eroded opening",
+        "contexts": [
+          "badlands",
+          "rock"
+        ]
+      }
+    ],
+    "secondary_features": [
+      {
+        "id": "secondary-01",
+        "text": "one reed, grass, or shrub mass",
+        "contexts": [
+          "river",
+          "grassland"
+        ]
+      },
+      {
+        "id": "secondary-02",
+        "text": "one broad patch of flowers or groundcover",
+        "contexts": [
+          "grassland"
+        ]
+      },
+      {
+        "id": "secondary-03",
+        "text": "single piece of driftwood or deadwood",
+        "contexts": [
+          "river",
+          "valley"
+        ]
+      },
+      {
+        "id": "secondary-04",
+        "text": "one simple trail marker or abandoned pack when story-appropriate",
+        "contexts": [
+          "open",
+          "settlement"
+        ]
+      },
+      {
+        "id": "secondary-05",
+        "text": "one broad mud, sand, or gravel bank",
+        "contexts": [
+          "river",
+          "wash"
+        ]
+      },
+      {
+        "id": "secondary-06",
+        "text": "one large root or branch",
+        "contexts": [
+          "river",
+          "valley"
+        ]
+      },
+      {
+        "id": "secondary-07",
+        "text": "one shallow puddle or pool",
+        "contexts": [
+          "wash",
+          "river"
+        ]
+      },
+      {
+        "id": "secondary-08",
+        "text": "one simple rock cairn",
+        "contexts": [
+          "ridge",
+          "open"
+        ]
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-01",
+        "text": "steep ravine edge with a broad visible drop",
+        "contexts": [
+          "ravine",
+          "ridge"
+        ]
+      },
+      {
+        "id": "hazard-02",
+        "text": "fast river channel at a ford",
+        "contexts": [
+          "river",
+          "ford"
+        ]
+      },
+      {
+        "id": "hazard-03",
+        "text": "loose badlands ledge with one clear unstable section",
+        "contexts": [
+          "badlands"
+        ]
+      },
+      {
+        "id": "hazard-04",
+        "text": "rockfall zone shown by a few large blocks",
+        "contexts": [
+          "valley",
+          "ridge"
+        ]
+      },
+      {
+        "id": "hazard-05",
+        "text": "mud or quicksand-like soft bank area with clear boundary",
+        "contexts": [
+          "river",
+          "wash"
+        ]
+      },
+      {
+        "id": "hazard-06",
+        "text": "narrow wash choke point under an overhang",
+        "contexts": [
+          "wash"
+        ]
+      },
+      {
+        "id": "hazard-07",
+        "text": "natural fissure crossing a rocky shelf",
+        "contexts": [
+          "shelf",
+          "rock"
+        ]
+      },
+      {
+        "id": "hazard-08",
+        "text": "thorn or scrub choke using a few large plant forms",
+        "contexts": [
+          "grassland",
+          "open"
+        ]
+      }
+    ],
+    "depth_features": [
+      {
+        "id": "depth-01",
+        "text": "trail bends behind a large outcrop",
+        "contexts": [
+          "valley",
+          "ridge"
+        ]
+      },
+      {
+        "id": "depth-02",
+        "text": "river curves toward a distant bank",
+        "contexts": [
+          "river"
+        ]
+      },
+      {
+        "id": "depth-03",
+        "text": "badlands gully narrows toward a gap",
+        "contexts": [
+          "badlands",
+          "wash"
+        ]
+      },
+      {
+        "id": "depth-04",
+        "text": "ridge overlooks a lower plain",
+        "contexts": [
+          "ridge",
+          "elevated"
+        ]
+      },
+      {
+        "id": "depth-05",
+        "text": "natural arch frames distant terrain",
+        "contexts": [
+          "badlands"
+        ]
+      },
+      {
+        "id": "depth-06",
+        "text": "ravine reveals a visible lower channel",
+        "contexts": [
+          "ravine"
+        ]
+      },
+      {
+        "id": "depth-07",
+        "text": "grassland horizon uses one distant hill band",
+        "contexts": [
+          "grassland",
+          "open"
+        ]
+      },
+      {
+        "id": "depth-08",
+        "text": "ford leads toward a opposite-bank landmark",
+        "contexts": [
+          "river",
+          "ford"
+        ]
+      }
+    ],
+    "atmosphere_features": [
+      {
+        "id": "atmosphere-01",
+        "text": "few wind-bent grass groups",
+        "contexts": [
+          "grassland",
+          "ridge"
+        ]
+      },
+      {
+        "id": "atmosphere-02",
+        "text": "simple river ripples at one bank",
+        "contexts": [
+          "river",
+          "water"
+        ]
+      },
+      {
+        "id": "atmosphere-03",
+        "text": "broad dust patch near one disturbed trail area",
+        "contexts": [
+          "badlands",
+          "wash"
+        ]
+      },
+      {
+        "id": "atmosphere-04",
+        "text": "single cloud bank kept as open colorable shapes",
+        "contexts": [
+          "open"
+        ]
+      },
+      {
+        "id": "atmosphere-05",
+        "text": "sparse moss or lichen on one shaded rock",
+        "contexts": [
+          "valley",
+          "river"
+        ]
+      },
+      {
+        "id": "atmosphere-06",
+        "text": "few reed groups near water",
+        "contexts": [
+          "river"
+        ]
+      },
+      {
+        "id": "atmosphere-07",
+        "text": "broad erosion bands on one badlands wall",
+        "contexts": [
+          "badlands"
+        ]
+      },
+      {
+        "id": "atmosphere-08",
+        "text": "clean distant horizon used as negative space",
+        "contexts": [
+          "grassland",
+          "ridge"
+        ]
+      }
+    ],
+    "interaction_patterns": [
+      {
+        "id": "interaction-01",
+        "text": "monster crosses a ford, wash, or shallow river edge",
+        "contexts": [
+          "river",
+          "ford",
+          "wash"
+        ]
+      },
+      {
+        "id": "interaction-02",
+        "text": "monster climbs onto or around one rock outcrop",
+        "contexts": [
+          "rock",
+          "ridge"
+        ]
+      },
+      {
+        "id": "interaction-03",
+        "text": "monster uses a tree, boulder, or ridge as partial cover",
+        "contexts": [
+          "valley",
+          "grassland"
+        ]
+      },
+      {
+        "id": "interaction-04",
+        "text": "monster follows a visible trail through open ground",
+        "contexts": [
+          "open",
+          "valley"
+        ]
+      },
+      {
+        "id": "interaction-05",
+        "text": "monster investigates one log, pool, or natural opening",
+        "contexts": [
+          "river",
+          "wash"
+        ]
+      },
+      {
+        "id": "interaction-06",
+        "text": "monster steps down a gully or broad bank",
+        "contexts": [
+          "ravine",
+          "badlands"
+        ]
+      },
+      {
+        "id": "interaction-07",
+        "text": "monster pauses beside a landmark that clearly locates the terrain",
+        "contexts": [
+          "universal"
+        ]
+      },
+      {
+        "id": "interaction-08",
+        "text": "monster carries, drags, or guards one simple object in the open landscape",
+        "contexts": [
+          "open",
+          "lair"
+        ]
+      }
+    ]
+  }
+}
