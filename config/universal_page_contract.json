@@ -110,6 +110,12 @@
     "line_art_purity": true,
     "environment_uniqueness": true,
     "print_layout": true,
-    "rule": "All gates must pass before Approve & Lock."
-  }
+    "rule": "All gates must pass before Approve & Lock. Colorability is the first constraint: story may enrich a page but may never reduce coloring usability."
+  },
+  "production_priority": [
+    "colorability",
+    "monster_identity",
+    "environment_identity",
+    "story_moment"
+  ]
 }
