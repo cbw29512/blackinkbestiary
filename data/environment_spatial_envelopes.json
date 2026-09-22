@@ -107,7 +107,9 @@
         "henhouse",
         "treasure vault",
         "phylactery vault",
-        "chapel"
+        "chapel",
+        "crypt",
+        "refuse pit"
       ],
       "plan_shape": "small or medium enclosed room",
       "proportions": "width and depth are comparable; room boundaries should feel close enough to define purpose",
@@ -400,7 +402,8 @@
         "stream crossing",
         "bog",
         "hollow tree",
-        "overgrown forest ruin"
+        "overgrown forest ruin",
+        "hollow"
       ],
       "plan_shape": "woodland path, edge, or pocket organized around one landmark",
       "proportions": "clear travel or open zone remains visible between large natural forms",
