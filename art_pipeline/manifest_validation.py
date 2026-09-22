@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 try:
     from .quality_system import archetype_rules
+    from .monster_catalog import resolve_monster_spec
 except ImportError:
     from quality_system import archetype_rules
+    from monster_catalog import resolve_monster_spec
 
 
 REQUIRED_PAGE_FIELDS = {
@@ -19,19 +20,17 @@ REQUIRED_VISUAL_FIELDS = {
 }
 
 
-def _validate_spec(spec_path: Path, page: dict) -> list[str]:
+def _validate_spec(monster_dir: Path, page: dict) -> list[str]:
     page_id = page["page_id"]
     spec_id = str(page.get("monster_spec_id") or "").strip()
-    if not spec_id or not spec_path.exists():
-        return [f"{page_id}: canonical monster spec missing: {spec_id}"]
+    if not spec_id:
+        return [f"{page_id}: canonical monster spec missing"]
     try:
-        spec = json.loads(spec_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        return [f"{page_id}: invalid monster spec {spec_id}: {exc}"]
+        spec = resolve_monster_spec(spec_id, monster_dir)
+    except RuntimeError as exc:
+        return [f"{page_id}: {exc}"]
 
     errors = []
-    if spec.get("monster_id") != spec_id:
-        errors.append(f"{page_id}: monster spec ID mismatch")
     if spec.get("monster_name") != page.get("monster_name"):
         errors.append(f"{page_id}: monster spec name mismatch")
     visual = spec.get("visual_identity") or {}
@@ -45,7 +44,6 @@ def _validate_spec(spec_path: Path, page: dict) -> list[str]:
     if not spec.get("accuracy_checks"):
         errors.append(f"{page_id}: monster spec accuracy_checks cannot be empty")
     return errors
-
 
 def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
     errors: list[str] = []
@@ -91,8 +89,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         if archetype not in archetypes:
             errors.append(f"{page_id}: unknown archetype {archetype!r}")
 
-        spec_id = str(page.get("monster_spec_id") or "").strip()
-        errors.extend(_validate_spec(monster_dir / f"{spec_id}.json", page))
+        errors.extend(_validate_spec(monster_dir, page))
 
     if seen_orders and seen_orders != set(range(1, len(pages) + 1)):
         errors.append("page order must be contiguous starting at 1")
