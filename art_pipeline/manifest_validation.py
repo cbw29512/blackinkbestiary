@@ -26,7 +26,7 @@ REQUIRED_VISUAL_FIELDS = {
 }
 
 
-def _validate_spec(monster_dir: Path, page: dict) -> list[str]:
+def _validate_spec(root: Path, monster_dir: Path, page: dict) -> list[str]:
     page_id = page["page_id"]
     spec_id = str(page.get("monster_spec_id") or "").strip()
     if not spec_id:
@@ -38,7 +38,7 @@ def _validate_spec(monster_dir: Path, page: dict) -> list[str]:
 
     errors = []
     errors.extend(minimal_recipe_errors(spec_id, monster_dir))
-    errors.extend(source_scope_errors(spec_id, ROOT))
+    errors.extend(source_scope_errors(spec_id, root))
     explicit_name = str(page.get("monster_name") or "").strip()
     if explicit_name and spec.get("monster_name") != explicit_name:
         errors.append(f"{page_id}: explicit monster_name conflicts with catalog")
@@ -127,7 +127,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         if archetype not in archetypes:
             errors.append(f"{page_id}: unknown archetype {archetype!r}")
 
-        errors.extend(_validate_spec(monster_dir, page))
+        errors.extend(_validate_spec(root, monster_dir, page))
         errors.extend(_validate_environment(page))
         errors.extend(_validate_physicality(page))
         try:
