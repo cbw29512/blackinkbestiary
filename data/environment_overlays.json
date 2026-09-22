@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "overlay_registry_id": "black-ink-environment-overlays-v1",
+  "purpose": "Cross-family environmental modifiers that deepen scenery without moving background detail into monster JSON.",
+  "overlays": {
+    "lair": {
+      "trigger_terms": [
+        "lair",
+        "nest",
+        "den",
+        "grotto",
+        "roost",
+        "burrow",
+        "hoard"
+      ],
+      "directives": [
+        "Show one unmistakable sign that the creature inhabits or repeatedly uses this place.",
+        "Use one large resting, feeding, storing, nesting, or territorial feature instead of many tiny personal objects.",
+        "The lair must still read as the base environment family first."
+      ],
+      "component_bias": [
+        "landmarks",
+        "secondary_features",
+        "interaction_patterns"
+      ]
+    },
+    "trap_zone": {
+      "trigger_terms": [
+        "trap",
+        "trapped",
+        "tripwire",
+        "pressure plate",
+        "pit",
+        "snare",
+        "ambush mechanism"
+      ],
+      "directives": [
+        "The trap mechanism must be visually understandable at a glance.",
+        "Use large structural trap parts integrated into the environment.",
+        "Avoid clockwork clutter, tiny gears, or invisible cause-and-effect."
+      ],
+      "component_bias": [
+        "hazards",
+        "structural_features",
+        "ground_planes"
+      ]
+    },
+    "ruin": {
+      "trigger_terms": [
+        "ruin",
+        "ruined",
+        "collapsed",
+        "broken",
+        "abandoned",
+        "wreck",
+        "wrecked"
+      ],
+      "directives": [
+        "Use a few large damaged forms with clear original structure still readable.",
+        "Show age through broken edges, missing sections, or one collapse zone rather than texture noise.",
+        "Leave broad intact surfaces for coloring."
+      ],
+      "component_bias": [
+        "structural_features",
+        "depth_features",
+        "secondary_features"
+      ]
+    },
+    "sacred": {
+      "trigger_terms": [
+        "shrine",
+        "chapel",
+        "temple",
+        "altar",
+        "sacred",
+        "ritual",
+        "reliquary",
+        "phylactery"
+      ],
+      "directives": [
+        "Use one primary sacred landmark and restrained supporting symbolism.",
+        "Favor large altars, plinths, arches, standing stones, or ritual basins.",
+        "Do not use rune wallpaper, symbol confetti, or excessive candles."
+      ],
+      "component_bias": [
+        "landmarks",
+        "lighting_features",
+        "structural_features"
+      ]
+    },
+    "military": {
+      "trigger_terms": [
+        "armory",
+        "barracks",
+        "war room",
+        "guard",
+        "fortified",
+        "gate",
+        "weapon",
+        "military"
+      ],
+      "directives": [
+        "Use practical defensive or storage features that clearly imply organized martial use.",
+        "Favor large shields, racks, gates, bunks, tables, or fortifications.",
+        "Avoid piles of dozens of tiny weapons."
+      ],
+      "component_bias": [
+        "structural_features",
+        "secondary_features",
+        "landmarks"
+      ]
+    },
+    "burial": {
+      "trigger_terms": [
+        "crypt",
+        "catacomb",
+        "grave",
+        "graveyard",
+        "tomb",
+        "burial",
+        "mausoleum",
+        "ossuary",
+        "sarcophagus"
+      ],
+      "directives": [
+        "Use substantial funerary architecture with large simple forms.",
+        "Favor one sarcophagus, grave marker group, tomb recess, or memorial feature.",
+        "Never use skull wallpaper or corpse clutter."
+      ],
+      "component_bias": [
+        "landmarks",
+        "structural_features",
+        "atmosphere_features"
+      ]
+    },
+    "treasure": {
+      "trigger_terms": [
+        "treasure",
+        "vault",
+        "hoard",
+        "cache",
+        "relic"
+      ],
+      "directives": [
+        "Treasure reads as broad containers or masses, not coin-by-coin detail.",
+        "Use one dominant chest, plinth, relic, or broad hoard form.",
+        "Preserve clear monster silhouette and open coloring space."
+      ],
+      "component_bias": [
+        "landmarks",
+        "secondary_features",
+        "interaction_patterns"
+      ]
+    },
+    "fungal": {
+      "trigger_terms": [
+        "fungal",
+        "mushroom",
+        "spore",
+        "mycelium"
+      ],
+      "directives": [
+        "Use a few oversized fungi with large caps, stalks, or shelves.",
+        "Treat fungi as major colorable forms rather than texture.",
+        "Keep the ground and background readable between growths."
+      ],
+      "component_bias": [
+        "secondary_features",
+        "overhead_features",
+        "atmosphere_features"
+      ]
+    },
+    "aquatic": {
+      "trigger_terms": [
+        "ocean",
+        "reef",
+        "kelp",
+        "lagoon",
+        "tidepool",
+        "river",
+        "water",
+        "cistern",
+        "sea",
+        "submerged"
+      ],
+      "directives": [
+        "Use broad water shapes and a few strong aquatic structures.",
+        "Water is negative space; do not fill it with bubbles or tiny fish.",
+        "Any current, surface, bank, or submerged structure must remain visually clear."
+      ],
+      "component_bias": [
+        "ground_planes",
+        "depth_features",
+        "atmosphere_features"
+      ]
+    },
+    "weathered": {
+      "trigger_terms": [
+        "ancient",
+        "old",
+        "abandoned",
+        "weathered",
+        "eroded",
+        "decayed"
+      ],
+      "directives": [
+        "Show age through a few large cracks, worn edges, leaning forms, or surface breaks.",
+        "Do not use dense crack networks as texture.",
+        "Keep damage broad enough to color comfortably."
+      ],
+      "component_bias": [
+        "primary_surfaces",
+        "structural_features",
+        "atmosphere_features"
+      ]
+    },
+    "settlement": {
+      "trigger_terms": [
+        "settlement",
+        "pantry",
+        "henhouse",
+        "hall",
+        "gallery",
+        "cell",
+        "prison",
+        "barracks",
+        "armory"
+      ],
+      "directives": [
+        "Show clear evidence of purposeful use through one or two large furnishings or fixtures.",
+        "Keep furnishings period-appropriate to the fantasy setting.",
+        "Avoid modern domestic or institutional drift."
+      ],
+      "component_bias": [
+        "secondary_features",
+        "lighting_features",
+        "structural_features"
+      ]
+    }
+  }
+}
