@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "mimic-door",
+  "family_profile": "mimic",
+  "display_name": "Mimic Door",
+  "size": "large",
+  "creature_type": "shapechanging monstrosity",
+  "visual_identity": {
+    "core_identity": "A predatory shapechanger disguised as a dungeon door, betrayed by integrated eye, mouth, tongue, and warped panels.",
+    "silhouette": "Mostly rectangular door silhouette fixed in a wall opening with subtle organic deformation.",
+    "body_shape": "Door slab and frame retain architectural structure while selected panels flex like living tissue.",
+    "surface": "Simple wood panels and iron fittings with sparse organic seams.",
+    "signature_gear": [
+      "door hinges",
+      "iron bands",
+      "handle transformed into tongue"
+    ],
+    "must_keep": [
+      "recognizable door",
+      "hidden eye",
+      "tongue-handle",
+      "wall integration",
+      "shapechanger reveal"
+    ],
+    "must_avoid": [
+      "free-standing chest mimic",
+      "humanoid limbs",
+      "full monster face covering door",
+      "ornate door clutter",
+      "cartoon expression"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Door remains physically integrated with its doorway or frame while the reveal emerges through panels and hardware.",
+    "behavior_style": [
+      "waiting as a convincing door",
+      "warping one panel into a mouth",
+      "revealing tongue through handle area",
+      "ambushing from a wall opening"
+    ]
+  },
+  "accuracy_checks": [
+    "door disguise remains convincing",
+    "architecture remains readable",
+    "mimic does not become unrelated monster"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "detached_door_drift",
+      "symptom": "door becomes free-standing monster",
+      "correction": "restore visible integration with wall opening and frame"
+    },
+    {
+      "id": "full_face_drift",
+      "symptom": "door surface becomes giant cartoon face",
+      "correction": "limit reveal to integrated eye, seam-mouth, and tongue-handle"
+    }
+  ]
+}
