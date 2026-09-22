@@ -28,7 +28,8 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     },
     {
       "book_id": "TOME-II",
@@ -53,7 +54,8 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     },
     {
       "book_id": "TOME-III",
@@ -78,7 +80,8 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     },
     {
       "book_id": "TOME-IV",
@@ -103,7 +106,8 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     },
     {
       "book_id": "TOME-V",
@@ -128,7 +132,8 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     },
     {
       "book_id": "TOME-VI",
@@ -153,7 +158,8 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     },
     {
       "book_id": "TOME-VII",
@@ -178,7 +184,8 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     },
     {
       "book_id": "TOME-VIII",
@@ -203,9 +210,11 @@
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
       "coloring_page_standard": "config/coloring_page_standard.json",
-      "page_contract": "config/universal_page_contract.json"
+      "page_contract": "config/universal_page_contract.json",
+      "monster_contract": "config/universal_monster_contract.json"
     }
   ],
   "default_target_pages": 50,
-  "page_contract": "config/universal_page_contract.json"
+  "page_contract": "config/universal_page_contract.json",
+  "monster_contract": "config/universal_monster_contract.json"
 }
