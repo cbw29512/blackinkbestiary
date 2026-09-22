@@ -60,8 +60,8 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
     )
     visual = monster.get("visual_identity") or {}
 
-    resolved.setdefault("monster_name", monster.get("monster_name"))
-    resolved.setdefault("habitat", environment.get("name"))
+    resolved["monster_name"] = monster.get("monster_name")
+    resolved["habitat"] = environment.get("name")
     resolved["identity_rules"] = _merge_unique(
         monster.get("accuracy_checks"),
         page.get("identity_rules"),
