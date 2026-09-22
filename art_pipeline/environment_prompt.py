@@ -31,6 +31,36 @@ def load_environment_for_page(page: dict) -> dict:
     return resolve_environment_profile(page.get("environment_profile_id"))
 
 
+def _required_object_rules(page: dict) -> list[str]:
+    variant = page.get("environment_variant") or {}
+    text = " ".join([
+        str(page.get("moment") or ""),
+        " ".join(str(item) for item in page.get("must_include") or []),
+        str(variant.get("landmark") or ""),
+        str(variant.get("interaction") or ""),
+    ]).lower()
+    rules = []
+    if "wall torch" in text or "wall sconce" in text or "torch bracket" in text:
+        rules.append(
+            "Required wall-mounted light must visibly attach to the wall with a bracket, ring, plate, or niche; "
+            "never draw it as a freestanding floor torch, post, or lamp."
+        )
+    if "tripwire" in text:
+        rules.append(
+            "Required tripwire must visibly cross the traversable path at believable ankle or shin height and "
+            "visibly connect to the triggered hazard so cause-and-effect reads instantly."
+        )
+    if "pressure plate" in text:
+        rules.append(
+            "Required pressure plate must be visibly integrated into the walking surface and clearly associated "
+            "with the hazard it activates."
+        )
+    if "pit" in text:
+        rules.append(
+            "Required pit must have a clear structural rim/opening and readable interior hazard without excessive tiny spikes."
+        )
+    return rules
+
 def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}
@@ -59,6 +89,7 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         _items("ENVIRONMENT ASSEMBLY CONTEXTS", palette.get("contexts")),
         *component_lines,
         _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules),
+        _items("REQUIRED OBJECT PHYSICAL RULES", _required_object_rules(page)),
         _items("FAMILY ENVIRONMENT QUALITY RULES", palette.get("family_quality_rules")),
         (
             "ENVIRONMENT PALETTE RULE: these selected components are a compatible design palette, "
