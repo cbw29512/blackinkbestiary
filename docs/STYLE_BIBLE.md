@@ -52,6 +52,30 @@ Each page spec must define:
 - signature feature(s)
 - prohibited look-alikes
 
+## Reference Image Rule
+
+Reference images exist to answer:
+
+> What anatomical and silhouette traits make this creature recognizable?
+
+Use them for:
+- head shape
+- body proportions
+- tail, horns, wings, limbs, claws, or other signature anatomy
+- silhouette
+- species-defining equipment when appropriate
+
+Do **not** copy:
+- pose
+- composition
+- lighting
+- rendering
+- colors
+- background
+- decorative details unique to the source artwork
+
+Black-Ink house style always overrides the rendering style of the reference.
+
 ## Habitat Rule
 
 The monster should appear where it plausibly lives, hunts, lairs, feeds, guards, or naturally operates.
