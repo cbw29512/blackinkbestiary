@@ -15,7 +15,10 @@ Every page should feel like it belongs in the same book:
 - Lighter interior lines.
 - Large uninterrupted white areas.
 - Medium-low detail density.
-- Environment supports the monster without competing with it.
+- Environment is a co-equal storytelling pillar with the monster and story moment.
+- Habitat must be specific, immediately readable, and worth coloring.
+- Use two to four large environmental cues rather than generic backdrop filler.
+- At least one environmental feature should interact with the creature or story moment.
 - Fantasy tone aimed above preschool level.
 - Clear enough for casual colorers; interesting enough for adults.
 
@@ -34,13 +37,14 @@ These are guidance targets, not rigid scoring rules.
 
 ## Composition Rules
 
-1. Monster is the dominant subject.
-2. Habitat is immediately readable.
-3. One clear action/moment.
-4. Avoid crowd scenes unless the creature is specifically a swarm.
-5. Leave breathing room around the silhouette.
-6. Do not fill every blank region with stones, grass, cracks, debris, scales, fur strokes, or decorative marks.
-7. Important scene objects must be readable at thumbnail size.
+1. Monster identity is immediately readable.
+2. Environment identity is immediately readable and specific to the named habitat.
+3. One clear action/moment connects monster and environment.
+4. Monster, environment, and story moment must all survive at thumbnail size.
+5. Avoid crowd scenes unless the creature is specifically a swarm.
+6. Leave breathing room around the silhouette and major environmental shapes.
+7. Do not fill every blank region with stones, grass, cracks, debris, scales, fur strokes, or decorative marks.
+8. Important scene objects and habitat cues must be readable at thumbnail size.
 
 ## Monster Identity
 
@@ -78,7 +82,13 @@ Black-Ink house style always overrides the rendering style of the reference.
 
 ## Habitat Rule
 
+The environment is not filler. It is one of three co-equal pillars on every page:
+
+> **Monster identity + environment identity + story moment**
+
 The monster should appear where it plausibly lives, hunts, lairs, feeds, guards, or naturally operates.
+
+The habitat must be specific enough that a reviewer can identify it without reading the caption. Use two to four large environment-defining cues, and make at least one of those cues interact with the monster or story moment.
 
 The habitat should help tell the story:
 - kobold → trapped tunnel / lair
@@ -87,7 +97,7 @@ The habitat should help tell the story:
 - ankheg → earth tunnel / burrow
 - mimic → treasure room / dungeon furnishing
 
-The background is context, not the star.
+The environment should not overpower the monster, but it must be equally intentional. Simplify clutter, not place. A clean generic room is a failure if the named habitat is not unmistakable.
 
 ## Coloring Rule
 
@@ -172,7 +182,9 @@ These become style references, not composition templates.
 Before APPROVE & LOCK:
 
 - Is the monster unmistakable?
-- Is the habitat appropriate?
+- Is the habitat unmistakable without reading the caption?
+- Is the environment specific rather than generic?
+- Does at least one environmental feature interact with the monster or story moment?
 - Is there one clear moment?
 - Is the silhouette strong?
 - Is there enough open space to color?

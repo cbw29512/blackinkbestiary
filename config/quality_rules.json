@@ -11,7 +11,7 @@
     },
     "simpler background": {
       "action": "modify",
-      "directive": "Simplify the environment to a few clear habitat-defining shapes. Preserve perspective and story-critical objects while removing background clutter."
+      "directive": "Remove nonessential clutter and tiny texture while preserving strong habitat identity, environmental storytelling, perspective, and story-critical setting features. Simplify detail, not place."
     },
     "clearer anatomy": {
       "action": "modify",
@@ -43,11 +43,35 @@
     },
     "focal subject weak": {
       "action": "modify",
-      "directive": "Make the monster the dominant focal subject by reducing competing object scale, background contrast, and visual tangents."
+      "directive": "Make the monster immediately readable without weakening habitat identity. Reduce competing object scale, tangents, and unnecessary detail while preserving two to four strong environmental cues and the environmental interaction that supports the story."
     },
     "composition wrong": {
       "action": "regenerate",
-      "directive": "Rebuild the composition around one dominant monster, one clear story beat, and only the habitat elements needed to support that moment."
+      "directive": "Rebuild the composition around three co-equal storytelling pillars: unmistakable monster identity, unmistakable environment identity, and one clear story moment. Use perspective and interaction to connect the creature to the place, with broad colorable shapes instead of filler clutter."
+    },
+    "environment identity weak": {
+      "action": "modify",
+      "directive": "Strengthen the named habitat with two to four large, unmistakable environmental cues. Make the place identifiable at thumbnail size without adding decorative clutter."
+    },
+    "environment generic": {
+      "action": "modify",
+      "directive": "Replace generic room or backdrop details with setting-specific architecture, terrain, furnishings, storage, hazards, vegetation, or lair features appropriate to the named habitat and fantasy context."
+    },
+    "environment story disconnect": {
+      "action": "modify",
+      "directive": "Make at least one environmental feature directly participate in the story moment through cause-and-effect, use, movement, scale, concealment, danger, feeding, guarding, or habitation."
+    },
+    "environment cluttered": {
+      "action": "modify",
+      "directive": "Reduce secondary environmental clutter while preserving the strongest habitat-defining features and all story-critical environmental interactions. Keep broad colorable shapes."
+    },
+    "wrong environment": {
+      "action": "regenerate",
+      "directive": "Rebuild the scene in the correct named habitat using setting-appropriate architecture, terrain, furnishings, and props. The environment must be immediately recognizable and integrated with the monster's action."
+    },
+    "modern setting drift": {
+      "action": "modify",
+      "directive": "Remove modern-looking domestic, industrial, or contemporary design cues that do not belong in the intended fantasy setting. Replace them with believable period-appropriate or fantastical equivalents."
     }
   }
 }

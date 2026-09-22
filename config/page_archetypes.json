@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "archetypes": {
-    "default_scene": "One dominant monster, one readable action, and a simple habitat that supports rather than competes with the subject.",
-    "trap_scene": "Show clear cause-and-effect: the trap trigger and trap result must both be readable. The monster remains the focal subject and trap geometry stays simple.",
-    "stealth_scene": "Use a low or concealed pose, clear line of sight, and restrained background detail. Avoid turning the scene into a static portrait.",
-    "swarm_scene": "Use a strong directional flow with distinct readable individuals and deliberate negative space. Never form an unreadable solid mass.",
-    "reveal_scene": "Preserve the disguise or hidden form while making the reveal moment unmistakable with one clear transformation cue.",
-    "boss_scene": "Use a commanding silhouette, stronger posture, and one rank-defining prop. Avoid excessive throne, treasure, or costume clutter.",
-    "lair_scene": "Establish the creature's habitat with two or three large environmental cues while keeping the monster dominant.",
-    "object_monster": "Keep the disguised object's original form readable while adding only the minimum living features needed to reveal the threat.",
-    "large_scale_scene": "Use architecture or environment as a scale reference. Keep the giant creature simple enough that its full silhouette remains readable.",
-    "action_scene": "Prioritize gesture and cause-and-effect. Props must support the action and should not dominate the monster.",
-    "horror_scene": "Use unsettling anatomy and pose without gore. Keep line art clean, printable, and spacious enough to color."
+    "default_scene": "Use three co-equal storytelling pillars: one unmistakable monster, one unmistakable environment, and one readable action. Establish the habitat with two to four large setting-specific cues, and make at least one environmental feature interact with the story moment.",
+    "trap_scene": "Show clear cause-and-effect: the trap trigger and trap result must both be readable. The trapped environment is as important as the monster: show believable anchors, floor/wall geometry, hazards, and spatial logic without clutter.",
+    "stealth_scene": "Use a low or concealed pose, clear line of sight, and an environment that actively provides cover, concealment, shadow, ledges, crawlspaces, foliage, rubble, or architecture. Avoid a monster pasted onto a generic backdrop.",
+    "swarm_scene": "Use a strong directional flow with distinct readable individuals and deliberate negative space. The environment must explain where the swarm emerges from, moves through, or occupies, with a clear opening, shaft, grate, nest, ceiling, or terrain feature.",
+    "reveal_scene": "Preserve the disguise or hidden form while making the reveal moment unmistakable. The environment must be part of the reveal by providing the perch, wall, furnishing, stonework, ceiling, or object context that made the disguise plausible.",
+    "boss_scene": "Use a commanding silhouette, stronger posture, and one rank-defining prop. The environment must communicate authority, territory, or lair identity through a few large purposeful features instead of generic throne-room clutter.",
+    "lair_scene": "Treat the lair as a co-equal subject: establish where and how the creature lives, feeds, guards, nests, worships, or stores possessions using two to four large environmental cues with broad colorable shapes.",
+    "object_monster": "Keep the disguised object's original form readable and make the surrounding environment support why that object belongs there. The reveal must interact with nearby floor, wall, furniture, treasure, or architecture rather than float in empty space.",
+    "large_scale_scene": "Use architecture, terrain, tunnel size, furniture, vehicles, trees, or other environmental references to make scale undeniable. The environment is essential evidence of size, not decorative background.",
+    "action_scene": "Prioritize gesture and cause-and-effect. The environment must participate in the action through objects being used, knocked over, stolen, broken, crossed, climbed, hidden behind, or moved through.",
+    "horror_scene": "Use unsettling anatomy and pose without gore. Make the environment reinforce dread through confinement, ruins, water, bones, fungi, crypt architecture, debris, or other habitat-specific cues while preserving clean colorable line art."
   }
 }

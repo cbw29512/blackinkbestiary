@@ -42,4 +42,9 @@ def active_book_paths(root: Path) -> dict[str, Path]:
         "reviews": resolve_root_path(root, active["reviews"], "active book reviews"),
         "quality_rules": resolve_root_path(root, config["quality_rules"], "quality rules"),
         "page_archetypes": resolve_root_path(root, config["page_archetypes"], "page archetypes"),
+        "environment_standard": resolve_root_path(
+            root,
+            config["environment_standard"],
+            "environment standard",
+        ),
     }

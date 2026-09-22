@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "principle": "Every page must deliver three co-equal storytelling pillars: an unmistakable monster, an unmistakable environment, and an unmistakable story moment.",
+  "generation_requirements": [
+    "The environment must be specific to the named habitat, never a generic room or empty backdrop.",
+    "Use two to four large, readable environmental cues that establish place at thumbnail size.",
+    "At least one environmental feature must interact with the monster or story moment through cause-and-effect, use, movement, scale, concealment, danger, feeding, guarding, or habitation.",
+    "Architecture, terrain, furniture, vegetation, debris, lighting fixtures, and props must match the setting's era and fantasy context.",
+    "The environment must be interesting to color, with broad shapes and open regions rather than tiny repetitive texture.",
+    "Perspective and scale must make the monster feel physically located inside the environment rather than pasted in front of it.",
+    "Simplification may remove clutter but must never erase habitat identity or story logic."
+  ],
+  "approval_checks": [
+    "Could the habitat be identified without reading the caption?",
+    "Does the environment feel like a place this creature plausibly lives, hunts, guards, feeds, hides, or operates?",
+    "Does the environment help explain the story moment rather than merely decorate the page?",
+    "Are two to four strong environmental cues readable at thumbnail size?",
+    "Is the environment enjoyable to color without becoming line-density homework?",
+    "Are setting details historically/fantasy appropriate rather than modern or generic?"
+  ],
+  "automatic_failures": [
+    "generic empty backdrop",
+    "wrong habitat",
+    "modern domestic or industrial details in a medieval-fantasy scene unless explicitly required",
+    "environment disconnected from the story moment",
+    "environment so weak that the page reads as a character portrait",
+    "environment so cluttered that monster, place, or story beat becomes hard to read"
+  ]
+}

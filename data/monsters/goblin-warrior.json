@@ -5,11 +5,11 @@
   "size": "small",
   "creature_type": "goblinoid humanoid",
   "visual_identity": {
-    "core_identity": "A small aggressive goblinoid fighter who relies on speed, dirty tricks, and scavenged weapons rather than heavy strength.",
-    "silhouette": "Small wiry fighter with oversized pointed ears, bent knees, ready stance, and a weapon held close.",
-    "head_features": "Large pointed ears, short nose, angular cheeks, sharp chin, wide toothy mouth, intense eyes.",
-    "body_shape": "Compact thin-limbed humanoid, agile rather than muscular.",
-    "surface": "Mostly smooth skin with restrained facial creases and scars.",
+    "core_identity": "A small, wiry goblinoid fighter who looks scrappy, sharp-featured, and dangerous rather than cute or heroic, relying on speed, dirty tricks, and scavenged gear.",
+    "silhouette": "Small lean fighter with oversized pointed ears, bent knees, slightly hunched shoulders, narrow torso, and crude weapon kept close; sparse hair at most, never furry.",
+    "head_features": "Oversized pointed ears, broad flattened nose, angular cheeks, low brow, sharp chin, wide mouth with irregular small teeth, intense crafty eyes; unmistakably goblin, not imp, elf, or orc.",
+    "body_shape": "Compact thin-limbed humanoid with sinewy arms and legs, quick hands and feet, agile crouched stance, and no bodybuilder mass.",
+    "surface": "Bare or lightly scarred skin with sparse hair only; no fur covering or fluffy facial outline.",
     "signature_gear": [
       "short sword or crude blade",
       "small shield or light scavenged armor",
@@ -23,11 +23,12 @@
       "ready to flee or strike"
     ],
     "must_keep": [
-      "large pointed ears",
-      "short goblinoid face",
+      "oversized pointed ears",
+      "broad flattened goblinoid nose",
+      "angular scrappy face",
       "small agile frame",
-      "scavenged martial gear",
-      "clear humanoid hands and feet"
+      "crouched dirty-fighting stance",
+      "scavenged martial gear"
     ],
     "must_avoid": [
       "kobold snout",
@@ -35,6 +36,10 @@
       "heavy knight armor",
       "large orc body",
       "cute mascot look",
+      "elf-child face",
+      "imp or devil styling",
+      "furry or fluffy silhouette",
+      "heroic human proportions",
       "excessive armor detail"
     ]
   },

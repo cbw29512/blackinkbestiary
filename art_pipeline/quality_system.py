@@ -26,6 +26,27 @@ def archetype_rules(root: Path) -> dict[str, str]:
     return payload.get("archetypes") or {}
 
 
+def environment_standard(root: Path) -> dict:
+    return _load(active_book_paths(root)["environment_standard"])
+
+
+def environment_directives(root: Path) -> list[str]:
+    payload = environment_standard(root)
+    directives = [str(payload.get("principle") or "").strip()]
+    directives.extend(
+        str(item).strip() for item in (payload.get("generation_requirements") or [])
+        if str(item).strip()
+    )
+    return [item for item in directives if item]
+
+
+def environment_approval_checks(root: Path) -> list[str]:
+    payload = environment_standard(root)
+    return [
+        str(item).strip() for item in (payload.get("approval_checks") or [])
+        if str(item).strip()
+    ]
+
 def expand_defect_tags(root: Path, tags) -> list[str]:
     rules = defect_rules(root)
     directives = []

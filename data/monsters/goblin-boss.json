@@ -5,11 +5,11 @@
   "size": "small",
   "creature_type": "goblinoid humanoid",
   "visual_identity": {
-    "core_identity": "A dominant goblin leader: still small and wiry, but better equipped, more self-important, and visibly in command.",
-    "silhouette": "Small goblinoid body with oversized pointed ears, broader stance, raised chin, and commanding gesture.",
-    "head_features": "Large pointed ears, short nose, angular face, wide mouth with small sharp teeth, heavy expressive brows.",
-    "body_shape": "Compact agile humanoid, slightly sturdier than a common goblin but never human-sized or orc-bulky.",
-    "surface": "Mostly smooth skin with a few scars or wrinkles kept simple for coloring.",
+    "core_identity": "A dominant goblin leader who is still small, wiry, ugly-cunning, and unmistakably goblinoid; authority comes from posture, trophies, and scavenged rank gear rather than human nobility or brute size.",
+    "silhouette": "Small goblinoid body with oversized pointed ears, narrow torso, broader commanding stance, raised chin, angular gestures, and visible scavenged symbols of rank; never furry.",
+    "head_features": "Oversized pointed ears, broad flattened nose, angular cheeks, low heavy brow, sharp chin, wide grin with irregular small teeth, suspicious predatory eyes.",
+    "body_shape": "Compact agile humanoid, slightly sturdier than a common goblin but still lean, small, and quick rather than orc-bulky or heroic.",
+    "surface": "Mostly bare skin with a few scars or wrinkles and sparse hair only; no fur-covered or fluffy silhouette.",
     "signature_gear": [
       "bent sword or decorated crude blade",
       "mismatched scavenged armor",
@@ -23,10 +23,11 @@
       "cruelly confident"
     ],
     "must_keep": [
-      "large pointed ears",
-      "short goblinoid face",
-      "small body scale",
-      "commanding posture",
+      "oversized pointed ears",
+      "broad flattened goblinoid nose",
+      "angular goblin face",
+      "small wiry body scale",
+      "commanding goblin posture",
       "better but still scavenged equipment"
     ],
     "must_avoid": [
@@ -35,6 +36,10 @@
       "reptilian snout",
       "tail",
       "full plate armor",
+      "cute mascot look",
+      "elf-child face",
+      "imp or devil styling",
+      "furry or fluffy silhouette",
       "overly ornate throne detail"
     ]
   },

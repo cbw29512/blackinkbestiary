@@ -20,6 +20,7 @@ jobs:
           python -m json.tool config/studio.json > /dev/null
           python -m json.tool config/quality_rules.json > /dev/null
           python -m json.tool config/page_archetypes.json > /dev/null
+          python -m json.tool config/environment_standard.json > /dev/null
           python -m unittest discover -s tests -v
           python scripts/audit_active_book.py
           python -m compileall -q art_pipeline scripts server.py
