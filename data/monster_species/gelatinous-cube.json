@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "gelatinous-cube",
+  "display_name": "Gelatinous Cube",
+  "visual_identity": {
+    "core_identity": "A nearly transparent cube-shaped dungeon ooze whose straight corridor-filling edges and suspended debris make its body readable.",
+    "silhouette": "Large rectangular cube occupying most of a ten-foot corridor, with subtly rippling edges and a flat forward face.",
+    "head_features": "No head or face; identity comes entirely from the cube form and suspended contents.",
+    "body_shape": "Uniform gelatinous cube with faint internal bubbles and objects suspended at different depths.",
+    "surface": "Mostly clear open white interior with only sparse contour ripples and bubbles.",
+    "signature_gear": [],
+    "attitude": [
+      "silent",
+      "relentless",
+      "featureless",
+      "engulfing"
+    ],
+    "must_keep": [
+      "clear cube geometry",
+      "transparent-looking open interior",
+      "corridor-filling scale"
+    ],
+    "must_avoid": [
+      "face or eyes",
+      "slime tentacles",
+      "solid black fill",
+      "rounded blob silhouette",
+      "decorative reflections",
+      "dense bubbles"
+    ]
+  },
+  "accuracy_checks": [
+    "cube edges are unmistakable",
+    "corridor scale explains size",
+    "interior stays mostly white",
+    "no face is added",
+    "outline remains simple"
+  ]
+}
