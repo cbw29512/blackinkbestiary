@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "flying-sword",
+  "family_profile": "construct",
+  "display_name": "Flying Sword",
+  "size": "small",
+  "creature_type": "construct",
+  "visual_identity": {
+    "core_identity": "A normal-looking weapon animated by magic, flying and attacking with no hand, arm, or visible wielder.",
+    "silhouette": "Single sword suspended horizontally or diagonally in open air with a clear motion arc.",
+    "head_features": "No head or face.",
+    "body_shape": "One complete sword with blade, guard, grip, and pommel; the weapon itself is the creature.",
+    "limb_structure": "No limbs whatsoever; movement comes from magical levitation of the complete sword.",
+    "surface": "Clean metal blade and simple hilt with minimal decorative marks.",
+    "signature_gear": [
+      "single sword only"
+    ],
+    "must_keep": [
+      "one complete sword",
+      "no wielder",
+      "clear airborne position",
+      "simple readable hilt"
+    ],
+    "must_avoid": [
+      "ghost holding sword",
+      "multiple swords",
+      "eyes on blade",
+      "arms or hands",
+      "overly ornate runes",
+      "motion clutter"
+    ]
+  },
+  "scene_identity": {
+    "natural_posture": "Suspended by magical force with one clear attack or guard orientation and no visible support.",
+    "behavior_style": [
+      "guarding a chamber",
+      "circling a pillar",
+      "lunging along one clean arc",
+      "hovering before a doorway"
+    ]
+  },
+  "accuracy_checks": [
+    "exactly one sword is shown as the creature",
+    "no hand or wielder appears",
+    "hilt and blade remain readable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "wielder_drift",
+      "symptom": "hand, ghost, or warrior appears holding sword",
+      "correction": "remove wielder entirely; the sword itself is animated"
+    },
+    {
+      "id": "weapon_swarm_drift",
+      "symptom": "multiple swords appear",
+      "correction": "restore one complete animated sword"
+    }
+  ],
+  "locomotion": {
+    "can_fly": true
+  }
+}
