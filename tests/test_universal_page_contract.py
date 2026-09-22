@@ -148,11 +148,13 @@ class UniversalPageContractTests(unittest.TestCase):
         self.assertEqual(resolved["physicality"]["mode"], "grounded")
         self.assertIn("both feet", resolved["physicality"]["support"])
 
-    def test_all_registered_books_share_one_contract(self):
+    def test_all_registered_books_share_universal_contracts(self):
         series = json.loads((ROOT / "data" / "series.json").read_text(encoding="utf-8"))
         self.assertEqual(series["page_contract"], "config/universal_page_contract.json")
+        self.assertEqual(series["monster_contract"], "config/universal_monster_contract.json")
         self.assertTrue(all(
             book["page_contract"] == "config/universal_page_contract.json"
+            and book["monster_contract"] == "config/universal_monster_contract.json"
             for book in series["books"]
         ))
 
