@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from prompt_builder import build_prompt
+from prompt_builder import build_prompt, load_monster_spec
 from workflow_adapter import PROMPT_TOKEN, SEED_TOKEN, prepare_workflow, validate_template
 from qa import inspect_png
 
@@ -27,6 +27,34 @@ class PromptTests(unittest.TestCase):
         self.assertIn("Kobold Warrior", text)
         self.assertIn("trapped corridor", text)
         self.assertIn("large uninterrupted white regions", text)
+
+    def test_first_five_tome_pages_resolve_canonical_specs(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = tome["pages"][:5]
+        self.assertEqual(
+            [page.get("monster_spec_id") for page in pages],
+            [
+                "kobold-warrior",
+                "kobold-shrine-keeper",
+                "goblin-minion",
+                "goblin-warrior",
+                "goblin-boss",
+            ],
+        )
+        for page in pages:
+            spec = load_monster_spec(page)
+            self.assertEqual(spec["monster_id"], page["monster_spec_id"])
+            self.assertTrue(spec["visual_identity"]["must_keep"])
+            self.assertTrue(spec["accuracy_checks"])
+
+    def test_canonical_kobold_identity_enters_generation_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        text = build_prompt(tome["pages"][0])
+        self.assertIn("CANONICAL SILHOUETTE", text)
+        self.assertIn("long balancing tail", text)
+        self.assertIn("goblin-like round head", text)
+        self.assertIn("REFERENCE RULE", text)
+        self.assertIn("anatomy, silhouette, and identity only", text)
 
     def test_modify_notes_enter_prompt(self):
         page = {

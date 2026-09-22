@@ -47,7 +47,24 @@ The system is complete when it can:
 
 ## System Roles
 
-### 1. Page Spec
+### 1. Canonical Monster Spec
+
+A reusable JSON identity record for the creature itself.
+
+It defines:
+- core creature identity
+- silhouette
+- head and body anatomy
+- surface treatment cues
+- signature gear
+- must-keep species traits
+- prohibited look-alikes
+- monster accuracy checks
+- optional identity/anatomy reference image
+
+Reference art controls **identity and anatomy only**. It never controls Black-Ink rendering style or composition.
+
+### 2. Page Spec
 
 A structured JSON blueprint for one page.
 
@@ -64,7 +81,7 @@ It defines:
 - optional reference images
 - current review instructions
 
-### 2. Production Manager
+### 3. Production Manager
 
 The state machine and traffic controller.
 
@@ -75,7 +92,7 @@ It decides:
 - whether the system may advance
 - which files are candidate vs approved
 
-### 3. Local Art Generator
+### 4. Local Art Generator
 
 The image model running on the local GPU.
 
@@ -87,7 +104,7 @@ Its job:
 
 The generator never approves its own work.
 
-### 4. Automatic QA
+### 5. Automatic QA
 
 Fast mechanical checks before human/LLM review.
 
@@ -104,7 +121,7 @@ Initial checks:
 
 Automatic QA is a garbage filter, not an art critic.
 
-### 5. Supervisor
+### 6. Supervisor
 
 The supervisory layer compares a candidate against:
 - page JSON
@@ -119,7 +136,7 @@ Outcomes:
 
 The supervisor may issue one targeted correction pass before showing the result to the human reviewer.
 
-### 6. Human Reviewer
+### 7. Human Reviewer
 
 Final authority.
 
@@ -210,12 +227,26 @@ Fields:
 - `current_page_id`
 - ordered `pages[]`
 
+### Canonical Monster Spec
+
+Fields:
+- `monster_id`
+- `monster_name`
+- `family`
+- `size`
+- `creature_type`
+- `visual_identity`
+- `default_habitats[]`
+- `accuracy_checks[]`
+- `reference`
+
 ### Page Spec
 
 Fields:
 - `page_id`
 - `order`
 - `monster_name`
+- `monster_spec_id`
 - `identity_rules[]`
 - `habitat`
 - `moment`

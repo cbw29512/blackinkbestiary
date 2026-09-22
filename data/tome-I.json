@@ -68,7 +68,8 @@
           "removing the trap",
           "adding gray shading"
         ]
-      }
+      },
+      "monster_spec_id": "kobold-warrior"
     },
     {
       "page_id": "I-02",
@@ -101,7 +102,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "kobold-shrine-keeper"
     },
     {
       "page_id": "I-03",
@@ -134,7 +136,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "goblin-minion"
     },
     {
       "page_id": "I-04",
@@ -167,7 +170,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "goblin-warrior"
     },
     {
       "page_id": "I-05",
@@ -200,7 +204,8 @@
         "open_white_area": "high",
         "color": "black_on_white"
       },
-      "reference_image": null
+      "reference_image": null,
+      "monster_spec_id": "goblin-boss"
     },
     {
       "page_id": "I-06",

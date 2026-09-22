@@ -20,6 +20,7 @@ TOME_FILE = DATA_DIR / "tome-I.json"
 STATE_FILE = DATA_DIR / "production-state.json"
 REVIEWS_FILE = DATA_DIR / "reviews.jsonl"
 APPROVED_ROOT = WEB_DIR / "approved"
+MONSTER_DIR = DATA_DIR / "monsters"
 
 VALID_DECISIONS = {"approve", "modify", "regenerate"}
 ACTIVE_STATES = {
@@ -53,6 +54,39 @@ def load_state():
 
 def page_by_id(tome, page_id: str):
     return next((page for page in tome["pages"] if page["page_id"] == page_id), None)
+
+
+def load_monster_spec(page: dict):
+    spec_id = str(page.get("monster_spec_id", "")).strip()
+    if not spec_id:
+        return None
+    path = MONSTER_DIR / f"{spec_id}.json"
+    if not path.exists():
+        raise ValueError(f"Monster spec not found: {spec_id}")
+    spec = read_json(path)
+    if spec.get("monster_id") != spec_id:
+        raise ValueError(f"Monster spec ID mismatch: {spec_id}")
+    return spec
+
+
+def public_monster_spec(page: dict):
+    spec = load_monster_spec(page)
+    if not spec:
+        return None
+    payload = json.loads(json.dumps(spec))
+    reference = payload.get("reference") or {}
+    image = str(reference.get("image") or "").strip()
+    resolved = None
+    if image:
+        relative = Path(image)
+        if not relative.is_absolute() and ".." not in relative.parts:
+            target = (WEB_DIR / relative).resolve()
+            web_root = WEB_DIR.resolve()
+            if target.exists() and target.is_file() and (target == web_root or web_root in target.parents):
+                resolved = relative.as_posix()
+    reference["resolved_image"] = resolved
+    payload["reference"] = reference
+    return payload
 
 
 def active_page_ids(state):
@@ -109,6 +143,7 @@ def public_state():
         },
         "progress": {"approved": approved, "total": tome["total_pages"]},
         "current_page": current,
+        "current_monster_spec": public_monster_spec(current),
         "current_state": state["pages"][state["current_page_id"]],
         "current_page_id": state["current_page_id"],
         "ordered_pages": [

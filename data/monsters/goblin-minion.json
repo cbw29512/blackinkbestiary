@@ -1,0 +1,59 @@
+{
+  "monster_id": "goblin-minion",
+  "monster_name": "Goblin Minion",
+  "family": "goblin",
+  "size": "small",
+  "creature_type": "goblinoid humanoid",
+  "visual_identity": {
+    "core_identity": "A small wiry goblinoid scavenger with quick hands, oversized pointed ears, and an expressive sharp-featured face.",
+    "silhouette": "Compact torso, thin limbs, slightly oversized head and ears, crouched or darting posture.",
+    "head_features": "Broad pointed ears, short flattened nose, sharp chin, wide mouth with small teeth, prominent brows and lively eyes.",
+    "body_shape": "Small narrow-chested humanoid with quick hands and feet; less reptilian and less muscular than a kobold or hobgoblin.",
+    "surface": "Mostly smooth skin with minimal wrinkles or scars; no fur covering.",
+    "signature_gear": [
+      "patched tunic",
+      "rope belt",
+      "small scavenged knife or kitchen tool",
+      "stolen food or trinket"
+    ],
+    "attitude": [
+      "mischievous",
+      "cowardly when isolated",
+      "opportunistic",
+      "quick"
+    ],
+    "must_keep": [
+      "large pointed ears",
+      "short goblinoid nose",
+      "small wiry body",
+      "expressive face",
+      "simple scavenged clothing"
+    ],
+    "must_avoid": [
+      "reptilian snout",
+      "tail",
+      "heavy armor",
+      "orc-like tusks",
+      "childlike cartoon proportions",
+      "dense wrinkles"
+    ]
+  },
+  "default_habitats": [
+    "dungeon kitchens",
+    "storerooms",
+    "crude goblin camps"
+  ],
+  "accuracy_checks": [
+    "large pointed ears dominate silhouette",
+    "face is goblinoid rather than reptilian",
+    "body is small and wiry",
+    "gear looks scavenged",
+    "pose reads quick or sneaky",
+    "coloring spaces remain open"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference guides goblin silhouette and facial anatomy only."
+  }
+}
