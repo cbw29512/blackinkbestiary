@@ -33,7 +33,7 @@ def audit_monster_catalog(root: Path) -> dict:
             errors.append(f"{path.name}: invalid JSON: {exc}")
             continue
         specs.append((path, spec))
-        family = str(spec.get("family") or "").strip()
+        family = str(spec.get("family_profile") or spec.get("family") or "").strip()
         if family:
             groups[family].append((path, spec))
 
