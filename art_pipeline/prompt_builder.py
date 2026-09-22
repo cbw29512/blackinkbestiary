@@ -129,6 +129,17 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             sections.append(_items("LATEST HUMAN QUICK CHANGES", tags))
             sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
 
+    variant = page.get("environment_variant") or {}
+    required = "; ".join(str(item) for item in page.get("must_include") or [])
+    sections.append(
+        "PAGE RECIPE LOCK — NON-NEGOTIABLE: "
+        f"environment={page['habitat']}; "
+        f"moment={page['moment']}; "
+        f"landmark={variant.get('landmark', '')}; "
+        f"interaction={variant.get('interaction', '')}; "
+        f"required elements={required}. "
+        "Universal family/component libraries may enrich these requirements but may not replace them."
+    )
     sections.append(
         "Final test: COLORABILITY IS THE GOVERNING CONSTRAINT. The page must first be inviting and satisfying to color, "
         "with broad open regions, clean line hierarchy, and no fiddly density. Under that constraint, the monster must be "
