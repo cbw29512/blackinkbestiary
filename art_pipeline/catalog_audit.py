@@ -5,19 +5,22 @@ from collections import defaultdict
 from pathlib import Path
 
 try:
-    from .monster_catalog import minimal_recipe_errors, resolve_monster_spec
+    from .monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
 except ImportError:
-    from monster_catalog import minimal_recipe_errors, resolve_monster_spec
+    from monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
 
-REQUIRED_VISUAL = {
-    "core_identity",
-    "silhouette",
-    "head_features",
-    "body_shape",
-    "surface",
-    "must_keep",
-    "must_avoid",
-}
+def _missing_paths(payload: dict, paths) -> list[str]:
+    missing = []
+    for dotted in paths or []:
+        value = payload
+        for part in str(dotted).split("."):
+            if not isinstance(value, dict) or part not in value:
+                value = None
+                break
+            value = value[part]
+        if value is None or value == "" or value == []:
+            missing.append(str(dotted))
+    return missing
 
 
 def _read(path: Path) -> dict:
@@ -62,6 +65,13 @@ def audit_monster_catalog(root: Path) -> dict:
                     f"{path.name}: repeated family {family!r} requires family_profile"
                 )
 
+    try:
+        contract = load_monster_contract(root / "config" / "universal_monster_contract.json")
+        required_family_paths = contract.get("family_profile_required") or []
+    except RuntimeError as exc:
+        errors.append(f"monster contract could not be loaded: {exc}")
+        required_family_paths = []
+
     family_profiles = 0
     for path in sorted(family_dir.glob("*.json")):
         family_profiles += 1
@@ -72,14 +82,9 @@ def audit_monster_catalog(root: Path) -> dict:
             continue
         if profile.get("profile_id") != path.stem:
             errors.append(f"{path.name}: profile_id must match filename")
-        visual = profile.get("visual_identity") or {}
-        missing = sorted(REQUIRED_VISUAL.difference(visual))
+        missing = _missing_paths(profile, required_family_paths)
         if missing:
-            errors.append(f"{path.name}: missing visual fields: {', '.join(missing)}")
-        if not profile.get("accuracy_checks"):
-            errors.append(f"{path.name}: accuracy_checks cannot be empty")
-        if not profile.get("known_failure_modes"):
-            errors.append(f"{path.name}: known_failure_modes cannot be empty")
+            errors.append(f"{path.name}: missing family DNA fields: {', '.join(missing)}")
 
     return {
         "pass": not errors,
