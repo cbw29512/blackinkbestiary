@@ -1,18 +1,14 @@
 {
-  "schema_version": 2,
-  "identity_version": 1,
+  "schema_version": 3,
   "monster_id": "kobold-shrine-keeper",
   "monster_name": "Kobold Shrine-Keeper",
   "family_profile": "kobold",
-  "family": "kobold",
-  "size": "small",
-  "creature_type": "reptilian humanoid",
-  "visual_identity": {
-    "core_identity": "A small reptilian kobold devoted to a crude underground shrine, more ceremonial than heavily armed but still wary and dangerous.",
-    "silhouette": "Short wiry reptilian body with a long tail and slightly bowed, reverent posture.",
-    "head_features": "Long narrow snout, sharp teeth, alert eyes, small backward horn nubs or head spines.",
-    "body_shape": "Lean scaled torso, thin limbs, clawed hands and long clawed feet.",
-    "surface": "Sparse simplified scales with large open body regions suitable for coloring.",
+  "variant_traits": [
+    "shrine keeper",
+    "reverent",
+    "watchful"
+  ],
+  "visual_overrides": {
     "signature_gear": [
       "simple ritual sash or leather cords",
       "small coin pouch",
@@ -23,40 +19,18 @@
       "possessive",
       "nervous",
       "watchful"
-    ],
-    "must_keep": [
-      "long reptilian snout",
-      "visible tail",
-      "horn nubs or head spines",
-      "small lean body",
-      "clawed hands and feet",
-      "recognizable kobold anatomy"
-    ],
-    "must_avoid": [
-      "goblin face",
-      "furry body",
-      "cute priest caricature",
-      "ornate high-fantasy robes",
-      "dense jewelry clutter",
-      "dragon wings"
+    ]
+  },
+  "scene_overrides": {
+    "behavior_style": [
+      "tending a small underground shrine",
+      "presenting a simple offering",
+      "guarding a sacred niche while remaining alert"
     ]
   },
   "default_habitats": [
     "low cave shrines",
     "dragon-themed kobold lairs",
     "coin-strewn alcoves"
-  ],
-  "accuracy_checks": [
-    "snout is long and reptilian",
-    "tail is visible",
-    "small horns or head spines visible",
-    "shrine role reads without hiding kobold anatomy",
-    "gear remains simple and scavenged",
-    "body remains lean and colorable"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Use reference only for creature identity and proportions; preserve Black-Ink coloring-book style."
-  }
+  ]
 }
