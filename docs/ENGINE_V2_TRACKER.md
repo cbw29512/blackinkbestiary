@@ -292,3 +292,44 @@ Walls, floors, ceilings, torches, traps, gates, roots, coral, tombs, furniture, 
 Environment variety must come from stronger structure, material design, fixtures, depth, and composition—not tiny texture.
 
 See `docs/ENVIRONMENT_ENGINE_V3.md` for the persistent architecture specification.
+
+
+## 2026-09-22 Tight Room Briefs
+
+Calibration art exposed that correct environment data can still produce a loose room when the generation prompt describes the same space too many different ways.
+
+The universal environment engine now compiles profile + spatial envelope into one authoritative `ROOM BRIEF`.
+
+Generation no longer separately repeats:
+
+- spatial type
+- material language
+- spatial read
+- plan shape
+- proportions
+- ceiling
+- openings
+- focal zone
+- camera
+- profile description
+- full visual-cue list
+
+The underlying data remains available for QA and validation, but the image model receives a compact room instruction:
+
+**geometry + proportions + material + overhead + openings + focal organization + view**
+
+This is followed only by:
+
+- up to five proof cues
+- up to four drift failures
+- selected compatible room components
+- active overlays
+- page-specific landmark / framing / interaction
+- final page recipe lock
+
+This reduces prompt contradiction and makes room geometry harder to reinterpret.
+
+Additional calibration-derived rules now also require:
+
+- wall torches/sconces to visibly attach to masonry rather than become freestanding posts
+- tripwires to visibly cross the walking path and connect cause-and-effect to the triggered hazard
