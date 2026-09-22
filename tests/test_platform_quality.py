@@ -7,7 +7,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from manifest_validation import validate_manifest
-from quality_system import archetype_directive, expand_defect_tags, recommended_action
+from quality_system import (
+    archetype_directive,
+    environment_approval_checks,
+    environment_directives,
+    expand_defect_tags,
+    recommended_action,
+)
 from studio_config import active_book_paths
 
 
@@ -28,6 +34,18 @@ class PlatformQualityTests(unittest.TestCase):
         self.assertTrue(any("cause-and-effect" in item for item in directives))
         self.assertTrue(any("missing required prop" in item for item in directives))
         self.assertTrue(any("gesture" in item for item in directives))
+
+    def test_environment_standard_is_global_and_actionable(self):
+        directives = environment_directives(ROOT)
+        checks = environment_approval_checks(ROOT)
+        self.assertTrue(any("co-equal storytelling pillars" in item for item in directives))
+        self.assertTrue(any("two to four" in item.lower() for item in directives))
+        self.assertTrue(any("without reading the caption" in item for item in checks))
+
+    def test_environment_defects_route_correctly(self):
+        self.assertEqual(recommended_action(ROOT, ["environment identity weak"]), "modify")
+        self.assertEqual(recommended_action(ROOT, ["environment generic"]), "modify")
+        self.assertEqual(recommended_action(ROOT, ["wrong environment"]), "regenerate")
 
     def test_composition_failure_recommends_regenerate(self):
         self.assertEqual(recommended_action(ROOT, ["composition wrong"]), "regenerate")
