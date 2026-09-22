@@ -1,18 +1,14 @@
 {
-  "schema_version": 2,
-  "identity_version": 1,
+  "schema_version": 3,
   "monster_id": "kobold-warrior",
   "monster_name": "Kobold Warrior",
   "family_profile": "kobold",
-  "family": "kobold",
-  "size": "small",
-  "creature_type": "reptilian humanoid",
-  "visual_identity": {
-    "core_identity": "A small, lean reptilian humanoid dungeon-dweller built for ambushes and traps rather than brute force.",
-    "silhouette": "Short but wiry body, long balancing tail, narrow shoulders, slightly hunched alert posture, long clawed feet.",
-    "head_features": "Long narrow draconic snout, sharp small teeth, pronounced brow, swept horn nubs or short head spines, alert predatory eyes.",
-    "body_shape": "Lean torso and limbs with visible reptilian anatomy; digitigrade-looking legs and clawed hands and feet.",
-    "surface": "Scaled skin suggested with sparse, simple scale marks rather than dense texture.",
+  "variant_traits": [
+    "warrior",
+    "trap-minded",
+    "wary"
+  ],
+  "visual_overrides": {
     "signature_gear": [
       "oversized spear",
       "rough leather straps",
@@ -23,40 +19,18 @@
       "suspicious",
       "aggressive when cornered",
       "trap-minded"
-    ],
-    "must_keep": [
-      "long reptilian snout",
-      "visible tail",
-      "horn nubs or head spines",
-      "lean reptilian silhouette",
-      "clawed feet",
-      "small dangerous-looking humanoid scale"
-    ],
-    "must_avoid": [
-      "goblin-like round head",
-      "furry body",
-      "cute mascot proportions",
-      "bulky ogre-like build",
-      "dense scale texture",
-      "dragon wings"
+    ]
+  },
+  "scene_overrides": {
+    "behavior_style": [
+      "testing or tending a simple trap",
+      "guarding a narrow passage",
+      "moving cautiously through confined dungeon space"
     ]
   },
   "default_habitats": [
     "trapped dungeon corridors",
     "crude underground lairs",
     "narrow cave passages"
-  ],
-  "accuracy_checks": [
-    "long draconic snout is obvious",
-    "tail is visible",
-    "horns or head spines are visible",
-    "body reads reptilian rather than furry",
-    "small wiry silhouette",
-    "trap-maker gear or behavior is believable"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference art controls anatomy and silhouette, never rendering style. Black-Ink house style controls the final line-art treatment."
-  }
+  ]
 }
