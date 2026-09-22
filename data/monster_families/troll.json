@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "troll",
+  "display_name": "Troll",
+  "taxonomy": {
+    "family": "troll",
+    "creature_type": "giant humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "Lanky regenerative cave giants with elongated arms, large claws, predatory faces, and tough sparse-textured skin.",
+    "silhouette": "Tall narrow torso, hunched shoulders, very long arms, large clawed hands and feet.",
+    "head_features": "Long coarse face, strong nose and brow, deep-set eyes, wide predatory mouth.",
+    "body_shape": "Lean powerful giant anatomy with visibly elongated limbs rather than ogre-like bulk.",
+    "surface": "Tough uneven skin with sparse bumps; no fur or reptilian scales.",
+    "must_keep": [
+      "very long arms",
+      "lanky giant proportions",
+      "large claws",
+      "predatory face",
+      "tough regenerative body identity"
+    ],
+    "must_avoid": [
+      "ogre belly",
+      "short arms",
+      "orc tusks",
+      "reptilian scales",
+      "cute features",
+      "dense skin texture"
+    ]
+  },
+  "accuracy_checks": [
+    "troll reads lanky rather than ogre-heavy",
+    "arms are distinctly elongated",
+    "large claws are visible",
+    "face reads predatory rather than goofy"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "ogre_drift",
+      "symptom": "troll becomes broad, heavy, and short-armed",
+      "correction": "narrow the torso and lengthen arms toward knees while preserving clawed hands"
+    },
+    {
+      "id": "orc_drift",
+      "symptom": "troll gains tusks or orc armor",
+      "correction": "remove tusks and military gear; restore predatory cave-giant anatomy"
+    }
+  ]
+}
