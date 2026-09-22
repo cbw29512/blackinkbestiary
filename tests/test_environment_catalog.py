@@ -15,6 +15,19 @@ class EnvironmentCatalogTests(unittest.TestCase):
     def setUp(self):
         self.tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
 
+    def test_every_environment_catalog_profile_is_complete(self):
+        for path in sorted((ROOT / "data" / "environment_families").glob("*.json")):
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            self.assertTrue(payload.get("family_id"), path)
+            self.assertTrue(payload.get("profiles"), path)
+            for profile_id, profile in payload["profiles"].items():
+                self.assertTrue(profile_id, path)
+                self.assertTrue(profile.get("name"), profile_id)
+                self.assertTrue(profile.get("description"), profile_id)
+                self.assertGreaterEqual(len(profile.get("visual_cues") or []), 3, profile_id)
+                self.assertTrue(profile.get("colorable_forms"), profile_id)
+                self.assertTrue(profile.get("must_avoid"), profile_id)
+
     def test_all_tome_i_pages_resolve_specific_environment_profiles(self):
         self.assertEqual(len(self.tome["pages"]), 50)
         for page in self.tome["pages"]:
