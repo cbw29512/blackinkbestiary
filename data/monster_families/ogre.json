@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "identity_version": 1,
+  "profile_id": "ogre",
+  "display_name": "Ogre",
+  "taxonomy": {
+    "family": "ogre",
+    "creature_type": "giant humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "Huge crude giant humanoids defined by massive heavy anatomy, broad coarse faces, oversized hands and feet, and awkward interaction with human-sized spaces.",
+    "silhouette": "Very large broad torso, thick limbs, heavy belly or chest mass, oversized hands and feet, slightly stooped posture.",
+    "head_features": "Broad heavy face, low brow, wide nose, large jaw, small deep-set eyes; coarse giant features without tusks.",
+    "body_shape": "Massive thick-limbed humanoid, wider and heavier than a troll, with obvious giant scale.",
+    "surface": "Mostly bare skin with sparse scars, folds, or restrained corpse damage depending on variant.",
+    "must_keep": [
+      "huge giant scale",
+      "broad heavy face",
+      "thick limbs",
+      "oversized hands and feet",
+      "simple crude proportions"
+    ],
+    "must_avoid": [
+      "troll-like lanky silhouette",
+      "orc tusks",
+      "human-sized proportions",
+      "bodybuilder definition",
+      "ape-like posture"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as ogre before generic brute",
+    "huge scale is obvious",
+    "body is broad and heavy rather than lanky",
+    "face is coarse and broad without tusks"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "troll_drift",
+      "symptom": "ogre becomes lanky with very long arms",
+      "correction": "shorten relative arm length and restore broad heavy torso and thick giant limbs"
+    },
+    {
+      "id": "orc_drift",
+      "symptom": "ogre gains tusks, boar nose, or armored orc styling",
+      "correction": "remove tusks and orc cues; restore broad coarse giant face and simple gear"
+    },
+    {
+      "id": "bodybuilder_drift",
+      "symptom": "anatomy becomes sharply defined heroic muscle",
+      "correction": "use blunt heavy mass, thick limbs, and less anatomical definition"
+    }
+  ]
+}
