@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "family_id": "ocean",
+  "display_name": "Ocean & Aquatic Environments",
+  "profiles": {
+    "ocean.kelp-forest": {
+      "name": "Kelp Forest",
+      "description": "Layered rocky coastal habitat with tall kelp blades rising from holdfasts.",
+      "visual_cues": [
+        "three or four tall kelp stipes",
+        "broad kelp blades",
+        "rocky reef base",
+        "open midwater gap"
+      ],
+      "colorable_forms": [
+        "large kelp blades",
+        "broad rocks",
+        "open water"
+      ],
+      "must_avoid": [
+        "dense seaweed wallpaper",
+        "tropical coral reef"
+      ]
+    },
+    "ocean.shallow-coral-reef": {
+      "name": "Shallow Coral Reef",
+      "description": "Sunlit reef with large coral heads and clear open channels.",
+      "visual_cues": [
+        "branching coral head",
+        "rounded massive coral",
+        "sand channel",
+        "few large sponges"
+      ],
+      "colorable_forms": [
+        "large coral lobes",
+        "sand bands",
+        "simple sponge shapes"
+      ],
+      "must_avoid": [
+        "hundreds of tiny coral branches"
+      ]
+    },
+    "ocean.deep-coral-garden": {
+      "name": "Deep-Sea Coral Garden",
+      "description": "Dark deep habitat with sparse tree-, fan-, and feather-shaped cold-water corals on rock.",
+      "visual_cues": [
+        "large fan coral",
+        "tree-like coral colony",
+        "rock ledge",
+        "open dark-water space"
+      ],
+      "colorable_forms": [
+        "large fan shapes",
+        "broad rock ledge",
+        "few sponge columns"
+      ],
+      "must_avoid": [
+        "sunlit tropical reef cues"
+      ]
+    },
+    "ocean.shipwreck-field": {
+      "name": "Shipwreck Field",
+      "description": "Submerged wreck site with a few large recognizable structural remains.",
+      "visual_cues": [
+        "broken hull ribs",
+        "tilted mast or beam",
+        "large anchor",
+        "sand or silt floor"
+      ],
+      "colorable_forms": [
+        "large timber panels",
+        "anchor silhouette",
+        "broad sand shapes"
+      ],
+      "must_avoid": [
+        "modern ship machinery",
+        "tiny debris carpet"
+      ]
+    },
+    "ocean.sea-cave-mouth": {
+      "name": "Submerged Sea Cave",
+      "description": "Wave-eroded rocky cavern opening into open water.",
+      "visual_cues": [
+        "large rock arch",
+        "cave wall fracture",
+        "sand or pebble shelf",
+        "open-water portal"
+      ],
+      "colorable_forms": [
+        "large rock planes",
+        "arch opening",
+        "simple water bands"
+      ],
+      "must_avoid": [
+        "limestone drip cave interior"
+      ]
+    },
+    "ocean.hydrothermal-vent-field": {
+      "name": "Hydrothermal Vent Field",
+      "description": "Deep seafloor with a few large chimney structures and sparse vent-associated forms.",
+      "visual_cues": [
+        "two or three vent chimneys",
+        "rocky seafloor",
+        "rising plume shape",
+        "few tube-worm clusters"
+      ],
+      "colorable_forms": [
+        "large chimney columns",
+        "broad rock plates",
+        "simple plume"
+      ],
+      "must_avoid": [
+        "tropical fish crowd",
+        "many tiny vents"
+      ]
+    },
+    "ocean.seamount-slope": {
+      "name": "Seamount Slope",
+      "description": "Steep underwater volcanic slope rising through open deep water.",
+      "visual_cues": [
+        "large sloping rock face",
+        "terraced ledges",
+        "sparse coral or sponge groups",
+        "open water drop-off"
+      ],
+      "colorable_forms": [
+        "broad rock terraces",
+        "few large corals",
+        "open water"
+      ],
+      "must_avoid": [
+        "flat generic seabed"
+      ]
+    },
+    "ocean.open-water-dropoff": {
+      "name": "Open-Water Drop-Off",
+      "description": "Pelagic scene at the edge of a steep underwater wall, emphasizing depth and open water.",
+      "visual_cues": [
+        "vertical rock wall",
+        "large open-water field",
+        "distant light gradient implied by line spacing",
+        "one ledge"
+      ],
+      "colorable_forms": [
+        "large wall planes",
+        "open water"
+      ],
+      "must_avoid": [
+        "busy seafloor props"
+      ]
+    },
+    "ocean.mangrove-lagoon": {
+      "name": "Mangrove Lagoon",
+      "description": "Shallow coastal water structured by large arching roots and muddy sand.",
+      "visual_cues": [
+        "arching mangrove roots",
+        "shallow water line",
+        "muddy shelf",
+        "few leaves above water"
+      ],
+      "colorable_forms": [
+        "large root arches",
+        "broad water areas"
+      ],
+      "must_avoid": [
+        "deep-sea darkness"
+      ]
+    },
+    "ocean.tidepool-shelf": {
+      "name": "Rocky Tidepool Shelf",
+      "description": "Intertidal rock platform with a few large pools and exposed rock forms.",
+      "visual_cues": [
+        "large tide pool",
+        "rock shelf",
+        "single anemone cluster",
+        "wave edge"
+      ],
+      "colorable_forms": [
+        "broad rock plates",
+        "pool shape",
+        "few sea-life forms"
+      ],
+      "must_avoid": [
+        "open-ocean abyss"
+      ]
+    }
+  }
+}
