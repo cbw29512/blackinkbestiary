@@ -4,6 +4,7 @@ from pathlib import Path
 
 try:
     from .environment_catalog import load_environment_contract, resolve_environment_profile
+    from .environment_variation import resolve_family_variation
     from .quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -12,6 +13,7 @@ try:
     )
 except ImportError:
     from environment_catalog import load_environment_contract, resolve_environment_profile
+    from environment_variation import resolve_family_variation
     from quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -33,6 +35,7 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}
     identity = profile.get("resolved_identity") or {}
+    family_variation = resolve_family_variation(profile.get("environment_family"))
     return [
         f"ENVIRONMENT PROFILE: {profile['name']}.",
         f"ENVIRONMENT SPATIAL TYPE: {identity.get('spatial_type', '')}.",
@@ -44,6 +47,12 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
         _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
         _items("ENVIRONMENT ERRORS TO AVOID", profile.get("must_avoid")),
+        _items("FAMILY GEOMETRY VARIATION POOL", family_variation.get("geometry_pool")),
+        _items("FAMILY LANDMARK VARIATION POOL", family_variation.get("landmark_pool")),
+        _items("FAMILY PROP VARIATION POOL", family_variation.get("prop_pool")),
+        _items("FAMILY STORY-INTERACTION POOL", family_variation.get("interaction_pool")),
+        _items("FAMILY ANTI-REPETITION RULES", family_variation.get("anti_repetition_rules")),
+        "VARIATION PRIORITY: preserve the named environment and explicit page variant; vary large geometry before adding props or texture.",
         f"UNIQUE BACKGROUND LANDMARK: {variant.get('landmark', '')}.",
         f"UNIQUE BACKGROUND FRAMING: {variant.get('framing', '')}.",
         f"MONSTER / ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
@@ -65,6 +74,7 @@ def environment_checklist(page: dict, root: Path) -> list[str]:
         f"Unique landmark is visible: {variant.get('landmark', '')}",
         f"Framing differs from repeated generic backgrounds: {variant.get('framing', '')}",
         f"Monster/environment interaction reads clearly: {variant.get('interaction', '')}",
+        "Environment geometry differs meaningfully from nearby pages before extra props are added",
         "Monster is large, centered or near-centered, and the dominant focal shape",
         "Major environmental objects are large and comfortable to color but visually secondary to the monster",
         "Monster leaves enough surrounding page area for the habitat to read",
