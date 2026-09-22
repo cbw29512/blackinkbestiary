@@ -21,25 +21,11 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
 
-STYLE_RULES = [
-    "professional fantasy coloring-book line art",
-    "pure black ink on a clean white background",
-    "portrait page composition",
-    "one unmistakable recognizable monster inside an equally intentional readable environment",
-    "bold clean outer contour",
-    "lighter simpler interior lines",
-    "large uninterrupted white regions that are enjoyable to color",
-    "medium-low detail density",
-    "environment is a co-equal storytelling pillar: specific, readable, purposeful, and enjoyable to color",
-    "use two to four large habitat-defining environmental cues instead of generic backdrop filler",
-    "at least one environmental feature directly supports or interacts with the story moment",
-    "no grayscale wash",
-    "no painterly shading",
-    "almost no crosshatching",
-    "minimal solid-black shadow masses",
-    "no text, caption, logo, watermark, or decorative border",
-    "mature fantasy look; not preschool-cute and not stick-figure simple",
-]
+try:
+    from .style_rules import STYLE_RULES
+except ImportError:
+    from style_rules import STYLE_RULES
+
 
 
 def _items(label: str, values) -> str:
