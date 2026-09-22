@@ -1,61 +1,7 @@
 {
+  "schema_version": 3,
   "monster_id": "mimic-chest",
   "monster_name": "Mimic — Chest",
-  "family": "mimic",
-  "size": "medium",
-  "creature_type": "shapechanging monstrosity",
-  "visual_identity": {
-    "core_identity": "A predatory shapechanger disguised as a treasure chest, revealing itself through a toothed lid-mouth, tongue, and organic seams.",
-    "silhouette": "Recognizable chest shape with lid lifted as an upper jaw, box body as lower jaw, and one or two subtle pseudopod forms.",
-    "head_features": "The chest itself becomes the head: lid-mouth with irregular teeth and a long tongue, no separate animal skull.",
-    "body_shape": "Wooden chest form distorted by flexible organic joints while retaining hinges, boards, and treasure-box proportions.",
-    "surface": "Wood grain kept minimal; fleshy mouth interior outlined simply without heavy shading.",
-    "signature_gear": [
-      "chest hinges",
-      "simple metal bands",
-      "latch transformed near mouth"
-    ],
-    "attitude": [
-      "deceptive",
-      "sudden",
-      "hungry",
-      "grasping"
-    ],
-    "must_keep": [
-      "recognizable treasure chest",
-      "lid as toothed mouth",
-      "long tongue",
-      "organic disguise reveal",
-      "vault context"
-    ],
-    "must_avoid": [
-      "separate monster head",
-      "cute cartoon chest",
-      "four animal legs",
-      "dense treasure clutter",
-      "ornate carving overload",
-      "text labels"
-    ]
-  },
-  "default_habitats": [
-    "treasure vaults",
-    "dungeon storerooms",
-    "ruined chambers"
-  ],
-  "accuracy_checks": [
-    "reads as chest before monster details",
-    "mouth transformation is clear",
-    "tongue is visible",
-    "reaching hand is near danger zone",
-    "wooden structure remains recognizable",
-    "scene is not cluttered"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "mimic"
+  "family_profile": "mimic",
+  "variant_profile": "mimic-chest"
 }
