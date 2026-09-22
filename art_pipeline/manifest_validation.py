@@ -34,12 +34,22 @@ def _validate_spec(root: Path, monster_dir: Path, page: dict) -> list[str]:
     if not spec_id:
         return [f"{page_id}: canonical monster spec missing"]
     try:
-        spec = resolve_monster_spec(spec_id, monster_dir)
+        spec = resolve_monster_spec(
+            spec_id,
+            monster_dir,
+            root / "data" / "monster_families",
+            root / "data" / "monster_variants",
+        )
     except RuntimeError as exc:
         return [f"{page_id}: {exc}"]
 
     errors = []
-    errors.extend(minimal_recipe_errors(spec_id, monster_dir))
+    errors.extend(minimal_recipe_errors(
+        spec_id,
+        monster_dir,
+        root / "data" / "monster_families",
+        root / "data" / "monster_variants",
+    ))
     errors.extend(source_scope_errors(spec_id, root))
     explicit_name = str(page.get("monster_name") or "").strip()
     if explicit_name and spec.get("monster_name") != explicit_name:
