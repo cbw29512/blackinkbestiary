@@ -53,7 +53,8 @@ class PromptTests(unittest.TestCase):
         self.assertIn("CANONICAL SILHOUETTE", text)
         self.assertIn("long balancing tail", text)
         self.assertIn("goblin-like round head", text)
-        self.assertIn("identity and anatomy only", text)
+        self.assertIn("REFERENCE RULE", text)
+        self.assertIn("anatomy, silhouette, and identity only", text)
 
     def test_modify_notes_enter_prompt(self):
         page = {
