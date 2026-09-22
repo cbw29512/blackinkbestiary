@@ -1,54 +1,6 @@
 {
+  "schema_version": 3,
   "monster_id": "rust-monster",
   "monster_name": "Rust Monster",
-  "family": "rust monster",
-  "size": "medium",
-  "creature_type": "monstrosity",
-  "visual_identity": {
-    "core_identity": "A low insectoid dungeon scavenger that seeks metal, recognized by its long sensory antennae, armored body, and metal-corroding feeding behavior.",
-    "silhouette": "Low four-legged arthropod-like body, arched armored back, extremely long feeler antennae sweeping forward, tapered tail.",
-    "head_features": "Small blunt head with simple mandibles and very long feathery or segmented antennae.",
-    "body_shape": "Compact low body on four sturdy legs with plated back and flexible tail, more alien than mammalian.",
-    "surface": "Broad armor plates with restrained seam lines; antennae kept clean and readable.",
-    "signature_gear": [],
-    "attitude": [
-      "curious",
-      "hungry for metal",
-      "skittish",
-      "persistent"
-    ],
-    "must_keep": [
-      "very long antennae",
-      "low armored body",
-      "four legs",
-      "metal-feeding behavior",
-      "non-mammalian silhouette"
-    ],
-    "must_avoid": [
-      "dog body",
-      "dragon head",
-      "six insect legs unless anatomy becomes cluttered",
-      "giant horns",
-      "humanoid face",
-      "dense antenna detail"
-    ]
-  },
-  "default_habitats": [
-    "armories",
-    "weapon caches",
-    "old forge rooms"
-  ],
-  "accuracy_checks": [
-    "antennae dominate silhouette",
-    "creature interacts directly with metal",
-    "ruined weapons show corrosion",
-    "body remains low and armored",
-    "not mistaken for ordinary insect",
-    "page preserves white space"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  "family_profile": "rust-monster"
 }
