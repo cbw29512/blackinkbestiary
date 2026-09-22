@@ -15,7 +15,7 @@ Every page should feel like it belongs in the same book:
 - Lighter interior lines.
 - Large uninterrupted white areas.
 - Medium-low detail density.
-- Environment is a co-equal storytelling pillar with the monster and story moment.
+- Environment is a co-equal storytelling pillar, but the monster is the large centered visual focal point.
 - Habitat must be specific, immediately readable, and worth coloring.
 - Use two to four large environmental cues rather than generic backdrop filler.
 - At least one environmental feature should interact with the creature or story moment.
@@ -37,7 +37,7 @@ These are guidance targets, not rigid scoring rules.
 
 ## Composition Rules
 
-1. Monster identity is immediately readable.
+1. Monster is the large centered or near-centered dominant focal subject and its identity is immediately readable.
 2. Environment identity is immediately readable and specific to the named habitat.
 3. One clear action/moment connects monster and environment.
 4. Monster, environment, and story moment must all survive at thumbnail size.
@@ -84,7 +84,7 @@ Black-Ink house style always overrides the rendering style of the reference.
 
 Black-Ink follows a bold-and-easy readability target without becoming preschool-simple.
 
-- Monster should be substantial, but usually leave enough page area for the habitat to read.
+- Monster should be large, centered or near-centered, and the dominant visual shape; target roughly 55–72% of page height in ordinary scenes while leaving enough page area for the habitat to read.
 - Use 2–4 major environmental forms.
 - Favor medium-to-large contiguous coloring regions over tiny enclosed cells.
 - Story-critical props must be large enough to identify and color comfortably.
@@ -105,7 +105,7 @@ Exact duplicate environment fingerprints fail validation. Similar habitat famili
 
 ## Habitat Rule
 
-The environment is not filler. It is one of three co-equal pillars on every page:
+The environment is not filler. It is one of three co-equal storytelling pillars on every page, while the monster remains visually dominant:
 
 > **Monster identity + environment identity + story moment**
 
@@ -120,7 +120,7 @@ The habitat should help tell the story:
 - ankheg → earth tunnel / burrow
 - mimic → treasure room / dungeon furnishing
 
-The environment should not overpower the monster, but it must be equally intentional. Simplify clutter, not place. A clean generic room is a failure if the named habitat is not unmistakable.
+The environment must not overpower the monster; it should frame the monster with a few large purposeful forms while remaining equally intentional as storytelling. Simplify clutter, not place. A clean generic room is a failure if the named habitat is not unmistakable.
 
 ## Coloring Rule
 
