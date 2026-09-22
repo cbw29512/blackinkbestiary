@@ -17,7 +17,9 @@
     "creature_identity": "canonical monster JSON resolved through reusable family profiles",
     "environment": "specific habitat with two to four large readable cues",
     "story": "one clear story moment interacting with the environment",
-    "approval": "human approval required before lock and advance"
+    "approval": "human approval required before lock and advance",
+    "environment_accuracy": "environment_profile_id must resolve through data/environment_families and use a page-unique landmark/framing/interaction fingerprint",
+    "colorability": "major monster and environment forms must follow config/coloring_page_standard.json"
   },
   "slots": [
     {
@@ -27,7 +29,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-02",
@@ -36,7 +44,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-03",
@@ -45,7 +59,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-04",
@@ -54,7 +74,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-05",
@@ -63,7 +89,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-06",
@@ -72,7 +104,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-07",
@@ -81,7 +119,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-08",
@@ -90,7 +134,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-09",
@@ -99,7 +149,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-10",
@@ -108,7 +164,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-11",
@@ -117,7 +179,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-12",
@@ -126,7 +194,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-13",
@@ -135,7 +209,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-14",
@@ -144,7 +224,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-15",
@@ -153,7 +239,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-16",
@@ -162,7 +254,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-17",
@@ -171,7 +269,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-18",
@@ -180,7 +284,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-19",
@@ -189,7 +299,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-20",
@@ -198,7 +314,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-21",
@@ -207,7 +329,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-22",
@@ -216,7 +344,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-23",
@@ -225,7 +359,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-24",
@@ -234,7 +374,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-25",
@@ -243,7 +389,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-26",
@@ -252,7 +404,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-27",
@@ -261,7 +419,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-28",
@@ -270,7 +434,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-29",
@@ -279,7 +449,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-30",
@@ -288,7 +464,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-31",
@@ -297,7 +479,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-32",
@@ -306,7 +494,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-33",
@@ -315,7 +509,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-34",
@@ -324,7 +524,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-35",
@@ -333,7 +539,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-36",
@@ -342,7 +554,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-37",
@@ -351,7 +569,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-38",
@@ -360,7 +584,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-39",
@@ -369,7 +599,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-40",
@@ -378,7 +614,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-41",
@@ -387,7 +629,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-42",
@@ -396,7 +644,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-43",
@@ -405,7 +659,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-44",
@@ -414,7 +674,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-45",
@@ -423,7 +689,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-46",
@@ -432,7 +704,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-47",
@@ -441,7 +719,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-48",
@@ -450,7 +734,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-49",
@@ -459,7 +749,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     },
     {
       "page_id": "III-50",
@@ -468,7 +764,13 @@
       "monster_spec_id": null,
       "habitat": null,
       "moment": null,
-      "archetype": null
+      "archetype": null,
+      "environment_profile_id": null,
+      "environment_variant": {
+        "landmark": null,
+        "framing": null,
+        "interaction": null
+      }
     }
   ]
 }
