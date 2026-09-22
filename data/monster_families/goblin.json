@@ -30,7 +30,8 @@
       "orc-like bulk",
       "reptilian snout",
       "tail"
-    ]
+    ],
+    "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure."
   },
   "accuracy_checks": [
     "goblin reads ugly-cunning rather than cute",
@@ -60,5 +61,20 @@
       "symptom": "upright muscular heroic body",
       "correction": "reduce muscle mass and use a smaller crouched scavenger posture"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Small, wiry, fast-looking goblinoid whose narrow body reads clearly smaller than a human or hobgoblin.",
+    "natural_posture": "Slightly crouched, darting, peeking, scavenging, or hunched over a task rather than standing heroically upright.",
+    "behavior_style": [
+      "scavenging or stealing one readable object",
+      "sneaking or peeking from cover",
+      "darting through rough lairs or storage areas",
+      "guarding or handling crude gear with opportunistic body language"
+    ],
+    "environment_fit": [
+      "rough dungeon rooms and storage spaces",
+      "caves and ruins used as lairs",
+      "crude camps, pantries, guard niches, and scavenged living spaces"
+    ]
+  }
 }
