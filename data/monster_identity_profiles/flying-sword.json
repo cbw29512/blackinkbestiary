@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "flying-sword",
+  "display_name": "Flying Sword",
+  "extends_family": "construct",
+  "taxonomy": {
+    "family": "construct",
+    "creature_type": "construct",
+    "default_size": "small"
+  },
+  "visual_identity": {
+    "core_identity": "A normal fantasy sword animated by magic, moving and attacking with no hand, arm, ghost, or visible wielder.",
+    "silhouette": "One complete sword with clear blade, guard, grip, and pommel suspended in open air.",
+    "head_features": "No head, eyes, mouth, face, or biological features.",
+    "body_shape": "The sword itself is the entire creature; no added torso, limbs, wings, or hidden operator.",
+    "limb_structure": "No limbs. Motion comes from magical levitation and changes in the sword's orientation.",
+    "surface": "Clean blade and simple hilt with broad colorable metal and grip regions and minimal ornament.",
+    "must_keep": [
+      "one complete sword",
+      "no wielder",
+      "clear unsupported levitation",
+      "readable blade guard grip and pommel",
+      "simple weapon silhouette"
+    ],
+    "must_avoid": [
+      "ghost holding the sword",
+      "human hand or arm",
+      "multiple swords",
+      "eyes or mouth on blade",
+      "robot parts",
+      "ornate rune clutter"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "A single ordinary weapon-sized construct whose threat comes from unnatural unsupported motion.",
+    "natural_posture": "Suspended horizontally, diagonally, or point-forward in open space with no visible support.",
+    "behavior_style": [
+      "guarding",
+      "circling",
+      "lunging",
+      "hovering in readiness"
+    ],
+    "environment_fit": [
+      "armories",
+      "vaults",
+      "guarded halls",
+      "ceremonial chambers"
+    ]
+  },
+  "locomotion": {
+    "can_fly": true
+  },
+  "render_identity": {
+    "subject_mode": "object",
+    "expected_count": "one"
+  },
+  "anatomy": {
+    "body_plan": "single animated weapon",
+    "limb_count": 0,
+    "wing_count": 0,
+    "support_logic": "unsupported magical levitation"
+  },
+  "accuracy_checks": [
+    "one complete sword is the dominant creature",
+    "no wielder or hidden hand appears",
+    "weapon geometry stays plausible",
+    "airborne support is clearly magical rather than attached",
+    "silhouette stays clean and colorable"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "wielder_drift",
+      "symptom": "ghost, hand, or humanoid appears to operate the sword",
+      "correction": "remove the operator and show the sword alone in unsupported magical motion"
+    },
+    {
+      "id": "weapon_swarm_drift",
+      "symptom": "multiple swords appear",
+      "correction": "restore one single complete sword as the only monster subject"
+    }
+  ],
+  "default_habitats": [
+    "armories",
+    "vaults",
+    "guarded halls"
+  ]
+}
