@@ -162,12 +162,18 @@ def minimal_recipe_errors(
     for field in contract.get("minimal_recipe_required") or []:
         if not str(raw.get(field) or "").strip():
             errors.append(f"{spec_id}: minimal monster recipe missing {field}")
-    family_path = family_profile_path(raw, family_dir)
-    if not family_path:
-        errors.append(f"{spec_id}: minimal monster recipe requires a valid family_profile")
+    family_id = str(raw.get("family_profile") or "").strip()
     species_id = str(raw.get("species_profile") or "").strip()
-    if species_id and not species_profile_path(raw, species_dir):
+    family_path = family_profile_path(raw, family_dir)
+    species_path = species_profile_path(raw, species_dir)
+    if family_id and not family_path:
+        errors.append(f"{spec_id}: family_profile {family_id!r} does not exist")
+    if species_id and not species_path:
         errors.append(f"{spec_id}: species_profile {species_id!r} does not exist")
+    if not family_path and not species_path:
+        errors.append(
+            f"{spec_id}: schema-v3+ monster recipe requires family_profile or species_profile"
+        )
     for field in contract.get("recipe_forbidden_fields") or []:
         if field in raw:
             errors.append(f"{spec_id}: schema-v3+ monster recipe must not inline {field}")
