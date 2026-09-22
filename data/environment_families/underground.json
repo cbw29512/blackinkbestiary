@@ -776,6 +776,26 @@
         "delicate palace doorway",
         "modern security door"
       ]
+    },
+    "underground.collapsed-ceiling-hall": {
+      "name": "Collapsed-Ceiling Hall",
+      "description": "A built masonry hall damaged by overhead collapse, leaving a large breach, fallen blocks, and an ambush opening above.",
+      "visual_cues": [
+        "large ceiling breach",
+        "few massive fallen stone blocks",
+        "surviving dressed-stone walls",
+        "shadowed overhead ledge"
+      ],
+      "colorable_forms": [
+        "broad wall planes",
+        "large broken blocks",
+        "simple ceiling opening"
+      ],
+      "must_avoid": [
+        "hundreds of tiny rubble stones",
+        "perfect intact ceiling",
+        "generic cave walls"
+      ]
     }
   }
 }
