@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import sys
 import threading
+import urllib.request
 import webbrowser
 from datetime import datetime, timezone
 from http import HTTPStatus
@@ -156,10 +157,19 @@ def generation_worker_status():
 def start_generation_worker():
     global _GENERATION_PROCESS
     state = load_state()
+    tome = load_tome()
     page_id = state["current_page_id"]
+    page = page_by_id(tome, page_id)
     status = state["pages"][page_id]["status"]
     if status not in GENERATABLE_STATES:
         raise ValueError(f"Current page is not ready to generate: {status}")
+    if not page or not page.get("monster_spec_id"):
+        return {
+            "started": False,
+            "running": False,
+            "page_id": page_id,
+            "reason": "canonical_monster_spec_required",
+        }
     if not GENERATOR_SCRIPT.exists():
         raise ValueError("Generation worker script is missing")
 
