@@ -22,6 +22,29 @@ function list(items) {
   return `<ul>${(items || []).map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
 }
 
+function candidateImageUrl(imagePath, version = "") {
+  const relative = String(imagePath || "").replace(/^\\/+/, "");
+  return `/${relative}?v=${encodeURIComponent(version)}`;
+}
+
+function attachCandidateImageError(imagePath, version = "") {
+  const image = qs("#artFrame img");
+  if (!image) return;
+
+  const directUrl = candidateImageUrl(imagePath, version);
+  image.addEventListener("error", () => {
+    qs("#artFrame").innerHTML = `
+      <div class="placeholder candidate-error">
+        <div>
+          <strong>Preview could not load.</strong><br><br>
+          The generated PNG still exists. 
+          <a href="${esc(directUrl)}" target="_blank" rel="noopener">Open generated image directly</a>.
+        </div>
+      </div>
+    `;
+  }, {once: true});
+}
+
 function render(d) {
   const p = d.current_page;
   const s = d.current_state;
@@ -49,10 +72,12 @@ function render(d) {
   `;
 
   if (c?.image_path) {
+    const imageUrl = candidateImageUrl(c.image_path, c.created_at || "");
     qs("#artFrame").innerHTML = `
-      <img src="${esc(c.image_path)}?v=${encodeURIComponent(c.created_at || "")}"
+      <img src="${esc(imageUrl)}"
            alt="Current ${esc(p.monster_name)} candidate">
     `;
+    attachCandidateImageError(c.image_path, c.created_at || "");
   } else {
     qs("#artFrame").innerHTML = `
       <div class="placeholder">
