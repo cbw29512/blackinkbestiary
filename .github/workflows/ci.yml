@@ -43,24 +43,3 @@ jobs:
           node --check web/app.js
           node --check web/golden-five-view.js
           node --check web/golden-five.js
-
-  runner-smoke:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo runner-ok
-
-  checkout-smoke:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: test -f art_pipeline/environment_spatial.py
-
-  python-smoke:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python --version
-      - run: PYTHONPATH=art_pipeline python -c "import environment_spatial; print('spatial-ok')"
