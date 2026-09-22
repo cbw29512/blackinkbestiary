@@ -80,7 +80,9 @@
       "directives": [
         "Use one primary sacred landmark and restrained supporting symbolism.",
         "Favor large altars, plinths, arches, standing stones, or ritual basins.",
-        "Do not use rune wallpaper, symbol confetti, or excessive candles."
+        "Do not use rune wallpaper, symbol confetti, or excessive candles.",
+        "The sacred story object must be unmistakable at thumbnail size: altar, reliquary, idol, shrine, offering vessel, or ritual focus should read immediately rather than resemble a generic lantern or prop.",
+        "Sacred fixtures and architecture should use a few distinctive large shapes; avoid repeating identical wall bays, sconces, or arches symmetrically across the whole page."
       ],
       "component_bias": [
         "landmarks",
@@ -229,7 +231,8 @@
       "directives": [
         "Show clear evidence of purposeful use through one or two large furnishings or fixtures.",
         "Keep furnishings period-appropriate to the fantasy setting.",
-        "Avoid modern domestic or institutional drift."
+        "Avoid modern domestic or institutional drift.",
+        "Purpose-built interiors should vary one major wall bay, doorway, niche, fixture, or furnishing so the room feels designed rather than tiled from repeated identical modules."
       ],
       "component_bias": [
         "secondary_features",
