@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "family_id": "undead-sites",
+  "display_name": "Undead & Haunted Environments",
+  "profiles": {
+    "undead.graveyard": {
+      "name": "Old Graveyard",
+      "description": "Weathered burial ground with a few large stones, wall fragments, and old trees.",
+      "visual_cues": [
+        "three or four gravestones",
+        "gnarled tree",
+        "low cemetery wall",
+        "sunken grave mound"
+      ],
+      "colorable_forms": [
+        "large stones",
+        "broad tree trunk",
+        "open ground"
+      ],
+      "must_avoid": [
+        "hundreds of tiny headstones"
+      ]
+    },
+    "undead.catacomb": {
+      "name": "Catacomb Passage",
+      "description": "Subterranean burial corridor with large wall niches and simple ossuary architecture.",
+      "visual_cues": [
+        "arched niches",
+        "stone coffin",
+        "wall shelf",
+        "narrow aisle"
+      ],
+      "colorable_forms": [
+        "large arches",
+        "coffin slabs"
+      ],
+      "must_avoid": [
+        "skull wallpaper"
+      ]
+    },
+    "undead.ruined-chapel": {
+      "name": "Ruined Chapel",
+      "description": "Small sacred building broken by time and neglect.",
+      "visual_cues": [
+        "broken altar",
+        "collapsed arch",
+        "few pew remnants",
+        "stained-glass opening simplified"
+      ],
+      "colorable_forms": [
+        "large arch planes",
+        "altar block",
+        "few window shapes"
+      ],
+      "must_avoid": [
+        "fully furnished active church"
+      ]
+    },
+    "undead.battlefield": {
+      "name": "Cursed Battlefield",
+      "description": "Open field with a few large remnants of war rather than dense corpses.",
+      "visual_cues": [
+        "broken banner",
+        "large shield",
+        "cracked siege timber",
+        "low earthworks"
+      ],
+      "colorable_forms": [
+        "broad ground",
+        "large war relics"
+      ],
+      "must_avoid": [
+        "gore",
+        "hundreds of weapons"
+      ]
+    }
+  }
+}
