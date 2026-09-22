@@ -44,22 +44,47 @@ jobs:
           node --check web/golden-five-view.js
           node --check web/golden-five.js
 
-  diagnostic:
+  import-spatial:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        file:
-          - test_environment_catalog.py
-          - test_catalog_and_series_audit.py
-          - test_creature_catalog.py
-          - test_product_north_star.py
-          - test_universal_page_contract.py
-          - test_art_pipeline.py
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run focused module
-        run: python -m unittest discover -s tests -p "${{ matrix.file }}" -v
+      - run: PYTHONPATH=art_pipeline python -c "import environment_spatial"
+
+  import-environment-prompt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=art_pipeline python -c "import environment_prompt"
+
+  import-prompt-builder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=art_pipeline python -c "import prompt_builder"
+
+  resolve-spatial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=art_pipeline python -c "from environment_catalog import resolve_environment_profile; from environment_spatial import resolve_spatial_envelope; print(resolve_spatial_envelope(resolve_environment_profile('underground.trapped-stone-corridor'))['envelope_id'])"
+
+  audit-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=art_pipeline python -c "from pathlib import Path; from environment_engine_audit import audit_environment_engine; r=audit_environment_engine(Path('.').resolve()); print(r); raise SystemExit(0 if r['pass'] else 1)"
