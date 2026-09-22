@@ -34,14 +34,14 @@ def _config(root: Path) -> dict:
         raise RuntimeError(f"Could not load local AI config: {exc}") from exc
 
 
-def local_generation_preflight(root: Path) -> dict:
+def local_generation_preflight(root: Path, fetch_json=_get_json, cli_finder=find_comfy_cli) -> dict:
     config = _config(root)
     base_url = str(config.get("comfy_url") or "http://127.0.0.1:8188").rstrip("/")
     python_ok = sys.version_info >= (3, 10)
-    cli_path = find_comfy_cli()
+    cli_path = cli_finder()
     cli_ok = bool(cli_path)
 
-    stats = _get_json(base_url + "/system_stats")
+    stats = fetch_json(base_url + "/system_stats")
     server_ok = isinstance(stats, dict)
     devices = list((stats or {}).get("devices") or [])
     system = dict((stats or {}).get("system") or {})
@@ -52,7 +52,7 @@ def local_generation_preflight(root: Path) -> dict:
         folder = str(spec.get("folder") or "").strip()
         filename = str(spec.get("filename") or "").strip()
         names = (
-            _get_json(base_url + "/models/" + urllib.parse.quote(folder))
+            fetch_json(base_url + "/models/" + urllib.parse.quote(folder))
             if server_ok and folder
             else None
         )
