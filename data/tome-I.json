@@ -37,7 +37,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -107,7 +107,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -159,7 +159,7 @@
         "furry or fluffy goblin anatomy",
         "generic pantry that could be a modern home"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -203,7 +203,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -247,7 +247,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -272,8 +272,9 @@
       "habitat": "Underground barracks tunnel",
       "moment": "Leading a shield-wall drill",
       "identity_rules": [
-        "Must be immediately recognizable as Hobgoblin Warrior",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
+        "Medium athletic hobgoblin, not a small goblin or bulky orc",
+        "Angular stern goblinoid face with broad flattened nose, pointed ears smaller than a goblin's, no tusks",
+        "Disciplined upright soldierly posture and organized military equipment"
       ],
       "must_include": [
         "disciplined hobgoblin warrior",
@@ -289,9 +290,14 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "orc tusks or boar-like nose",
+        "hulking orc body",
+        "tiny goblin proportions",
+        "oversized goblin ears",
+        "feral barbarian posture"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -316,8 +322,9 @@
       "habitat": "Cave war room",
       "moment": "Pinning a dagger into a tunnel map",
       "identity_rules": [
-        "Must be immediately recognizable as Hobgoblin Captain",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
+        "Medium athletic veteran hobgoblin officer, not an orc or oversized goblin",
+        "Angular mature goblinoid face with broad flattened nose, pointed ears smaller than a goblin's, no tusks",
+        "Command authority comes from posture, rank marker, and organized gear rather than brute size"
       ],
       "must_include": [
         "hobgoblin captain",
@@ -333,9 +340,14 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "orc tusks or boar-like nose",
+        "hulking orc body",
+        "tiny goblin proportions",
+        "oversized goblin ears",
+        "feral barbarian posture"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -378,7 +390,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -422,7 +434,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -466,7 +478,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -510,7 +522,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -554,7 +566,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -598,7 +610,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -642,7 +654,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -686,7 +698,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -730,7 +742,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -774,7 +786,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -818,7 +830,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -862,7 +874,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -906,7 +918,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -950,7 +962,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -994,7 +1006,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1038,7 +1050,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1082,7 +1094,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1126,7 +1138,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1170,7 +1182,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1214,7 +1226,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1258,7 +1270,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1302,7 +1314,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1346,7 +1358,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1390,7 +1402,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1434,7 +1446,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1478,7 +1490,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1522,7 +1534,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1566,7 +1578,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1611,7 +1623,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1655,7 +1667,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1700,7 +1712,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1745,7 +1757,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1790,7 +1802,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1835,7 +1847,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1880,7 +1892,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1924,7 +1936,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -1969,7 +1981,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -2013,7 +2025,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -2058,7 +2070,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -2103,7 +2115,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -2148,7 +2160,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -2193,7 +2205,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
@@ -2239,7 +2251,7 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "composition": "Portrait page; monster, environment, and story moment are co-equal storytelling pillars. Keep the monster immediately readable, make the named habitat unmistakable with two to four large setting-specific cues, and show at least one direct interaction between creature and environment. Preserve broad colorable shapes and avoid filler clutter.",
+      "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 55–72% of page height. The named environment must remain unmistakable with two to four large supporting forms arranged around, behind, or beneath the monster, and at least one environmental feature must participate in the story moment. Keep broad colorable regions, clear silhouette separation, and generous white space.",
       "coloring_rules": {
         "outer_contour": "bold",
         "interior_lines": "light_to_medium",
