@@ -18,6 +18,10 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
         self.assertEqual(report["errors"], [])
         self.assertTrue(report["pass"])
         self.assertGreaterEqual(report["family_profiles"], 10)
+        self.assertGreaterEqual(report["species_profiles"], 10)
+        self.assertGreater(len(report["legacy_specs"]), 0)
+        self.assertGreater(len(report["inline_identity_specs"]), 0)
+        self.assertFalse(report["scale_ready"])
 
     def test_environment_variation_registry_covers_every_family(self):
         report = audit_environment_variation_catalog(ROOT)
@@ -35,6 +39,11 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
         self.assertTrue(report["pass"])
         self.assertEqual(report["books_registered"], 8)
         self.assertGreaterEqual(report["source_registry_entries"], 50)
+        self.assertGreaterEqual(report["monster_family_profiles"], 10)
+        self.assertGreaterEqual(report["monster_species_profiles"], 10)
+        self.assertGreater(report["monster_legacy_specs"], 0)
+        self.assertGreater(report["monster_inline_identity_specs"], 0)
+        self.assertFalse(report["monster_catalog_scale_ready"])
         tome_i = next(row for row in report["books"] if row["book_id"] == "TOME-I")
         self.assertTrue(tome_i["production_ready"])
         self.assertTrue(tome_i["calibration_required"])
