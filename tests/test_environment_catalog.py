@@ -38,6 +38,31 @@ class EnvironmentCatalogTests(unittest.TestCase):
             self.assertTrue((page.get("environment_variant") or {}).get("framing"))
             self.assertTrue((page.get("environment_variant") or {}).get("interaction"))
 
+    def test_every_profile_resolves_environment_identity(self):
+        for page in self.tome["pages"]:
+            profile = resolve_environment_profile(page["environment_profile_id"])
+            identity = profile["resolved_identity"]
+            self.assertTrue(identity["spatial_type"], page["page_id"])
+            self.assertTrue(identity["material_language"], page["page_id"])
+            self.assertTrue(identity["identity_markers"], page["page_id"])
+            self.assertTrue(identity["spatial_read"], page["page_id"])
+
+    def test_i09_reads_as_low_dungeon_crawlway_not_generic_hallway(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-09")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        identity = profile["resolved_identity"]
+        self.assertIn("dungeon service crawlway", identity["spatial_type"])
+        self.assertIn("stone block walls", identity["material_language"])
+        self.assertTrue(any("sconce" in item for item in identity["identity_markers"]))
+        self.assertIn("generic hallway", identity["spatial_read"])
+
+        text = build_prompt(page)
+        self.assertIn("ENVIRONMENT SPATIAL TYPE", text)
+        self.assertIn("ENVIRONMENT MATERIAL LANGUAGE", text)
+        self.assertIn("ENVIRONMENT IDENTITY MARKERS", text)
+        self.assertIn("UNIVERSAL ENVIRONMENT IDENTITY RULES", text)
+        self.assertIn("flagstone floor", text)
+
     def test_tome_i_background_fingerprints_are_unique(self):
         fingerprints = [environment_fingerprint(page) for page in self.tome["pages"]]
         self.assertEqual(len(fingerprints), len(set(fingerprints)))
