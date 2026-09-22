@@ -151,7 +151,8 @@ function render(d) {
   } else if (s.generation_error?.message) {
     qs("#statusLine").innerHTML = `<span class="error"><strong>Generation stopped:</strong> ${esc(s.generation_error.message)}</span>`;
   } else if (c) {
-    qs("#statusLine").innerHTML = `Attempt <strong>${c.attempt}</strong> · QA: <strong>${esc(c.qa_status)}</strong> · Supervisor: <strong>${esc(c.supervisor_status)}</strong>`;
+    const mode = c.generation_mode ? ` · Mode: <strong>${esc(c.generation_mode.replaceAll("_", " "))}</strong>` : "";
+    qs("#statusLine").innerHTML = `Attempt <strong>${c.attempt}</strong>${mode} · QA: <strong>${esc(c.qa_status)}</strong> · Supervisor: <strong>${esc(c.supervisor_status)}</strong>`;
   } else if (!p.monster_spec_id) {
     qs("#statusLine").innerHTML = `<strong>Identity gate:</strong> canonical monster spec required before this page can generate.`;
   } else {
