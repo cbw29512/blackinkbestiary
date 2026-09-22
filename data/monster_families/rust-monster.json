@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "rust-monster",
+  "display_name": "Rust Monster",
+  "taxonomy": {
+    "family": "rust monster",
+    "creature_type": "monstrosity",
+    "default_size": "medium"
+  },
+  "visual_identity": {
+    "core_identity": "A low insectoid dungeon scavenger recognized by extremely long sensory antennae, armored body, four legs, and metal-corroding feeding behavior.",
+    "silhouette": "Low four-legged arthropod-like body, arched armored back, extremely long feeler antennae sweeping forward, tapered tail.",
+    "head_features": "Small blunt head with simple mandibles and very long segmented antennae.",
+    "body_shape": "Compact low body on four sturdy legs with plated back and flexible tail.",
+    "limb_structure": "Exactly four sturdy walking legs; two extremely long antennae project from the head. No six-leg insect anatomy.",
+    "surface": "Broad armor plates with restrained seam lines; antennae kept clean and readable.",
+    "must_keep": [
+      "very long antennae",
+      "low armored body",
+      "four legs",
+      "metal-feeding behavior",
+      "non-mammalian silhouette"
+    ],
+    "must_avoid": [
+      "dog body",
+      "dragon head",
+      "six insect legs",
+      "giant horns",
+      "humanoid face",
+      "dense antenna detail"
+    ]
+  },
+  "accuracy_checks": [
+    "antennae dominate silhouette",
+    "creature interacts directly with metal",
+    "body remains low and armored",
+    "not mistaken for ordinary insect",
+    "page preserves white space"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "insect_leg_drift",
+      "symptom": "rust monster gains six legs",
+      "correction": "restore canonical four-legged body while retaining arthropod-like armor"
+    },
+    {
+      "id": "dog_drift",
+      "symptom": "body becomes mammalian quadruped",
+      "correction": "restore plated alien torso, mandibles, long antennae, and tapered tail"
+    },
+    {
+      "id": "antenna_clutter",
+      "symptom": "antennae become feathery micro-detail",
+      "correction": "use two long clean readable feelers"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Medium low scavenger, large enough to interact clearly with weapons, armor, gates, or forge objects.",
+    "natural_posture": "Supported on four legs with head and antennae reaching toward nearby metal.",
+    "behavior_style": [
+      "touching metal with antennae",
+      "feeding beside a large weapon or armor piece",
+      "searching an armory lane",
+      "following a metal fixture"
+    ],
+    "environment_fit": [
+      "armories",
+      "weapon caches",
+      "old forge rooms and metal-storage spaces"
+    ]
+  }
+}
