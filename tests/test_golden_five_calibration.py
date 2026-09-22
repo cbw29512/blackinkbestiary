@@ -12,6 +12,7 @@ from calibration_gate import (
     load_calibration_config,
     validate_calibration,
 )
+from calibration_service import public_calibration_state
 
 
 class GoldenFiveCalibrationTests(unittest.TestCase):
@@ -47,6 +48,25 @@ class GoldenFiveCalibrationTests(unittest.TestCase):
         rule = case["special_rule"].lower()
         self.assertIn("lower body visibly supported", rule)
         self.assertIn("never depict a midair", rule)
+
+    def test_studio_calibration_payload_exposes_five_reviewable_pages(self):
+        payload = public_calibration_state(ROOT)
+        self.assertEqual(len(payload["pages"]), 5)
+        self.assertEqual(
+            len(payload["required_review_dimensions"]),
+            6,
+        )
+        self.assertFalse(payload["report"]["production_calibrated"])
+        self.assertFalse(payload["worker"]["running"])
+
+    def test_studio_loads_split_calibration_scripts(self):
+        html = (ROOT / "web" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("golden-five-view.js", html)
+        self.assertIn("golden-five.js", html)
+        self.assertLess(
+            html.index("golden-five-view.js"),
+            html.index("golden-five.js"),
+        )
 
     def test_tome_i_clean_rebuild_starts_queued(self):
         state = json.loads(
