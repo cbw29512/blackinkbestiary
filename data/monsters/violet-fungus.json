@@ -1,57 +1,29 @@
 {
+  "schema_version": 3,
   "monster_id": "violet-fungus",
   "monster_name": "Violet Fungus",
-  "family": "fungus",
-  "size": "medium",
-  "creature_type": "giant fungus",
-  "visual_identity": {
-    "core_identity": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body.",
-    "silhouette": "Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
-    "head_features": "No head, eyes, or mouth; cap remains mushroom-like.",
+  "family_profile": "fungus",
+  "variant_traits": [
+    "predatory rooted fungus",
+    "multiple long whip-like tendrils",
+    "mushroom body remains dominant",
+    "no face"
+  ],
+  "visual_overrides": {
+    "core_identity": "A rooted predatory fungus that resembles a large mushroom while several long whip-like tendrils lash from its body.",
+    "silhouette": "Thick mushroom stalk and cap with multiple long narrow tendrils extending in sweeping curves.",
     "body_shape": "Rooted fungal stalk with cap and four or more flexible tendrils emerging around the upper stalk.",
     "surface": "Simple cap and stalk with sparse spots; tendrils smooth and uncluttered.",
-    "signature_gear": [],
+    "must_keep": [
+      "multiple long tendrils",
+      "clear contrast between mushroom body and tendrils",
+      "rooted posture"
+    ],
     "attitude": [
       "still",
       "reaching",
       "reactive",
       "predatory"
-    ],
-    "must_keep": [
-      "mushroom body",
-      "multiple long tendrils",
-      "rooted posture",
-      "no face",
-      "clear contrast between cap and tendrils"
-    ],
-    "must_avoid": [
-      "humanoid face",
-      "walking feet",
-      "octopus body",
-      "teeth",
-      "solid black tendrils",
-      "dense fungal texture"
     ]
-  },
-  "default_habitats": [
-    "fungal caverns",
-    "damp ruins",
-    "mushroom halls"
-  ],
-  "accuracy_checks": [
-    "mushroom identity remains obvious",
-    "tendrils are long and distinct",
-    "dropped torch is reachable",
-    "no face appears",
-    "fungal cavern remains simple",
-    "tendrils do not tangle into clutter"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "fungus"
+  }
 }
