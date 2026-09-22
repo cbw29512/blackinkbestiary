@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "contract_id": "black-ink-page-v2",
+  "schema_version": 1,
+  "contract_id": "black-ink-page-v1",
   "purpose": "Resolve every Black-Ink Bestiary page from one universal coloring-book contract plus reusable monster/environment catalogs and a small set of page-unique facts.",
   "applies_to": "all books in data/series.json",
   "resolution_order": [
