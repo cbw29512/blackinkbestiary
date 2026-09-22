@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "identity_version": 1,
+  "identity_version": 2,
   "profile_id": "bugbear",
   "display_name": "Bugbear",
   "taxonomy": {
@@ -9,56 +9,76 @@
     "default_size": "medium"
   },
   "visual_identity": {
-    "core_identity": "A tall long-armed shaggy goblinoid ambush predator: imposing and hairy, but unmistakably goblinoid rather than ape, sasquatch, bear, or generic brute.",
-    "silhouette": "Tall broad-shouldered humanoid with disproportionately long arms, large hands, slightly hunched predatory posture, pointed ears, and shaggy hair concentrated around head, shoulders, forearms, and back.",
-    "head_features": "Heavy goblinoid face with broad flattened nose, low brow, deep-set eyes, pointed ears, pronounced cheek structure, and a short goblinoid muzzle area rather than an ape muzzle.",
-    "body_shape": "Powerful long-limbed humanoid with broad shoulders and long reach; muscular but not bodybuilder-thick, with forward-leaning stealth posture.",
-    "surface": "Coarse shaggy hair in controlled patches; chest, face, hands, and major anatomy stay readable. Never a full-body sasquatch coat.",
+    "core_identity": "A tall, long-armed goblinoid ambusher with controlled shaggy hair and unmistakably goblinoid facial structure. It is humanoid and predatory, never ape-like, sasquatch-like, bear-like, or a generic furry brute.",
+    "silhouette": "Tall rangy humanoid, narrow waist, long arms reaching below the hips, large hands, pointed ears, slightly stooped but fully bipedal stance. Hair creates a rough outline around head, shoulders, back, and forearms without turning the whole body into a fur mass.",
+    "head_features": "Clearly goblinoid head: pointed ears, angular cheek planes, low brow, small watchful eyes, broad projecting goblinoid nose and short mouth line. No flat primate muzzle, gorilla brow block, bear muzzle, or rounded ape skull.",
+    "body_shape": "Long-limbed powerful humanoid with a narrower torso than a gorilla or ogre, long forearms, large hands, and stable bipedal weight-bearing legs. Muscular but not barrel-chested or bodybuilder-thick.",
+    "surface": "Shaggy hair is selective and directional on head, shoulders, upper back, forearms, and outer legs. Chest, face, hands, feet, and major anatomy stay open and readable for coloring.",
     "must_keep": [
-      "very long arms",
-      "pointed goblinoid ears",
-      "broad goblinoid nose",
-      "large hands",
-      "shaggy but readable silhouette",
-      "ambush-predator posture"
+      "clearly goblinoid face",
+      "large pointed ears",
+      "broad projecting goblinoid nose",
+      "very long arms and large hands",
+      "tall rangy humanoid proportions",
+      "selective shaggy hair rather than full-body fur",
+      "stable grounded ambusher body language"
     ],
     "must_avoid": [
-      "ape face",
-      "gorilla proportions",
+      "ape face or primate muzzle",
+      "gorilla brow block",
+      "gorilla barrel chest",
       "sasquatch or Bigfoot silhouette",
-      "bear muzzle",
       "full-body dense fur coat",
+      "bear muzzle or rounded bear ears",
+      "knuckle-walking posture",
       "generic caveman face",
-      "heroic bodybuilder stance"
+      "heroic bodybuilder stance",
+      "floating or unsupported pose"
     ]
   },
   "accuracy_checks": [
-    "face reads goblinoid before ape-like",
-    "arms are visibly longer than normal humanoid arms",
-    "pointed ears remain readable through hair",
-    "fur supports silhouette without hiding anatomy",
-    "posture reads ambush predator rather than portrait model"
+    "face reads goblinoid before furry brute",
+    "nose projects as goblinoid rather than flat primate muzzle",
+    "pointed ears remain clearly visible",
+    "arms are visibly long without gorilla proportions",
+    "torso stays humanoid and rangy rather than barrel-chested",
+    "fur is selective and does not hide anatomy",
+    "pose is stably supported by the environment"
   ],
   "known_failure_modes": [
     {
-      "id": "sasquatch_drift",
-      "symptom": "creature reads as Bigfoot or sasquatch",
-      "correction": "reduce full-body fur, restore pointed goblinoid ears and broad flattened goblinoid nose, strengthen scavenged gear and ambush posture"
+      "id": "ape_drift",
+      "symptom": "face or torso reads as gorilla, ape-man, or primate",
+      "correction": "remove primate muzzle and brow block, narrow the torso, restore pointed ears, angular goblinoid cheeks, projecting goblinoid nose, and upright humanoid leg proportions"
     },
     {
-      "id": "ape_drift",
-      "symptom": "face or body becomes gorilla-like",
-      "correction": "remove primate muzzle and knuckle-walking cues; restore humanoid torso, goblinoid face, and long-armed upright ambusher anatomy"
+      "id": "sasquatch_drift",
+      "symptom": "creature reads as Bigfoot or a full-body furry humanoid",
+      "correction": "reduce fur coverage to selective patches and expose clean chest, face, hands, feet, and long-limbed goblinoid anatomy"
     },
     {
       "id": "bear_drift",
-      "symptom": "head becomes ursine",
-      "correction": "remove bear muzzle and rounded bear ears; restore pointed ears and goblinoid facial planes"
+      "symptom": "head reads as bear-like",
+      "correction": "remove bear muzzle and rounded ears; restore pointed ears, angular facial planes, and goblinoid nose"
     },
     {
-      "id": "portrait_drift",
-      "symptom": "pose becomes static heroic portrait",
-      "correction": "use a forward lean, crouch, concealment, or active ambush gesture"
+      "id": "brute_drift",
+      "symptom": "body becomes a generic hulking bodybuilder",
+      "correction": "narrow the waist and chest, lengthen the arms, keep muscle simple, and restore stealthy goblinoid proportions"
+    },
+    {
+      "id": "hover_drift",
+      "symptom": "feet do not visibly contact a support surface",
+      "correction": "place both feet or another clear support point against the environment and use a stable natural coloring pose"
     }
+  ],
+  "locomotion": {
+    "can_fly": false
+  },
+  "default_habitats": [
+    "dungeon passages",
+    "cave ambush routes",
+    "ruined underground halls",
+    "low crawlways"
   ]
 }
