@@ -46,8 +46,8 @@ The production audit rejects missing fields, duplicate IDs/orders, missing canon
 
 `config/environment_standard.json` is global across all books. Every page must satisfy three co-equal storytelling pillars:
 
-- unmistakable monster identity
-- unmistakable environment identity
+- unmistakable monster identity — visually dominant, large, and centered or near-centered
+- unmistakable environment identity — supportive framing around the monster
 - unmistakable story moment
 
 The environment must use setting-specific, colorable cues and must participate in the scene rather than function as generic background filler. `data/environment_families/*.json` provides concrete habitat profiles such as limestone drip caves, lava tubes, kelp forests, shipwreck fields, deep-sea coral gardens, and hydrothermal vent fields. Each page adds a unique landmark, framing, and interaction fingerprint. Duplicate background fingerprints fail manifest validation.
@@ -56,7 +56,7 @@ Simplification removes clutter, not habitat identity.
 
 ### Coloring-page scale standard
 
-`config/coloring_page_standard.json` keeps pages easy to color: large bold forms, a substantial but not page-filling monster, 2–4 major environmental forms, sparse secondary objects, and broad open white regions. The system explicitly rejects micro-texture, tiny enclosed coloring islands, and monster scaling that erases the environment.
+`config/coloring_page_standard.json` keeps pages easy to color: a large centered monster as the dominant focal form, 2–4 major supporting environmental forms, sparse secondary objects, and broad open white regions. The system explicitly rejects micro-texture, tiny enclosed coloring islands, and monster scaling that erases the environment.
 
 ### Defect remediation
 
