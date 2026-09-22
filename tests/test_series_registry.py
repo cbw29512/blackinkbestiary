@@ -29,6 +29,13 @@ class SeriesRegistryTests(unittest.TestCase):
                 [slot["order"] for slot in plan["slots"]],
                 list(range(1, 51)),
             )
+            for slot in plan["slots"]:
+                self.assertIn("environment_profile_id", slot)
+                self.assertIn("environment_variant", slot)
+                self.assertEqual(
+                    set(slot["environment_variant"]),
+                    {"landmark", "framing", "interaction"},
+                )
 
     def test_only_existing_production_files_are_reported_ready(self):
         rows = series_status(ROOT)
