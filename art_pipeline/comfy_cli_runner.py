@@ -108,9 +108,24 @@ class ComfyCli:
 
     def validate_workflow(self, workflow: Path):
         return self.run(
-            "validate", "--workflow", str(workflow),
+            "workflow", "validate", str(workflow),
             expect_json=True,
             where="local",
+        )
+
+    def set_workflow_slots(self, workflow: Path, overrides: dict):
+        args = ["workflow", "set-slot", str(workflow)]
+        for address, value in overrides.items():
+            args.append(f"{address}={json.dumps(value, ensure_ascii=False)}")
+        return self.run(*args, expect_json=True, where="local")
+
+    def run_workflow(self, workflow: Path, *, timeout: float = 600.0):
+        return self.run(
+            "run", "--workflow", str(workflow), "--wait",
+            "--host", "127.0.0.1", "--port", "8188",
+            expect_json=True,
+            where="local",
+            timeout=timeout,
         )
 
     def template_check(self):
