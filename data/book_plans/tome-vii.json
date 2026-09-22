@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "book_id": "TOME-VII",
+  "title": "Mythical Beasts",
+  "status": "setup_ready",
+  "target_pages": 50,
+  "theme": "Legendary and myth-inspired creatures in iconic wild, sacred, ruined, and enchanted settings",
+  "environment_scope": [
+    "lost temples",
+    "enchanted valleys",
+    "sacred groves",
+    "ancient ruins",
+    "remote peaks",
+    "legendary roads"
+  ],
+  "production_contract": {
+    "creature_identity": "canonical monster JSON resolved through reusable family profiles",
+    "environment": "specific habitat with two to four large readable cues",
+    "story": "one clear story moment interacting with the environment",
+    "approval": "human approval required before lock and advance"
+  },
+  "slots": [
+    {
+      "page_id": "VII-01",
+      "order": 1,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-02",
+      "order": 2,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-03",
+      "order": 3,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-04",
+      "order": 4,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-05",
+      "order": 5,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-06",
+      "order": 6,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-07",
+      "order": 7,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-08",
+      "order": 8,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-09",
+      "order": 9,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-10",
+      "order": 10,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-11",
+      "order": 11,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-12",
+      "order": 12,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-13",
+      "order": 13,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-14",
+      "order": 14,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-15",
+      "order": 15,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-16",
+      "order": 16,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-17",
+      "order": 17,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-18",
+      "order": 18,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-19",
+      "order": 19,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-20",
+      "order": 20,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-21",
+      "order": 21,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-22",
+      "order": 22,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-23",
+      "order": 23,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-24",
+      "order": 24,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-25",
+      "order": 25,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-26",
+      "order": 26,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-27",
+      "order": 27,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-28",
+      "order": 28,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-29",
+      "order": 29,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-30",
+      "order": 30,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-31",
+      "order": 31,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-32",
+      "order": 32,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-33",
+      "order": 33,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-34",
+      "order": 34,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-35",
+      "order": 35,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-36",
+      "order": 36,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-37",
+      "order": 37,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-38",
+      "order": 38,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-39",
+      "order": 39,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-40",
+      "order": 40,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-41",
+      "order": 41,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-42",
+      "order": 42,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-43",
+      "order": 43,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-44",
+      "order": 44,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-45",
+      "order": 45,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-46",
+      "order": 46,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-47",
+      "order": 47,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-48",
+      "order": 48,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-49",
+      "order": 49,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    },
+    {
+      "page_id": "VII-50",
+      "order": 50,
+      "planning_status": "unassigned",
+      "monster_spec_id": null,
+      "habitat": null,
+      "moment": null,
+      "archetype": null
+    }
+  ]
+}
