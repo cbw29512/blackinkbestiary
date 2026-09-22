@@ -53,5 +53,8 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 2,
+  "identity_version": 1,
+  "family_profile": "construct"
 }
