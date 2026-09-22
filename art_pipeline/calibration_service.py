@@ -99,7 +99,6 @@ def start_calibration_worker(root: Path, page_id: str) -> dict:
             "reason": "local_generation_preflight_failed",
             "preflight": preflight,
         }
-
     state = load_calibration_state(root)
     status = state["pages"][page_id].get("status")
     if status not in {"pending", "regenerate_requested"}:
@@ -132,7 +131,6 @@ def start_calibration_worker(root: Path, page_id: str) -> dict:
             raise RuntimeError(f"Could not start Golden Five worker: {exc}") from exc
         _ACTIVE_PAGE_ID = page_id
         return {"started": True, "running": True, "pid": _PROCESS.pid, "page_id": page_id}
-
 def review_calibration(
     root: Path,
     page_id: str,
