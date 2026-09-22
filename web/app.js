@@ -135,6 +135,10 @@ function render(d) {
     <p><strong>Framing:</strong> ${esc(p.environment_variant?.framing || "")}</p>
     <p><strong>Interaction:</strong> ${esc(p.environment_variant?.interaction || "")}</p>
     <h3>Moment</h3><p>${esc(p.moment)}</p>
+    <h3>Physicality</h3>
+    <p><strong>Mode:</strong> ${esc(p.physicality?.mode || "")}</p>
+    <p><strong>Support:</strong> ${esc(p.physicality?.support || "")}</p>
+    <p><strong>Motion:</strong> ${esc(p.physicality?.motion || "")}</p>
     <h3>Identity</h3>${list(p.identity_rules)}
     <h3>Must Include</h3>${list(p.must_include)}
     <h3>Must Avoid</h3>${list(p.must_avoid)}

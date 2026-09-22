@@ -19,7 +19,8 @@
     "story": "one clear story moment interacting with the environment",
     "approval": "human approval required before lock and advance",
     "environment_accuracy": "environment_profile_id must resolve through data/environment_families and use a page-unique landmark/framing/interaction fingerprint",
-    "colorability": "major monster and environment forms must follow config/coloring_page_standard.json"
+    "colorability": "major monster and environment forms must follow config/coloring_page_standard.json",
+    "physicality": "Every production page must declare mode, support/contact, and motion/weight so grounded, hanging, flying, falling, swimming, burrowing, coiling, climbing, and swarming poses are physically readable."
   },
   "slots": [
     {
@@ -35,6 +36,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -50,6 +56,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -65,6 +76,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -80,6 +96,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -95,6 +116,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -110,6 +136,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -125,6 +156,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -140,6 +176,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -155,6 +196,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -170,6 +216,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -185,6 +236,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -200,6 +256,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -215,6 +276,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -230,6 +296,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -245,6 +316,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -260,6 +336,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -275,6 +356,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -290,6 +376,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -305,6 +396,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -320,6 +416,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -335,6 +436,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -350,6 +456,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -365,6 +476,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -380,6 +496,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -395,6 +516,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -410,6 +536,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -425,6 +556,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -440,6 +576,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -455,6 +596,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -470,6 +616,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -485,6 +636,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -500,6 +656,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -515,6 +676,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -530,6 +696,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -545,6 +716,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -560,6 +736,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -575,6 +756,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -590,6 +776,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -605,6 +796,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -620,6 +816,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -635,6 +836,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -650,6 +856,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -665,6 +876,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -680,6 +896,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -695,6 +916,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -710,6 +936,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -725,6 +956,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -740,6 +976,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -755,6 +996,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     },
     {
@@ -770,6 +1016,11 @@
         "landmark": null,
         "framing": null,
         "interaction": null
+      },
+      "physicality": {
+        "mode": null,
+        "support": null,
+        "motion": null
       }
     }
   ]

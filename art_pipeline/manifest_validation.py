@@ -15,7 +15,7 @@ except ImportError:
 REQUIRED_PAGE_FIELDS = {
     "page_id", "order", "monster_name", "habitat", "moment",
     "must_include", "must_avoid", "monster_spec_id", "archetype",
-    "environment_profile_id", "environment_variant",
+    "environment_profile_id", "environment_variant", "physicality",
 }
 REQUIRED_VISUAL_FIELDS = {
     "core_identity", "silhouette", "head_features", "body_shape", "surface",
@@ -62,6 +62,16 @@ def _validate_environment(page: dict) -> list[str]:
         if not str(variant.get(field) or "").strip():
             errors.append(f"{page_id}: environment_variant.{field} is required")
     return errors
+
+def _validate_physicality(page: dict) -> list[str]:
+    page_id = page["page_id"]
+    physicality = page.get("physicality") or {}
+    errors = []
+    for field in ("mode", "support", "motion"):
+        if not str(physicality.get(field) or "").strip():
+            errors.append(f"{page_id}: physicality.{field} is required")
+    return errors
+
 
 def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
     errors: list[str] = []
@@ -110,6 +120,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
 
         errors.extend(_validate_spec(monster_dir, page))
         errors.extend(_validate_environment(page))
+        errors.extend(_validate_physicality(page))
         fingerprint = environment_fingerprint(page)
         if fingerprint in seen_backgrounds:
             errors.append(f"{page_id}: background duplicates {seen_backgrounds[fingerprint]}")
