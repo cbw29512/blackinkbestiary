@@ -17,6 +17,7 @@ from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
 from prompt_builder import build_prompt
 from qa import inspect_candidate
+from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
 
 TOME_FILE = ROOT / "data" / "tome-I.json"
 STATE_FILE = ROOT / "data" / "production-state.json"
@@ -28,12 +29,6 @@ STUDIO_URL = "http://127.0.0.1:8765"
 
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def envelope_data(payload):
-    if isinstance(payload, dict) and "data" in payload:
-        return payload.get("data")
-    return payload
 
 
 def find_prompt_id(value):
@@ -60,38 +55,11 @@ def get_current():
     return page, state["pages"][page_id]
 
 
-def exact_slot(slots: list[dict], names: list[str], *, required=True):
-    for name in names:
-        matches = [
-            slot for slot in slots
-            if isinstance(slot, dict) and str(slot.get("name", "")).lower() == name.lower()
-        ]
-        if len(matches) == 1:
-            return str(matches[0]["address"])
-        if len(matches) > 1:
-            if not required:
-                return None
-            addresses = ", ".join(str(slot.get("address")) for slot in matches)
-            raise RuntimeError(f"Live template has multiple {name!r} slots: {addresses}")
-    if not required:
-        return None
-    available = ", ".join(
-        f"{slot.get('address')}:{slot.get('name')}"
-        for slot in slots if isinstance(slot, dict)
-    )
-    raise RuntimeError(
-        f"No unique slot named {names} was found. Live template slots: {available}"
-    )
-
-
-def discover_slots(cli: ComfyCli, template_name: str):
-    path = WORKFLOW_DIR / f"{template_name}.json"
-    cli.fetch_template(template_name, path)
-    payload = envelope_data(cli.workflow_slots(path)) or {}
-    slots = payload.get("slots") if isinstance(payload, dict) else None
-    if not isinstance(slots, list):
-        raise RuntimeError(f"Could not read live template slots: {payload}")
-    return slots
+def diffusion_model_filename(config: dict) -> str:
+    for model in config["models"]:
+        if model.get("folder") == "diffusion_models":
+            return model["filename"]
+    raise RuntimeError("No diffusion model configured")
 
 
 def studio_health():
@@ -155,29 +123,38 @@ def main():
         return 3
 
     template_name = config["templates"]["text_to_image"]
-    slots = discover_slots(cli, template_name)
-    prompt_addr = exact_slot(slots, ["prompt", "text"])
-    seed_addr = exact_slot(slots, ["seed"], required=False)
-    width_addr = exact_slot(slots, ["width"], required=False)
-    height_addr = exact_slot(slots, ["height"], required=False)
-
     prompt = build_prompt(page, page_state.get("review_notes"))
     seed = random.randint(1, 2**63 - 1)
-    params = {prompt_addr: prompt}
-    if seed_addr:
-        params[seed_addr] = seed
-    if width_addr:
-        params[width_addr] = 768
-    if height_addr:
-        params[height_addr] = 1024
+    workflow_path = WORKFLOW_DIR / "blackink_i01_text_to_image.json"
+
+    try:
+        prepared = prepare_distilled_text_to_image(
+            cli,
+            template_name,
+            workflow_path,
+            prompt=prompt,
+            seed=seed,
+            model_filename=diffusion_model_filename(config),
+            width=768,
+            height=1024,
+        )
+        validation = envelope_data(cli.validate_workflow(workflow_path)) or {}
+        if not validation.get("valid"):
+            print("Prepared I-01 workflow did not validate:")
+            print(json.dumps(validation, indent=2))
+            return 4
+    except (ComfyCliError, RuntimeError) as exc:
+        print(f"Could not prepare the distilled FLUX workflow: {exc}")
+        return 4
 
     print(f"Template: {template_name}")
-    print(f"Prompt slot: {prompt_addr}")
+    print(f"Distilled branch: {prepared['selected_root']}")
+    print(f"Model: {diffusion_model_filename(config)}")
     print(f"Seed: {seed}")
     print("Generating one calibration candidate...")
 
     try:
-        result = cli.run_template(template_name, params, timeout=600)
+        result = cli.run_workflow(workflow_path, timeout=600)
     except ComfyCliError as exc:
         print(exc)
         print("\nIf the error mentions DynamicVRAM/VBAR/CUDA OOM on the RTX 5060 Ti,")
