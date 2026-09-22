@@ -124,10 +124,27 @@ def resolve_monster_spec(
     resolved = _apply_contract_defaults(resolved, contract)
     resolved = _apply_minimal_recipe(resolved, raw)
 
-    taxonomy = family.get("taxonomy") or {}
-    resolved["family"] = raw.get("family") or taxonomy.get("family") or raw.get("family_profile")
-    resolved["size"] = raw.get("size") or taxonomy.get("default_size") or ""
-    resolved["creature_type"] = raw.get("creature_type") or taxonomy.get("creature_type") or ""
+    family_taxonomy = family.get("taxonomy") or {}
+    species_taxonomy = species.get("taxonomy") or {}
+    resolved["family"] = (
+        raw.get("family")
+        or species_taxonomy.get("family")
+        or family_taxonomy.get("family")
+        or raw.get("family_profile")
+        or raw.get("species_profile")
+    )
+    resolved["size"] = (
+        raw.get("size")
+        or species_taxonomy.get("default_size")
+        or family_taxonomy.get("default_size")
+        or ""
+    )
+    resolved["creature_type"] = (
+        raw.get("creature_type")
+        or species_taxonomy.get("creature_type")
+        or family_taxonomy.get("creature_type")
+        or ""
+    )
     resolved["schema_version"] = int(raw.get("schema_version") or 1)
     resolved["identity_version"] = int(raw.get("identity_version") or family.get("identity_version") or 1)
     resolved["monster_contract"] = contract.get("contract_id")
