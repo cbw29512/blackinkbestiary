@@ -9,9 +9,11 @@ except ImportError:
     from style_rules import STYLE_RULES
 try:
     from .environment_prompt import environment_prompt_sections
+    from .physicality_prompt import physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
 except ImportError:
     from environment_prompt import environment_prompt_sections
+    from physicality_prompt import physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,6 +37,7 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
             "and story-critical environmental interactions. Simplify clutter only; never flatten the scene into a generic backdrop."
         ),
         f"STORY MOMENT MUST READ AS: {page['moment']}.",
+        *physicality_sections(page),
         f"SCENE ARCHETYPE MUST REMAIN: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
         _items("MUST INCLUDE", page.get("must_include")),
