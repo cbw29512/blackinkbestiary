@@ -84,11 +84,12 @@ Black-Ink house style always overrides the rendering style of the reference.
 
 Black-Ink follows a bold-and-easy readability target without becoming preschool-simple.
 
-- Monster should be large, centered or near-centered, and the dominant visual shape; target roughly 55–72% of page height in ordinary scenes while leaving enough page area for the habitat to read.
-- Use 2–4 major environmental forms.
+- Monster should be large, centered or near-centered, and the dominant visual shape; target roughly 60–75% of page height in ordinary scenes while leaving enough page area for the habitat to read.
+- Use 2–4 major environmental forms arranged around and behind the monster.
 - Favor medium-to-large contiguous coloring regions over tiny enclosed cells.
 - Story-critical props must be large enough to identify and color comfortably.
 - Background depth comes from overlapping large forms and perspective, not micro-detail.
+- Keep the full or nearly full monster silhouette visible; major anatomy should not be cropped unless the page intentionally uses a close-up.
 - If simplifying a page, remove clutter before removing habitat identity.
 
 ## Background Variety Rule
