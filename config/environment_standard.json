@@ -8,7 +8,9 @@
     "Architecture, terrain, furniture, vegetation, debris, lighting fixtures, and props must match the setting's era and fantasy context.",
     "The environment must be interesting to color, with broad shapes and open regions rather than tiny repetitive texture.",
     "Perspective and scale must make the monster feel physically located inside the environment rather than pasted in front of it.",
-    "Simplification may remove clutter but must never erase habitat identity or story logic."
+    "Simplification may remove clutter but must never erase habitat identity or story logic.",
+    "Do not reuse the same background composition across pages when a different habitat subtype, landmark, camera framing, terrain structure, or lair interaction is plausible.",
+    "A broad label such as cave, forest, ocean, crypt, or ruin is not specific enough by itself; every production page must resolve to a concrete environment profile."
   ],
   "approval_checks": [
     "Could the habitat be identified without reading the caption?",
@@ -16,7 +18,9 @@
     "Does the environment help explain the story moment rather than merely decorate the page?",
     "Are two to four strong environmental cues readable at thumbnail size?",
     "Is the environment enjoyable to color without becoming line-density homework?",
-    "Are setting details historically/fantasy appropriate rather than modern or generic?"
+    "Are setting details historically/fantasy appropriate rather than modern or generic?",
+    "Does this background differ meaningfully from nearby pages in landmark, framing, depth structure, or interaction?",
+    "Is the habitat subtype specific enough that it would still feel distinct if the monster were removed?"
   ],
   "automatic_failures": [
     "generic empty backdrop",
@@ -24,6 +28,8 @@
     "modern domestic or industrial details in a medieval-fantasy scene unless explicitly required",
     "environment disconnected from the story moment",
     "environment so weak that the page reads as a character portrait",
-    "environment so cluttered that monster, place, or story beat becomes hard to read"
+    "environment so cluttered that monster, place, or story beat becomes hard to read",
+    "background composition substantially repeats another page",
+    "generic cave, ocean, forest, ruin, or room without a concrete habitat subtype"
   ]
 }
