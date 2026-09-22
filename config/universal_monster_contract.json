@@ -3,6 +3,7 @@
   "contract_id": "black-ink-monster-v3",
   "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
   "minimal_recipe_required": [
+    "schema_version",
     "monster_id",
     "monster_name"
   ],
@@ -98,7 +99,24 @@
       "ooze -> gelatinous cube / black pudding / ochre jelly",
       "fungus -> shrieker fungus / violet fungus",
       "mimic -> chest mimic / door mimic"
-    ]
+    ],
+    "required_when_standalone": [
+      "taxonomy.family",
+      "taxonomy.creature_type",
+      "taxonomy.default_size",
+      "visual_identity.core_identity",
+      "visual_identity.silhouette",
+      "visual_identity.head_features",
+      "visual_identity.body_shape",
+      "visual_identity.surface",
+      "visual_identity.must_keep",
+      "visual_identity.must_avoid",
+      "scene_identity.size_impression",
+      "scene_identity.natural_posture",
+      "scene_identity.behavior_style",
+      "accuracy_checks"
+    ],
+    "prompt_rule": "A standalone species profile must carry enough visual and scene DNA to produce the creature without relying on page scenery or an invented family."
   },
   "recipe_forbidden_fields": [
     "visual_identity",
