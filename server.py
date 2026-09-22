@@ -161,25 +161,6 @@ def start_generation_worker():
     page_id = state["current_page_id"]
     page = page_by_id(tome, page_id)
     status = state["pages"][page_id]["status"]
-    preflight = local_generation_preflight(ROOT)
-    if not preflight["ready_for_generation"]:
-        return {
-            "started": False,
-            "running": False,
-            "page_id": page_id,
-            "reason": "local_generation_preflight_failed",
-            "preflight": preflight,
-        }
-    first_page_id = tome["pages"][0]["page_id"]
-    calibration = calibration_report(ROOT)
-    if page_id != first_page_id and not calibration["production_calibrated"]:
-        return {
-            "started": False,
-            "running": False,
-            "page_id": page_id,
-            "reason": "golden_five_calibration_required",
-            "calibration": calibration,
-        }
     if status not in GENERATABLE_STATES:
         raise ValueError(f"Current page is not ready to generate: {status}")
     if not page or not page.get("monster_spec_id"):
@@ -191,6 +172,27 @@ def start_generation_worker():
         }
     if not GENERATOR_SCRIPT.exists():
         raise ValueError("Generation worker script is missing")
+
+    first_page_id = tome["pages"][0]["page_id"]
+    calibration = calibration_report(ROOT)
+    if page_id != first_page_id and not calibration["production_calibrated"]:
+        return {
+            "started": False,
+            "running": False,
+            "page_id": page_id,
+            "reason": "golden_five_calibration_required",
+            "calibration": calibration,
+        }
+
+    preflight = local_generation_preflight(ROOT)
+    if not preflight["ready_for_generation"]:
+        return {
+            "started": False,
+            "running": False,
+            "page_id": page_id,
+            "reason": "local_generation_preflight_failed",
+            "preflight": preflight,
+        }
 
     with _GENERATION_LOCK:
         if _GENERATION_PROCESS is not None and _GENERATION_PROCESS.poll() is None:
