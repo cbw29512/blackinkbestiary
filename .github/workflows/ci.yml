@@ -25,6 +25,7 @@ jobs:
           python -m json.tool config/universal_page_contract.json > /dev/null
           python -m json.tool config/universal_monster_contract.json > /dev/null
           python -m json.tool config/universal_environment_contract.json > /dev/null
+          python -m json.tool config/universal_story_contract.json > /dev/null
           python -m json.tool config/kdp_print_standard.json > /dev/null
           python -m json.tool config/content_scope.json > /dev/null
           python -m json.tool data/monster_source_registry.json > /dev/null
