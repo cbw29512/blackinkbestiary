@@ -20,7 +20,7 @@ class EnvironmentQualityTests(unittest.TestCase):
         text = build_prompt(self.goblin_page)
         self.assertIn("Colorability is the governing product constraint", text)
         self.assertIn("two to four large", text)
-        self.assertIn("environment is unmistakably the named habitat", text)
+        self.assertIn("environment must be unmistakably the named habitat", text)
 
     def test_environment_is_preserved_during_image_edit(self):
         text = build_edit_prompt(
