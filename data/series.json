@@ -3,8 +3,7 @@
   "series_id": "black-ink-bestiary",
   "series_title": "Black-Ink Bestiary",
   "tagline": "Fantasy Monsters in Their Natural Habitat",
-  "target_pages_per_book": 50,
-  "production_rule": "Monster identity + environment identity + story moment are co-equal. Every page uses a specific environment profile, a unique landmark/framing/interaction variant, and large easy-to-color forms. No book enters production until its full manifest passes audit.",
+  "production_rule": "Every book inherits the universal page contract. Each page supplies only its unique monster, environment profile, landmark/framing/interaction, story moment, scene archetype, and physicality. Book page count is configured per book.",
   "books": [
     {
       "book_id": "TOME-I",
@@ -28,7 +27,8 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     },
     {
       "book_id": "TOME-II",
@@ -52,7 +52,8 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     },
     {
       "book_id": "TOME-III",
@@ -76,7 +77,8 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     },
     {
       "book_id": "TOME-IV",
@@ -100,7 +102,8 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     },
     {
       "book_id": "TOME-V",
@@ -124,7 +127,8 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     },
     {
       "book_id": "TOME-VI",
@@ -148,7 +152,8 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     },
     {
       "book_id": "TOME-VII",
@@ -172,7 +177,8 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     },
     {
       "book_id": "TOME-VIII",
@@ -196,7 +202,10 @@
       "style_standard": "docs/STYLE_BIBLE.md",
       "environment_standard": "config/environment_standard.json",
       "environment_catalog": "data/environment_families",
-      "coloring_page_standard": "config/coloring_page_standard.json"
+      "coloring_page_standard": "config/coloring_page_standard.json",
+      "page_contract": "config/universal_page_contract.json"
     }
-  ]
+  ],
+  "default_target_pages": 50,
+  "page_contract": "config/universal_page_contract.json"
 }
