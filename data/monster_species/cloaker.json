@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "profile_id": "cloaker",
+  "display_name": "Cloaker",
+  "taxonomy": {
+    "family": "cloaker",
+    "creature_type": "cave aberration",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A living cave predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature.",
+    "silhouette": "Wide triangular mantle body with winglike sides, narrow trailing tail, and a compact underside head near the front edge.",
+    "head_features": "Small predatory underside face with round eyes and a wide mouth, integrated into the mantle rather than on a neck.",
+    "body_shape": "Flat flexible ray-like body with broad leathery wings and one long whip-like tail; no humanoid limbs.",
+    "surface": "Smooth leathery membrane with sparse folds and rib lines.",
+    "signature_gear": [],
+    "attitude": [
+      "still",
+      "camouflaged",
+      "sudden",
+      "smothering"
+    ],
+    "must_keep": [
+      "cloak-like folded silhouette",
+      "broad leathery wings",
+      "integrated underside face",
+      "long tail"
+    ],
+    "must_avoid": [
+      "ordinary bat anatomy",
+      "feathers",
+      "humanoid arms",
+      "dragon head",
+      "multiple tentacles",
+      "dense membrane veins"
+    ]
+  },
+  "accuracy_checks": [
+    "reads as a living cloak rather than bat",
+    "broad mantle shape is clear",
+    "tail is visible",
+    "face remains secondary to body silhouette",
+    "line art stays open"
+  ]
+}
