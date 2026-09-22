@@ -71,6 +71,16 @@ class PromptTests(unittest.TestCase):
         self.assertIn("make the ham obvious", text)
         self.assertIn("stolen ham", text)
 
+
+    def test_story_contract_drives_generation_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
+        text = build_prompt(page)
+        self.assertIn("STORY BEAT:", text)
+        self.assertIn("STORY/ENVIRONMENT INTERACTION:", text)
+        self.assertIn("STATIC STORY TEST:", text)
+        self.assertIn("not as a character portrait", text)
+
     def test_first_five_tome_pages_resolve_canonical_specs(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         pages = tome["pages"][:5]
