@@ -7,6 +7,7 @@ import threading
 from pathlib import Path
 try:
     from .calibration_gate import calibration_paths, calibration_report, load_calibration_config
+    from .local_preflight import local_generation_preflight
     from .calibration_state import (
         approve_calibration_candidate,
         load_calibration_state,
@@ -14,6 +15,7 @@ try:
     )
 except ImportError:
     from calibration_gate import calibration_paths, calibration_report, load_calibration_config
+    from local_preflight import local_generation_preflight
     from calibration_state import (
         approve_calibration_candidate,
         load_calibration_state,
@@ -88,6 +90,16 @@ def start_calibration_worker(root: Path, page_id: str) -> dict:
     valid_ids = {item["page_id"] for item in config.get("cases", [])}
     if page_id not in valid_ids:
         raise ValueError(f"{page_id} is not a Golden Five calibration page")
+    preflight = local_generation_preflight(root)
+    if not preflight["ready_for_generation"]:
+        return {
+            "started": False,
+            "running": False,
+            "page_id": page_id,
+            "reason": "local_generation_preflight_failed",
+            "preflight": preflight,
+        }
+
     state = load_calibration_state(root)
     status = state["pages"][page_id].get("status")
     if status not in {"pending", "regenerate_requested"}:
