@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "identity_version": 1,
+  "profile_id": "drider",
+  "display_name": "Drider",
+  "taxonomy": {
+    "family": "drider",
+    "creature_type": "monstrous humanoid",
+    "default_size": "large"
+  },
+  "visual_identity": {
+    "core_identity": "A humanoid upper body fused directly to the body of a giant spider, combining deliberate weapon use with eight-legged arachnid movement.",
+    "silhouette": "Humanoid torso rising from the front of a broad spider abdomen, eight long spider legs radiating below and around.",
+    "head_features": "Elven or severe humanoid face with pointed ears; no insect head.",
+    "body_shape": "Humanlike chest and arms merge at the waist into a giant spider cephalothorax and abdomen.",
+    "limb_structure": "Two humanoid arms above a fused spider lower body with exactly eight spider legs; no human legs.",
+    "surface": "Humanoid skin and cloth kept simple; spider lower body uses sparse hair and broad plates.",
+    "must_keep": [
+      "humanoid upper torso",
+      "giant spider lower body",
+      "eight spider legs",
+      "visible fusion at waist",
+      "ranged-weapon capability"
+    ],
+    "must_avoid": [
+      "centaur horse body",
+      "two separate creatures",
+      "human legs",
+      "six spider legs",
+      "full insect head",
+      "overly ornate armor"
+    ]
+  },
+  "accuracy_checks": [
+    "fusion between torso and spider body is clear",
+    "eight legs are readable",
+    "no human legs appear",
+    "upper body stays humanoid",
+    "webs do not overwhelm anatomy"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "centaur_drift",
+      "symptom": "lower body becomes horse-like",
+      "correction": "restore arachnid cephalothorax, abdomen, and exactly eight spider legs"
+    },
+    {
+      "id": "split_creature_drift",
+      "symptom": "humanoid appears mounted on separate spider",
+      "correction": "make torso visibly fuse directly into spider body"
+    },
+    {
+      "id": "leg_count_drift",
+      "symptom": "spider lower body has six legs",
+      "correction": "restore exactly eight arachnid legs"
+    }
+  ],
+  "scene_identity": {
+    "size_impression": "Large hybrid with wide eight-legged spread and humanoid torso rising above it.",
+    "natural_posture": "Supported on multiple spider legs, clinging to broad surfaces, or using web structures with clear contact.",
+    "behavior_style": [
+      "watching from a webbed ledge",
+      "aiming from stable spider-legged support",
+      "climbing wall or ruin",
+      "guarding a webbed sacred or ruined space"
+    ],
+    "environment_fit": [
+      "webbed underground ruins",
+      "large cave walls and ledges",
+      "chapels or chambers with clear arachnid support geometry"
+    ]
+  }
+}
