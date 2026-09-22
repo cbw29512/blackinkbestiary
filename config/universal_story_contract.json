@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "contract_id": "black-ink-story-v1",
+  "schema_version": 2,
+  "contract_id": "black-ink-story-v2",
   "purpose": "Make every page communicate one clear, static, colorable story beat instead of a generic character portrait.",
   "principles": [
     "One page communicates one primary beat.",
@@ -10,7 +10,8 @@
     "Avoid neutral portrait poses where the monster merely stands and holds props.",
     "Avoid simultaneous unrelated actions, extra characters, or multiple props added only to explain the story.",
     "The environment must participate in the beat rather than acting as wallpaper.",
-    "Story clarity must not require falling, jumping, chaotic motion, micro-detail, or dense background clutter."
+    "Story clarity must not require falling, jumping, chaotic motion, micro-detail, or dense background clutter.",
+    "Presence is not enough: required objects must connect, support, cross, point toward, emerge from, or interact with each other exactly as the story beat requires."
   ],
   "required_inputs": [
     "moment",
@@ -27,7 +28,8 @@
     "stated moment is not visually distinguishable at thumbnail size",
     "story adds enough props, figures, or detail to reduce coloring space",
     "story complexity makes the monster silhouette or anatomy harder to color",
-    "more than one primary action must be decoded to understand the page"
+    "more than one primary action must be decoded to understand the page",
+    "all required objects are present but their spatial/physical relationship makes the story incorrect or ambiguous"
   ],
   "review_questions": [
     "What single verb describes what the monster is doing?",
@@ -49,5 +51,20 @@
     ],
     "secondary_figures": "none unless essential; if present, small and simple",
     "rule": "Express the beat with one clear verb, simple body language, and one environment interaction. Do not build a miniature narrative scene full of objects."
+  },
+  "relationship_engine": {
+    "registry_path": "data/scene_relationship_rules.json",
+    "purpose": "Required objects must have correct physical and narrative relationships, not merely appear somewhere in the frame.",
+    "rule": "Resolve only relationship rules triggered by the page recipe and append them after the core story beat.",
+    "examples": [
+      "tripwire crosses travel lane and visibly explains pit trigger",
+      "wall torch visibly attaches to masonry",
+      "offering object aims toward shrine focal point",
+      "hanging creature visibly attaches to overhead support",
+      "emerging creature visibly intersects and remains supported by the opening",
+      "carried object visibly contacts the limb or body carrying it"
+    ],
+    "prompt_budget": 4,
+    "review_rule": "A page fails story/environment interaction if all required objects are present but their physical relationship is wrong or ambiguous."
   }
 }
