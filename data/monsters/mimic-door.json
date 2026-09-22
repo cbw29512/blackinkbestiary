@@ -1,61 +1,12 @@
 {
+  "schema_version": 3,
   "monster_id": "mimic-door",
   "monster_name": "Mimic — Door",
-  "family": "mimic",
-  "size": "large",
-  "creature_type": "shapechanging monstrosity",
-  "visual_identity": {
-    "core_identity": "A predatory shapechanger disguised as a dungeon door, betrayed by a hidden eye, tongue-like handle, and organic warping in the wood.",
-    "silhouette": "Mostly rectangular door silhouette fixed in a wall opening, with subtle bulging organic deformation.",
-    "head_features": "No separate head; one concealed eye and a mouth or tongue integrated into door hardware or panel seams.",
-    "body_shape": "Door slab and frame retain architectural structure while selected panels flex like living tissue.",
-    "surface": "Simple wood panels and iron fittings with sparse organic seams.",
-    "signature_gear": [
-      "door hinges",
-      "iron bands",
-      "handle transformed into tongue"
-    ],
-    "attitude": [
-      "patient",
-      "deceptive",
-      "sudden",
-      "hungry"
-    ],
-    "must_keep": [
-      "recognizable door",
-      "hidden eye",
-      "tongue-handle",
-      "wall integration",
-      "shapechanger reveal"
-    ],
-    "must_avoid": [
-      "free-standing chest mimic",
-      "humanoid limbs",
-      "full monster face covering door",
-      "ornate door clutter",
-      "cartoon expression",
-      "excess slime"
-    ]
-  },
+  "family_profile": "mimic",
+  "species_profile": "mimic-door",
   "default_habitats": [
     "torch-lit halls",
     "sealed dungeon rooms",
     "corridor junctions"
-  ],
-  "accuracy_checks": [
-    "door disguise remains convincing",
-    "eye is discoverable but clear",
-    "tongue handle is obvious",
-    "architecture remains readable",
-    "mimic does not become unrelated monster",
-    "line art stays clean"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "mimic"
+  ]
 }
