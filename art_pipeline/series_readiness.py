@@ -6,13 +6,13 @@ from pathlib import Path
 try:
     from .book_registry import load_series, plan_path
     from .manifest_validation import validate_manifest
-    from .page_contract import missing_required_paths
+    from .page_contract import missing_required_paths, page_uniqueness_fingerprint
     from .state_validation import validate_state
     from .source_scope import load_monster_registry
 except ImportError:
     from book_registry import load_series, plan_path
     from manifest_validation import validate_manifest
-    from page_contract import missing_required_paths
+    from page_contract import missing_required_paths, page_uniqueness_fingerprint
     from state_validation import validate_state
     from source_scope import load_monster_registry
 
@@ -97,11 +97,24 @@ def audit_series(root: Path) -> dict:
     registry = load_monster_registry(root)
     allowed = set((registry.get("monsters") or {}).keys())
     used = set()
+    cross_book_recipes = {}
     for row in rows:
         if row.get("manifest_exists"):
             book = next(item for item in series["books"] if item["book_id"] == row["book_id"])
             manifest = _read(root / book["manifest_path"])
             used.update(page.get("monster_spec_id") for page in manifest.get("pages", []))
+            for page in manifest.get("pages", []):
+                try:
+                    fingerprint = page_uniqueness_fingerprint(page, root)
+                except RuntimeError:
+                    continue
+                prior = cross_book_recipes.get(fingerprint)
+                if prior and prior != book["book_id"]:
+                    structural_errors.append(
+                        f"{book['book_id']}:{page.get('page_id')}: duplicate resolved page recipe already used in {prior}"
+                    )
+                else:
+                    cross_book_recipes[fingerprint] = book["book_id"]
     unknown = sorted(item for item in used if item and item not in allowed)
     if unknown:
         structural_errors.append("production manifests use monsters outside source roster: " + ", ".join(unknown))
