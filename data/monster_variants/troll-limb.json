@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "troll-limb",
+  "family_profile": "troll",
+  "display_name": "Troll Limb",
+  "size": "medium",
+  "creature_type": "regenerating severed giant limb",
+  "visual_identity": {
+    "core_identity": "A severed troll arm still animated by supernatural regeneration, crawling like a grotesque hand-creature without graphic gore.",
+    "silhouette": "Long muscular forearm ending in an oversized clawed hand, fingers acting like legs as the limb crawls.",
+    "head_features": "No head; identity comes from troll skin, long proportions, and large clawed hand.",
+    "body_shape": "Single elongated arm with large hand, bent wrist, and finger-walking posture.",
+    "limb_structure": "Exactly one severed troll arm and hand; fingers provide the crawling support. No torso, second arm, or legs.",
+    "surface": "Tough troll skin with sparse bumps; severed end simplified and non-gory.",
+    "must_keep": [
+      "single severed arm only",
+      "oversized clawed hand",
+      "finger-walking motion",
+      "non-gory severed end"
+    ],
+    "must_avoid": [
+      "full troll body",
+      "graphic blood",
+      "human hand proportions",
+      "tentacle anatomy",
+      "extra limbs",
+      "cartoon glove look"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "A medium crawling limb, much larger than a human arm but clearly only one piece of a troll.",
+    "natural_posture": "Palm/fingers and forearm visibly contact the floor or support surface while crawling.",
+    "behavior_style": [
+      "finger-walking across stone",
+      "grasping one large object",
+      "crawling from a drain or doorway",
+      "bracing the wrist against rubble"
+    ]
+  },
+  "accuracy_checks": [
+    "only one arm is present",
+    "finger-walking support is believable",
+    "severed end stays non-gory"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "full_troll_drift",
+      "symptom": "generator restores a whole troll body",
+      "correction": "show exactly one severed arm with no torso, legs, or second arm"
+    },
+    {
+      "id": "gore_drift",
+      "symptom": "severed end becomes graphic",
+      "correction": "use simplified clean fantasy regeneration edge without blood detail"
+    }
+  ]
+}
