@@ -4,19 +4,11 @@ import json
 from pathlib import Path
 
 try:
-    from .monster_profile_catalog import (
-        IDENTITY_DIR,
-        merge_dict,
-        merge_unique,
-        resolve_profile_layers,
-    )
+    from .monster_profile_catalog import IDENTITY_DIR, merge_dict, resolve_profile_layers
+    from .monster_resolution import apply_defaults, apply_recipe, decorate_resolved
 except ImportError:
-    from monster_profile_catalog import (
-        IDENTITY_DIR,
-        merge_dict,
-        merge_unique,
-        resolve_profile_layers,
-    )
+    from monster_profile_catalog import IDENTITY_DIR, merge_dict, resolve_profile_layers
+    from monster_resolution import apply_defaults, apply_recipe, decorate_resolved
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
@@ -33,42 +25,6 @@ def _read_json(path: Path) -> dict:
 
 def load_monster_contract(path: Path = CONTRACT_FILE) -> dict:
     return _read_json(path)
-
-
-def _apply_defaults(resolved: dict, contract: dict) -> dict:
-    defaults = contract.get("defaults") or {}
-    for key in ("visual_identity", "locomotion", "scene_identity", "render_identity", "anatomy"):
-        resolved[key] = merge_dict(defaults.get(key) or {}, resolved.get(key) or {})
-    resolved["default_habitats"] = merge_unique(
-        defaults.get("default_habitats"),
-        resolved.get("default_habitats"),
-    )
-    return resolved
-
-
-def _apply_recipe(resolved: dict, raw: dict) -> dict:
-    if raw.get("visual_overrides"):
-        resolved["visual_identity"] = merge_dict(
-            resolved.get("visual_identity") or {},
-            raw["visual_overrides"],
-        )
-    if raw.get("scene_overrides"):
-        resolved["scene_identity"] = merge_dict(
-            resolved.get("scene_identity") or {},
-            raw["scene_overrides"],
-        )
-    if raw.get("render_overrides"):
-        resolved["render_identity"] = merge_dict(
-            resolved.get("render_identity") or {},
-            raw["render_overrides"],
-        )
-    if raw.get("anatomy_overrides"):
-        resolved["anatomy"] = merge_dict(
-            resolved.get("anatomy") or {},
-            raw["anatomy_overrides"],
-        )
-    resolved["variant_traits"] = list(raw.get("variant_traits") or [])
-    return resolved
 
 
 def resolve_monster_spec(
@@ -91,27 +47,9 @@ def resolve_monster_spec(
     contract = load_monster_contract(ROOT / "config" / "universal_monster_contract.json")
     layers = resolve_profile_layers(raw, family_dir, identity_dir)
     resolved = merge_dict(layers["base"], raw)
-    resolved = _apply_defaults(resolved, contract)
-    resolved = _apply_recipe(resolved, raw)
-
-    taxonomy = resolved.get("taxonomy") or {}
-    resolved["family"] = (
-        raw.get("family")
-        or taxonomy.get("family")
-        or layers["family_id"]
-        or layers["identity_id"]
-        or ""
-    )
-    resolved["size"] = raw.get("size") or taxonomy.get("default_size") or ""
-    resolved["creature_type"] = raw.get("creature_type") or taxonomy.get("creature_type") or ""
-    resolved["schema_version"] = int(raw.get("schema_version") or 1)
-    resolved["identity_version"] = int(
-        raw.get("identity_version")
-        or layers["identity"].get("identity_version")
-        or layers["family"].get("identity_version")
-        or 1
-    )
-    resolved["monster_contract"] = contract.get("contract_id")
+    resolved = apply_defaults(resolved, contract)
+    resolved = apply_recipe(resolved, raw)
+    resolved = decorate_resolved(resolved, raw, layers, contract)
     resolved["catalog"] = {
         "monster_file": path.relative_to(ROOT).as_posix(),
         "family_profile": layers["family_path"].relative_to(ROOT).as_posix()
