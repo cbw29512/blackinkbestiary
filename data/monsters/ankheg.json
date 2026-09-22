@@ -1,54 +1,16 @@
 {
+  "schema_version": 3,
   "monster_id": "ankheg",
   "monster_name": "Ankheg",
-  "family": "ankheg",
-  "size": "large",
-  "creature_type": "giant burrowing insect",
-  "visual_identity": {
-    "core_identity": "A massive burrowing insect predator with a heavily armored segmented body, powerful mandibles, and digging legs.",
-    "silhouette": "Long low insect body with broad armored thorax, tapered abdomen, six strong legs, and large front mandibles.",
-    "head_features": "Armored insect head with oversized paired mandibles, small eyes, and short antennae.",
-    "body_shape": "Three-part insect anatomy with six legs, plated thorax, segmented abdomen, and reinforced forelegs for digging.",
-    "surface": "Large chitin plates with simple seams; avoid tiny shell texture.",
-    "signature_gear": [],
-    "attitude": [
-      "burrowing",
-      "aggressive",
-      "sudden",
-      "territorial"
-    ],
-    "must_keep": [
-      "six legs",
-      "large mandibles",
-      "segmented armored abdomen",
-      "burrowing anatomy",
-      "insect silhouette"
-    ],
-    "must_avoid": [
-      "dragon head",
-      "spider eight legs",
-      "scorpion tail",
-      "humanoid face",
-      "wings",
-      "dense shell pattern"
-    ]
-  },
+  "species_profile": "ankheg",
+  "variant_traits": [
+    "burrowing",
+    "armored",
+    "mandibled"
+  ],
   "default_habitats": [
     "earthen tunnels",
     "burrows",
     "loose dungeon floors"
-  ],
-  "accuracy_checks": [
-    "six legs are visible or clearly implied",
-    "mandibles dominate head identity",
-    "earth burst reads clearly",
-    "body remains insectoid",
-    "armor plates are broad and colorable",
-    "no dragon features appear"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  ]
 }
