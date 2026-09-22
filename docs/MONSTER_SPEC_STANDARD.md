@@ -86,14 +86,16 @@ The human reviewer checks two separate questions:
 
 A page can be technically attractive and still fail if monster identity is wrong.
 
-## Initial Canonical Batch
+## Tome I Coverage
 
-The first five Tome I pages use:
+All 50 Tome I pages must declare a `monster_spec_id` whose JSON file satisfies this contract.
 
-- I-01 -> `kobold-warrior`
-- I-02 -> `kobold-shrine-keeper`
-- I-03 -> `goblin-minion`
-- I-04 -> `goblin-warrior`
-- I-05 -> `goblin-boss`
+CI enforces:
+- exactly 50 ordered Tome I pages
+- a resolvable canonical spec for every page
+- matching `monster_id` and `monster_name`
+- required visual-identity fields
+- non-empty identity keep/avoid rules and accuracy checks
+- concrete page-specific `must_include` requirements
 
-Do not mass-produce later pages until these prove the identity workflow is reliable.
+A missing or malformed canonical spec is a production blocker and must fail tests before merge.
