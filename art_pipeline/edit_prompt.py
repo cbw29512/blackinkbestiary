@@ -2,11 +2,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from prompt_builder import STYLE_RULES, _canonical_sections, _items, load_monster_spec
+from prompt_builder import _canonical_sections, _items, load_monster_spec
 try:
+    from .environment_spec import prompt_sections as environment_prompt_sections
     from .quality_system import archetype_directive, expand_defect_tags
+    from .style_rules import STYLE_RULES
 except ImportError:
+    from environment_spec import prompt_sections as environment_prompt_sections
     from quality_system import archetype_directive, expand_defect_tags
+    from style_rules import STYLE_RULES
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -22,7 +26,8 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
         ),
         f"SUBJECT MUST REMAIN: {page['monster_name']}.",
         *_canonical_sections(spec),
-        f"HABITAT MUST READ AS: {page['habitat']}.",
+        f"HABITAT LABEL MUST READ AS: {page['habitat']}.",
+        *environment_prompt_sections(page),
         f"STORY MOMENT MUST READ AS: {page['moment']}.",
         f"SCENE ARCHETYPE MUST REMAIN: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
@@ -50,8 +55,10 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
 
     sections.append(
         "Correct every listed defect, but do not invent unrelated changes. "
+        "Preserve successful environment anchors just as carefully as successful monster anatomy. "
+        "Do not simplify a specific environment into a generic empty background. "
         "Make the smallest set of edits needed to satisfy the requirements. "
         "Keep every successful part of the provided image unchanged. "
-        "Return one clean black-on-white printable coloring page."
+        "Return one clean black-on-white printable coloring page where monster, environment, and story all read clearly."
     )
     return "\n\n".join(part for part in sections if part)
