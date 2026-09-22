@@ -4,14 +4,16 @@ import json
 from pathlib import Path
 
 try:
+    from .environment_spec import validate_environment
     from .quality_system import archetype_rules
 except ImportError:
+    from environment_spec import validate_environment
     from quality_system import archetype_rules
 
 
 REQUIRED_PAGE_FIELDS = {
     "page_id", "order", "monster_name", "habitat", "moment",
-    "must_include", "must_avoid", "monster_spec_id", "archetype",
+    "must_include", "must_avoid", "monster_spec_id", "archetype", "environment",
 }
 REQUIRED_VISUAL_FIELDS = {
     "core_identity", "silhouette", "head_features", "body_shape", "surface",
@@ -90,6 +92,8 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         archetype = str(page.get("archetype") or "")
         if archetype not in archetypes:
             errors.append(f"{page_id}: unknown archetype {archetype!r}")
+
+        errors.extend(validate_environment(page))
 
         spec_id = str(page.get("monster_spec_id") or "").strip()
         errors.extend(_validate_spec(monster_dir / f"{spec_id}.json", page))
