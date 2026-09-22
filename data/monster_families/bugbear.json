@@ -34,7 +34,8 @@
       "generic caveman face",
       "heroic bodybuilder stance",
       "floating or unsupported pose"
-    ]
+    ],
+    "limb_structure": "Very long humanoid arms with large hands, stable bipedal legs, and large grounded feet; proportions are rangy goblinoid rather than knuckle-walking primate."
   },
   "accuracy_checks": [
     "face reads goblinoid before furry brute",
@@ -80,5 +81,20 @@
     "cave ambush routes",
     "ruined underground halls",
     "low crawlways"
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Tall, rangy medium goblinoid that feels larger than goblins through limb length and reach, not gorilla bulk.",
+    "natural_posture": "Slightly stooped, stalking, crouched behind cover, or planted in a deliberate ambusher stance with clear foot contact.",
+    "behavior_style": [
+      "creeping through confined passages",
+      "watching or ambushing from cover",
+      "guarding, dragging, or handling one object with deliberate predatory body language"
+    ],
+    "environment_fit": [
+      "dungeon passages and guard routes",
+      "cave ambush routes",
+      "ruined underground halls",
+      "low crawlways and concealed approaches"
+    ]
+  }
 }
