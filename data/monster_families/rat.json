@@ -28,7 +28,8 @@
       "horns",
       "dense fur hatching",
       "oversized saber fangs"
-    ]
+    ],
+    "limb_structure": "Four true rodent legs with small forepaws, stronger hind legs, and a long tapering mostly hairless tail; never humanoid hands or canine paws."
   },
   "accuracy_checks": [
     "reads as rat rather than generic furry beast",
@@ -46,5 +47,20 @@
       "symptom": "rat develops canine body or paws",
       "correction": "restore low rodent body, small forepaws, rounded ears, and long naked tail"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Low-to-the-ground rodent proportions; exact scale follows giant or swarm variant while retaining unmistakable rat anatomy.",
+    "natural_posture": "Scurrying, sniffing, crouching, climbing low debris, or feeding with all weight naturally supported by paws or nearby surfaces.",
+    "behavior_style": [
+      "sniffing or scavenging around one food source",
+      "squeezing along wall edges and debris",
+      "climbing low rubble or storage clutter",
+      "clustering or swarming around a clear focal object when the variant permits"
+    ],
+    "environment_fit": [
+      "cellars, pantries, and refuse areas",
+      "sewers, drains, and damp tunnels",
+      "dungeon rubble, cave edges, and low storage spaces"
+    ]
+  }
 }
