@@ -62,4 +62,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run focused module
-        run: python -m unittest ${{ matrix.module }} -v
+        run: python -m unittest discover -s tests -p "${{ matrix.file }}" -v
