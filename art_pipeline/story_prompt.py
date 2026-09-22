@@ -3,6 +3,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+try:
+    from .scene_relationships import relationship_prompt_lines, relationship_review_checks
+except ImportError:
+    from scene_relationships import relationship_prompt_lines, relationship_review_checks
+
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_FILE = ROOT / "config" / "universal_story_contract.json"
 
@@ -30,6 +35,7 @@ def story_sections(page: dict, root: Path = ROOT) -> list[str]:
             "not as a character portrait or a monster merely holding props. "
             "If extra story detail would reduce coloring space or silhouette clarity, simplify the story."
         ),
+        *relationship_prompt_lines(page, root),
     ]
 
 
@@ -42,6 +48,7 @@ def story_checklist(page: dict, root: Path = ROOT) -> list[str]:
         "The page does not read as a neutral portrait or prop-holding pose",
     ]
     checks.extend(contract.get("review_questions") or [])
+    checks.extend(relationship_review_checks(page, root))
     return checks
 
 
