@@ -109,6 +109,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
     return "\n\n".join(part for part in sections if part)
 
 
+
 def build_supervisor_checklist(page: dict) -> list[str]:
     spec = load_monster_spec(page)
     checks = [

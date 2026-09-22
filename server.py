@@ -16,6 +16,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+from art_pipeline.rebuild_state import activate_rebuild_source
+
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
 DATA_DIR = ROOT / "data"
@@ -229,6 +231,7 @@ def append_review(entry):
         handle.write(json.dumps(entry) + "\n")
 
 
+
 def tome_folder_name(tome) -> str:
     tome_id = str(tome.get("tome_id", "TOME-I")).strip()
     if tome_id.upper().startswith("TOME-"):
@@ -298,7 +301,8 @@ def apply_decision(decision: str, notes: str = "", quick_tags=None):
         if index + 1 < len(order):
             next_id = order[index + 1]
             state["current_page_id"] = next_id
-            state["pages"][next_id]["status"] = "queued"
+            if not activate_rebuild_source(state, next_id, WEB_DIR):
+                state["pages"][next_id]["status"] = "queued"
         else:
             state["complete"] = True
     else:
@@ -346,6 +350,8 @@ def register_candidate(payload):
         "image_path": image_path,
         "qa_status": payload.get("qa_status", "pass"),
         "supervisor_status": payload.get("supervisor_status", "ready_for_human"),
+        "generation_mode": payload.get("generation_mode", "unknown"),
+        "source": payload.get("source"),
         "created_at": utc_now(),
     }
     page_state["attempt"] = attempt

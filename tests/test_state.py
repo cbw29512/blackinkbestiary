@@ -76,6 +76,28 @@ class StateTests(unittest.TestCase):
         self.assertTrue(approved.exists())
         self.assertEqual(approved.read_bytes(), candidate.read_bytes())
 
+
+    def test_approve_activates_ordered_rebuild_source(self):
+        first = server.WEB_DIR / "candidates" / "first.png"
+        first.write_bytes(b"first")
+        rebuild = server.WEB_DIR / "candidates" / "rebuild" / "I-02-source.png"
+        rebuild.parent.mkdir(parents=True, exist_ok=True)
+        rebuild.write_bytes(b"second")
+
+        state = server.load_state()
+        state["pages"]["I-02"]["rebuild_source_path"] = "candidates/rebuild/I-02-source.png"
+        server.write_json(server.STATE_FILE, state)
+
+        server.register_candidate({"page_id": "I-01", "image_path": "candidates/first.png"})
+        result = server.apply_decision("approve")
+
+        self.assertEqual(result["current_page_id"], "I-02")
+        state = server.load_state()
+        second = state["pages"]["I-02"]
+        self.assertEqual(second["status"], "awaiting_human")
+        self.assertEqual(second["current_candidate"]["generation_mode"], "rebuild_source")
+        self.assertEqual(second["current_candidate"]["image_path"], "candidates/rebuild/I-02-source.png")
+
     def test_approve_refuses_to_overwrite_different_locked_art_file(self):
         candidate = server.WEB_DIR / "candidates" / "test.png"
         candidate.write_bytes(b"new-art")

@@ -15,3 +15,5 @@ data/template-validation.json
 art_pipeline/workflows/official/*.json
 
 data/generation-worker.log
+discard/
+data/rebuild-backups/
