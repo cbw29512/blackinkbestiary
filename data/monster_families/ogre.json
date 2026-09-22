@@ -27,7 +27,8 @@
       "human-sized proportions",
       "bodybuilder definition",
       "ape-like posture"
-    ]
+    ],
+    "limb_structure": "Thick heavy humanoid arms and legs with oversized hands and feet; limb length is blunt and massive rather than troll-long or ape-like."
   },
   "accuracy_checks": [
     "reads as ogre before generic brute",
@@ -51,5 +52,20 @@
       "symptom": "anatomy becomes sharply defined heroic muscle",
       "correction": "use blunt heavy mass, thick limbs, and less anatomical definition"
     }
-  ]
+  ],
+  "scene_identity": {
+    "size_impression": "Huge relative to ordinary furniture, doors, corridors, and human-scale props; scale should be obvious through environmental comparison.",
+    "natural_posture": "Wide planted stance, slight stoop under its own mass, ducking beneath architecture, or leaning into a simple heavy task.",
+    "behavior_style": [
+      "ducking or squeezing through human-sized spaces",
+      "dragging, lifting, or carrying one large readable object",
+      "guarding a crude lair",
+      "rummaging or feeding with slow heavy body language"
+    ],
+    "environment_fit": [
+      "large caves and rough lairs",
+      "ruined halls and broken gateways",
+      "human-sized rooms or passages that clearly demonstrate the ogre's scale"
+    ]
+  }
 }
