@@ -719,6 +719,63 @@
       "must_avoid": [
         "modern elevator machinery"
       ]
+    },
+    "underground.service-crawlway": {
+      "name": "Low Service Crawlway",
+      "description": "A cramped built or partly excavated secondary passage intended for access and maintenance rather than grand traffic.",
+      "visual_cues": [
+        "low overhead clearance",
+        "narrow wall spacing",
+        "single wall niche or support",
+        "worn floor path"
+      ],
+      "colorable_forms": [
+        "large wall planes",
+        "simple ceiling beam or arch",
+        "broad floor strip"
+      ],
+      "must_avoid": [
+        "grand hall scale",
+        "dense decorative masonry"
+      ]
+    },
+    "underground.stone-stair": {
+      "name": "Dungeon Stone Stair",
+      "description": "A practical built stairway with heavy stone treads, tight walls, and clear vertical movement.",
+      "visual_cues": [
+        "large stone treads",
+        "tight side wall",
+        "landing or turn",
+        "simple wall bracket"
+      ],
+      "colorable_forms": [
+        "broad step bands",
+        "large wall slabs",
+        "simple landing"
+      ],
+      "must_avoid": [
+        "ornate palace staircase",
+        "tiny repetitive step detail"
+      ]
+    },
+    "underground.fortified-gate": {
+      "name": "Fortified Dungeon Gate",
+      "description": "Defensive underground threshold with heavy stonework and a few large gate elements.",
+      "visual_cues": [
+        "massive arch",
+        "heavy gate leaves or portcullis bars",
+        "guard ledge or plinth",
+        "thick threshold stones"
+      ],
+      "colorable_forms": [
+        "large arch blocks",
+        "broad gate panels",
+        "simple bars"
+      ],
+      "must_avoid": [
+        "delicate palace doorway",
+        "modern security door"
+      ]
     }
   }
 }
