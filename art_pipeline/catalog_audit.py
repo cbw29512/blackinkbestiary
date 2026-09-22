@@ -6,10 +6,12 @@ from pathlib import Path
 
 try:
     from .environment_variation import family_variation_errors, load_variation_registry
-    from .monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
+    from .monster_catalog import load_monster_contract, resolve_monster_spec
+    from .monster_recipe_audit import audit_monster_recipes
 except ImportError:
     from environment_variation import family_variation_errors, load_variation_registry
-    from monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
+    from monster_catalog import load_monster_contract, resolve_monster_spec
+    from monster_recipe_audit import audit_monster_recipes
 
 
 def _missing_paths(payload: dict, paths) -> list[str]:
@@ -44,12 +46,15 @@ def audit_monster_catalog(root: Path) -> dict:
             errors.append(f"{path.name}: invalid JSON: {exc}")
             continue
         specs.append((path, spec))
-        errors.extend(minimal_recipe_errors(path.stem, monster_dir, family_dir))
         try:
             resolve_monster_spec(path.stem, monster_dir, family_dir)
         except RuntimeError as exc:
-            errors.append(f"{path.name}: could not resolve through universal engine: {exc}")
-        family = str(spec.get("family_profile") or spec.get("family") or "").strip()
+            errors.append(
+                f"{path.name}: could not resolve through universal engine: {exc}"
+            )
+        family = str(
+            spec.get("family_profile") or spec.get("family") or ""
+        ).strip()
         if family:
             groups[family].append((path, spec))
 
@@ -57,9 +62,13 @@ def audit_monster_catalog(root: Path) -> dict:
         if profile_id:
             profile_path = family_dir / f"{profile_id}.json"
             if not profile_path.exists():
-                errors.append(f"{path.name}: family_profile {profile_id!r} does not exist")
+                errors.append(
+                    f"{path.name}: family_profile {profile_id!r} does not exist"
+                )
 
-    repeated = {family: items for family, items in groups.items() if len(items) >= 2}
+    repeated = {
+        family: items for family, items in groups.items() if len(items) >= 2
+    }
     for family, items in sorted(repeated.items()):
         for path, spec in items:
             profile_id = str(spec.get("family_profile") or "").strip()
@@ -69,7 +78,9 @@ def audit_monster_catalog(root: Path) -> dict:
                 )
 
     try:
-        contract = load_monster_contract(root / "config" / "universal_monster_contract.json")
+        contract = load_monster_contract(
+            root / "config" / "universal_monster_contract.json"
+        )
         required_family_paths = contract.get("family_profile_required") or []
     except RuntimeError as exc:
         errors.append(f"monster contract could not be loaded: {exc}")
@@ -87,13 +98,25 @@ def audit_monster_catalog(root: Path) -> dict:
             errors.append(f"{path.name}: profile_id must match filename")
         missing = _missing_paths(profile, required_family_paths)
         if missing:
-            errors.append(f"{path.name}: missing family DNA fields: {', '.join(missing)}")
+            errors.append(
+                f"{path.name}: missing family DNA fields: {', '.join(missing)}"
+            )
+
+    recipe_report = audit_monster_recipes(root)
+    errors.extend(
+        f"recipe policy: {error}" for error in recipe_report["errors"]
+    )
 
     return {
         "pass": not errors,
         "monster_specs": len(specs),
         "repeated_families": sorted(repeated),
         "family_profiles": family_profiles,
+        "recipe_policy_pass": recipe_report["pass"],
+        "minimal_v3_plus": recipe_report["minimal_v3_plus"],
+        "legacy_with_family_profile": recipe_report["legacy_with_family_profile"],
+        "standalone_legacy": recipe_report["standalone_legacy"],
+        "migration_warnings": recipe_report["warnings"],
         "errors": errors,
     }
 
@@ -126,7 +149,9 @@ def audit_environment_variation_catalog(root: Path) -> dict:
     for family_id in sorted(family_ids):
         errors.extend(family_variation_errors(family_id, registry))
     for family_id in sorted(registry_ids - family_ids):
-        errors.append(f"variation registry has unknown environment family {family_id!r}")
+        errors.append(
+            f"variation registry has unknown environment family {family_id!r}"
+        )
 
     return {
         "pass": not errors,
