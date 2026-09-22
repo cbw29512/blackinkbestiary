@@ -46,6 +46,30 @@ class ComfyCliContractTests(unittest.TestCase):
         self.assertIn("--param=seed=42", argv)
 
     @patch("comfy_cli_runner.subprocess.run", return_value=_Result())
+    def test_validate_workflow_uses_required_workflow_option(self, run):
+        cli = ComfyCli(command="comfy")
+        cli.validate_workflow(Path("wf.json"))
+        argv = run.call_args.args[0]
+        self.assertEqual(
+            argv,
+            ["comfy", "--json", "--where", "local", "workflow", "validate", "--workflow", "wf.json"],
+        )
+
+    @patch("comfy_cli_runner.subprocess.run", return_value=_Result())
+    def test_run_workflow_uses_run_workflow_wait_contract(self, run):
+        cli = ComfyCli(command="comfy")
+        cli.run_workflow(Path("wf.json"))
+        argv = run.call_args.args[0]
+        self.assertIn("run", argv)
+        self.assertIn("--workflow", argv)
+        self.assertIn("wf.json", argv)
+        self.assertIn("--wait", argv)
+        self.assertIn("--host", argv)
+        self.assertIn("127.0.0.1", argv)
+        self.assertIn("--port", argv)
+        self.assertIn("8188", argv)
+
+    @patch("comfy_cli_runner.subprocess.run", return_value=_Result())
     def test_plain_commands_do_not_receive_json_flag(self, run):
         cli = ComfyCli(command="comfy")
         cli.run("--version")
