@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "identity_version": 1,
+  "variant_id": "giant-spider",
+  "family_profile": "spider",
+  "display_name": "Giant Spider",
+  "size": "large",
+  "creature_type": "giant arachnid",
+  "visual_identity": {
+    "core_identity": "A huge web-building spider with a clear two-part arachnid body, eight long legs, and an ambush posture at the center of a web.",
+    "silhouette": "Large rounded abdomen behind a smaller cephalothorax, eight long jointed legs radiating outward.",
+    "body_shape": "Two main body sections with eight legs attached to the front section; abdomen elevated slightly.",
+    "must_keep": [
+      "web-center posture",
+      "large readable abdomen"
+    ],
+    "must_avoid": [
+      "dense web clutter",
+      "oversized mammal-like fur"
+    ]
+  },
+  "scene_identity": {
+    "size_impression": "Large arachnid whose leg span occupies a broad web or chamber zone.",
+    "behavior_style": [
+      "waiting at web center",
+      "clinging to a broad wall or ceiling",
+      "descending on visible silk",
+      "guarding a webbed opening"
+    ]
+  },
+  "accuracy_checks": [
+    "web relationship is clear",
+    "eight legs remain readable",
+    "web does not overwhelm coloring space"
+  ],
+  "known_failure_modes": [
+    {
+      "id": "web_clutter",
+      "symptom": "web lines overwhelm monster and coloring regions",
+      "correction": "use a few large structural web lines with open gaps"
+    }
+  ]
+}
