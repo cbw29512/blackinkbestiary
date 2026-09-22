@@ -61,11 +61,12 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("generic hallway", identity["spatial_read"])
 
         text = build_prompt(page)
-        self.assertIn("ENVIRONMENT SPATIAL TYPE", text)
-        self.assertIn("ENVIRONMENT MATERIAL LANGUAGE", text)
-        self.assertIn("ENVIRONMENT IDENTITY MARKERS", text)
-        self.assertIn("UNIVERSAL ENVIRONMENT IDENTITY RULES", text)
+        self.assertIn("ROOM BRIEF — AUTHORITATIVE", text)
+        self.assertIn("ROOM PROOF CUES", text)
+        self.assertIn("ROOM DRIFT FAILURES", text)
         self.assertIn("flagstone floor", text)
+        self.assertNotIn("ENVIRONMENT SPATIAL TYPE", text)
+        self.assertNotIn("SPACE PLAN SHAPE", text)
 
     def test_i01_resolves_to_narrow_built_corridor_envelope(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
@@ -74,7 +75,8 @@ class EnvironmentCatalogTests(unittest.TestCase):
         text = build_prompt(page)
         self.assertEqual(envelope["envelope_id"], "narrow_built_corridor")
         self.assertIn("length visibly exceeds width", envelope["proportions"])
-        self.assertIn("SPACE ENVELOPE: narrow_built_corridor", text)
+        self.assertIn("ROOM BRIEF — AUTHORITATIVE", text)
+        self.assertIn("narrow linear built passage", text)
         self.assertIn("two side boundaries", text)
         self.assertIn("square room", text)
 
@@ -90,6 +92,24 @@ class EnvironmentCatalogTests(unittest.TestCase):
                 self.assertTrue(envelope["must_show"], profile_id)
                 self.assertTrue(envelope["must_not_drift"], profile_id)
         self.assertGreaterEqual(count, 70)
+    def test_room_prompt_is_tight_not_redundant(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(page)
+        self.assertEqual(text.count("ROOM BRIEF — AUTHORITATIVE"), 1)
+        for redundant in (
+            "ENVIRONMENT SPATIAL TYPE",
+            "ENVIRONMENT MATERIAL LANGUAGE",
+            "ENVIRONMENT SPATIAL READ",
+            "SPACE PLAN SHAPE",
+            "SPACE PROPORTIONS",
+            "SPACE CEILING / OVERHEAD",
+            "SPACE OPENINGS",
+            "SPACE FOCAL ZONE",
+            "SPACE CAMERA",
+            "ENVIRONMENT ACCURACY",
+            "ENVIRONMENT VISUAL CUES",
+        ):
+            self.assertNotIn(redundant, text)
     def test_i02_shrine_keeper_stays_limestone_cave_not_dungeon_corridor(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-02")
         palette = assemble_environment_palette(page, ROOT)
@@ -152,9 +172,9 @@ class EnvironmentCatalogTests(unittest.TestCase):
     def test_prompt_uses_selected_palette_not_entire_component_library(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-03")
         text = build_prompt(page)
-        self.assertIn("SELECTED SPATIAL ARCHETYPES", text)
-        self.assertIn("SELECTED PRIMARY SURFACES", text)
-        self.assertIn("SELECTED LIGHTING FEATURES", text)
+        self.assertIn("ROOM COMPONENT — spatial archetypes", text)
+        self.assertIn("ROOM COMPONENT — primary surfaces", text)
+        self.assertIn("ROOM COMPONENT — lighting features", text)
         self.assertIn("ENVIRONMENT PALETTE RULE", text)
         self.assertNotIn("FAMILY GEOMETRY VARIATION POOL", text)
         self.assertIn(page["environment_variant"]["landmark"], text)
@@ -186,7 +206,7 @@ class EnvironmentCatalogTests(unittest.TestCase):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-47")
         text = build_prompt(page)
         self.assertIn("Crystal Cavern", text)
-        self.assertIn("LARGE COLORABLE ENVIRONMENT FORMS", text)
+        self.assertIn("ROOM COLORING FORMS", text)
         self.assertIn("UNIQUE BACKGROUND LANDMARK", text)
         self.assertIn("MONSTER / ENVIRONMENT INTERACTION", text)
 
