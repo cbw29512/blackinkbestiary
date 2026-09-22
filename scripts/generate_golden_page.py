@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from calibration_gate import calibration_case, calibration_paths, load_calibration_config, validate_calibration
-from calibration_state import load_calibration_state, register_calibration_candidate
+from calibration_state import load_calibration_state, register_calibration_candidate, set_calibration_generation_error
 from candidate_runner import TechnicalQAError, execute_candidate
 from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
@@ -131,6 +131,10 @@ def main() -> int:
         return 0
     except Exception as exc:
         LOGGER.exception("Golden Five generation failed")
+        try:
+            set_calibration_generation_error(ROOT, args.page_id, str(exc))
+        except Exception:
+            LOGGER.exception("Could not persist Golden Five generation error")
         print(f"GENERATION FAILED: {exc}")
         return 1
 
