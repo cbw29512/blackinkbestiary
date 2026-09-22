@@ -33,21 +33,24 @@ Changing the active book requires a Studio restart. Python code should not be ed
 
 ## Page Schema
 
-Every page must define:
+Every page recipe must define:
 
 - `page_id`
 - `order`
-- `monster_name`
 - `monster_spec_id`
-- `habitat`
 - `moment`
 - `archetype`
 - `environment_profile_id`
 - `environment_variant.landmark`
 - `environment_variant.framing`
 - `environment_variant.interaction`
-- `must_include[]`
-- `must_avoid[]`
+- `physicality.mode`
+- `physicality.support`
+- `physicality.motion`
+
+Optional `must_avoid[]` entries are allowed only for true page-specific negative exceptions.
+
+Legacy Tome I fields such as `monster_name`, `habitat`, `identity_rules`, `must_include`, `coloring_rules`, `reference_image`, and manifest-level `modify` may remain during migration, but generation does not treat them as authorities. Monster identity comes from the monster engine, environment identity from the environment engine, coloring rules from the universal page contract, and current human corrections from state `review_notes`.
 
 The production audit rejects missing fields, duplicate IDs/orders, missing canonical specs, bad archetypes, and malformed identity specs.
 
