@@ -30,7 +30,7 @@ def _page_text(page: dict) -> str:
     return " ".join([
         str(page.get("moment") or ""),
         str(page.get("archetype") or ""),
-        " ".join(str(item) for item in page.get("must_include") or []),
+        " ".join(str(item) for item in (page.get("required_elements") or (page.get("page_exceptions") or {}).get("must_include") or [])),
         str(variant.get("landmark") or ""),
         str(variant.get("framing") or ""),
         str(variant.get("interaction") or ""),
