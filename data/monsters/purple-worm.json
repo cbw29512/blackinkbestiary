@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A colossal subterranean worm whose immense segmented body and circular tooth-filled maw communicates overwhelming subterranean scale. Extremely thick worm body with repeated broad segments and a long continuation beyond the visible composition. Large simple segmented plates or folds; minimal fine texture.",
+  "behavior_traits": [
+    "burrowing",
+    "subsurface pursuit",
+    "engulfing attack",
+    "tunneling"
+  ]
 }
