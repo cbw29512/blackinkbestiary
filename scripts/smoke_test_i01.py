@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
+from page_contract import resolve_page_spec
 from prompt_builder import build_prompt
 from qa import inspect_candidate
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
@@ -51,7 +52,8 @@ def get_current():
     tome = read_json(TOME_FILE)
     state = read_json(STATE_FILE)
     page_id = state["current_page_id"]
-    page = next(p for p in tome["pages"] if p["page_id"] == page_id)
+    raw_page = next(p for p in tome["pages"] if p["page_id"] == page_id)
+    page = resolve_page_spec(raw_page, ROOT)
     return page, state["pages"][page_id]
 
 
