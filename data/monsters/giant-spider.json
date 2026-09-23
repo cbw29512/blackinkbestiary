@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
+    "forest",
     "caves",
-    "ruins",
-    "underground"
+    "ruins"
   ],
   "accuracy_checks": [
     "eight legs are countable",
@@ -51,7 +51,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "spider"
+  "family_profile": "spider",
+  "description": "A huge web-building spider with a clear two-part arachnid body, eight long legs, and an ambush posture. Two main body sections with eight legs attached to the front section; abdomen elevated slightly. Sparse short hairs and simple abdominal markings; web lines kept broad and readable.",
+  "behavior_traits": [
+    "web building",
+    "climbing",
+    "ambush hunting",
+    "prey wrapping"
+  ]
 }
