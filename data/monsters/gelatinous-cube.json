@@ -7,17 +7,17 @@
   "variant_traits": [
     "cube geometry",
     "nearly transparent",
-    "corridor-filling"
+    "substantial cube volume"
   ],
   "visual_overrides": {
-    "core_identity": "A nearly transparent cube-shaped dungeon ooze defined by straight corridor-filling edges and sparse suspended contents.",
+    "core_identity": "A nearly transparent cube-shaped ooze defined by straight planar edges, substantial volume, and sparse suspended contents.",
     "silhouette": "Large rectangular cube with subtly rippling edges and a flat forward face.",
     "body_shape": "Uniform gelatinous cube with sparse internal bubbles and objects suspended at different depths.",
     "surface": "Mostly clear open white interior with only sparse contour ripples and bubbles.",
     "must_keep": [
       "clear cube geometry",
       "transparent-looking open interior",
-      "corridor-filling scale"
+      "large imposing cube scale"
     ],
     "must_avoid": [
       "rounded blob silhouette",
