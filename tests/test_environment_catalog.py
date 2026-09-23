@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from environment_catalog import environment_fingerprint, resolve_environment_profile
 from environment_components import assembly_fingerprint, assemble_environment_palette
+from environment_assembly import infer_overlays
 from environment_engine_audit import audit_environment_engine
 from environment_spatial import resolve_spatial_envelope
 from environment_variation import load_variation_registry
@@ -205,6 +206,24 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("large", directives)
         self.assertIn("tiny", directives)
         self.assertIn("broad", directives)
+
+    def test_explicit_environment_roles_are_authoritative(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        sample = dict(page)
+        sample["environment_roles"] = ["laboratory", "trap_zone"]
+        overlays = infer_overlays(sample, profile, ROOT)
+        self.assertEqual([item["overlay_id"] for item in overlays[:2]], ["laboratory", "trap_zone"])
+
+    def test_specific_inferred_role_beats_broad_registry_order(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        sample = dict(page)
+        sample["moment"] = "A creature guards a working alchemical laboratory workshop."
+        overlays = infer_overlays(sample, profile, ROOT)
+        ids = [item["overlay_id"] for item in overlays]
+        self.assertIn("laboratory", ids)
+        self.assertLess(ids.index("laboratory"), len(ids))
 
 
 if __name__ == "__main__":
