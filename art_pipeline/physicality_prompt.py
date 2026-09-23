@@ -1,3 +1,8 @@
+try:
+    from .physicality_modes import mode_prompt_sections, mode_review_checks
+except ImportError:
+    from physicality_modes import mode_prompt_sections, mode_review_checks
+
 from __future__ import annotations
 
 POWERED_AIR_MODES = {
@@ -44,6 +49,7 @@ def physicality_sections(page: dict) -> list[str]:
     )
     return [
         f"PHYSICAL STATE: {physicality.get('mode', '')}.",
+        *mode_prompt_sections(page),
         f"PHYSICAL SUPPORT / CONTACT: {physicality.get('support', '')}.",
         f"PHYSICAL MOTION / WEIGHT: {physicality.get('motion', '')}.",
         flight_rule,
@@ -56,6 +62,7 @@ def physicality_checklist(page: dict) -> list[str]:
     can_fly = bool((page.get("locomotion") or {}).get("can_fly"))
     return [
         f"Physical state reads as: {physicality.get('mode', '')}",
+        *mode_review_checks(page),
         f"Support/contact is visible and believable: {physicality.get('support', '')}",
         f"Motion/weight reads correctly: {physicality.get('motion', '')}",
         f"Controlled powered flight allowed by monster data: {can_fly}",
