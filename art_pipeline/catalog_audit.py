@@ -33,8 +33,9 @@ def _read(path: Path) -> dict:
 
 
 _SCENERY_TERMS = (
-    "background", "wall", "floor", "ceiling", "corridor", "room", "vault context",
-    "treasure pile", "laboratory", "furniture", "gate context", "background", "architecture",
+    "background", "vault context", "treasure pile", "laboratory fixture",
+    "room dressing", "corridor dressing", "cave dressing", "gate context",
+    "background composition", "environment camera", "scenery",
 )
 
 def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
