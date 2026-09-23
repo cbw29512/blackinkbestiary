@@ -38,9 +38,9 @@
     ]
   },
   "default_habitats": [
-    "phylactery vaults",
-    "ancient crypts",
-    "deep arcane chambers"
+    "ruins",
+    "burial sites",
+    "underground"
   ],
   "accuracy_checks": [
     "reads as intelligent undead caster",
@@ -54,5 +54,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "An ancient skeletal spellcaster preserved by forbidden magic, combining unmistakable undead anatomy with deliberate arcane intelligence and a guarded phylactery. Dry skeletal humanoid frame under decayed layered robes, bony hands visible, upright commanding posture. Clean bone planes and torn fabric edges; no gore, slime, or dense decay. Tall robed skeletal humanoid with narrow shoulders, exposed skull and hands, one spellcasting arm raised, robes falling in simple vertical shapes.",
+  "behavior_traits": [
+    "arcane casting",
+    "ritual preparation",
+    "commanding undead",
+    "guarding"
+  ]
 }
