@@ -30,9 +30,12 @@
     },
     "pit_interrupts_route": {
       "trigger_terms": [
-        "pit",
         "pit trap",
-        "punji pit"
+        "punji pit",
+        "open pit",
+        "opened pit",
+        "trap pit",
+        "pit opening"
       ],
       "directives": [
         "The pit opening is cut into the floor plane and visibly interrupts or threatens the normal travel route.",
@@ -144,12 +147,15 @@
     },
     "carrying_object": {
       "trigger_terms": [
-        "carrying",
-        "carries",
-        "dragging",
-        "drags",
-        "stolen ham",
-        "sack"
+        "carrying a",
+        "carrying the",
+        "carries a",
+        "carries the",
+        "dragging a",
+        "dragging the",
+        "drags a",
+        "drags the",
+        "stolen ham"
       ],
       "directives": [
         "The carried object visibly contacts the hand, arm, shoulder, rope, or body supporting it.",
@@ -162,8 +168,12 @@
         "kicks",
         "kicking",
         "touches",
-        "pulls",
-        "pushes",
+        "pulls a",
+        "pulls the",
+        "pulls on",
+        "pushes a",
+        "pushes the",
+        "pushes against",
         "grips",
         "grabbing",
         "reaches toward",
