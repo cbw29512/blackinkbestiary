@@ -429,3 +429,12 @@ These were discovered by `python scripts/run_local_ci.py` before any Golden Five
 - Canonical scene is now: Kobold Warrior + trapped stone corridor + open spiked pit interrupting the route + wall torch bracket.
 - Calibration and regression tests now reject tripwire ownership for I-01 while retaining universal tripwire support for other pages.
 - Purpose: reduce prompt competition and make the trap story immediately readable in coloring-page line art.
+
+### 2026-09-23 Universal Weapon Contact
+- Added config/creature_equipment_rules.json and art_pipeline/equipment_relationships.py.
+- Canonical signature gear is scanned for weapon terms after monster resolution.
+- A carried weapon now receives a universal hand-contact rule unless the page explicitly mounts, displays, drops, embeds, sheathes, or otherwise detaches that weapon.
+- Held weapons must visibly connect to an anatomically correct grasping hand/limb, may not float or clip through the hand, and may not be duplicated unless the page explicitly requests multiples.
+- Weapon scale is required to remain subordinate to creature identity and the page story.
+- Kobold Warrior canonical gear changed from "oversized spear" to "short simple spear" to match the coloring-page readability target.
+- Added regression coverage for held, detached, review-check, and duplicate-weapon behavior.
