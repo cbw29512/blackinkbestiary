@@ -34,16 +34,16 @@
     ]
   },
   "default_habitats": [
-    "fungal caverns",
-    "damp ruins",
-    "mushroom halls"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "mushroom identity remains obvious",
     "tendrils are long and distinct",
-    "dropped torch is reachable",
+    "tendrils have a clear reachable interaction zone",
     "no face appears",
-    "fungal cavern remains simple",
+    "rooted posture remains physically supported",
     "tendrils do not tangle into clutter"
   ],
   "reference": {
