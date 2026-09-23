@@ -44,7 +44,7 @@ class TomeISpecTests(unittest.TestCase):
             self.assertNotIn("must_avoid", page)
             self.assertNotIn("coloring_rules", page)
             self.assertNotIn("modify", page)
-            self.assertTrue((page.get("page_exceptions") or {}).get("required_elements"))
+            self.assertNotIn("page_exceptions", page)
 
     def test_every_page_uses_monster_first_visual_hierarchy(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
@@ -64,20 +64,13 @@ class TomeISpecTests(unittest.TestCase):
             self.assertTrue(physicality.get("support"), page["page_id"])
             self.assertTrue(physicality.get("motion"), page["page_id"])
 
-    def test_page_requirements_are_concrete(self):
+    def test_page_recipes_do_not_duplicate_universal_requirements(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
-        forbidden_placeholders = {"one clear story moment", "large open areas to color"}
-
         for page in tome["pages"]:
-            requirements = {
-                item.lower()
-                for item in (page.get("page_exceptions") or {}).get("required_elements", [])
-            }
-            self.assertFalse(
-                requirements.intersection(forbidden_placeholders),
-                f"{page['page_id']} still has placeholder requirements",
-            )
-            self.assertGreaterEqual(len(requirements), 3, page["page_id"])
+            self.assertNotIn("page_exceptions", page, page["page_id"])
+            self.assertTrue(page["moment"], page["page_id"])
+            self.assertTrue(page["environment_variant"]["landmark"], page["page_id"])
+            self.assertTrue(page["environment_variant"]["interaction"], page["page_id"])
 
 
 if __name__ == "__main__":
