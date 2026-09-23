@@ -50,6 +50,7 @@
     "held_weapon": [
       "Any depicted carried weapon must visibly connect to at least one anatomically correct grasping hand or limb.",
       "The hand must wrap or close around the weapon grip, haft, shaft, handle, or stock; do not float the weapon beside the creature or let it pass behind the hand without contact.",
+      "Show one instance of each canonical carried weapon unless the page explicitly requires multiple copies.",
       "Use a second hand only when natural for the weapon and pose. Keep the weapon subordinate to the creature and story rather than turning it into an oversized competing focal object."
     ]
   },
@@ -57,6 +58,7 @@
     "held_weapon": [
       "Every carried weapon visibly contacts a grasping hand or limb.",
       "No carried weapon floats, clips through the hand, or appears attached to the body without a believable grip.",
+      "Canonical carried weapons are not duplicated unless the page explicitly requires multiple copies.",
       "Weapon scale remains subordinate to creature identity and the page story."
     ]
   },
