@@ -1,7 +1,7 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "contract_id": "black-ink-monster-v2",
-  "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
+  "purpose": "Monster JSON answers what the creature is and where it can plausibly exist. Family profiles carry shared anatomy and anti-drift intelligence; the universal environment and page engines turn broad habitat compatibility into unique scenery and story composition.",
   "minimal_recipe_required": [
     "monster_id",
     "monster_name",
@@ -13,7 +13,9 @@
     "visual_overrides",
     "default_habitats",
     "scene_overrides",
-    "physical_requirements"
+    "physical_requirements",
+    "description",
+    "behavior_traits"
   ],
   "defaults": {
     "visual_identity": {
@@ -28,7 +30,9 @@
       "behavior_style": [],
       "environment_fit": []
     },
-    "physical_requirements": []
+    "physical_requirements": [],
+    "description": "",
+    "behavior_traits": []
   },
   "resolution_order": [
     "universal monster defaults",
@@ -45,7 +49,11 @@
     "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
     "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
     "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it.",
-    "Legacy monster scenery words are planning-only and must never become generation authority. Generation prompts treat all monster data as creature-only."
+    "Legacy monster scenery words are planning-only and must never become generation authority. Generation prompts treat all monster data as creature-only.",
+    "Monster description is creature-only factual visual identity: size, proportions, anatomy, skin or surface, posture, movement, and persistent biological or cultural traits. It must not narrate a particular page.",
+    "default_habitats are broad compatibility tags such as forest, caves, underground, ruins, wilderness, ocean, swamp, desert, mountain, settlement, or fortification. They are inputs to environment selection, never finished scenery.",
+    "behavior_traits describe reusable creature behavior such as climbing, stalking, scavenging, guarding, burrowing, swimming, or ambushing. The page engine may turn one into a story moment; the monster must not prescribe the exact scene.",
+    "The environment engine fleshes broad habitat tags into spatial geometry, landmarks, surfaces, lighting, hazards, vegetation, water, architecture, depth, and supporting props. The page engine selects a unique combination and interaction."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -69,7 +77,9 @@
       "broad habitat compatibility through default_habitats",
       "broad family habitat compatibility through scene_identity.environment_fit",
       "variant-specific habitat compatibility when biologically necessary",
-      "creature-required physical relationships such as overhead attachment, structural attachment, rooted support, or water support"
+      "creature-required physical relationships such as overhead attachment, structural attachment, rooted support, or water support",
+      "creature-only description covering stable visual identity, proportions, posture, movement, and persistent traits",
+      "reusable behavior traits that can inspire but do not dictate a page moment"
     ],
     "monster_must_not_define": [
       "wall systems",
