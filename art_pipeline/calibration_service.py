@@ -8,10 +8,12 @@ from pathlib import Path
 try:
     from .calibration_gate import calibration_paths, calibration_report, load_calibration_config
     from .local_preflight import local_generation_preflight
+    from .page_contract import resolve_page_spec
     from .calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate, set_calibration_generation_error
 except ImportError:
     from calibration_gate import calibration_paths, calibration_report, load_calibration_config
     from local_preflight import local_generation_preflight
+    from page_contract import resolve_page_spec
     from calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate, set_calibration_generation_error
 LOGGER = logging.getLogger(__name__)
 _LOCK = threading.Lock()
@@ -44,7 +46,10 @@ def public_calibration_state(root: Path) -> dict:
     paths = calibration_paths(root, config)
     state = load_calibration_state(root)
     manifest = _read_json(paths["manifest"])
-    pages_by_id = {page["page_id"]: page for page in manifest.get("pages", [])}
+    pages_by_id = {
+        page["page_id"]: resolve_page_spec(page, root)
+        for page in manifest.get("pages", [])
+    }
     rows = []
     for case in config.get("cases", []):
         page_id = case["page_id"]
