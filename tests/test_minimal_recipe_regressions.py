@@ -47,7 +47,7 @@ class MinimalRecipeRegressionTests(unittest.TestCase):
             "environment_variant": {
                 "landmark": "wall torch beside a pressure plate and open pit",
                 "framing": "tight corridor",
-                "interaction": "guarding the route while pulling a tripwire",
+                "interaction": "pulls the tripwire while guarding the route",
             },
             "physicality": {
                 "mode": "grounded",
