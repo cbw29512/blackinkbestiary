@@ -12,7 +12,8 @@
     "locomotion",
     "visual_overrides",
     "default_habitats",
-    "scene_overrides"
+    "scene_overrides",
+    "physical_requirements"
   ],
   "defaults": {
     "visual_identity": {
@@ -26,7 +27,8 @@
     "scene_identity": {
       "behavior_style": [],
       "environment_fit": []
-    }
+    },
+    "physical_requirements": []
   },
   "resolution_order": [
     "universal monster defaults",
@@ -38,7 +40,7 @@
     "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
     "Monster recipes should only state what differs from the family.",
     "Known family failure modes must be injected into generation and review, not merely stored.",
-    "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment.",
+    "Page recipes own scene-specific props, exact habitat interaction, exact pose, and story moment. Monster data may declare a creature-required physical relationship, but the environment engine supplies the actual supporting scenery.",
     "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
     "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
     "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
@@ -66,7 +68,8 @@
     "monster_may_define": [
       "broad habitat compatibility through default_habitats",
       "broad family habitat compatibility through scene_identity.environment_fit",
-      "variant-specific habitat compatibility when biologically necessary"
+      "variant-specific habitat compatibility when biologically necessary",
+      "creature-required physical relationships such as overhead attachment, structural attachment, rooted support, or water support"
     ],
     "monster_must_not_define": [
       "wall systems",
@@ -90,6 +93,6 @@
       "background composition",
       "environment camera framing"
     ],
-    "rule": "Monster data may say where a creature can plausibly exist and may define creature-specific support or locomotion needs, but must not describe reusable scenery. If a visual element belongs to the location rather than the creature, the universal environment engine owns it."
+    "rule": "Monster data may say where a creature can plausibly exist and may define a creature-required physical relationship. That requirement describes what the creature needs, never what the reusable scenery looks like; the universal environment engine supplies the actual support and all location dressing."
   }
 }
