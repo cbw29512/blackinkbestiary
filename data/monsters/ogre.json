@@ -5,8 +5,8 @@
   "size": "large",
   "creature_type": "giant humanoid",
   "visual_identity": {
-    "core_identity": "A huge crude giant humanoid whose enormous body, heavy limbs, and simple expression communicate brute strength and poor fit in human-sized spaces.",
-    "silhouette": "Very large broad torso, thick limbs, heavy belly, oversized hands and feet, stooped posture under low architecture.",
+    "core_identity": "A huge crude giant humanoid whose enormous body, heavy limbs, and simple expression communicate brute strength.",
+    "silhouette": "Very large broad torso, thick limbs, heavy belly, oversized hands and feet.",
     "head_features": "Broad heavy face, low brow, wide nose, large jaw, small eyes, simple coarse features.",
     "body_shape": "Massive thick-limbed humanoid with broad chest, heavy belly, and awkward giant proportions.",
     "surface": "Bare skin with sparse scars and simple folds; minimal texture.",
@@ -44,12 +44,11 @@
     "ruined halls"
   ],
   "accuracy_checks": [
-    "ogre scale is obvious against architecture",
+    "ogre scale is obvious from body proportions",
     "body is massive rather than lanky",
     "head is broad and coarse",
     "clothing is simple",
-    "pose can read awkward or clumsy",
-    "background reinforces size"
+    "pose can read awkward or clumsy"
   ],
   "reference": {
     "image": null,
