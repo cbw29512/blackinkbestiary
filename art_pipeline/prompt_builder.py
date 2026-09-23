@@ -52,6 +52,7 @@ def _canonical_sections(spec: dict | None) -> list[str]:
     ]
     sections = [
         f"CANONICAL CREATURE TYPE: {spec.get('creature_type', '')}; size {spec.get('size', '')}.",
+        f"CREATURE DESCRIPTION: {spec.get('description', '')}".strip(),
         f"CANONICAL CORE IDENTITY: {visual.get('core_identity', '')}".strip(),
         f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}".strip(),
         f"CANONICAL HEAD: {visual.get('head_features', '')}".strip(),
@@ -61,6 +62,7 @@ def _canonical_sections(spec: dict | None) -> list[str]:
         f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}".strip(),
         f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}".strip(),
         _items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style")),
+        _items("REUSABLE CREATURE BEHAVIOR TRAITS", spec.get("behavior_traits")),
         _items("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", spec.get("physical_requirements")),
         _items("VARIANT TRAITS", spec.get("variant_traits")),
         _items("CANONICAL GEAR", visual.get("signature_gear")),
@@ -86,6 +88,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             "elements because the monster text mentions them. Build all scenery exclusively from the selected page environment."
         ),
         (
+            "HABITAT EXPANSION RULE: broad creature habitat tags are compatibility inputs only. The universal environment engine must flesh the selected habitat into specific spatial geometry, surfaces, landmarks, lighting, depth, hazards, vegetation or water, architecture where appropriate, and supporting props without copying a canned monster scene.\n\n"
             "PAGE ENVIRONMENT AUTHORITY: the named HABITAT and resolved environment profile below are mandatory and "
             "override all general creature habitat preferences. Creature-family environment_fit data is planning-only "
             "and must never replace, broaden, or reinterpret this selected page environment."
