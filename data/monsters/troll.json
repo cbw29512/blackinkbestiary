@@ -5,7 +5,7 @@
   "size": "large",
   "creature_type": "giant humanoid",
   "visual_identity": {
-    "core_identity": "A tall predatory cave giant with a narrow torso, very long clawed arms, powerful regeneration, and a wary hatred of fire.",
+    "core_identity": "A tall predatory giant with a narrow torso, very long clawed arms, powerful regeneration, and a wary hatred of fire.",
     "silhouette": "Lanky tall body, long arms reaching near the knees, hunched shoulders, large clawed hands and feet.",
     "head_features": "Long coarse face, pronounced nose and brow, wide predatory mouth with sharp teeth, deep-set eyes.",
     "body_shape": "Lean but powerful giant with elongated limbs, broad hands, and slightly stooped posture.",
@@ -37,16 +37,16 @@
     ]
   },
   "default_habitats": [
-    "cave fire pits",
-    "underground ravines",
-    "damp dungeon chambers"
+    "underground",
+    "caves",
+    "wilderness"
   ],
   "accuracy_checks": [
     "body reads lanky rather than ogre-bulky",
     "arms are distinctly long",
     "claws are clear",
     "face is predatory",
-    "fire relationship can read visually",
+    "fire-wary behavior may read when the page story calls for it",
     "silhouette remains simple"
   ],
   "reference": {
