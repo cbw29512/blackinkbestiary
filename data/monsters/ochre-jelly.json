@@ -5,7 +5,7 @@
   "size": "large",
   "creature_type": "ooze",
   "visual_identity": {
-    "core_identity": "A viscous amoeboid dungeon ooze known for splitting into separate living masses when struck.",
+    "core_identity": "A viscous amoeboid ooze known for splitting into separate living masses when struck.",
     "silhouette": "Two irregular low jelly masses with rounded lobes and stringy connective drips, both clearly moving.",
     "head_features": "No head, eyes, or face.",
     "body_shape": "Soft amorphous blobs with uneven edges, sagging folds, and no fixed limbs.",
@@ -34,14 +34,14 @@
     ]
   },
   "default_habitats": [
-    "stone stairs",
-    "damp corridors",
-    "subterranean chambers"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "two halves are clearly independent",
-    "both halves move upward",
-    "stair geometry stays readable",
+    "both halves show coherent creeping motion",
+    "both split masses remain clearly readable",
     "no facial features appear",
     "ooze remains colorable",
     "split behavior is obvious without caption"
