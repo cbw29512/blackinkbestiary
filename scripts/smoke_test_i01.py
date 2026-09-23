@@ -10,7 +10,6 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
-from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
 from prompt_builder import build_prompt
 from qa import inspect_candidate
 from smoke_test_support import (
@@ -19,6 +18,7 @@ from smoke_test_support import (
     load_current,
     model_filename,
     post_json,
+    prepare_i01_workflow,
     read_json,
 )
 
@@ -26,29 +26,6 @@ CONFIG_FILE = ROOT / "config" / "local_ai_stack.json"
 WORKFLOW_DIR = ROOT / "art_pipeline" / "workflows" / "official"
 CANDIDATE_DIR = ROOT / "web" / "candidates"
 STUDIO_URL = "http://127.0.0.1:8765"
-
-
-def _prepare(cli, config, page, prompt, seed):
-    workflow_path = WORKFLOW_DIR / "blackink_i01_text_to_image.json"
-    prepared = prepare_distilled_text_to_image(
-        cli,
-        config["templates"]["text_to_image"],
-        workflow_path,
-        prompt=prompt,
-        seed=seed,
-        model_filename=model_filename(config, "diffusion_models"),
-        clip_filename=model_filename(config, "text_encoders"),
-        vae_filename=model_filename(config, "vae"),
-        width=768,
-        height=1024,
-    )
-    validation = envelope_data(cli.validate_workflow(workflow_path)) or {}
-    if not validation.get("valid"):
-        raise RuntimeError(
-            "Prepared I-01 workflow did not validate: "
-            + json.dumps(validation)
-        )
-    return workflow_path, prepared
 
 
 def _download_best_candidate(client, images, page_state):
@@ -92,7 +69,9 @@ def main() -> int:
     seed = random.randint(1, 2**63 - 1)
     prompt = build_prompt(page, page_state.get("review_notes"))
     try:
-        workflow_path, prepared = _prepare(cli, config, page, prompt, seed)
+        workflow_path, prepared = prepare_i01_workflow(
+            cli, config, prompt, seed, WORKFLOW_DIR
+        )
     except (ComfyCliError, RuntimeError) as exc:
         print(f"Could not prepare the distilled FLUX workflow: {exc}")
         return 4
