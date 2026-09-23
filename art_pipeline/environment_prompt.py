@@ -102,6 +102,19 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         _items("ENVIRONMENT ASSEMBLY CONTEXTS", palette.get("contexts")),
         *component_lines,
         _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules),
+        (
+            "PHYSICAL BELIEVABILITY RULE: every environmental object must have a plausible support, attachment, "
+            "or terrain relationship. Wall fixtures attach to walls; hanging objects attach to beams, branches, "
+            "ceilings, hooks, or chains; furniture and containers rest on floors, shelves, ledges, or ground; "
+            "doors and gates occupy structural openings; traps integrate with the path/floor/wall that operates them; "
+            "vegetation grows from soil, rock cracks, water, roots, or other believable substrate. Reject floating, "
+            "unsupported, intersecting, or purposeless props."
+        ),
+        (
+            "FANTASY PLACE LOGIC: the environment must look used or formed for a reason. Choose only a few large "
+            "context-appropriate forms that explain travel, shelter, work, worship, burial, defense, feeding, nesting, "
+            "storage, water flow, erosion, or habitation. Do not add generic fantasy clutter merely to fill empty space."
+        ),
         _items("REQUIRED OBJECT PHYSICAL RULES", _required_object_rules(page)),
         _items("FAMILY ENVIRONMENT QUALITY RULES", palette.get("family_quality_rules")),
         (
