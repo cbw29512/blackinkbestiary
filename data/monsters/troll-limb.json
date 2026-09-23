@@ -51,7 +51,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "troll"
+  "family_profile": "troll",
+  "description": "A severed troll arm still animated by supernatural regeneration, crawling like a grotesque hand-creature without graphic gore. Single elongated arm with large hand, bent wrist, and finger-walking posture. Tough troll skin with sparse bumps; severed end simplified and non-gory. Long muscular forearm ending in an oversized clawed hand, fingers acting like legs as the limb crawls.",
+  "behavior_traits": [
+    "crawling",
+    "grasping",
+    "regenerative movement",
+    "persistent pursuit"
+  ]
 }
