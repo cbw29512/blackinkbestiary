@@ -43,7 +43,7 @@ def build_manifest_from_plan(plan: dict, root: Path) -> tuple[dict, list[str]]:
         "title": plan.get("title"),
         "theme": plan.get("theme", ""),
         "total_pages": target,
-        "page_contract": plan.get("page_contract", "black-ink-page-v1"),
+        "page_contract": plan.get("page_contract", "black-ink-page-v2"),
         "pages": pages,
     }
     return manifest, errors
