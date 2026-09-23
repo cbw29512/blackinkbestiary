@@ -32,12 +32,16 @@ def _matches(item: str, terms: list[str]) -> bool:
 def attachment_assignments(spec: dict | None, root: Path = ROOT) -> list[dict]:
     payload = load_equipment_rules(root / "config" / "creature_equipment_rules.json")
     groups = payload.get("attachment_groups") or {}
+    ordered_groups = sorted(
+        groups.items(),
+        key=lambda pair: -int((pair[1] or {}).get("priority") or 0),
+    )
     assignments = []
     weapons = set(canonical_weapon_gear(spec, payload))
     for item in _signature_gear(spec):
         if item in weapons:
             continue
-        for group_id, group in groups.items():
+        for group_id, group in ordered_groups:
             terms = [str(term) for term in group.get("trigger_terms") or []]
             if _matches(item, terms):
                 assignments.append({
@@ -51,8 +55,15 @@ def attachment_assignments(spec: dict | None, root: Path = ROOT) -> list[dict]:
 
 
 def attachment_prompt_sections(spec: dict | None, root: Path = ROOT) -> list[str]:
+    payload = load_equipment_rules(root / "config" / "creature_equipment_rules.json")
+    assignments = attachment_assignments(spec, root)
     sections = []
-    for item in attachment_assignments(spec, root):
+    if assignments:
+        sections.append(
+            "CREATURE GEAR PHYSICALITY — UNIVERSAL: "
+            + str(payload.get("general_equipment_rule") or "").strip()
+        )
+    for item in assignments:
         directives = " ".join(
             str(value).strip()
             for value in item.get("directives") or []
