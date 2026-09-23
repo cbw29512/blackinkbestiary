@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
-  "contract_id": "black-ink-page-v1",
-  "purpose": "Resolve every Black-Ink Bestiary page from one universal coloring-book contract plus reusable monster/environment catalogs and a small set of page-unique facts.",
+  "schema_version": 2,
+  "contract_id": "black-ink-page-v2",
+  "purpose": "Resolve every Black-Ink Bestiary page from universal monster, environment, story, physicality, and coloring engines plus only the facts unique to that page.",
   "applies_to": "all books in data/series.json",
   "resolution_order": [
     "universal contract defaults",
@@ -9,7 +9,8 @@
     "monster variant profile",
     "environment family/profile",
     "scene archetype",
-    "page-unique fields and overrides",
+    "page recipe",
+    "page exceptions when truly unique",
     "latest human review corrections"
   ],
   "required_unique_fields": [
@@ -28,11 +29,12 @@
   ],
   "derived_fields": {
     "monster_name": "monster catalog monster_name",
-    "habitat": "environment profile name unless page overrides it",
-    "identity_rules": "monster accuracy_checks plus optional page identity_rules",
-    "composition": "universal defaults.composition unless page overrides it",
-    "coloring_rules": "universal defaults.coloring_rules merged with page overrides",
-    "must_avoid": "global_must_avoid + monster must_avoid + environment must_avoid + page must_avoid"
+    "habitat": "environment profile name",
+    "identity_rules": "monster accuracy_checks only",
+    "composition": "universal defaults.composition",
+    "coloring_rules": "universal defaults.coloring_rules",
+    "required_elements": "page_exceptions.must_include only",
+    "must_avoid": "global_must_avoid + monster must_avoid + environment must_avoid + page_exceptions.must_avoid"
   },
   "defaults": {
     "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 60–75% of page height. Keep the full or nearly full silhouette readable. The environment must remain unmistakable using two to four large supporting forms arranged around, behind, or beneath the monster. At least one environmental feature must participate in the story moment. Preserve broad colorable regions, clear silhouette separation, believable grounding, and generous white space.",
@@ -69,7 +71,7 @@
     ],
     "rule": "Pages may reuse a monster family or environment family, but should not reuse the same resolved combination of subject, place, landmark, framing, interaction, action, and physical state unless intentionally designed as a paired scene."
   },
-  "inheritance_rule": "When a universal rule improves, every tome and future book inherits it automatically. Tome manifests store only page-specific recipes and exceptions.",
+  "inheritance_rule": "When a universal rule improves, every tome and future book inherits it automatically. Tome manifests store only the page recipe and rare page-specific exceptions.",
   "environment_diversity": {
     "max_profile_share": 0.08,
     "minimum_repeat_allowance": 2,
@@ -117,5 +119,45 @@
     "monster_identity",
     "environment_identity",
     "story_moment"
-  ]
+  ],
+  "allowed_recipe_fields": [
+    "page_id",
+    "order",
+    "monster_spec_id",
+    "environment_profile_id",
+    "moment",
+    "archetype",
+    "environment_variant",
+    "physicality",
+    "page_exceptions"
+  ],
+  "allowed_environment_variant_fields": [
+    "landmark",
+    "framing",
+    "interaction"
+  ],
+  "allowed_physicality_fields": [
+    "mode",
+    "support",
+    "motion"
+  ],
+  "allowed_page_exception_fields": [
+    "must_include",
+    "must_avoid"
+  ],
+  "legacy_forbidden_fields": [
+    "monster_name",
+    "habitat",
+    "identity_rules",
+    "must_include",
+    "must_avoid",
+    "coloring_rules",
+    "composition",
+    "reference_image",
+    "modify",
+    "family",
+    "visual_identity",
+    "accuracy_checks"
+  ],
+  "exception_rule": "page_exceptions is optional and may contain only truly page-specific include/avoid facts that cannot be expressed by the monster recipe, environment profile, moment, environment_variant, physicality, archetype, or universal standards. It must never duplicate monster anatomy, generic environment scenery, coloring style, composition, or global quality rules."
 }
