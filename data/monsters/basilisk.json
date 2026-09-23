@@ -34,15 +34,15 @@
     ]
   },
   "default_habitats": [
-    "statue galleries",
-    "underground ruins",
-    "rocky lairs"
+    "underground",
+    "ruins",
+    "rocky terrain"
   ],
   "accuracy_checks": [
     "eight legs are countable or strongly readable",
-    "stare is central to composition",
+    "predatory stare is visually clear",
     "body is squat not serpentine",
-    "petrified creature or statues reinforce threat",
+    "petrification identity is readable without requiring scenery props",
     "no wings appear",
     "scale texture stays simple"
   ],
