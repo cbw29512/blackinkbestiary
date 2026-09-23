@@ -8,10 +8,12 @@ from pathlib import Path
 try:
     from .calibration_gate import calibration_paths, calibration_report, load_calibration_config
     from .local_preflight import local_generation_preflight
+    from .page_contract import resolve_page_spec
     from .calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate, set_calibration_generation_error
 except ImportError:
     from calibration_gate import calibration_paths, calibration_report, load_calibration_config
     from local_preflight import local_generation_preflight
+    from page_contract import resolve_page_spec
     from calibration_state import approve_calibration_candidate, load_calibration_state, reject_calibration_candidate, set_calibration_generation_error
 LOGGER = logging.getLogger(__name__)
 _LOCK = threading.Lock()
@@ -48,7 +50,7 @@ def public_calibration_state(root: Path) -> dict:
     rows = []
     for case in config.get("cases", []):
         page_id = case["page_id"]
-        page = pages_by_id[page_id]
+        page = resolve_page_spec(pages_by_id[page_id], root)
         entry = state["pages"][page_id]
         rows.append({
             "page_id": page_id,
