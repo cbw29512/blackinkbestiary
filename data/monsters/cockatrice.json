@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "improvised henhouses",
-    "dungeon pens",
-    "ruined underground farms"
+    "wilderness",
+    "ruins",
+    "farmland"
   ],
   "accuracy_checks": [
     "hybrid identity is obvious",
@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A small vicious rooster-reptile hybrid combining a cock's head and comb with leathery wings, clawed feet, and a serpentine tail. Small feathered torso transitioning into leathery wings and a scaled curling tail, with birdlike clawed legs. Sparse feathers on torso, smooth wing membranes, simple tail scales. Compact birdlike body, raised leathery wings, rooster head with comb, two clawed legs, long curling reptilian tail.",
+  "behavior_traits": [
+    "ground foraging",
+    "short powered flight",
+    "defensive pecking",
+    "territorial behavior"
+  ]
 }
