@@ -24,7 +24,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def infer_overlays(page: dict, profile: dict, root: Path = ROOT) -> list[dict]:
+    """Select a small, deterministic set of environment-owned roles.
+
+    Explicit page roles are authoritative. Inferred roles are ranked by the
+    specificity of the matched trigger instead of registry insertion order.
+    This prevents broad roles such as inhabited/lair from crowding out a more
+    specific role such as laboratory, prison, nest, or forge.
+    """
     registry = load_overlay_registry(root)
+    overlays = registry["overlays"]
     variant = page.get("environment_variant") or {}
     haystack = " ".join([
         str(profile.get("environment_id") or ""),
@@ -34,15 +42,44 @@ def infer_overlays(page: dict, profile: dict, root: Path = ROOT) -> list[dict]:
         str(variant.get("landmark") or ""),
         str(variant.get("framing") or ""),
         str(variant.get("interaction") or ""),
-        " ".join(str(item) for item in page.get("environment_overlays") or []),
-        " ".join(str(item) for item in page.get("environment_roles") or []),
     ]).lower()
-    matches = []
-    for overlay_id, overlay in registry["overlays"].items():
-        terms = [str(item).lower() for item in overlay.get("trigger_terms") or []]
-        if any(term and term in haystack for term in terms):
-            matches.append({"overlay_id": overlay_id, **overlay})
-    return matches[:3]
+
+    selected: list[dict] = []
+    seen: set[str] = set()
+
+    explicit = [
+        *(str(item) for item in page.get("environment_roles") or []),
+        *(str(item) for item in page.get("environment_overlays") or []),
+    ]
+    for overlay_id in explicit:
+        overlay_id = overlay_id.strip()
+        if overlay_id in overlays and overlay_id not in seen:
+            selected.append({"overlay_id": overlay_id, **overlays[overlay_id]})
+            seen.add(overlay_id)
+            if len(selected) == 3:
+                return selected
+
+    inferred = []
+    for overlay_id, overlay in overlays.items():
+        if overlay_id in seen:
+            continue
+        matches = [
+            str(term).lower()
+            for term in overlay.get("trigger_terms") or []
+            if str(term).strip() and str(term).lower() in haystack
+        ]
+        if matches:
+            # Longer phrases are more specific. A role with fewer trigger terms
+            # wins the final tie so generic catch-all roles do not dominate.
+            score = (max(len(term) for term in matches), -len(overlay.get("trigger_terms") or []), overlay_id)
+            inferred.append((score, overlay_id, overlay))
+
+    for _, overlay_id, overlay in sorted(inferred, reverse=True):
+        selected.append({"overlay_id": overlay_id, **overlay})
+        seen.add(overlay_id)
+        if len(selected) == 3:
+            break
+    return selected
 
 
 def _pick(items: list[dict], contexts: set[str], key: str, order: int) -> dict:
