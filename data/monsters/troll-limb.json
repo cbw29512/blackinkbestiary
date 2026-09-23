@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "bare dungeon floors",
-    "cave battle sites",
-    "stone corridors"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "clearly reads as a crawling severed troll arm",
@@ -44,7 +44,7 @@
     "claws are obvious",
     "movement is readable",
     "severed end is non-gory",
-    "simple scene supports the limb"
+    "finger-walking posture is physically supported"
   ],
   "reference": {
     "image": null,
