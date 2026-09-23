@@ -88,7 +88,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("long reptilian snout", keep)
         self.assertIn("visible tail", keep)
         self.assertEqual(spec["family_profile"], "kobold")
-        self.assertEqual(spec["schema_version"], 2)
+        self.assertEqual(spec["schema_version"], 4)
 
 
 if __name__ == "__main__":
