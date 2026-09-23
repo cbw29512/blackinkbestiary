@@ -37,7 +37,14 @@ class TomeISpecTests(unittest.TestCase):
             self.assertTrue(spec["visual_identity"]["must_keep"])
             self.assertTrue(spec["visual_identity"]["must_avoid"])
             self.assertTrue(spec["accuracy_checks"])
-            self.assertTrue(page["must_include"])
+            self.assertNotIn("monster_name", page)
+            self.assertNotIn("habitat", page)
+            self.assertNotIn("identity_rules", page)
+            self.assertNotIn("must_include", page)
+            self.assertNotIn("must_avoid", page)
+            self.assertNotIn("coloring_rules", page)
+            self.assertNotIn("modify", page)
+            self.assertTrue((page.get("page_exceptions") or {}).get("required_elements"))
 
     def test_every_page_uses_monster_first_visual_hierarchy(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
@@ -62,7 +69,10 @@ class TomeISpecTests(unittest.TestCase):
         forbidden_placeholders = {"one clear story moment", "large open areas to color"}
 
         for page in tome["pages"]:
-            requirements = {item.lower() for item in page["must_include"]}
+            requirements = {
+                item.lower()
+                for item in (page.get("page_exceptions") or {}).get("required_elements", [])
+            }
             self.assertFalse(
                 requirements.intersection(forbidden_placeholders),
                 f"{page['page_id']} still has placeholder requirements",
