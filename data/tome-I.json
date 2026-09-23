@@ -122,7 +122,7 @@
       "environment_variant": {
         "landmark": "central map table backed by a natural cave wall",
         "framing": "over-table three-quarter view with two tunnel exits",
-        "interaction": "captain pins a dagger into the map while gear hangs from nearby rock pegs"
+        "interaction": "captain pins a dagger into the map on the central war table"
       },
       "physicality": {
         "mode": "grounded",
