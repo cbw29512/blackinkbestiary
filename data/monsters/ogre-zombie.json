@@ -55,7 +55,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "ogre"
+  "family_profile": "ogre",
+  "description": "A dead ogre animated into a slow hulking corpse, preserving the ogre's huge proportions while showing restrained unmistakable undeath. Huge heavy ogre frame with sagging posture, stiff joints, and asymmetrical undead movement. Sparse torn skin, a few exposed bone edges or stitched tears, kept clean and non-gory for coloring.",
+  "behavior_traits": [
+    "relentless pursuit",
+    "clumsy striking",
+    "mindless wandering",
+    "direct attack"
+  ]
 }
