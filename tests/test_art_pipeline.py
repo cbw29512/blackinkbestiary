@@ -22,7 +22,6 @@ class PromptTests(unittest.TestCase):
             "monster_spec_id": "kobold-warrior",
             "moment": "tripwire triggered",
             "archetype": "trap_scene",
-            "must_include": ["pit"],
             "environment_profile_id": "underground.trapped-stone-corridor",
             "environment_variant": {
                 "landmark": "open pit beside torch bracket",
@@ -48,8 +47,10 @@ class PromptTests(unittest.TestCase):
             "monster_spec_id": "goblin-minion",
             "moment": "running away with a stolen ham",
             "archetype": "action_scene",
-            "must_include": ["stolen ham"],
-            "must_avoid": ["modern kitchen"],
+            "page_exceptions": {
+                "must_include": ["stolen ham remains readable"],
+                "must_avoid": ["modern kitchen"],
+            },
             "environment_profile_id": "underground.rough-stone-pantry",
             "environment_variant": {
                 "landmark": "large food shelves",
