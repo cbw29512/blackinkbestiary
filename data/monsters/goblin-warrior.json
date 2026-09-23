@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "monster_id": "goblin-warrior",
   "monster_name": "Goblin Warrior",
@@ -62,5 +62,12 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference guides goblin anatomy; Black-Ink style controls line art."
-  }
+  },
+  "description": "A small, wiry goblinoid fighter who looks scrappy, sharp-featured, and dangerous rather than cute or heroic, relying on speed, dirty tricks, and scavenged gear. Compact thin-limbed humanoid with sinewy arms and legs, quick hands and feet, agile crouched stance, and no bodybuilder mass. Bare or lightly scarred skin with sparse hair only; no fur covering or fluffy facial outline.",
+  "behavior_traits": [
+    "ambushing",
+    "skirmishing",
+    "scavenging",
+    "quick retreat"
+  ]
 }
