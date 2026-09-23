@@ -58,7 +58,9 @@ def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
     # here is a warning because the environment engine owns what the place looks like.
     habitats = spec.get("default_habitats") or []
     habitat_scenery_terms = (
-        "torch-lit", "floor grate", "pillar", "table", "shelf", "ten-foot",
+        "torch-lit", "fire pit", "alcove", "gallery", "entrance", "pantry", "kitchen",
+        "rotunda", "armory", "vault", "shrine", "lair", "nest", "rubble pile",
+        "collapsed tunnel", "coin-strewn", "floor grate", "pillar", "table", "shelf", "ten-foot",
         "stairs", "corridor", "war room", "throne room", "treasure", "ceiling",
         "storeroom", "cell", "chapel", "barracks", "mine shaft",
     )
