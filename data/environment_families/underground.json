@@ -21,7 +21,8 @@
         "basalt tube texture",
         "dense tiny cave popcorn",
         "generic square dungeon"
-      ]
+      ],
+      "spatial_envelope": "natural_cavern"
     },
     "underground.basalt-lava-tube": {
       "name": "Basalt Lava Tube",
