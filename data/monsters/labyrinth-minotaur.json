@@ -55,7 +55,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "minotaur"
+  "family_profile": "minotaur",
+  "description": "A massive bull-headed humanoid defined by sweeping horns, hooves, powerful movement, and a heavy axe. Large muscular humanoid torso and arms with powerful legs and hooved feet; animal head only, not full bull body. Short sparse body hair with simple hide areas; no dense fur. Very broad shoulders, bull head with wide horns, thick humanoid torso, powerful legs ending in hooves, two-handed axe.",
+  "behavior_traits": [
+    "relentless pursuit",
+    "charging",
+    "patrolling",
+    "weapon fighting"
+  ]
 }
