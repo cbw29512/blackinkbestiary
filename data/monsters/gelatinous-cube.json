@@ -5,8 +5,8 @@
   "size": "large",
   "creature_type": "ooze",
   "visual_identity": {
-    "core_identity": "A nearly transparent cube-shaped dungeon ooze whose straight corridor-filling edges and suspended debris make its body readable.",
-    "silhouette": "Large rectangular cube occupying most of a ten-foot corridor, with subtly rippling edges and a flat forward face.",
+    "core_identity": "A nearly transparent cube-shaped ooze whose straight geometric edges and suspended debris make its body readable.",
+    "silhouette": "Large rectangular cube with subtly rippling edges and a flat forward face.",
     "head_features": "No head or face; identity comes entirely from the cube form and suspended contents.",
     "body_shape": "Uniform gelatinous cube with faint internal bubbles and objects suspended at different depths.",
     "surface": "Mostly clear open white interior with only sparse contour ripples and bubbles.",
@@ -22,7 +22,7 @@
       "transparent-looking open interior",
       "suspended bones",
       "suspended key",
-      "corridor-filling scale"
+      "large imposing cube scale"
     ],
     "must_avoid": [
       "face or eyes",
@@ -34,13 +34,13 @@
     ]
   },
   "default_habitats": [
-    "ten-foot stone corridors",
-    "square dungeon passages",
-    "underground halls"
+    "underground",
+    "dungeons",
+    "ruins"
   ],
   "accuracy_checks": [
     "cube edges are unmistakable",
-    "corridor scale explains size",
+    "large cube scale is obvious",
     "bones and key appear inside not in front",
     "interior stays mostly white",
     "no face is added",
