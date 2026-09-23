@@ -35,8 +35,8 @@
   },
   "default_habitats": [
     "underground",
-    "burrows",
-    "earthworks"
+    "wilderness",
+    "farmland"
   ],
   "accuracy_checks": [
     "six legs are visible or clearly implied",
@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A massive burrowing insect predator with a heavily armored segmented body, powerful mandibles, and digging legs. Three-part insect anatomy with six legs, plated thorax, segmented abdomen, and reinforced forelegs for digging. Large chitin plates with simple seams; avoid tiny shell texture.",
+  "behavior_traits": [
+    "burrowing",
+    "ambush hunting",
+    "tunneling",
+    "sudden emergence"
+  ]
 }
