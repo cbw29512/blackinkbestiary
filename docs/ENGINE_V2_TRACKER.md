@@ -438,3 +438,12 @@ These were discovered by `python scripts/run_local_ci.py` before any Golden Five
 - Weapon scale is required to remain subordinate to creature identity and the page story.
 - Kobold Warrior canonical gear changed from "oversized spear" to "short simple spear" to match the coloring-page readability target.
 - Added regression coverage for held, detached, review-check, and duplicate-weapon behavior.
+
+### 2026-09-23 Full Monster Equipment Audit
+- Audited all 50 current monster files for signature-gear ambiguity.
+- Normalized every remaining "X or Y", conditional, and oversized signature-gear entry to one concrete default; final static rescan found zero ambiguous gear entries.
+- Added universal weapon-state resolution for held, body-secured, and explicitly environmental weapons.
+- Canonical and page-specific weapons now share the same physical-contact rules.
+- Busy-hand scenes secure or omit secondary canonical weapons instead of floating them nearby.
+- Creatures without grasping limbs are exempt; Flying Sword remains the weapon-creature and never receives a hand-contact rule.
+- Added catalog-wide regression coverage so future ambiguous signature gear fails CI.
