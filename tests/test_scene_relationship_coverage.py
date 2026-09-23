@@ -21,6 +21,12 @@ class SceneRelationshipCoverageTests(unittest.TestCase):
             for item in active_relationship_rules(self.pages[page_id], ROOT)
         }
 
+    def test_kicked_lantern_suppresses_mounted_fixture_state(self):
+        ids = self.rule_ids("I-04")
+        self.assertIn("dislodging_fixture", ids)
+        self.assertIn("interaction_contact", ids)
+        self.assertNotIn("wall_mounted_fixture", ids)
+
     def test_wedged_ogre_has_two_surface_contact_rule(self):
         self.assertIn("wedged_between_surfaces", self.rule_ids("I-10"))
 
