@@ -36,7 +36,8 @@ def load_monster_spec(page: dict) -> dict | None:
 
 
 def build_prompt(page: dict, review_notes: dict | None = None) -> str:
-    page = resolve_page_spec(page, ROOT)
+    if (page.get("_resolved") or {}).get("contract_id") != "black-ink-page-v2":
+        page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
@@ -108,7 +109,8 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
 
 
 def build_supervisor_checklist(page: dict) -> list[str]:
-    page = resolve_page_spec(page, ROOT)
+    if (page.get("_resolved") or {}).get("contract_id") != "black-ink-page-v2":
+        page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
     checks = [
         f"Clearly recognizable as {page['monster_name']}",
