@@ -62,7 +62,7 @@
         "shrine"
       ],
       "directives": [
-        "The offered object is visibly separate from the hand and readable as the stated object.",
+        "The offered object must remain visually distinct from the hand while being visibly held, pinched, or supported by the fingers; it must not float beside the hand.",
         "The gesture clearly aims toward the altar, shrine, idol, skull, relic, or ritual focal point receiving the offering.",
         "The sacred focal point and offered object must not merge into unrelated props."
       ],
@@ -343,6 +343,22 @@
         "The creature's acting limb must visibly contact the fixture or loose lantern at the moment it is being dislodged.",
         "The wall bracket, niche, hook, or mount remains visibly attached to the wall while the lantern or fixture body visibly separates from it.",
         "Do not show the object both attached to the wall and already free in the same physical state."
+      ]
+    },
+    "pinning_to_surface": {
+      "priority": 94,
+      "trigger_terms": [
+        "pinning a",
+        "pinning the",
+        "pins a",
+        "pins the",
+        "pinned into",
+        "pinned to"
+      ],
+      "directives": [
+        "The held object must visibly contact the surface at the exact pinning point.",
+        "The acting hand must visibly grip or press the object while its tip, edge, or fastening point enters or presses against the target surface.",
+        "Keep the pinned object, hand, and target surface visually distinct; do not float the object above the surface or merge it into the hand."
       ]
     }
   },
