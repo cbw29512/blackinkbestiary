@@ -44,9 +44,11 @@ class EnvironmentQualityTests(unittest.TestCase):
     def test_goblin_pantry_rejects_modern_domestic_drift(self):
         resolved = resolve_page_spec(self.goblin_page, ROOT)
         avoid = " ".join(resolved["must_avoid"]).lower()
-        self.assertIn("modern household", avoid)
-        self.assertIn("generic pantry", avoid)
-        self.assertTrue(any("stone" in item.lower() for item in resolved["must_include"]))
+        self.assertIn("modern cabinets", avoid)
+        self.assertIn("appliances", avoid)
+        text = build_prompt(self.goblin_page)
+        self.assertIn("rough stone walls", text)
+        self.assertIn("open timber shelves", text)
 
     def test_environment_review_checks_exist(self):
         directives = environment_directives(ROOT)
