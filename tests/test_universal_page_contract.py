@@ -46,15 +46,27 @@ class UniversalPageContractTests(unittest.TestCase):
         self.assertEqual(page["habitat"], "Trapped Stone Corridor")
         self.assertIn("60–75% of page height", page["composition"])
         self.assertTrue(page["must_avoid"])
-        self.assertEqual(page["_resolved"]["contract_id"], "black-ink-page-v1")
+        self.assertEqual(page["_resolved"]["contract_id"], "black-ink-page-v2")
 
-    def test_canonical_catalog_names_override_stale_page_display_fields(self):
+    def test_legacy_page_fields_are_rejected(self):
         raw = self.minimal_page()
         raw["monster_name"] = "Wrong Creature Name"
-        raw["habitat"] = "Generic Hallway"
+        raw["must_include"] = ["legacy duplicate"]
+        with self.assertRaisesRegex(RuntimeError, "legacy page field"):
+            resolve_page_spec(raw, ROOT)
+
+    def test_page_exceptions_are_narrow_and_resolved(self):
+        raw = self.minimal_page()
+        raw["page_exceptions"] = {
+            "must_include": ["one cracked warning tile unique to this page"],
+            "must_avoid": ["sealed pit lid"],
+        }
         page = resolve_page_spec(raw, ROOT)
-        self.assertEqual(page["monster_name"], "Kobold Warrior")
-        self.assertEqual(page["habitat"], "Trapped Stone Corridor")
+        self.assertEqual(
+            page["required_elements"],
+            ["one cracked warning tile unique to this page"],
+        )
+        self.assertIn("sealed pit lid", page["must_avoid"])
 
     def test_minimal_recipe_generates_complete_prompt(self):
         text = build_prompt(self.minimal_page())
@@ -88,6 +100,8 @@ class UniversalPageContractTests(unittest.TestCase):
         self.assertEqual(len(plan["slots"]), 24)
         self.assertNotIn("habitat", plan["slots"][0])
         self.assertNotIn("composition", plan["slots"][0])
+        self.assertNotIn("page_contract", plan["slots"][0])
+        self.assertEqual(plan["page_contract"], "black-ink-page-v2")
         self.assertEqual(book["kdp_print_standard"], "config/kdp_print_standard.json")
         self.assertEqual(book["content_scope"], "config/content_scope.json")
         self.assertEqual(book["environment_contract"], "config/universal_environment_contract.json")
@@ -102,6 +116,7 @@ class UniversalPageContractTests(unittest.TestCase):
         manifest, errors = build_manifest_from_plan(plan, ROOT)
         self.assertEqual(errors, [])
         self.assertEqual(manifest["total_pages"], 1)
+        self.assertEqual(manifest["page_contract"], "black-ink-page-v2")
         self.assertNotIn("habitat", manifest["pages"][0])
         self.assertEqual(
             validate_manifest(ROOT, manifest, ROOT / "data" / "monsters"),
