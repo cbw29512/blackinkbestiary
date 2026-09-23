@@ -34,8 +34,8 @@
     ]
   },
   "default_habitats": [
-    "underground",
     "caves",
+    "underground",
     "ruins"
   ],
   "accuracy_checks": [
@@ -56,5 +56,13 @@
   },
   "physical_requirements": [
     "overhead_attachment: ambush posture requires a believable overhead support; environment engine chooses the ceiling, rock, beam, branch, or other compatible support"
+  ],
+  "schema_version": 4,
+  "description": "An ambush creature that resembles a leathery stalactite-like mantle while clinging overhead until it peels away and drops. Compact central body under a wide flexible mantle, short gripping tentacles, no humanoid limbs. Leathery membrane with sparse folds and simple underside texture.",
+  "behavior_traits": [
+    "overhead ambush",
+    "clinging",
+    "dropping attack",
+    "powered flight"
   ]
 }
