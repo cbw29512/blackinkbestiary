@@ -89,6 +89,8 @@ def main() -> int:
     parser.add_argument("--start", help="Optional page id to start/resume from, e.g. I-24")
     parser.add_argument("--only", help="Optional page id to test repeatedly")
     parser.add_argument("--seed", type=int, help="Base seed for reproducible testing")
+    parser.add_argument("--reset", action="store_true", help="Start a fresh gallery and discard prior test state")
+    parser.add_argument("--rerun-failed", action="store_true", help="Retry candidates whose prior status was failed")
     args = parser.parse_args()
     if args.copies < 1:
         raise SystemExit("--copies must be at least 1")
@@ -109,18 +111,38 @@ def main() -> int:
         pages = pages[ids.index(args.start):]
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    state = {
-        "schema_version": 1,
-        "started_at": utc_now(),
-        "updated_at": utc_now(),
-        "copies_per_page": args.copies,
-        "results": [],
-    }
+    if STATE_FILE.exists() and not args.reset:
+        state = read_json(STATE_FILE)
+        state.setdefault("results", [])
+        state.setdefault("selections", {})
+        state["copies_per_page"] = max(int(state.get("copies_per_page") or 0), args.copies)
+        state["updated_at"] = utc_now()
+        state.pop("completed_at", None)
+    else:
+        state = {
+            "schema_version": 2,
+            "started_at": utc_now(),
+            "updated_at": utc_now(),
+            "copies_per_page": args.copies,
+            "results": [],
+            "selections": {},
+        }
     write_state(state)
 
-    sequence = 0
+    existing = {
+        (str(item.get("page_id")), int(item.get("candidate") or 0)): item
+        for item in state.get("results", [])
+    }
+
+    sequence = len(state.get("results", []))
     for page in pages:
         for candidate_no in range(1, args.copies + 1):
+            prior = existing.get((page["page_id"], candidate_no))
+            if prior and not (args.rerun_failed and prior.get("status") in {"failed", "technical_qa_failed"}):
+                print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
+                continue
+            if prior:
+                state["results"].remove(prior)
             sequence += 1
             reload_authority()
             seed = (args.seed + sequence) if args.seed is not None else random.randint(1, 2**63 - 1)
@@ -146,6 +168,7 @@ def main() -> int:
                 record.update({"status": "failed", "error": str(exc)})
             record["finished_at"] = utc_now()
             state["results"].append(record)
+            existing[(page["page_id"], candidate_no)] = record
             state["updated_at"] = utc_now()
             write_state(state)
             print(json.dumps(record))
