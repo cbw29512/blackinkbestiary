@@ -37,9 +37,9 @@
     ]
   },
   "default_habitats": [
-    "dark labyrinths",
-    "crypt mazes",
-    "underground passages"
+    "underground",
+    "crypts",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads as minotaur skeleton immediately",
@@ -47,7 +47,7 @@
     "large skeleton scale is clear",
     "horns are intact",
     "no flesh obscures bones",
-    "corridor turn supports reveal"
+    "skeletal posture remains stable and readable"
   ],
   "reference": {
     "image": null,
