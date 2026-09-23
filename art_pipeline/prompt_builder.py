@@ -79,6 +79,12 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         f"SUBJECT: {page['monster_name']}.",
         *_canonical_sections(spec),
         (
+            "CREATURE-ONLY AUTHORITY: canonical monster data describes the creature only. Any place words inherited "
+            "from legacy monster text are descriptive lore or scale context, never scenery instructions. Do not add walls, "
+            "corridors, caves, treasure, pillars, furniture, ruins, water, vegetation, lighting, traps, or other background "
+            "elements because the monster text mentions them. Build all scenery exclusively from the selected page environment."
+        ),
+        (
             "PAGE ENVIRONMENT AUTHORITY: the named HABITAT and resolved environment profile below are mandatory and "
             "override all general creature habitat preferences. Creature-family environment_fit data is planning-only "
             "and must never replace, broaden, or reinterpret this selected page environment."
