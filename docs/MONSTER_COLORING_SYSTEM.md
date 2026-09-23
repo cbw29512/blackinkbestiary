@@ -230,35 +230,34 @@ Fields:
 - `current_page_id`
 - ordered `pages[]`
 
-### Canonical Monster Spec
+### Canonical Monster Recipe
 
-Fields:
+Raw monster recipe fields:
+- `schema_version`
 - `monster_id`
 - `monster_name`
-- `family`
-- `size`
-- `creature_type`
-- `visual_identity`
-- `default_habitats[]`
-- `accuracy_checks[]`
-- `reference`
+- `family_profile`
+- optional true variant fields such as `variant_traits`, locomotion, or narrow overrides
+
+Family anatomy, silhouette, scene behavior, accuracy checks, and known failure modes resolve from `data/monster_families/`.
 
 ### Page Spec
 
-Fields:
+Raw page recipe fields:
 - `page_id`
 - `order`
-- `monster_name`
 - `monster_spec_id`
-- `identity_rules[]`
-- `habitat`
 - `moment`
-- `must_include[]`
-- `must_avoid[]`
-- `composition`
-- `coloring_rules`
-- `reference_images[]`
-- `status`
+- `archetype`
+- `environment_profile_id`
+- `environment_variant.landmark`
+- `environment_variant.framing`
+- `environment_variant.interaction`
+- `physicality.mode`
+- `physicality.support`
+- `physicality.motion`
+
+Tome I contains only these unique fields. Monster name, habitat, identity checks, coloring rules, global avoid rules, and current review corrections are derived at runtime from their universal owners.
 
 ### Candidate
 
