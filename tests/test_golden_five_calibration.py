@@ -74,6 +74,15 @@ class GoldenFiveCalibrationTests(unittest.TestCase):
         self.assertFalse(payload["report"]["production_calibrated"])
         self.assertFalse(payload["worker"]["running"])
 
+
+    def test_studio_payload_resolves_page_v2_display_fields(self):
+        payload = public_calibration_state(ROOT)
+        pages = {item["page_id"]: item for item in payload["pages"]}
+        self.assertEqual(pages["I-01"]["monster_name"], "Kobold Warrior")
+        self.assertEqual(pages["I-01"]["habitat"], "Trapped Stone Corridor")
+        self.assertEqual(pages["I-24"]["monster_name"], "Gelatinous Cube")
+        self.assertEqual(pages["I-40"]["habitat"], "Abandoned Armory")
+
     def test_studio_loads_split_calibration_scripts(self):
         html = (ROOT / "web" / "index.html").read_text(encoding="utf-8")
         self.assertIn("golden-five-view.js", html)
