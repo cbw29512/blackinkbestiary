@@ -38,8 +38,8 @@
   },
   "default_habitats": [
     "underground",
-    "crypts",
-    "ruins"
+    "ruins",
+    "burial sites"
   ],
   "accuracy_checks": [
     "reads as minotaur skeleton immediately",
@@ -54,7 +54,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "minotaur"
+  "family_profile": "minotaur",
+  "description": "The animated skeleton of a minotaur, preserving the horned bull skull and massive humanoid bone structure without flesh. Heavy humanoid skeleton with broad rib cage and large limb bones, clearly larger than a human skeleton. Clean bone shapes with sparse cracks, no gore or hanging flesh.",
+  "behavior_traits": [
+    "relentless pursuit",
+    "charging",
+    "weapon fighting",
+    "guarding"
+  ]
 }
