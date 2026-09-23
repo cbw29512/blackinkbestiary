@@ -152,10 +152,7 @@
       "reference_image",
       "modify"
     ],
-    "runtime_compatibility_retained": [
-      "monster_name",
-      "habitat"
-    ],
-    "migration_note": "monster_name and habitat remain temporarily because a small number of raw-manifest display/smoke-test readers still consume them; generation does not."
+    "runtime_compatibility_retained": [],
+    "migration_note": "Tome I raw-manifest consumers now resolve through the universal page contract; legacy display copies no longer need to remain."
   }
 }
