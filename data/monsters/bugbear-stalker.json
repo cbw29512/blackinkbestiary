@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "monster_id": "bugbear-stalker",
   "monster_name": "Bugbear Stalker",
   "family_profile": "bugbear",
@@ -7,5 +7,17 @@
     "stealth-focused",
     "patient",
     "watchful"
+  ],
+  "description": "",
+  "behavior_traits": [
+    "stealth stalking",
+    "ambushing",
+    "scavenging",
+    "dragging loot"
+  ],
+  "default_habitats": [
+    "underground",
+    "ruins",
+    "wilderness"
   ]
 }
