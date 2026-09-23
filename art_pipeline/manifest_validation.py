@@ -8,6 +8,7 @@ try:
     from .monster_catalog import minimal_recipe_errors, resolve_monster_spec
     from .environment_catalog import environment_fingerprint, environment_identity_errors, resolve_environment_profile
     from .page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from .page_recipe_policy import page_recipe_errors
     from .physicality_prompt import locomotion_errors
     from .source_scope import source_scope_errors
     from .story_prompt import story_errors
@@ -16,6 +17,7 @@ except ImportError:
     from monster_catalog import minimal_recipe_errors, resolve_monster_spec
     from environment_catalog import environment_fingerprint, environment_identity_errors, resolve_environment_profile
     from page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from page_recipe_policy import page_recipe_errors
     from physicality_prompt import locomotion_errors
     from source_scope import source_scope_errors
     from story_prompt import story_errors
@@ -109,6 +111,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
             errors.append(f"{page_id}: missing fields: {', '.join(missing)}")
         if missing_paths:
             errors.append(f"{page_id}: missing contract fields: {', '.join(missing_paths)}")
+        errors.extend(page_recipe_errors(page, root))
         if missing or missing_paths:
             continue
 
