@@ -38,9 +38,9 @@
     ]
   },
   "default_habitats": [
-    "dark dungeon stairs",
-    "crypt access tunnels",
-    "abandoned underground prisons"
+    "underground",
+    "ruins",
+    "wilderness"
   ],
   "accuracy_checks": [
     "reads as ogre and zombie simultaneously",
