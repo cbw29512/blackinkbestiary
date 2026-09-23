@@ -44,14 +44,6 @@
       "page_id": "I-03",
       "order": 3,
       "moment": "Running away with a stolen ham",
-      "must_avoid": [
-        "modern household cabinetry or appliances",
-        "clean suburban kitchen appearance",
-        "cute elf-child face",
-        "imp or devil face",
-        "furry or fluffy goblin anatomy",
-        "generic pantry that could be a modern home"
-      ],
       "monster_spec_id": "goblin-minion",
       "archetype": "action_scene",
       "environment_profile_id": "underground.rough-stone-pantry",
@@ -106,13 +98,6 @@
       "page_id": "I-06",
       "order": 6,
       "moment": "Leading a shield-wall drill",
-      "must_avoid": [
-        "orc tusks or boar-like nose",
-        "hulking orc body",
-        "tiny goblin proportions",
-        "oversized goblin ears",
-        "feral barbarian posture"
-      ],
       "monster_spec_id": "hobgoblin-warrior",
       "archetype": "action_scene",
       "environment_profile_id": "underground.barracks-passage",
@@ -131,13 +116,6 @@
       "page_id": "I-07",
       "order": 7,
       "moment": "Pinning a dagger into a tunnel map",
-      "must_avoid": [
-        "orc tusks or boar-like nose",
-        "hulking orc body",
-        "tiny goblin proportions",
-        "oversized goblin ears",
-        "feral barbarian posture"
-      ],
       "monster_spec_id": "hobgoblin-captain",
       "archetype": "action_scene",
       "environment_profile_id": "underground.war-room",
@@ -156,10 +134,6 @@
       "page_id": "I-08",
       "order": 8,
       "moment": "Lurking beneath a broken ceiling, ready to ambush",
-      "must_avoid": [
-        "unsupported feet",
-        "jumping, falling, dropping, or hovering pose"
-      ],
       "monster_spec_id": "bugbear-warrior",
       "archetype": "stealth_scene",
       "environment_profile_id": "underground.collapsed-ceiling-hall",
@@ -178,12 +152,6 @@
       "page_id": "I-09",
       "order": 9,
       "moment": "Dragging a sack and signaling for silence",
-      "must_avoid": [
-        "normal-height hallway",
-        "upright relaxed stance",
-        "smooth generic walls",
-        "modern building hallway"
-      ],
       "monster_spec_id": "bugbear-stalker",
       "archetype": "stealth_scene",
       "environment_profile_id": "underground.service-crawlway",
