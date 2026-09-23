@@ -388,4 +388,23 @@ Golden Five resolved relationship set:
 
 No Golden Five page currently exhausts the four-rule prompt budget.
 
+## 2026-09-22 Local CI Fallback
+
+GitHub-hosted private Actions remains blocked before checkout because the account has exhausted included private-runner minutes and paid runner access has not yet begun executing jobs.
+
+A local CI-equivalent runner now exists at:
+
+`python scripts/run_local_ci.py`
+
+It validates the same production surfaces used by Studio checks:
+
+- required JSON files and environment component catalogs
+- full Python unittest discovery
+- active-book audit
+- series audit
+- Python compileall
+- JavaScript syntax checks for Studio and Golden Five UI files
+
+This is a validation fallback, not a second rule system. It calls the existing audits/tests and leaves GitHub workflow logic unchanged.
+
 
