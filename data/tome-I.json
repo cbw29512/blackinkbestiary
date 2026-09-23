@@ -10,24 +10,6 @@
       "monster_name": "Kobold Warrior",
       "habitat": "Tight trapped stone corridor",
       "moment": "Cackling as a tripwire is triggered",
-      "identity_rules": [
-        "small reptilian humanoid",
-        "long snout",
-        "small horn nubs",
-        "needle teeth",
-        "ragged leather gear",
-        "oversized spear",
-        "devious trap-maker; not cute"
-      ],
-      "must_include": [
-        "small wiry kobold",
-        "oversized spear",
-        "visible tripwire across the corridor",
-        "opened punji pit with wooden spikes",
-        "wall torch",
-        "tight dressed-stone corridor",
-        "cackling trap-maker expression"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -37,40 +19,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
-      "modify": {
-        "preserve": [
-          "kobold pose",
-          "spear",
-          "corridor perspective",
-          "tripwire",
-          "pit trap",
-          "wall torch",
-          "overall scene concept"
-        ],
-        "change": [
-          "reduce detail density roughly 30–40%",
-          "remove most hatching",
-          "reduce tiny scale texture",
-          "reduce unnecessary stone cracks",
-          "create larger clean white coloring areas",
-          "use lighter interior lines"
-        ],
-        "avoid": [
-          "cute reinterpretation",
-          "stick-figure simplification",
-          "losing monster identity",
-          "removing the trap",
-          "adding gray shading"
-        ]
-      },
       "monster_spec_id": "kobold-warrior",
       "archetype": "trap_scene",
       "environment_profile_id": "underground.trapped-stone-corridor",
@@ -91,17 +39,6 @@
       "monster_name": "Kobold Shrine-Keeper",
       "habitat": "Low cave shrine with coins and dragon skull prop",
       "moment": "Raising a copper coin as an offering",
-      "identity_rules": [
-        "Must be immediately recognizable as Kobold Shrine-Keeper",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "lean kobold shrine-keeper",
-        "copper coin held up as an offering",
-        "low cave shrine",
-        "scattered coins",
-        "dragon skull shrine prop"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -111,14 +48,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "kobold-shrine-keeper",
       "archetype": "lair_scene",
       "environment_profile_id": "underground.limestone-drip-cave",
@@ -139,19 +68,6 @@
       "monster_name": "Goblin Minion",
       "habitat": "Dungeon kitchen and pantry",
       "moment": "Running away with a stolen ham",
-      "identity_rules": [
-        "Unmistakably goblin: oversized pointed ears, broad flattened nose, angular scrappy face, wide irregular-toothed grin",
-        "Small wiry slightly hunched scavenger body; not heroic, cute, furry, elf-like, or imp-like",
-        "Sparse hair only; no furry or fluffy silhouette"
-      ],
-      "must_include": [
-        "small wiry unmistakably goblin minion",
-        "clearly visible stolen ham tucked under one arm",
-        "darting or hunched running-away pose",
-        "rough medieval-fantasy dungeon kitchen built into stone",
-        "simple pantry shelves with sacks, crocks, hanging food, or crude storage",
-        "at least one environmental cue showing the pantry is being raided or scavenged"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -167,14 +83,6 @@
         "furry or fluffy goblin anatomy",
         "generic pantry that could be a modern home"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "goblin-minion",
       "archetype": "action_scene",
       "environment_profile_id": "underground.rough-stone-pantry",
@@ -195,17 +103,6 @@
       "monster_name": "Goblin Warrior",
       "habitat": "Narrow dungeon crawlway",
       "moment": "Kicking over a lantern to darken the hall",
-      "identity_rules": [
-        "Must be immediately recognizable as Goblin Warrior",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "small goblin warrior",
-        "crude blade and small shield",
-        "lantern being kicked over",
-        "narrow dungeon crawlway",
-        "darkening-hall story beat"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -215,14 +112,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "goblin-warrior",
       "archetype": "action_scene",
       "environment_profile_id": "underground.dressed-stone-corridor",
@@ -243,17 +132,6 @@
       "monster_name": "Goblin Boss",
       "habitat": "Cave hall with improvised throne",
       "moment": "Pointing a bent sword from atop a chest",
-      "identity_rules": [
-        "Must be immediately recognizable as Goblin Boss",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "small goblin boss",
-        "bent sword pointing outward",
-        "standing on a chest",
-        "improvised cave throne",
-        "keys or scavenged trophies showing rank"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -263,14 +141,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "goblin-boss",
       "archetype": "boss_scene",
       "environment_profile_id": "underground.throne-grotto",
@@ -291,18 +161,6 @@
       "monster_name": "Hobgoblin Warrior",
       "habitat": "Underground barracks tunnel",
       "moment": "Leading a shield-wall drill",
-      "identity_rules": [
-        "Medium athletic hobgoblin, not a small goblin or bulky orc",
-        "Angular stern goblinoid face with broad flattened nose, pointed ears smaller than a goblin's, no tusks",
-        "Disciplined upright soldierly posture and organized military equipment"
-      ],
-      "must_include": [
-        "disciplined hobgoblin warrior",
-        "shield-wall drill",
-        "multiple overlapping shields",
-        "underground barracks tunnel",
-        "military posture"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -317,14 +175,6 @@
         "oversized goblin ears",
         "feral barbarian posture"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "hobgoblin-warrior",
       "archetype": "action_scene",
       "environment_profile_id": "underground.barracks-passage",
@@ -345,18 +195,6 @@
       "monster_name": "Hobgoblin Captain",
       "habitat": "Cave war room",
       "moment": "Pinning a dagger into a tunnel map",
-      "identity_rules": [
-        "Medium athletic veteran hobgoblin officer, not an orc or oversized goblin",
-        "Angular mature goblinoid face with broad flattened nose, pointed ears smaller than a goblin's, no tusks",
-        "Command authority comes from posture, rank marker, and organized gear rather than brute size"
-      ],
-      "must_include": [
-        "hobgoblin captain",
-        "dagger pinning a tunnel map",
-        "cave war-room table",
-        "simple military gear",
-        "commanding posture"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -371,14 +209,6 @@
         "oversized goblin ears",
         "feral barbarian posture"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "hobgoblin-captain",
       "archetype": "action_scene",
       "environment_profile_id": "underground.war-room",
@@ -397,11 +227,6 @@
       "page_id": "I-08",
       "order": 8,
       "moment": "Lurking beneath a broken ceiling, ready to ambush",
-      "must_include": [
-        "large broken ceiling breach overhead",
-        "fallen masonry used as cover",
-        "dungeon hall perspective"
-      ],
       "must_avoid": [
         "unsupported feet",
         "jumping, falling, dropping, or hovering pose"
@@ -424,14 +249,6 @@
       "page_id": "I-09",
       "order": 9,
       "moment": "Dragging a sack and signaling for silence",
-      "must_include": [
-        "dragged sack",
-        "finger-to-mouth silence signal",
-        "visibly low crawlway forcing a crouch",
-        "cut-stone block walls",
-        "flagstone floor",
-        "one unmistakable dungeon fixture such as an iron sconce or barred service recess"
-      ],
       "must_avoid": [
         "normal-height hallway",
         "upright relaxed stance",
@@ -458,17 +275,6 @@
       "monster_name": "Ogre",
       "habitat": "Too-small spiral dungeon stair",
       "moment": "Wedged awkwardly on the stairs",
-      "identity_rules": [
-        "Must be immediately recognizable as Ogre",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "massive ogre",
-        "too-small spiral stair",
-        "body visibly wedged between walls",
-        "crude dungeon setting",
-        "awkward frustrated pose"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -478,14 +284,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "ogre",
       "archetype": "action_scene",
       "environment_profile_id": "underground.spiral-stair",
@@ -506,17 +304,6 @@
       "monster_name": "Ogre Zombie",
       "habitat": "Dark cramped dungeon stair",
       "moment": "Shuffling downward with chains dragging",
-      "identity_rules": [
-        "Must be immediately recognizable as Ogre Zombie",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "large ogre zombie",
-        "dragging chains",
-        "cramped dark stair",
-        "slow shuffling descent",
-        "restrained undead damage without gore"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -526,14 +313,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "ogre-zombie",
       "archetype": "horror_scene",
       "environment_profile_id": "underground.spiral-stair",
@@ -554,17 +333,6 @@
       "monster_name": "Troll",
       "habitat": "Cave fire pit",
       "moment": "Watching a wound close while glaring at fire",
-      "identity_rules": [
-        "Must be immediately recognizable as Troll",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "lanky troll",
-        "cave fire pit",
-        "visible closing wound",
-        "hostile glare toward fire",
-        "long clawed arms"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -574,14 +342,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "troll",
       "archetype": "action_scene",
       "environment_profile_id": "underground.limestone-drip-cave",
@@ -602,17 +362,6 @@
       "monster_name": "Troll Limb",
       "habitat": "Bare dungeon flagstones",
       "moment": "Severed arm crawling toward a dropped axe",
-      "identity_rules": [
-        "Must be immediately recognizable as Troll Limb",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "severed troll arm",
-        "clawed hand crawling under its own power",
-        "dropped axe",
-        "bare dungeon flagstones",
-        "non-gory magical severed-limb presentation"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -622,14 +371,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "troll-limb",
       "archetype": "horror_scene",
       "environment_profile_id": "underground.dressed-stone-corridor",
@@ -650,17 +391,6 @@
       "monster_name": "Darkmantle",
       "habitat": "Limestone cave ceiling",
       "moment": "Peeling away from a stalactite above a lantern",
-      "identity_rules": [
-        "Must be immediately recognizable as Darkmantle",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "darkmantle disguised against a stalactite",
-        "leathery mantle body",
-        "dangling tentacles",
-        "lantern below",
-        "limestone cave ceiling"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -670,14 +400,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "darkmantle",
       "archetype": "reveal_scene",
       "environment_profile_id": "underground.limestone-drip-cave",
@@ -698,17 +420,6 @@
       "monster_name": "Stirges",
       "habitat": "Dungeon cell",
       "moment": "Feeding around a sleeping prisoner",
-      "identity_rules": [
-        "Must be immediately recognizable as Stirges",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "several stirges",
-        "long needle proboscises",
-        "batlike wings",
-        "sleeping prisoner",
-        "dungeon cell"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -718,14 +429,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "stirges",
       "archetype": "swarm_scene",
       "environment_profile_id": "underground.prison-cell",
@@ -746,17 +449,6 @@
       "monster_name": "Giant Bat",
       "habitat": "Cavern above underground river",
       "moment": "Hanging with wings partly wrapped",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Bat",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "single giant bat",
-        "partly wrapped hanging wings",
-        "cavern ceiling",
-        "underground river below",
-        "large readable bat silhouette"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -766,14 +458,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "giant-bat",
       "archetype": "lair_scene",
       "environment_profile_id": "underground.underground-river-cavern",
@@ -794,17 +478,6 @@
       "monster_name": "Bat Swarm",
       "habitat": "Vertical dungeon well shaft",
       "moment": "Exploding upward from the well",
-      "identity_rules": [
-        "Must be immediately recognizable as Bat Swarm",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "swarm of bats",
-        "bats erupting upward",
-        "vertical dungeon well shaft",
-        "clear spiral movement",
-        "open center for readability"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -814,14 +487,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "bat-swarm",
       "archetype": "swarm_scene",
       "environment_profile_id": "underground.well-shaft",
@@ -842,17 +507,6 @@
       "monster_name": "Giant Rat",
       "habitat": "Collapsed dungeon pantry",
       "moment": "Defending a nest among burst sacks",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Rat",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "giant rat",
-        "defensive nest posture",
-        "burst grain sacks",
-        "collapsed dungeon pantry",
-        "visible nest material"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -862,14 +516,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "giant-rat",
       "archetype": "lair_scene",
       "environment_profile_id": "underground.rough-stone-pantry",
@@ -890,17 +536,6 @@
       "monster_name": "Rat Swarm",
       "habitat": "Dungeon floor grate",
       "moment": "Pouring through the grate like water",
-      "identity_rules": [
-        "Must be immediately recognizable as Rat Swarm",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "many rats",
-        "rats pouring through a floor grate",
-        "flowing swarm shape",
-        "dungeon flagstones",
-        "clear grate opening"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -910,14 +545,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "rat-swarm",
       "archetype": "swarm_scene",
       "environment_profile_id": "underground.floor-grate",
@@ -938,17 +565,6 @@
       "monster_name": "Giant Centipede",
       "habitat": "Catacomb coffin niche",
       "moment": "Uncoiling around an old bone",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Centipede",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "giant centipede",
-        "many segmented legs",
-        "coiled body around an old bone",
-        "catacomb coffin niche",
-        "clear mandibles"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -958,14 +574,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "giant-centipede",
       "archetype": "lair_scene",
       "environment_profile_id": "underground.catacomb-niches",
@@ -986,17 +594,6 @@
       "monster_name": "Giant Fire Beetle",
       "habitat": "Abandoned mine tunnel",
       "moment": "Lighting the tunnel with body glands",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Fire Beetle",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "giant fire beetle",
-        "large beetle shell",
-        "visible luminous gland shapes",
-        "abandoned mine tunnel",
-        "gland light illuminating nearby rock"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1006,14 +603,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "giant-fire-beetle",
       "archetype": "lair_scene",
       "environment_profile_id": "underground.mine-tunnel",
@@ -1034,17 +623,6 @@
       "monster_name": "Giant Spider",
       "habitat": "Web-filled dungeon hall",
       "moment": "Waiting at the center of a large web",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Spider",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "giant spider",
-        "large radial web",
-        "spider at web center",
-        "web-filled dungeon hall",
-        "clear eight-legged silhouette"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1054,14 +632,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "giant-spider",
       "archetype": "lair_scene",
       "environment_profile_id": "underground.webbed-hall",
@@ -1082,17 +652,6 @@
       "monster_name": "Giant Wolf Spider",
       "habitat": "Ceiling above a treasure chest",
       "moment": "Flattened overhead watching the chest",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Wolf Spider",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "giant wolf spider",
-        "stocky hairy hunting-spider body",
-        "flattened against ceiling",
-        "treasure chest below",
-        "large forward-facing eyes"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1102,14 +661,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "giant-wolf-spider",
       "archetype": "stealth_scene",
       "environment_profile_id": "underground.treasure-vault",
@@ -1130,17 +681,6 @@
       "monster_name": "Gelatinous Cube",
       "habitat": "Ten-foot dressed-stone corridor",
       "moment": "Sliding forward with bones and a key suspended inside",
-      "identity_rules": [
-        "Must be immediately recognizable as Gelatinous Cube",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "translucent gelatinous cube",
-        "square cube edges filling corridor",
-        "bones suspended inside",
-        "key suspended inside",
-        "ten-foot dressed-stone corridor"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1150,14 +690,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "gelatinous-cube",
       "archetype": "reveal_scene",
       "environment_profile_id": "underground.dressed-stone-corridor",
@@ -1178,17 +710,6 @@
       "monster_name": "Black Pudding",
       "habitat": "Dungeon cistern / floor grate",
       "moment": "Corroding bars while climbing through",
-      "identity_rules": [
-        "Must be immediately recognizable as Black Pudding",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "irregular black-pudding ooze",
-        "corroding metal bars",
-        "floor grate or cistern edge",
-        "acid damage on metal",
-        "outline-driven ooze shape without a giant solid-black blob"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1198,14 +719,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "black-pudding",
       "archetype": "action_scene",
       "environment_profile_id": "underground.cistern",
@@ -1226,17 +739,6 @@
       "monster_name": "Ochre Jelly",
       "habitat": "Dungeon stair",
       "moment": "Two split halves continuing upward",
-      "identity_rules": [
-        "Must be immediately recognizable as Ochre Jelly",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "two ochre-jelly halves",
-        "both split halves moving independently",
-        "dungeon stair",
-        "viscous irregular outlines",
-        "clear split story beat"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1246,14 +748,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "ochre-jelly",
       "archetype": "action_scene",
       "environment_profile_id": "underground.stone-stair",
@@ -1274,17 +768,6 @@
       "monster_name": "Mimic — Chest",
       "habitat": "Treasure vault",
       "moment": "Chest mouth opening around a reaching hand",
-      "identity_rules": [
-        "Must be immediately recognizable as Mimic — Chest",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "treasure-chest mimic",
-        "chest lid transformed into toothed mouth",
-        "long tongue",
-        "reaching hand near the mouth",
-        "treasure vault"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1294,14 +777,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "mimic-chest",
       "archetype": "object_monster",
       "environment_profile_id": "underground.treasure-vault",
@@ -1322,17 +797,6 @@
       "monster_name": "Mimic — Door",
       "habitat": "Torch-lit dungeon hall",
       "moment": "Door revealing tongue-handle and hidden eye",
-      "identity_rules": [
-        "Must be immediately recognizable as Mimic — Door",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "door mimic",
-        "door surface still recognizable",
-        "hidden eye in the wood",
-        "tongue-shaped handle",
-        "torch-lit dungeon hall"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1342,14 +806,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "mimic-door",
       "archetype": "object_monster",
       "environment_profile_id": "underground.dressed-stone-corridor",
@@ -1370,17 +826,6 @@
       "monster_name": "Animated Armor",
       "habitat": "Pedestal-lined dungeon hall",
       "moment": "Stepping down from its display pedestal",
-      "identity_rules": [
-        "Must be immediately recognizable as Animated Armor",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "empty animated suit of armor",
-        "no visible wearer",
-        "stepping off a pedestal",
-        "pedestal-lined dungeon hall",
-        "clear articulated plate armor"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1390,14 +835,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "animated-armor",
       "archetype": "reveal_scene",
       "environment_profile_id": "underground.display-gallery",
@@ -1418,17 +855,6 @@
       "monster_name": "Flying Sword",
       "habitat": "Dungeon rotunda",
       "moment": "Orbiting a cracked pillar at throat height",
-      "identity_rules": [
-        "Must be immediately recognizable as Flying Sword",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "single flying sword",
-        "no hand holding it",
-        "sword orbiting a cracked pillar",
-        "throat-height placement",
-        "dungeon rotunda"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1438,14 +864,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "flying-sword",
       "archetype": "object_monster",
       "environment_profile_id": "underground.rotunda",
@@ -1466,17 +884,6 @@
       "monster_name": "Rug of Smothering",
       "habitat": "Noble crypt",
       "moment": "Rearing up from the floor to wrap a victim",
-      "identity_rules": [
-        "Must be immediately recognizable as Rug of Smothering",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "living rug rearing from the floor",
-        "rug curling around a victim",
-        "noble crypt",
-        "decorative pattern kept simple",
-        "smothering motion clearly readable"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1486,14 +893,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "rug-of-smothering",
       "archetype": "object_monster",
       "environment_profile_id": "underground.crypt",
@@ -1514,17 +913,6 @@
       "monster_name": "Gargoyle",
       "habitat": "Stone dungeon gate",
       "moment": "One statue beginning to move",
-      "identity_rules": [
-        "Must be immediately recognizable as Gargoyle",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "stone gargoyle",
-        "horned winged humanoid silhouette",
-        "one foot leaving a gate perch",
-        "stone dungeon gate",
-        "cracked stone texture kept sparse"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1534,14 +922,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "gargoyle",
       "archetype": "reveal_scene",
       "environment_profile_id": "underground.fortified-gate",
@@ -1562,17 +942,6 @@
       "monster_name": "Labyrinth Minotaur",
       "habitat": "Identical stone maze corridors",
       "moment": "Filling an intersection with axe ready",
-      "identity_rules": [
-        "Must be immediately recognizable as Labyrinth Minotaur",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "bull-headed minotaur",
-        "large curved horns",
-        "two-handed axe",
-        "maze intersection",
-        "massive humanoid body with hooved feet"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1582,14 +951,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "labyrinth-minotaur",
       "archetype": "large_scale_scene",
       "environment_profile_id": "underground.labyrinth",
@@ -1610,17 +971,6 @@
       "monster_name": "Minotaur Skeleton",
       "habitat": "Dark labyrinth corridor",
       "moment": "Turning the corner with empty eye sockets",
-      "identity_rules": [
-        "Must be immediately recognizable as Minotaur Skeleton",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "minotaur skeleton",
-        "horned bull skull",
-        "skeletal humanoid body",
-        "dark labyrinth corner",
-        "empty eye sockets"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1630,14 +980,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "minotaur-skeleton",
       "archetype": "horror_scene",
       "environment_profile_id": "underground.labyrinth",
@@ -1658,17 +1000,6 @@
       "monster_name": "Roper",
       "habitat": "Stalagmite cavern",
       "moment": "Sticky tendrils striking from camouflage",
-      "identity_rules": [
-        "Must be immediately recognizable as Roper",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "stalagmite-shaped roper",
-        "single central eye",
-        "large toothed mouth",
-        "multiple long sticky tendrils",
-        "stalagmite cavern camouflage"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1678,14 +1009,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "roper",
       "archetype": "reveal_scene",
       "environment_profile_id": "underground.limestone-drip-cave",
@@ -1706,18 +1029,6 @@
       "monster_name": "Cloaker",
       "habitat": "Dungeon antechamber",
       "moment": "Peeling off a wall hook like a living cloak",
-      "identity_rules": [
-        "Must be immediately recognizable as Cloaker",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "living cloaker",
-        "manta-like cloak silhouette",
-        "wide leathery wings",
-        "long tail",
-        "peeling from a wall hook",
-        "dungeon antechamber"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1727,14 +1038,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "cloaker",
       "archetype": "reveal_scene",
       "environment_profile_id": "underground.antechamber",
@@ -1755,17 +1058,6 @@
       "monster_name": "Grick",
       "habitat": "Collapsed tunnel rubble",
       "moment": "Tentacles emerging around a central beak",
-      "identity_rules": [
-        "Must be immediately recognizable as Grick",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "grick",
-        "thick wormlike body",
-        "four tentacles around a central beak",
-        "collapsed tunnel rubble",
-        "ambush emergence"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1775,14 +1067,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "grick",
       "archetype": "reveal_scene",
       "environment_profile_id": "underground.collapsed-tunnel",
@@ -1803,18 +1087,6 @@
       "monster_name": "Ankheg",
       "habitat": "Earthen tunnel / burrow",
       "moment": "Bursting upward through the floor",
-      "identity_rules": [
-        "Must be immediately recognizable as Ankheg",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "ankheg",
-        "large burrowing insect body",
-        "heavy mandibles",
-        "segmented armored plates",
-        "bursting through earthen floor",
-        "burrow tunnel"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1824,14 +1096,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "ankheg",
       "archetype": "action_scene",
       "environment_profile_id": "underground.earthen-burrow",
@@ -1852,18 +1116,6 @@
       "monster_name": "Bulette",
       "habitat": "Loose-earth cavern",
       "moment": "Dorsal fin cutting through soil before surfacing",
-      "identity_rules": [
-        "Must be immediately recognizable as Bulette",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "bulette",
-        "armored land-shark body",
-        "prominent dorsal fin",
-        "four powerful legs",
-        "fin cutting through loose earth",
-        "surfacing from cavern floor"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1873,14 +1125,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "bulette",
       "archetype": "action_scene",
       "environment_profile_id": "underground.loose-earth-cavern",
@@ -1901,18 +1145,6 @@
       "monster_name": "Rust Monster",
       "habitat": "Abandoned armory alcove",
       "moment": "Feeding on a pile of ruined metal weapons",
-      "identity_rules": [
-        "Must be immediately recognizable as Rust Monster",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "rust monster",
-        "low armored insectoid body",
-        "very long feeler antennae",
-        "ruined metal weapons",
-        "abandoned armory alcove",
-        "feeding-on-metal story beat"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1922,14 +1154,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "rust-monster",
       "archetype": "lair_scene",
       "environment_profile_id": "underground.armory",
@@ -1950,18 +1174,6 @@
       "monster_name": "Otyugh",
       "habitat": "Refuse pit beneath dungeon privies",
       "moment": "Rising from garbage with eyestalks searching",
-      "identity_rules": [
-        "Must be immediately recognizable as Otyugh",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "otyugh",
-        "three thick legs",
-        "two long grasping tentacles",
-        "single elevated eyestalk",
-        "wide central mouth",
-        "refuse pit and garbage"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -1971,14 +1183,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "otyugh",
       "archetype": "horror_scene",
       "environment_profile_id": "underground.refuse-pit",
@@ -1999,18 +1203,6 @@
       "monster_name": "Gibbering Mouther",
       "habitat": "Flooded dungeon cell",
       "moment": "Many mouths churning above rippling water",
-      "identity_rules": [
-        "Must be immediately recognizable as Gibbering Mouther",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "gibbering mouther",
-        "amorphous crawling mass",
-        "many distinct mouths",
-        "several scattered eyes",
-        "flooded dungeon cell",
-        "rippling water around the creature"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2020,14 +1212,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "gibbering-mouther",
       "archetype": "horror_scene",
       "environment_profile_id": "underground.prison-cell",
@@ -2048,17 +1232,6 @@
       "monster_name": "Basilisk",
       "habitat": "Statue-filled underground gallery",
       "moment": "Staring forward as a small creature petrifies",
-      "identity_rules": [
-        "Must be immediately recognizable as Basilisk",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "eight-legged basilisk",
-        "heavy lizardlike body",
-        "direct petrifying stare",
-        "statue-filled underground gallery",
-        "small creature partly turning to stone"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2068,14 +1241,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "basilisk",
       "archetype": "horror_scene",
       "environment_profile_id": "underground.stone-gallery",
@@ -2096,18 +1261,6 @@
       "monster_name": "Cockatrice",
       "habitat": "Improvised dungeon henhouse",
       "moment": "Wings raised beside a petrified mouse",
-      "identity_rules": [
-        "Must be immediately recognizable as Cockatrice",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "cockatrice",
-        "rooster-like head and comb",
-        "reptilian or batlike wings",
-        "serpentine tail",
-        "petrified mouse",
-        "improvised dungeon henhouse"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2117,14 +1270,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "cockatrice",
       "archetype": "action_scene",
       "environment_profile_id": "underground.crude-henhouse",
@@ -2145,17 +1290,6 @@
       "monster_name": "Purple Worm",
       "habitat": "Mine shaft / deep tunnel",
       "moment": "Circular maw filling the tunnel",
-      "identity_rules": [
-        "Must be immediately recognizable as Purple Worm",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "colossal purple worm",
-        "circular ringed maw",
-        "segmented worm body",
-        "maw filling a mine tunnel",
-        "deep shaft scale"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2165,14 +1299,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "purple-worm",
       "archetype": "large_scale_scene",
       "environment_profile_id": "underground.mine-shaft",
@@ -2193,18 +1319,6 @@
       "monster_name": "Drider",
       "habitat": "Webbed underground chapel",
       "moment": "Hanging overhead and aiming downward",
-      "identity_rules": [
-        "Must be immediately recognizable as Drider",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "drider",
-        "humanoid upper torso",
-        "giant spider lower body with eight legs",
-        "bow aimed downward",
-        "hanging overhead",
-        "webbed underground chapel"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2214,14 +1328,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "drider",
       "archetype": "stealth_scene",
       "environment_profile_id": "underground.webbed-chapel",
@@ -2242,18 +1348,6 @@
       "monster_name": "Behir",
       "habitat": "Crystal cavern",
       "moment": "Coiled around a crystal column with lightning arcing",
-      "identity_rules": [
-        "Must be immediately recognizable as Behir",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "behir",
-        "long serpentine reptile",
-        "many pairs of legs",
-        "horned head",
-        "coiled around crystal column",
-        "lightning arcing around body"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2263,14 +1357,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "behir",
       "archetype": "large_scale_scene",
       "environment_profile_id": "underground.crystal-cavern",
@@ -2291,18 +1377,6 @@
       "monster_name": "Shrieker Fungus",
       "habitat": "Underground mushroom hall",
       "moment": "Gill-mouth opened in a piercing shriek",
-      "identity_rules": [
-        "Must be immediately recognizable as Shrieker Fungus",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "shrieker fungus",
-        "large mushroom body",
-        "open gill-mouth beneath cap",
-        "visible vibration or shriek motion lines",
-        "underground mushroom hall",
-        "no humanoid face or limbs"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2312,14 +1386,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "shrieker-fungus",
       "archetype": "horror_scene",
       "environment_profile_id": "underground.mushroom-hall",
@@ -2340,18 +1406,6 @@
       "monster_name": "Violet Fungus",
       "habitat": "Damp fungal cavern with shelf fungus wall and shallow pool",
       "moment": "Tendrils reaching toward a dropped torch",
-      "identity_rules": [
-        "Must be immediately recognizable as Violet Fungus",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "violet fungus",
-        "large fungus body",
-        "multiple long whipping tendrils",
-        "dropped torch",
-        "fungal cavern",
-        "no humanoid face"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2361,14 +1415,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "violet-fungus",
       "archetype": "action_scene",
       "environment_profile_id": "underground.fungal-cavern",
@@ -2389,19 +1435,6 @@
       "monster_name": "Lich",
       "habitat": "Deep underground phylactery vault",
       "moment": "Guarding the phylactery while casting",
-      "identity_rules": [
-        "Must be immediately recognizable as Lich",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
-      "must_include": [
-        "lich",
-        "skeletal undead spellcaster",
-        "decayed robes",
-        "visible phylactery object",
-        "spellcasting hand",
-        "deep underground vault",
-        "commanding final-page composition"
-      ],
       "must_avoid": [
         "grayscale wash",
         "dense crosshatching",
@@ -2411,14 +1444,6 @@
         "environment disconnected from the story moment",
         "clutter that obscures monster, habitat, or story beat"
       ],
-      "coloring_rules": {
-        "outer_contour": "bold",
-        "interior_lines": "light_to_medium",
-        "detail_density": "medium_low",
-        "open_white_area": "high",
-        "color": "black_on_white"
-      },
-      "reference_image": null,
       "monster_spec_id": "lich",
       "archetype": "boss_scene",
       "environment_profile_id": "underground.phylactery-vault",
@@ -2433,5 +1458,6 @@
         "motion": "casting gesture projects outward while stance remains anchored and balanced"
       }
     }
-  ]
+  ],
+  "page_contract": "black-ink-page-v1"
 }

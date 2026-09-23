@@ -29,9 +29,9 @@
   "derived_fields": {
     "monster_name": "monster catalog monster_name",
     "habitat": "environment profile name unless page overrides it",
-    "identity_rules": "monster accuracy_checks plus optional page identity_rules",
+    "identity_rules": "monster accuracy_checks only; legacy page identity_rules are non-authoritative",
     "composition": "universal defaults.composition unless page overrides it",
-    "coloring_rules": "universal defaults.coloring_rules merged with page overrides",
+    "coloring_rules": "universal defaults only; legacy page coloring_rules are non-authoritative",
     "must_avoid": "global_must_avoid + monster must_avoid + environment must_avoid + page must_avoid"
   },
   "defaults": {
@@ -117,5 +117,45 @@
     "monster_identity",
     "environment_identity",
     "story_moment"
-  ]
+  ],
+  "generation_authority": {
+    "authoritative_page_fields": [
+      "page_id",
+      "order",
+      "monster_spec_id",
+      "environment_profile_id",
+      "moment",
+      "archetype",
+      "environment_variant.landmark",
+      "environment_variant.framing",
+      "environment_variant.interaction",
+      "physicality.mode",
+      "physicality.support",
+      "physicality.motion",
+      "must_avoid"
+    ],
+    "legacy_non_authoritative_fields": [
+      "monster_name",
+      "habitat",
+      "identity_rules",
+      "must_include",
+      "coloring_rules",
+      "reference_image",
+      "modify"
+    ],
+    "review_correction_source": "Production/calibration state review_notes are the only human correction authority used by generation and image-edit prompts.",
+    "rule": "Legacy manifest fields may remain during migration for compatibility or display, but they must not change monster identity, required scene objects, coloring rules, or edit instructions.",
+    "strip_now_fields": [
+      "identity_rules",
+      "must_include",
+      "coloring_rules",
+      "reference_image",
+      "modify"
+    ],
+    "runtime_compatibility_retained": [
+      "monster_name",
+      "habitat"
+    ],
+    "migration_note": "monster_name and habitat remain temporarily because a small number of raw-manifest display/smoke-test readers still consume them; generation does not."
+  }
 }

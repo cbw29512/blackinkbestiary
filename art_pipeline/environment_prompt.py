@@ -37,11 +37,16 @@ def load_environment_for_page(page: dict) -> dict:
 
 def _required_object_rules(page: dict) -> list[str]:
     variant = page.get("environment_variant") or {}
+    physicality = page.get("physicality") or {}
     text = " ".join([
         str(page.get("moment") or ""),
-        " ".join(str(item) for item in page.get("must_include") or []),
+        str(page.get("archetype") or ""),
         str(variant.get("landmark") or ""),
+        str(variant.get("framing") or ""),
         str(variant.get("interaction") or ""),
+        str(physicality.get("mode") or ""),
+        str(physicality.get("support") or ""),
+        str(physicality.get("motion") or ""),
     ]).lower()
     rules = []
     if "wall torch" in text or "wall sconce" in text or "torch bracket" in text:
@@ -68,9 +73,7 @@ def _required_object_rules(page: dict) -> list[str]:
 def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}
-    identity = profile.get("resolved_identity") or {}
     palette = assemble_environment_palette(page, root)
-    envelope = resolve_spatial_envelope(profile)
     room = build_room_brief(page, root)
     component_lines = [
         f"ROOM COMPONENT — {group.replace('_', ' ')}: {item.get('text', '')}."

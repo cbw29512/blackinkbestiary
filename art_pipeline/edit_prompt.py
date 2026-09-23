@@ -2,25 +2,22 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from prompt_builder import _canonical_sections, _items, load_monster_spec
-try:
-    from .page_contract import resolve_page_spec
-except ImportError:
-    from page_contract import resolve_page_spec
-try:
-    from .style_rules import STYLE_RULES
-except ImportError:
-    from style_rules import STYLE_RULES
 try:
     from .environment_prompt import environment_prompt_sections
+    from .monster_prompt import _canonical_sections, _items, load_monster_spec
+    from .page_contract import resolve_page_spec
     from .physicality_prompt import physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
     from .story_prompt import story_sections
+    from .style_rules import STYLE_RULES
 except ImportError:
     from environment_prompt import environment_prompt_sections
+    from monster_prompt import _canonical_sections, _items, load_monster_spec
+    from page_contract import resolve_page_spec
     from physicality_prompt import physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
     from story_prompt import story_sections
+    from style_rules import STYLE_RULES
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -48,18 +45,10 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
         *physicality_sections(page),
         f"SCENE ARCHETYPE MUST REMAIN: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
-        _items("MUST INCLUDE", page.get("must_include")),
         _items("MUST AVOID", page.get("must_avoid")),
         f"COMPOSITION TARGET: {page.get('composition', '')}".strip(),
         "HOUSE STYLE MUST REMAIN: " + "; ".join(STYLE_RULES) + ".",
     ]
-
-    modify = page.get("modify") or {}
-    sections.extend([
-        _items("PRESERVE", modify.get("preserve")),
-        _items("CHANGE ONLY AS NEEDED", modify.get("change")),
-        _items("DO NOT INTRODUCE", modify.get("avoid")),
-    ])
 
     if review_notes:
         text = (review_notes.get("text") or "").strip()

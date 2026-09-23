@@ -333,3 +333,45 @@ Additional calibration-derived rules now also require:
 
 - wall torches/sconces to visibly attach to masonry rather than become freestanding posts
 - tripwires to visibly cross the walking path and connect cause-and-effect to the triggered hazard
+
+
+## 2026-09-22 Page Recipe Authority Boundary
+
+Legacy Tome I manifests still contain fields from the pre-universal architecture. Those fields may remain temporarily for compatibility or Studio display, but they are no longer allowed to compete with the universal engines.
+
+Generation authority is now:
+
+- monster identity/anatomy/gear tendencies -> universal monster engine
+- room/place geometry and reusable scenery -> universal environment engine
+- story action -> `moment` + `environment_variant.interaction`
+- composition framing -> `environment_variant.framing`
+- physical support/motion -> `physicality`
+- page-specific negative exceptions -> `must_avoid`
+- current human corrections -> production/calibration state `review_notes`
+
+Legacy manifest fields `monster_name`, `habitat`, `identity_rules`, `must_include`, `coloring_rules`, `reference_image`, and `modify` are non-authoritative during migration.
+
+Prompt generation, image-edit prompting, environment object triggers, and scene-relationship activation no longer consume legacy `must_include` or manifest-level `modify` instructions. Canonical monster identity and universal coloring defaults override stale page copies.
+
+The page contract remains `black-ink-page-v1` for backward compatibility with all eight book plans and scaffolding. This is an authority clarification, not a breaking contract migration.
+
+Regression tests use deliberately poisoned legacy values to ensure they cannot leak into generation.
+
+**Validation status:** implementation is isolated on the stacked branch. GitHub Actions is still failing before runner assignment, so this is not yet CI-certified.
+
+
+### Tome I first-stage cleanup
+
+The first safe data cleanup has now been applied to all 50 Tome I recipes after the authority boundary was established.
+
+Removed from Tome I:
+
+- 48 legacy `identity_rules` blocks
+- 50 legacy `must_include` blocks
+- 48 duplicated `coloring_rules` blocks
+- 48 page-level `reference_image` placeholders
+- the stale I-01 manifest `modify` block
+
+This reduced the Tome I manifest by roughly 32 KB while preserving the unique page recipe, page-specific negative exceptions, and temporary display compatibility fields `monster_name` / `habitat`.
+
+The migration audit now distinguishes fields safe to strip immediately from fields retained temporarily for raw-manifest consumers.

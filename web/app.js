@@ -139,14 +139,20 @@ function render(d) {
     <p><strong>Mode:</strong> ${esc(p.physicality?.mode || "")}</p>
     <p><strong>Support:</strong> ${esc(p.physicality?.support || "")}</p>
     <p><strong>Motion:</strong> ${esc(p.physicality?.motion || "")}</p>
-    <h3>Identity</h3>${list(p.identity_rules)}
-    <h3>Must Include</h3>${list(p.must_include)}
+    <h3>Canonical Identity Checks</h3>${list(m?.accuracy_checks)}
+    <h3>Page Recipe</h3>
+    <ul>
+      <li><strong>Landmark:</strong> ${esc(p.environment_variant?.landmark || "")}</li>
+      <li><strong>Framing:</strong> ${esc(p.environment_variant?.framing || "")}</li>
+      <li><strong>Interaction:</strong> ${esc(p.environment_variant?.interaction || "")}</li>
+    </ul>
     <h3>Must Avoid</h3>${list(p.must_avoid)}
-    ${p.modify ? `
-      <h3>Current Modify Direction</h3>
-      <p><strong>Preserve:</strong></p>${list(p.modify.preserve)}
-      <p><strong>Change:</strong></p>${list(p.modify.change)}
-      <p><strong>Avoid:</strong></p>${list(p.modify.avoid)}
+    ${s.review_notes ? `
+      <h3>Current Review Direction</h3>
+      ${s.review_notes.text ? `<p>${esc(s.review_notes.text)}</p>` : ""}
+      ${s.review_notes.quick_tags?.length ? `<p><strong>Quick changes:</strong></p>${list(s.review_notes.quick_tags)}` : ""}
+      ${s.review_notes.preserve_dimensions?.length ? `<p><strong>Preserve:</strong></p>${list(s.review_notes.preserve_dimensions)}` : ""}
+      ${s.review_notes.failed_dimensions?.length ? `<p><strong>Correct:</strong></p>${list(s.review_notes.failed_dimensions)}` : ""}
     ` : ""}
   `;
 
