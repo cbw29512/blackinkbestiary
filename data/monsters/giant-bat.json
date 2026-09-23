@@ -5,8 +5,8 @@
   "size": "large",
   "creature_type": "giant beast",
   "visual_identity": {
-    "core_identity": "An enormous cave bat with a broad membrane wingspan, powerful clawed feet, and an unmistakable natural bat silhouette.",
-    "silhouette": "Wide folded or partly opened wings, hanging inverted body, large pointed ears, narrow torso, clawed feet gripping overhead rock.",
+    "core_identity": "An enormous bat with a broad membrane wingspan, powerful clawed feet, and an unmistakable natural bat silhouette.",
+    "silhouette": "Wide folded or partly opened wings, hanging inverted body, large pointed ears, narrow torso, clawed feet capable of gripping overhead support.",
     "head_features": "Natural bat face with large ears, short muzzle, small eyes, no monstrous humanoid features.",
     "body_shape": "Light flying mammal body with very long finger-boned wings and compact torso.",
     "surface": "Short fur on body and smooth wing membranes with minimal vein lines.",
@@ -34,16 +34,16 @@
     ]
   },
   "default_habitats": [
-    "river caverns",
-    "high cave ceilings",
-    "deep mine chambers"
+    "caves",
+    "underground",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads immediately as giant bat",
     "wings use elongated finger structure",
     "hanging pose is plausible",
     "scale is obvious",
-    "underground river remains secondary",
+    "environment remains secondary to the bat",
     "open wing areas are colorable"
   ],
   "reference": {
@@ -53,5 +53,8 @@
   },
   "schema_version": 2,
   "identity_version": 1,
-  "family_profile": "bat"
+  "family_profile": "bat",
+  "physical_requirements": [
+    "overhead_attachment: inverted roosting posture requires a believable overhead support; environment engine chooses the ceiling, rock, beam, branch, or other compatible support"
+  ]
 }
