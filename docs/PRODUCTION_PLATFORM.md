@@ -33,23 +33,25 @@ Changing the active book requires a Studio restart. Python code should not be ed
 
 ## Page Schema
 
-Every page must define:
+Production manifests use the **black-ink-page-v2** tiny recipe contract.
+
+Every page stores only:
 
 - `page_id`
 - `order`
-- `monster_name`
 - `monster_spec_id`
-- `habitat`
+- `environment_profile_id`
 - `moment`
 - `archetype`
-- `environment_profile_id`
 - `environment_variant.landmark`
 - `environment_variant.framing`
 - `environment_variant.interaction`
-- `must_include[]`
-- `must_avoid[]`
+- `physicality.mode`
+- `physicality.support`
+- `physicality.motion`
+- optional `page_exceptions` only for genuine page-specific requirements that cannot live in a universal engine
 
-The production audit rejects missing fields, duplicate IDs/orders, missing canonical specs, bad archetypes, and malformed identity specs.
+Do **not** store derived monster names, habitat prose, identity rules, global must-avoid rules, global coloring rules, composition boilerplate, references, or review/modify state in a page recipe. The resolver derives those from the universal engines and catalogs.
 
 ## Global Quality Layers
 
