@@ -18,6 +18,7 @@ from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
 from generation_runtime import model_filename, read_json
+from page_contract import resolve_page_spec
 from prompt_builder import build_prompt
 from qa import inspect_candidate
 
@@ -37,7 +38,7 @@ def _page(page_id: str, calibration: dict) -> dict:
     page = next((item for item in tome.get("pages", []) if item.get("page_id") == page_id), None)
     if not page:
         raise RuntimeError(f"Calibration page not found in manifest: {page_id}")
-    return page
+    return resolve_page_spec(page, ROOT)
 
 
 def _prompt(page: dict, case: dict, page_state: dict) -> str:

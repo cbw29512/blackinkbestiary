@@ -5,7 +5,7 @@
   "size": "medium",
   "creature_type": "monstrosity",
   "visual_identity": {
-    "core_identity": "A low insectoid dungeon scavenger that seeks metal, recognized by its long sensory antennae, armored body, and metal-corroding feeding behavior.",
+    "core_identity": "A low insectoid scavenger that seeks metal, recognized by its long sensory antennae, armored body, and metal-corroding feeding behavior.",
     "silhouette": "Low four-legged arthropod-like body, arched armored back, extremely long feeler antennae sweeping forward, tapered tail.",
     "head_features": "Small blunt head with simple mandibles and very long feathery or segmented antennae.",
     "body_shape": "Compact low body on four sturdy legs with plated back and flexible tail, more alien than mammalian.",
@@ -41,10 +41,10 @@
   "accuracy_checks": [
     "antennae dominate silhouette",
     "creature interacts directly with metal",
-    "ruined weapons show corrosion",
+    "metal target, if shown, displays corrosion at the contact point",
     "body remains low and armored",
     "not mistaken for ordinary insect",
-    "page preserves white space"
+    "body silhouette remains clear and uncluttered"
   ],
   "reference": {
     "image": null,

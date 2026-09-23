@@ -55,7 +55,7 @@
   "relationship_engine": {
     "registry_path": "data/scene_relationship_rules.json",
     "purpose": "Required objects must have correct physical and narrative relationships, not merely appear somewhere in the frame.",
-    "rule": "Resolve only relationship rules triggered by the page recipe and append them after the core story beat.",
+    "rule": "Resolve only relationship rules triggered by the page recipe, rank by priority, allow higher-priority rules to suppress physically incompatible lower-priority states, and append no more than the prompt budget.",
     "examples": [
       "tripwire crosses travel lane and visibly explains pit trigger",
       "wall torch visibly attaches to masonry",
@@ -65,6 +65,6 @@
       "carried object visibly contacts the limb or body carrying it"
     ],
     "prompt_budget": 4,
-    "review_rule": "A page fails story/environment interaction if all required objects are present but their physical relationship is wrong or ambiguous."
+    "review_rule": "A page fails story/environment interaction if required objects are present but their contact, support, attachment, containment, or cause-and-effect relationship is wrong or ambiguous."
   }
 }

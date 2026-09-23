@@ -1,0 +1,77 @@
+import json
+import sys
+import unittest
+from copy import deepcopy
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from equipment_relationships import held_weapon_gear, secured_weapon_gear
+from monster_catalog import resolve_monster_spec
+from prompt_builder import build_prompt, build_supervisor_checklist
+
+
+class EquipmentRelationshipTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        cls.pages = {page["page_id"]: page for page in tome["pages"]}
+
+    def test_kobold_weapon_is_held_in_one_real_grip(self):
+        spec = resolve_monster_spec("kobold-warrior")
+        page = self.pages["I-01"]
+        self.assertEqual(held_weapon_gear(spec, page, ROOT), ["short simple spear"])
+        self.assertEqual(secured_weapon_gear(spec, page, ROOT), [])
+        text = build_prompt(page)
+        self.assertIn("CREATURE EQUIPMENT RELATIONSHIP — HELD", text)
+        self.assertIn("grasping hand or limb", text)
+        self.assertIn("one instance of each canonical carried weapon", text)
+
+    def test_externally_displayed_weapon_is_not_forced_onto_creature(self):
+        page = deepcopy(self.pages["I-01"])
+        page["moment"] = "Watching a short spear displayed on a wall rack"
+        page["environment_variant"]["interaction"] = (
+            "kobold stands beside the short spear displayed on a wall rack"
+        )
+        spec = resolve_monster_spec("kobold-warrior")
+        self.assertEqual(held_weapon_gear(spec, page, ROOT), [])
+        self.assertEqual(secured_weapon_gear(spec, page, ROOT), [])
+
+    def test_busy_hands_secure_canonical_weapon(self):
+        page = self.pages["I-03"]
+        spec = resolve_monster_spec("goblin-minion")
+        self.assertEqual(held_weapon_gear(spec, page, ROOT), [])
+        self.assertEqual(
+            secured_weapon_gear(spec, page, ROOT),
+            ["belt-sheathed small scavenged knife"],
+        )
+        self.assertIn("CREATURE EQUIPMENT RELATIONSHIP — SECURED", build_prompt(page))
+
+    def test_page_specific_weapon_overrides_busy_hand_default(self):
+        page = self.pages["I-07"]
+        spec = resolve_monster_spec("hobgoblin-captain")
+        self.assertEqual(held_weapon_gear(spec, page, ROOT), ["dagger"])
+        self.assertEqual(secured_weapon_gear(spec, page, ROOT), ["straight sword"])
+
+    def test_weapon_creature_does_not_receive_hand_contact_rule(self):
+        page = self.pages["I-30"]
+        spec = resolve_monster_spec("flying-sword")
+        self.assertEqual(held_weapon_gear(spec, page, ROOT), [])
+        self.assertEqual(secured_weapon_gear(spec, page, ROOT), [])
+        text = build_prompt(page)
+        self.assertNotIn("CREATURE EQUIPMENT RELATIONSHIP — HELD", text)
+        self.assertNotIn("CREATURE EQUIPMENT RELATIONSHIP — SECURED", text)
+
+    def test_supervisor_checks_contact_duplication_and_scale(self):
+        checks = " ".join(build_supervisor_checklist(self.pages["I-01"]))
+        self.assertIn("Equipment contact (short simple spear)", checks)
+        self.assertIn("visibly contacts a grasping hand or limb", checks)
+        self.assertIn("not duplicated", checks)
+        self.assertIn("subordinate", checks)
+
+
+
+
+if __name__ == "__main__":
+    unittest.main()

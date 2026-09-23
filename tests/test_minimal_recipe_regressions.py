@@ -29,7 +29,7 @@ class MinimalRecipeRegressionTests(unittest.TestCase):
 
     def test_golden_five_keep_story_critical_information(self):
         expectations = {
-            "I-01": ["tripwire", "punji pit", "torch bracket"],
+            "I-01": ["open spiked pit trap", "wall torch bracket"],
             "I-24": ["bones and a key", "suspended inside"],
             "I-27": ["reaching hand", "toothed mouth"],
             "I-38": ["ankheg", "bursts upward", "loose floor"],
@@ -61,6 +61,42 @@ class MinimalRecipeRegressionTests(unittest.TestCase):
         self.assertIn("pit_interrupts_route", ids)
         self.assertIn("pressure_plate_route", ids)
         self.assertIn("interaction_contact", ids)
+
+
+    def test_i24_containment_does_not_trigger_hanging_support(self):
+        rules = active_relationship_rules(self.pages["I-24"], ROOT)
+        ids = [item["rule_id"] for item in rules]
+        self.assertIn("contained_inside_body", ids)
+        self.assertNotIn("hanging_from_support", ids)
+
+    def test_i27_reaching_hand_gets_contact_relationship(self):
+        ids = [item["rule_id"] for item in active_relationship_rules(self.pages["I-27"], ROOT)]
+        self.assertIn("interaction_contact", ids)
+
+    def test_i38_bursting_from_ground_gets_emergence_relationship(self):
+        ids = [item["rule_id"] for item in active_relationship_rules(self.pages["I-38"], ROOT)]
+        self.assertIn("emerging_from_opening", ids)
+
+    def test_i40_feeding_story_gets_physical_contact_relationship(self):
+        ids = [item["rule_id"] for item in active_relationship_rules(self.pages["I-40"], ROOT)]
+        self.assertIn("feeding_contact", ids)
+
+
+    def test_relationship_rules_ignore_incidental_words(self):
+        cases = {
+            "I-12": "pit_interrupts_route",
+            "I-18": "carrying_object",
+            "I-26": "interaction_contact",
+            "I-37": "interaction_contact",
+            "I-41": "pit_interrupts_route",
+            "I-45": "carrying_object",
+        }
+        for page_id, forbidden_rule in cases.items():
+            ids = [
+                item["rule_id"]
+                for item in active_relationship_rules(self.pages[page_id], ROOT)
+            ]
+            self.assertNotIn(forbidden_rule, ids, page_id)
 
     def test_no_duplicate_required_object_rule_section(self):
         text = build_prompt(self.pages["I-01"])

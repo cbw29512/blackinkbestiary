@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "contract_id": "black-ink-monster-v2",
+  "schema_version": 4,
+  "contract_id": "black-ink-monster-v3",
   "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
   "minimal_recipe_required": [
     "monster_id",
@@ -9,6 +9,8 @@
   ],
   "minimal_recipe_optional": [
     "variant_traits",
+    "size",
+    "creature_type",
     "locomotion",
     "visual_overrides",
     "default_habitats",
@@ -42,7 +44,12 @@
     "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
     "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
     "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
-    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it."
+    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it.",
+    "Schema-v3+ recipes may contain only contract-approved top-level fields; duplicated resolved family fields are a CI failure.",
+    "A variant override should describe only the delta from family DNA. Do not restate the family silhouette, anatomy, must-keep, must-avoid, or accuracy checks unchanged.",
+    "Depicted weapons inherit universal equipment-state rules: a weapon associated with a creature must resolve to exactly one state—held in a believable grasp, visibly secured to the creature, or explicitly placed in the environment. Creatures without grasping limbs are exempt from hand-contact rules.",
+    "Signature gear entries must be concrete visual defaults, never alternatives or conditionals. Do not use 'X or Y', 'if scene allows', 'if unobtrusive', 'if any', or oversized wording in signature_gear; page-specific props belong to the page recipe instead.",
+    "Legacy standalone monster specs obey the same identity-scope boundary as family-backed recipes: page-specific props, landmarks, secondary figures, camera/composition language, and exact current-scene interactions must not leak into visual identity or accuracy checks."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -82,5 +89,56 @@
       "environment depth cues"
     ],
     "rule": "If a visual element could be reused by another creature in the same place, it belongs in the universal environment engine: family/profile/component/overlay system."
+  },
+  "recipe_policy": {
+    "allowed_top_level": [
+      "schema_version",
+      "identity_version",
+      "monster_id",
+      "monster_name",
+      "family_profile",
+      "variant_traits",
+      "size",
+      "creature_type",
+      "locomotion",
+      "visual_overrides",
+      "default_habitats",
+      "scene_overrides"
+    ],
+    "forbidden_in_v3": [
+      "visual_identity",
+      "scene_identity",
+      "family",
+      "reference",
+      "accuracy_checks",
+      "known_failure_modes"
+    ],
+    "rule": "Schema-v3+ monster files are recipes, not resolved creature documents. Family-owned anatomy, scene behavior, accuracy checks, references, and anti-drift knowledge must not be copied into them.",
+    "migration_rule": "Any legacy monster that already references a valid family_profile should be migrated to a schema-v3+ recipe unless it has a genuine variant difference that must remain as an override.",
+    "size_rule": "size and creature_type are permitted only when the variant genuinely differs from family taxonomy defaults."
+  },
+  "equipment_physicality": {
+    "registry": "config/creature_equipment_rules.json",
+    "rule": "Creature gear identifies what belongs to the monster; the universal equipment engine resolves held versus secured versus environmental weapon state, prevents accidental duplicate weapons, enforces believable contact, and exempts creatures such as animated weapons that have no grasping limbs.",
+    "signature_gear_rule": "Signature gear names one concrete default item or worn feature per entry. Alternate choices and scene props are prohibited because they cause duplicate or contradictory generation."
+  },
+  "identity_scope_policy": {
+    "monster_may_own": [
+      "species/variant anatomy and silhouette",
+      "inherent surface/material identity",
+      "stable locomotion and natural posture tendencies",
+      "inherent behavior or camouflage tendencies",
+      "stable creature gear that should follow the variant between scenes",
+      "accuracy checks that remain true regardless of the selected page"
+    ],
+    "monster_must_not_own": [
+      "the active page landmark, room geometry, or selected environment proof cue",
+      "a page-specific secondary figure or victim",
+      "a page-specific prop that exists only for the current story beat",
+      "camera/framing/composition instructions",
+      "the exact current-page pose, direction, support object, or interaction target",
+      "approval language such as final-page composition or scene-matching"
+    ],
+    "rule": "Monster identity must remain reusable when the same creature is placed on a different page. If changing the page environment, prop, or story beat makes an identity rule false, that rule belongs to the page/story/environment engine instead."
   }
 }

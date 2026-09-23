@@ -1,18 +1,22 @@
 {
+  "schema_version": 3,
   "monster_id": "minotaur-skeleton",
   "monster_name": "Minotaur Skeleton",
-  "family": "minotaur",
-  "size": "large",
+  "family_profile": "minotaur",
+  "variant_traits": [
+    "undead skeleton",
+    "bull skull",
+    "fleshless minotaur frame"
+  ],
   "creature_type": "undead monstrous humanoid",
-  "visual_identity": {
+  "visual_overrides": {
     "core_identity": "The animated skeleton of a minotaur, preserving the horned bull skull and massive humanoid bone structure without flesh.",
-    "silhouette": "Tall skeletal humanoid frame topped by a broad horned bull skull, long bones, rib cage, and hooved or skeletal feet.",
+    "silhouette": "Tall skeletal humanoid frame topped by a broad horned bull skull with large limb bones and an open rib cage.",
     "head_features": "Large bovine skull with long muzzle cavity, empty eye sockets, and prominent curved horns.",
     "body_shape": "Heavy humanoid skeleton with broad rib cage and large limb bones, clearly larger than a human skeleton.",
-    "surface": "Clean bone shapes with sparse cracks, no gore or hanging flesh.",
+    "surface": "Clean bone shapes with sparse cracks; no gore or hanging flesh.",
     "signature_gear": [
-      "simple damaged axe or labyrinth weapon",
-      "minimal straps if any"
+      "simple damaged axe"
     ],
     "attitude": [
       "silent",
@@ -22,39 +26,19 @@
     ],
     "must_keep": [
       "bull skull",
-      "large horns",
       "skeletal humanoid body",
-      "empty eye sockets",
-      "large scale"
+      "empty eye sockets"
     ],
     "must_avoid": [
       "fleshy minotaur",
       "human skull",
-      "goat skull",
       "graphic gore",
-      "tiny human skeleton proportions",
-      "ornate armor"
+      "tiny human skeleton proportions"
     ]
   },
   "default_habitats": [
     "dark labyrinths",
     "crypt mazes",
     "underground passages"
-  ],
-  "accuracy_checks": [
-    "reads as minotaur skeleton immediately",
-    "bull skull dominates head identity",
-    "large skeleton scale is clear",
-    "horns are intact",
-    "no flesh obscures bones",
-    "corridor turn supports reveal"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "minotaur"
+  ]
 }

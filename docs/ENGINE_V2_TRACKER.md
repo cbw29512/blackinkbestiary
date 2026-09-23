@@ -350,3 +350,127 @@ Tome I has been migrated completely to the strict page-v2 recipe model.
 
 Current CI limitation remains external to code execution: GitHub Actions jobs continue to terminate before checkout with no steps.
 
+## 2026-09-22 Monster Catalog V3 Migration Checkpoint
+
+The repeated-family monster catalog has been migrated to the schema-v3 recipe model.
+
+- 50 monster specs total in the current catalog
+- 31 schema-v3/minimal family-backed recipes total: 29 migrated in this lane plus the 2 Bugbear recipes that were already minimal
+- 19 remaining legacy specs are standalone species with no reusable family profile yet; they are intentionally not forced into artificial families
+- schema-v3 recipes may contain only contract-approved top-level fields
+- duplicated family-owned anatomy, scene identity, accuracy checks, reference data, and known failure modes are now catalog-audit failures
+- the normal catalog audit now calls the monster recipe policy audit, so v3 drift cannot silently bypass CI
+- existing creature-catalog regression tests were updated from monster-v2/schema-2 expectations to monster-v3/schema-3 expectations
+
+Standalone legacy monsters should migrate only when a real reusable family abstraction exists. Do not invent a family merely to reduce file size.
+
+**Validation blocker:** GitHub Actions jobs are currently failing before checkout with no executed steps. The migration must not merge as verified-green until the full workflow executes successfully.
+
+## 2026-09-22 Golden Five Relationship Hardening
+
+Static Golden Five review after combining page-v2 and monster-v3 exposed three reusable relationship gaps and one ambiguous trigger.
+
+Fixes:
+
+- `suspended inside` no longer activates hanging-from-support logic; contained objects use a dedicated containment relationship.
+- Ankheg-style `bursting upward` / `bursts upward` scenes now activate emergence-from-opening geometry.
+- Feeding scenes now require visible physical contact between feeding anatomy and the target material, with damage/consumption at the contact point.
+- `reaching hand` now activates generic interaction-contact logic for object-monster scenes.
+- scene relationship selection remains priority-based and capped at four rules.
+
+Golden Five resolved relationship set:
+
+- I-01: pit interrupts route + wall-mounted fixture; tripwire is no longer required
+- I-24: contained-inside-body
+- I-27: interaction contact
+- I-38: emerging-from-opening
+- I-40: feeding contact
+
+No Golden Five page currently exhausts the four-rule prompt budget.
+
+## 2026-09-22 Local CI Fallback
+
+GitHub-hosted private Actions remains blocked before checkout because the account has exhausted included private-runner minutes and paid runner access has not yet begun executing jobs.
+
+A local CI-equivalent runner now exists at:
+
+`python scripts/run_local_ci.py`
+
+It validates the same production surfaces used by Studio checks:
+
+- required JSON files and environment component catalogs
+- full Python unittest discovery
+- active-book audit
+- series audit
+- Python compileall
+- JavaScript syntax checks for Studio and Golden Five UI files
+
+This is a validation fallback, not a second rule system. It calls the existing audits/tests and leaves GitHub workflow logic unchanged.
+
+## 2026-09-23 Local CI Defect Fixes
+
+The first full local CI run on the integrated page-v2 / monster-v3 branch found two genuine defects.
+
+1. Spatial envelope resolution let secondary descriptive language outrank the named environment identity. This caused Limestone Drip Cave to resolve as a built corridor because its first visual cue contained the word "passage".
+   - The resolver now gives primary profile identity (environment ID, name, spatial type) authority over description/spatial-read cues.
+   - Existing envelope priority remains the tie-breaker among valid primary matches.
+   - Static sweep: 80/80 environment profiles resolve; Limestone Drip Cave resolves to `natural_cavern`.
+
+2. Scene relationship phrase matching accidentally double-escaped `\w`, so word-boundary protection did not work as intended.
+   - The regex now uses actual word boundaries.
+   - I-26's "pulls and flows upward" no longer falsely activates `interaction_contact`.
+
+These were discovered by `python scripts/run_local_ci.py` before any Golden Five generation.
+
+
+
+### 2026-09-23 I-01 Trap Simplification
+- Golden Five I-01 no longer requires a tripwire.
+- Canonical scene is now: Kobold Warrior + trapped stone corridor + open spiked pit interrupting the route + wall torch bracket.
+- Calibration and regression tests now reject tripwire ownership for I-01 while retaining universal tripwire support for other pages.
+- Purpose: reduce prompt competition and make the trap story immediately readable in coloring-page line art.
+
+### 2026-09-23 Universal Weapon Contact
+- Added config/creature_equipment_rules.json and art_pipeline/equipment_relationships.py.
+- Canonical signature gear is scanned for weapon terms after monster resolution.
+- A carried weapon now receives a universal hand-contact rule unless the page explicitly mounts, displays, drops, embeds, sheathes, or otherwise detaches that weapon.
+- Held weapons must visibly connect to an anatomically correct grasping hand/limb, may not float or clip through the hand, and may not be duplicated unless the page explicitly requests multiples.
+- Weapon scale is required to remain subordinate to creature identity and the page story.
+- Kobold Warrior canonical gear changed from "oversized spear" to "short simple spear" to match the coloring-page readability target.
+- Added regression coverage for held, detached, review-check, and duplicate-weapon behavior.
+
+### 2026-09-23 Full Monster Equipment Audit
+- Audited all 50 current monster files for signature-gear ambiguity.
+- Normalized every remaining "X or Y", conditional, and oversized signature-gear entry to one concrete default; final static rescan found zero ambiguous gear entries.
+- Added universal weapon-state resolution for held, body-secured, and explicitly environmental weapons.
+- Canonical and page-specific weapons now share the same physical-contact rules.
+- Busy-hand scenes secure or omit secondary canonical weapons instead of floating them nearby.
+- Creatures without grasping limbs are exempt; Flying Sword remains the weapon-creature and never receives a hand-contact rule.
+- Added catalog-wide regression coverage so future ambiguous signature gear fails CI.
+
+
+## 2026-09-23 Equipment, Relationship, and Physicality Hardening
+
+Calibration exposed a broader physical-consistency problem: correct objects were sometimes present but floated, duplicated, attached to the wrong body part, or occupied contradictory physical states.
+
+Universal fixes now include:
+
+- weapon state resolution: held, body-secured, or explicitly environmental
+- carried weapons must visibly contact a believable grasping hand/limb
+- busy-hand scenes secure or omit secondary canonical weapons instead of floating them nearby
+- page-specific weapons inherit the same contact rules as canonical monster gear
+- animated weapon-creatures such as Flying Sword are exempt from hand-contact logic
+- shields attach to hand/forearm; quivers to back/hip; belts/pouches to waist; armor/straps/clothing to body; footwear to feet; chains/shackles to real attachment points; small worn accessories to clothing/cord/belt
+- specific attachment rules outrank generic ones, preventing cases such as foot wraps being treated as torso wraps
+- all 50 current monster files were audited; ambiguous signature-gear alternatives/conditionals were normalized to concrete defaults
+- catalog regression tests reject ambiguous signature gear going forward
+- relationship rules now support explicit suppression of incompatible lower-priority states
+- kicked/dislodged lanterns suppress the normal mounted-fixture state while retaining contact with the creature and wall mount
+- offering objects must remain visibly held by fingers rather than floating beside the hand
+- pinning actions require held-object contact with the target surface
+- reusable relationship coverage now includes wedged geometry, peeling from support, emergence through openings, wrapping/coiling contact, corrosion at contact points, web support, ceiling cling, and stepping between supports
+- every Tome I physicality.mode now resolves to exactly one universal support family through config/physicality_mode_rules.json
+- active physicality modes with missing or duplicate universal mappings are regression failures
+- scene relationship prompt budget remains capped at four; current Tome I static audit has no over-budget page
+
+Current architectural rule: if a recurring visual/physical failure can be described independently of one specific monster/page, fix it in the universal engine and add a regression test before regenerating.

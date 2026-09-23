@@ -5,15 +5,14 @@
   "size": "medium",
   "creature_type": "undead spellcaster",
   "visual_identity": {
-    "core_identity": "An ancient skeletal spellcaster preserved by forbidden magic, combining unmistakable undead anatomy with deliberate arcane intelligence and a guarded phylactery.",
+    "core_identity": "An ancient skeletal spellcaster preserved by forbidden magic, combining unmistakable undead anatomy with deliberate arcane intelligence.",
     "silhouette": "Tall robed skeletal humanoid with narrow shoulders, exposed skull and hands, one spellcasting arm raised, robes falling in simple vertical shapes.",
     "head_features": "Bare or partly hooded skull with deep empty sockets or small magical pinpoints, intact jaw, severe ancient profile.",
     "body_shape": "Dry skeletal humanoid frame under decayed layered robes, bony hands visible, upright commanding posture.",
     "surface": "Clean bone planes and torn fabric edges; no gore, slime, or dense decay.",
     "signature_gear": [
-      "simple arcane staff or wand if unobtrusive",
-      "visible phylactery object",
-      "few ancient jewelry or robe fasteners"
+      "simple arcane staff",
+      "few simple robe fasteners"
     ],
     "attitude": [
       "commanding",
@@ -25,8 +24,7 @@
       "skeletal skull",
       "bony hands",
       "decayed robes",
-      "spellcasting posture",
-      "visible phylactery nearby"
+      "spellcasting posture"
     ],
     "must_avoid": [
       "zombie flesh",
@@ -45,10 +43,9 @@
   "accuracy_checks": [
     "reads as intelligent undead caster",
     "skull and hands are clearly skeletal",
-    "phylactery is visible but secondary",
     "spellcasting action is clear",
     "robes remain simple and colorable",
-    "final-page composition feels imposing"
+    "upright commanding posture remains clear"
   ],
   "reference": {
     "image": null,

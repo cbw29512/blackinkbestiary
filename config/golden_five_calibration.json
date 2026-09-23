@@ -23,10 +23,10 @@
       "calibration_role": "small humanoid + trap storytelling + built dungeon perspective",
       "stress_test": [
         "kobold identity",
-        "tripwire/pit cause-and-effect",
+        "open pit clearly interrupts the corridor route",
         "open coloring regions inside masonry scene"
       ],
-      "special_rule": "Keep the trap story obvious without filling the corridor with cracks, spikes, or texture."
+      "special_rule": "The open pit must visibly interrupt the walking route and read instantly as a trap; use only a few large readable spikes and keep the masonry simple."
     },
     {
       "page_id": "I-24",

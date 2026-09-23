@@ -151,5 +151,10 @@
     "monster_identity",
     "environment_identity",
     "story_moment"
-  ]
+  ],
+  "physicality_engine": {
+    "registry": "config/physicality_mode_rules.json",
+    "rule": "Every physicality.mode must resolve to exactly one reusable support family. The universal family supplies generic support/weight rules; the page recipe supplies only scene-specific support and motion details.",
+    "coverage_gate": "Active-book audit/tests must fail when a used physicality.mode has no universal family or maps to more than one family."
+  }
 }

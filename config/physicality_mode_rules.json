@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "registry_id": "black-ink-physicality-modes-v1",
+  "purpose": "Apply reusable support, weight, and contact rules from page physicality.mode so stable geometry is enforced across every book.",
+  "groups": {
+    "stable_ground": {
+      "modes": [
+        "grounded",
+        "elevated-standing",
+        "descending",
+        "walking-turn",
+        "anchored",
+        "grounded-feeding",
+        "ground-swarm",
+        "rooted"
+      ],
+      "directives": [
+        "At least one clear load-bearing body part must visibly contact the named support surface.",
+        "Body weight and center of mass must read as supported by that contact; no unexplained gap beneath feet, paws, hooves, base, or root."
+      ]
+    },
+    "active_ground": {
+      "modes": [
+        "running",
+        "kicking",
+        "crouched-dragging",
+        "crawling"
+      ],
+      "directives": [
+        "At least one load-bearing limb or body surface must visibly contact the ground while the action occurs.",
+        "Motion may extend other limbs away from support, but the whole creature may not accidentally become airborne."
+      ]
+    },
+    "attached_support": {
+      "modes": [
+        "attached-peeling",
+        "hanging",
+        "web-supported",
+        "ceiling-cling",
+        "web-hanging",
+        "architectural-attachment",
+        "object-supported"
+      ],
+      "directives": [
+        "Show one or more explicit attachment/contact points to the named support.",
+        "The support must visibly carry or anchor the creature's weight; do not place the support behind the creature without contact."
+      ]
+    },
+    "transition_between_supports": {
+      "modes": [
+        "stepping-down",
+        "stepping-from-perch"
+      ],
+      "directives": [
+        "Show a readable transfer of weight between the old support and the destination surface.",
+        "At least one support contact must remain visible during the transition; never freeze the creature unsupported between surfaces."
+      ]
+    },
+    "embedded_or_emerging": {
+      "modes": [
+        "crawling-emergence",
+        "bursting-from-ground",
+        "burrowing",
+        "embedded-rising",
+        "tunnel-emergence"
+      ],
+      "directives": [
+        "A substantial part of the creature must remain visibly connected to the source opening, earth, tunnel, or embedding material.",
+        "Displaced material or boundary contact should identify the emergence source; do not depict an unsupported jump."
+      ]
+    },
+    "coiled_or_wrapped": {
+      "modes": [
+        "coiled-contact",
+        "coiled-support",
+        "rearing-from-floor"
+      ],
+      "directives": [
+        "The body must visibly press against, wrap around, or remain anchored to the named support or target.",
+        "Keep contact points readable and avoid floating body segments or ambiguous merged silhouettes."
+      ]
+    },
+    "ooze_contact": {
+      "modes": [
+        "sliding-ooze",
+        "climbing-ooze",
+        "amorphous-contact"
+      ],
+      "directives": [
+        "A broad portion of the amorphous body must visibly contact floor, wall, bars, steps, water, or another named support.",
+        "Stretching or flowing forms must preserve a continuous contact path rather than floating as disconnected blobs."
+      ]
+    },
+    "intentional_airborne": {
+      "modes": [
+        "flying-swarm",
+        "magical-flight"
+      ],
+      "directives": [
+        "Airborne placement must be clearly intentional and supported by the creature's flight or magical locomotion.",
+        "Use a readable motion path or origin point so the subject does not look accidentally misplaced in midair."
+      ]
+    },
+    "constrained_support": {
+      "modes": [
+        "wedged"
+      ],
+      "directives": [
+        "The creature must visibly contact the confining geometry and at least one load-bearing support surface.",
+        "Compression and contact, not hovering, must explain the constrained pose."
+      ]
+    },
+    "swarm_or_cluster_contact": {
+      "modes": [
+        "feeding-swarm"
+      ],
+      "directives": [
+        "Some members of the cluster must visibly contact the named feeding/support target while others may remain airborne.",
+        "Keep contact members and airborne members visually distinct enough to read the cluster's physical logic."
+      ]
+    }
+  },
+  "rule": "Every physicality.mode used by an active page must resolve to exactly one reusable support family. Page support/motion text supplies the scene-specific contact detail."
+}

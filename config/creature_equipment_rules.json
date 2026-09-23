@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "registry_id": "black-ink-creature-equipment-v1",
+  "purpose": "Keep carried creature equipment physically connected to the creature unless a page explicitly places it elsewhere.",
+  "weapon_terms": [
+    "spear",
+    "sword",
+    "axe",
+    "mace",
+    "dagger",
+    "bow",
+    "crossbow",
+    "club",
+    "hammer",
+    "staff",
+    "glaive",
+    "halberd",
+    "scimitar",
+    "rapier",
+    "flail",
+    "trident",
+    "javelin",
+    "pike",
+    "lance",
+    "sling",
+    "blade",
+    "knife"
+  ],
+  "directives": {
+    "held_weapon": [
+      "Any depicted carried weapon must visibly connect to at least one anatomically correct grasping hand or limb.",
+      "The hand must wrap or close around the weapon grip, haft, shaft, handle, or stock; do not float the weapon beside the creature or let it pass behind the hand without contact.",
+      "Show one instance of each canonical carried weapon unless the page explicitly requires multiple copies.",
+      "Use a second hand only when natural for the weapon and pose. Keep the weapon subordinate to the creature and story rather than turning it into an oversized competing focal object."
+    ],
+    "secured_weapon": [
+      "When the page story already occupies the creature's hands with another object or interaction, the canonical weapon may not float nearby or become an extra held prop.",
+      "If shown, secure the weapon visibly to a sheath, belt loop, back sling, harness, scabbard, or other plausible body attachment with clear physical contact.",
+      "Do not duplicate the weapon in both held and secured positions. If no plausible secured position exists, omit the secondary weapon rather than inventing an attachment."
+    ]
+  },
+  "review_checks": {
+    "held_weapon": [
+      "Every carried weapon visibly contacts a grasping hand or limb.",
+      "No carried weapon floats, clips through the hand, or appears attached to the body without a believable grip.",
+      "Canonical carried weapons are not duplicated unless the page explicitly requires multiple copies.",
+      "Weapon scale remains subordinate to creature identity and the page story."
+    ],
+    "secured_weapon": [
+      "A non-held canonical weapon is visibly secured to the creature or omitted; it does not float nearby.",
+      "The secured weapon has a believable attachment point such as sheath, belt, sling, harness, or scabbard.",
+      "The weapon is not duplicated in both held and secured positions."
+    ]
+  },
+  "rule": "Any depicted weapon associated with a grasping creature must resolve to exactly one physical state: held in a believable grip, secured to the creature by sheath/belt/sling/harness, or explicitly placed in the environment. Canonical weapons default to held unless the story occupies the hands, in which case they are secured or omitted. Page-specific weapon actions override the canonical default. Creatures without grasping limbs never receive hand-contact rules.",
+  "story_hand_use_terms": [
+    "carrying a",
+    "carrying the",
+    "carries a",
+    "carries the",
+    "dragging a",
+    "dragging the",
+    "drags a",
+    "drags the",
+    "offering",
+    "raises a",
+    "raises the",
+    "pinning a",
+    "pinning the",
+    "pins a",
+    "pins the",
+    "holding a",
+    "holding the",
+    "holds a",
+    "holds the",
+    "grabbing",
+    "grips"
+  ],
+  "body_secure_terms": [
+    "sheathed",
+    "holstered",
+    "scabbard",
+    "back sling",
+    "back-slung",
+    "belt loop",
+    "belt-sheathed",
+    "weapon harness"
+  ],
+  "external_placement_terms": [
+    "mounted",
+    "displayed",
+    "dropped",
+    "discarded",
+    "embedded",
+    "stuck",
+    "lying",
+    "resting",
+    "leaning",
+    "hanging",
+    "on the ground",
+    "on the floor",
+    "on a rack",
+    "in a rack",
+    "weapon rack",
+    "wall rack",
+    "display rack"
+  ],
+  "attachment_groups": {
+    "shield": {
+      "trigger_terms": [
+        "shield"
+      ],
+      "directives": [
+        "The shield must visibly connect to the creature through a hand grip, forearm straps, or both.",
+        "Do not float the shield beside the arm, fuse it into the torso, or duplicate it on both arms unless the page explicitly requires multiple shields."
+      ],
+      "review_checks": [
+        "Shield has a believable hand or forearm attachment.",
+        "Shield does not float, merge into the torso, or duplicate unexpectedly."
+      ],
+      "priority": 100
+    },
+    "quiver": {
+      "trigger_terms": [
+        "quiver"
+      ],
+      "directives": [
+        "The quiver must be visibly secured at the back, shoulder, or hip by a strap or belt connection.",
+        "Arrows stay contained by the quiver; do not float loose around the creature."
+      ],
+      "review_checks": [
+        "Quiver visibly attaches to back, shoulder, or hip.",
+        "Quiver and arrows do not float or duplicate."
+      ],
+      "priority": 95
+    },
+    "waist_gear": {
+      "trigger_terms": [
+        "belt",
+        "pouch",
+        "pouches"
+      ],
+      "directives": [
+        "Belts visibly wrap the waist or hips. Pouches visibly hang from or attach to the belt or waist.",
+        "Do not place belts, keys, or pouches as disconnected floating props beside the creature."
+      ],
+      "review_checks": [
+        "Belt or pouch gear visibly attaches at the waist or hips.",
+        "Waist gear is not floating or disconnected."
+      ],
+      "priority": 90
+    },
+    "torso_gear": {
+      "trigger_terms": [
+        "armor",
+        "harness",
+        "strap",
+        "straps",
+        "sash",
+        "tunic",
+        "loincloth",
+        "robe",
+        "wrap",
+        "wraps",
+        "cord",
+        "cords"
+      ],
+      "directives": [
+        "Worn torso gear must follow the creature's body and visibly contact the shoulders, chest, waist, or hips as appropriate.",
+        "Armor plates, straps, cloth, and harness pieces must not hover away from the body or cut through anatomy."
+      ],
+      "review_checks": [
+        "Worn torso gear visibly follows and contacts the creature's body.",
+        "Armor, straps, or clothing do not float or cut through anatomy."
+      ],
+      "priority": 80
+    },
+    "foot_gear": {
+      "trigger_terms": [
+        "boot",
+        "boots",
+        "foot wrap",
+        "foot wraps"
+      ],
+      "directives": [
+        "Footwear or foot wraps must visibly follow the feet and ankles without replacing claws, hooves, or canonical foot anatomy.",
+        "Keep canonical toes, claws, or hoof structure readable when the creature identity requires them."
+      ],
+      "review_checks": [
+        "Foot gear visibly fits the feet and ankles.",
+        "Canonical claw, toe, or hoof anatomy remains readable."
+      ],
+      "priority": 94
+    },
+    "restraints": {
+      "trigger_terms": [
+        "chain",
+        "chains",
+        "shackle",
+        "shackles"
+      ],
+      "directives": [
+        "Chains and shackles must have a visible physical origin: wrist, ankle, belt, collar, held link, or another explicitly stated attachment point.",
+        "A dragging chain must visibly trail from that attachment or grasp instead of beginning in empty space."
+      ],
+      "review_checks": [
+        "Chains or shackles have a visible attachment or grasp point.",
+        "No chain begins or ends inexplicably in empty space."
+      ],
+      "priority": 92
+    },
+    "worn_accessory": {
+      "trigger_terms": [
+        "charm",
+        "token",
+        "fastener",
+        "fasteners",
+        "insignia",
+        "medallion"
+      ],
+      "directives": [
+        "Small worn accessories must visibly attach to clothing, cord, sash, belt, or another plausible support point.",
+        "Do not let small accessories float independently beside the creature."
+      ],
+      "review_checks": [
+        "Small worn accessories have a visible support or attachment point.",
+        "Accessories do not float beside the creature."
+      ],
+      "priority": 88
+    }
+  },
+  "general_equipment_rule": "Every depicted signature-gear item must have a believable physical relationship to the creature or environment. Do not invent extra copies beyond what the canonical gear phrase already states. Handheld, worn, secured, and environmental gear use different attachment rules; nothing may float, duplicate unexpectedly, or clip through anatomy."
+}

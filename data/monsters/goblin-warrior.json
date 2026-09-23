@@ -1,67 +1,27 @@
 {
-  "schema_version": 2,
-  "identity_version": 1,
+  "schema_version": 3,
   "monster_id": "goblin-warrior",
   "monster_name": "Goblin Warrior",
   "family_profile": "goblin",
-  "family": "goblin",
-  "size": "small",
-  "creature_type": "goblinoid humanoid",
-  "visual_identity": {
-    "core_identity": "A small, wiry goblinoid fighter who looks scrappy, sharp-featured, and dangerous rather than cute or heroic, relying on speed, dirty tricks, and scavenged gear.",
-    "silhouette": "Small lean fighter with oversized pointed ears, bent knees, slightly hunched shoulders, narrow torso, and crude weapon kept close; sparse hair at most, never furry.",
-    "head_features": "Oversized pointed ears, broad flattened nose, angular cheeks, low brow, sharp chin, wide mouth with irregular small teeth, intense crafty eyes; unmistakably goblin, not imp, elf, or orc.",
-    "body_shape": "Compact thin-limbed humanoid with sinewy arms and legs, quick hands and feet, agile crouched stance, and no bodybuilder mass.",
-    "surface": "Bare or lightly scarred skin with sparse hair only; no fur covering or fluffy facial outline.",
+  "variant_traits": [
+    "warrior",
+    "dirty fighter",
+    "aggressive",
+    "nervous energy"
+  ],
+  "visual_overrides": {
     "signature_gear": [
-      "short sword or crude blade",
-      "small shield or light scavenged armor",
+      "short crude sword",
+      "small shield",
+      "light scavenged armor",
       "belt pouches",
-      "simple boots or wraps"
+      "simple foot wraps"
     ],
     "attitude": [
       "aggressive",
       "cunning",
       "nervous energy",
       "ready to flee or strike"
-    ],
-    "must_keep": [
-      "oversized pointed ears",
-      "broad flattened goblinoid nose",
-      "angular scrappy face",
-      "small agile frame",
-      "crouched dirty-fighting stance",
-      "scavenged martial gear"
-    ],
-    "must_avoid": [
-      "kobold snout",
-      "tail",
-      "heavy knight armor",
-      "large orc body",
-      "cute mascot look",
-      "elf-child face",
-      "imp or devil styling",
-      "furry or fluffy silhouette",
-      "heroic human proportions",
-      "excessive armor detail"
     ]
-  },
-  "default_habitats": [
-    "narrow dungeon crawlways",
-    "guard posts",
-    "ruined underground halls"
-  ],
-  "accuracy_checks": [
-    "ears are clearly oversized and pointed",
-    "face reads goblin not kobold",
-    "body stays small and agile",
-    "weapon and light armor read clearly",
-    "pose suggests dirty-fighting readiness",
-    "background does not overwhelm silhouette"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference guides goblin anatomy; Black-Ink style controls line art."
   }
 }
