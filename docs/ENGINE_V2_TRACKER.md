@@ -365,3 +365,27 @@ The repeated-family monster catalog has been migrated to the schema-v3 recipe mo
 Standalone legacy monsters should migrate only when a real reusable family abstraction exists. Do not invent a family merely to reduce file size.
 
 **Validation blocker:** GitHub Actions jobs are currently failing before checkout with no executed steps. The migration must not merge as verified-green until the full workflow executes successfully.
+
+## 2026-09-22 Golden Five Relationship Hardening
+
+Static Golden Five review after combining page-v2 and monster-v3 exposed three reusable relationship gaps and one ambiguous trigger.
+
+Fixes:
+
+- `suspended inside` no longer activates hanging-from-support logic; contained objects use a dedicated containment relationship.
+- Ankheg-style `bursting upward` / `bursts upward` scenes now activate emergence-from-opening geometry.
+- Feeding scenes now require visible physical contact between feeding anatomy and the target material, with damage/consumption at the contact point.
+- `reaching hand` now activates generic interaction-contact logic for object-monster scenes.
+- scene relationship selection remains priority-based and capped at four rules.
+
+Golden Five resolved relationship set:
+
+- I-01: tripwire trigger + pit interrupts route + wall-mounted fixture
+- I-24: contained-inside-body
+- I-27: interaction contact
+- I-38: emerging-from-opening
+- I-40: feeding contact
+
+No Golden Five page currently exhausts the four-rule prompt budget.
+
+
