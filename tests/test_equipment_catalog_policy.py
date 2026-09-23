@@ -43,6 +43,24 @@ class EquipmentCatalogPolicyTests(unittest.TestCase):
         self.assertEqual(assignments["dragging chains"], "restraints")
         self.assertEqual(assignments["broken shackles"], "restraints")
 
+
+    def test_scene_props_stay_out_of_monster_identity(self):
+        lich = resolve_monster_spec("lich")
+        gear = (lich.get("visual_identity") or {}).get("signature_gear") or []
+        self.assertNotIn("visible phylactery object", gear)
+        self.assertFalse(any("phylactery" in str(item).lower() for item in gear))
+
+        armor = resolve_monster_spec("animated-armor")
+        self.assertNotIn("pedestal display origin", armor.get("variant_traits") or [])
+
+    def test_goblin_rank_medallion_gets_worn_attachment(self):
+        boss = resolve_monster_spec("goblin-boss")
+        assignments = {
+            item["item"]: item["group_id"]
+            for item in attachment_assignments(boss, ROOT)
+        }
+        self.assertEqual(assignments["simple rank medallion"], "worn_accessory")
+
     def test_specific_attachment_rules_beat_generic_wrap_rules(self):
         goblin = resolve_monster_spec("goblin-warrior")
         assignments = {
