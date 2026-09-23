@@ -326,6 +326,24 @@
         "Show a believable weight transfer between the two surfaces; do not suspend the creature in the gap.",
         "Keep both support surfaces readable so the movement is physically understandable."
       ]
+    },
+    "dislodging_fixture": {
+      "priority": 95,
+      "trigger_terms": [
+        "kicks the lantern",
+        "kicking over a lantern",
+        "knocks the lantern",
+        "dislodges the lantern",
+        "tears the lantern free"
+      ],
+      "suppresses": [
+        "wall_mounted_fixture"
+      ],
+      "directives": [
+        "The creature's acting limb must visibly contact the fixture or loose lantern at the moment it is being dislodged.",
+        "The wall bracket, niche, hook, or mount remains visibly attached to the wall while the lantern or fixture body visibly separates from it.",
+        "Do not show the object both attached to the wall and already free in the same physical state."
+      ]
     }
   },
   "prompt_budget": {
