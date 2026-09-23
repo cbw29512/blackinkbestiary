@@ -61,6 +61,7 @@ def _canonical_sections(spec: dict | None) -> list[str]:
         f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}".strip(),
         f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}".strip(),
         _items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style")),
+        _items("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", spec.get("physical_requirements")),
         _items("VARIANT TRAITS", spec.get("variant_traits")),
         _items("CANONICAL GEAR", visual.get("signature_gear")),
         _items("CANONICAL ATTITUDE", visual.get("attitude")),
