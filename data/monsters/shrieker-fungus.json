@@ -1,16 +1,17 @@
 {
+  "schema_version": 3,
   "monster_id": "shrieker-fungus",
   "monster_name": "Shrieker Fungus",
-  "family": "fungus",
-  "size": "medium",
-  "creature_type": "giant fungus",
-  "visual_identity": {
-    "core_identity": "A stationary cave fungus whose thick stalk and broad cap contain a mouthlike gill opening that produces an alarm shriek.",
-    "silhouette": "Large mushroom silhouette with stout stalk, broad cap, and an opened underside gill cavity.",
-    "head_features": "No animal head; the underside of the cap opens like a simple mouth or resonant gill chamber.",
-    "body_shape": "Single rooted mushroom body with thick stalk and cap, no arms or legs.",
-    "surface": "Smooth cap with sparse spots or folds, simple gill lines underneath.",
-    "signature_gear": [],
+  "family_profile": "fungus",
+  "variant_traits": [
+    "alarm fungus",
+    "resonant gill opening",
+    "stationary shrieker"
+  ],
+  "visual_overrides": {
+    "core_identity": "A stationary cave fungus whose thick stalk and broad cap contain a resonant underside opening that produces an alarm shriek.",
+    "silhouette": "Large mushroom silhouette with stout rooted stalk, broad cap, and an opened underside gill cavity.",
+    "head_features": "No animal head; the underside of the cap opens as a simple resonant gill chamber rather than a toothed mouth.",
     "attitude": [
       "rooted",
       "alarming",
@@ -18,40 +19,23 @@
       "non-humanoid"
     ],
     "must_keep": [
-      "mushroom silhouette",
-      "rooted stalk",
-      "open gill-mouth",
-      "no limbs",
+      "open gill chamber",
       "visible shriek motion"
     ],
     "must_avoid": [
-      "human face",
-      "walking legs",
-      "tentacles",
-      "cute mushroom eyes",
-      "dense gill texture",
-      "toothed animal mouth"
+      "toothed animal mouth",
+      "tentacles"
+    ]
+  },
+  "scene_overrides": {
+    "behavior_style": [
+      "reacting through a visibly resonant cap/gill opening while remaining rooted",
+      "shrieking in place with simple vibration cues rather than a face"
     ]
   },
   "default_habitats": [
     "fungal halls",
     "damp caves",
     "underground mushroom groves"
-  ],
-  "accuracy_checks": [
-    "reads as fungus first",
-    "shriek opening is under cap",
-    "no humanoid anatomy appears",
-    "vibration lines explain sound",
-    "stalk remains rooted",
-    "cap has large coloring areas"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "fungus"
+  ]
 }
