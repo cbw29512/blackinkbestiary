@@ -5,14 +5,18 @@ on:
     branches: [main, "feat/**", "fix/**"]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Validate JSON and run state-machine tests
@@ -45,3 +49,4 @@ jobs:
           node --check web/app.js
           node --check web/golden-five-view.js
           node --check web/golden-five.js
+          node --check web/test-gallery.js
