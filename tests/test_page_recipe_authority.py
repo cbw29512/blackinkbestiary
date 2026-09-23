@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from edit_prompt import build_edit_prompt
 from page_contract import load_page_contract, resolve_page_spec
+from page_recipe_audit import audit_manifest_recipe_debt
 from prompt_builder import build_prompt
 from scene_relationships import active_relationship_rules
 
@@ -29,6 +30,14 @@ class PageRecipeAuthorityTests(unittest.TestCase):
             {"identity_rules", "must_include", "coloring_rules", "modify"}.issubset(legacy)
         )
         self.assertIn("review_notes", authority["review_correction_source"])
+
+
+    def test_tome_i_is_safe_for_future_legacy_strip(self):
+        report = audit_manifest_recipe_debt(ROOT, ROOT / "data" / "tome-I.json")
+        self.assertTrue(report["safe_to_strip_legacy"])
+        self.assertEqual(report["pages_missing_authoritative_fields"], [])
+        self.assertGreater(report["pages_with_legacy_fields"], 0)
+        self.assertGreater(report["legacy_field_counts"].get("must_include", 0), 0)
 
     def test_resolver_uses_canonical_identity_and_coloring_defaults(self):
         page = deepcopy(self.i01)
