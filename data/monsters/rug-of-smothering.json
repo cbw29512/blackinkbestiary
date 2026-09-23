@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "noble crypts",
-    "burial chambers",
-    "abandoned halls"
+    "ruins",
+    "settlements",
+    "burial sites"
   ],
   "accuracy_checks": [
     "still reads as rug",
@@ -51,10 +51,17 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "family_profile": "construct",
   "physical_requirements": [
     "ground_support: resting disguise must lie on a believable supporting surface before animated folding; environment engine chooses the floor or terrain"
+  ],
+  "description": "An apparently decorative floor rug animated into a flexible constricting sheet that wraps victims with no face or limbs. Flat woven rectangle capable of bending, rolling, and wrapping while keeping identifiable rug edges. Broad simple geometric or heraldic pattern with large colorable areas, fringe kept sparse. Large rectangular textile lifting in a curling wave, corners and edges folding around a central victim.",
+  "behavior_traits": [
+    "object mimicry",
+    "motionless ambush",
+    "wrapping attack",
+    "surface creeping"
   ]
 }
