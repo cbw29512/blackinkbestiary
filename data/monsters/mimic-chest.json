@@ -5,7 +5,7 @@
   "size": "medium",
   "creature_type": "shapechanging monstrosity",
   "visual_identity": {
-    "core_identity": "A predatory shapechanger disguised as a treasure chest, revealing itself through a toothed lid-mouth, tongue, and organic seams.",
+    "core_identity": "A predatory shapechanger disguised as a wooden chest, revealing itself through a toothed lid-mouth, tongue, and organic seams.",
     "silhouette": "Recognizable chest shape with lid lifted as an upper jaw, box body as lower jaw, and one or two subtle pseudopod forms.",
     "head_features": "The chest itself becomes the head: lid-mouth with irregular teeth and a long tongue, no separate animal skull.",
     "body_shape": "Wooden chest form distorted by flexible organic joints while retaining hinges, boards, and treasure-box proportions.",
@@ -37,9 +37,9 @@
     ]
   },
   "default_habitats": [
-    "treasure vaults",
-    "dungeon storerooms",
-    "ruined chambers"
+    "dungeons",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "reads as chest before monster details",
