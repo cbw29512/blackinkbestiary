@@ -37,9 +37,9 @@
     ]
   },
   "default_habitats": [
-    "display halls",
-    "crypt galleries",
-    "dungeon guard chambers"
+    "ruins",
+    "fortifications",
+    "settlements"
   ],
   "accuracy_checks": [
     "emptiness inside helmet is clear",
@@ -54,7 +54,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "construct"
+  "family_profile": "construct",
+  "description": "An empty suit of medieval plate armor moving under magical force, with no visible wearer inside. Articulated breastplate, pauldrons, gauntlets, greaves, and boots moving as a complete hollow suit. Broad simple metal plates with a few dents and edge lines, avoiding ornate engraving. Full humanoid armor silhouette in a deliberate stepping pose, rigid plates separated by dark empty gaps.",
+  "behavior_traits": [
+    "patrolling",
+    "motionless guarding",
+    "weapon fighting",
+    "sudden animation"
+  ]
 }
