@@ -33,23 +33,25 @@ Changing the active book requires a Studio restart. Python code should not be ed
 
 ## Page Schema
 
-Every page must define:
+Every production page is a **page-v2 recipe**. It stores only:
 
 - `page_id`
 - `order`
-- `monster_name`
 - `monster_spec_id`
-- `habitat`
+- `environment_profile_id`
 - `moment`
 - `archetype`
-- `environment_profile_id`
 - `environment_variant.landmark`
 - `environment_variant.framing`
 - `environment_variant.interaction`
-- `must_include[]`
-- `must_avoid[]`
+- `physicality.mode`
+- `physicality.support`
+- `physicality.motion`
+- optional `page_exceptions.must_include[]` / `page_exceptions.must_avoid[]` only for truly page-specific facts that cannot live in a universal engine
 
-The production audit rejects missing fields, duplicate IDs/orders, missing canonical specs, bad archetypes, and malformed identity specs.
+Monster name, anatomy, habitat prose, composition, coloring rules, global avoid rules, environment geometry, and reusable object-relationship rules are derived. Legacy page fields are rejected instead of silently merged.
+
+The production audit rejects missing fields, duplicate IDs/orders, legacy recipe fields, missing canonical specs, bad archetypes, and malformed identity specs.
 
 ## Global Quality Layers
 
@@ -134,8 +136,8 @@ This creates structured data for future quality analysis without silently overri
 
 ## Starting Another Book
 
-1. Fill the registered 50-slot book plan with canonical monster specs, concrete environment profiles, and unique background variants.
-2. Give every page a valid archetype and concrete monster, environment, and story requirements.
+1. Fill the registered book plan with canonical monster IDs, concrete environment profiles, and unique page-v2 scene recipes.
+2. Give every page a valid archetype, moment, landmark, framing, interaction, and physicality. Use `page_exceptions` only when a genuinely unique requirement cannot be expressed by those fields or by a universal engine.
 3. Point `config/studio.json` at the new manifest/state/reviews files.
 4. Run `python scripts/init_active_book.py`.
 5. Run `python scripts/audit_active_book.py`.
