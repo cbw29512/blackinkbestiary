@@ -52,10 +52,17 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "family_profile": "construct",
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "description": "A normal-looking weapon animated by magic, flying and attacking with no hand, arm, or visible wielder. One complete sword with blade, guard, grip, and pommel; the weapon itself is the creature. Clean metal blade and simple hilt with minimal decorative marks. Single sword suspended horizontally or diagonally in open air with a clear motion arc.",
+  "behavior_traits": [
+    "powered flight",
+    "motionless guarding",
+    "slashing attack",
+    "patrolling"
+  ]
 }
