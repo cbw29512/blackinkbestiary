@@ -42,9 +42,9 @@
     ]
   },
   "default_habitats": [
-    "trapped dungeon corridors",
-    "crude underground lairs",
-    "narrow cave passages"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "long draconic snout is obvious",
