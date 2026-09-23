@@ -11,6 +11,38 @@ from monster_catalog import resolve_monster_spec
 
 
 class EquipmentCatalogPolicyTests(unittest.TestCase):
+
+    def test_hobgoblin_shield_gets_hand_or_forearm_attachment(self):
+        spec = resolve_monster_spec("hobgoblin-warrior")
+        assignments = attachment_assignments(spec, ROOT)
+        shield = next(item for item in assignments if item["item"] == "medium shield")
+        self.assertEqual(shield["group_id"], "shield")
+        self.assertIn("forearm", " ".join(shield["directives"]))
+
+    def test_drider_quiver_gets_body_attachment(self):
+        spec = resolve_monster_spec("drider")
+        assignments = attachment_assignments(spec, ROOT)
+        quiver = next(item for item in assignments if item["item"] == "quiver")
+        self.assertEqual(quiver["group_id"], "quiver")
+        self.assertIn("back", " ".join(quiver["directives"]))
+
+    def test_kobold_armor_and_straps_get_torso_attachment(self):
+        spec = resolve_monster_spec("kobold-warrior")
+        assignments = {item["item"]: item["group_id"] for item in attachment_assignments(spec, ROOT)}
+        self.assertEqual(assignments["rough leather straps"], "torso_gear")
+        self.assertEqual(assignments["light scavenged armor"], "torso_gear")
+
+    def test_ogre_belt_gets_waist_attachment(self):
+        spec = resolve_monster_spec("ogre")
+        assignments = {item["item"]: item["group_id"] for item in attachment_assignments(spec, ROOT)}
+        self.assertEqual(assignments["thick belt"], "waist_gear")
+
+    def test_zombie_restraints_get_real_attachment_points(self):
+        spec = resolve_monster_spec("ogre-zombie")
+        assignments = {item["item"]: item["group_id"] for item in attachment_assignments(spec, ROOT)}
+        self.assertEqual(assignments["dragging chains"], "restraints")
+        self.assertEqual(assignments["broken shackles"], "restraints")
+
     def test_specific_attachment_rules_beat_generic_wrap_rules(self):
         goblin = resolve_monster_spec("goblin-warrior")
         assignments = {
