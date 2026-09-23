@@ -292,3 +292,19 @@ Walls, floors, ceilings, torches, traps, gates, roots, coral, tombs, furniture, 
 Environment variety must come from stronger structure, material design, fixtures, depth, and composition—not tiny texture.
 
 See `docs/ENVIRONMENT_ENGINE_V3.md` for the persistent architecture specification.
+
+
+## 2026-09-23 Environment / Monster Separation Lock
+
+Research and production feedback confirmed a stricter ownership boundary:
+
+- monster/family data describes the creature: anatomy, silhouette, locomotion, identity, behavior tendencies, and true habitat compatibility
+- the page selects only the environment identity (for example cave, ocean, forest, field, laboratory, crypt, corridor) plus a tiny unique story interaction when needed
+- the universal environment engine renders the believable place: geometry, surfaces, overhead, lighting, structures, landmarks, hazards, depth, atmosphere, furnishings, signs of use, and fantasy dressing
+- environment component selection no longer uses monster identity as its randomization key
+- reusable role overlays now include laboratory, inhabited space, and open terrain in addition to lair, treasure, sacred, military, burial, ruin, trap, aquatic, fungal, weathered, and settlement roles
+- a lair is not automatically a treasure hoard; treasure dressing appears when the selected environment/page role calls for treasure or hoarding
+- random variation must remain context-compatible and physically plausible: fixtures attach to walls/floors/ceilings, furnishings have support, traps belong to traversable geometry, and open landscapes preserve terrain logic and horizon/depth
+- environment richness comes from rotating a few large believable forms, not clutter or monster-specific scenery
+
+This rule applies to every monster. New monster JSON must not accumulate reusable background descriptions.
