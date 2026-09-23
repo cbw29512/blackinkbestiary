@@ -66,20 +66,18 @@ Reference art controls **identity and anatomy only**. It never controls Black-In
 
 ### 2. Page Spec
 
-A structured JSON blueprint for one page.
+A small page-v2 recipe containing only facts unique to one page.
 
 It defines:
 - page ID and order
-- monster identity
-- anatomy requirements
-- habitat
-- scene moment
-- composition
-- must-include elements
-- must-avoid elements
-- coloring-book rules
-- optional reference images
-- current review instructions
+- canonical monster spec ID
+- canonical environment profile ID
+- scene moment and archetype
+- unique landmark, framing, and monster/environment interaction
+- physical mode, support/contact, and motion
+- optional page exceptions only when a requirement cannot be derived from a universal engine
+
+It does **not** duplicate monster anatomy, habitat prose, composition, coloring rules, reference-image policy, global avoid rules, or current review instructions. Those are resolved from reusable engines and runtime review state.
 
 ### 3. Production Manager
 
@@ -247,17 +245,26 @@ Fields:
 Fields:
 - `page_id`
 - `order`
-- `monster_name`
 - `monster_spec_id`
-- `identity_rules[]`
-- `habitat`
+- `environment_profile_id`
 - `moment`
-- `must_include[]`
-- `must_avoid[]`
-- `composition`
-- `coloring_rules`
-- `reference_images[]`
-- `status`
+- `archetype`
+- `environment_variant.landmark`
+- `environment_variant.framing`
+- `environment_variant.interaction`
+- `physicality.mode`
+- `physicality.support`
+- `physicality.motion`
+- optional `page_exceptions.must_include[]`
+- optional `page_exceptions.must_avoid[]`
+
+Derived at runtime:
+- `monster_name`
+- `habitat`
+- monster accuracy/anti-drift rules
+- environment geometry and reusable components
+- composition and coloring rules
+- global and canonical avoid rules
 
 ### Candidate
 
