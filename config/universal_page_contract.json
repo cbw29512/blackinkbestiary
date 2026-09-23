@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
-  "contract_id": "black-ink-page-v1",
-  "purpose": "Resolve every Black-Ink Bestiary page from one universal coloring-book contract plus reusable monster/environment catalogs and a small set of page-unique facts.",
+  "schema_version": 2,
+  "contract_id": "black-ink-page-v2",
+  "purpose": "Resolve every Black-Ink page from universal engines plus a tiny page recipe. Raw manifests store only page-unique facts and explicit exceptions.",
   "applies_to": "all books in data/series.json",
   "resolution_order": [
     "universal contract defaults",
@@ -9,9 +9,42 @@
     "monster variant profile",
     "environment family/profile",
     "scene archetype",
-    "page-unique fields and overrides",
+    "page-unique recipe",
+    "explicit page_exceptions",
     "latest human review corrections"
   ],
+  "allowed_source_fields": [
+    "page_id",
+    "order",
+    "monster_spec_id",
+    "environment_profile_id",
+    "moment",
+    "archetype",
+    "environment_variant",
+    "physicality",
+    "page_exceptions"
+  ],
+  "forbidden_source_fields": [
+    "monster_name",
+    "habitat",
+    "identity_rules",
+    "must_include",
+    "must_avoid",
+    "coloring_rules",
+    "composition",
+    "reference_image",
+    "reference_images",
+    "modify"
+  ],
+  "page_exceptions": {
+    "allowed_fields": [
+      "required_elements",
+      "identity_notes",
+      "avoid_elements",
+      "coloring_overrides"
+    ],
+    "rule": "Use only for genuinely page-specific exceptions that cannot live in the monster, environment, archetype, physicality, or universal coloring engines. Empty exception groups are invalid."
+  },
   "required_unique_fields": [
     "page_id",
     "order",
@@ -28,11 +61,12 @@
   ],
   "derived_fields": {
     "monster_name": "monster catalog monster_name",
-    "habitat": "environment profile name unless page overrides it",
-    "identity_rules": "monster accuracy_checks plus optional page identity_rules",
-    "composition": "universal defaults.composition unless page overrides it",
-    "coloring_rules": "universal defaults.coloring_rules merged with page overrides",
-    "must_avoid": "global_must_avoid + monster must_avoid + environment must_avoid + page must_avoid"
+    "habitat": "resolved environment profile name",
+    "identity_rules": "monster accuracy_checks plus page_exceptions.identity_notes",
+    "must_include": "page_exceptions.required_elements",
+    "composition": "universal defaults.composition",
+    "coloring_rules": "universal defaults.coloring_rules merged only with page_exceptions.coloring_overrides",
+    "must_avoid": "global_must_avoid + monster must_avoid + environment must_avoid + page_exceptions.avoid_elements"
   },
   "defaults": {
     "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 60–75% of page height. Keep the full or nearly full silhouette readable. The environment must remain unmistakable using two to four large supporting forms arranged around, behind, or beneath the monster. At least one environmental feature must participate in the story moment. Preserve broad colorable regions, clear silhouette separation, believable grounding, and generous white space.",
@@ -69,7 +103,7 @@
     ],
     "rule": "Pages may reuse a monster family or environment family, but should not reuse the same resolved combination of subject, place, landmark, framing, interaction, action, and physical state unless intentionally designed as a paired scene."
   },
-  "inheritance_rule": "When a universal rule improves, every tome and future book inherits it automatically. Tome manifests store only page-specific recipes and exceptions.",
+  "inheritance_rule": "When a universal rule improves, every tome and future book inherits it automatically. Tome manifests store only page-specific recipes and explicit exceptions.",
   "environment_diversity": {
     "max_profile_share": 0.08,
     "minimum_repeat_allowance": 2,
