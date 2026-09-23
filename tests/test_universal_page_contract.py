@@ -97,6 +97,10 @@ class UniversalPageContractTests(unittest.TestCase):
         self.assertEqual(book["kdp_print_standard"], "config/kdp_print_standard.json")
         self.assertEqual(book["content_scope"], "config/content_scope.json")
         self.assertEqual(book["environment_contract"], "config/universal_environment_contract.json")
+        self.assertEqual(plan["page_contract"], "black-ink-page-v2")
+        self.assertEqual(plan["monster_contract"], "black-ink-monster-v3")
+        self.assertEqual(plan["environment_contract"], "black-ink-environment-v3")
+        self.assertEqual(plan["story_contract"], "black-ink-story-v2")
         self.assertEqual(plan["print_standard"], "black-ink-kdp-8.5x11-v1")
         self.assertEqual(plan["source_scope"], "2024 SRD")
 
