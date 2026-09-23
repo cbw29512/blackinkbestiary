@@ -6,7 +6,7 @@
   "creature_type": "goblinoid humanoid",
   "visual_identity": {
     "core_identity": "A veteran hobgoblin officer whose authority comes from disciplined posture, better equipment, and command presence.",
-    "silhouette": "Medium athletic goblinoid with upright stance, squared shoulders, one commanding arm or map-directed gesture.",
+    "silhouette": "Medium athletic goblinoid with upright stance, squared shoulders.",
     "head_features": "Angular mature goblinoid face, pointed ears, stern brows, controlled expression, visible scars kept sparse.",
     "body_shape": "Athletic soldierly humanoid, slightly broader than a rank-and-file hobgoblin but never bulky.",
     "surface": "Smooth skin with a few scars; simple armor planes suitable for coloring.",
@@ -14,7 +14,7 @@
       "better-fitted martial armor",
       "officer sash or insignia",
       "straight sword",
-      "dagger used as map marker"
+      "practical dagger"
     ],
     "attitude": [
       "commanding",
@@ -39,14 +39,14 @@
     ]
   },
   "default_habitats": [
-    "cave war rooms",
-    "underground command posts",
-    "fortified barracks"
+    "underground",
+    "fortifications",
+    "settlements"
   ],
   "accuracy_checks": [
     "reads as hobgoblin first and captain second",
     "rank is visible without ornate clutter",
-    "map interaction is believable",
+    "command gesture is believable",
     "medium scale is preserved",
     "military gear remains simple",
     "commanding posture is clear"
