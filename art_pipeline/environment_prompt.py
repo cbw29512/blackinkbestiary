@@ -39,7 +39,7 @@ def _required_object_rules(page: dict) -> list[str]:
     variant = page.get("environment_variant") or {}
     text = " ".join([
         str(page.get("moment") or ""),
-        " ".join(str(item) for item in page.get("must_include") or []),
+        " ".join(str(item) for item in (page.get("required_elements") or (page.get("page_exceptions") or {}).get("must_include") or [])),
         str(variant.get("landmark") or ""),
         str(variant.get("interaction") or ""),
     ]).lower()
