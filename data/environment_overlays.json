@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "overlay_registry_id": "black-ink-environment-overlays-v1",
-  "purpose": "Cross-family environmental modifiers that deepen scenery without moving background detail into monster JSON.",
+  "purpose": "Cross-family environmental roles that let the environment engine create believable fantasy places independently of monster identity.",
   "overlays": {
     "lair": {
       "trigger_terms": [
@@ -240,6 +240,72 @@
         "secondary_features",
         "lighting_features",
         "structural_features"
+      ]
+    },
+    "laboratory": {
+      "trigger_terms": [
+        "laboratory",
+        "lab",
+        "alchemy",
+        "alchemical",
+        "experiment",
+        "workshop",
+        "research"
+      ],
+      "directives": [
+        "Make the space read as a working fantasy laboratory through two or three large functional stations, not decorative clutter.",
+        "Favor a broad workbench, large vessels or alembic-like apparatus, shelves with a few oversized containers, a basin, furnace, specimen vessel, or writing station.",
+        "Every fixture must sit on, hang from, or connect to a believable support surface; no floating apparatus.",
+        "Keep glassware sparse and large enough to color; avoid dozens of tiny bottles, labels, tubes, or modern scientific equipment."
+      ],
+      "component_bias": [
+        "landmarks",
+        "secondary_features",
+        "interaction_patterns"
+      ]
+    },
+    "inhabited": {
+      "trigger_terms": [
+        "inhabited",
+        "occupied",
+        "camp",
+        "living",
+        "quarters",
+        "den",
+        "nest",
+        "roost"
+      ],
+      "directives": [
+        "Show one or two large signs of repeated habitation such as bedding, a feeding area, storage, a fire site, nesting material, tracks, or a worn route.",
+        "Habitation evidence must fit the base environment and remain secondary to its spatial identity.",
+        "Avoid random prop piles; each object should imply sleeping, feeding, storing, guarding, crafting, or travel."
+      ],
+      "component_bias": [
+        "secondary_features",
+        "ground_planes",
+        "interaction_patterns"
+      ]
+    },
+    "open_terrain": {
+      "trigger_terms": [
+        "open field",
+        "grassland",
+        "plain",
+        "meadow",
+        "valley",
+        "open landscape",
+        "battlefield"
+      ],
+      "directives": [
+        "Build believable open terrain from a foreground ground plane, a middle-distance landmark, and a distant horizon or terrain break.",
+        "Choose only a few large natural or fantasy features: boulders, lone trees, standing stones, ruined wall sections, stream bends, low ridges, old road traces, or distant structures.",
+        "Preserve broad open coloring regions and visible sky; do not fill the field with repeated grass blades, flowers, rocks, or debris.",
+        "Any ruin, road, stream, tree, or standing stone must have a plausible relationship to the terrain rather than appearing as isolated decoration."
+      ],
+      "component_bias": [
+        "landmarks",
+        "depth_features",
+        "secondary_features"
       ]
     }
   }
