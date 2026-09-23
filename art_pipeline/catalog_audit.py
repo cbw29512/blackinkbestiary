@@ -30,12 +30,38 @@ def _read(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+
+
+_SCENERY_TERMS = (
+    "background", "wall", "floor", "ceiling", "corridor", "room", "vault context",
+    "pillar", "treasure pile", "laboratory", "furniture", "doorway", "gate context",
+)
+
+def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
+    warnings = []
+    visual = spec.get("visual_identity") or {}
+    fields = {
+        "visual_identity.core_identity": visual.get("core_identity"),
+        "visual_identity.silhouette": visual.get("silhouette"),
+        "visual_identity.must_keep": visual.get("must_keep"),
+        "accuracy_checks": spec.get("accuracy_checks"),
+    }
+    for field, value in fields.items():
+        values = value if isinstance(value, list) else [value]
+        for item in values:
+            text = str(item or "").lower()
+            if any(term in text for term in _SCENERY_TERMS):
+                warnings.append(f"{path.name}: scenery ownership warning in {field}: {item}")
+    return warnings
+
+
 def audit_monster_catalog(root: Path) -> dict:
     monster_dir = root / "data" / "monsters"
     family_dir = root / "data" / "monster_families"
     specs = []
     groups: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
     errors: list[str] = []
+    ownership_warnings: list[str] = []
 
     for path in sorted(monster_dir.glob("*.json")):
         try:
@@ -44,6 +70,7 @@ def audit_monster_catalog(root: Path) -> dict:
             errors.append(f"{path.name}: invalid JSON: {exc}")
             continue
         specs.append((path, spec))
+        ownership_warnings.extend(_monster_scenery_warnings(path, spec))
         errors.extend(minimal_recipe_errors(path.stem, monster_dir, family_dir))
         try:
             resolve_monster_spec(path.stem, monster_dir, family_dir)
@@ -95,6 +122,7 @@ def audit_monster_catalog(root: Path) -> dict:
         "repeated_families": sorted(repeated),
         "family_profiles": family_profiles,
         "errors": errors,
+        "ownership_warnings": ownership_warnings,
     }
 
 
