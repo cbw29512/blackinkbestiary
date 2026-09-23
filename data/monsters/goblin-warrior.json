@@ -47,17 +47,16 @@
     ]
   },
   "default_habitats": [
-    "narrow dungeon crawlways",
-    "guard posts",
-    "ruined underground halls"
+    "underground",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "ears are clearly oversized and pointed",
     "face reads goblin not kobold",
     "body stays small and agile",
     "weapon and light armor read clearly",
-    "pose suggests dirty-fighting readiness",
-    "background does not overwhelm silhouette"
+    "pose suggests dirty-fighting readiness"
   ],
   "reference": {
     "image": null,
