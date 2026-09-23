@@ -308,3 +308,15 @@ Research and production feedback confirmed a stricter ownership boundary:
 - environment richness comes from rotating a few large believable forms, not clutter or monster-specific scenery
 
 This rule applies to every monster. New monster JSON must not accumulate reusable background descriptions.
+
+
+## 2026-09-23 Ownership / Composition Hardening
+
+- environment overlay selection no longer depends on registry insertion order; explicit page roles are authoritative and inferred roles are ranked by trigger specificity within the three-role page budget
+- creature-required physical relationships are now first-class monster data for cases such as a door mimic needing structural attachment or a darkmantle needing overhead support
+- physical requirements describe what the creature needs, never what reusable scenery looks like; the environment engine supplies the actual wall, ceiling, floor, terrain, water, or other compatible support
+- legacy monster recipes are being normalized to broad habitat compatibility and creature-only accuracy checks rather than corridor, room, stair, forge, or prop requirements
+- scenery ownership auditing distinguishes reusable environment dressing from legitimate creature support/identity relationships
+- Environment Engine V3 documentation now reflects the expanded 27-role library
+
+**Current gate:** exact-head Studio checks must be green before PR #60 can merge or Golden Five regeneration resumes.
