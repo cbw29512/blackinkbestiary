@@ -48,9 +48,9 @@ Every page recipe must define:
 - `physicality.support`
 - `physicality.motion`
 
-Optional `must_avoid[]` entries are allowed only for true page-specific negative exceptions.
+Optional `must_avoid[]` entries are allowed only for a genuine page-specific negative exception that is not already owned by a universal, monster-family, or environment rule.
 
-Legacy Tome I fields such as `monster_name`, `habitat`, `identity_rules`, `must_include`, `coloring_rules`, `reference_image`, and manifest-level `modify` may remain during migration, but generation does not treat them as authorities. Monster identity comes from the monster engine, environment identity from the environment engine, coloring rules from the universal page contract, and current human corrections from state `review_notes`.
+Tome I has completed migration and stores none of the former duplicated fields such as `monster_name`, `habitat`, `identity_rules`, `must_include`, `coloring_rules`, `reference_image`, or manifest-level `modify`. Monster identity comes from the monster engine, environment identity from the environment engine, coloring and composition rules from the universal page contract, and current human corrections from state `review_notes`.
 
 The production audit rejects missing fields, duplicate IDs/orders, missing canonical specs, bad archetypes, and malformed identity specs.
 
