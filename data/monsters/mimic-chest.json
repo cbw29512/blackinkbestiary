@@ -25,8 +25,7 @@
       "recognizable treasure chest",
       "lid as toothed mouth",
       "long tongue",
-      "organic disguise reveal",
-      "vault context"
+      "organic disguise reveal"
     ],
     "must_avoid": [
       "separate monster head",
@@ -46,9 +45,7 @@
     "reads as chest before monster details",
     "mouth transformation is clear",
     "tongue is visible",
-    "reaching hand is near danger zone",
-    "wooden structure remains recognizable",
-    "scene is not cluttered"
+    "wooden structure remains recognizable"
   ],
   "reference": {
     "image": null,
