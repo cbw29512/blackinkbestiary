@@ -34,8 +34,8 @@
     ]
   },
   "default_habitats": [
-    "underground",
     "caves",
+    "underground",
     "ruins"
   ],
   "accuracy_checks": [
@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A wormlike ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak. Long heavy worm body with subtle segmented folds and no legs. Rubbery ringed skin with restrained segment lines.",
+  "behavior_traits": [
+    "ambush hunting",
+    "coiling",
+    "concealment",
+    "sudden striking"
+  ]
 }
