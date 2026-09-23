@@ -5,10 +5,10 @@
   "size": "gargantuan",
   "creature_type": "monstrosity",
   "visual_identity": {
-    "core_identity": "A colossal subterranean worm whose immense segmented body and circular tooth-filled maw can fill an entire mine tunnel.",
-    "silhouette": "Huge cylindrical segmented body emerging straight through tunnel space, front dominated by round open maw.",
+    "core_identity": "A colossal subterranean worm whose immense segmented body and circular tooth-filled maw communicates overwhelming subterranean scale.",
+    "silhouette": "Huge cylindrical segmented body emerging through earth or rock, front dominated by a round open maw.",
     "head_features": "No separate skull; front is a circular muscular mouth ringed with inward-pointing teeth.",
-    "body_shape": "Extremely thick worm body with repeated broad segments and long unseen continuation into tunnel.",
+    "body_shape": "Extremely thick worm body with repeated broad segments and a long continuation beyond the visible composition.",
     "surface": "Large simple segmented plates or folds; minimal fine texture.",
     "signature_gear": [],
     "attitude": [
@@ -19,7 +19,7 @@
     ],
     "must_keep": [
       "circular maw",
-      "massive tunnel-filling scale",
+      "massive gargantuan scale",
       "segmented worm body",
       "no legs",
       "subterranean emergence"
@@ -34,13 +34,13 @@
     ]
   },
   "default_habitats": [
-    "mine shafts",
-    "deep tunnels",
-    "underdark caverns"
+    "underground",
+    "deep earth",
+    "caves"
   ],
   "accuracy_checks": [
     "maw dominates the page",
-    "scale is obvious from tunnel geometry",
+    "gargantuan scale is obvious from relative scale cues",
     "worm body has no limbs",
     "segments are broad and simple",
     "teeth remain colorable",
