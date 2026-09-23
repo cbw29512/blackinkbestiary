@@ -47,7 +47,8 @@
     "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it.",
     "Schema-v3+ recipes may contain only contract-approved top-level fields; duplicated resolved family fields are a CI failure.",
     "A variant override should describe only the delta from family DNA. Do not restate the family silhouette, anatomy, must-keep, must-avoid, or accuracy checks unchanged.",
-    "Depicted weapons inherit universal equipment-state rules: a weapon associated with a creature must resolve to exactly one state—held in a believable grasp, visibly secured to the creature, or explicitly placed in the environment. Creatures without grasping limbs are exempt from hand-contact rules."
+    "Depicted weapons inherit universal equipment-state rules: a weapon associated with a creature must resolve to exactly one state—held in a believable grasp, visibly secured to the creature, or explicitly placed in the environment. Creatures without grasping limbs are exempt from hand-contact rules.",
+    "Signature gear entries must be concrete visual defaults, never alternatives or conditionals. Do not use 'X or Y', 'if scene allows', 'if unobtrusive', 'if any', or oversized wording in signature_gear; page-specific props belong to the page recipe instead."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -117,6 +118,7 @@
   },
   "equipment_physicality": {
     "registry": "config/creature_equipment_rules.json",
-    "rule": "Creature gear identifies what belongs to the monster; the universal equipment engine resolves held versus secured versus environmental weapon state, prevents accidental duplicate weapons, enforces believable contact, and exempts creatures such as animated weapons that have no grasping limbs."
+    "rule": "Creature gear identifies what belongs to the monster; the universal equipment engine resolves held versus secured versus environmental weapon state, prevents accidental duplicate weapons, enforces believable contact, and exempts creatures such as animated weapons that have no grasping limbs.",
+    "signature_gear_rule": "Signature gear names one concrete default item or worn feature per entry. Alternate choices and scene props are prohibited because they cause duplicate or contradictory generation."
   }
 }
