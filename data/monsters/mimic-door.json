@@ -38,15 +38,15 @@
     ]
   },
   "default_habitats": [
-    "torch-lit halls",
-    "sealed dungeon rooms",
-    "corridor junctions"
+    "dungeons",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "door disguise remains convincing",
     "eye is discoverable but clear",
     "tongue handle is obvious",
-    "architecture remains readable",
+    "door form and structural attachment remain readable",
     "mimic does not become unrelated monster",
     "line art stays clean"
   ],
