@@ -69,9 +69,18 @@ def active_relationship_rules(page: dict, root: Path = ROOT) -> list[dict]:
         )
     )
     maximum = int((payload.get("prompt_budget") or {}).get("max_active_rules") or 4)
+    selected = []
+    suppressed = set()
+    for item in matches:
+        if item["rule_id"] in suppressed:
+            continue
+        selected.append(item)
+        suppressed.update(str(rule_id) for rule_id in item.get("suppresses") or [])
+        if len(selected) >= maximum:
+            break
     return [
         {key: value for key, value in item.items() if key != "_registry_order"}
-        for item in matches[:maximum]
+        for item in selected
     ]
 
 
