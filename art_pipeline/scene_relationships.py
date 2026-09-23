@@ -46,7 +46,7 @@ def _term_matches(text: str, term: str) -> bool:
     normalized = " ".join(str(term or "").lower().split())
     if not normalized:
         return False
-    pattern = rf"(?<!\\w){re.escape(normalized)}(?!\\w)"
+    pattern = rf"(?<!\w){re.escape(normalized)}(?!\w)"
     return re.search(pattern, text) is not None
 
 
