@@ -11,9 +11,9 @@
   ],
   "visual_overrides": {
     "signature_gear": [
-      "simple ritual sash or leather cords",
+      "simple ritual sash",
       "small coin pouch",
-      "crude charm or shrine token"
+      "crude shrine charm"
     ],
     "attitude": [
       "reverent",
