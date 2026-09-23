@@ -60,7 +60,7 @@ The engine knows a large library but selects only a small compatible palette for
 - 816 reusable environment components
 - 144 underground / dungeon / cave components
 - 96 components in each of the other seven families
-- 11 reusable cross-family overlays
+- 27 required reusable cross-family environment roles
 
 Library depth exists to create variety across hundreds of pages. It must never create clutter inside one page.
 
@@ -79,6 +79,24 @@ Overlays add cross-family context without creating monster-specific scenery:
 - aquatic
 - weathered
 - settlement
+- laboratory
+- inhabited
+- open_terrain
+- forge
+- library
+- kitchen
+- prison
+- mine
+- campsite
+- village
+- swamp
+- desert
+- mountain
+- coastal
+- throne_room
+- nest
+
+Explicit page roles are authoritative. Inferred roles are ranked by trigger specificity rather than registry order, with a maximum of three active roles per page. This prevents a broad role such as inhabited or lair from crowding out a specific role such as laboratory, prison, forge, or nest.
 
 For example, a sacred overlay can improve a dungeon shrine, forest shrine, ruined temple, or dragon relic chamber without duplicating shrine rules in monster files.
 
