@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "An amorphous crawling aberration formed from a lumpy mass of fleshlike material covered in many unrelated eyes and mouths. Soft shapeless crawling mound with pseudopod-like lower edges, never resolving into humanoid anatomy. Smooth folds with sparse bumps; mouths and eyes provide identity without dense gore.",
+  "behavior_traits": [
+    "slow crawling",
+    "engulfing",
+    "chaotic vocalization",
+    "opportunistic feeding"
+  ]
 }
