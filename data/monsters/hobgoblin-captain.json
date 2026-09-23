@@ -39,8 +39,8 @@
     ]
   },
   "default_habitats": [
-    "underground",
     "fortifications",
+    "ruins",
     "settlements"
   ],
   "accuracy_checks": [
@@ -56,7 +56,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "hobgoblin"
+  "family_profile": "hobgoblin",
+  "description": "A veteran hobgoblin officer whose authority comes from disciplined posture, better equipment, and command presence. Athletic soldierly humanoid, slightly broader than a rank-and-file hobgoblin but never bulky. Smooth skin with a few scars; simple armor planes suitable for coloring.",
+  "behavior_traits": [
+    "commanding",
+    "disciplined fighting",
+    "formation leadership",
+    "guarding"
+  ]
 }
