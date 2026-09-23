@@ -186,14 +186,13 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertNotIn("FAMILY GEOMETRY VARIATION POOL", text)
         self.assertIn(page["environment_variant"]["landmark"], text)
 
-    def test_i01_requires_literal_wall_mount_and_readable_tripwire(self):
+    def test_i01_uses_relationship_engine_as_single_physical_rule_owner(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         text = build_prompt(page)
-        self.assertIn("REQUIRED OBJECT PHYSICAL RULES", text)
-        self.assertIn("visibly attach to the wall", text)
-        self.assertIn("never draw it as a freestanding floor torch", text)
-        self.assertIn("tripwire must visibly cross the traversable path", text)
-        self.assertIn("cause-and-effect reads instantly", text)
+        self.assertNotIn("REQUIRED OBJECT PHYSICAL RULES", text)
+        self.assertIn("SCENE RELATIONSHIP — TRIPWIRE TRIGGER", text)
+        self.assertIn("SCENE RELATIONSHIP — PIT INTERRUPTS ROUTE", text)
+        self.assertIn("SCENE RELATIONSHIP — WALL MOUNTED FIXTURE", text)
     def test_i01_relationship_rules_lock_tripwire_pit_and_wall_fixture(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         text = build_prompt(page)
