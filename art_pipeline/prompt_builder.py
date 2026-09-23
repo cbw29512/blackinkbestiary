@@ -25,50 +25,14 @@ MONSTER_DIR = ROOT / "data" / "monsters"
 
 try:
     from .style_rules import STYLE_RULES
+    from .prompt_sections import canonical_monster_sections, prompt_items
 except ImportError:
     from style_rules import STYLE_RULES
-
-
-
-def _items(label: str, values) -> str:
-    values = [str(v).strip() for v in (values or []) if str(v).strip()]
-    if not values:
-        return ""
-    return f"{label}: " + "; ".join(values) + "."
+    from prompt_sections import canonical_monster_sections, prompt_items
 
 
 def load_monster_spec(page: dict) -> dict | None:
     return load_monster_for_page(page)
-
-def _canonical_sections(spec: dict | None) -> list[str]:
-    if not spec:
-        return []
-    visual = spec.get("visual_identity") or {}
-    scene = spec.get("scene_identity") or {}
-    failures = [
-        f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
-        for item in spec.get("known_failure_modes", [])
-        if item.get("symptom") and item.get("correction")
-    ]
-    sections = [
-        f"CANONICAL CREATURE TYPE: {spec.get('creature_type', '')}; size {spec.get('size', '')}.",
-        f"CANONICAL CORE IDENTITY: {visual.get('core_identity', '')}".strip(),
-        f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}".strip(),
-        f"CANONICAL HEAD: {visual.get('head_features', '')}".strip(),
-        f"CANONICAL BODY: {visual.get('body_shape', '')}".strip(),
-        f"CANONICAL LIMBS / EXTREMITIES: {visual.get('limb_structure', '')}".strip(),
-        f"CANONICAL SURFACE: {visual.get('surface', '')}".strip(),
-        f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}".strip(),
-        f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}".strip(),
-        _items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style")),
-        _items("VARIANT TRAITS", spec.get("variant_traits")),
-        _items("CANONICAL GEAR", visual.get("signature_gear")),
-        _items("CANONICAL ATTITUDE", visual.get("attitude")),
-        _items("IDENTITY FEATURES THAT MUST SURVIVE STYLIZATION", visual.get("must_keep")),
-        _items("IDENTITY ERRORS TO AVOID", visual.get("must_avoid")),
-        _items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
-    ]
-    return [part for part in sections if part and not part.endswith(":")]
 
 
 def build_prompt(page: dict, review_notes: dict | None = None) -> str:
@@ -77,7 +41,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
         f"SUBJECT: {page['monster_name']}.",
-        *_canonical_sections(spec),
+        *canonical_monster_sections(spec),
         (
             "PAGE ENVIRONMENT AUTHORITY: the named HABITAT and resolved environment profile below are mandatory and "
             "override all general creature habitat preferences. Creature-family environment_fit data is planning-only "
@@ -90,9 +54,9 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         *physicality_sections(page),
         f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}.",
         f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
-        _items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules")),
-        _items("MUST INCLUDE", page.get("must_include")),
-        _items("MUST AVOID", page.get("must_avoid")),
+        promptprompt_items("MONSTER ACCURACY CHECKS", page.get("identity_rules")),
+        promptprompt_items("PAGE-SPECIFIC REQUIRED ELEMENTS", page.get("required_elements")),
+        promptprompt_items("MUST AVOID", page.get("must_avoid")),
         f"COMPOSITION: {page.get('composition', '')}".strip(),
         "HOUSE STYLE: " + "; ".join(STYLE_RULES) + ".",
         (
@@ -102,22 +66,13 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         ),
     ]
 
-    modify = page.get("modify")
-    if modify:
-        sections.extend([
-            _items("PRESERVE", modify.get("preserve")),
-            _items("CHANGE", modify.get("change")),
-            _items("DO NOT CHANGE / DO NOT INTRODUCE", modify.get("avoid")),
-            "This is a targeted refinement. Preserve the successful scene and simplify only the requested areas.",
-        ])
-
     if review_notes:
         tags = review_notes.get("quick_tags") or []
         text = (review_notes.get("text") or "").strip()
         failed_dimensions = review_notes.get("failed_dimensions") or []
         route = str(review_notes.get("routing_recommendation") or "").strip()
         if failed_dimensions:
-            sections.append(_items("FAILED QUALITY DIMENSIONS TO REBUILD", failed_dimensions))
+            sections.append(prompt_items("FAILED QUALITY DIMENSIONS TO REBUILD", failed_dimensions))
         if route == "regenerate":
             sections.append(
                 "REGENERATION RULE: rebuild the failed composition from the canonical page recipe. "
@@ -126,19 +81,19 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         if text:
             sections.append(f"LATEST HUMAN NOTE: {text}")
         if tags:
-            sections.append(_items("LATEST HUMAN QUICK CHANGES", tags))
-            sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
+            sections.append(prompt_items("LATEST HUMAN QUICK CHANGES", tags))
+            sections.append(prompt_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
 
     variant = page.get("environment_variant") or {}
-    required = "; ".join(str(item) for item in page.get("must_include") or [])
+    required = "; ".join(str(item) for item in page.get("required_elements") or [])
     sections.append(
         "PAGE RECIPE LOCK — NON-NEGOTIABLE: "
         f"environment={page['habitat']}; "
         f"moment={page['moment']}; "
         f"landmark={variant.get('landmark', '')}; "
         f"interaction={variant.get('interaction', '')}; "
-        f"required elements={required}. "
-        "Universal family/component libraries may enrich these requirements but may not replace them."
+        f"page exceptions={required or 'none'}. "
+        "Universal family/component libraries may enrich the page recipe but may not replace its landmark, framing, interaction, or physicality."
     )
     sections.append(
         "Final test: COLORABILITY IS THE GOVERNING CONSTRAINT. The page must first be inviting and satisfying to color, "
@@ -176,6 +131,6 @@ def build_supervisor_checklist(page: dict) -> list[str]:
             for item in spec.get("known_failure_modes", [])
             if item.get("symptom")
         )
-    for item in page.get("must_include", []):
-        checks.append(f"Required element present: {item}")
+    for item in page.get("required_elements", []):
+        checks.append(f"Page-specific required element present: {item}")
     return checks
