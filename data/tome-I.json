@@ -9,17 +9,17 @@
       "order": 1,
       "monster_spec_id": "kobold-warrior",
       "environment_profile_id": "underground.trapped-stone-corridor",
-      "moment": "Cackling as a tripwire is triggered",
+      "moment": "Cackling while guarding an open spiked pit trap",
       "archetype": "trap_scene",
       "environment_variant": {
-        "landmark": "open punji pit beside a torch bracket",
+        "landmark": "open spiked pit trap cutting across the corridor floor beside a wall torch bracket",
         "framing": "tight one-point corridor perspective",
-        "interaction": "kobold is physically beside the visible tripwire and triggered pit"
+        "interaction": "kobold stands safely on solid flagstone beside the open pit while guarding the trapped route"
       },
       "physicality": {
         "mode": "grounded",
-        "support": "both feet on the flagstone floor beside the trap",
-        "motion": "leaning and twisting toward the tripwire while cackling; no floating feet"
+        "support": "both feet planted on solid flagstone beside the pit edge",
+        "motion": "balanced guard stance facing the trapped route; no floating feet"
       }
     },
     {
