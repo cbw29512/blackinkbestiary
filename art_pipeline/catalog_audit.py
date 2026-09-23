@@ -7,9 +7,11 @@ from pathlib import Path
 try:
     from .environment_variation import family_variation_errors, load_variation_registry
     from .monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
+    from .monster_recipe_audit import audit_monster_recipes
 except ImportError:
     from environment_variation import family_variation_errors, load_variation_registry
     from monster_catalog import load_monster_contract, minimal_recipe_errors, resolve_monster_spec
+    from monster_recipe_audit import audit_monster_recipes
 
 
 def _missing_paths(payload: dict, paths) -> list[str]:
@@ -89,9 +91,15 @@ def audit_monster_catalog(root: Path) -> dict:
         if missing:
             errors.append(f"{path.name}: missing family DNA fields: {', '.join(missing)}")
 
+    recipe_report = audit_monster_recipes(root)
+    errors.extend(f"monster recipe: {error}" for error in recipe_report["errors"])
+
     return {
         "pass": not errors,
         "monster_specs": len(specs),
+        "minimal_v3_plus": recipe_report["minimal_v3_plus"],
+        "legacy_with_family_profile": recipe_report["legacy_with_family_profile"],
+        "standalone_legacy": recipe_report["standalone_legacy"],
         "repeated_families": sorted(repeated),
         "family_profiles": family_profiles,
         "errors": errors,
