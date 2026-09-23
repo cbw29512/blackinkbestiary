@@ -34,15 +34,15 @@
     ]
   },
   "default_habitats": [
-    "flooded cells",
-    "caverns",
-    "dungeon drains"
+    "underground",
+    "wetlands",
+    "ruins"
   ],
   "accuracy_checks": [
     "multiple mouths are clearly separate",
     "eyes are scattered rather than forming one face",
     "body remains amorphous",
-    "water ripples support movement",
+    "crawling motion remains physically readable",
     "gore stays restrained",
     "negative space remains usable"
   ],
