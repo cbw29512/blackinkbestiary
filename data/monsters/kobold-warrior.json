@@ -8,7 +8,7 @@
   "size": "small",
   "creature_type": "reptilian humanoid",
   "visual_identity": {
-    "core_identity": "A small, lean reptilian humanoid dungeon-dweller built for ambushes and traps rather than brute force.",
+    "core_identity": "A small, lean reptilian humanoid built for ambushes and traps rather than brute force.",
     "silhouette": "Short but wiry body, long balancing tail, narrow shoulders, slightly hunched alert posture, long clawed feet.",
     "head_features": "Long narrow draconic snout, sharp small teeth, pronounced brow, swept horn nubs or short head spines, alert predatory eyes.",
     "body_shape": "Lean torso and limbs with visible reptilian anatomy; digitigrade-looking legs and clawed hands and feet.",
@@ -52,7 +52,7 @@
     "horns or head spines are visible",
     "body reads reptilian rather than furry",
     "small wiry silhouette",
-    "trap-maker gear or behavior is believable"
+    "cunning trap-minded behavior is believable"
   ],
   "reference": {
     "image": null,
