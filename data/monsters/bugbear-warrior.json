@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "monster_id": "bugbear-warrior",
   "monster_name": "Bugbear Warrior",
   "family_profile": "bugbear",
@@ -7,5 +7,17 @@
     "warrior",
     "brutal ambusher",
     "physically imposing"
+  ],
+  "description": "",
+  "behavior_traits": [
+    "ambushing",
+    "brutal fighting",
+    "guarding",
+    "stealth stalking"
+  ],
+  "default_habitats": [
+    "underground",
+    "ruins",
+    "wilderness"
   ]
 }
