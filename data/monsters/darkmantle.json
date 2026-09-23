@@ -5,7 +5,7 @@
   "size": "small",
   "creature_type": "cave aberration",
   "visual_identity": {
-    "core_identity": "A ceiling-dwelling ambush creature that resembles a leathery stalactite-clinging mantle until it peels away and drops.",
+    "core_identity": "An ambush creature that resembles a leathery stalactite-like mantle while clinging overhead until it peels away and drops.",
     "silhouette": "Flattened manta-like leathery body with broad mantle edges and several short dangling tentacles beneath.",
     "head_features": "Small central underside head or beak-like mouth largely hidden beneath the mantle, with simple predatory features.",
     "body_shape": "Compact central body under a wide flexible mantle, short gripping tentacles, no humanoid limbs.",
@@ -19,7 +19,7 @@
     ],
     "must_keep": [
       "broad mantle shape",
-      "ceiling-clinging posture",
+      "overhead clinging posture",
       "dangling tentacles",
       "non-humanoid body",
       "stalactite camouflage"
@@ -34,13 +34,13 @@
     ]
   },
   "default_habitats": [
-    "limestone ceilings",
-    "stalactite caverns",
-    "dark dungeon vaults"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads as mantle-like cave predator",
-    "ceiling relationship is obvious",
+    "clinging ambush posture is obvious",
     "tentacles are visible",
     "shape differs from a bat",
     "body is compact",
