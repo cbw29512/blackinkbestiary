@@ -28,7 +28,7 @@ class WorkerInstructionReloadTests(unittest.TestCase):
         events = []
         with patch.object(worker, "generation_instruction_snapshot", side_effect=lambda: events.append("instructions") or {"ok": True}), \
              patch.object(worker, "current_context", side_effect=lambda: events.append("page") or ({}, {})), \
-             patch.object(worker.WORKFLOW_FILE, "exists", return_value=False):
+             patch("pathlib.Path.exists", return_value=False):
             with self.assertRaises(SystemExit):
                 worker.submit_one("http://127.0.0.1:8188", None)
         self.assertEqual(events[:2], ["instructions", "page"])
