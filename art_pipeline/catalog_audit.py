@@ -50,9 +50,14 @@ def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
     # default_habitats is allowed, but should stay broad. Specific fixtures/room dressing
     # here is a warning because the environment engine owns what the place looks like.
     habitats = spec.get("default_habitats") or []
+    habitat_scenery_terms = (
+        "torch-lit", "floor grate", "pillar", "table", "shelf", "ten-foot",
+        "stairs", "corridor", "war room", "throne room", "treasure", "ceiling",
+        "storeroom", "cell", "chapel", "barracks", "mine shaft",
+    )
     for item in habitats:
         text = str(item or "").lower()
-        if any(term in text for term in ("torch-lit", "floor grate", "pillar", "table", "shelf", "ten-foot", "cramped dungeon stairs")):
+        if any(term in text for term in habitat_scenery_terms):
             warnings.append(f"{path.name}: overly specific default_habitats entry: {item}")
     for field, value in fields.items():
         values = value if isinstance(value, list) else [value]
@@ -125,7 +130,7 @@ def audit_monster_catalog(root: Path) -> dict:
             errors.append(f"{path.name}: missing family DNA fields: {', '.join(missing)}")
 
     return {
-        "pass": not errors,
+        "pass": not errors and not ownership_warnings,
         "monster_specs": len(specs),
         "repeated_families": sorted(repeated),
         "family_profiles": family_profiles,
