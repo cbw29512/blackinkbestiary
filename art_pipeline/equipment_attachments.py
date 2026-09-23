@@ -3,9 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 
 try:
-    from .equipment_policy import load_equipment_rules
+    from .equipment_policy import canonical_weapon_gear, contains_term, load_equipment_rules
 except ImportError:
-    from equipment_policy import load_equipment_rules
+    from equipment_policy import canonical_weapon_gear, contains_term, load_equipment_rules
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -25,20 +25,17 @@ def _signature_gear(spec: dict | None) -> list[str]:
 
 
 def _matches(item: str, terms: list[str]) -> bool:
-    text = f" {_normalize(item)} "
-    return any(f" {_normalize(term)} " in text for term in terms)
+    text = _normalize(item)
+    return any(contains_term(text, term) for term in terms)
 
 
 def attachment_assignments(spec: dict | None, root: Path = ROOT) -> list[dict]:
     payload = load_equipment_rules(root / "config" / "creature_equipment_rules.json")
     groups = payload.get("attachment_groups") or {}
     assignments = []
+    weapons = set(canonical_weapon_gear(spec, payload))
     for item in _signature_gear(spec):
-        lower = _normalize(item)
-        if any(term in lower for term in ("sword", "spear", "axe", "mace", "dagger", "bow",
-                                          "crossbow", "club", "hammer", "staff", "glaive",
-                                          "halberd", "scimitar", "rapier", "flail", "trident",
-                                          "javelin", "pike", "lance", "sling", "blade", "knife")):
+        if item in weapons:
             continue
         for group_id, group in groups.items():
             terms = [str(term) for term in group.get("trigger_terms") or []]
