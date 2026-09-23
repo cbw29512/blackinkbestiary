@@ -1,16 +1,20 @@
 {
+  "schema_version": 3,
   "monster_id": "rug-of-smothering",
   "monster_name": "Rug of Smothering",
-  "family": "construct",
+  "family_profile": "construct",
+  "variant_traits": [
+    "animated textile",
+    "constricting rug",
+    "deceptive floor object"
+  ],
   "size": "large",
-  "creature_type": "construct",
-  "visual_identity": {
-    "core_identity": "An apparently decorative floor rug animated into a flexible constricting sheet that wraps victims with no face or limbs.",
-    "silhouette": "Large rectangular textile lifting in a curling wave, corners and edges folding around a central victim.",
-    "head_features": "No head, eyes, or mouth; menace comes from folding motion.",
-    "body_shape": "Flat woven rectangle capable of bending, rolling, and wrapping while keeping identifiable rug edges.",
-    "surface": "Broad simple geometric or heraldic pattern with large colorable areas, fringe kept sparse.",
-    "signature_gear": [],
+  "visual_overrides": {
+    "core_identity": "An apparently decorative floor rug animated into a flexible constricting sheet that wraps a victim with no face or limbs.",
+    "silhouette": "Large rectangular textile lifting in a curling wave while corners and edges fold around a central target.",
+    "head_features": "No head, eyes, or mouth; menace comes entirely from folding and wrapping motion.",
+    "body_shape": "Flat woven rectangle capable of bending, rolling, and wrapping while retaining identifiable rug edges.",
+    "surface": "Broad simple geometric or heraldic pattern with large colorable areas and sparse fringe.",
     "attitude": [
       "sudden",
       "constricting",
@@ -20,38 +24,26 @@
     "must_keep": [
       "rectangular rug identity",
       "folding sheet motion",
-      "victim being wrapped",
       "simple textile pattern",
       "no face"
     ],
     "must_avoid": [
       "carpet monster mouth",
       "tentacles",
-      "solid fabric black fill",
       "overly intricate pattern",
-      "humanoid limbs",
       "flying carpet pose"
+    ]
+  },
+  "scene_overrides": {
+    "natural_posture": "The textile remains visibly connected to floor, victim, or surrounding surfaces through folds and contact rather than floating freely.",
+    "behavior_style": [
+      "wrapping one clearly readable target",
+      "curling upward from an apparently normal floor position"
     ]
   },
   "default_habitats": [
     "noble crypts",
     "burial chambers",
     "abandoned halls"
-  ],
-  "accuracy_checks": [
-    "still reads as rug",
-    "wrapping motion is clear",
-    "victim is visible enough to understand action",
-    "pattern remains simple",
-    "no face is added",
-    "large coloring regions remain"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "construct"
+  ]
 }
