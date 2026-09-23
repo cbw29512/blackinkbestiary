@@ -139,15 +139,9 @@ function render(d) {
     <p><strong>Mode:</strong> ${esc(p.physicality?.mode || "")}</p>
     <p><strong>Support:</strong> ${esc(p.physicality?.support || "")}</p>
     <p><strong>Motion:</strong> ${esc(p.physicality?.motion || "")}</p>
-    <h3>Identity</h3>${list(p.identity_rules)}
-    <h3>Must Include</h3>${list(p.must_include)}
-    <h3>Must Avoid</h3>${list(p.must_avoid)}
-    ${p.modify ? `
-      <h3>Current Modify Direction</h3>
-      <p><strong>Preserve:</strong></p>${list(p.modify.preserve)}
-      <p><strong>Change:</strong></p>${list(p.modify.change)}
-      <p><strong>Avoid:</strong></p>${list(p.modify.avoid)}
-    ` : ""}
+    <h3>Monster Accuracy Checks</h3>${list(p.identity_rules)}
+    ${p.required_elements?.length ? `<h3>Page-Specific Required Elements</h3>${list(p.required_elements)}` : ""}
+    <h3>Resolved Avoid Rules</h3>${list(p.must_avoid)}
   `;
 
   qs("#queue").innerHTML = d.ordered_pages.map((x) => `
