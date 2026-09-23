@@ -34,17 +34,17 @@
     ]
   },
   "default_habitats": [
-    "loose-earth caverns",
-    "subterranean fields",
-    "collapsed tunnels"
+    "underground",
+    "loose earth",
+    "rocky terrain"
   ],
   "accuracy_checks": [
     "reads as land predator not aquatic shark",
     "dorsal fin is obvious",
     "four legs are present",
-    "soil-cutting movement is clear",
+    "burrowing movement is clear",
     "armor remains colorable",
-    "body feels heavy and subterranean"
+    "body feels heavy and built for burrowing"
   ],
   "reference": {
     "image": null,
