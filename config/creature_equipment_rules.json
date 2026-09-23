@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "registry_id": "black-ink-creature-equipment-v1",
+  "purpose": "Keep carried creature equipment physically connected to the creature unless a page explicitly places it elsewhere.",
+  "weapon_terms": [
+    "spear",
+    "sword",
+    "axe",
+    "mace",
+    "dagger",
+    "bow",
+    "crossbow",
+    "club",
+    "hammer",
+    "staff",
+    "glaive",
+    "halberd",
+    "scimitar",
+    "rapier",
+    "flail",
+    "trident",
+    "javelin",
+    "pike",
+    "lance",
+    "sling",
+    "blade"
+  ],
+  "detached_state_terms": [
+    "mounted",
+    "displayed",
+    "dropped",
+    "discarded",
+    "sheathed",
+    "holstered",
+    "embedded",
+    "stuck",
+    "lying",
+    "resting",
+    "leaning",
+    "hanging",
+    "on the ground",
+    "on the floor",
+    "on a rack",
+    "in a rack",
+    "weapon rack",
+    "wall rack",
+    "display rack"
+  ],
+  "directives": {
+    "held_weapon": [
+      "Any depicted carried weapon must visibly connect to at least one anatomically correct grasping hand or limb.",
+      "The hand must wrap or close around the weapon grip, haft, shaft, handle, or stock; do not float the weapon beside the creature or let it pass behind the hand without contact.",
+      "Use a second hand only when natural for the weapon and pose. Keep the weapon subordinate to the creature and story rather than turning it into an oversized competing focal object."
+    ]
+  },
+  "review_checks": {
+    "held_weapon": [
+      "Every carried weapon visibly contacts a grasping hand or limb.",
+      "No carried weapon floats, clips through the hand, or appears attached to the body without a believable grip.",
+      "Weapon scale remains subordinate to creature identity and the page story."
+    ]
+  },
+  "rule": "A weapon in canonical creature gear is assumed carried and held unless the page explicitly places that weapon in a detached, mounted, displayed, dropped, embedded, sheathed, or environmental state."
+}
