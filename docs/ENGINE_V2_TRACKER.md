@@ -375,3 +375,34 @@ Removed from Tome I:
 This reduced the Tome I manifest by roughly 32 KB while preserving the unique page recipe, page-specific negative exceptions, and temporary display compatibility fields `monster_name` / `habitat`.
 
 The migration audit now distinguishes fields safe to strip immediately from fields retained temporarily for raw-manifest consumers.
+
+
+## 2026-09-22 Tome I Minimal Recipe Migration Complete
+
+Tome I has completed its legacy page-data migration.
+
+Raw page entries now contain only:
+
+- `page_id`
+- `order`
+- `monster_spec_id`
+- `moment`
+- `archetype`
+- `environment_profile_id`
+- `environment_variant`
+- `physicality`
+
+All reusable information is resolved from universal owners.
+
+Migration results:
+
+- legacy identity/include/coloring/reference/modify copies removed
+- duplicated monster-name and habitat display fields removed after raw readers were converted to canonical resolution
+- 336 copied global avoid entries removed
+- the final 22 family/environment/physicality avoid entries removed after ownership was verified
+- Tome I shrank from roughly 90 KB to roughly 38 KB
+- Golden Five display and I-01 smoke-test paths now resolve page display fields through the universal page contract
+- the former 227-line smoke script was split into two modules, each below 150 lines
+- a whole-manifest regression test now rejects any return of non-recipe page fields
+
+This is the target format for future books: page JSON describes only what makes that page unique.
