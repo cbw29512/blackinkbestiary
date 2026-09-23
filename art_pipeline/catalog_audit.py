@@ -34,7 +34,7 @@ def _read(path: Path) -> dict:
 
 _SCENERY_TERMS = (
     "background", "wall", "floor", "ceiling", "corridor", "room", "vault context",
-    "pillar", "treasure pile", "laboratory", "furniture", "doorway", "gate context",
+    "pillar", "treasure pile", "laboratory", "furniture", "doorway", "gate context", "grate", "architecture",
 )
 
 def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
@@ -46,6 +46,13 @@ def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
         "visual_identity.must_keep": visual.get("must_keep"),
         "accuracy_checks": spec.get("accuracy_checks"),
     }
+    # default_habitats is allowed, but should stay broad. Specific fixtures/room dressing
+    # here is a warning because the environment engine owns what the place looks like.
+    habitats = spec.get("default_habitats") or []
+    for item in habitats:
+        text = str(item or "").lower()
+        if any(term in text for term in ("torch", "grate", "pillar", "table", "shelf", "stairs", "ten-foot", "wall", "ceiling")):
+            warnings.append(f"{path.name}: overly specific default_habitats entry: {item}")
     for field, value in fields.items():
         values = value if isinstance(value, list) else [value]
         for item in values:
