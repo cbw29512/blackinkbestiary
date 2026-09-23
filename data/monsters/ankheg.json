@@ -34,14 +34,14 @@
     ]
   },
   "default_habitats": [
-    "earthen tunnels",
+    "underground",
     "burrows",
-    "loose dungeon floors"
+    "earthworks"
   ],
   "accuracy_checks": [
     "six legs are visible or clearly implied",
     "mandibles dominate head identity",
-    "earth burst reads clearly",
+    "burrowing action reads clearly",
     "body remains insectoid",
     "armor plates are broad and colorable",
     "no dragon features appear"
