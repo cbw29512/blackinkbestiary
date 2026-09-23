@@ -27,27 +27,6 @@
     "knife",
     "shield"
   ],
-  "detached_state_terms": [
-    "mounted",
-    "displayed",
-    "dropped",
-    "discarded",
-    "sheathed",
-    "holstered",
-    "embedded",
-    "stuck",
-    "lying",
-    "resting",
-    "leaning",
-    "hanging",
-    "on the ground",
-    "on the floor",
-    "on a rack",
-    "in a rack",
-    "weapon rack",
-    "wall rack",
-    "display rack"
-  ],
   "directives": {
     "held_weapon": [
       "Any depicted carried weapon must visibly connect to at least one anatomically correct grasping hand or limb.",
@@ -74,7 +53,7 @@
       "The weapon is not duplicated in both held and secured positions."
     ]
   },
-  "rule": "A canonical carried weapon is held when the page leaves a grasping limb available. If the story uses the creature's hands for another object or interaction, that weapon must instead be visibly secured to the creature or omitted. Explicit mounted/displayed/dropped/embedded states override both. Creatures without grasping limbs never receive hand-contact rules.",
+  "rule": "Any depicted weapon associated with a grasping creature must resolve to exactly one physical state: held in a believable grip, secured to the creature by sheath/belt/sling/harness, or explicitly placed in the environment. Canonical weapons default to held unless the story occupies the hands, in which case they are secured or omitted. Page-specific weapon actions override the canonical default. Creatures without grasping limbs never receive hand-contact rules.",
   "story_hand_use_terms": [
     "carrying a",
     "carrying the",
@@ -97,5 +76,34 @@
     "holds the",
     "grabbing",
     "grips"
+  ],
+  "body_secure_terms": [
+    "sheathed",
+    "holstered",
+    "scabbard",
+    "back sling",
+    "back-slung",
+    "belt loop",
+    "belt-sheathed",
+    "weapon harness"
+  ],
+  "external_placement_terms": [
+    "mounted",
+    "displayed",
+    "dropped",
+    "discarded",
+    "embedded",
+    "stuck",
+    "lying",
+    "resting",
+    "leaning",
+    "hanging",
+    "on the ground",
+    "on the floor",
+    "on a rack",
+    "in a rack",
+    "weapon rack",
+    "wall rack",
+    "display rack"
   ]
 }
