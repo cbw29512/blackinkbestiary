@@ -56,5 +56,13 @@
   },
   "physical_requirements": [
     "overhead_attachment: folded disguise or roosting posture requires believable overhead support; environment engine chooses the ceiling, rock, beam, branch, wall projection, or other compatible support"
+  ],
+  "schema_version": 4,
+  "description": "A living predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature. Flat flexible ray-like body with broad leathery wings and one long whip-like tail; no humanoid limbs. Smooth leathery membrane with sparse folds and rib lines. Wide triangular mantle body with winglike sides, narrow trailing tail, and a compact underside head near the front edge.",
+  "behavior_traits": [
+    "overhead clinging",
+    "motionless camouflage",
+    "gliding attack",
+    "wrapping prey"
   ]
 }
