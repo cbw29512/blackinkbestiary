@@ -3,10 +3,10 @@
   "monster_name": "Grick",
   "family": "grick",
   "size": "medium",
-  "creature_type": "cave aberration",
+  "creature_type": "aberration",
   "visual_identity": {
-    "core_identity": "A wormlike subterranean ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak.",
-    "silhouette": "Thick serpentine body rising from rubble, front end opening into four evenly spaced tentacles around the mouth.",
+    "core_identity": "A wormlike ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak.",
+    "silhouette": "Thick serpentine body coiled or rising, front end opening into four evenly spaced tentacles around the mouth.",
     "head_features": "No normal head; four muscular facial tentacles frame a small hard beak at the exact center.",
     "body_shape": "Long heavy worm body with subtle segmented folds and no legs.",
     "surface": "Rubbery ringed skin with restrained segment lines.",
@@ -22,7 +22,7 @@
       "central beak",
       "wormlike body",
       "no legs",
-      "rubble ambush posture"
+      "coiled ambush posture"
     ],
     "must_avoid": [
       "octopus body",
@@ -34,16 +34,16 @@
     ]
   },
   "default_habitats": [
-    "collapsed tunnels",
-    "rubble piles",
-    "deep caves"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "four tentacles are countable",
     "beak sits at center",
     "body reads wormlike",
     "no legs appear",
-    "rubble concealment is clear",
+    "ambush posture is clear",
     "silhouette remains simple"
   ],
   "reference": {
