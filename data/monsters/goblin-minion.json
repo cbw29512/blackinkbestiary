@@ -16,8 +16,8 @@
     "signature_gear": [
       "patched tunic",
       "rope belt",
-      "small scavenged knife or kitchen tool",
-      "stolen food or trinket"
+      "small scavenged knife or simple hand tool",
+      "small stolen or scavenged trinket"
     ],
     "attitude": [
       "mischievous",
@@ -47,9 +47,9 @@
     ]
   },
   "default_habitats": [
-    "rough stone dungeon pantries",
-    "scavenged underground kitchens",
-    "cramped goblin storerooms"
+    "underground",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "oversized pointed ears dominate the silhouette",
