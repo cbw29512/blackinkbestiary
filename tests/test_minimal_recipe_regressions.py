@@ -81,6 +81,23 @@ class MinimalRecipeRegressionTests(unittest.TestCase):
         ids = [item["rule_id"] for item in active_relationship_rules(self.pages["I-40"], ROOT)]
         self.assertIn("feeding_contact", ids)
 
+
+    def test_relationship_rules_ignore_incidental_words(self):
+        cases = {
+            "I-12": "pit_interrupts_route",
+            "I-18": "carrying_object",
+            "I-26": "interaction_contact",
+            "I-37": "interaction_contact",
+            "I-41": "pit_interrupts_route",
+            "I-45": "carrying_object",
+        }
+        for page_id, forbidden_rule in cases.items():
+            ids = [
+                item["rule_id"]
+                for item in active_relationship_rules(self.pages[page_id], ROOT)
+            ]
+            self.assertNotIn(forbidden_rule, ids, page_id)
+
     def test_no_duplicate_required_object_rule_section(self):
         text = build_prompt(self.pages["I-01"])
         self.assertNotIn("REQUIRED OBJECT PHYSICAL RULES", text)
