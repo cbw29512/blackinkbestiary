@@ -6,14 +6,14 @@
   "creature_type": "monstrous humanoid",
   "visual_identity": {
     "core_identity": "A humanoid upper body fused directly to the body of a giant spider, combining deliberate weapon use with eight-legged arachnid movement.",
-    "silhouette": "Humanoid torso rising from the front of a broad spider abdomen, eight long spider legs radiating below and around, bow held above.",
+    "silhouette": "Humanoid torso rising from the front of a broad spider abdomen, eight long spider legs radiating below and around, with ranged weapon gear carried by the humanoid arms.",
     "head_features": "Elven or severe humanoid face with pointed ears, long hair or simple head covering, no insect head.",
     "body_shape": "Humanlike chest and arms merge at the waist into a giant spider cephalothorax and abdomen with eight legs.",
     "surface": "Humanoid skin and cloth kept simple; spider lower body uses sparse hair and broad plates.",
     "signature_gear": [
       "bow",
       "quiver",
-      "simple underground harness straps"
+      "simple harness straps"
     ],
     "attitude": [
       "calculating",
@@ -45,10 +45,10 @@
   "accuracy_checks": [
     "fusion between torso and spider body is clear",
     "eight legs are readable",
-    "bow aiming downward matches scene",
+    "bow use remains anatomically believable in the humanoid arms",
     "no human legs appear",
     "upper body stays humanoid",
-    "webs do not overwhelm anatomy"
+    "scene elements do not overwhelm the fused humanoid-and-spider anatomy"
   ],
   "reference": {
     "image": null,
