@@ -113,6 +113,23 @@ class EquipmentRelationshipTests(unittest.TestCase):
         self.assertEqual(assignments["dragging chains"], "restraints")
         self.assertEqual(assignments["broken shackles"], "restraints")
 
+
+    def test_specific_attachment_rules_beat_generic_wrap_rules(self):
+        goblin = resolve_monster_spec("goblin-warrior")
+        assignments = {
+            item["item"]: item["group_id"]
+            for item in attachment_assignments(goblin, ROOT)
+        }
+        self.assertEqual(assignments["simple foot wraps"], "foot_gear")
+
+    def test_robe_fasteners_use_accessory_attachment(self):
+        lich = resolve_monster_spec("lich")
+        assignments = {
+            item["item"]: item["group_id"]
+            for item in attachment_assignments(lich, ROOT)
+        }
+        self.assertEqual(assignments["few simple robe fasteners"], "worn_accessory")
+
     def test_all_monster_signature_gear_is_concrete_and_unambiguous(self):
         payload = load_equipment_rules(ROOT / "config" / "creature_equipment_rules.json")
         forbidden = (
