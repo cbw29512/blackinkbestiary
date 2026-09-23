@@ -24,7 +24,7 @@
       "no wielder",
       "clear airborne position",
       "simple readable hilt",
-      "motion around pillar"
+      "clear magical airborne motion"
     ],
     "must_avoid": [
       "ghost holding sword",
@@ -42,11 +42,10 @@
   ],
   "accuracy_checks": [
     "sword is visibly unsupported",
-    "pillar orbit reads clearly",
+    "airborne motion reads clearly",
     "weapon remains dominant",
     "no hidden hand appears",
-    "blade silhouette is clean",
-    "background stays secondary"
+    "blade silhouette is clean"
   ],
   "reference": {
     "image": null,
