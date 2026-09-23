@@ -292,3 +292,20 @@ Walls, floors, ceilings, torches, traps, gates, roots, coral, tombs, furniture, 
 Environment variety must come from stronger structure, material design, fixtures, depth, and composition—not tiny texture.
 
 See `docs/ENVIRONMENT_ENGINE_V3.md` for the persistent architecture specification.
+
+## 2026-09-22 Monster Catalog V3 Migration Checkpoint
+
+The repeated-family monster catalog has been migrated to the schema-v3 recipe model.
+
+- 50 monster specs total in the current catalog
+- 31 schema-v3/minimal family-backed recipes total: 29 migrated in this lane plus the 2 Bugbear recipes that were already minimal
+- 19 remaining legacy specs are standalone species with no reusable family profile yet; they are intentionally not forced into artificial families
+- schema-v3 recipes may contain only contract-approved top-level fields
+- duplicated family-owned anatomy, scene identity, accuracy checks, reference data, and known failure modes are now catalog-audit failures
+- the normal catalog audit now calls the monster recipe policy audit, so v3 drift cannot silently bypass CI
+- existing creature-catalog regression tests were updated from monster-v2/schema-2 expectations to monster-v3/schema-3 expectations
+
+Standalone legacy monsters should migrate only when a real reusable family abstraction exists. Do not invent a family merely to reduce file size.
+
+**Validation blocker:** GitHub Actions jobs are currently failing before checkout with no executed steps. The migration must not merge as verified-green until the full workflow executes successfully.
+

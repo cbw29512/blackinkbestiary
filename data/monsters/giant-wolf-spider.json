@@ -1,16 +1,22 @@
 {
+  "schema_version": 3,
   "monster_id": "giant-wolf-spider",
   "monster_name": "Giant Wolf Spider",
-  "family": "wolf spider",
+  "family_profile": "spider",
+  "variant_traits": [
+    "ground-hunting spider",
+    "stocky hunter",
+    "prominent forward eyes",
+    "minimal web use"
+  ],
   "size": "medium",
   "creature_type": "giant arachnid",
-  "visual_identity": {
-    "core_identity": "A large ground-hunting wolf spider adapted for ambush rather than web-building, with a stockier hairy body and prominent forward-facing eyes.",
-    "silhouette": "Low muscular spider body, sturdy eight legs, compact abdomen, flattened stalking posture.",
-    "head_features": "Broad cephalothorax with several eyes including a prominent forward-facing pair, short powerful fangs.",
-    "body_shape": "Stockier than a web spider, with thick jointed legs and compact abdomen built for sudden movement.",
-    "surface": "Sparse coarse hair tufts on legs and body; no dense furry mass.",
-    "signature_gear": [],
+  "visual_overrides": {
+    "core_identity": "A large ground-hunting wolf spider adapted for ambush rather than web-building, with a stockier body and prominent forward-facing eyes.",
+    "silhouette": "Low muscular spider body with sturdy eight-leg spread, compact abdomen, and flattened stalking posture.",
+    "head_features": "Broad arachnid cephalothorax with several eyes including a prominent forward-facing pair and short powerful fangs.",
+    "body_shape": "Stockier than a web-building spider, with thick jointed legs and a compact abdomen built for sudden movement.",
+    "surface": "Sparse coarse hair tufts on legs and body without becoming a furry mammal.",
     "attitude": [
       "watchful",
       "stalking",
@@ -18,7 +24,6 @@
       "sudden"
     ],
     "must_keep": [
-      "eight legs",
       "prominent forward eyes",
       "stocky hunting-spider body",
       "flattened ambush pose",
@@ -27,31 +32,20 @@
     "must_avoid": [
       "giant orb web",
       "wolf mammal features",
-      "six legs",
-      "humanoid eyes",
       "fluffy fur overload",
       "oversized abdomen"
     ]
   },
-  "default_habitats": [
-    "ceilings over treasure",
-    "rocky caves",
-    "dry dungeon chambers"
-  ],
-  "accuracy_checks": [
-    "reads as hunting spider rather than web spider",
-    "large forward eyes are visible",
-    "eight legs are clear",
-    "ceiling flattening pose is plausible",
-    "treasure remains visible below",
-    "hair detail stays restrained"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  "scene_overrides": {
+    "natural_posture": "Flattened against floor, wall, or ceiling with multiple legs visibly supporting the body; no mammal-like crouch.",
+    "behavior_style": [
+      "stalking low without a capture web",
+      "waiting flattened against stone above or beside a route"
+    ]
   },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "spider"
+  "default_habitats": [
+    "rocky caves",
+    "dry dungeon chambers",
+    "stone ceilings above guarded spaces"
+  ]
 }

@@ -1,16 +1,17 @@
 {
+  "schema_version": 3,
   "monster_id": "giant-rat",
   "monster_name": "Giant Rat",
-  "family": "rat",
+  "family_profile": "rat",
+  "variant_traits": [
+    "oversized rat",
+    "territorial scavenger",
+    "defensive nest behavior"
+  ],
   "size": "small",
   "creature_type": "giant beast",
-  "visual_identity": {
-    "core_identity": "An oversized filthy dungeon rat with a low rodent posture, long naked tail, strong incisors, and defensive nest behavior.",
-    "silhouette": "Low four-legged rodent, arched back, long tapering tail, pointed snout, rounded ears.",
-    "head_features": "Long rat snout, prominent incisors, whiskers, rounded ears, small alert eyes.",
-    "body_shape": "Lean low quadruped with strong hind legs, small forepaws, and long tail.",
-    "surface": "Short coarse fur indicated sparingly; tail mostly hairless.",
-    "signature_gear": [],
+  "visual_overrides": {
+    "core_identity": "An oversized filthy dungeon rat retaining true rodent anatomy, long naked tail, strong incisors, and defensive scavenger behavior.",
     "attitude": [
       "defensive",
       "nervous",
@@ -18,40 +19,23 @@
       "hungry"
     ],
     "must_keep": [
-      "rat snout",
-      "long naked tail",
-      "rounded ears",
-      "large incisors",
-      "four-legged rodent anatomy"
+      "oversized rat scale",
+      "large incisors"
     ],
     "must_avoid": [
-      "wolf body",
-      "mouse-cute proportions",
-      "human hands",
-      "huge fangs",
-      "dense fur hatching",
-      "fantasy horns"
+      "oversized saber fangs"
+    ]
+  },
+  "scene_overrides": {
+    "size_impression": "Clearly larger than a normal rat while remaining low, lean, and recognizably rodent.",
+    "behavior_style": [
+      "defending a nest or food source",
+      "scavenging along low dungeon debris"
     ]
   },
   "default_habitats": [
     "pantries",
     "sewers",
     "collapsed storerooms"
-  ],
-  "accuracy_checks": [
-    "reads as rat not generic beast",
-    "tail is visible",
-    "incisors and whiskers are clear",
-    "nest behavior is readable",
-    "scale is larger than normal rat",
-    "fur remains simple"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "rat"
+  ]
 }

@@ -48,7 +48,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertNotIn("creature_type", raw)
 
         spec = resolve_monster_spec("bugbear-stalker")
-        self.assertEqual(spec["monster_contract"], "black-ink-monster-v2")
+        self.assertEqual(spec["monster_contract"], "black-ink-monster-v3")
         self.assertTrue(spec["catalog"]["minimal_recipe"])
         self.assertEqual(spec["family"], "bugbear")
         self.assertEqual(spec["size"], "medium")
@@ -82,13 +82,23 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
         self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
 
+
+    def test_catalog_audit_enforces_v3_recipe_policy(self):
+        from catalog_audit import audit_monster_catalog
+
+        report = audit_monster_catalog(ROOT)
+        self.assertTrue(report["pass"])
+        self.assertEqual(report["errors"], [])
+        self.assertGreater(report["minimal_v3_plus"], 0)
+        self.assertIn("legacy_with_family_profile", report)
+
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
         keep = spec["visual_identity"]["must_keep"]
         self.assertIn("long reptilian snout", keep)
         self.assertIn("visible tail", keep)
         self.assertEqual(spec["family_profile"], "kobold")
-        self.assertEqual(spec["schema_version"], 2)
+        self.assertEqual(spec["schema_version"], 3)
 
 
 if __name__ == "__main__":

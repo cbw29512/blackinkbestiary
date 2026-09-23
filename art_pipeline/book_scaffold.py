@@ -78,7 +78,7 @@ def build_book_plan(book: dict, page_prefix: str) -> dict:
         "theme": book.get("theme", ""),
         "environment_scope": deepcopy(book.get("environment_scope", [])),
         "page_contract": "black-ink-page-v1",
-        "monster_contract": "black-ink-monster-v2",
+        "monster_contract": "black-ink-monster-v3",
         "environment_contract": "black-ink-environment-v3",
         "story_contract": "black-ink-story-v1",
         "print_standard": "black-ink-kdp-8.5x11-v1",
