@@ -190,16 +190,15 @@ class EnvironmentCatalogTests(unittest.TestCase):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         text = build_prompt(page)
         self.assertNotIn("REQUIRED OBJECT PHYSICAL RULES", text)
-        self.assertIn("SCENE RELATIONSHIP — TRIPWIRE TRIGGER", text)
+        self.assertNotIn("SCENE RELATIONSHIP — TRIPWIRE TRIGGER", text)
         self.assertIn("SCENE RELATIONSHIP — PIT INTERRUPTS ROUTE", text)
         self.assertIn("SCENE RELATIONSHIP — WALL MOUNTED FIXTURE", text)
-    def test_i01_relationship_rules_lock_tripwire_pit_and_wall_fixture(self):
+    def test_i01_relationship_rules_lock_pit_and_wall_fixture(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         text = build_prompt(page)
         self.assertIn("SCENE RELATIONSHIP — WALL MOUNTED FIXTURE", text)
-        self.assertIn("SCENE RELATIONSHIP — TRIPWIRE TRIGGER", text)
+        self.assertNotIn("SCENE RELATIONSHIP — TRIPWIRE TRIGGER", text)
         self.assertIn("SCENE RELATIONSHIP — PIT INTERRUPTS ROUTE", text)
-        self.assertIn("crosses the traversable path", text)
         self.assertIn("interrupts or threatens the normal travel route", text)
 
     def test_i02_relationship_rules_lock_offering_to_shrine(self):
