@@ -22,7 +22,7 @@
       "folded wings",
       "horned grotesque head",
       "clawed limbs",
-      "architectural perch"
+      "stone-sculpture disguise"
     ],
     "must_avoid": [
       "dragon body",
@@ -34,17 +34,17 @@
     ]
   },
   "default_habitats": [
-    "stone gates",
-    "crypt entrances",
-    "underground arches"
+    "ruins",
+    "fortifications",
+    "settlements"
   ],
   "accuracy_checks": [
     "reads as stone sculpture becoming alive",
     "wings remain visible",
-    "one foot or hand leaves perch",
+    "transition from still sculpture to movement is readable",
     "stone texture is sparse",
     "humanoid gargoyle silhouette is clear",
-    "gate remains secondary"
+    "environment remains secondary to the gargoyle"
   ],
   "reference": {
     "image": null,
@@ -53,5 +53,8 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "physical_requirements": [
+    "ground_support: resting sculpture disguise requires a believable load-bearing support; environment engine chooses the ledge, plinth, roof, gate, wall projection, rock, or other compatible structure"
+  ]
 }
