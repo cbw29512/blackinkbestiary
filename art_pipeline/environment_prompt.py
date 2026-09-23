@@ -5,7 +5,7 @@ from pathlib import Path
 try:
     from .environment_catalog import load_environment_contract, resolve_environment_profile
     from .environment_components import assemble_environment_palette
-    from .environment_spatial import resolve_spatial_envelope
+    from .environment_spatial import resolve_spatial_envelope, spatial_envelope_prompt_rules
     from .quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -15,7 +15,7 @@ try:
 except ImportError:
     from environment_catalog import load_environment_contract, resolve_environment_profile
     from environment_components import assemble_environment_palette
-    from environment_spatial import resolve_spatial_envelope
+    from environment_spatial import resolve_spatial_envelope, spatial_envelope_prompt_rules
     from quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -93,6 +93,7 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         f"SPACE CAMERA: {envelope.get('camera', '')}.",
         _items("SPACE MUST SHOW", envelope.get("must_show")),
         _items("SPACE DRIFT FAILURES", envelope.get("must_not_drift")),
+        _items("MANDATORY SPATIAL COMPOSITION RULES", spatial_envelope_prompt_rules(envelope)),
         _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", load_environment_contract().get("prompt_rules")),
         f"ENVIRONMENT ACCURACY: {profile['description']}",
         _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
