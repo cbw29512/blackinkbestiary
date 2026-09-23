@@ -21,6 +21,16 @@ class SceneRelationshipCoverageTests(unittest.TestCase):
             for item in active_relationship_rules(self.pages[page_id], ROOT)
         }
 
+    def test_offering_object_stays_in_contact_with_fingers(self):
+        rules = active_relationship_rules(self.pages["I-02"], ROOT)
+        offering = next(item for item in rules if item["rule_id"] == "offering_to_shrine")
+        text = " ".join(offering["directives"])
+        self.assertIn("held, pinched, or supported by the fingers", text)
+        self.assertIn("must not float", text)
+
+    def test_map_dagger_has_pinning_contact_rule(self):
+        self.assertIn("pinning_to_surface", self.rule_ids("I-07"))
+
     def test_kicked_lantern_suppresses_mounted_fixture_state(self):
         ids = self.rule_ids("I-04")
         self.assertIn("dislodging_fixture", ids)
