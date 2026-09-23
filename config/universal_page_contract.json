@@ -144,6 +144,18 @@
       "modify"
     ],
     "review_correction_source": "Production/calibration state review_notes are the only human correction authority used by generation and image-edit prompts.",
-    "rule": "Legacy manifest fields may remain during migration for compatibility or display, but they must not change monster identity, required scene objects, coloring rules, or edit instructions."
+    "rule": "Legacy manifest fields may remain during migration for compatibility or display, but they must not change monster identity, required scene objects, coloring rules, or edit instructions.",
+    "strip_now_fields": [
+      "identity_rules",
+      "must_include",
+      "coloring_rules",
+      "reference_image",
+      "modify"
+    ],
+    "runtime_compatibility_retained": [
+      "monster_name",
+      "habitat"
+    ],
+    "migration_note": "monster_name and habitat remain temporarily because a small number of raw-manifest display/smoke-test readers still consume them; generation does not."
   }
 }
