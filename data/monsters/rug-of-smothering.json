@@ -53,5 +53,8 @@
   },
   "schema_version": 2,
   "identity_version": 1,
-  "family_profile": "construct"
+  "family_profile": "construct",
+  "physical_requirements": [
+    "ground_support: resting disguise must lie on a believable supporting surface before animated folding; environment engine chooses the floor or terrain"
+  ]
 }
