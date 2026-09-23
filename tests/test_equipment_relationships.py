@@ -8,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from equipment_attachments import attachment_assignments
-from equipment_policy import canonical_weapon_gear, load_equipment_rules
 from equipment_relationships import held_weapon_gear, secured_weapon_gear
 from monster_catalog import resolve_monster_spec
 from prompt_builder import build_prompt, build_supervisor_checklist
