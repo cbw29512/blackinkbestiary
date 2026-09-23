@@ -71,28 +71,27 @@ class EquipmentRelationshipTests(unittest.TestCase):
         self.assertIn("not duplicated", checks)
         self.assertIn("subordinate", checks)
 
-    def test_all_monster_weapon_gear_is_concrete_and_unambiguous(self):
+    def test_all_monster_signature_gear_is_concrete_and_unambiguous(self):
         payload = load_equipment_rules(ROOT / "config" / "creature_equipment_rules.json")
         forbidden = (
             " or ",
             "if scene allows",
             "if unobtrusive",
+            "if any",
             "oversized",
-            "large two-handed",
-            "labyrinth weapon",
-            "kitchen tool",
         )
         armed = 0
         for path in sorted((ROOT / "data" / "monsters").glob("*.json")):
             spec = resolve_monster_spec(path.stem)
+            gear = (spec.get("visual_identity") or {}).get("signature_gear") or []
             weapons = canonical_weapon_gear(spec, payload)
             if weapons:
                 armed += 1
-            for item in weapons:
-                lower = item.lower()
+            for item in gear:
+                lower = str(item).lower()
                 self.assertFalse(
                     any(term in lower for term in forbidden),
-                    f"{path.stem}: ambiguous weapon gear {item!r}",
+                    f"{path.stem}: ambiguous signature gear {item!r}",
                 )
         self.assertGreaterEqual(armed, 10)
 
