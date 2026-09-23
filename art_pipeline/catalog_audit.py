@@ -36,6 +36,9 @@ _SCENERY_TERMS = (
     "background", "vault context", "treasure pile", "laboratory fixture",
     "room dressing", "corridor dressing", "cave dressing", "gate context",
     "background composition", "environment camera", "scenery",
+    "war room", "throne room", "treasure room", "mine tunnel",
+    "floor grate", "wall sconce", "dungeon pantry", "underground kitchen",
+    "goblin storeroom",
 )
 
 def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
@@ -44,7 +47,9 @@ def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
     fields = {
         "visual_identity.core_identity": visual.get("core_identity"),
         "visual_identity.silhouette": visual.get("silhouette"),
+        "visual_identity.signature_gear": visual.get("signature_gear"),
         "visual_identity.must_keep": visual.get("must_keep"),
+        "visual_identity.must_avoid": visual.get("must_avoid"),
         "accuracy_checks": spec.get("accuracy_checks"),
     }
     # default_habitats is allowed, but should stay broad. Specific fixtures/room dressing
