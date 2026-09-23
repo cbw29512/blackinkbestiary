@@ -5,8 +5,8 @@
   "size": "large",
   "creature_type": "giant arachnid",
   "visual_identity": {
-    "core_identity": "A huge web-building spider with a clear two-part arachnid body, eight long legs, and an ambush posture at the center of a web.",
-    "silhouette": "Large rounded abdomen behind a smaller cephalothorax, eight long jointed legs radiating outward.",
+    "core_identity": "A huge web-building spider with a clear two-part arachnid body, eight long legs, and an ambush posture.",
+    "silhouette": "Large rounded abdomen behind a smaller cephalothorax, eight long jointed legs radiating outward in a stable hunting or web-building posture.",
     "head_features": "Arachnid cephalothorax with multiple simple eyes and visible fangs, no humanoid face.",
     "body_shape": "Two main body sections with eight legs attached to the front section; abdomen elevated slightly.",
     "surface": "Sparse short hairs and simple abdominal markings; web lines kept broad and readable.",
@@ -15,13 +15,13 @@
       "patient",
       "still",
       "predatory",
-      "web-bound"
+      "ambush-ready"
     ],
     "must_keep": [
       "eight legs",
       "two-part spider body",
       "fangs",
-      "web-center posture",
+      "stable arachnid posture",
       "large readable abdomen"
     ],
     "must_avoid": [
@@ -34,15 +34,15 @@
     ]
   },
   "default_habitats": [
-    "web-filled halls",
-    "cave ceilings",
-    "abandoned chambers"
+    "caves",
+    "ruins",
+    "underground"
   ],
   "accuracy_checks": [
     "eight legs are countable",
     "body reads true spider",
-    "web center is obvious",
-    "monster remains dominant over web",
+    "eight-legged posture is physically coherent",
+    "monster remains visually dominant",
     "fangs are visible",
     "page preserves negative space"
   ],
