@@ -35,8 +35,8 @@
   },
   "default_habitats": [
     "underground",
-    "dungeons",
-    "ruins"
+    "ruins",
+    "sewers"
   ],
   "accuracy_checks": [
     "cube edges are unmistakable",
@@ -51,7 +51,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "ooze"
+  "family_profile": "ooze",
+  "description": "A nearly transparent cube-shaped ooze whose straight geometric edges and suspended debris make its body readable. Uniform gelatinous cube with faint internal bubbles and objects suspended at different depths. Mostly clear open white interior with only sparse contour ripples and bubbles.",
+  "behavior_traits": [
+    "slow creeping",
+    "engulfing",
+    "corridor-like space filling",
+    "opportunistic feeding"
+  ]
 }
