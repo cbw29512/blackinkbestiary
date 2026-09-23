@@ -76,9 +76,20 @@ def has_grasping_limb(spec: dict | None) -> bool:
         str(visual.get("body_shape") or ""),
         str(visual.get("limb_structure") or ""),
     ]))
-    if "weapon itself is the creature" in text or "no humanoid limbs" in text:
+    negative = (
+        "weapon itself is the creature",
+        "no humanoid limbs",
+        "no added limbs",
+        "no limbs",
+        "no hands",
+        "no arms",
+        "no wielder",
+    )
+    if any(marker in text for marker in negative):
         return False
-    return any(term in text for term in ("humanoid", "hand", "arm", "gauntlet", "grasping tentacle"))
+    positive = ("humanoid", "hand", "hands", "arm", "arms", "gauntlet", "gauntlets",
+                "grasping tentacle", "grasping tentacles")
+    return any(contains_term(text, term) for term in positive)
 
 
 def story_occupies_hands(page: dict, payload: dict) -> bool:
