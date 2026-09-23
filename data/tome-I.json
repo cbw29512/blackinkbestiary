@@ -7,8 +7,6 @@
     {
       "page_id": "I-01",
       "order": 1,
-      "monster_name": "Kobold Warrior",
-      "habitat": "Tight trapped stone corridor",
       "moment": "Cackling as a tripwire is triggered",
       "must_avoid": [
         "grayscale wash",
@@ -36,8 +34,6 @@
     {
       "page_id": "I-02",
       "order": 2,
-      "monster_name": "Kobold Shrine-Keeper",
-      "habitat": "Low cave shrine with coins and dragon skull prop",
       "moment": "Raising a copper coin as an offering",
       "must_avoid": [
         "grayscale wash",
@@ -65,8 +61,6 @@
     {
       "page_id": "I-03",
       "order": 3,
-      "monster_name": "Goblin Minion",
-      "habitat": "Dungeon kitchen and pantry",
       "moment": "Running away with a stolen ham",
       "must_avoid": [
         "grayscale wash",
@@ -100,8 +94,6 @@
     {
       "page_id": "I-04",
       "order": 4,
-      "monster_name": "Goblin Warrior",
-      "habitat": "Narrow dungeon crawlway",
       "moment": "Kicking over a lantern to darken the hall",
       "must_avoid": [
         "grayscale wash",
@@ -129,8 +121,6 @@
     {
       "page_id": "I-05",
       "order": 5,
-      "monster_name": "Goblin Boss",
-      "habitat": "Cave hall with improvised throne",
       "moment": "Pointing a bent sword from atop a chest",
       "must_avoid": [
         "grayscale wash",
@@ -158,8 +148,6 @@
     {
       "page_id": "I-06",
       "order": 6,
-      "monster_name": "Hobgoblin Warrior",
-      "habitat": "Underground barracks tunnel",
       "moment": "Leading a shield-wall drill",
       "must_avoid": [
         "grayscale wash",
@@ -192,8 +180,6 @@
     {
       "page_id": "I-07",
       "order": 7,
-      "monster_name": "Hobgoblin Captain",
-      "habitat": "Cave war room",
       "moment": "Pinning a dagger into a tunnel map",
       "must_avoid": [
         "grayscale wash",
@@ -272,8 +258,6 @@
     {
       "page_id": "I-10",
       "order": 10,
-      "monster_name": "Ogre",
-      "habitat": "Too-small spiral dungeon stair",
       "moment": "Wedged awkwardly on the stairs",
       "must_avoid": [
         "grayscale wash",
@@ -301,8 +285,6 @@
     {
       "page_id": "I-11",
       "order": 11,
-      "monster_name": "Ogre Zombie",
-      "habitat": "Dark cramped dungeon stair",
       "moment": "Shuffling downward with chains dragging",
       "must_avoid": [
         "grayscale wash",
@@ -330,8 +312,6 @@
     {
       "page_id": "I-12",
       "order": 12,
-      "monster_name": "Troll",
-      "habitat": "Cave fire pit",
       "moment": "Watching a wound close while glaring at fire",
       "must_avoid": [
         "grayscale wash",
@@ -359,8 +339,6 @@
     {
       "page_id": "I-13",
       "order": 13,
-      "monster_name": "Troll Limb",
-      "habitat": "Bare dungeon flagstones",
       "moment": "Severed arm crawling toward a dropped axe",
       "must_avoid": [
         "grayscale wash",
@@ -388,8 +366,6 @@
     {
       "page_id": "I-14",
       "order": 14,
-      "monster_name": "Darkmantle",
-      "habitat": "Limestone cave ceiling",
       "moment": "Peeling away from a stalactite above a lantern",
       "must_avoid": [
         "grayscale wash",
@@ -417,8 +393,6 @@
     {
       "page_id": "I-15",
       "order": 15,
-      "monster_name": "Stirges",
-      "habitat": "Dungeon cell",
       "moment": "Feeding around a sleeping prisoner",
       "must_avoid": [
         "grayscale wash",
@@ -446,8 +420,6 @@
     {
       "page_id": "I-16",
       "order": 16,
-      "monster_name": "Giant Bat",
-      "habitat": "Cavern above underground river",
       "moment": "Hanging with wings partly wrapped",
       "must_avoid": [
         "grayscale wash",
@@ -475,8 +447,6 @@
     {
       "page_id": "I-17",
       "order": 17,
-      "monster_name": "Bat Swarm",
-      "habitat": "Vertical dungeon well shaft",
       "moment": "Exploding upward from the well",
       "must_avoid": [
         "grayscale wash",
@@ -504,8 +474,6 @@
     {
       "page_id": "I-18",
       "order": 18,
-      "monster_name": "Giant Rat",
-      "habitat": "Collapsed dungeon pantry",
       "moment": "Defending a nest among burst sacks",
       "must_avoid": [
         "grayscale wash",
@@ -533,8 +501,6 @@
     {
       "page_id": "I-19",
       "order": 19,
-      "monster_name": "Rat Swarm",
-      "habitat": "Dungeon floor grate",
       "moment": "Pouring through the grate like water",
       "must_avoid": [
         "grayscale wash",
@@ -562,8 +528,6 @@
     {
       "page_id": "I-20",
       "order": 20,
-      "monster_name": "Giant Centipede",
-      "habitat": "Catacomb coffin niche",
       "moment": "Uncoiling around an old bone",
       "must_avoid": [
         "grayscale wash",
@@ -591,8 +555,6 @@
     {
       "page_id": "I-21",
       "order": 21,
-      "monster_name": "Giant Fire Beetle",
-      "habitat": "Abandoned mine tunnel",
       "moment": "Lighting the tunnel with body glands",
       "must_avoid": [
         "grayscale wash",
@@ -620,8 +582,6 @@
     {
       "page_id": "I-22",
       "order": 22,
-      "monster_name": "Giant Spider",
-      "habitat": "Web-filled dungeon hall",
       "moment": "Waiting at the center of a large web",
       "must_avoid": [
         "grayscale wash",
@@ -649,8 +609,6 @@
     {
       "page_id": "I-23",
       "order": 23,
-      "monster_name": "Giant Wolf Spider",
-      "habitat": "Ceiling above a treasure chest",
       "moment": "Flattened overhead watching the chest",
       "must_avoid": [
         "grayscale wash",
@@ -678,8 +636,6 @@
     {
       "page_id": "I-24",
       "order": 24,
-      "monster_name": "Gelatinous Cube",
-      "habitat": "Ten-foot dressed-stone corridor",
       "moment": "Sliding forward with bones and a key suspended inside",
       "must_avoid": [
         "grayscale wash",
@@ -707,8 +663,6 @@
     {
       "page_id": "I-25",
       "order": 25,
-      "monster_name": "Black Pudding",
-      "habitat": "Dungeon cistern / floor grate",
       "moment": "Corroding bars while climbing through",
       "must_avoid": [
         "grayscale wash",
@@ -736,8 +690,6 @@
     {
       "page_id": "I-26",
       "order": 26,
-      "monster_name": "Ochre Jelly",
-      "habitat": "Dungeon stair",
       "moment": "Two split halves continuing upward",
       "must_avoid": [
         "grayscale wash",
@@ -765,8 +717,6 @@
     {
       "page_id": "I-27",
       "order": 27,
-      "monster_name": "Mimic — Chest",
-      "habitat": "Treasure vault",
       "moment": "Chest mouth opening around a reaching hand",
       "must_avoid": [
         "grayscale wash",
@@ -794,8 +744,6 @@
     {
       "page_id": "I-28",
       "order": 28,
-      "monster_name": "Mimic — Door",
-      "habitat": "Torch-lit dungeon hall",
       "moment": "Door revealing tongue-handle and hidden eye",
       "must_avoid": [
         "grayscale wash",
@@ -823,8 +771,6 @@
     {
       "page_id": "I-29",
       "order": 29,
-      "monster_name": "Animated Armor",
-      "habitat": "Pedestal-lined dungeon hall",
       "moment": "Stepping down from its display pedestal",
       "must_avoid": [
         "grayscale wash",
@@ -852,8 +798,6 @@
     {
       "page_id": "I-30",
       "order": 30,
-      "monster_name": "Flying Sword",
-      "habitat": "Dungeon rotunda",
       "moment": "Orbiting a cracked pillar at throat height",
       "must_avoid": [
         "grayscale wash",
@@ -881,8 +825,6 @@
     {
       "page_id": "I-31",
       "order": 31,
-      "monster_name": "Rug of Smothering",
-      "habitat": "Noble crypt",
       "moment": "Rearing up from the floor to wrap a victim",
       "must_avoid": [
         "grayscale wash",
@@ -910,8 +852,6 @@
     {
       "page_id": "I-32",
       "order": 32,
-      "monster_name": "Gargoyle",
-      "habitat": "Stone dungeon gate",
       "moment": "One statue beginning to move",
       "must_avoid": [
         "grayscale wash",
@@ -939,8 +879,6 @@
     {
       "page_id": "I-33",
       "order": 33,
-      "monster_name": "Labyrinth Minotaur",
-      "habitat": "Identical stone maze corridors",
       "moment": "Filling an intersection with axe ready",
       "must_avoid": [
         "grayscale wash",
@@ -968,8 +906,6 @@
     {
       "page_id": "I-34",
       "order": 34,
-      "monster_name": "Minotaur Skeleton",
-      "habitat": "Dark labyrinth corridor",
       "moment": "Turning the corner with empty eye sockets",
       "must_avoid": [
         "grayscale wash",
@@ -997,8 +933,6 @@
     {
       "page_id": "I-35",
       "order": 35,
-      "monster_name": "Roper",
-      "habitat": "Stalagmite cavern",
       "moment": "Sticky tendrils striking from camouflage",
       "must_avoid": [
         "grayscale wash",
@@ -1026,8 +960,6 @@
     {
       "page_id": "I-36",
       "order": 36,
-      "monster_name": "Cloaker",
-      "habitat": "Dungeon antechamber",
       "moment": "Peeling off a wall hook like a living cloak",
       "must_avoid": [
         "grayscale wash",
@@ -1055,8 +987,6 @@
     {
       "page_id": "I-37",
       "order": 37,
-      "monster_name": "Grick",
-      "habitat": "Collapsed tunnel rubble",
       "moment": "Tentacles emerging around a central beak",
       "must_avoid": [
         "grayscale wash",
@@ -1084,8 +1014,6 @@
     {
       "page_id": "I-38",
       "order": 38,
-      "monster_name": "Ankheg",
-      "habitat": "Earthen tunnel / burrow",
       "moment": "Bursting upward through the floor",
       "must_avoid": [
         "grayscale wash",
@@ -1113,8 +1041,6 @@
     {
       "page_id": "I-39",
       "order": 39,
-      "monster_name": "Bulette",
-      "habitat": "Loose-earth cavern",
       "moment": "Dorsal fin cutting through soil before surfacing",
       "must_avoid": [
         "grayscale wash",
@@ -1142,8 +1068,6 @@
     {
       "page_id": "I-40",
       "order": 40,
-      "monster_name": "Rust Monster",
-      "habitat": "Abandoned armory alcove",
       "moment": "Feeding on a pile of ruined metal weapons",
       "must_avoid": [
         "grayscale wash",
@@ -1171,8 +1095,6 @@
     {
       "page_id": "I-41",
       "order": 41,
-      "monster_name": "Otyugh",
-      "habitat": "Refuse pit beneath dungeon privies",
       "moment": "Rising from garbage with eyestalks searching",
       "must_avoid": [
         "grayscale wash",
@@ -1200,8 +1122,6 @@
     {
       "page_id": "I-42",
       "order": 42,
-      "monster_name": "Gibbering Mouther",
-      "habitat": "Flooded dungeon cell",
       "moment": "Many mouths churning above rippling water",
       "must_avoid": [
         "grayscale wash",
@@ -1229,8 +1149,6 @@
     {
       "page_id": "I-43",
       "order": 43,
-      "monster_name": "Basilisk",
-      "habitat": "Statue-filled underground gallery",
       "moment": "Staring forward as a small creature petrifies",
       "must_avoid": [
         "grayscale wash",
@@ -1258,8 +1176,6 @@
     {
       "page_id": "I-44",
       "order": 44,
-      "monster_name": "Cockatrice",
-      "habitat": "Improvised dungeon henhouse",
       "moment": "Wings raised beside a petrified mouse",
       "must_avoid": [
         "grayscale wash",
@@ -1287,8 +1203,6 @@
     {
       "page_id": "I-45",
       "order": 45,
-      "monster_name": "Purple Worm",
-      "habitat": "Mine shaft / deep tunnel",
       "moment": "Circular maw filling the tunnel",
       "must_avoid": [
         "grayscale wash",
@@ -1316,8 +1230,6 @@
     {
       "page_id": "I-46",
       "order": 46,
-      "monster_name": "Drider",
-      "habitat": "Webbed underground chapel",
       "moment": "Hanging overhead and aiming downward",
       "must_avoid": [
         "grayscale wash",
@@ -1345,8 +1257,6 @@
     {
       "page_id": "I-47",
       "order": 47,
-      "monster_name": "Behir",
-      "habitat": "Crystal cavern",
       "moment": "Coiled around a crystal column with lightning arcing",
       "must_avoid": [
         "grayscale wash",
@@ -1374,8 +1284,6 @@
     {
       "page_id": "I-48",
       "order": 48,
-      "monster_name": "Shrieker Fungus",
-      "habitat": "Underground mushroom hall",
       "moment": "Gill-mouth opened in a piercing shriek",
       "must_avoid": [
         "grayscale wash",
@@ -1403,8 +1311,6 @@
     {
       "page_id": "I-49",
       "order": 49,
-      "monster_name": "Violet Fungus",
-      "habitat": "Damp fungal cavern with shelf fungus wall and shallow pool",
       "moment": "Tendrils reaching toward a dropped torch",
       "must_avoid": [
         "grayscale wash",
@@ -1432,8 +1338,6 @@
     {
       "page_id": "I-50",
       "order": 50,
-      "monster_name": "Lich",
-      "habitat": "Deep underground phylactery vault",
       "moment": "Guarding the phylactery while casting",
       "must_avoid": [
         "grayscale wash",
