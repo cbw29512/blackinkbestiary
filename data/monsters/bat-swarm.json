@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "vertical wells",
-    "cave shafts",
-    "collapsed underground chambers"
+    "caves",
+    "underground",
+    "ruins"
   ],
   "accuracy_checks": [
     "swarm direction is instantly readable",
@@ -51,7 +51,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "bat"
+  "family_profile": "bat",
+  "description": "A dense but readable cloud of ordinary cave bats moving as one turbulent mass through confined underground air. Small natural bat bodies with simple membrane wings, varied wing positions, no oversized leader creature. Minimal fur and wing detail to prevent visual noise. Dozens of small bat silhouettes arranged in a clear upward spiral or funnel, with negative space between groups.",
+  "behavior_traits": [
+    "swarming flight",
+    "echolocation hunting",
+    "roosting",
+    "fleeing disturbance"
+  ]
 }
