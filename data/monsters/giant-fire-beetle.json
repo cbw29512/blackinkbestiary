@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "abandoned mines",
-    "dark tunnels",
-    "ore chambers"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads immediately as giant beetle",
@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "An oversized beetle with a heavy oval shell and prominent luminous gland structures that make it recognizable even in black-and-white line art. Three-part insect body with hard domed elytra, six legs, and a compact abdomen. Large smooth armor plates with restrained segment lines; gland areas outlined clearly rather than shaded. Low oval beetle body, domed wing cases, six stout legs, short antennae, broad head.",
+  "behavior_traits": [
+    "crawling",
+    "burrowing through debris",
+    "foraging",
+    "defensive biting"
+  ]
 }
