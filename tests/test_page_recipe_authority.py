@@ -64,6 +64,34 @@ class PageRecipeAuthorityTests(unittest.TestCase):
         self.assertEqual(resolved["coloring_rules"]["color"], "black_on_white")
         self.assertEqual(resolved["coloring_rules"]["detail_density"], "medium_low")
 
+
+    def test_removed_page_avoids_still_resolve_from_correct_owners(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        pantry = resolve_page_spec(pages["I-03"], ROOT)["must_avoid"]
+        self.assertIn("cute elf-child face", pantry)
+        self.assertIn("imp or devil face", pantry)
+        self.assertIn("modern cabinets", pantry)
+        self.assertIn("appliances", pantry)
+
+        hobgoblin = resolve_page_spec(pages["I-06"], ROOT)["must_avoid"]
+        self.assertIn("orc tusks", hobgoblin)
+        self.assertIn("boar-like nose", hobgoblin)
+        self.assertIn("oversized goblin ears", hobgoblin)
+
+        bugbear = resolve_page_spec(pages["I-08"], ROOT)["must_avoid"]
+        self.assertIn("floating or unsupported pose", bugbear)
+        self.assertIn(
+            "non-flying creature shown jumping, falling, dropping, or frozen in midair",
+            bugbear,
+        )
+
+        crawlway = resolve_page_spec(pages["I-09"], ROOT)["must_avoid"]
+        self.assertIn("normal-height corridor", crawlway)
+        self.assertIn("smooth featureless hallway walls", crawlway)
+        self.assertIn("modern drywall or office hallway", crawlway)
+
     def test_generation_prompt_ignores_legacy_positive_instructions(self):
         page = deepcopy(self.i01)
         page["identity_rules"] = ["LEGACY IDENTITY POISON"]
