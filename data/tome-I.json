@@ -20,20 +20,6 @@
         "mode": "grounded",
         "support": "both feet on the flagstone floor beside the trap",
         "motion": "leaning and twisting toward the tripwire while cackling; no floating feet"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "small wiry kobold",
-          "oversized spear",
-          "visible tripwire across the corridor",
-          "opened punji pit with wooden spikes",
-          "wall torch",
-          "tight dressed-stone corridor",
-          "cackling trap-maker expression"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -52,18 +38,6 @@
         "mode": "grounded",
         "support": "feet planted on cave floor before the flowstone altar",
         "motion": "one arm raised with the coin while torso stays balanced over the feet"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "lean kobold shrine-keeper",
-          "copper coin held up as an offering",
-          "low cave shrine",
-          "scattered coins",
-          "dragon skull shrine prop"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -82,25 +56,6 @@
         "mode": "running",
         "support": "one foot visibly contacting the pantry floor while the other drives forward",
         "motion": "forward-leaning escape stride carrying the ham; weight and momentum read as running"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "small wiry unmistakably goblin minion",
-          "clearly visible stolen ham tucked under one arm",
-          "darting or hunched running-away pose",
-          "rough medieval-fantasy dungeon kitchen built into stone",
-          "simple pantry shelves with sacks, crocks, hanging food, or crude storage",
-          "at least one environmental cue showing the pantry is being raided or scavenged"
-        ],
-        "avoid_elements": [
-          "decorative border",
-          "modern household cabinetry or appliances",
-          "clean suburban kitchen appearance",
-          "cute elf-child face",
-          "imp or devil face",
-          "furry or fluffy goblin anatomy",
-          "generic pantry that could be a modern home"
-        ]
       }
     },
     {
@@ -119,18 +74,6 @@
         "mode": "kicking",
         "support": "one foot planted firmly on the corridor floor",
         "motion": "other foot makes visible contact with the lantern while torso counterbalances the kick"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "small goblin warrior",
-          "crude blade and small shield",
-          "lantern being kicked over",
-          "narrow dungeon crawlway",
-          "darkening-hall story beat"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -149,18 +92,6 @@
         "mode": "elevated-standing",
         "support": "both feet visibly planted on top of the chest",
         "motion": "upright commanding gesture from the supported chest top; no hovering above it"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "small goblin boss",
-          "bent sword pointing outward",
-          "standing on a chest",
-          "improvised cave throne",
-          "keys or scavenged trophies showing rank"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -179,23 +110,6 @@
         "mode": "grounded",
         "support": "feet planted in the marked drill lane",
         "motion": "braced military stance leading the shield-wall formation"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "disciplined hobgoblin warrior",
-          "shield-wall drill",
-          "multiple overlapping shields",
-          "underground barracks tunnel",
-          "military posture"
-        ],
-        "avoid_elements": [
-          "decorative border",
-          "orc tusks or boar-like nose",
-          "hulking orc body",
-          "tiny goblin proportions",
-          "oversized goblin ears",
-          "feral barbarian posture"
-        ]
       }
     },
     {
@@ -214,23 +128,6 @@
         "mode": "grounded",
         "support": "feet planted behind or beside the war table",
         "motion": "weight shifted toward the table as the dagger is pinned into the map"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "hobgoblin captain",
-          "dagger pinning a tunnel map",
-          "cave war-room table",
-          "simple military gear",
-          "commanding posture"
-        ],
-        "avoid_elements": [
-          "decorative border",
-          "orc tusks or boar-like nose",
-          "hulking orc body",
-          "tiny goblin proportions",
-          "oversized goblin ears",
-          "feral barbarian posture"
-        ]
       }
     },
     {
@@ -249,17 +146,6 @@
         "mode": "grounded",
         "support": "both feet visibly planted on the stone floor or large rubble",
         "motion": "low braced ambush stance with weight clearly carried through the legs"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "large broken ceiling breach overhead",
-          "fallen masonry used as cover",
-          "dungeon hall perspective"
-        ],
-        "avoid_elements": [
-          "unsupported feet",
-          "jumping, falling, dropping, or hovering pose"
-        ]
       }
     },
     {
@@ -278,22 +164,6 @@
         "mode": "crouched-dragging",
         "support": "feet and trailing sack visibly contact the crawlway floor",
         "motion": "ducked forward pull with weight low under the ceiling"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "dragged sack",
-          "finger-to-mouth silence signal",
-          "visibly low crawlway forcing a crouch",
-          "cut-stone block walls",
-          "flagstone floor",
-          "one unmistakable dungeon fixture such as an iron sconce or barred service recess"
-        ],
-        "avoid_elements": [
-          "normal-height hallway",
-          "upright relaxed stance",
-          "smooth generic walls",
-          "modern building hallway"
-        ]
       }
     },
     {
@@ -312,18 +182,6 @@
         "mode": "wedged",
         "support": "feet on stair treads with torso visibly contacting stair wall or central column",
         "motion": "awkward compressed body showing the ogre physically stuck in the stair geometry"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "massive ogre",
-          "too-small spiral stair",
-          "body visibly wedged between walls",
-          "crude dungeon setting",
-          "awkward frustrated pose"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -342,18 +200,6 @@
         "mode": "descending",
         "support": "at least one foot visibly contacts a stair tread",
         "motion": "shuffling downward with dragging chains contacting the steps"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "large ogre zombie",
-          "dragging chains",
-          "cramped dark stair",
-          "slow shuffling descent",
-          "restrained undead damage without gore"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -372,18 +218,6 @@
         "mode": "grounded",
         "support": "feet planted on cave floor",
         "motion": "body recoils from the fire while one wound closes; balance remains believable"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "lanky troll",
-          "cave fire pit",
-          "visible closing wound",
-          "hostile glare toward fire",
-          "long clawed arms"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -402,18 +236,6 @@
         "mode": "crawling",
         "support": "severed arm rests on palm/fingers against the flagstones",
         "motion": "fingers pull and drag the limb toward the dropped axe"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "severed troll arm",
-          "clawed hand crawling under its own power",
-          "dropped axe",
-          "bare dungeon flagstones",
-          "non-gory magical severed-limb presentation"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -432,18 +254,6 @@
         "mode": "attached-peeling",
         "support": "part of the darkmantle remains visibly attached to the stalactite",
         "motion": "body peels downward from the attachment point toward the lantern"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "darkmantle disguised against a stalactite",
-          "leathery mantle body",
-          "dangling tentacles",
-          "lantern below",
-          "limestone cave ceiling"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -462,18 +272,6 @@
         "mode": "feeding-swarm",
         "support": "some stirges visibly cling to prisoner, bedding, bars, or wall while others fly nearby",
         "motion": "feeding cluster centers on contact points; airborne members show wing-driven motion"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "several stirges",
-          "long needle proboscises",
-          "batlike wings",
-          "sleeping prisoner",
-          "dungeon cell"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -492,18 +290,6 @@
         "mode": "hanging",
         "support": "claws or feet visibly grip the cavern ceiling",
         "motion": "body hangs inverted with wings partly wrapped and gravity clearly downward"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "single giant bat",
-          "partly wrapped hanging wings",
-          "cavern ceiling",
-          "underground river below",
-          "large readable bat silhouette"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -522,18 +308,6 @@
         "mode": "flying-swarm",
         "support": "well opening is the visible origin point",
         "motion": "bats stream upward from the shaft in a clear rising flow"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "swarm of bats",
-          "bats erupting upward",
-          "vertical dungeon well shaft",
-          "clear spiral movement",
-          "open center for readability"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -552,18 +326,6 @@
         "mode": "grounded",
         "support": "all visible paws contact nest, sacks, or floor",
         "motion": "low defensive crouch over the nest"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "giant rat",
-          "defensive nest posture",
-          "burst grain sacks",
-          "collapsed dungeon pantry",
-          "visible nest material"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -582,18 +344,6 @@
         "mode": "ground-swarm",
         "support": "rats visibly contact the grate edge and flagstone floor",
         "motion": "continuous flow pours through the grate and spreads across the floor"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "many rats",
-          "rats pouring through a floor grate",
-          "flowing swarm shape",
-          "dungeon flagstones",
-          "clear grate opening"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -612,18 +362,6 @@
         "mode": "coiled-contact",
         "support": "segmented body visibly rests against niche floor, wall, or bone",
         "motion": "body uncoils around the bone without floating segments"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "giant centipede",
-          "many segmented legs",
-          "coiled body around an old bone",
-          "catacomb coffin niche",
-          "clear mandibles"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -642,18 +380,6 @@
         "mode": "grounded",
         "support": "beetle legs visibly contact the mine floor or rail bed",
         "motion": "forward stance while glowing body glands light the tunnel"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "giant fire beetle",
-          "large beetle shell",
-          "visible luminous gland shapes",
-          "abandoned mine tunnel",
-          "gland light illuminating nearby rock"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -672,18 +398,6 @@
         "mode": "web-supported",
         "support": "multiple spider legs visibly contact tensioned web strands",
         "motion": "body weight sits at the web center with web geometry supporting it"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "giant spider",
-          "large radial web",
-          "spider at web center",
-          "web-filled dungeon hall",
-          "clear eight-legged silhouette"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -702,18 +416,6 @@
         "mode": "ceiling-cling",
         "support": "multiple legs visibly grip the ceiling directly above the chest",
         "motion": "flattened ambush posture with body pressed to the overhead surface"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "giant wolf spider",
-          "stocky hairy hunting-spider body",
-          "flattened against ceiling",
-          "treasure chest below",
-          "large forward-facing eyes"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -732,18 +434,6 @@
         "mode": "sliding-ooze",
         "support": "cube bottom edge and sides visibly contact corridor floor and walls",
         "motion": "slow forward slide filling the passage; suspended objects remain inside the cube"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "translucent gelatinous cube",
-          "square cube edges filling corridor",
-          "bones suspended inside",
-          "key suspended inside",
-          "ten-foot dressed-stone corridor"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -762,18 +452,6 @@
         "mode": "climbing-ooze",
         "support": "pudding visibly adheres to grate, bars, basin edge, or floor",
         "motion": "ooze stretches through and over the metal while corrosion occurs at contact points"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "irregular black-pudding ooze",
-          "corroding metal bars",
-          "floor grate or cistern edge",
-          "acid damage on metal",
-          "outline-driven ooze shape without a giant solid-black blob"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -792,18 +470,6 @@
         "mode": "climbing-ooze",
         "support": "both jelly halves visibly contact separate stair treads",
         "motion": "each half pulls and flows upward along the steps"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "two ochre-jelly halves",
-          "both split halves moving independently",
-          "dungeon stair",
-          "viscous irregular outlines",
-          "clear split story beat"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -822,18 +488,6 @@
         "mode": "object-supported",
         "support": "chest mimic remains visibly seated on plinth or floor",
         "motion": "lid-mouth opens from the supported chest body around the reaching hand"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "treasure-chest mimic",
-          "chest lid transformed into toothed mouth",
-          "long tongue",
-          "reaching hand near the mouth",
-          "treasure vault"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -852,18 +506,6 @@
         "mode": "architectural-attachment",
         "support": "door mimic remains visibly hinged, framed, or rooted in the doorway",
         "motion": "living features emerge from the supported door surface without detaching into midair"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "door mimic",
-          "door surface still recognizable",
-          "hidden eye in the wood",
-          "tongue-shaped handle",
-          "torch-lit dungeon hall"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -882,18 +524,6 @@
         "mode": "stepping-down",
         "support": "one foot remains on the pedestal while the other reaches or contacts the floor",
         "motion": "clear weight transfer from display pedestal into the room"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "empty animated suit of armor",
-          "no visible wearer",
-          "stepping off a pedestal",
-          "pedestal-lined dungeon hall",
-          "clear articulated plate armor"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -912,18 +542,6 @@
         "mode": "magical-flight",
         "support": "no physical support required because flight is intentional and magical",
         "motion": "sword follows a clear curved orbit around the pillar with orientation matching the motion path"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "single flying sword",
-          "no hand holding it",
-          "sword orbiting a cracked pillar",
-          "throat-height placement",
-          "dungeon rotunda"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -942,18 +560,6 @@
         "mode": "rearing-from-floor",
         "support": "lower rug edge remains visibly in contact with the floor",
         "motion": "upper rug body rises and wraps the victim while the base anchors the motion"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "living rug rearing from the floor",
-          "rug curling around a victim",
-          "noble crypt",
-          "decorative pattern kept simple",
-          "smothering motion clearly readable"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -972,18 +578,6 @@
         "mode": "stepping-from-perch",
         "support": "one clawed foot or hand still contacts the stone perch while another reaches the passage floor",
         "motion": "clear transition off the perch rather than unsupported hovering"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "stone gargoyle",
-          "horned winged humanoid silhouette",
-          "one foot leaving a gate perch",
-          "stone dungeon gate",
-          "cracked stone texture kept sparse"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1002,18 +596,6 @@
         "mode": "grounded",
         "support": "both hooved feet visibly contact the labyrinth floor",
         "motion": "braced axe-ready stance filling the intersection"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "bull-headed minotaur",
-          "large curved horns",
-          "two-handed axe",
-          "maze intersection",
-          "massive humanoid body with hooved feet"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1032,18 +614,6 @@
         "mode": "walking-turn",
         "support": "at least one hoof visibly contacts the floor at the corner",
         "motion": "torso and shoulders rotate into view with believable weight shift"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "minotaur skeleton",
-          "horned bull skull",
-          "skeletal humanoid body",
-          "dark labyrinth corner",
-          "empty eye sockets"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1062,18 +632,6 @@
         "mode": "anchored",
         "support": "roper base is firmly planted on the cave floor among stalagmites",
         "motion": "tendrils extend outward while the main body remains anchored"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "stalagmite-shaped roper",
-          "single central eye",
-          "large toothed mouth",
-          "multiple long sticky tendrils",
-          "stalagmite cavern camouflage"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1092,19 +650,6 @@
         "mode": "attached-peeling",
         "support": "part of the cloaker remains visibly attached to wall hook or wall plane",
         "motion": "body peels outward from the attachment point like a living cloak"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "living cloaker",
-          "manta-like cloak silhouette",
-          "wide leathery wings",
-          "long tail",
-          "peeling from a wall hook",
-          "dungeon antechamber"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1123,18 +668,6 @@
         "mode": "crawling-emergence",
         "support": "body visibly contacts rubble and floor",
         "motion": "grick pulls forward from behind collapsed stones with tentacles leading"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "grick",
-          "thick wormlike body",
-          "four tentacles around a central beak",
-          "collapsed tunnel rubble",
-          "ambush emergence"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1153,19 +686,6 @@
         "mode": "bursting-from-ground",
         "support": "lower body remains visibly inside the broken earth opening",
         "motion": "upper body erupts upward with displaced soil showing the source point"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "ankheg",
-          "large burrowing insect body",
-          "heavy mandibles",
-          "segmented armored plates",
-          "bursting through earthen floor",
-          "burrow tunnel"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1184,19 +704,6 @@
         "mode": "burrowing",
         "support": "most body remains inside the soil mass",
         "motion": "dorsal fin and upper back cut through earth along a readable travel path"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "bulette",
-          "armored land-shark body",
-          "prominent dorsal fin",
-          "four powerful legs",
-          "fin cutting through loose earth",
-          "surfacing from cavern floor"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1215,19 +722,6 @@
         "mode": "grounded-feeding",
         "support": "legs visibly contact armory floor or weapon pile",
         "motion": "head and antennae engage the metal pile at clear contact points"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "rust monster",
-          "low armored insectoid body",
-          "very long feeler antennae",
-          "ruined metal weapons",
-          "abandoned armory alcove",
-          "feeding-on-metal story beat"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1246,19 +740,6 @@
         "mode": "embedded-rising",
         "support": "lower body remains visibly supported by or embedded in the refuse pit",
         "motion": "upper body rises from the waste while tentacles reach toward the rim"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "otyugh",
-          "three thick legs",
-          "two long grasping tentacles",
-          "single elevated eyestalk",
-          "wide central mouth",
-          "refuse pit and garbage"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1277,19 +758,6 @@
         "mode": "amorphous-contact",
         "support": "body base visibly contacts shallow water and submerged floor",
         "motion": "mass churns in place with ripples radiating from the contact area"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "gibbering mouther",
-          "amorphous crawling mass",
-          "many distinct mouths",
-          "several scattered eyes",
-          "flooded dungeon cell",
-          "rippling water around the creature"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1308,18 +776,6 @@
         "mode": "grounded",
         "support": "all visible feet contact the gallery floor",
         "motion": "forward petrifying stare from a stable stalking stance"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "eight-legged basilisk",
-          "heavy lizardlike body",
-          "direct petrifying stare",
-          "statue-filled underground gallery",
-          "small creature partly turning to stone"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1338,19 +794,6 @@
         "mode": "grounded",
         "support": "birdlike feet visibly contact straw, pen floor, or perch",
         "motion": "wings raise while body remains physically supported beside the petrified mouse"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "cockatrice",
-          "rooster-like head and comb",
-          "reptilian or batlike wings",
-          "serpentine tail",
-          "petrified mouse",
-          "improvised dungeon henhouse"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1369,18 +812,6 @@
         "mode": "tunnel-emergence",
         "support": "worm body visibly contacts tunnel floor and walls around the maw",
         "motion": "forward emergence fills the route with the tunnel geometry carrying its scale"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "colossal purple worm",
-          "circular ringed maw",
-          "segmented worm body",
-          "maw filling a mine tunnel",
-          "deep shaft scale"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1399,19 +830,6 @@
         "mode": "web-hanging",
         "support": "spider legs or web anchors visibly connect the drider to overhead webbing or arch",
         "motion": "upper body aims downward while lower body is visibly suspended by web contact"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "drider",
-          "humanoid upper torso",
-          "giant spider lower body with eight legs",
-          "bow aimed downward",
-          "hanging overhead",
-          "webbed underground chapel"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1430,19 +848,6 @@
         "mode": "coiled-support",
         "support": "multiple body coils visibly wrap and press against the crystal column and/or cavern floor",
         "motion": "coils grip the structure while lightning arcs outward"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "behir",
-          "long serpentine reptile",
-          "many pairs of legs",
-          "horned head",
-          "coiled around crystal column",
-          "lightning arcing around body"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1461,19 +866,6 @@
         "mode": "rooted",
         "support": "fungus stalk/base visibly grows from and contacts the cavern floor",
         "motion": "gill-mouth opens upward while rooted body remains stationary"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "shrieker fungus",
-          "large mushroom body",
-          "open gill-mouth beneath cap",
-          "visible vibration or shriek motion lines",
-          "underground mushroom hall",
-          "no humanoid face or limbs"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1492,19 +884,6 @@
         "mode": "rooted",
         "support": "fungus base visibly attaches to the cave floor or fungal shelf",
         "motion": "tendrils extend toward the torch while the main body remains planted"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "violet fungus",
-          "large fungus body",
-          "multiple long whipping tendrils",
-          "dropped torch",
-          "fungal cavern",
-          "no humanoid face"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     },
     {
@@ -1523,20 +902,6 @@
         "mode": "grounded",
         "support": "feet or lower robes visibly contact the vault floor beside the reliquary plinth",
         "motion": "casting gesture projects outward while stance remains anchored and balanced"
-      },
-      "page_exceptions": {
-        "required_elements": [
-          "lich",
-          "skeletal undead spellcaster",
-          "decayed robes",
-          "visible phylactery object",
-          "spellcasting hand",
-          "deep underground vault",
-          "commanding final-page composition"
-        ],
-        "avoid_elements": [
-          "decorative border"
-        ]
       }
     }
   ]
