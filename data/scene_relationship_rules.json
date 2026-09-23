@@ -110,7 +110,13 @@
         "bursting upward",
         "bursts upward",
         "breaking through",
-        "surfacing from"
+        "surfacing from",
+        "erupts upward",
+        "erupting upward",
+        "pours through the opening",
+        "through the grate",
+        "before surfacing",
+        "surfacing"
       ],
       "directives": [
         "The body visibly intersects the opening boundary in a physically believable way.",
@@ -123,7 +129,10 @@
         "guarding",
         "guards",
         "guard",
-        "protecting"
+        "protecting",
+        "defending",
+        "defends",
+        "defend"
       ],
       "directives": [
         "The guarded object or threshold is positioned close enough to the subject that the protective relationship reads instantly.",
@@ -214,6 +223,108 @@
         "The feeding mouth, mandibles, antennae, or other stated feeding anatomy must visibly contact the target material.",
         "The target must show the stated damage, corrosion, bite, or consumption at or immediately beside the contact point.",
         "Do not place the food or target nearby without a readable physical feeding relationship."
+      ]
+    },
+    "wedged_between_surfaces": {
+      "priority": 93,
+      "trigger_terms": [
+        "wedged between",
+        "visibly wedged",
+        "stuck between",
+        "mode wedged"
+      ],
+      "directives": [
+        "The creature must visibly contact both confining surfaces that create the wedge; do not leave empty gaps that make the pose read as ordinary standing.",
+        "Feet, body, or another load-bearing part must still contact a believable support surface so the compressed pose has weight.",
+        "Keep the surrounding geometry simple enough that the two confining surfaces are immediately readable."
+      ]
+    },
+    "peeling_from_support": {
+      "priority": 93,
+      "trigger_terms": [
+        "peeling away from",
+        "peels away from",
+        "peeling off",
+        "peels from",
+        "attached-peeling"
+      ],
+      "directives": [
+        "A visible portion of the creature must remain attached to the named support while another portion separates from it.",
+        "Show a clear attachment/contact point and a clear peeling edge; do not make the creature float beside the support.",
+        "The motion should read as weight transferring away from the support, not as an unsupported midair pose."
+      ]
+    },
+    "wrapped_around_target": {
+      "priority": 91,
+      "trigger_terms": [
+        "uncoiling around",
+        "uncoils around",
+        "coiled around",
+        "coils around",
+        "wraps a victim",
+        "wraps the victim",
+        "wraps around"
+      ],
+      "directives": [
+        "The wrapping body or material must visibly curve around and contact the named target with readable overlap.",
+        "Keep enough of the target visible to prove what is being wrapped; do not merge the two silhouettes into one ambiguous mass.",
+        "The wrapped target and surrounding contact points must remain simple enough for clean coloring regions."
+      ]
+    },
+    "corrosive_contact": {
+      "priority": 92,
+      "trigger_terms": [
+        "corroding bars",
+        "visibly corrodes",
+        "corrodes the metal",
+        "corrosion occurs at contact points"
+      ],
+      "directives": [
+        "Corrosion or damage must appear at the exact place where the creature or substance touches the metal.",
+        "Keep the undamaged and damaged portions of the metal visually connected so the cause-and-effect reads instantly.",
+        "Do not scatter corrosion marks on unrelated surfaces away from the contact point."
+      ]
+    },
+    "web_supported": {
+      "priority": 89,
+      "trigger_terms": [
+        "web-supported",
+        "web center",
+        "tensioned web strands"
+      ],
+      "directives": [
+        "Multiple legs or body contact points must visibly touch the web strands that support the creature's weight.",
+        "The web geometry should visibly carry the creature instead of passing behind it as decoration.",
+        "Keep web strands broad and sparse enough to remain colorable and readable."
+      ]
+    },
+    "ceiling_cling": {
+      "priority": 89,
+      "trigger_terms": [
+        "ceiling-cling",
+        "flattens overhead",
+        "grip the ceiling",
+        "pressed to the overhead surface"
+      ],
+      "directives": [
+        "Multiple limbs must visibly contact the ceiling or overhead support surface.",
+        "The body should sit close to the overhead plane so the cling reads as supported rather than hovering.",
+        "Preserve a clear creature silhouette despite the overhead contact."
+      ]
+    },
+    "stepping_from_support": {
+      "priority": 87,
+      "trigger_terms": [
+        "stepping down from",
+        "steps down from",
+        "steps off",
+        "stepping off",
+        "weight transfer from"
+      ],
+      "directives": [
+        "At least one foot or support point must visibly contact the old support or the destination surface during the step.",
+        "Show a believable weight transfer between the two surfaces; do not suspend the creature in the gap.",
+        "Keep both support surfaces readable so the movement is physically understandable."
       ]
     }
   },
