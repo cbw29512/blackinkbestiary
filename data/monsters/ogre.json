@@ -39,9 +39,9 @@
     ]
   },
   "default_habitats": [
-    "cramped dungeon stairs",
-    "cave lairs",
-    "ruined halls"
+    "caves",
+    "ruins",
+    "wilderness"
   ],
   "accuracy_checks": [
     "ogre scale is obvious from body proportions",
