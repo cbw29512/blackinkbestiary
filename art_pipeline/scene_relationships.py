@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,7 +28,7 @@ def load_relationship_rules(path: Path = RULES_FILE) -> dict:
 def _page_text(page: dict) -> str:
     variant = page.get("environment_variant") or {}
     physicality = page.get("physicality") or {}
-    return " ".join([
+    raw = " ".join([
         str(page.get("moment") or ""),
         str(page.get("archetype") or ""),
         " ".join(str(item) for item in page.get("must_include") or []),
@@ -37,7 +38,16 @@ def _page_text(page: dict) -> str:
         str(physicality.get("mode") or ""),
         str(physicality.get("support") or ""),
         str(physicality.get("motion") or ""),
-    ]).lower()
+    ])
+    return " ".join(raw.lower().split())
+
+
+def _term_matches(text: str, term: str) -> bool:
+    normalized = " ".join(str(term or "").lower().split())
+    if not normalized:
+        return False
+    pattern = rf"(?<!\\w){re.escape(normalized)}(?!\\w)"
+    return re.search(pattern, text) is not None
 
 
 def active_relationship_rules(page: dict, root: Path = ROOT) -> list[dict]:
@@ -45,8 +55,8 @@ def active_relationship_rules(page: dict, root: Path = ROOT) -> list[dict]:
     text = _page_text(page)
     matches = []
     for order, (rule_id, rule) in enumerate(payload["rules"].items()):
-        terms = [str(item).lower() for item in rule.get("trigger_terms") or []]
-        if any(term and term in text for term in terms):
+        terms = [str(item) for item in rule.get("trigger_terms") or []]
+        if any(_term_matches(text, term) for term in terms):
             matches.append({
                 "rule_id": rule_id,
                 "_registry_order": order,
