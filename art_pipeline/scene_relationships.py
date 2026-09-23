@@ -44,12 +44,25 @@ def active_relationship_rules(page: dict, root: Path = ROOT) -> list[dict]:
     payload = load_relationship_rules(root / "data" / "scene_relationship_rules.json")
     text = _page_text(page)
     matches = []
-    for rule_id, rule in payload["rules"].items():
+    for order, (rule_id, rule) in enumerate(payload["rules"].items()):
         terms = [str(item).lower() for item in rule.get("trigger_terms") or []]
         if any(term and term in text for term in terms):
-            matches.append({"rule_id": rule_id, **rule})
+            matches.append({
+                "rule_id": rule_id,
+                "_registry_order": order,
+                **rule,
+            })
+    matches.sort(
+        key=lambda item: (
+            -int(item.get("priority") or 0),
+            int(item.get("_registry_order") or 0),
+        )
+    )
     maximum = int((payload.get("prompt_budget") or {}).get("max_active_rules") or 4)
-    return matches[:maximum]
+    return [
+        {key: value for key, value in item.items() if key != "_registry_order"}
+        for item in matches[:maximum]
+    ]
 
 
 def relationship_prompt_lines(page: dict, root: Path = ROOT) -> list[str]:
