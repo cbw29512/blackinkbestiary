@@ -1,16 +1,16 @@
 {
+  "schema_version": 3,
   "monster_id": "ochre-jelly",
   "monster_name": "Ochre Jelly",
-  "family": "ooze",
-  "size": "large",
-  "creature_type": "ooze",
-  "visual_identity": {
-    "core_identity": "A viscous amoeboid dungeon ooze known for splitting into separate living masses when struck.",
-    "silhouette": "Two irregular low jelly masses with rounded lobes and stringy connective drips, both clearly moving.",
-    "head_features": "No head, eyes, or face.",
-    "body_shape": "Soft amorphous blobs with uneven edges, sagging folds, and no fixed limbs.",
-    "surface": "Mostly open interiors with a few contour ripples and drip lines.",
-    "signature_gear": [],
+  "family_profile": "ooze",
+  "variant_traits": [
+    "splitting ooze",
+    "two living halves",
+    "viscous creeping mass"
+  ],
+  "visual_overrides": {
+    "core_identity": "A viscous amoeboid dungeon ooze whose defining variant behavior is splitting into separate living masses.",
+    "silhouette": "Two irregular low jelly masses with rounded lobes and sparse connective drips, each clearly moving independently.",
     "attitude": [
       "creeping",
       "dividing",
@@ -19,39 +19,23 @@
     ],
     "must_keep": [
       "two distinct split halves",
-      "amorphous jelly anatomy",
-      "no face",
-      "viscous rounded edges",
       "shared visual identity between halves"
     ],
     "must_avoid": [
       "single unsplit blob",
-      "solid black fill",
-      "eyes or smile",
-      "sharp spikes",
-      "humanoid limbs",
-      "dense internal texture"
+      "sharp spikes"
+    ]
+  },
+  "scene_overrides": {
+    "natural_posture": "Both split halves remain fully supported by floor, stairs, or adjacent architecture while moving independently.",
+    "behavior_style": [
+      "two split halves creeping around the same obstacle",
+      "separate ooze masses climbing or flowing along readable stone geometry"
     ]
   },
   "default_habitats": [
     "stone stairs",
     "damp corridors",
     "subterranean chambers"
-  ],
-  "accuracy_checks": [
-    "two halves are clearly independent",
-    "both halves move upward",
-    "stair geometry stays readable",
-    "no facial features appear",
-    "ooze remains colorable",
-    "split behavior is obvious without caption"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "ooze"
+  ]
 }
