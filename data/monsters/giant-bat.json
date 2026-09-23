@@ -1,57 +1,40 @@
 {
+  "schema_version": 3,
   "monster_id": "giant-bat",
   "monster_name": "Giant Bat",
-  "family": "bat",
+  "family_profile": "bat",
+  "variant_traits": [
+    "giant scale",
+    "powerful roosting feet",
+    "broad wingspan"
+  ],
   "size": "large",
   "creature_type": "giant beast",
-  "visual_identity": {
-    "core_identity": "An enormous cave bat with a broad membrane wingspan, powerful clawed feet, and an unmistakable natural bat silhouette.",
-    "silhouette": "Wide folded or partly opened wings, hanging inverted body, large pointed ears, narrow torso, clawed feet gripping overhead rock.",
-    "head_features": "Natural bat face with large ears, short muzzle, small eyes, no monstrous humanoid features.",
-    "body_shape": "Light flying mammal body with very long finger-boned wings and compact torso.",
-    "surface": "Short fur on body and smooth wing membranes with minimal vein lines.",
-    "signature_gear": [],
+  "visual_overrides": {
+    "core_identity": "An enormous natural cave bat with a broad membrane wingspan and powerful clawed roosting feet.",
+    "silhouette": "Very broad wings with a compact mammal torso, large pointed ears, and strong clawed feet; often hanging inverted or partly opening its wings.",
     "attitude": [
       "alert",
       "roosting",
-      "startled",
       "watchful"
     ],
     "must_keep": [
-      "natural bat anatomy",
       "very large wings",
-      "large ears",
       "inverted hanging posture",
       "clawed roosting feet"
     ],
     "must_avoid": [
-      "dragon wings",
-      "humanoid arms",
       "vampire clothing",
-      "horns",
-      "insect anatomy",
-      "dense fur texture"
+      "dragon-heavy body mass"
     ]
+  },
+  "scene_overrides": {
+    "size_impression": "Large enough to dominate a cave or mine chamber while retaining light natural bat proportions.",
+    "natural_posture": "Hanging securely by clawed feet from a visible overhead surface or moving in controlled natural flight."
   },
   "default_habitats": [
     "river caverns",
     "high cave ceilings",
     "deep mine chambers"
-  ],
-  "accuracy_checks": [
-    "reads immediately as giant bat",
-    "wings use elongated finger structure",
-    "hanging pose is plausible",
-    "scale is obvious",
-    "underground river remains secondary",
-    "open wing areas are colorable"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "bat"
+  ]
 }
