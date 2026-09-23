@@ -38,7 +38,7 @@
     ]
   },
   "default_habitats": [
-    "dungeons",
+    "underground",
     "ruins",
     "settlements"
   ],
@@ -55,10 +55,17 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "family_profile": "mimic",
   "physical_requirements": [
     "structural_attachment: disguised door body must occupy a believable supported opening; environment engine chooses the wall, frame, materials, and surrounding room"
+  ],
+  "description": "A predatory shapechanger disguised as a dungeon door, betrayed by a hidden eye, tongue-like handle, and organic warping in the wood. Door slab and frame retain architectural structure while selected panels flex like living tissue. Simple wood panels and iron fittings with sparse organic seams.",
+  "behavior_traits": [
+    "object mimicry",
+    "motionless ambush",
+    "adhesive grappling",
+    "sudden biting"
   ]
 }
