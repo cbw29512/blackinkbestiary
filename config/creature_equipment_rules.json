@@ -23,7 +23,9 @@
     "pike",
     "lance",
     "sling",
-    "blade"
+    "blade",
+    "knife",
+    "shield"
   ],
   "detached_state_terms": [
     "mounted",
@@ -52,6 +54,11 @@
       "The hand must wrap or close around the weapon grip, haft, shaft, handle, or stock; do not float the weapon beside the creature or let it pass behind the hand without contact.",
       "Show one instance of each canonical carried weapon unless the page explicitly requires multiple copies.",
       "Use a second hand only when natural for the weapon and pose. Keep the weapon subordinate to the creature and story rather than turning it into an oversized competing focal object."
+    ],
+    "secured_weapon": [
+      "When the page story already occupies the creature's hands with another object or interaction, the canonical weapon may not float nearby or become an extra held prop.",
+      "If shown, secure the weapon visibly to a sheath, belt loop, back sling, harness, scabbard, or other plausible body attachment with clear physical contact.",
+      "Do not duplicate the weapon in both held and secured positions. If no plausible secured position exists, omit the secondary weapon rather than inventing an attachment."
     ]
   },
   "review_checks": {
@@ -60,7 +67,35 @@
       "No carried weapon floats, clips through the hand, or appears attached to the body without a believable grip.",
       "Canonical carried weapons are not duplicated unless the page explicitly requires multiple copies.",
       "Weapon scale remains subordinate to creature identity and the page story."
+    ],
+    "secured_weapon": [
+      "A non-held canonical weapon is visibly secured to the creature or omitted; it does not float nearby.",
+      "The secured weapon has a believable attachment point such as sheath, belt, sling, harness, or scabbard.",
+      "The weapon is not duplicated in both held and secured positions."
     ]
   },
-  "rule": "A weapon in canonical creature gear is assumed carried and held unless the page explicitly places that weapon in a detached, mounted, displayed, dropped, embedded, sheathed, or environmental state."
+  "rule": "A canonical carried weapon is held when the page leaves a grasping limb available. If the story uses the creature's hands for another object or interaction, that weapon must instead be visibly secured to the creature or omitted. Explicit mounted/displayed/dropped/embedded states override both. Creatures without grasping limbs never receive hand-contact rules.",
+  "story_hand_use_terms": [
+    "carrying a",
+    "carrying the",
+    "carries a",
+    "carries the",
+    "dragging a",
+    "dragging the",
+    "drags a",
+    "drags the",
+    "offering",
+    "raises a",
+    "raises the",
+    "pinning a",
+    "pinning the",
+    "pins a",
+    "pins the",
+    "holding a",
+    "holding the",
+    "holds a",
+    "holds the",
+    "grabbing",
+    "grips"
+  ]
 }
