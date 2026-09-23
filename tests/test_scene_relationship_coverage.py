@@ -21,6 +21,14 @@ class SceneRelationshipCoverageTests(unittest.TestCase):
             for item in active_relationship_rules(self.pages[page_id], ROOT)
         }
 
+    def test_i01_trap_scene_has_clear_cause_route_and_fixture_relationships(self):
+        ids = self.rule_ids("I-01")
+        self.assertIn("tripwire_trigger", ids)
+        self.assertIn("pit_interrupts_route", ids)
+        self.assertIn("wall_mounted_fixture", ids)
+        self.assertIn("guarding_focal_object", ids)
+        self.assertLessEqual(len(ids), 4)
+
     def test_offering_object_stays_in_contact_with_fingers(self):
         rules = active_relationship_rules(self.pages["I-02"], ROOT)
         offering = next(item for item in rules if item["rule_id"] == "offering_to_shrine")
