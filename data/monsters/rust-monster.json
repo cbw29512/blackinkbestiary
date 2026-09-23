@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A low insectoid scavenger that seeks metal, recognized by its long sensory antennae, armored body, and metal-corroding feeding behavior. Compact low body on four sturdy legs with plated back and flexible tail, more alien than mammalian. Broad armor plates with restrained seam lines; antennae kept clean and readable. Low four-legged arthropod-like body, arched armored back, extremely long feeler antennae sweeping forward, tapered tail.",
+  "behavior_traits": [
+    "metal seeking",
+    "scavenging",
+    "antenna probing",
+    "quick pursuit"
+  ]
 }
