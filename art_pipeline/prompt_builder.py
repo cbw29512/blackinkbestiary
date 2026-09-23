@@ -12,11 +12,13 @@ except ImportError:
     from prompt_parts import canonical_monster_sections, items_line, recipe_lock_line
 
 try:
+    from .equipment_relationships import equipment_prompt_sections, equipment_review_checks
     from .environment_prompt import environment_checklist, environment_prompt_sections
     from .physicality_prompt import physicality_checklist, physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
     from .story_prompt import story_checklist, story_sections
 except ImportError:
+    from equipment_relationships import equipment_prompt_sections, equipment_review_checks
     from environment_prompt import environment_checklist, environment_prompt_sections
     from physicality_prompt import physicality_checklist, physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
@@ -43,6 +45,7 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
         "Create ONE printable fantasy monster coloring-book page.",
         f"SUBJECT: {page['monster_name']}.",
         *canonical_monster_sections(spec),
+        *equipment_prompt_sections(spec, page, ROOT),
         (
             "PAGE ENVIRONMENT AUTHORITY: the named HABITAT and resolved environment profile below are mandatory and "
             "override all general creature habitat preferences. Creature-family environment_fit data is planning-only "
@@ -121,6 +124,7 @@ def build_supervisor_checklist(page: dict) -> list[str]:
         "No dense crosshatching or excessive tiny texture",
         "No text, border, logo, or watermark",
     ]
+    checks.extend(equipment_review_checks(spec, page, ROOT))
     checks.extend(environment_checklist(page, ROOT))
     checks.extend(story_checklist(page, ROOT))
     checks.extend(physicality_checklist(page))
