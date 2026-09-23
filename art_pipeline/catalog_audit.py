@@ -91,6 +91,15 @@ def audit_monster_catalog(root: Path) -> dict:
             continue
         specs.append((path, spec))
         ownership_warnings.extend(_monster_scenery_warnings(path, spec))
+        schema_version = int(spec.get("schema_version") or 1)
+        if schema_version >= 4:
+            if not str(spec.get("description") or "").strip():
+                errors.append(f"{path.name}: schema v4 monster requires creature-only description")
+            if not (spec.get("behavior_traits") or []):
+                errors.append(f"{path.name}: schema v4 monster requires reusable behavior_traits")
+            habitats = spec.get("default_habitats") or []
+            if not habitats:
+                errors.append(f"{path.name}: schema v4 monster requires broad default_habitats")
         errors.extend(minimal_recipe_errors(path.stem, monster_dir, family_dir))
         try:
             resolve_monster_spec(path.stem, monster_dir, family_dir)
