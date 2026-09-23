@@ -35,8 +35,8 @@
   },
   "default_habitats": [
     "underground",
-    "settlements",
-    "sewers"
+    "sewers",
+    "settlements"
   ],
   "accuracy_checks": [
     "individual silhouettes remain readable",
@@ -49,7 +49,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "rat"
+  "family_profile": "rat",
+  "description": "A flowing mass of ordinary rats whose individual bodies remain readable while the group moves like a living tide. Small four-legged rodent forms in varied running poses; no giant leader rat. Minimal fur lines and simple naked tails.",
+  "behavior_traits": [
+    "swarming",
+    "scavenging",
+    "squeezing through gaps",
+    "fleeing danger"
+  ]
 }
