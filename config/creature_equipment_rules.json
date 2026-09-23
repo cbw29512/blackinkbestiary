@@ -117,7 +117,8 @@
       "review_checks": [
         "Shield has a believable hand or forearm attachment.",
         "Shield does not float, merge into the torso, or duplicate unexpectedly."
-      ]
+      ],
+      "priority": 100
     },
     "quiver": {
       "trigger_terms": [
@@ -130,7 +131,8 @@
       "review_checks": [
         "Quiver visibly attaches to back, shoulder, or hip.",
         "Quiver and arrows do not float or duplicate."
-      ]
+      ],
+      "priority": 95
     },
     "waist_gear": {
       "trigger_terms": [
@@ -145,7 +147,8 @@
       "review_checks": [
         "Belt or pouch gear visibly attaches at the waist or hips.",
         "Waist gear is not floating or disconnected."
-      ]
+      ],
+      "priority": 90
     },
     "torso_gear": {
       "trigger_terms": [
@@ -169,7 +172,8 @@
       "review_checks": [
         "Worn torso gear visibly follows and contacts the creature's body.",
         "Armor, straps, or clothing do not float or cut through anatomy."
-      ]
+      ],
+      "priority": 80
     },
     "foot_gear": {
       "trigger_terms": [
@@ -185,7 +189,8 @@
       "review_checks": [
         "Foot gear visibly fits the feet and ankles.",
         "Canonical claw, toe, or hoof anatomy remains readable."
-      ]
+      ],
+      "priority": 94
     },
     "restraints": {
       "trigger_terms": [
@@ -201,7 +206,8 @@
       "review_checks": [
         "Chains or shackles have a visible attachment or grasp point.",
         "No chain begins or ends inexplicably in empty space."
-      ]
+      ],
+      "priority": 92
     },
     "worn_accessory": {
       "trigger_terms": [
@@ -218,8 +224,9 @@
       "review_checks": [
         "Small worn accessories have a visible support or attachment point.",
         "Accessories do not float beside the creature."
-      ]
+      ],
+      "priority": 88
     }
   },
-  "general_equipment_rule": "Every depicted signature-gear item must have a believable physical relationship to the creature or environment. Handheld, worn, secured, and environmental gear use different attachment rules; nothing may float, duplicate, or clip through anatomy."
+  "general_equipment_rule": "Every depicted signature-gear item must have a believable physical relationship to the creature or environment. Do not invent extra copies beyond what the canonical gear phrase already states. Handheld, worn, secured, and environmental gear use different attachment rules; nothing may float, duplicate unexpectedly, or clip through anatomy."
 }
