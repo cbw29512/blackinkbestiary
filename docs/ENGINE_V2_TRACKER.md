@@ -320,3 +320,18 @@ This rule applies to every monster. New monster JSON must not accumulate reusabl
 - Environment Engine V3 documentation now reflects the expanded 27-role library
 
 **Current gate:** exact-head Studio checks must be green before PR #60 can merge or Golden Five regeneration resumes.
+
+
+## 2026-09-23 Per-Page Instruction Reload Lock
+
+Mass generation must never carry a stale AI context from one coloring page into the next.
+
+Before **every individual page generation**, including every regeneration attempt, the worker must reload the authoritative universal monster contract, universal environment contract, universal page contract, coloring-page standard, current manifest/page recipe, current monster spec/family data, and current review corrections from disk. These instructions are not batch-cached.
+
+Required batch lifecycle:
+
+**finish page N -> discard page-specific generation context -> reload current contracts/data from disk -> resolve page N+1 fresh -> build a fresh prompt -> generate page N+1**
+
+If human review detects systematic drift, stop the batch, repair the highest reusable engine/data layer, add a regression test, and resume. Because the next page reloads the contracts from disk, the correction must take effect immediately rather than waiting for a new batch.
+
+This is a production invariant for every book and every monster.
