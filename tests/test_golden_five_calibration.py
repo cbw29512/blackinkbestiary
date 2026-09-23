@@ -5,6 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
+sys.path.insert(0, str(ROOT / "scripts"))
 
 from calibration_gate import (
     calibration_case,
@@ -14,6 +15,7 @@ from calibration_gate import (
 )
 from calibration_service import public_calibration_state
 from calibration_state import load_calibration_state, set_calibration_generation_error
+from generate_golden_page import _page as load_golden_page
 
 
 class GoldenFiveCalibrationTests(unittest.TestCase):
@@ -82,6 +84,13 @@ class GoldenFiveCalibrationTests(unittest.TestCase):
         self.assertEqual(pages["I-01"]["habitat"], "Trapped Stone Corridor")
         self.assertEqual(pages["I-24"]["monster_name"], "Gelatinous Cube")
         self.assertEqual(pages["I-40"]["habitat"], "Abandoned Armory")
+
+    def test_golden_generator_resolves_page_v2_before_generation(self):
+        config = load_calibration_config()
+        page = load_golden_page("I-01", config)
+        self.assertEqual(page["monster_name"], "Kobold Warrior")
+        self.assertEqual(page["habitat"], "Trapped Stone Corridor")
+        self.assertEqual(page["_resolved"]["contract_id"], "black-ink-page-v2")
 
     def test_studio_loads_split_calibration_scripts(self):
         html = (ROOT / "web" / "index.html").read_text(encoding="utf-8")
