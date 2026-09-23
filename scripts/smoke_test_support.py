@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from page_contract import resolve_page_spec
+from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image\nfrom page_contract import resolve_page_spec
 
 LOGGER = logging.getLogger(__name__)
 
@@ -66,6 +66,34 @@ def model_filename(config: dict, folder: str) -> str:
         raise RuntimeError(f"No model configured for {folder}")
     return str(match["filename"])
 
+
+
+def prepare_i01_workflow(
+    cli,
+    config: dict,
+    prompt: str,
+    seed: int,
+    workflow_dir: Path,
+):
+    workflow_path = workflow_dir / "blackink_i01_text_to_image.json"
+    prepared = prepare_distilled_text_to_image(
+        cli,
+        config["templates"]["text_to_image"],
+        workflow_path,
+        prompt=prompt,
+        seed=seed,
+        model_filename=model_filename(config, "diffusion_models"),
+        clip_filename=model_filename(config, "text_encoders"),
+        vae_filename=model_filename(config, "vae"),
+        width=768,
+        height=1024,
+    )
+    validation = envelope_data(cli.validate_workflow(workflow_path)) or {}
+    if not validation.get("valid"):
+        raise RuntimeError(
+            "Prepared I-01 workflow did not validate: " + json.dumps(validation)
+        )
+    return workflow_path, prepared
 
 def studio_health(studio_url: str) -> bool:
     try:
