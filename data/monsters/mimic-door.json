@@ -57,5 +57,8 @@
   },
   "schema_version": 2,
   "identity_version": 1,
-  "family_profile": "mimic"
+  "family_profile": "mimic",
+  "physical_requirements": [
+    "structural_attachment: disguised door body must occupy a believable supported opening; environment engine chooses the wall, frame, materials, and surrounding room"
+  ]
 }
