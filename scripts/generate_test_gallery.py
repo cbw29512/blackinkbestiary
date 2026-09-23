@@ -51,6 +51,31 @@ def write_state(payload: dict) -> None:
     tmp.replace(STATE_FILE)
 
 
+def load_or_init_state(copies: int, reset: bool = False) -> dict:
+    if STATE_FILE.exists() and not reset:
+        state = read_json(STATE_FILE)
+        state.setdefault("results", [])
+        state.setdefault("selections", {})
+        state["copies_per_page"] = max(int(state.get("copies_per_page") or 0), copies)
+        state["updated_at"] = utc_now()
+        state.pop("completed_at", None)
+        return state
+    return {
+        "schema_version": 2,
+        "started_at": utc_now(),
+        "updated_at": utc_now(),
+        "copies_per_page": copies,
+        "results": [],
+        "selections": {},
+    }
+
+
+def should_skip_candidate(prior: dict | None, rerun_failed: bool) -> bool:
+    if not prior:
+        return False
+    return not (rerun_failed and prior.get("status") in {"failed", "technical_qa_failed"})
+
+
 def load_pages() -> list[dict]:
     paths = active_book_paths(ROOT)
     tome = read_json(paths["manifest"])
@@ -111,22 +136,7 @@ def main() -> int:
         pages = pages[ids.index(args.start):]
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    if STATE_FILE.exists() and not args.reset:
-        state = read_json(STATE_FILE)
-        state.setdefault("results", [])
-        state.setdefault("selections", {})
-        state["copies_per_page"] = max(int(state.get("copies_per_page") or 0), args.copies)
-        state["updated_at"] = utc_now()
-        state.pop("completed_at", None)
-    else:
-        state = {
-            "schema_version": 2,
-            "started_at": utc_now(),
-            "updated_at": utc_now(),
-            "copies_per_page": args.copies,
-            "results": [],
-            "selections": {},
-        }
+    state = load_or_init_state(args.copies, args.reset)
     write_state(state)
 
     existing = {
@@ -138,7 +148,7 @@ def main() -> int:
     for page in pages:
         for candidate_no in range(1, args.copies + 1):
             prior = existing.get((page["page_id"], candidate_no))
-            if prior and not (args.rerun_failed and prior.get("status") in {"failed", "technical_qa_failed"}):
+            if should_skip_candidate(prior, args.rerun_failed):
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
                 continue
             if prior:
