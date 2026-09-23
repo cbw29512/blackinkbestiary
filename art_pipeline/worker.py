@@ -45,6 +45,8 @@ def current_context():
 def readiness(comfy_url: str):
     page, page_state = current_context()
     prompt = build_prompt(page, page_state.get("review_notes"))
+    if not instruction_snapshot:
+        raise RuntimeError("Universal generation instructions were not reloaded")
     report = {
         "current_page": page["page_id"],
         "monster": page["monster_name"],
@@ -81,7 +83,28 @@ def show_prompt():
         print(f"- {item}")
 
 
+def generation_instruction_snapshot() -> dict:
+    """Reload production authority from disk before every page generation."""
+    paths = [
+        ROOT / "config" / "universal_monster_contract.json",
+        ROOT / "config" / "universal_environment_contract.json",
+        ROOT / "config" / "universal_page_contract.json",
+        ROOT / "config" / "coloring_page_standard.json",
+    ]
+    snapshot = {}
+    for path in paths:
+        snapshot[path.name] = {
+            "mtime_ns": path.stat().st_mtime_ns,
+            "content": read_json(path),
+        }
+    return snapshot
+
+
 def submit_one(comfy_url: str, seed: int | None):
+    # Deliberately re-read all universal instructions for every page. Do not
+    # cache these contracts across a batch: edits made after drift is detected
+    # must govern the very next generated page.
+    instruction_snapshot = generation_instruction_snapshot()
     page, page_state = current_context()
     if not WORKFLOW_FILE.exists():
         raise SystemExit(
