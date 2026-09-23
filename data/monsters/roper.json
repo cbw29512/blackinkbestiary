@@ -53,5 +53,13 @@
   },
   "physical_requirements": [
     "ground_support: stationary ambush posture requires a believable rocklike supporting surface; environment engine chooses the compatible ground or terrain"
+  ],
+  "schema_version": 4,
+  "description": "A stationary ambush predator resembling a stalagmite, revealed by one central eye, a toothed mouth, and multiple long adhesive tendrils. Conical flexible central trunk with six or fewer long simple tendrils emerging from its sides. Rocklike folds and ridges kept sparse enough to preserve the camouflage silhouette.",
+  "behavior_traits": [
+    "motionless camouflage",
+    "tentacle ambush",
+    "grappling",
+    "anchored hunting"
   ]
 }
