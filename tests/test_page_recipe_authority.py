@@ -6,12 +6,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
+sys.path.insert(0, str(ROOT / "scripts"))
 
+from calibration_service import public_calibration_state
 from edit_prompt import build_edit_prompt
 from page_contract import load_page_contract, resolve_page_spec
 from page_recipe_audit import audit_manifest_recipe_debt
 from prompt_builder import build_prompt
 from scene_relationships import active_relationship_rules
+from smoke_test_support import load_current
 
 
 class PageRecipeAuthorityTests(unittest.TestCase):
@@ -29,29 +32,34 @@ class PageRecipeAuthorityTests(unittest.TestCase):
         self.assertTrue(
             {"identity_rules", "must_include", "coloring_rules", "modify"}.issubset(legacy)
         )
+        self.assertEqual(authority["runtime_compatibility_retained"], [])
         self.assertIn("review_notes", authority["review_correction_source"])
 
-
-    def test_tome_i_is_safe_for_future_legacy_strip(self):
+    def test_tome_i_legacy_recipe_migration_is_complete(self):
         report = audit_manifest_recipe_debt(ROOT, ROOT / "data" / "tome-I.json")
         self.assertTrue(report["safe_to_strip_generation_legacy"])
+        self.assertTrue(report["migration_complete"])
         self.assertEqual(report["pages_missing_authoritative_fields"], [])
-        self.assertGreater(report["pages_with_legacy_fields"], 0)
-        self.assertTrue(
-            all(count == 0 for count in report["strip_now_field_counts"].values())
-        )
-        self.assertGreater(
-            report["runtime_compatibility_retained_counts"].get("monster_name", 0),
-            0,
-        )
+        self.assertEqual(report["pages_with_legacy_fields"], 0)
+        self.assertTrue(all(count == 0 for count in report["legacy_field_counts"].values()))
+
+    def test_raw_tome_pages_are_minimal(self):
+        for page in (self.i01, self.i02):
+            self.assertNotIn("monster_name", page)
+            self.assertNotIn("habitat", page)
+            self.assertNotIn("identity_rules", page)
+            self.assertNotIn("must_include", page)
+            self.assertNotIn("coloring_rules", page)
+            self.assertNotIn("reference_image", page)
+            self.assertNotIn("modify", page)
 
     def test_resolver_uses_canonical_identity_and_coloring_defaults(self):
         page = deepcopy(self.i01)
         page["identity_rules"] = ["LEGACY IDENTITY POISON"]
         page["coloring_rules"] = {"color": "purple", "detail_density": "extreme"}
-
         resolved = resolve_page_spec(page, ROOT)
-
+        self.assertEqual(resolved["monster_name"], "Kobold Warrior")
+        self.assertEqual(resolved["habitat"], "Trapped Stone Corridor")
         self.assertNotIn("LEGACY IDENTITY POISON", resolved["identity_rules"])
         self.assertEqual(resolved["coloring_rules"]["color"], "black_on_white")
         self.assertEqual(resolved["coloring_rules"]["detail_density"], "medium_low")
@@ -63,26 +71,17 @@ class PageRecipeAuthorityTests(unittest.TestCase):
         page["modify"] = {
             "preserve": ["LEGACY PRESERVE POISON"],
             "change": ["LEGACY CHANGE POISON"],
-            "avoid": ["LEGACY MODIFY AVOID POISON"],
         }
-
         text = build_prompt(page)
-
         self.assertNotIn("LEGACY IDENTITY POISON", text)
         self.assertNotIn("LEGACY PROP POISON", text)
         self.assertNotIn("LEGACY PRESERVE POISON", text)
-        self.assertNotIn("LEGACY CHANGE POISON", text)
         self.assertIn("PAGE RECIPE LOCK", text)
         self.assertIn(page["environment_variant"]["framing"], text)
 
     def test_edit_prompt_uses_review_state_not_manifest_modify(self):
         page = deepcopy(self.i01)
-        page["modify"] = {
-            "preserve": ["LEGACY PRESERVE POISON"],
-            "change": ["LEGACY CHANGE POISON"],
-            "avoid": ["LEGACY MODIFY AVOID POISON"],
-        }
-
+        page["modify"] = {"change": ["LEGACY CHANGE POISON"]}
         text = build_edit_prompt(
             page,
             {
@@ -91,21 +90,29 @@ class PageRecipeAuthorityTests(unittest.TestCase):
                 "preserve_dimensions": ["monster_identity"],
             },
         )
-
         self.assertIn("CURRENT REVIEW CORRECTION", text)
         self.assertIn("more white space", text)
-        self.assertNotIn("LEGACY PRESERVE POISON", text)
         self.assertNotIn("LEGACY CHANGE POISON", text)
 
     def test_relationship_rules_ignore_legacy_must_include(self):
         page = deepcopy(self.i02)
         page["must_include"] = ["tripwire"]
         page["moment"] = "raising a copper coin as an offering"
-        rules = active_relationship_rules(page, ROOT)
-        rule_ids = {rule["rule_id"] for rule in rules}
-
+        rule_ids = {
+            rule["rule_id"] for rule in active_relationship_rules(page, ROOT)
+        }
         self.assertIn("offering_to_shrine", rule_ids)
         self.assertNotIn("tripwire_trigger", rule_ids)
+
+    def test_raw_manifest_consumers_resolve_display_fields(self):
+        smoke_page, _ = load_current(ROOT)
+        self.assertEqual(smoke_page["monster_name"], "Kobold Warrior")
+        self.assertEqual(smoke_page["habitat"], "Trapped Stone Corridor")
+
+        calibration = public_calibration_state(ROOT)
+        i01 = next(row for row in calibration["pages"] if row["page_id"] == "I-01")
+        self.assertEqual(i01["monster_name"], "Kobold Warrior")
+        self.assertEqual(i01["habitat"], "Trapped Stone Corridor")
 
 
 if __name__ == "__main__":
