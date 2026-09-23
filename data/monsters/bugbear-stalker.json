@@ -8,7 +8,7 @@
     "patient",
     "watchful"
   ],
-  "description": "",
+  "description": "A stealth-focused bugbear variant using the shared bugbear family anatomy, distinguished by a low, cautious hunting posture and lightly carried scavenged gear.",
   "behavior_traits": [
     "stealth stalking",
     "ambushing",
