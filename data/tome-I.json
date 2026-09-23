@@ -14,7 +14,7 @@
       "environment_variant": {
         "landmark": "open spiked pit trap cutting across the corridor floor beside a wall torch bracket",
         "framing": "tight one-point corridor perspective",
-        "interaction": "kobold stands safely on solid flagstone beside the open pit while guarding the trapped route"
+        "interaction": "kobold stands safely on solid flagstone beside the open pit, guarding the trapped route while one clear ankle-height tripwire crosses the corridor and visibly leads toward the pit mechanism"
       },
       "physicality": {
         "mode": "grounded",
