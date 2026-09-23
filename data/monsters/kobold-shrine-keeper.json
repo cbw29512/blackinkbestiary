@@ -8,7 +8,7 @@
   "size": "small",
   "creature_type": "reptilian humanoid",
   "visual_identity": {
-    "core_identity": "A small reptilian kobold devoted to a crude underground shrine, more ceremonial than heavily armed but still wary and dangerous.",
+    "core_identity": "A small reptilian kobold with a ceremonial caretaker role, more ritual-minded than heavily armed but still wary and dangerous.",
     "silhouette": "Short wiry reptilian body with a long tail and slightly bowed, reverent posture.",
     "head_features": "Long narrow snout, sharp teeth, alert eyes, small backward horn nubs or head spines.",
     "body_shape": "Lean scaled torso, thin limbs, clawed hands and long clawed feet.",
@@ -42,15 +42,15 @@
     ]
   },
   "default_habitats": [
-    "low cave shrines",
-    "dragon-themed kobold lairs",
-    "coin-strewn alcoves"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "snout is long and reptilian",
     "tail is visible",
     "small horns or head spines visible",
-    "shrine role reads without hiding kobold anatomy",
+    "ceremonial caretaker role reads without hiding kobold anatomy",
     "gear remains simple and scavenged",
     "body remains lean and colorable"
   ],
