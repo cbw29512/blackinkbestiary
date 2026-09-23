@@ -43,13 +43,13 @@
       "elf-child face",
       "imp or devil styling",
       "furry or fluffy silhouette",
-      "overly ornate throne detail"
+      "overly ornate rank gear"
     ]
   },
   "default_habitats": [
-    "cave throne rooms",
-    "goblin command dens",
-    "improvised underground halls"
+    "underground",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "clearly reads as goblin first and boss second",
