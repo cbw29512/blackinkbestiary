@@ -380,7 +380,7 @@ Fixes:
 
 Golden Five resolved relationship set:
 
-- I-01: tripwire trigger + pit interrupts route + wall-mounted fixture
+- I-01: pit interrupts route + wall-mounted fixture; tripwire is no longer required
 - I-24: contained-inside-body
 - I-27: interaction contact
 - I-38: emerging-from-opening
@@ -447,3 +447,30 @@ These were discovered by `python scripts/run_local_ci.py` before any Golden Five
 - Busy-hand scenes secure or omit secondary canonical weapons instead of floating them nearby.
 - Creatures without grasping limbs are exempt; Flying Sword remains the weapon-creature and never receives a hand-contact rule.
 - Added catalog-wide regression coverage so future ambiguous signature gear fails CI.
+
+
+## 2026-09-23 Equipment, Relationship, and Physicality Hardening
+
+Calibration exposed a broader physical-consistency problem: correct objects were sometimes present but floated, duplicated, attached to the wrong body part, or occupied contradictory physical states.
+
+Universal fixes now include:
+
+- weapon state resolution: held, body-secured, or explicitly environmental
+- carried weapons must visibly contact a believable grasping hand/limb
+- busy-hand scenes secure or omit secondary canonical weapons instead of floating them nearby
+- page-specific weapons inherit the same contact rules as canonical monster gear
+- animated weapon-creatures such as Flying Sword are exempt from hand-contact logic
+- shields attach to hand/forearm; quivers to back/hip; belts/pouches to waist; armor/straps/clothing to body; footwear to feet; chains/shackles to real attachment points; small worn accessories to clothing/cord/belt
+- specific attachment rules outrank generic ones, preventing cases such as foot wraps being treated as torso wraps
+- all 50 current monster files were audited; ambiguous signature-gear alternatives/conditionals were normalized to concrete defaults
+- catalog regression tests reject ambiguous signature gear going forward
+- relationship rules now support explicit suppression of incompatible lower-priority states
+- kicked/dislodged lanterns suppress the normal mounted-fixture state while retaining contact with the creature and wall mount
+- offering objects must remain visibly held by fingers rather than floating beside the hand
+- pinning actions require held-object contact with the target surface
+- reusable relationship coverage now includes wedged geometry, peeling from support, emergence through openings, wrapping/coiling contact, corrosion at contact points, web support, ceiling cling, and stepping between supports
+- every Tome I physicality.mode now resolves to exactly one universal support family through config/physicality_mode_rules.json
+- active physicality modes with missing or duplicate universal mappings are regression failures
+- scene relationship prompt budget remains capped at four; current Tome I static audit has no over-budget page
+
+Current architectural rule: if a recurring visual/physical failure can be described independently of one specific monster/page, fix it in the universal engine and add a regression test before regenerating.
