@@ -7,9 +7,11 @@ from pathlib import Path
 try:
     from .environment_catalog import resolve_environment_profile
     from .monster_catalog import resolve_monster_spec
+    from .page_recipe_audit import page_recipe_errors
 except ImportError:
     from environment_catalog import resolve_environment_profile
     from monster_catalog import resolve_monster_spec
+    from page_recipe_audit import page_recipe_errors
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_FILE = ROOT / "config" / "universal_page_contract.json"
@@ -47,6 +49,9 @@ def _merge_dict(base: dict, override: dict | None) -> dict:
 
 def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
     contract = load_page_contract(root / "config" / "universal_page_contract.json")
+    errors = page_recipe_errors(page, contract)
+    if errors:
+        raise RuntimeError("; ".join(errors))
     resolved = deepcopy(page)
 
     monster = resolve_monster_spec(
@@ -62,22 +67,18 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
 
     resolved["monster_name"] = monster.get("monster_name")
     resolved["habitat"] = environment.get("name")
-    resolved["identity_rules"] = _merge_unique(
-        monster.get("accuracy_checks"),
-        page.get("identity_rules"),
-    )
+    exceptions = page.get("page_exceptions") or {}
+    resolved["identity_rules"] = _merge_unique(monster.get("accuracy_checks"))
+    resolved["required_elements"] = list(exceptions.get("must_include") or [])
     resolved["must_avoid"] = _merge_unique(
         contract.get("global_must_avoid"),
         visual.get("must_avoid"),
         environment.get("must_avoid"),
-        page.get("must_avoid"),
+        exceptions.get("must_avoid"),
     )
     defaults = contract.get("defaults") or {}
-    resolved.setdefault("composition", defaults.get("composition", ""))
-    resolved["coloring_rules"] = _merge_dict(
-        defaults.get("coloring_rules") or {},
-        page.get("coloring_rules"),
-    )
+    resolved["composition"] = defaults.get("composition", "")
+    resolved["coloring_rules"] = deepcopy(defaults.get("coloring_rules") or {})
     locomotion_defaults = {
         "can_fly": bool((contract.get("locomotion") or {}).get("default_can_fly", False))
     }
