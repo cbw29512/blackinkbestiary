@@ -38,7 +38,9 @@ _SCENERY_TERMS = (
     "background composition", "environment camera", "scenery",
     "war room", "throne room", "treasure room", "mine tunnel",
     "floor grate", "wall sconce", "dungeon pantry", "underground kitchen",
-    "goblin storeroom",
+    "goblin storeroom", "statue gallery", "crypt entrance", "underground arch",
+    "rubble ambush", "cave fire pit", "dungeon chamber", "coin-strewn",
+    "cave shrine", "guarded vault", "armory",
 )
 
 def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
