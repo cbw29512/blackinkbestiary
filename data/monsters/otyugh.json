@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "refuse pits",
     "sewers",
-    "dungeon privies"
+    "underground",
+    "ruins"
   ],
   "accuracy_checks": [
     "three-leg anatomy is readable",
@@ -50,5 +50,13 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A filthy refuse-dwelling aberration with three stout legs, two long grasping tentacles, one elevated eyestalk, and a broad central mouth. Round heavy torso with three thick legs and two flexible grasping tentacles. Tough hide with sparse folds, warts, and garbage residue kept simple. Low bulky central body supported by three legs, two long tentacles reaching outward, single eye stalk rising above.",
+  "behavior_traits": [
+    "scavenging",
+    "refuse feeding",
+    "tentacle grappling",
+    "territorial ambush"
+  ]
 }
