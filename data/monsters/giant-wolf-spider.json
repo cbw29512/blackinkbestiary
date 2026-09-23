@@ -34,8 +34,8 @@
     ]
   },
   "default_habitats": [
+    "forest",
     "caves",
-    "underground",
     "rocky terrain"
   ],
   "accuracy_checks": [
@@ -51,7 +51,14 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "spider"
+  "family_profile": "spider",
+  "description": "A large ground-hunting wolf spider adapted for ambush rather than web-building, with a stockier hairy body and prominent forward-facing eyes. Stockier than a web spider, with thick jointed legs and compact abdomen built for sudden movement. Sparse coarse hair tufts on legs and body; no dense furry mass.",
+  "behavior_traits": [
+    "ground stalking",
+    "climbing",
+    "ambush hunting",
+    "quick pursuit"
+  ]
 }
