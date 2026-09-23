@@ -41,7 +41,7 @@ class CreatureCatalogTests(unittest.TestCase):
 
     def test_minimal_bugbear_recipe_inherits_complete_family_identity(self):
         raw = json.loads((ROOT / "data" / "monsters" / "bugbear-stalker.json").read_text(encoding="utf-8"))
-        self.assertEqual(raw["schema_version"], 3)
+        self.assertEqual(raw["schema_version"], 4)
         self.assertNotIn("visual_identity", raw)
         self.assertNotIn("accuracy_checks", raw)
         self.assertNotIn("size", raw)
