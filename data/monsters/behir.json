@@ -5,7 +5,7 @@
   "size": "huge",
   "creature_type": "monstrosity",
   "visual_identity": {
-    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head, and a body built to coil through caverns.",
+    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head,..",
     "silhouette": "Very long snake-like torso wrapped in coils, numerous paired legs along the sides, horned head raised from the coil.",
     "head_features": "Long reptilian head with strong jaws, backward horns or spines, alert eyes, no wings.",
     "body_shape": "Serpentine segmented torso with many pairs of short legs spaced along its length and a tapering tail.",
@@ -22,7 +22,7 @@
       "long serpentine body",
       "horned reptilian head",
       "no wings",
-      "cavern-coiling posture"
+      "coiling serpentine posture"
     ],
     "must_avoid": [
       "dragon wings",
@@ -34,16 +34,16 @@
     ]
   },
   "default_habitats": [
-    "crystal caverns",
-    "deep caves",
-    "subterranean cliffs"
+    "underground",
+    "caves",
+    "rocky terrain"
   ],
   "accuracy_checks": [
     "many legs are obvious",
     "body reads serpentine not centipede",
     "head is reptilian",
     "no wings appear",
-    "crystal coil composition is readable",
+    "coiled body remains readable",
     "lightning remains secondary to anatomy"
   ],
   "reference": {
