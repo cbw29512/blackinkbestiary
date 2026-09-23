@@ -105,6 +105,8 @@ def submit_one(comfy_url: str, seed: int | None):
     # cache these contracts across a batch: edits made after drift is detected
     # must govern the very next generated page.
     instruction_snapshot = generation_instruction_snapshot()
+    if not instruction_snapshot:
+        raise RuntimeError("Universal generation instructions were not reloaded")
     page, page_state = current_context()
     if not WORKFLOW_FILE.exists():
         raise SystemExit(
