@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "monster_id": "kobold-shrine-keeper",
   "monster_name": "Kobold Shrine-Keeper",
@@ -58,5 +58,12 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Use reference only for creature identity and proportions; preserve Black-Ink coloring-book style."
-  }
+  },
+  "description": "A small reptilian kobold with a ceremonial caretaker role, more ritual-minded than heavily armed but still wary and dangerous. Lean scaled torso, thin limbs, clawed hands and long clawed feet. Sparse simplified scales with large open body regions suitable for coloring. Short wiry reptilian body with a long tail and slightly bowed, reverent posture.",
+  "behavior_traits": [
+    "ritual tending",
+    "scavenging",
+    "guarding",
+    "cautious retreat"
+  ]
 }
