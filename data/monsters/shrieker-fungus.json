@@ -5,7 +5,7 @@
   "size": "medium",
   "creature_type": "giant fungus",
   "visual_identity": {
-    "core_identity": "A stationary cave fungus whose thick stalk and broad cap contain a mouthlike gill opening that produces an alarm shriek.",
+    "core_identity": "A stationary fungus whose thick stalk and broad cap contain a mouthlike gill opening that produces an alarm shriek.",
     "silhouette": "Large mushroom silhouette with stout stalk, broad cap, and an opened underside gill cavity.",
     "head_features": "No animal head; the underside of the cap opens like a simple mouth or resonant gill chamber.",
     "body_shape": "Single rooted mushroom body with thick stalk and cap, no arms or legs.",
@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "fungal halls",
-    "damp caves",
-    "underground mushroom groves"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads as fungus first",
