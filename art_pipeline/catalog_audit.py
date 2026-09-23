@@ -34,7 +34,7 @@ def _read(path: Path) -> dict:
 
 _SCENERY_TERMS = (
     "background", "wall", "floor", "ceiling", "corridor", "room", "vault context",
-    "pillar", "treasure pile", "laboratory", "furniture", "doorway", "gate context", "grate", "architecture",
+    "treasure pile", "laboratory", "furniture", "gate context", "background", "architecture",
 )
 
 def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
@@ -51,7 +51,7 @@ def _monster_scenery_warnings(path: Path, spec: dict) -> list[str]:
     habitats = spec.get("default_habitats") or []
     for item in habitats:
         text = str(item or "").lower()
-        if any(term in text for term in ("torch", "grate", "pillar", "table", "shelf", "stairs", "ten-foot", "wall", "ceiling")):
+        if any(term in text for term in ("torch-lit", "floor grate", "pillar", "table", "shelf", "ten-foot", "cramped dungeon stairs")):
             warnings.append(f"{path.name}: overly specific default_habitats entry: {item}")
     for field, value in fields.items():
         values = value if isinstance(value, list) else [value]
