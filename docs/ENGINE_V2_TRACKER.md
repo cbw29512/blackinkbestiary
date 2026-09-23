@@ -423,3 +423,9 @@ The first full local CI run on the integrated page-v2 / monster-v3 branch found 
 These were discovered by `python scripts/run_local_ci.py` before any Golden Five generation.
 
 
+
+### 2026-09-23 I-01 Trap Simplification
+- Golden Five I-01 no longer requires a tripwire.
+- Canonical scene is now: Kobold Warrior + trapped stone corridor + open spiked pit interrupting the route + wall torch bracket.
+- Calibration and regression tests now reject tripwire ownership for I-01 while retaining universal tripwire support for other pages.
+- Purpose: reduce prompt competition and make the trap story immediately readable in coloring-page line art.
