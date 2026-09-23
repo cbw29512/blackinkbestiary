@@ -35,13 +35,14 @@ def infer_overlays(page: dict, profile: dict, root: Path = ROOT) -> list[dict]:
         str(variant.get("framing") or ""),
         str(variant.get("interaction") or ""),
         " ".join(str(item) for item in page.get("environment_overlays") or []),
+        " ".join(str(item) for item in page.get("environment_roles") or []),
     ]).lower()
     matches = []
     for overlay_id, overlay in registry["overlays"].items():
         terms = [str(item).lower() for item in overlay.get("trigger_terms") or []]
         if any(term and term in haystack for term in terms):
             matches.append({"overlay_id": overlay_id, **overlay})
-    return matches[:2]
+    return matches[:3]
 
 
 def _pick(items: list[dict], contexts: set[str], key: str, order: int) -> dict:
@@ -81,10 +82,12 @@ def assemble_environment_palette(page: dict, root: Path = ROOT) -> dict:
     contract = load_environment_contract(root / "config" / "universal_environment_contract.json")
     contexts = infer_contexts(profile, catalog)
     overlays = infer_overlays(page, profile, root)
+    # Background selection is environment-owned. Monster identity must not influence
+    # which cave wall, reef shelf, field landmark, laboratory fixture, etc. is chosen.
     key = "|".join([
         str(page.get("page_id") or ""),
-        str(page.get("monster_spec_id") or ""),
         str(profile.get("environment_id") or ""),
+        str(page.get("environment_seed") or page.get("order") or 1),
     ])
     order = int(page.get("order") or 1)
     components = {}
