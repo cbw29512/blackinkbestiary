@@ -11,8 +11,9 @@
   ],
   "visual_overrides": {
     "signature_gear": [
-      "short sword or crude blade",
-      "small shield or light scavenged armor",
+      "short crude sword",
+      "small shield",
+      "light scavenged armor",
       "belt pouches",
       "simple boots or wraps"
     ],
