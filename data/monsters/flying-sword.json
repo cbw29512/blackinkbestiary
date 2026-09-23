@@ -36,9 +36,9 @@
     ]
   },
   "default_habitats": [
-    "rotundas",
-    "armories",
-    "guarded vaults"
+    "ruins",
+    "settlements",
+    "fortifications"
   ],
   "accuracy_checks": [
     "sword is visibly unsupported",
