@@ -17,6 +17,7 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
         report = audit_monster_catalog(ROOT)
         self.assertEqual(report["errors"], [])
         self.assertTrue(report["pass"])
+        self.assertEqual(report["ownership_warnings"], [])
         self.assertGreaterEqual(report["family_profiles"], 10)
 
     def test_monster_ownership_audit_flags_scenery_but_not_support_relationships(self):
