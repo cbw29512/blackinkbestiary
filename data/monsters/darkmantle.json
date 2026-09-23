@@ -53,5 +53,8 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "physical_requirements": [
+    "overhead_attachment: ambush posture requires a believable overhead support; environment engine chooses the ceiling, rock, beam, branch, or other compatible support"
+  ]
 }
