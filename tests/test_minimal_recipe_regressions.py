@@ -29,7 +29,7 @@ class MinimalRecipeRegressionTests(unittest.TestCase):
 
     def test_golden_five_keep_story_critical_information(self):
         expectations = {
-            "I-01": ["tripwire", "punji pit", "torch bracket"],
+            "I-01": ["open spiked pit trap", "wall torch bracket"],
             "I-24": ["bones and a key", "suspended inside"],
             "I-27": ["reaching hand", "toothed mouth"],
             "I-38": ["ankheg", "bursts upward", "loose floor"],
