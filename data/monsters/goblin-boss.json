@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "monster_id": "goblin-boss",
   "monster_name": "Goblin Boss",
@@ -63,5 +63,12 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference defines goblin identity and proportions, not a composition to copy."
-  }
+  },
+  "description": "A dominant goblin leader who is still small, wiry, ugly-cunning, and unmistakably goblinoid; authority comes from posture, trophies, and scavenged rank gear rather than human nobility or brute size. Compact agile humanoid, slightly sturdier than a common goblin but still lean, small, and quick rather than orc-bulky or heroic. Mostly bare skin with a few scars or wrinkles and sparse hair only; no fur-covered or fluffy silhouette.",
+  "behavior_traits": [
+    "commanding",
+    "opportunistic fighting",
+    "retreating",
+    "ambushing"
+  ]
 }
