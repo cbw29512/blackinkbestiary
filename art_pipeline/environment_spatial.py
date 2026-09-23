@@ -58,31 +58,50 @@ def resolve_spatial_envelope(
         if families and family not in families:
             continue
         terms = [str(item).lower() for item in envelope.get("terms") or [] if str(item).strip()]
-        primary_hits = sum(1 for term in terms if term in primary_text)
-        secondary_hits = sum(1 for term in terms if term in secondary_text)
-        if not primary_hits and not secondary_hits:
+        primary_terms = [term for term in terms if term in primary_text]
+        secondary_terms = [term for term in terms if term in secondary_text]
+        if not primary_terms and not secondary_terms:
             continue
-        matched_terms = [
-            term for term in terms
-            if term in primary_text or term in secondary_text
-        ]
-        ranked.append((
-            primary_hits,
-            secondary_hits,
-            int(envelope.get("priority") or 0),
-            max((len(term) for term in matched_terms), default=0),
-            envelope_id,
-            envelope,
-        ))
+        ranked.append({
+            "primary_hits": len(primary_terms),
+            "primary_longest": max((len(term) for term in primary_terms), default=0),
+            "secondary_hits": len(secondary_terms),
+            "secondary_longest": max((len(term) for term in secondary_terms), default=0),
+            "priority": int(envelope.get("priority") or 0),
+            "envelope_id": envelope_id,
+            "envelope": envelope,
+        })
 
     if not ranked:
         raise RuntimeError(
             f"No spatial envelope matched environment profile {profile.get('environment_id')!r}"
         )
 
-    ranked.sort(reverse=True)
-    _, _, _, _, envelope_id, envelope = ranked[0]
-    return {"envelope_id": envelope_id, **envelope}
+    has_primary = any(item["primary_hits"] for item in ranked)
+    if has_primary:
+        ranked = [item for item in ranked if item["primary_hits"]]
+        ranked.sort(
+            key=lambda item: (
+                item["priority"],
+                item["primary_hits"],
+                item["primary_longest"],
+                item["envelope_id"],
+            ),
+            reverse=True,
+        )
+    else:
+        ranked.sort(
+            key=lambda item: (
+                item["priority"],
+                item["secondary_hits"],
+                item["secondary_longest"],
+                item["envelope_id"],
+            ),
+            reverse=True,
+        )
+
+    selected = ranked[0]
+    return {"envelope_id": selected["envelope_id"], **selected["envelope"]}
 
 
 def spatial_envelope_errors(profile: dict) -> list[str]:
