@@ -82,8 +82,12 @@
     },
     "hanging_from_support": {
       "trigger_terms": [
-        "hanging",
-        "suspended",
+        "hanging from",
+        "hangs from",
+        "hanging overhead",
+        "suspended from",
+        "suspended beneath",
+        "suspended by",
         "web-hanging"
       ],
       "directives": [
@@ -98,7 +102,12 @@
         "emerges",
         "half-emerged",
         "burrow opening",
-        "cave mouth"
+        "cave mouth",
+        "bursting from",
+        "bursting upward",
+        "bursts upward",
+        "breaking through",
+        "surfacing from"
       ],
       "directives": [
         "The body visibly intersects the opening boundary in a physically believable way.",
@@ -158,13 +167,44 @@
         "grips",
         "grabbing",
         "reaches toward",
-        "reaching toward"
+        "reaching toward",
+        "reaching hand"
       ],
       "directives": [
         "The acting limb visibly contacts or clearly reaches toward the named target.",
         "The target remains distinct from the limb and surrounding props."
       ],
       "priority": 90
+    },
+    "contained_inside_body": {
+      "priority": 97,
+      "trigger_terms": [
+        "suspended inside",
+        "inside the cube",
+        "inside the ooze",
+        "embedded inside",
+        "visible within the body"
+      ],
+      "directives": [
+        "Contained objects must read clearly inside the enclosing creature or material volume, not pasted in front of its outer silhouette.",
+        "Keep the containing outline continuous enough to prove enclosure while leaving the interior open and easy to color.",
+        "Use sparse overlap or depth cues rather than dense shading to show that the objects are within the body."
+      ]
+    },
+    "feeding_contact": {
+      "priority": 91,
+      "trigger_terms": [
+        "feeding on",
+        "feeds directly on",
+        "feeding directly on",
+        "gnawing",
+        "chewing on"
+      ],
+      "directives": [
+        "The feeding mouth, mandibles, antennae, or other stated feeding anatomy must visibly contact the target material.",
+        "The target must show the stated damage, corrosion, bite, or consumption at or immediately beside the contact point.",
+        "Do not place the food or target nearby without a readable physical feeding relationship."
+      ]
     }
   },
   "prompt_budget": {
