@@ -5,8 +5,7 @@
   "family_profile": "construct",
   "variant_traits": [
     "empty plate armor",
-    "guard construct",
-    "pedestal display origin"
+    "guard construct"
   ],
   "size": "medium",
   "visual_overrides": {
