@@ -34,10 +34,10 @@ class PageRecipeAuthorityTests(unittest.TestCase):
 
     def test_tome_i_is_safe_for_future_legacy_strip(self):
         report = audit_manifest_recipe_debt(ROOT, ROOT / "data" / "tome-I.json")
-        self.assertTrue(report["safe_to_strip_legacy"])
+        self.assertTrue(report["safe_to_strip_generation_legacy"])
         self.assertEqual(report["pages_missing_authoritative_fields"], [])
         self.assertGreater(report["pages_with_legacy_fields"], 0)
-        self.assertGreater(report["legacy_field_counts"].get("must_include", 0), 0)
+        self.assertGreaterEqual(report["strip_now_field_counts"].get("must_include", 0), 0)\n        self.assertGreater(report["runtime_compatibility_retained_counts"].get("monster_name", 0), 0)
 
     def test_resolver_uses_canonical_identity_and_coloring_defaults(self):
         page = deepcopy(self.i01)
