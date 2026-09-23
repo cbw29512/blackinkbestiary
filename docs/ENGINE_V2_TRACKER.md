@@ -333,3 +333,20 @@ Additional calibration-derived rules now also require:
 
 - wall torches/sconces to visibly attach to masonry rather than become freestanding posts
 - tripwires to visibly cross the walking path and connect cause-and-effect to the triggered hazard
+
+## 2026-09-22 Minimal Page Recipe V2 Checkpoint
+
+Tome I has been migrated completely to the strict page-v2 recipe model.
+
+- 50/50 Tome I pages use only approved raw recipe fields.
+- 0 Tome I pages retain legacy `page_exceptions`.
+- Monster name, habitat, identity checks, global avoid rules, coloring rules, and composition are derived by universal engines.
+- Scene-specific story information is carried by `moment`, `environment_variant`, and `physicality` instead of duplicated must-include lists.
+- Environment-specific drift guards remain owned by reusable environment profiles.
+- Scene relationship rules are now the single owner for physical object relationships; duplicate environment-level torch/tripwire/pit rules were removed.
+- Relationship selection is priority-based so critical trap/support/cause-and-effect rules cannot be silently crowded out by lower-priority matches.
+- Golden Five regression coverage protects I-01, I-24, I-27, I-38, and I-40 after recipe minimization.
+- Prompt-builder helpers were split so touched production modules remain under the 150-line project limit.
+
+Current CI limitation remains external to code execution: GitHub Actions jobs continue to terminate before checkout with no steps.
+

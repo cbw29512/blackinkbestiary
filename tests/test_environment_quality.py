@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from edit_prompt import build_edit_prompt
 from prompt_builder import build_prompt, load_monster_spec
+from page_contract import resolve_page_spec
 from quality_system import environment_approval_checks, environment_directives
 
 
@@ -41,10 +42,13 @@ class EnvironmentQualityTests(unittest.TestCase):
         self.assertIn("broad flattened", visual["head_features"].lower())
 
     def test_goblin_pantry_rejects_modern_domestic_drift(self):
-        avoid = " ".join(self.goblin_page["must_avoid"]).lower()
-        self.assertIn("modern household", avoid)
-        self.assertIn("generic pantry", avoid)
-        self.assertTrue(any("stone" in item.lower() for item in self.goblin_page["must_include"]))
+        resolved = resolve_page_spec(self.goblin_page, ROOT)
+        avoid = " ".join(resolved["must_avoid"]).lower()
+        self.assertIn("modern cabinets", avoid)
+        self.assertIn("appliances", avoid)
+        text = build_prompt(self.goblin_page)
+        self.assertIn("rough stone walls", text)
+        self.assertIn("open timber shelves", text)
 
     def test_environment_review_checks_exist(self):
         directives = environment_directives(ROOT)

@@ -46,15 +46,21 @@ class UniversalPageContractTests(unittest.TestCase):
         self.assertEqual(page["habitat"], "Trapped Stone Corridor")
         self.assertIn("60–75% of page height", page["composition"])
         self.assertTrue(page["must_avoid"])
-        self.assertEqual(page["_resolved"]["contract_id"], "black-ink-page-v1")
+        self.assertEqual(page["_resolved"]["contract_id"], "black-ink-page-v2")
 
     def test_canonical_catalog_names_override_stale_page_display_fields(self):
         raw = self.minimal_page()
         raw["monster_name"] = "Wrong Creature Name"
         raw["habitat"] = "Generic Hallway"
-        page = resolve_page_spec(raw, ROOT)
-        self.assertEqual(page["monster_name"], "Kobold Warrior")
-        self.assertEqual(page["habitat"], "Trapped Stone Corridor")
+        tome = {
+            "tome_id": "TEST-LEGACY",
+            "title": "Legacy Field Test",
+            "theme": "test",
+            "total_pages": 1,
+            "pages": [raw],
+        }
+        errors = validate_manifest(ROOT, tome, ROOT / "data" / "monsters")
+        self.assertTrue(any("legacy derived fields" in error for error in errors))
 
     def test_minimal_recipe_generates_complete_prompt(self):
         text = build_prompt(self.minimal_page())

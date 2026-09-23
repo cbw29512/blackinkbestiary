@@ -29,9 +29,9 @@ class SeriesRegistryTests(unittest.TestCase):
                 [slot["order"] for slot in plan["slots"]],
                 list(range(1, book["target_pages"] + 1)),
             )
-            self.assertEqual(plan["page_contract"], "black-ink-page-v1")
+            self.assertEqual(plan["page_contract"], "black-ink-page-v2")
             for slot in plan["slots"]:
-                self.assertEqual(slot["page_contract"], "black-ink-page-v1")
+                self.assertEqual(slot["page_contract"], "black-ink-page-v2")
                 self.assertNotIn("habitat", slot)
                 self.assertNotIn("composition", slot)
                 self.assertIn("environment_profile_id", slot)

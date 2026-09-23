@@ -59,24 +59,28 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
         root / "data" / "environment_families",
     )
     visual = monster.get("visual_identity") or {}
+    exceptions = page.get("page_exceptions") or {}
 
     resolved["monster_name"] = monster.get("monster_name")
     resolved["habitat"] = environment.get("name")
     resolved["identity_rules"] = _merge_unique(
         monster.get("accuracy_checks"),
-        page.get("identity_rules"),
+        exceptions.get("identity_notes"),
+    )
+    resolved["must_include"] = _merge_unique(
+        exceptions.get("required_elements"),
     )
     resolved["must_avoid"] = _merge_unique(
         contract.get("global_must_avoid"),
         visual.get("must_avoid"),
         environment.get("must_avoid"),
-        page.get("must_avoid"),
+        exceptions.get("avoid_elements"),
     )
     defaults = contract.get("defaults") or {}
-    resolved.setdefault("composition", defaults.get("composition", ""))
+    resolved["composition"] = defaults.get("composition", "")
     resolved["coloring_rules"] = _merge_dict(
         defaults.get("coloring_rules") or {},
-        page.get("coloring_rules"),
+        exceptions.get("coloring_overrides"),
     )
     locomotion_defaults = {
         "can_fly": bool((contract.get("locomotion") or {}).get("default_can_fly", False))

@@ -66,20 +66,18 @@ Reference art controls **identity and anatomy only**. It never controls Black-In
 
 ### 2. Page Spec
 
-A structured JSON blueprint for one page.
+A tiny page-specific recipe. Universal engines own reusable intelligence.
 
 It defines:
 - page ID and order
-- monster identity
-- anatomy requirements
-- habitat
-- scene moment
-- composition
-- must-include elements
-- must-avoid elements
-- coloring-book rules
-- optional reference images
-- current review instructions
+- canonical monster spec ID
+- canonical environment profile ID
+- one scene moment and archetype
+- unique landmark, framing, and monster/environment interaction
+- physical support and motion
+- only genuine page-specific exceptions when unavoidable
+
+It does **not** duplicate monster anatomy, habitat prose, generic coloring rules, global negative rules, composition boilerplate, reference metadata, or review instructions.
 
 ### 3. Production Manager
 
@@ -247,17 +245,15 @@ Fields:
 Fields:
 - `page_id`
 - `order`
-- `monster_name`
 - `monster_spec_id`
-- `identity_rules[]`
-- `habitat`
+- `environment_profile_id`
 - `moment`
-- `must_include[]`
-- `must_avoid[]`
-- `composition`
-- `coloring_rules`
-- `reference_images[]`
-- `status`
+- `archetype`
+- `environment_variant`
+- `physicality`
+- optional `page_exceptions`
+
+All monster identity, environment identity, coloring defaults, composition defaults, and global avoid rules are resolved from universal engines.
 
 ### Candidate
 

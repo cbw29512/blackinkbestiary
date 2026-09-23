@@ -5,83 +5,31 @@ from pathlib import Path
 
 try:
     from .quality_system import archetype_rules
-    from .monster_catalog import minimal_recipe_errors, resolve_monster_spec
-    from .environment_catalog import environment_fingerprint, environment_identity_errors, resolve_environment_profile
+    from .environment_catalog import environment_fingerprint
+    from .manifest_page_validation import (
+        validate_environment_dependencies,
+        validate_monster_dependencies,
+        validate_physicality_dependencies,
+    )
     from .page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from .page_recipe_policy import page_recipe_errors
     from .physicality_prompt import locomotion_errors
-    from .source_scope import source_scope_errors
     from .story_prompt import story_errors
 except ImportError:
     from quality_system import archetype_rules
-    from monster_catalog import minimal_recipe_errors, resolve_monster_spec
-    from environment_catalog import environment_fingerprint, environment_identity_errors, resolve_environment_profile
+    from environment_catalog import environment_fingerprint
+    from manifest_page_validation import (
+        validate_environment_dependencies,
+        validate_monster_dependencies,
+        validate_physicality_dependencies,
+    )
     from page_contract import load_page_contract, missing_required_paths, page_uniqueness_fingerprint, resolve_page_spec
+    from page_recipe_policy import page_recipe_errors
     from physicality_prompt import locomotion_errors
-    from source_scope import source_scope_errors
     from story_prompt import story_errors
 
 
 REQUIRED_PAGE_FIELDS = {"page_id", "order", "monster_spec_id", "moment", "archetype"}
-REQUIRED_VISUAL_FIELDS = {
-    "core_identity", "silhouette", "head_features", "body_shape", "surface",
-    "signature_gear", "attitude", "must_keep", "must_avoid",
-}
-
-
-def _validate_spec(root: Path, monster_dir: Path, page: dict) -> list[str]:
-    page_id = page["page_id"]
-    spec_id = str(page.get("monster_spec_id") or "").strip()
-    if not spec_id:
-        return [f"{page_id}: canonical monster spec missing"]
-    try:
-        spec = resolve_monster_spec(spec_id, monster_dir)
-    except RuntimeError as exc:
-        return [f"{page_id}: {exc}"]
-
-    errors = []
-    errors.extend(minimal_recipe_errors(spec_id, monster_dir))
-    errors.extend(source_scope_errors(spec_id, root))
-    explicit_name = str(page.get("monster_name") or "").strip()
-    if explicit_name and spec.get("monster_name") != explicit_name:
-        errors.append(f"{page_id}: explicit monster_name conflicts with catalog")
-    visual = spec.get("visual_identity") or {}
-    missing = sorted(REQUIRED_VISUAL_FIELDS.difference(visual))
-    if missing:
-        errors.append(f"{page_id}: monster spec missing visual fields: {', '.join(missing)}")
-    if not visual.get("must_keep"):
-        errors.append(f"{page_id}: monster spec must_keep cannot be empty")
-    if not visual.get("must_avoid"):
-        errors.append(f"{page_id}: monster spec must_avoid cannot be empty")
-    if not spec.get("accuracy_checks"):
-        errors.append(f"{page_id}: monster spec accuracy_checks cannot be empty")
-    return errors
-
-def _validate_environment(page: dict) -> list[str]:
-    page_id = page["page_id"]
-    errors = []
-    profile_id = str(page.get("environment_profile_id") or "").strip()
-    try:
-        profile = resolve_environment_profile(profile_id)
-        errors.extend(f"{page_id}: {item}" for item in environment_identity_errors(profile))
-    except RuntimeError as exc:
-        errors.append(f"{page_id}: {exc}")
-
-    variant = page.get("environment_variant") or {}
-    for field in ("landmark", "framing", "interaction"):
-        if not str(variant.get(field) or "").strip():
-            errors.append(f"{page_id}: environment_variant.{field} is required")
-    return errors
-
-def _validate_physicality(page: dict) -> list[str]:
-    page_id = page["page_id"]
-    physicality = page.get("physicality") or {}
-    errors = []
-    for field in ("mode", "support", "motion"):
-        if not str(physicality.get(field) or "").strip():
-            errors.append(f"{page_id}: physicality.{field} is required")
-    return errors
-
-
 def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
     errors: list[str] = []
     pages = tome.get("pages") or []
@@ -109,6 +57,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
             errors.append(f"{page_id}: missing fields: {', '.join(missing)}")
         if missing_paths:
             errors.append(f"{page_id}: missing contract fields: {', '.join(missing_paths)}")
+        errors.extend(page_recipe_errors(page, root))
         if missing or missing_paths:
             continue
 
@@ -130,9 +79,9 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         if archetype not in archetypes:
             errors.append(f"{page_id}: unknown archetype {archetype!r}")
 
-        errors.extend(_validate_spec(root, monster_dir, page))
-        errors.extend(_validate_environment(page))
-        errors.extend(_validate_physicality(page))
+        errors.extend(validate_monster_dependencies(root, monster_dir, page))
+        errors.extend(validate_environment_dependencies(page))
+        errors.extend(validate_physicality_dependencies(page))
         errors.extend(story_errors(page, root))
         try:
             resolved = resolve_page_spec(page, root)

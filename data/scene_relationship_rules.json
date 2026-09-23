@@ -14,7 +14,8 @@
       "directives": [
         "The fixture visibly touches and is supported by the wall through a bracket, ring, plate, hook, or niche.",
         "The fixture must not become a freestanding post, floor lamp, or floating object."
-      ]
+      ],
+      "priority": 80
     },
     "tripwire_trigger": {
       "trigger_terms": [
@@ -24,7 +25,8 @@
         "The wire visibly crosses the traversable path at ankle or shin height.",
         "At least one anchor point is visible on wall, floor, stake, or mechanism.",
         "The wire visibly leads to or explains the triggered hazard; it is not merely a rope held by the monster."
-      ]
+      ],
+      "priority": 100
     },
     "pit_interrupts_route": {
       "trigger_terms": [
@@ -36,7 +38,8 @@
         "The pit opening is cut into the floor plane and visibly interrupts or threatens the normal travel route.",
         "The rim is structurally clear and the interior hazard is readable without tiny repetitive detail.",
         "Do not place the pit harmlessly off to the side unless the page recipe explicitly says side pit."
-      ]
+      ],
+      "priority": 98
     },
     "pressure_plate_route": {
       "trigger_terms": [
@@ -45,7 +48,8 @@
       "directives": [
         "The pressure plate is part of the walkable floor and lies where a traveler could plausibly step on it.",
         "Its relationship to the hazard is visually understandable."
-      ]
+      ],
+      "priority": 96
     },
     "offering_to_shrine": {
       "trigger_terms": [
@@ -58,7 +62,8 @@
         "The offered object is visibly separate from the hand and readable as the stated object.",
         "The gesture clearly aims toward the altar, shrine, idol, skull, relic, or ritual focal point receiving the offering.",
         "The sacred focal point and offered object must not merge into unrelated props."
-      ]
+      ],
+      "priority": 94
     },
     "object_on_support": {
       "trigger_terms": [
@@ -72,7 +77,8 @@
       "directives": [
         "The supported object or creature visibly contacts the named supporting surface.",
         "No hovering gap or ambiguous overlap may separate object from support."
-      ]
+      ],
+      "priority": 88
     },
     "hanging_from_support": {
       "trigger_terms": [
@@ -83,7 +89,8 @@
       "directives": [
         "Visible contact or attachment points connect the subject to the stated overhead support.",
         "The body weight must read as carried by the support rather than floating."
-      ]
+      ],
+      "priority": 92
     },
     "emerging_from_opening": {
       "trigger_terms": [
@@ -96,7 +103,8 @@
       "directives": [
         "The body visibly intersects the opening boundary in a physically believable way.",
         "A substantial supported portion remains connected to floor, earth, water, wall, or opening rather than appearing airborne."
-      ]
+      ],
+      "priority": 92
     },
     "guarding_focal_object": {
       "trigger_terms": [
@@ -108,7 +116,8 @@
       "directives": [
         "The guarded object or threshold is positioned close enough to the subject that the protective relationship reads instantly.",
         "Body orientation, gaze, or stance points toward the approach to the guarded feature."
-      ]
+      ],
+      "priority": 86
     },
     "using_cover": {
       "trigger_terms": [
@@ -121,7 +130,8 @@
       "directives": [
         "The subject overlaps the cover edge enough to show concealment while keeping the silhouette readable.",
         "The cover must be a real environment form, not an unexplained foreground shape."
-      ]
+      ],
+      "priority": 84
     },
     "carrying_object": {
       "trigger_terms": [
@@ -135,7 +145,8 @@
       "directives": [
         "The carried object visibly contacts the hand, arm, shoulder, rope, or body supporting it.",
         "Its silhouette stays distinct enough to identify the object without text."
-      ]
+      ],
+      "priority": 82
     },
     "interaction_contact": {
       "trigger_terms": [
@@ -152,11 +163,12 @@
       "directives": [
         "The acting limb visibly contacts or clearly reaches toward the named target.",
         "The target remains distinct from the limb and surrounding props."
-      ]
+      ],
+      "priority": 90
     }
   },
   "prompt_budget": {
     "max_active_rules": 4,
-    "rule": "Select only rules triggered by the current page recipe. Relationship precision must not become prompt clutter."
+    "rule": "Select the highest-priority triggered rules. Critical cause-and-effect and support geometry outrank decorative or secondary relationships."
   }
 }
