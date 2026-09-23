@@ -13,7 +13,7 @@
     "signature_gear": [
       "bow",
       "quiver",
-      "simple underground armor or straps"
+      "simple armor or straps"
     ],
     "attitude": [
       "calculating",
@@ -38,17 +38,17 @@
     ]
   },
   "default_habitats": [
-    "webbed chapels",
-    "underground ruins",
-    "high cavern walls"
+    "underground",
+    "ruins",
+    "caves"
   ],
   "accuracy_checks": [
     "fusion between torso and spider body is clear",
     "eight legs are readable",
-    "bow aiming downward matches scene",
+    "weapon use remains anatomically plausible",
     "no human legs appear",
     "upper body stays humanoid",
-    "webs do not overwhelm anatomy"
+    "secondary material does not overwhelm anatomy"
   ],
   "reference": {
     "image": null,
