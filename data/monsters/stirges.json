@@ -53,5 +53,13 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "schema_version": 4,
+  "description": "A small swarm of ugly flying blood-feeders combining batlike wings with long needle proboscises and grasping feet. Compact flying body with membranous wings, small legs or grasping feet, and narrow abdomen. Smooth membrane wings and sparse body texture; avoid dense insect detail. Several small airborne bodies with outspread membrane wings and long straight proboscises projecting from their faces.",
+  "behavior_traits": [
+    "swarming flight",
+    "blood feeding",
+    "clinging",
+    "ambush hunting"
+  ]
 }
