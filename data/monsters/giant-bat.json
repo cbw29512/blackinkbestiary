@@ -51,10 +51,17 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "family_profile": "bat",
   "physical_requirements": [
     "overhead_attachment: inverted roosting posture requires a believable overhead support; environment engine chooses the ceiling, rock, beam, branch, or other compatible support"
+  ],
+  "description": "An enormous bat with a broad membrane wingspan, powerful clawed feet, and an unmistakable natural bat silhouette. Light flying mammal body with very long finger-boned wings and compact torso. Short fur on body and smooth wing membranes with minimal vein lines.",
+  "behavior_traits": [
+    "powered flight",
+    "echolocation hunting",
+    "inverted roosting",
+    "swarming movement"
   ]
 }
