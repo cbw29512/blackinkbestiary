@@ -43,6 +43,7 @@ def current_context():
 
 
 def readiness(comfy_url: str):
+    instruction_snapshot = generation_instruction_snapshot()
     page, page_state = current_context()
     prompt = build_prompt(page, page_state.get("review_notes"))
     if not instruction_snapshot:
