@@ -64,7 +64,8 @@
   "scalability_rule": "Hundreds of monster recipes remain small. Creature files own identity, variant traits, behavior tendencies, locomotion, and habitat compatibility; reusable scenery belongs exclusively to the environment engine.",
   "environment_ownership": {
     "monster_may_define": [
-      "broad habitat compatibility only, such as underground, forest, wilderness, ocean, undead-sites, giant-territories, mythic-sites, dragon-lairs",
+      "broad habitat compatibility through default_habitats",
+      "broad family habitat compatibility through scene_identity.environment_fit",
       "variant-specific habitat compatibility when biologically necessary"
     ],
     "monster_must_not_define": [
@@ -89,6 +90,6 @@
       "background composition",
       "environment camera framing"
     ],
-    "rule": "Monster data may say where a creature can plausibly exist, but must not describe what that place looks like. If a visual element belongs to the location rather than the creature, the universal environment engine owns it."
+    "rule": "Monster data may say where a creature can plausibly exist and may define creature-specific support or locomotion needs, but must not describe reusable scenery. If a visual element belongs to the location rather than the creature, the universal environment engine owns it."
   }
 }
