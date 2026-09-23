@@ -407,4 +407,19 @@ It validates the same production surfaces used by Studio checks:
 
 This is a validation fallback, not a second rule system. It calls the existing audits/tests and leaves GitHub workflow logic unchanged.
 
+## 2026-09-23 Local CI Defect Fixes
+
+The first full local CI run on the integrated page-v2 / monster-v3 branch found two genuine defects.
+
+1. Spatial envelope resolution let secondary descriptive language outrank the named environment identity. This caused Limestone Drip Cave to resolve as a built corridor because its first visual cue contained the word "passage".
+   - The resolver now gives primary profile identity (environment ID, name, spatial type) authority over description/spatial-read cues.
+   - Existing envelope priority remains the tie-breaker among valid primary matches.
+   - Static sweep: 80/80 environment profiles resolve; Limestone Drip Cave resolves to `natural_cavern`.
+
+2. Scene relationship phrase matching accidentally double-escaped `\w`, so word-boundary protection did not work as intended.
+   - The regex now uses actual word boundaries.
+   - I-26's "pulls and flows upward" no longer falsely activates `interaction_contact`.
+
+These were discovered by `python scripts/run_local_ci.py` before any Golden Five generation.
+
 
