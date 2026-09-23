@@ -56,5 +56,13 @@
   },
   "physical_requirements": [
     "ground_support: resting sculpture disguise requires a believable load-bearing support; environment engine chooses the ledge, plinth, roof, gate, wall projection, rock, or other compatible structure"
+  ],
+  "schema_version": 4,
+  "description": "A squat winged stone predator disguised as architectural sculpture until it begins to move. Compact muscular humanoid carved from stone, thick forearms, bent legs, folded wings. Stone planes with a few cracks and chipped edges, not dense masonry texture.",
+  "behavior_traits": [
+    "motionless camouflage",
+    "sudden attack",
+    "perching",
+    "powered flight"
   ]
 }
