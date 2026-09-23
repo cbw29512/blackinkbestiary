@@ -5,7 +5,7 @@
   "size": "swarm",
   "creature_type": "swarm of tiny beasts",
   "visual_identity": {
-    "core_identity": "A flowing mass of ordinary dungeon rats whose individual bodies remain readable while the group moves like a living tide.",
+    "core_identity": "A flowing mass of ordinary rats whose individual bodies remain readable while the group moves like a living tide.",
     "silhouette": "Many low rat bodies overlapping in a directional stream, tails and pointed snouts creating motion without becoming a black mass.",
     "head_features": "Repeated simple rat heads with pointed snouts, rounded ears, whiskers, and visible incisors on a few foreground animals.",
     "body_shape": "Small four-legged rodent forms in varied running poses; no giant leader rat.",
@@ -34,15 +34,13 @@
     ]
   },
   "default_habitats": [
-    "floor grates",
-    "sewers",
-    "dungeon kitchens"
+    "underground",
+    "settlements",
+    "sewers"
   ],
   "accuracy_checks": [
-    "rats clearly pour from the grate",
     "individual silhouettes remain readable",
-    "flow direction is obvious",
-    "background grate remains visible",
+    "group movement direction is obvious",
     "page preserves white space",
     "no giant leader dominates"
   ],
