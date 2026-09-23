@@ -34,9 +34,9 @@
     ]
   },
   "default_habitats": [
-    "dungeon cells",
-    "cave ceilings",
-    "abandoned underground rooms"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "proboscises are unmistakable",
