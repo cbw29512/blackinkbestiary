@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
   "monster_id": "goblin-minion",
   "monster_name": "Goblin Minion",
@@ -64,5 +64,12 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference guides goblin silhouette and facial anatomy only."
-  }
+  },
+  "description": "A small, wiry, scrappy goblinoid scavenger: ugly-cunning rather than cute, with quick hands, oversized pointed ears, a broad flattened nose, angular cheeks, and a wide sharp-toothed grin. Small narrow-chested humanoid with lean sinewy limbs, long quick fingers, slightly crouched posture, and light scavenger proportions rather than heroic or muscular anatomy. Mostly bare leathery-looking skin represented with clean line art; sparse hair only. No fur covering, fluffy cheeks, fuzzy limbs, or animal pelt silhouette.",
+  "behavior_traits": [
+    "scavenging",
+    "skittish movement",
+    "group fighting",
+    "quick retreat"
+  ]
 }
