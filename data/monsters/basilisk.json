@@ -34,7 +34,7 @@
     ]
   },
   "default_habitats": [
-    "underground",
+    "caves",
     "ruins",
     "rocky terrain"
   ],
@@ -50,5 +50,12 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A squat heavy reptilian monster with eight sturdy legs and a fixed predatory stare associated with petrification. Stocky scaled reptile with exactly eight legs, low belly, and thick tapering tail. Large simple scales or armored skin plates used sparingly.",
+  "behavior_traits": [
+    "predatory watching",
+    "low stalking movement",
+    "territorial ambush"
+  ]
 }
