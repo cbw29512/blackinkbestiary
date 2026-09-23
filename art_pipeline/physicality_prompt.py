@@ -1,9 +1,9 @@
+from __future__ import annotations
+
 try:
     from .physicality_modes import mode_prompt_sections, mode_review_checks
 except ImportError:
     from physicality_modes import mode_prompt_sections, mode_review_checks
-
-from __future__ import annotations
 
 POWERED_AIR_MODES = {
     "flying",
