@@ -9,7 +9,7 @@ except ImportError:
     from page_contract import missing_required_paths
 
 
-PLAN_ONLY_KEYS = {"planning_status"}
+PLAN_ONLY_KEYS = {"planning_status", "page_contract"}
 
 
 def build_manifest_from_plan(plan: dict, root: Path) -> tuple[dict, list[str]]:
