@@ -358,3 +358,20 @@ The page contract remains `black-ink-page-v1` for backward compatibility with al
 Regression tests use deliberately poisoned legacy values to ensure they cannot leak into generation.
 
 **Validation status:** implementation is isolated on the stacked branch. GitHub Actions is still failing before runner assignment, so this is not yet CI-certified.
+
+
+### Tome I first-stage cleanup
+
+The first safe data cleanup has now been applied to all 50 Tome I recipes after the authority boundary was established.
+
+Removed from Tome I:
+
+- 48 legacy `identity_rules` blocks
+- 50 legacy `must_include` blocks
+- 48 duplicated `coloring_rules` blocks
+- 48 page-level `reference_image` placeholders
+- the stale I-01 manifest `modify` block
+
+This reduced the Tome I manifest by roughly 32 KB while preserving the unique page recipe, page-specific negative exceptions, and temporary display compatibility fields `monster_name` / `habitat`.
+
+The migration audit now distinguishes fields safe to strip immediately from fields retained temporarily for raw-manifest consumers.
