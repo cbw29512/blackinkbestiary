@@ -3,9 +3,9 @@
   "monster_name": "Cloaker",
   "family": "cloaker",
   "size": "large",
-  "creature_type": "cave aberration",
+  "creature_type": "aberration",
   "visual_identity": {
-    "core_identity": "A living cave predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature.",
+    "core_identity": "A living predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature.",
     "silhouette": "Wide triangular mantle body with winglike sides, narrow trailing tail, and a compact underside head near the front edge.",
     "head_features": "Small predatory underside face with round eyes and a wide mouth, integrated into the mantle rather than on a neck.",
     "body_shape": "Flat flexible ray-like body with broad leathery wings and one long whip-like tail; no humanoid limbs.",
@@ -53,5 +53,8 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "physical_requirements": [
+    "overhead_attachment: folded disguise or roosting posture requires believable overhead support; environment engine chooses the ceiling, rock, beam, branch, wall projection, or other compatible support"
+  ]
 }
