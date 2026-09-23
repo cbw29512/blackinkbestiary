@@ -226,5 +226,14 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertLess(ids.index("laboratory"), len(ids))
 
 
+    def test_creature_support_requirement_does_not_own_environment_scenery(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-28")
+        text = build_prompt(page)
+        self.assertIn("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", text)
+        self.assertIn("structural_attachment", text)
+        self.assertIn("environment engine chooses the wall, frame, materials, and surrounding room", text)
+        self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
+
+
 if __name__ == "__main__":
     unittest.main()
