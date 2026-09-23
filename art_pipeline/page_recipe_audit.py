@@ -23,6 +23,8 @@ def audit_manifest_recipe_debt(
     contract = _read_json(root / "config" / "universal_page_contract.json")
     authority = contract.get("generation_authority") or {}
     legacy_fields = set(authority.get("legacy_non_authoritative_fields") or [])
+    strip_now = set(authority.get("strip_now_fields") or [])
+    retained = set(authority.get("runtime_compatibility_retained") or [])
     required_paths = list(contract.get("required_unique_fields") or [])
     manifest = _read_json(manifest_path)
 
@@ -57,13 +59,23 @@ def audit_manifest_recipe_debt(
             })
 
     total_pages = len(manifest.get("pages") or [])
+    strip_now_counts = {
+        field: field_counts.get(field, 0)
+        for field in sorted(strip_now)
+    }
+    retained_counts = {
+        field: field_counts.get(field, 0)
+        for field in sorted(retained)
+    }
     return {
         "manifest": manifest_path.relative_to(root).as_posix(),
         "total_pages": total_pages,
         "pages_with_legacy_fields": len(pages_with_legacy),
         "legacy_field_counts": dict(sorted(field_counts.items())),
+        "strip_now_field_counts": strip_now_counts,
+        "runtime_compatibility_retained_counts": retained_counts,
         "legacy_pages": pages_with_legacy,
         "pages_missing_authoritative_fields": missing_authority,
-        "safe_to_strip_legacy": not missing_authority,
+        "safe_to_strip_generation_legacy": not missing_authority,
         "migration_complete": not pages_with_legacy and not missing_authority,
     }
