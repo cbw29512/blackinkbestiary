@@ -57,6 +57,53 @@ class TestGalleryResumeTests(unittest.TestCase):
             )
         )
 
+    def test_non_identity_assistant_rejection_reuses_exact_image_for_targeted_edit(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-10-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"candidate")
+            prior = {
+                "page_id": "I-10",
+                "candidate": 1,
+                "status": "assistant_rejected",
+                "image_path": "test-gallery/I-10-C01.png",
+                "assistant_review": {
+                    "decision": "reject",
+                    "stage": "environment",
+                    "notes": "spiral stair is not visible",
+                },
+            }
+            with patch.object(gallery, "ROOT", root):
+                source, verdict = gallery.assistant_repair_plan(prior)
+
+            self.assertEqual(source, image)
+            self.assertEqual(verdict["stage"], "environment")
+            self.assertIn("spiral stair is not visible", verdict["defects"])
+
+    def test_identity_assistant_rejection_never_reuses_bad_source(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-14-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"bad-body-plan")
+            prior = {
+                "page_id": "I-14",
+                "candidate": 1,
+                "status": "assistant_rejected",
+                "image_path": "test-gallery/I-14-C01.png",
+                "assistant_review": {
+                    "decision": "reject",
+                    "stage": "identity",
+                    "notes": "wrong body plan",
+                },
+            }
+            with patch.object(gallery, "ROOT", root):
+                source, verdict = gallery.assistant_repair_plan(prior)
+
+            self.assertIsNone(source)
+            self.assertIsNone(verdict)
+
     def test_assistant_rejected_candidate_can_be_retried(self):
         prior = {"status": "assistant_rejected"}
         self.assertTrue(gallery.should_skip_candidate(prior, False))
