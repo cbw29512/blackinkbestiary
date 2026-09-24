@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import random
 import subprocess
@@ -134,6 +135,34 @@ def clear_selection_for_candidate(state: dict, page_id: str, candidate_no: int) 
         return False
     state["selections"].pop(str(page_id), None)
     return True
+
+
+def current_review_id(item: dict | None) -> str | None:
+    if not item:
+        return None
+    path = existing_candidate_path(item)
+    if path is None:
+        return None
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    return (
+        f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}-"
+        f"H{digest[:16]}"
+    )
+
+
+def exact_assistant_approval_is_current(
+    prior: dict | None,
+    current_generation_fingerprint: str,
+) -> bool:
+    if not prior:
+        return False
+    if generation_authority_stale(prior, current_generation_fingerprint):
+        return False
+    assistant = prior.get("assistant_review") or {}
+    if str(assistant.get("decision") or "").lower() not in {"approve", "select"}:
+        return False
+    recorded = str(assistant.get("review_id") or "")
+    return bool(recorded and recorded == current_review_id(prior))
 
 
 def assistant_repair_plan(prior: dict | None) -> tuple[Path | None, dict | None]:
@@ -418,6 +447,17 @@ def main() -> int:
                 prior,
                 current_review_fingerprint,
             )
+            current_exact_approval = exact_assistant_approval_is_current(
+                prior,
+                current_fingerprint,
+            )
+            if current_exact_approval:
+                print(json.dumps({
+                    "page_id": page["page_id"],
+                    "candidate": candidate_no,
+                    "status": "skipped_exact_image_approved",
+                }))
+                continue
 
             reviewer_recheck_failed = False
             reviewer_recheck_feedback = None
