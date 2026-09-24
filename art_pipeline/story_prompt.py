@@ -64,6 +64,26 @@ def interaction_proof_rules(page: dict) -> list[str]:
         rules.append(
             "WEB-SUPPORT PROOF: multiple canonical legs visibly contact tensioned web strands at the body's support points, while surrounding architecture remains readable through the web."
         )
+    if "silence" in text and ("finger" in text or "signal" in text):
+        rules.append(
+            "SILENCE-GESTURE PROOF: one hand must visibly make a finger-to-mouth hush gesture near the face while the other body action remains readable; do not substitute a generic raised hand."
+        )
+    if "sack" in text and ("drag" in text or "pull" in text):
+        rules.append(
+            "DRAGGED-SACK PROOF: exactly one sack visibly trails behind or beside the creature, with the sack resting on the floor and a hand/rope contact showing it is being pulled."
+        )
+    if "ham" in text:
+        rules.append(
+            "HAM-OBJECT PROOF: the stolen food must read unmistakably as a ham through a large rounded meat shape with one protruding bone end; do not substitute a generic sack, loaf, rock, or unidentified bundle."
+        )
+    if "shrine" in text and "coin" in text:
+        rules.append(
+            "SHRINE-OFFERING PROOF: the coin is visibly held or raised between the creature and the shrine/altar, with hand and body orientation making the offering/tending action clear."
+        )
+    if "map" in text and ("command" in text or "captain" in text or "table" in text):
+        rules.append(
+            "MAP-COMMAND PROOF: a readable open map lies on the table and the officer's hand/gesture visibly points to or organizes that map; do not substitute a generic table pose."
+        )
     return rules
 
 
