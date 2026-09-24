@@ -57,6 +57,15 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("Support/contact is visible and believable:", prompt)
         self.assertIn("Motion/weight reads correctly:", prompt)
 
+    def test_canonical_scale_and_body_plan_are_hard_gates(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-01")
+        prompt = vr.build_review_prompt(page)
+        self.assertIn("Canonical scale reads as:", prompt)
+        self.assertIn("Canonical body plan reads as:", prompt)
+        self.assertIn("canonical scale/proportion gate", prompt)
+        self.assertIn("canonical body-plan gate", prompt)
+
     def test_review_uses_generate_endpoint_with_image(self):
         verdict = {
             "pass": False,
