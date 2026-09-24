@@ -143,13 +143,37 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
     spec = load_monster_spec(page)
     review_stage = str((review_notes or {}).get("stage") or "").strip().lower()
     review_text = str((review_notes or {}).get("text") or "").strip()
-    identity_recovery = ""
+    recovery_lock = ""
     if review_stage == "identity" and review_text:
-        identity_recovery = (
+        recovery_lock = (
             "IDENTITY RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed species/anatomy review. "
             "Generate a fresh creature from canonical written authority and explicitly correct these visible failures: "
             + review_text
             + ". Do not imitate or preserve the failed creature silhouette from the prior attempt."
+        )
+    elif review_stage == "environment" and review_text:
+        recovery_lock = (
+            "ENVIRONMENT RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed environment geometry/identity review. "
+            "Keep canonical creature anatomy, but rebuild room/terrain geometry, camera, scale references, landmark placement, and supporting architecture as needed. "
+            "The setting must read correctly even if the creature is mentally removed. Explicitly correct these visible failures: "
+            + review_text
+            + ". Do not preserve a generic or spatially wrong background."
+        )
+    elif review_stage in {"action", "scene"} and review_text:
+        recovery_lock = (
+            "ACTION RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed the required visible action/contact review. "
+            "Keep canonical creature identity and any correct setting geometry, but rebuild pose, prop placement, support/contact, and cause-and-effect as needed. "
+            "The required verb must be visible without a caption. Explicitly correct these visible failures: "
+            + review_text
+            + ". Do not preserve a neutral pose or merely place the creature near the required prop."
+        )
+    elif review_stage == "quality" and review_text:
+        recovery_lock = (
+            "QUALITY RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed printable coloring-page quality review. "
+            "Preserve canonical identity, correct environment, and clear action while simplifying line density and repeated detail, removing decorative borders/inset frames, large black fills, grayscale, clutter, or wallpaper patterns as needed. "
+            "Explicitly correct these visible failures: "
+            + review_text
+            + ". Broad white colorable regions and a clean silhouette are mandatory."
         )
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
@@ -161,7 +185,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
         f"SUBJECT: {page['monster_name']}.",
         *_body_plan_lock(page, spec),
-        identity_recovery,
+        recovery_lock,
         critical_scene_lock(page),
         (
             "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Treat every countable body structure in the canonical creature "
@@ -242,7 +266,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
                 "STAGNATION ESCAPE RULE: the previous structural repair failed at the same review stage. "
                 "Use the alternate composition lock above to change camera/pose/landmark geometry materially while preserving canonical identity and required habitat/action."
             )
-        if text and review_stage != "identity":
+        if text and review_stage not in {"identity", "environment", "action", "scene", "quality"}:
             sections.append(f"LATEST REVIEW CORRECTION: {text}")
         if tags:
             sections.append(_items("LATEST HUMAN QUICK CHANGES", tags))
