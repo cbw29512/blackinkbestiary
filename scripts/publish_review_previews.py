@@ -44,6 +44,7 @@ Image = load_pillow()
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "data" / "test-gallery-state.json"
+RUNTIME_STATUS = ROOT / "data" / "local-runtime-status.json"
 SOURCE_DIR = ROOT / "web" / "test-gallery"
 PREVIEW_DIR = ROOT / "review-previews"
 MANIFEST = PREVIEW_DIR / "manifest.json"
@@ -230,10 +231,36 @@ def main() -> int:
             "visual_review": item.get("visual_review"),
         })
 
+    runtime = None
+    if RUNTIME_STATUS.exists():
+        try:
+            runtime = json.loads(RUNTIME_STATUS.read_text(encoding="utf-8-sig"))
+        except (OSError, json.JSONDecodeError) as exc:
+            runtime = {
+                "schema_version": 1,
+                "status": "failed",
+                "stage": "runtime-status-read",
+                "message": f"Could not read local runtime status: {exc}",
+            }
+
+    if runtime and str(runtime.get("status") or "").lower() == "failed":
+        diagnostics.append({
+            "page_id": None,
+            "monster_name": None,
+            "candidate": None,
+            "status": "local_runtime_failed",
+            "error": runtime.get("message"),
+            "stage": runtime.get("stage"),
+            "started_at": None,
+            "finished_at": runtime.get("updated_at"),
+            "visual_review": None,
+        })
+
     MANIFEST.write_text(json.dumps({
-        "schema_version": 3,
+        "schema_version": 4,
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
+        "runtime": runtime,
         "candidates": published,
         "diagnostics": diagnostics,
     }, indent=2) + "\n", encoding="utf-8")
