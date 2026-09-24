@@ -136,6 +136,27 @@ def clear_selection_for_candidate(state: dict, page_id: str, candidate_no: int) 
     return True
 
 
+def assistant_repair_plan(prior: dict | None) -> tuple[Path | None, dict | None]:
+    if not prior or str(prior.get("status") or "") != "assistant_rejected":
+        return None, None
+    assistant_review = prior.get("assistant_review") or {}
+    stage = str(assistant_review.get("stage") or "").strip().lower()
+    source = existing_candidate_path(prior)
+    if stage not in {"environment", "action", "quality"} or source is None:
+        return None, None
+    notes = str(assistant_review.get("notes") or "").strip()
+    return source, {
+        "pass": False,
+        "score": 0,
+        "stage": stage,
+        "defects": [
+            notes
+            or "Exact-image review rejected this stage and requires targeted repair."
+        ],
+        "preserve": [],
+    }
+
+
 def should_skip_candidate(
     prior: dict | None,
     rerun_failed: bool,
@@ -460,28 +481,7 @@ def main() -> int:
                         "score": int(refreshed_review.get("score") or 0),
                     }))
 
-            assistant_repair_source = None
-            assistant_repair_verdict = None
-            if prior and str(prior.get("status") or "") == "assistant_rejected":
-                assistant_review = prior.get("assistant_review") or {}
-                assistant_stage = str(assistant_review.get("stage") or "").strip().lower()
-                rejected_source = existing_candidate_path(prior)
-                if (
-                    assistant_stage in {"environment", "action", "quality"}
-                    and rejected_source is not None
-                ):
-                    assistant_notes = str(assistant_review.get("notes") or "").strip()
-                    assistant_repair_source = rejected_source
-                    assistant_repair_verdict = {
-                        "pass": False,
-                        "score": 0,
-                        "stage": assistant_stage,
-                        "defects": [
-                            assistant_notes
-                            or "Exact-image review rejected this stage and requires targeted repair."
-                        ],
-                        "preserve": [],
-                    }
+            assistant_repair_source, assistant_repair_verdict = assistant_repair_plan(prior)
 
             if should_skip_candidate(
                 prior,
