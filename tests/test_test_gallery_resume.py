@@ -40,6 +40,23 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertFalse(gallery.should_skip_candidate(prior, True))
 
 
+    def test_exhausted_candidate_retries_when_current_reviewer_just_failed_it(self):
+        prior = {"status": "max_refinements_reached"}
+        self.assertTrue(
+            gallery.should_skip_candidate(
+                prior,
+                True,
+                retry_max_refinements=False,
+            )
+        )
+        self.assertFalse(
+            gallery.should_skip_candidate(
+                prior,
+                True,
+                retry_max_refinements=True,
+            )
+        )
+
     def test_assistant_rejected_candidate_can_be_retried(self):
         prior = {"status": "assistant_rejected"}
         self.assertTrue(gallery.should_skip_candidate(prior, False))
