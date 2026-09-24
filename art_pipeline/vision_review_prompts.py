@@ -66,6 +66,18 @@ def build_scene_review_prompt(page: dict) -> str:
         "Unique landmark is visible:",
         "Framing differs from repeated generic backgrounds:",
         "Monster/environment interaction reads clearly:",
+        "One clear story beat reads as:",
+        "Environment participates through:",
+        "Body language communicates the action without needing the caption",
+        "The page does not read as a neutral portrait or prop-holding pose",
+        "What single verb describes what the monster is doing?",
+        "Can that action be identified without reading the caption?",
+        "Does at least one environment feature participate?",
+        "Does the pose remain stable and easy to color?",
+        "Would removing the prop destroy the entire story read?",
+        "Controlled powered flight allowed by monster data:",
+        "Pose is stable, natural, and easy to read in a static coloring page",
+        "No jumping, falling, dropping, or accidental hovering",
     )
     selected = [item for item in checks if item.startswith(prefixes)]
     return """You are the Black-Ink Bestiary SCENE AND PHYSICALITY GATE.
@@ -78,7 +90,6 @@ A web background is NOT automatically a dungeon hall; required stone architectur
 A generic corridor is NOT automatically the named habitat.
 If a required prop, interaction, spatial relation, support, or cause-and-effect is ambiguous or merely implied, fail.
 
-DEFECT WORDING RULE: defects must describe the visible failure, not copy a required gate. Do NOT return "Habitat reads as: Cramped Spiral Stair"; return "cramped spiral stair is not visible" or "stairs read straight, not spiral". Do NOT return "Scene moment reads as: kicking over a lantern"; return "lantern is not being kicked over".
 DEFECT WORDING RULE: defects must describe the visible failure, not copy a required gate. Do NOT return "Habitat reads as: Cramped Spiral Stair"; return "cramped spiral stair is not visible" or "stairs read straight, not spiral". Do NOT return "Scene moment reads as: kicking over a lantern"; return "lantern is not being kicked over".
 Preserve items must describe literal visible scene geometry/action, not repeat the requested labels.
 Return exactly one compact JSON object and nothing else:
@@ -96,6 +107,7 @@ def build_review_prompt(page: dict) -> str:
         "Clearly recognizable as ",
         "Canonical scale reads as:",
         "Canonical body plan reads as:",
+        "Shape-first body geometry reads as:",
         "Identity check:",
         "Reject identity drift:",
         "Swarm reads as ",
@@ -105,6 +117,7 @@ def build_review_prompt(page: dict) -> str:
         "Physical state reads as:",
         "Support/contact is visible and believable:",
         "Motion/weight reads correctly:",
+        "Mode-specific contact geometry reads correctly:",
         "Environment matches profile:",
         "Spatial type reads without the monster:",
         "Material language is visible:",
@@ -117,6 +130,18 @@ def build_review_prompt(page: dict) -> str:
         "Unique landmark is visible:",
         "Framing differs from repeated generic backgrounds:",
         "Monster/environment interaction reads clearly:",
+        "One clear story beat reads as:",
+        "Environment participates through:",
+        "Body language communicates the action without needing the caption",
+        "The page does not read as a neutral portrait or prop-holding pose",
+        "What single verb describes what the monster is doing?",
+        "Can that action be identified without reading the caption?",
+        "Does at least one environment feature participate?",
+        "Does the pose remain stable and easy to color?",
+        "Would removing the prop destroy the entire story read?",
+        "Controlled powered flight allowed by monster data:",
+        "Pose is stable, natural, and easy to read in a static coloring page",
+        "No jumping, falling, dropping, or accidental hovering",
     )
     selected = [item for item in checks if not item.startswith(excluded_prefixes)]
     return """You are the Black-Ink Bestiary FINAL COLORING-PAGE GATE.
