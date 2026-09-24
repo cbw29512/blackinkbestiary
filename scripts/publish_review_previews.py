@@ -66,8 +66,10 @@ def verdict_rank(verdict: dict) -> tuple:
     stage = str(verdict.get("stage") or "").strip().lower()
     stage_progress = {
         "identity": 1,
+        "environment": 2,
         "scene": 2,
-        "quality": 3,
+        "action": 3,
+        "quality": 4,
     }.get(stage, 0)
     return (
         1 if verdict.get("pass") else 0,
