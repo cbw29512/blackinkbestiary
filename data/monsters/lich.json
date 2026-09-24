@@ -64,5 +64,32 @@
     "ritual preparation",
     "commanding undead",
     "guarding"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium tall narrow skeletal humanoid whose authority comes from posture, robes, and spell gesture rather than oversized body mass.",
+    "natural_posture": "Upright skeletal stance with normal humanoid balance; bony hands emerge clearly from simple robes for deliberate spellcasting or guarding gestures.",
+    "behavior_style": [
+      "arcane casting",
+      "ritual preparation",
+      "commanding undead",
+      "guarding"
+    ],
+    "environment_fit": [
+      "ruins",
+      "burial sites",
+      "underground"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "zombie_drift",
+      "symptom": "body gains fleshy corpse mass or wet decay",
+      "correction": "strip back to dry skeletal skull/hands and narrow bone frame under decayed robes"
+    },
+    {
+      "id": "armored_knight_drift",
+      "symptom": "heavy armor hides the skeletal caster identity",
+      "correction": "remove full knight armor and restore exposed skull, bony hands, simple robes, and arcane gesture"
+    }
   ]
 }
