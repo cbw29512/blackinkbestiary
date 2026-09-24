@@ -67,7 +67,17 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
     score = verdict.get("score")
     preserve = verdict.get("preserve")
     defects = verdict.get("defects")
-    if (not isinstance(verdict.get("pass"), bool) or not isinstance(score, int) or isinstance(score, bool) or not 0 <= score <= 100\n            or not isinstance(defects, list) or not all(isinstance(x, str) for x in defects)\n            or not isinstance(preserve, list) or not all(isinstance(x, str) for x in preserve)):\n        raise VisionReviewError(f"Vision reviewer returned invalid verdict: {verdict}")
+    if (
+        not isinstance(verdict.get("pass"), bool)
+        or not isinstance(score, int)
+        or isinstance(score, bool)
+        or not 0 <= score <= 100
+        or not isinstance(defects, list)
+        or not all(isinstance(x, str) for x in defects)
+        or not isinstance(preserve, list)
+        or not all(isinstance(x, str) for x in preserve)
+    ):
+        raise VisionReviewError(f"Vision reviewer returned invalid verdict: {verdict}")
     return verdict
 
 
