@@ -39,14 +39,21 @@ def main() -> int:
     decisions = json.loads(DECISIONS.read_text(encoding="utf-8"))
     state = json.loads(STATE.read_text(encoding="utf-8"))
     reviews = decisions.get("reviews", [])
-    changed = False
-    applied = 0
-
+    # Decisions are append-only history. Collapse duplicates so the latest
+    # decision for an exact content hash wins deterministically.
+    latest_by_review_id = {}
     for review in reviews:
         target_review_id = str(review.get("review_id") or "")
         decision = str(review.get("decision") or "").lower()
         if not target_review_id or decision not in {"approve", "reject"}:
             continue
+        latest_by_review_id[target_review_id] = review
+
+    changed = False
+    applied = 0
+
+    for target_review_id, review in latest_by_review_id.items():
+        decision = str(review.get("decision") or "").lower()
 
         for item in state.get("results", []):
             current_review_id = review_id_for(item)
@@ -54,11 +61,14 @@ def main() -> int:
                 continue
 
             notes = str(review.get("notes") or "")
-            item["assistant_review"] = {
+            next_review = {
                 "review_id": target_review_id,
                 "decision": decision,
                 "notes": notes,
             }
+            if item.get("assistant_review") == next_review:
+                break
+            item["assistant_review"] = next_review
 
             if decision == "reject":
                 item["status"] = "assistant_rejected"
