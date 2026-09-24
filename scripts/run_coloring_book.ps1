@@ -81,6 +81,20 @@ if (-not (Test-Comfy)) {
 }
 
 Write-Host "ComfyUI API ready." -ForegroundColor Green
+
+$vision = $config.vision_reviewer
+if (-not $vision -or -not $vision.required) { throw "Required semantic vision reviewer is not configured." }
+try {
+  $ollamaTags = Invoke-RestMethod -Uri "$($vision.base_url.TrimEnd('/'))/api/tags" -TimeoutSec 3
+} catch {
+  throw "Semantic vision reviewer is required but Ollama is not reachable at $($vision.base_url). Start/install Ollama before running the gallery."
+}
+$visionModel = [string]$vision.model
+$installedVision = @($ollamaTags.models | ForEach-Object { [string]$_.name })
+if (-not ($installedVision | Where-Object { $_ -eq $visionModel -or $_ -like "$visionModel*" })) {
+  throw "Required vision model $visionModel is not installed in Ollama. Run: ollama pull $visionModel"
+}
+Write-Host "Semantic vision reviewer ready: $visionModel" -ForegroundColor Green
 Write-Host "Starting fresh Tome I test gallery: 50 pages x 4 candidates (up to 200 images)..." -ForegroundColor Green
 
 $runner = Get-Command python -ErrorAction SilentlyContinue
