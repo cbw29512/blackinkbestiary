@@ -84,6 +84,42 @@ def interaction_proof_rules(page: dict) -> list[str]:
         rules.append(
             "MAP-COMMAND PROOF: a readable open map lies on the table and the officer's hand/gesture visibly points to or organizes that map; do not substitute a generic table pose."
         )
+    if "suspended inside" in text or ("suspended" in text and ("cube" in text or "ooze" in text)):
+        rules.append(
+            "SUSPENDED-CONTENTS PROOF: every named suspended object must be visibly enclosed within the continuous transparent/translucent body volume, not floating outside, resting on top, or hidden behind it."
+        )
+    if ("corrod" in text or "acid damage" in text) and ("metal" in text or "bar" in text):
+        rules.append(
+            "CORROSION-CONTACT PROOF: visible material damage must begin exactly where the creature contacts the metal, with pitting, eaten edges, or broken bar contour at the contact zone; do not show unrelated decorative damage elsewhere."
+        )
+    if "split" in text and ("half" in text or "halves" in text):
+        rules.append(
+            "SPLIT-BODY PROOF: show exactly the required separate body masses as independent continuous forms, each visibly supported and moving on its own. Do not reconnect them, add a third mass, or leave one half as a detached decorative blob."
+        )
+    if "mimic" in text and ("reveal" in text or "mouth" in text or "tongue" in text or "hidden eye" in text):
+        rules.append(
+            "MIMIC-REVEAL PROOF: the predatory feature must emerge directly from the original object's own lid, seam, panel, handle, hinge, or surface while the object silhouette remains recognizable. No separate creature may appear beside or behind it."
+        )
+    if "petrif" in text or "turning to stone" in text:
+        rules.append(
+            "PETRIFICATION PROOF: the affected secondary creature/object must show a readable transition between living form and stone through a clear boundary of stiffened contour, stone cracks/facets, or statue-like texture. Do not substitute a second ordinary statue with no visible transformation."
+        )
+    if "camouflage" in text or "disguis" in text:
+        rules.append(
+            "CAMOUFLAGE-BREAK PROOF: surrounding forms must explain the disguise while one or two canonical creature features visibly break that match. The subject may not become so blended that species identity disappears."
+        )
+    if "lightning" in text or "electrical" in text:
+        rules.append(
+            "LIGHTNING-CONTACT PROOF: sparse line-art arcs must visibly originate from or travel along the creature and connect toward the named environmental target. Do not use disconnected decorative lightning in empty background space."
+        )
+    if "shriek" in text or "alarm" in text:
+        rules.append(
+            "ALARM-VIBRATION PROOF: use a few clean radiating vibration/sound contour lines from the actual opening or vibrating structure while the rooted/supporting body remains still. No text, sound-effect lettering, or dense comic burst."
+        )
+    if "guard" in text and ("phylactery" in text or "reliquary" in text or "focus object" in text):
+        rules.append(
+            "GUARDED-FOCUS PROOF: the guarded object must be clearly visible and spatially tied to the creature's stance or gesture; the creature must visibly control/interpose the space around it rather than merely stand elsewhere in the room."
+        )
     return rules
 
 
