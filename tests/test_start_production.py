@@ -75,6 +75,16 @@ class StartProductionContractTests(unittest.TestCase):
             self.assertIn(f"[{step}/7]", autopilot)
         self.assertNotIn("[5/6]", autopilot)
 
+    def test_full_gallery_validates_engine_before_starting_local_ai_or_generating(self):
+        text = (ROOT / "scripts" / "run_coloring_book.ps1").read_text(encoding="utf-8")
+        sync_at = text.index("sync_engine_for_run.py")
+        preflight_at = text.index("engine_preflight.py")
+        ai_at = text.index("ensure_local_ai.ps1")
+        generate_at = text.index("generate_test_gallery.py")
+        self.assertLess(sync_at, preflight_at)
+        self.assertLess(preflight_at, ai_at)
+        self.assertLess(ai_at, generate_at)
+
     def test_start_doc_names_single_entry_point(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
         self.assertIn("START_BLACKINK.bat", text)
