@@ -149,7 +149,7 @@ def environment_checklist(page: dict, root: Path) -> list[str]:
         f"Framing differs from repeated generic backgrounds: {variant.get('framing', '')}",
         f"Monster/environment interaction reads clearly: {variant.get('interaction', '')}",
         "Environment geometry differs meaningfully from nearby pages before extra props are added",
-        "Monster is large, centered or near-centered, and the dominant focal shape",
+        "Monster is visually dominant through framing while preserving canonical creature scale and proportions",
         "Major environmental objects are large and comfortable to color but visually secondary to the monster",
         "Monster leaves enough surrounding page area for the habitat to read",
         "Background depth comes from a few large forms, not micro-detail",
