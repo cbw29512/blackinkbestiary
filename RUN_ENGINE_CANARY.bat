@@ -4,6 +4,15 @@ cd /d "%~dp0"
 echo.
 echo Black-Ink Bestiary - Engine Canary + Publish
 echo ==============================================
+echo Ensuring local AI artist and semantic reviewer are ready...
+powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\ensure_local_ai.ps1"
+if errorlevel 1 (
+  echo.
+  echo Local AI runtime could not be started or verified.
+  pause
+  exit /b 1
+)
+echo.
 echo Synchronizing the latest engine rules and AI decisions...
 python scripts\sync_engine_for_run.py
 if errorlevel 1 (
