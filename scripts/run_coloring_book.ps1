@@ -92,10 +92,20 @@ try {
 $visionModel = [string]$vision.model
 $installedVision = @($ollamaTags.models | ForEach-Object { [string]$_.name })
 if (-not ($installedVision | Where-Object { $_ -eq $visionModel -or $_ -like "$visionModel*" })) {
-  if ($visionModel -like "*-instruct" -and ($installedVision | Where-Object { $_ -eq ($visionModel -replace "-instruct$", "") })) {
-    throw "The installed Qwen3-VL model is the thinking variant and can consume its output budget before returning the JSON verdict. This project requires $visionModel. Run: ollama pull $visionModel"
+  $ollama = Get-Command ollama -ErrorAction SilentlyContinue
+  if (-not $ollama) {
+    throw "Required vision model $visionModel is not installed and the Ollama CLI was not found."
   }
-  throw "Required vision model $visionModel is not installed in Ollama. Run: ollama pull $visionModel"
+  Write-Host "Required semantic reviewer $visionModel is not installed. Pulling it now..." -ForegroundColor Yellow
+  & $ollama.Source pull $visionModel
+  if ($LASTEXITCODE -ne 0) {
+    throw "Ollama could not install required vision model $visionModel."
+  }
+  $ollamaTags = Invoke-RestMethod -Uri "$($vision.base_url.TrimEnd('/'))/api/tags" -TimeoutSec 5
+  $installedVision = @($ollamaTags.models | ForEach-Object { [string]$_.name })
+  if (-not ($installedVision | Where-Object { $_ -eq $visionModel -or $_ -like "$visionModel*" })) {
+    throw "Ollama pull completed but required vision model $visionModel is still not visible."
+  }
 }
 Write-Host "Semantic vision reviewer ready: $visionModel" -ForegroundColor Green
 Write-Host "Running semantic vision smoke test..." -ForegroundColor Yellow
