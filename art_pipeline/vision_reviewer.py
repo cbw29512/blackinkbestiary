@@ -32,7 +32,7 @@ monster identity; signature features; environment identity; story readability; c
 large usable coloring regions; and creature/scenery separation.
 Do not assume a requested feature exists merely because the text says it should.
 Return exactly one compact JSON object and nothing else:\n{"pass": true|false, "score": 0-100, "defects": ["specific visible defect"], "preserve": ["successful visible feature"]}
-Pass only when there is no meaningful visible defect worth another edit. Keep analysis terse: inspect silently, then emit the JSON verdict immediately. Do not write step-by-step reasoning.
+Report at most 4 defects and at most 3 preserve items. Each item must be a short phrase under 80 characters.\nPrioritize only the defects that matter most for the next image edit.\nPass only when there is no meaningful visible defect worth another edit. Inspect silently and emit the JSON verdict immediately. Do not write step-by-step reasoning.
 REQUIREMENTS:
 - """ + "\n- ".join(checks)
 
@@ -62,11 +62,24 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         )
     try:
         verdict = json.loads(raw)
-    except json.JSONDecodeError as exc:
-        raise VisionReviewError(
-            f"Vision reviewer returned non-JSON content: {raw[:300]}"
-            f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}"
-        ) from exc
+    except json.JSONDecodeError:
+        # Accept harmless markdown fences or a short preamble only when a
+        # complete JSON object is present. Never invent or repair missing data.
+        start = raw.find("{")
+        end = raw.rfind("}")
+        if start >= 0 and end > start:
+            try:
+                verdict = json.loads(raw[start:end + 1])
+            except json.JSONDecodeError as exc:
+                raise VisionReviewError(
+                    f"Vision reviewer returned non-JSON content: {raw[:300]}"
+                    f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}"
+                ) from exc
+        else:
+            raise VisionReviewError(
+                f"Vision reviewer returned non-JSON content: {raw[:300]}"
+                f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}"
+            )
     score = verdict.get("score")
     preserve = verdict.get("preserve")
     defects = verdict.get("defects")
@@ -81,6 +94,9 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         or not all(isinstance(x, str) for x in preserve)
     ):
         raise VisionReviewError(f"Vision reviewer returned invalid verdict: {verdict}")
+    # Keep repair prompts bounded even if the local model ignores the requested caps.
+    verdict["defects"] = defects[:4]
+    verdict["preserve"] = preserve[:3]
     return verdict
 
 
