@@ -120,16 +120,45 @@ def _pick(items: list[dict], contexts: set[str], key: str, order: int) -> dict:
     return dict(eligible[(offset + max(order - 1, 0)) % len(eligible)])
 
 
-def _chosen_groups(contract: dict, contexts: set[str], overlays: list[dict]) -> list[str]:
+def _chosen_groups(
+    contract: dict,
+    contexts: set[str],
+    overlays: list[dict],
+    page: dict,
+) -> list[str]:
     budget = contract.get("assembly_budget") or {}
     biased = {group for overlay in overlays for group in overlay.get("component_bias") or []}
     accents = list(budget.get("accent_groups") or [])
     accents.sort(key=lambda group: (group not in biased, group))
     groups = list(budget.get("core_groups") or [])
     groups.extend(accents[: int(budget.get("selected_accents") or 2)])
+
+    variant = page.get("environment_variant") or {}
+    explicit_landmark = bool(str(variant.get("landmark") or "").strip())
+    explicit_interaction = bool(str(variant.get("interaction") or "").strip())
+    explicit_text = " ".join([
+        str(page.get("moment") or ""),
+        " ".join(str(x) for x in page.get("must_include") or []),
+        str(variant.get("landmark") or ""),
+        str(variant.get("interaction") or ""),
+    ]).lower()
+    explicit_light = any(
+        term in explicit_text
+        for term in ("torch", "lantern", "sconce", "brazier", "candle", "fire bowl")
+    )
+
+    if explicit_landmark:
+        groups = [group for group in groups if group != "landmarks"]
+    if explicit_light:
+        groups = [group for group in groups if group != "lighting_features"]
+
     if "trap" in contexts or any(item["overlay_id"] == "trap_zone" for item in overlays):
         groups.extend(budget.get("conditional_groups") or [])
-    groups.append(str(budget.get("story_group") or "interaction_patterns"))
+
+    story_group = str(budget.get("story_group") or "interaction_patterns")
+    if not explicit_interaction:
+        groups.append(story_group)
+
     return list(dict.fromkeys(groups))
 
 
@@ -156,7 +185,7 @@ def assemble_environment_palette(page: dict, root: Path = ROOT) -> dict:
     ])
     order = int(page.get("order") or 1)
     components = {}
-    for group in _chosen_groups(contract, contexts, overlays):
+    for group in _chosen_groups(contract, contexts, overlays, page):
         options = (catalog.get("groups") or {}).get(group) or []
         if options:
             components[group] = _pick(options, contexts, f"{key}|{group}", order)
