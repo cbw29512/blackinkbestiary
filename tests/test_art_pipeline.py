@@ -261,9 +261,6 @@ class QATests(unittest.TestCase):
             self.assertIn("missing_file", result["reasons"])
 
 
-if __name__ == "__main__":
-    unittest.main()
-
     def test_prompt_injects_family_failure_modes_for_minimal_monster(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
@@ -272,3 +269,18 @@ if __name__ == "__main__":
         self.assertIn("gorilla, ape-man, or primate", text)
         self.assertIn("CORRECTION:", text)
 
+    def test_candidate_prompts_are_materially_distinct_and_colorable(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-24")
+        prompts = [build_prompt(page, candidate_no=n) for n in range(1, 5)]
+        self.assertEqual(len(set(prompts)), 4)
+        for n, text in enumerate(prompts, 1):
+            self.assertIn(f"CANDIDATE {n} COMPOSITION LOCK", text)
+            self.assertIn("NEVER fill a creature", text)
+            self.assertIn("No large black masses", text)
+            self.assertIn("cube with straight readable edges", text)
+            self.assertIn("remove humanoid anatomy entirely", text)
+
+
+if __name__ == "__main__":
+    unittest.main()
