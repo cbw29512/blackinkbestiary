@@ -275,6 +275,18 @@ class PromptTests(unittest.TestCase):
         self.assertIn("two forelimbs that ARE the membrane wings", text)
         self.assertIn("Never add separate humanoid arms", text)
 
+    def test_goblin_boss_pointing_and_hobgoblin_formation_are_literal(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        boss = build_prompt(pages["I-05"])
+        self.assertIn("POINTING-DIRECTION PROOF", boss)
+        self.assertIn("directional line away from the body", boss)
+
+        drill = build_prompt(pages["I-06"])
+        self.assertIn("FORMATION-LEADERSHIP PROOF", drill)
+        self.assertIn("two or more subordinate overlapping shields", drill)
+
     def test_early_tome_i_story_objects_have_literal_visual_proof(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         pages = {page["page_id"]: page for page in tome["pages"]}
