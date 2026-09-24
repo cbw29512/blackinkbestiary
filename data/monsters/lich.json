@@ -35,7 +35,9 @@
       "vampire fangs",
       "graphic gore",
       "ornate clutter hiding bones"
-    ]
+    ],
+    "limb_structure": "One normal skeletal humanoid body with exactly two arms/hands and two legs beneath the robes, though lower legs may be partly hidden by fabric. The skull is one humanlike skeletal head; no extra limbs, wings, horns, or animal anatomy.",
+    "shape_lock": "Draw one tall narrow skeletal humanoid with one skull, two bony arms/hands, and two legs concealed partly by simple vertical robes. Keep the frame dry and skeletal rather than armored, fleshy, or monstrous; spellcasting gesture comes from normal humanoid anatomy."
   },
   "default_habitats": [
     "ruins",
