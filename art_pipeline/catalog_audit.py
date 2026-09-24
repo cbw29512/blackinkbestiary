@@ -178,11 +178,31 @@ def audit_monster_catalog(root: Path) -> dict:
         if missing:
             errors.append(f"{path.name}: missing family DNA fields: {', '.join(missing)}")
 
+    shape_locked = sum(
+        1
+        for _, resolved in resolved_specs
+        if str(((resolved.get("visual_identity") or {}).get("shape_lock")) or "").strip()
+    )
+    limb_structured = sum(
+        1
+        for _, resolved in resolved_specs
+        if str(((resolved.get("visual_identity") or {}).get("limb_structure")) or "").strip()
+    )
+
     return {
         "pass": not errors and not ownership_warnings,
         "monster_specs": len(specs),
         "repeated_families": sorted(repeated),
         "family_profiles": family_profiles,
+        "positive_geometry": {
+            "shape_locked": shape_locked,
+            "limb_structured": limb_structured,
+            "resolved_specs": len(resolved_specs),
+            "complete": (
+                shape_locked == len(resolved_specs)
+                and limb_structured == len(resolved_specs)
+            ),
+        },
         "errors": errors,
         "ownership_warnings": ownership_warnings,
     }
