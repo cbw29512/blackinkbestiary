@@ -19,6 +19,21 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("Full 50-page gallery is blocked", text)
         self.assertIn("9/9 exact-image approved", text)
 
+    def test_canary_launchers_self_start_local_ai_runtime(self):
+        autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
+        canary = (ROOT / "RUN_ENGINE_CANARY.bat").read_text(encoding="utf-8")
+        for text in (autopilot, canary):
+            self.assertIn("ensure_local_ai.ps1", text)
+            self.assertIn("powershell -NoProfile -ExecutionPolicy Bypass", text)
+
+    def test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight(self):
+        text = (ROOT / "scripts" / "ensure_local_ai.ps1").read_text(encoding="utf-8")
+        self.assertIn("/system_stats", text)
+        self.assertIn("/api/tags", text)
+        self.assertIn("ollama.Source", text)
+        self.assertIn("Semantic vision smoke test", text)
+        self.assertIn("Starting ComfyUI Desktop", text)
+
     def test_start_doc_names_single_entry_point(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
         self.assertIn("START_BLACKINK.bat", text)
