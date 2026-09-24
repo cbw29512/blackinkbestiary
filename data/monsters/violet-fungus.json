@@ -4,7 +4,35 @@
   "family": "fungus",
   "size": "medium",
   "creature_type": "giant fungus",
-  "visual_identity": {
+  "default_habitats": [
+    "underground",
+    "caves",
+    "ruins"
+  ],
+  "accuracy_checks": [
+    "mushroom identity remains obvious",
+    "tendrils are long and distinct",
+    "tendrils have a clear reachable interaction zone",
+    "no face appears",
+    "rooted posture remains physically supported",
+    "tendrils do not tangle into clutter"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  },
+  "schema_version": 4,
+  "identity_version": 1,
+  "family_profile": "fungus",
+  "description": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body. Rooted fungal stalk with cap and four or more flexible tendrils emerging around the upper stalk. Simple cap and stalk with sparse spots; tendrils smooth and uncluttered. Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
+  "behavior_traits": [
+    "stationary growth",
+    "tentacle lashing",
+    "cluster growth",
+    "opportunistic feeding"
+  ],
+  "visual_overrides": {
     "core_identity": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body.",
     "silhouette": "Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
     "head_features": "No head, eyes, or mouth; cap remains mushroom-like.",
@@ -33,32 +61,5 @@
       "dense fungal texture"
     ]
   },
-  "default_habitats": [
-    "underground",
-    "caves",
-    "ruins"
-  ],
-  "accuracy_checks": [
-    "mushroom identity remains obvious",
-    "tendrils are long and distinct",
-    "tendrils have a clear reachable interaction zone",
-    "no face appears",
-    "rooted posture remains physically supported",
-    "tendrils do not tangle into clutter"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 4,
-  "identity_version": 1,
-  "family_profile": "fungus",
-  "description": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body. Rooted fungal stalk with cap and four or more flexible tendrils emerging around the upper stalk. Simple cap and stalk with sparse spots; tendrils smooth and uncluttered. Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
-  "behavior_traits": [
-    "stationary growth",
-    "tentacle lashing",
-    "cluster growth",
-    "opportunistic feeding"
-  ]
+  "anatomy_variant": true
 }
