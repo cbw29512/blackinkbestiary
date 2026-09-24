@@ -99,15 +99,13 @@ Write-Host "Running semantic vision smoke test..." -ForegroundColor Yellow
 $smokeBody = @{
   model = $visionModel
   stream = $false
-  think = $false
-  messages = @(@{ role = "user"; content = 'Reply with exactly this JSON and nothing else: {"pass":true,"score":100,"defects":[],"preserve":[]}' })
+  prompt = 'Reply with exactly this JSON and nothing else: {"pass":true,"score":100,"defects":[],"preserve":[]}'
   options = @{ temperature = 0; num_predict = 128 }
 } | ConvertTo-Json -Depth 8
 try {
-  $smoke = Invoke-RestMethod -Method Post -Uri "$($vision.base_url.TrimEnd('/'))/api/chat" -ContentType "application/json" -Body $smokeBody -TimeoutSec 120
-  $smokeContent = [string]$smoke.message.content
-  if ([string]::IsNullOrWhiteSpace($smokeContent) -and $smoke.PSObject.Properties.Name -contains "response") { $smokeContent = [string]$smoke.response }
-  if ([string]::IsNullOrWhiteSpace($smokeContent)) { throw "empty response from Ollama chat API" }
+  $smoke = Invoke-RestMethod -Method Post -Uri "$($vision.base_url.TrimEnd('/'))/api/generate" -ContentType "application/json" -Body $smokeBody -TimeoutSec 120
+  $smokeContent = [string]$smoke.response
+  if ([string]::IsNullOrWhiteSpace($smokeContent)) { throw "empty response from Ollama generate API" }
   $smokeVerdict = $smokeContent | ConvertFrom-Json
   if ($null -eq $smokeVerdict.pass -or $null -eq $smokeVerdict.defects) { throw "invalid structured response: $smokeContent" }
 } catch {
