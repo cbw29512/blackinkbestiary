@@ -13,6 +13,7 @@ def build_identity_review_prompt(page: dict) -> str:
         "Clearly recognizable as ",
         "Canonical scale reads as:",
         "Canonical body plan reads as:",
+        "Shape-first body geometry reads as:",
         "Identity check:",
         "Reject identity drift:",
         "Swarm reads as ",
