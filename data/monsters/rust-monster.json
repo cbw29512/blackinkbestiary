@@ -60,5 +60,32 @@
     "scavenging",
     "antenna probing",
     "quick pursuit"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium low armored scavenger whose long antennae make the silhouette distinctive without becoming a dog or dragon.",
+    "natural_posture": "Exactly four legs support the arched low body while two very long antennae sweep forward toward metal.",
+    "behavior_style": [
+      "metal seeking",
+      "scavenging",
+      "antenna probing",
+      "quick pursuit"
+    ],
+    "environment_fit": [
+      "underground",
+      "ruins",
+      "settlements"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dog_dragon_drift",
+      "symptom": "body/head becomes mammalian or reptilian predator",
+      "correction": "restore small blunt alien head, low plated body, four legs, long antennae, and flexible tail"
+    },
+    {
+      "id": "extra_leg_drift",
+      "symptom": "creature gains six or more insect walking legs",
+      "correction": "restore exactly four sturdy walking legs under the low armored body"
+    }
   ]
 }
