@@ -6,7 +6,7 @@
   "creature_type": "swarm of tiny beasts",
   "visual_identity": {
     "core_identity": "A flowing mass of ordinary rats whose individual bodies remain readable while the group moves like a living tide.",
-    "silhouette": "Many low rat bodies overlapping in a directional stream, tails and pointed snouts creating motion without becoming a black mass.",
+    "silhouette": "A controlled directional stream of roughly 12–24 comparable small rat bodies with broad white gaps; no sea of repeated rats and no oversized leader.",
     "head_features": "Repeated simple rat heads with pointed snouts, rounded ears, whiskers, and visible incisors on a few foreground animals.",
     "body_shape": "Small four-legged rodent forms in varied running poses; no giant leader rat.",
     "surface": "Minimal fur lines and simple naked tails.",
@@ -30,7 +30,10 @@
       "mouse-cartoon faces",
       "insect swarm",
       "human features",
-      "excessive overlap"
+      "excessive overlap",
+      "wallpaper density of rats",
+      "more than about two dozen visible rats",
+      "oversized foreground leader rat"
     ]
   },
   "default_habitats": [
@@ -42,7 +45,9 @@
     "individual silhouettes remain readable",
     "group movement direction is obvious",
     "page preserves white space",
-    "no giant leader dominates"
+    "no giant leader dominates",
+    "visible population is controlled rather than wallpaper-dense",
+    "rats stay comparable in scale with no giant focal animal"
   ],
   "reference": {
     "image": null,
