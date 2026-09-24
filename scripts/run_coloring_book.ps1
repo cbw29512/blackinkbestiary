@@ -95,6 +95,34 @@ if (-not ($installedVision | Where-Object { $_ -eq $visionModel -or $_ -like "$v
   throw "Required vision model $visionModel is not installed in Ollama. Run: ollama pull $visionModel"
 }
 Write-Host "Semantic vision reviewer ready: $visionModel" -ForegroundColor Green
+Write-Host "Running semantic vision smoke test..." -ForegroundColor Yellow
+$smokeBody = @{
+  model = $visionModel
+  stream = $false
+  think = $false
+  format = @{
+    type = "object"
+    properties = @{
+      pass = @{ type = "boolean" }
+      score = @{ type = "integer" }
+      defects = @{ type = "array"; items = @{ type = "string" } }
+      preserve = @{ type = "array"; items = @{ type = "string" } }
+    }
+    required = @("pass","score","defects","preserve")
+  }
+  messages = @(@{ role = "user"; content = "Return the required JSON object. This is a startup smoke test; pass=true, score=100, defects=[], preserve=[]" })
+  options = @{ temperature = 0; num_predict = 128 }
+} | ConvertTo-Json -Depth 8
+try {
+  $smoke = Invoke-RestMethod -Method Post -Uri "$($vision.base_url.TrimEnd('/'))/api/chat" -ContentType "application/json" -Body $smokeBody -TimeoutSec 120
+  $smokeContent = [string]$smoke.message.content
+  if ([string]::IsNullOrWhiteSpace($smokeContent)) { throw "empty structured response" }
+  $smokeVerdict = $smokeContent | ConvertFrom-Json
+  if ($null -eq $smokeVerdict.pass -or $null -eq $smokeVerdict.defects) { throw "invalid structured response: $smokeContent" }
+} catch {
+  throw "Semantic vision smoke test failed before image generation: $($_.Exception.Message)"
+}
+Write-Host "Semantic vision smoke test passed." -ForegroundColor Green
 Write-Host "Starting fresh Tome I test gallery: 50 pages x 4 candidates (up to 200 images)..." -ForegroundColor Green
 
 $runner = Get-Command python -ErrorAction SilentlyContinue
