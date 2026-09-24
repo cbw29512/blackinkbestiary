@@ -391,6 +391,7 @@ def main() -> int:
             )
 
             reviewer_recheck_failed = False
+            reviewer_recheck_feedback = None
             if (
                 prior
                 and not stale_generation_authority
@@ -429,6 +430,8 @@ def main() -> int:
                     )
                     if not refreshed_review.get("pass"):
                         reviewer_recheck_failed = True
+                        reviewer_recheck_feedback = review_notes(refreshed_review)
+                        reviewer_recheck_feedback["routing_recommendation"] = "regenerate"
                         clear_selection_for_candidate(
                             state,
                             page["page_id"],
@@ -481,7 +484,7 @@ def main() -> int:
                 "started_at": utc_now(),
             }
             try:
-                review_feedback = None
+                review_feedback = reviewer_recheck_feedback
                 if prior and prior.get("status") == "assistant_rejected":
                     assistant_review = prior.get("assistant_review") or {}
                     notes = (assistant_review.get("notes") or "").strip()
