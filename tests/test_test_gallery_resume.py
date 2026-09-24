@@ -197,6 +197,28 @@ class TestGalleryResumeTests(unittest.TestCase):
 
             self.assertEqual(edit_sources, [initial])
 
+    def test_review_gate_progress_beats_higher_score_from_earlier_failure(self):
+        identity_fail = {
+            "pass": False,
+            "stage": "identity",
+            "score": 49,
+            "defects": ["wrong creature"],
+        }
+        scene_fail = {
+            "pass": False,
+            "stage": "scene",
+            "score": 45,
+            "defects": ["missing action"],
+        }
+        quality_fail = {
+            "pass": False,
+            "stage": "quality",
+            "score": 40,
+            "defects": ["too dense"],
+        }
+        self.assertGreater(gallery.verdict_rank(scene_fail), gallery.verdict_rank(identity_fail))
+        self.assertGreater(gallery.verdict_rank(quality_fail), gallery.verdict_rank(scene_fail))
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
