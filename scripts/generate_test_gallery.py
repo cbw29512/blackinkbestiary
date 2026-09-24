@@ -209,6 +209,14 @@ def prepare_edit(cli, client, config, page, seed: int, candidate_no: int, source
     return path
 
 
+def reuse_existing_image_after_reviewer_recheck(verdict: dict) -> bool:
+    """Reuse current pixels after reviewer-only changes unless identity is wrong."""
+    if verdict.get("pass"):
+        return False
+    stage = str(verdict.get("stage") or "").strip().lower()
+    return stage in {"environment", "scene", "action", "quality"}
+
+
 def verdict_rank(verdict: dict) -> tuple:
     stage = str(verdict.get("stage") or "").strip().lower()
     # Passed work always wins. Among failures, gate progress outranks numeric
@@ -431,7 +439,8 @@ def main() -> int:
                     )
                     if not refreshed_review.get("pass"):
                         reviewer_recheck_failed = True
-                        reviewer_recheck_source = prior_image
+                        if reuse_existing_image_after_reviewer_recheck(refreshed_review):
+                            reviewer_recheck_source = prior_image
                         reviewer_recheck_feedback = review_notes(refreshed_review)
                         reviewer_recheck_feedback["routing_recommendation"] = "regenerate"
                         clear_selection_for_candidate(
