@@ -59,5 +59,31 @@
     "predatory watching",
     "low stalking movement",
     "territorial ambush"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium, squat eight-legged reptilian monster whose low belly and thick body read heavier and stranger than an ordinary lizard.",
+    "natural_posture": "Belly low with all eight short legs distributed beneath the trunk; head held forward in a fixed predatory stare.",
+    "behavior_style": [
+      "predatory watching",
+      "low stalking movement",
+      "territorial ambush"
+    ],
+    "environment_fit": [
+      "caves",
+      "ruins",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "four_leg_lizard_drift",
+      "symptom": "creature collapses into an ordinary four-legged lizard",
+      "correction": "restore exactly eight short sturdy legs distributed along the low heavy trunk"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "creature gains wings, horns, or heroic dragon proportions",
+      "correction": "remove wings and dragon ornament; keep squat wingless eight-legged reptile anatomy"
+    }
   ]
 }
