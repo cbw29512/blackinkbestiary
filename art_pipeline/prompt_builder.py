@@ -244,7 +244,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "individuals remain countable enough to read while broad white gaps preserve colorability"
         )
     else:
-        subject_test = "the monster must be the large centered or near-centered dominant focal subject and unmistakable at thumbnail size"
+        subject_test = "the monster must be the first-read focal subject through framing while preserving canonical size, body mass, and species proportions, and it must remain unmistakable at thumbnail size"
 
     sections.append(
         "Final test: COLORABILITY IS THE GOVERNING CONSTRAINT. The page must first be inviting and satisfying to color, "
