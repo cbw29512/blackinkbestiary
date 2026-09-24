@@ -743,6 +743,35 @@
         "grand palace staircase",
         "random steps with no central axis"
       ]
+    },
+    "mine_tunnel_to_shaft": {
+      "priority": 140,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "mine shaft / deep tunnel",
+        "deep timber-braced shaft",
+        "tunnel-to-shaft"
+      ],
+      "plan_shape": "long excavated mine tunnel terminating at or opening directly into a much deeper shaft",
+      "proportions": "the near travel lane is tunnel-like and longer than wide, while the far opening drops or rises dramatically to prove deep shaft scale",
+      "ceiling": "timber-braced or rough-cut mine ceiling remains visible over the tunnel approach; the shaft opening interrupts that enclosure at the destination",
+      "openings": "one primary tunnel route feeds directly into one large shaft opening; side branches remain absent or subordinate",
+      "focal_zone": "the creature occupies and constricts the tunnel approach while the shaft opening and support beams provide scale immediately beyond or around it",
+      "camera": "straight or mild diagonal tunnel perspective that shows both side boundaries, overhead bracing, and the deep shaft opening in one composition",
+      "must_show": [
+        "both tunnel side boundaries around the creature",
+        "timber or rough-cut overhead mine structure",
+        "one unmistakable deep shaft opening connected to the tunnel route",
+        "support beams, rail platform, or other large mine-scale reference"
+      ],
+      "must_not_drift": [
+        "pure vertical shaft with no readable tunnel approach",
+        "generic cave opening",
+        "wide room with freestanding creature",
+        "flat corridor with no deep shaft transition"
+      ]
     }
   }
 }
