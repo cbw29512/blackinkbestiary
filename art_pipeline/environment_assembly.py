@@ -82,12 +82,34 @@ def infer_overlays(page: dict, profile: dict, root: Path = ROOT) -> list[dict]:
     return selected
 
 
+def _compatibility_score(item: dict, contexts: set[str]) -> tuple[int, int, int, int] | None:
+    tags = {str(x).lower() for x in item.get("contexts") or [] if str(x).strip()}
+    if not tags:
+        return None
+    if "universal" in tags:
+        # Universal components are safe fallbacks, but an exact specific match
+        # should beat them whenever one exists.
+        return (0, 0, 0, -len(tags))
+
+    overlap = tags.intersection(contexts)
+    if not overlap:
+        return None
+    foreign = tags.difference(contexts)
+    exact = 1 if not foreign else 0
+    return (exact, len(overlap), -len(foreign), -len(tags))
+
+
 def _pick(items: list[dict], contexts: set[str], key: str, order: int) -> dict:
-    eligible = [
-        item for item in items
-        if "universal" in {str(x).lower() for x in item.get("contexts") or []}
-        or contexts.intersection(str(x).lower() for x in item.get("contexts") or [])
-    ] or list(items)
+    ranked = []
+    for item in items:
+        score = _compatibility_score(item, contexts)
+        if score is not None:
+            ranked.append((score, item))
+    if not ranked:
+        ranked = [((0, 0, -999, 0), item) for item in items]
+
+    best_score = max(score for score, _ in ranked)
+    eligible = [item for score, item in ranked if score == best_score]
     offset = int(hashlib.sha256(key.encode("utf-8")).hexdigest()[:8], 16)
     return dict(eligible[(offset + max(order - 1, 0)) % len(eligible)])
 
