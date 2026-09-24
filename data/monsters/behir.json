@@ -60,5 +60,32 @@
     "coiling",
     "predatory stalking",
     "sudden striking"
+  ],
+  "scene_identity": {
+    "size_impression": "Huge, extremely long serpentine reptile whose scale comes from body length and repeated short legs rather than dragon bulk.",
+    "natural_posture": "Long body coils or braces against terrain while many paired short legs visibly contact support along the torso.",
+    "behavior_style": [
+      "climbing",
+      "coiling",
+      "predatory stalking",
+      "sudden striking"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "body becomes a four-limbed dragon or gains wings",
+      "correction": "remove wings and dragon torso proportions; restore snake-long body with repeated paired short legs"
+    },
+    {
+      "id": "leg_loss_drift",
+      "symptom": "many-legged body collapses into a smooth snake or only a few legs",
+      "correction": "restore repeated paired legs along much of the serpentine torso"
+    }
   ]
 }
