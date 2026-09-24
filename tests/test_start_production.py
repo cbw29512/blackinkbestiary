@@ -64,6 +64,17 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("engine_preflight_failed", publisher)
         self.assertIn('"engine_preflight": engine_preflight', publisher)
 
+    def test_engine_preflight_is_fail_closed_and_autopilot_steps_are_consistent(self):
+        preflight = (ROOT / "scripts" / "engine_preflight.py").read_text(encoding="utf-8")
+        autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
+
+        self.assertIn("unit-test-launch", preflight)
+        self.assertIn("engine-preflight-status.json", preflight)
+        self.assertIn('"status": "failed"', preflight)
+        for step in range(1, 8):
+            self.assertIn(f"[{step}/7]", autopilot)
+        self.assertNotIn("[5/6]", autopilot)
+
     def test_start_doc_names_single_entry_point(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
         self.assertIn("START_BLACKINK.bat", text)
