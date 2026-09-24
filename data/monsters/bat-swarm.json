@@ -6,7 +6,7 @@
   "creature_type": "swarm of tiny beasts",
   "visual_identity": {
     "core_identity": "A dense but readable cloud of ordinary cave bats moving as one turbulent mass through confined underground air.",
-    "silhouette": "Dozens of small bat silhouettes arranged in a clear upward spiral or funnel, with negative space between groups.",
+    "silhouette": "A controlled upward spiral/funnel of roughly 12–24 similarly scaled small bat silhouettes with broad white gaps between clusters; no wallpaper field and no giant leader.",
     "head_features": "Individual bats have simple pointed ears and short natural muzzles; no single face dominates.",
     "body_shape": "Small natural bat bodies with simple membrane wings, varied wing positions, no oversized leader creature.",
     "surface": "Minimal fur and wing detail to prevent visual noise.",
@@ -30,7 +30,10 @@
       "bird flock",
       "insect swarm",
       "dense crosshatching",
-      "unreadable overlap"
+      "unreadable overlap",
+      "more than about two dozen visible bats",
+      "wallpaper density of tiny repeated bats",
+      "oversized central bat"
     ]
   },
   "default_habitats": [
@@ -44,7 +47,9 @@
     "center retains open space",
     "no single bat dominates",
     "shaft geometry remains visible",
-    "page avoids black visual mass"
+    "page avoids black visual mass",
+    "visible population is controlled rather than wallpaper-dense",
+    "all bats are broadly comparable in scale"
   ],
   "reference": {
     "image": null,
