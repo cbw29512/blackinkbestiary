@@ -17,7 +17,7 @@ class VisionReviewerTests(unittest.TestCase):
             "vision_reviewer": {
                 "provider": "ollama",
                 "base_url": "http://127.0.0.1:11434",
-                "model": "qwen3-vl:4b",
+                "model": "qwen3-vl:4b-instruct",
             }
         }
         self.page = {
