@@ -60,5 +60,32 @@
     "subsurface pursuit",
     "powerful leaping",
     "ambush hunting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large compact land-burrowing predator with massive low body, thick legs, and a prominent dorsal fin proving the land-shark silhouette.",
+    "natural_posture": "Four heavy legs brace low to the ground while the plated back and dorsal fin stay above the body mass.",
+    "behavior_style": [
+      "burrowing",
+      "subsurface pursuit",
+      "powerful leaping",
+      "ambush hunting"
+    ],
+    "environment_fit": [
+      "underground",
+      "wilderness",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "fish_drift",
+      "symptom": "creature becomes an aquatic shark or fish body",
+      "correction": "restore four weight-bearing digging legs, broad armored land body, and one dorsal fin"
+    },
+    {
+      "id": "extra_leg_drift",
+      "symptom": "creature gains insect-like extra legs",
+      "correction": "keep exactly four powerful legs and remove all additional limb pairs"
+    }
   ]
 }
