@@ -136,6 +136,24 @@ def interaction_proof_rules(page: dict) -> list[str]:
         rules.append(
             "REACH-TARGET PROOF: at least one canonical tendril/extension must visibly point toward and close the distance to the named target while the main body remains supported as required. Do not turn the whole creature into an unsupported tentacle mass."
         )
+    if ("watch" in text or "stare" in text or "gaze" in text) and any(
+        term in text for term in ("chest", "target", "victim", "object", "creature")
+    ):
+        rules.append(
+            "GAZE-TARGET PROOF: head/eyes must visibly orient toward the named target and the target must lie along that readable sightline; do not substitute a generic forward-facing portrait."
+        )
+    if "aim" in text and any(term in text for term in ("bow", "weapon", "downward", "target")):
+        rules.append(
+            "AIM-DIRECTION PROOF: weapon/attack line and the creature's arms/head must visibly share the named direction toward the target zone; do not show a held weapon with an ambiguous aim."
+        )
+    if "water" in text and any(term in text for term in ("ripple", "rippling", "wade", "contact")):
+        rules.append(
+            "WATER-CONTACT PROOF: visible ripple arcs must originate where the creature/body contacts the water surface; do not place decorative ripples elsewhere or leave the body floating above the waterline."
+        )
+    if ("fill" in text or "filling" in text) and any(term in text for term in ("tunnel", "passage", "shaft", "corridor")):
+        rules.append(
+            "PASSAGE-FILL PROOF: the creature's body must visibly approach both sides of the named passage and use the passage boundaries as scale evidence; do not show a small creature floating in a wide generic opening."
+        )
     return rules
 
 
