@@ -20,6 +20,27 @@ def review_id(page_id: str, candidate: int, payload: bytes) -> str:
 
 
 class ReviewDecisionTests(unittest.TestCase):
+    def test_repository_exact_image_decisions_are_unique(self):
+        payload = json.loads(
+            (ROOT / "review-previews" / "decisions.json").read_text(encoding="utf-8")
+        )
+        ids = [
+            str(item.get("review_id") or "")
+            for item in payload.get("reviews", [])
+            if str(item.get("review_id") or "")
+        ]
+        self.assertEqual(len(ids), len(set(ids)))
+
+    def test_repository_rejection_stages_are_known_when_present(self):
+        payload = json.loads(
+            (ROOT / "review-previews" / "decisions.json").read_text(encoding="utf-8")
+        )
+        allowed = {"identity", "environment", "action", "quality"}
+        for item in payload.get("reviews", []):
+            stage = str(item.get("stage") or "").strip().lower()
+            if stage:
+                self.assertIn(stage, allowed, item.get("review_id"))
+
     def test_review_id_binds_exact_image_bytes(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
