@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from prompt_builder import _canonical_sections, _items, load_monster_spec
+from prompt_builder import _body_plan_lock, _canonical_sections, _items, load_monster_spec
 try:
     from .page_contract import resolve_page_spec
 except ImportError:
@@ -32,10 +32,11 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
     sections = [
         "EDIT THE PROVIDED CURRENT COLORING PAGE. Do not redesign it from scratch.",
         (
-            "Preserve the existing framing, camera angle, pose, perspective, successful anatomy, "
-            "and successful background elements unless they conflict with the requirements below."
+            "Preserve the existing framing, camera angle, pose, perspective, and successful background elements. "
+            "Preserve anatomy only when it matches the canonical body-plan and scale locks below; rebuild incorrect species anatomy rather than polishing it."
         ),
         f"SUBJECT MUST REMAIN: {page['monster_name']}.",
+        *_body_plan_lock(page, spec),
         *_canonical_sections(spec),
         f"HABITAT MUST READ AS: {page['habitat']}.",
         *environment_prompt_sections(page, ROOT),
