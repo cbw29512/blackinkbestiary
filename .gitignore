@@ -21,3 +21,4 @@ data/local-runtime-status.json
 data/test-gallery-state.json
 data/test-gallery-state.json.tmp
 web/test-gallery/*
+data/engine-preflight-status.json
