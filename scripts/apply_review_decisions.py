@@ -145,15 +145,17 @@ def main() -> int:
         page_id = str(item.get("page_id"))
         candidate_no = int(item.get("candidate") or 0)
 
+        single_candidate_page = int(state.get("copies_per_page") or 1) <= 1
+        decision_wants_selection = (
+            decision == "select"
+            or (decision == "approve" and single_candidate_page)
+        )
         same_review = item.get("assistant_review") == next_review
-        if (
-            same_review
-            and decision != "select"
-        ):
+        if same_review and not decision_wants_selection:
             continue
         if (
             same_review
-            and decision == "select"
+            and decision_wants_selection
             and (
                 not selection_eligible(item)
                 or selection_matches(state, page_id, candidate_no, target_review_id)
@@ -190,8 +192,14 @@ def main() -> int:
             # Approval means this exact image is acceptable, but it must not
             # silently replace another final candidate merely because the
             # decision appeared later in the append-only review history.
+            # On a one-candidate canary, approval acts as the selection only
+            # after the current local staged reviewer also passes.
             selected = (state.get("selections") or {}).get(page_id)
-            if selected is None and int(state.get("copies_per_page") or 1) <= 1:
+            if (
+                selected is None
+                and single_candidate_page
+                and selection_eligible(item)
+            ):
                 state.setdefault("selections", {})[page_id] = {
                     "candidate": candidate_no,
                     "source": "assistant_review",
