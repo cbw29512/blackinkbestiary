@@ -172,7 +172,12 @@ def main() -> int:
         if decision == "reject":
             item["status"] = "assistant_rejected"
             rejected_image = current_image_path(item)
-            if rejected_image.exists():
+            # Identity failure means the source silhouette/body plan is unsafe
+            # to preserve, so discard it and force fresh text generation.
+            # Environment/action/quality failures keep the exact rejected image
+            # so the next pass can repair the scene while preserving good
+            # creature identity and successful pixels.
+            if stage == "identity" and rejected_image.exists():
                 rejected_image.unlink()
             selected = (state.get("selections") or {}).get(page_id)
             if selected and int(selected.get("candidate") or 0) == candidate_no:
