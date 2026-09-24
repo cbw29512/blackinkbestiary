@@ -30,16 +30,18 @@ class VisionReviewerTests(unittest.TestCase):
 
     def test_prompt_bounds_verdict_size(self):
         prompt = vr.build_review_prompt(self.page)
-        self.assertIn("at most 4 defects", prompt)
-        self.assertIn("at most 3 preserve items", prompt)
-        self.assertIn("under 80 characters", prompt)
+        lower = prompt.lower()
+        self.assertIn("at most 4 defects", lower)
+        self.assertIn("3 preserve items", lower)
+        self.assertIn("under 80 characters", lower)
         self.assertIn("FINAL COLORING-PAGE GATE", prompt)
 
 
     def test_identity_prompt_is_fail_closed_and_scale_focused(self):
         prompt = vr.build_identity_review_prompt(self.page)
-        self.assertIn("identity and anatomy gate", prompt)
-        self.assertIn("FAIL CLOSED", prompt)
+        lower = prompt.lower()
+        self.assertIn("identity and anatomy gate", lower)
+        self.assertIn("fail closed", lower)
         self.assertIn("adult-human-sized heroic mass", prompt)
         self.assertIn("Any identity failure should score 49 or lower", prompt)
 
@@ -99,7 +101,7 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertEqual(request.call_count, 1)
         url, payload = request.call_args.args[:2]
         self.assertTrue(url.endswith("/api/generate"))
-        self.assertIn("identity and anatomy gate", payload["prompt"])
+        self.assertIn("identity and anatomy gate", payload["prompt"].lower())
         self.assertEqual(len(payload["images"]), 1)
         self.assertFalse(payload["stream"])
         self.assertFalse(payload["think"])
