@@ -131,6 +131,11 @@ Write-Host "Starting/resuming Tome I test gallery: 50 pages x 4 candidates (up t
 $runner = Get-Command python -ErrorAction SilentlyContinue
 if (-not $runner) { $runner = Get-Command py -ErrorAction SilentlyContinue }
 if (-not $runner) { throw "Python was not found." }
+
+Write-Host "Synchronizing latest engine rules and AI decisions..." -ForegroundColor Yellow
+& $runner.Source (Join-Path $root "scripts\sync_engine_for_run.py")
+if ($LASTEXITCODE -ne 0) { throw "Engine sync refused or failed with code $LASTEXITCODE." }
+
 & $runner.Source (Join-Path $root "scripts\apply_review_decisions.py")
 if ($LASTEXITCODE -ne 0) { throw "Review decision applier exited with code $LASTEXITCODE." }
 
