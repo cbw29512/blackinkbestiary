@@ -39,20 +39,34 @@ Write-Host "Black-Ink Bestiary - Automated Test Gallery" -ForegroundColor Cyan
 Write-Host "================================================"
 
 if (-not (Test-Comfy)) {
-  $mainPy = Find-ComfyMain
-  if (-not $mainPy) {
-    throw "Existing ComfyUI installation was not found. Start your existing ComfyUI Desktop once, then rerun this launcher."
+  $knownInstall = Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary\ComfyUI"
+  $knownMain = Join-Path $knownInstall "main.py"
+
+  if (Test-Path $knownMain) {
+    Write-Host "Found existing ComfyUI Desktop install: $knownInstall" -ForegroundColor Green
+    $desktopExe = Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA "Programs") -Filter "ComfyUI*.exe" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($desktopExe) {
+      Write-Host "Launching ComfyUI Desktop..." -ForegroundColor Yellow
+      Start-Process -FilePath $desktopExe.FullName | Out-Null
+    } else {
+      Write-Host "Launching the existing Black-Ink install with its own Python environment..." -ForegroundColor Yellow
+      $embedded = @(
+        (Join-Path (Split-Path -Parent $knownInstall) "python_embeded\python.exe"),
+        (Join-Path (Split-Path -Parent $knownInstall) ".venv\Scripts\python.exe"),
+        (Join-Path $knownInstall ".venv\Scripts\python.exe")
+      ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+      if (-not $embedded) {
+        throw "Found the existing ComfyUI install but not its runtime. Open ComfyUI Desktop once, then rerun RUN_COLORING_BOOK.bat."
+      }
+      Start-Process -FilePath $embedded -ArgumentList @($knownMain, "--listen", "127.0.0.1", "--port", "8188") -WorkingDirectory $knownInstall -WindowStyle Minimized | Out-Null
+    }
+  } else {
+    $mainPy = Find-ComfyMain
+    if (-not $mainPy) {
+      throw "Existing ComfyUI installation was not found. Open ComfyUI Desktop once, then rerun RUN_COLORING_BOOK.bat."
+    }
+    throw "A ComfyUI core folder was found at $mainPy, but this launcher will not start it with the wrong Python environment. Open ComfyUI Desktop once, then rerun."
   }
-
-  $comfyRoot = Split-Path -Parent $mainPy
-  $python = Get-Command python -ErrorAction SilentlyContinue
-  if (-not $python) { $python = Get-Command py -ErrorAction SilentlyContinue }
-  if (-not $python) { throw "Python was not found." }
-
-  Write-Host "Found existing ComfyUI: $comfyRoot" -ForegroundColor Green
-  Write-Host "Starting existing ComfyUI..." -ForegroundColor Yellow
-  $args = @($mainPy, "--listen", "127.0.0.1", "--port", "8188")
-  Start-Process -FilePath $python.Source -ArgumentList $args -WorkingDirectory $comfyRoot -WindowStyle Minimized | Out-Null
 
   Write-Host "Waiting for ComfyUI API..." -ForegroundColor Yellow
   $ready = $false
@@ -61,7 +75,7 @@ if (-not (Test-Comfy)) {
     if (Test-Comfy) { $ready = $true; break }
     if (($i + 1) % 10 -eq 0) { Write-Host "  still starting... $((($i + 1) * 2)) seconds" }
   }
-  if (-not $ready) { throw "Existing ComfyUI did not become ready at $($config.comfy_url) within 4 minutes." }
+  if (-not $ready) { throw "ComfyUI Desktop did not expose the API at $($config.comfy_url) within 4 minutes." }
 }
 
 Write-Host "ComfyUI API ready." -ForegroundColor Green
