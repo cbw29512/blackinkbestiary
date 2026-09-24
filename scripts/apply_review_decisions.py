@@ -49,45 +49,48 @@ def main() -> int:
             continue
         latest_by_review_id[target_review_id] = review
 
+    current_items = {}
+    for item in state.get("results", []):
+        current_review_id = review_id_for(item)
+        if current_review_id:
+            current_items[current_review_id] = item
+
     changed = False
     applied = 0
 
     for target_review_id, review in latest_by_review_id.items():
+        item = current_items.get(target_review_id)
+        if item is None:
+            continue
+
         decision = str(review.get("decision") or "").lower()
+        notes = str(review.get("notes") or "")
+        next_review = {
+            "review_id": target_review_id,
+            "decision": decision,
+            "notes": notes,
+        }
+        if item.get("assistant_review") == next_review:
+            continue
+        item["assistant_review"] = next_review
 
-        for item in state.get("results", []):
-            current_review_id = review_id_for(item)
-            if current_review_id != target_review_id:
-                continue
-
-            notes = str(review.get("notes") or "")
-            next_review = {
+        if decision == "reject":
+            item["status"] = "assistant_rejected"
+            rejected_image = current_image_path(item)
+            if rejected_image.exists():
+                rejected_image.unlink()
+            selected = (state.get("selections") or {}).get(str(item.get("page_id")))
+            if selected and int(selected.get("candidate") or 0) == int(item.get("candidate") or 0):
+                state["selections"].pop(str(item.get("page_id")), None)
+        else:
+            state.setdefault("selections", {})[str(item.get("page_id"))] = {
+                "candidate": int(item.get("candidate") or 0),
+                "source": "assistant_review",
                 "review_id": target_review_id,
-                "decision": decision,
-                "notes": notes,
             }
-            if item.get("assistant_review") == next_review:
-                break
-            item["assistant_review"] = next_review
 
-            if decision == "reject":
-                item["status"] = "assistant_rejected"
-                rejected_image = current_image_path(item)
-                if rejected_image.exists():
-                    rejected_image.unlink()
-                selected = (state.get("selections") or {}).get(str(item.get("page_id")))
-                if selected and int(selected.get("candidate") or 0) == int(item.get("candidate") or 0):
-                    state["selections"].pop(str(item.get("page_id")), None)
-            else:
-                state.setdefault("selections", {})[str(item.get("page_id"))] = {
-                    "candidate": int(item.get("candidate") or 0),
-                    "source": "assistant_review",
-                    "review_id": target_review_id,
-                }
-
-            changed = True
-            applied += 1
-            break
+        changed = True
+        applied += 1
 
     if changed:
         STATE.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
