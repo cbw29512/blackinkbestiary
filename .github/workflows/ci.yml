@@ -58,16 +58,7 @@ jobs:
               python -m json.tool data/environment_spatial_envelopes.json > /dev/null
               for file in data/environment_components/*.json; do python -m json.tool "$file" > /dev/null; done
               python -m json.tool data/series.json > /dev/null
-              python - <<'PY'
-              from pathlib import Path
-              import sys
-              sys.path.insert(0, 'art_pipeline')
-              from catalog_audit import audit_monster_catalog
-              report = audit_monster_catalog(Path('.').resolve())
-              print('CATALOG_ERRORS=', report['errors'])
-              print('OWNERSHIP_WARNINGS=', report['ownership_warnings'])
-              raise SystemExit(0 if report['pass'] else 1)
-              PY
+              python -c "from pathlib import Path; import sys; sys.path.insert(0, 'art_pipeline'); from catalog_audit import audit_monster_catalog; report=audit_monster_catalog(Path('.').resolve()); print('CATALOG_ERRORS=', report['errors']); print('OWNERSHIP_WARNINGS=', report['ownership_warnings']); raise_code=0 if report['pass'] else 1; raise SystemExit(raise_code)"
               ;;
             unit-tests)
               python -m unittest discover -s tests -v
