@@ -94,8 +94,62 @@ def _payload(settings: dict, prompt: str, encoded: str) -> dict:
     }
 
 
+POSITIVE_GATE_PREFIXES = (
+    "Identity check:",
+    "Canonical scale reads as:",
+    "Canonical body plan reads as:",
+    "Shape-first body geometry reads as:",
+    "Habitat reads as:",
+    "Scene moment reads as:",
+    "Required element present:",
+    "Physical state reads as:",
+    "Support/contact is visible and believable:",
+    "Motion/weight reads correctly:",
+    "Environment matches profile:",
+    "Spatial type reads without the monster:",
+    "Material language is visible:",
+    "At least one unmistakable location marker is visible:",
+    "Spatial geometry reads correctly:",
+    "Space envelope matches:",
+    "Space proportions read correctly:",
+    "Space overhead/ceiling reads correctly:",
+    "Unique landmark is visible:",
+    "Monster/environment interaction reads clearly:",
+)
+
+
+def _positive_gate_values(prompt: str) -> set[str]:
+    values = set()
+    for raw in prompt.splitlines():
+        line = raw.strip()
+        if line.startswith("- "):
+            line = line[2:].strip()
+        for prefix in POSITIVE_GATE_PREFIXES:
+            if line.startswith(prefix):
+                values.add(line)
+                tail = line[len(prefix):].strip()
+                if tail:
+                    values.add(tail)
+                break
+    return values
+
+
+def _normalize_gate_echoes(verdict: dict, prompt: str) -> dict:
+    positive = _positive_gate_values(prompt)
+    normalized = []
+    for defect in verdict.get("defects") or []:
+        defect_text = str(defect).strip()
+        if defect_text in positive:
+            normalized.append(f"Required condition not visibly satisfied: {defect_text}")
+        else:
+            normalized.append(defect_text)
+    verdict["defects"] = normalized
+    return verdict
+
+
 def _run_gate(url: str, settings: dict, encoded: str, prompt: str, stage: str) -> dict:
     verdict = _parse_verdict(_request(url, _payload(settings, prompt, encoded)), stage)
+    verdict = _normalize_gate_echoes(verdict, prompt)
     if not verdict["pass"]:
         verdict["score"] = min(verdict["score"], 49)
     return verdict
