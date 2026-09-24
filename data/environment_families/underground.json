@@ -406,12 +406,12 @@
     },
     "underground.spiral-stair": {
       "name": "Cramped Spiral Stair",
-      "description": "Tight masonry stair curling around a central newel or shaft, emphasizing vertical confinement.",
+      "description": "Extremely tight masonry spiral stair curling around a central newel, column, or shaft; wedge-shaped treads and a curved outer wall make the helical geometry unmistakable.",
       "visual_cues": [
-        "curving stone steps",
-        "central column or open shaft",
-        "tight wall radius",
-        "small landing"
+        "wedge-shaped stone treads visibly curving around a central newel or shaft",
+        "central column or open shaft visible through multiple stair turns",
+        "tight curved outer masonry wall",
+        "small landing connected directly to the helix"
       ],
       "colorable_forms": [
         "large step bands",
@@ -419,9 +419,13 @@
         "simple railing if any"
       ],
       "must_avoid": [
+        "straight staircase",
         "grand staircase",
-        "open ballroom"
-      ]
+        "ordinary broad stair flight",
+        "open ballroom",
+        "flat corridor with isolated steps"
+      ],
+      "spatial_envelope": "spiral_stair"
     },
     "underground.prison-cell": {
       "name": "Dungeon Prison Cell",
