@@ -32,7 +32,7 @@ def review_id_for(item: dict) -> str | None:
     return f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}-H{digest[:16]}"
 
 
-def classify_rejection_stage(review: dict) -> str:
+def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
     explicit = str(review.get("stage") or "").strip().lower()
     if explicit in {"identity", "environment", "action", "quality"}:
         return explicit
@@ -83,6 +83,10 @@ def classify_rejection_stage(review: dict) -> str:
             continue
         if any(term in notes for term in terms):
             return stage
+
+    local_stage = str(((item or {}).get("visual_review") or {}).get("stage") or "").strip().lower()
+    if local_stage in {"identity", "environment", "action", "quality"}:
+        return local_stage
     return ""
 
 
@@ -134,7 +138,7 @@ def main() -> int:
 
         decision = str(review.get("decision") or "").lower()
         notes = str(review.get("notes") or "")
-        stage = classify_rejection_stage(review) if decision == "reject" else ""
+        stage = classify_rejection_stage(review, item) if decision == "reject" else ""
         next_review = {
             "review_id": target_review_id,
             "decision": decision,
