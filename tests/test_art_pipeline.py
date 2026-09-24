@@ -236,6 +236,19 @@ class PromptTests(unittest.TestCase):
         self.assertIn("three distinct luminous glands", text)
         self.assertIn("two by the eyes and one near the rear abdomen", text)
 
+    def test_overhead_support_uses_only_canonical_anatomy(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        darkmantle = build_prompt(pages["I-14"])
+        self.assertIn("mantle body/rim itself remains visibly attached", darkmantle)
+        self.assertIn("no hands, feet, arms, or legs provide support", darkmantle)
+
+        bat = build_prompt(pages["I-16"])
+        self.assertIn("both canonical hind feet only visibly grip the cavern ceiling", bat)
+        self.assertIn("forelimbs remain membrane wings", bat)
+        self.assertIn("never become separate hands or arms", bat)
+
     def test_giant_bat_prompt_forbids_separate_arms(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-16")
