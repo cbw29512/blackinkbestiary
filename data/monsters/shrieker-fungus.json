@@ -59,7 +59,9 @@
       "cute mushroom eyes",
       "dense gill texture",
       "toothed animal mouth"
-    ]
+    ],
+    "shape_lock": "Draw one rooted mushroom only: one thick stalk anchored to the ground, one broad cap above it, and one large simple resonant gill opening on the underside of that cap. The opening may read mouthlike but has no teeth, lips, eyes, separate head, arms, legs, or tentacles.",
+    "limb_structure": "No limbs or tendrils. One rooted stalk supports one broad cap; the only active-looking structure is the single underside gill/resonant opening."
   },
   "anatomy_variant": true
 }
