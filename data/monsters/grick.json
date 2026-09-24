@@ -31,7 +31,9 @@
       "humanoid eyes",
       "insect legs",
       "dense ring texture"
-    ]
+    ],
+    "limb_structure": "No walking legs or arms. Exactly four fleshy facial tentacles open symmetrically around one small central beak at the front of the long wormlike body.",
+    "shape_lock": "Draw one thick legless worm body with a single front end that opens into exactly four muscular tentacles around one central beak. Keep the rest of the body continuous, heavy, and serpentine; add no snake head, octopus body, insect legs, or extra facial tentacles."
   },
   "default_habitats": [
     "caves",
