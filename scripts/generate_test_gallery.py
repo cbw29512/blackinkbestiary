@@ -19,6 +19,7 @@ from image_edit_profile import prepare_distilled_image_edit
 from edit_prompt import build_edit_prompt
 from vision_reviewer import VisionReviewError, review_image, review_notes
 from generation_runtime import model_filename, read_json
+from generation_fingerprint import page_generation_fingerprint
 from manifest_validation import validate_manifest
 from page_contract import resolve_page_spec
 from prompt_builder import build_prompt
@@ -332,6 +333,7 @@ def main() -> int:
                 "candidate": candidate_no,
                 "seed": seed,
                 "engine_commit": engine_commit(),
+                "generation_fingerprint": page_generation_fingerprint(page, ROOT),
                 "started_at": utc_now(),
             }
             try:
