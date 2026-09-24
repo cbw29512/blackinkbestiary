@@ -208,9 +208,11 @@ Use REGENERATE when:
 - page is stylistically unusable
 - targeted editing would cost more effort than a fresh attempt
 
-## Golden Five
+## Golden Five Human Calibration
 
-Before scaling Tome I, approve five reference pages that demonstrate the style across different creature types.
+Golden Five is the separate human calibration/reference lane used to prove final Studio judgment across different creature types. It is not the automated engine-canary gate.
+
+Before treating the finished book workflow as human-calibrated, approve five reference pages that demonstrate the style across different creature types.
 
 Suggested categories:
 1. Humanoid — Kobold Warrior
@@ -220,6 +222,8 @@ Suggested categories:
 5. Unusual anatomy — Roper
 
 These become style references, not composition templates.
+
+The automated preflight is the separate nine-page exact-image canary: I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22. All nine require current content-hash-valid approval before the 50-page × 4-candidate gallery launcher is allowed to run.
 
 ## Reviewer Test
 
