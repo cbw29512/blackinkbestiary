@@ -35,7 +35,9 @@
       "ornate door clutter",
       "cartoon expression",
       "excess slime"
-    ]
+    ],
+    "shape_lock": "Draw one full rectangular door slab integrated into a doorway as the entire creature body. Keep hinges, frame alignment, and door panels readable; one hidden eye and tongue-handle emerge from existing hardware/panel seams only. No separate monster head, torso, arms, legs, chest body, or freestanding creature silhouette.",
+    "limb_structure": "No separate biological limbs. Eye, tongue, mouth seam, or pseudopod detail must remain integrated into the door slab or its existing hardware while the door stays structurally attached in the opening."
   },
   "default_habitats": [
     "underground",
