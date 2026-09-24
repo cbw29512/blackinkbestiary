@@ -18,6 +18,14 @@ def _checks(page: dict) -> list[str]:
     return unique
 
 
+def _require_selected(page: dict, stage: str, selected: list[str]) -> list[str]:
+    if not selected:
+        raise RuntimeError(
+            f"{page.get('page_id')}: {stage} vision gate has no concrete review checks"
+        )
+    return selected
+
+
 def build_identity_review_prompt(page: dict) -> str:
     checks = _checks(page)
     prefixes = (
@@ -29,7 +37,11 @@ def build_identity_review_prompt(page: dict) -> str:
         "Reject identity drift:",
         "Swarm reads as ",
     )
-    selected = [item for item in checks if item.startswith(prefixes)]
+    selected = _require_selected(
+        page,
+        "identity",
+        [item for item in checks if item.startswith(prefixes)],
+    )
     return """You are the Black-Ink Bestiary IDENTITY AND ANATOMY GATE.
 Inspect only what is visibly present in the image. Do not trust the requested creature name as evidence.
 
@@ -72,7 +84,11 @@ def build_environment_review_prompt(page: dict) -> str:
         "Framing differs from repeated generic backgrounds:",
         "Environment geometry differs meaningfully from nearby pages",
     )
-    selected = [item for item in checks if item.startswith(prefixes)]
+    selected = _require_selected(
+        page,
+        "environment",
+        [item for item in checks if item.startswith(prefixes)],
+    )
     return """You are the Black-Ink Bestiary ENVIRONMENT GEOMETRY GATE.
 Inspect only the visible setting. Ignore creature beauty and action quality except where creature scale proves the space.
 
@@ -115,7 +131,11 @@ def build_action_review_prompt(page: dict) -> str:
         "Pose is stable, natural, and easy to read in a static coloring page",
         "No jumping, falling, dropping, or accidental hovering",
     )
-    selected = [item for item in checks if item.startswith(prefixes)]
+    selected = _require_selected(
+        page,
+        "action",
+        [item for item in checks if item.startswith(prefixes)],
+    )
     return """You are the Black-Ink Bestiary ACTION AND PHYSICALITY GATE.
 Inspect the visible action, contact, support, and cause-and-effect. The environment has already been checked separately.
 
@@ -183,7 +203,11 @@ def build_review_prompt(page: dict) -> str:
         "Pose is stable, natural, and easy to read in a static coloring page",
         "No jumping, falling, dropping, or accidental hovering",
     )
-    selected = [item for item in checks if not item.startswith(excluded_prefixes)]
+    selected = _require_selected(
+        page,
+        "quality",
+        [item for item in checks if not item.startswith(excluded_prefixes)],
+    )
     return """You are the Black-Ink Bestiary FINAL COLORING-PAGE GATE.
 The candidate has already been checked for species identity, environment geometry, and action/physicality requirements.
 Now red-team the actual image for any remaining production failure.
