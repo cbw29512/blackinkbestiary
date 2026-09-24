@@ -15,6 +15,22 @@ def load_story_contract(root: Path = ROOT) -> dict:
     return _read(root / "config" / "universal_story_contract.json")
 
 
+def critical_scene_lock(page: dict) -> str:
+    variant = page.get("environment_variant") or {}
+    physicality = page.get("physicality") or {}
+    return (
+        "CRITICAL SCENE LOCK — NON-NEGOTIABLE: "
+        f"exact visible action={page.get('moment', '')}; "
+        f"environment interaction={variant.get('interaction', '')}; "
+        f"landmark={variant.get('landmark', '')}; "
+        f"framing={variant.get('framing', '')}; "
+        f"support/contact={physicality.get('support', '')}; "
+        f"motion/weight={physicality.get('motion', '')}. "
+        "Build the pose and environment around this cause-and-effect first. "
+        "Do not replace the required action with standing, holding, posing, or merely being near the prop."
+    )
+
+
 def story_sections(page: dict, root: Path = ROOT) -> list[str]:
     contract = load_story_contract(root)
     variant = page.get("environment_variant") or {}
