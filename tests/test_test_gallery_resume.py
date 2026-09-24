@@ -256,6 +256,77 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertGreater(gallery.verdict_rank(action_fail), gallery.verdict_rank(environment_fail))
         self.assertGreater(gallery.verdict_rank(quality_fail), gallery.verdict_rank(action_fail))
 
+    def test_repeated_action_failure_escalates_from_edit_to_fresh_regeneration(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "web" / "candidates").mkdir(parents=True)
+            initial = root / "initial.png"
+            initial.write_bytes(b"x")
+            edited = root / "web" / "candidates" / "edit.png"
+            edited.write_bytes(b"y")
+            regenerated = root / "web" / "candidates" / "regen.png"
+            regenerated.write_bytes(b"z")
+
+            verdicts = iter([
+                {
+                    "pass": False,
+                    "score": 45,
+                    "stage": "action",
+                    "defects": ["lantern is not being kicked"],
+                    "preserve": ["goblin anatomy"],
+                },
+                {
+                    "pass": False,
+                    "score": 45,
+                    "stage": "action",
+                    "defects": ["lantern is still not being kicked"],
+                    "preserve": ["goblin anatomy"],
+                },
+                {
+                    "pass": True,
+                    "score": 95,
+                    "stage": "quality",
+                    "defects": [],
+                    "preserve": ["action fixed"],
+                },
+            ])
+
+            edit_calls = []
+            prepare_feedback = []
+            generated = iter(["candidates/edit.png", "candidates/regen.png"])
+
+            def fake_edit(cli, client, config, page, seed, candidate_no, source, verdict, pass_no):
+                edit_calls.append((Path(source), pass_no))
+                return root / f"edit-{pass_no}.json"
+
+            def fake_prepare(cli, config, page, seed, candidate_no, review_feedback=None):
+                prepare_feedback.append(review_feedback)
+                return root / "regen.json"
+
+            with (
+                patch.object(gallery, "ROOT", root),
+                patch.object(gallery, "reload_authority", return_value={}),
+                patch.object(gallery, "review_image", side_effect=lambda *a, **k: next(verdicts)),
+                patch.object(gallery, "prepare_edit", side_effect=fake_edit),
+                patch.object(gallery, "prepare", side_effect=fake_prepare),
+                patch.object(gallery, "execute_candidate", side_effect=lambda *a, **k: next(generated)),
+            ):
+                gallery.refine_candidate(
+                    cli=object(),
+                    client=object(),
+                    config={"vision_reviewer": {"max_refinement_passes": 3}},
+                    page={"page_id": "X-01"},
+                    candidate_no=1,
+                    seed=100,
+                    initial=initial,
+                )
+
+            self.assertEqual(edit_calls, [(initial, 1)])
+            self.assertEqual(len(prepare_feedback), 1)
+            self.assertEqual(prepare_feedback[0]["stage"], "action")
+            self.assertTrue(prepare_feedback[0]["stagnation_escalation"])
+            self.assertEqual(prepare_feedback[0]["routing_recommendation"], "regenerate")
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
