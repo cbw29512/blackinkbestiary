@@ -59,7 +59,9 @@
       "teeth",
       "solid black tendrils",
       "dense fungal texture"
-    ]
+    ],
+    "shape_lock": "Draw one rooted mushroom body with one thick stalk, one broad cap, and exactly four long whip-like tendrils emerging separately around the upper stalk. Keep all four tendrils visually distinct with simple sweeping curves and clear gaps; no face, legs, octopus body, extra tentacle mass, or tangled knot.",
+    "limb_structure": "No walking limbs. Exactly four long flexible tendrils emerge separately from the upper rooted stalk beneath the cap; each remains visually traceable from base to tip."
   },
   "anatomy_variant": true
 }
