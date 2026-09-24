@@ -39,6 +39,33 @@ class TomeISpecTests(unittest.TestCase):
             self.assertTrue(spec["accuracy_checks"])
             self.assertTrue(page["must_include"])
 
+    def test_page_recipes_do_not_override_canonical_identity_with_generic_boilerplate(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        forbidden = {
+            "use clear fantasy-monster anatomy and a strong silhouette",
+        }
+        for page in tome["pages"]:
+            raw_rules = {
+                str(item).strip().lower()
+                for item in page.get("identity_rules") or []
+            }
+            self.assertFalse(
+                raw_rules.intersection(forbidden),
+                f"{page['page_id']} contains generic anatomy boilerplate",
+            )
+            self.assertFalse(
+                any(rule.startswith("must be immediately recognizable as ") for rule in raw_rules),
+                f"{page['page_id']} repeats a label instead of concrete identity geometry",
+            )
+
+            resolved = resolve_page_spec(page, ROOT)
+            self.assertTrue(resolved.get("identity_rules"), page["page_id"])
+            spec = load_monster_spec(page)
+            self.assertTrue(
+                set(spec["accuracy_checks"]).issubset(set(resolved["identity_rules"])),
+                page["page_id"],
+            )
+
     def test_every_page_preserves_canonical_scale_in_visual_hierarchy(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         for page in tome["pages"]:
