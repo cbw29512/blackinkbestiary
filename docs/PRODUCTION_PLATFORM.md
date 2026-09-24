@@ -120,7 +120,7 @@ Large local galleries do not need to be uploaded into chat. The local machine ke
 
 Every published candidate receives a `review_id` containing page, candidate number, and a SHA-256 fingerprint of the actual finalized PNG. Assistant decisions in `review-previews/decisions.json` must target that exact `review_id`. This prevents an old rejection from accidentally rejecting a newly regenerated image that reused the same page/candidate slot, even if state metadata is stale.
 
-A rejection removes the final local gallery copy, records the assistant notes, and marks only that exact candidate `assistant_rejected`. The next regeneration receives those notes as a fresh-generation correction rather than blindly repeating the previous prompt. `RERUN_NEXT_REJECTED.bat` applies current GitHub decisions, reruns only the first rejected candidate, and republishes the new preview. Stale JPEG review previews are removed on the next publish.
+A rejection records the assistant notes/stage and marks only that exact candidate `assistant_rejected`. Identity rejection deletes the unsafe local source and rebuilds fresh from canonical text authority. Environment, action, and quality rejection preserve the exact rejected PNG as a targeted image-edit source so correct creature identity and successful pixels are not needlessly thrown away. `RERUN_NEXT_REJECTED.bat` applies current GitHub decisions, reruns only the first rejected candidate, and republishes the new preview. Stale JPEG review previews are removed on the next publish.
 
 The intended loop is:
 
