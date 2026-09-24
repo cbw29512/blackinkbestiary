@@ -35,7 +35,12 @@
       "reptilian scales",
       "cute features",
       "short arms",
-      "dense skin texture"
+      "dense skin texture",
+      "horns or horn nubs",
+      "full-body fur",
+      "broad bodybuilder chest",
+      "six-pack superhero torso",
+      "ogre-like short thick limbs"
     ]
   },
   "default_habitats": [
@@ -48,7 +53,10 @@
     "claws are clear",
     "face is predatory",
     "fire-wary behavior may read when the page story calls for it",
-    "silhouette remains simple"
+    "silhouette remains simple",
+    "head is hornless",
+    "arms hang unusually low toward the knees or ground",
+    "torso is narrow and lanky, never superhero-built"
   ],
   "reference": {
     "image": null,
