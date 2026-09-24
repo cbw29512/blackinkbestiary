@@ -38,7 +38,8 @@
       "clawed animal feet",
       "six-pack bodybuilder torso"
     ],
-    "limb_structure": "Balanced athletic humanoid arms and legs with controlled hand placement and stable booted or armored feet; no giant, animal, or exaggerated goblin limb proportions."
+    "limb_structure": "Balanced athletic humanoid arms and legs with controlled hand placement and stable booted or armored feet; no giant, animal, or exaggerated goblin limb proportions.",
+    "shape_lock": "Draw a medium lean military goblinoid with humanlike overall scale, angular stern face, pointed ears, broad flattened nose, and disciplined posture. Keep the torso athletic but not bodybuilder-bulky; no horns, tusks, tail, claws, animal feet, or orc-like jaw."
   },
   "accuracy_checks": [
     "reads as disciplined goblinoid soldier before generic fantasy brute",
