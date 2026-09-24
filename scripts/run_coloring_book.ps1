@@ -100,12 +100,12 @@ $smokeBody = @{
   model = $visionModel
   stream = $false
   prompt = 'Reply with exactly this JSON and nothing else: {"pass":true,"score":100,"defects":[],"preserve":[]}'
-  options = @{ temperature = 0; num_predict = 128 }
+  options = @{ temperature = 0; num_predict = 2048 }
 } | ConvertTo-Json -Depth 8
 try {
   $smoke = Invoke-RestMethod -Method Post -Uri "$($vision.base_url.TrimEnd('/'))/api/generate" -ContentType "application/json" -Body $smokeBody -TimeoutSec 120
   $smokeContent = [string]$smoke.response
-  if ([string]::IsNullOrWhiteSpace($smokeContent)) { throw "empty response from Ollama generate API" }
+  if ([string]::IsNullOrWhiteSpace($smokeContent)) { throw "empty response from Ollama generate API (done_reason=$($smoke.done_reason); eval_count=$($smoke.eval_count))" }
   $smokeVerdict = $smokeContent | ConvertFrom-Json
   if ($null -eq $smokeVerdict.pass -or $null -eq $smokeVerdict.defects) { throw "invalid structured response: $smokeContent" }
 } catch {
