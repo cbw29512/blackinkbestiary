@@ -4,36 +4,6 @@
   "family": "spider",
   "size": "large",
   "creature_type": "giant arachnid",
-  "visual_identity": {
-    "core_identity": "A huge web-building spider with a clear two-part arachnid body, eight long legs, and an ambush posture.",
-    "silhouette": "Large rounded abdomen behind a smaller cephalothorax, eight long jointed legs radiating outward in a stable hunting or web-building posture.",
-    "head_features": "Arachnid cephalothorax with multiple simple eyes and visible fangs, no humanoid face.",
-    "body_shape": "Two main body sections with eight legs attached to the front section; abdomen elevated slightly.",
-    "surface": "Sparse short hairs and simple abdominal markings; web lines kept broad and readable.",
-    "signature_gear": [],
-    "attitude": [
-      "patient",
-      "still",
-      "predatory",
-      "ambush-ready"
-    ],
-    "must_keep": [
-      "eight legs",
-      "two-part spider body",
-      "fangs",
-      "stable arachnid posture",
-      "large readable abdomen"
-    ],
-    "must_avoid": [
-      "insect six-leg anatomy",
-      "human eyes",
-      "wolf-like fur",
-      "cartoon smile",
-      "dense web clutter",
-      "extra limbs"
-    ],
-    "shape_lock": "Draw exactly eight spider legs attached to the cephalothorax, a clear two-part arachnid body, and a stable web-supported posture; keep web strands sparse enough that stone architecture and broad coloring spaces remain visible."
-  },
   "default_habitats": [
     "forest",
     "caves",
@@ -61,5 +31,18 @@
     "climbing",
     "ambush hunting",
     "prey wrapping"
+  ],
+  "visual_overrides": {
+    "signature_gear": [],
+    "attitude": [
+      "patient",
+      "still",
+      "predatory",
+      "ambush-ready"
+    ],
+    "shape_lock": "Draw exactly eight spider legs attached to the cephalothorax, a clear two-part arachnid body, and a stable web-supported posture; keep web strands sparse enough that stone architecture and broad coloring spaces remain visible."
+  },
+  "variant_traits": [
+    "giant spider"
   ]
 }
