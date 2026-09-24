@@ -31,7 +31,8 @@
       "cartoon smile",
       "dense web clutter",
       "extra limbs"
-    ]
+    ],
+    "shape_lock": "Draw exactly eight spider legs attached to the cephalothorax, a clear two-part arachnid body, and a stable web-supported posture; keep web strands sparse enough that stone architecture and broad coloring spaces remain visible."
   },
   "default_habitats": [
     "forest",
