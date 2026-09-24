@@ -94,7 +94,11 @@ def inspect_line_art(path: str | Path) -> dict:
     x_step = max(1, width // 256)
     y_step = max(1, height // 256)
     dark = white = total = 0
+    chromatic = 0
+    safe_margin_dark = safe_margin_total = 0
     min_luma, max_luma = 255, 0
+    margin_x = max(1, int(width * 0.04))
+    margin_y = max(1, int(height * 0.04))
 
     for y in range(0, height, y_step):
         row = rows[y]
@@ -105,14 +109,29 @@ def inspect_line_art(path: str | Path) -> dict:
             else:
                 r, g, b = row[i], row[i + 1], row[i + 2]
                 luma = (299 * r + 587 * g + 114 * b) // 1000
-            dark += luma < 80
+                if max(r, g, b) - min(r, g, b) > 12:
+                    chromatic += 1
+            is_dark = luma < 80
+            dark += is_dark
             white += luma > 245
             total += 1
+            if (
+                x < margin_x
+                or x >= width - margin_x
+                or y < margin_y
+                or y >= height - margin_y
+            ):
+                safe_margin_total += 1
+                safe_margin_dark += is_dark
             min_luma = min(min_luma, luma)
             max_luma = max(max_luma, luma)
 
     dark_ratio = dark / total if total else 0.0
     white_ratio = white / total if total else 0.0
+    chromatic_ratio = chromatic / total if total else 0.0
+    safe_margin_dark_ratio = (
+        safe_margin_dark / safe_margin_total if safe_margin_total else 0.0
+    )
     reasons = []
     if dark_ratio < 0.001:
         reasons.append("near_blank_page")
@@ -120,11 +139,17 @@ def inspect_line_art(path: str | Path) -> dict:
         reasons.append("overly_dark_page")
     if max_luma - min_luma < 35:
         reasons.append("insufficient_contrast")
+    if chromatic_ratio > 0.01:
+        reasons.append("unexpected_color_content")
+    if safe_margin_dark_ratio > 0.02:
+        reasons.append("safe_margin_too_busy")
 
     return {
         "supported": True,
         "dark_ratio": round(dark_ratio, 4),
         "white_ratio": round(white_ratio, 4),
+        "chromatic_ratio": round(chromatic_ratio, 4),
+        "safe_margin_dark_ratio": round(safe_margin_dark_ratio, 4),
         "contrast_range": max_luma - min_luma,
         "pass": not reasons,
         "reasons": reasons,
