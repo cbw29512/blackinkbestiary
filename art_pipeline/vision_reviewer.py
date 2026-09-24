@@ -43,12 +43,20 @@ def _parse_verdict(result: dict, stage: str) -> dict:
         verdict = json.loads(raw)
     except json.JSONDecodeError:
         start, end = raw.find("{"), raw.rfind("}")
+        diagnostics = (
+            f"; done_reason={result.get('done_reason') if isinstance(result, dict) else None}"
+            f"; eval_count={result.get('eval_count') if isinstance(result, dict) else None}"
+        )
         if start < 0 or end <= start:
-            raise VisionReviewError(f"{stage} reviewer returned non-JSON content: {raw[:300]}")
+            raise VisionReviewError(
+                f"{stage} reviewer returned non-JSON content: {raw[:300]}{diagnostics}"
+            )
         try:
             verdict = json.loads(raw[start:end + 1])
         except json.JSONDecodeError as exc:
-            raise VisionReviewError(f"{stage} reviewer returned non-JSON content: {raw[:300]}") from exc
+            raise VisionReviewError(
+                f"{stage} reviewer returned non-JSON content: {raw[:300]}{diagnostics}"
+            ) from exc
 
     score = verdict.get("score")
     defects = verdict.get("defects")
