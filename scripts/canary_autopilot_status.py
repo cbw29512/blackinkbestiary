@@ -2,9 +2,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from generation_fingerprint import page_generation_fingerprint
 STATE = ROOT / "data" / "test-gallery-state.json"
 CANARY_PAGE_IDS = (
     "I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22",
@@ -38,7 +42,11 @@ def _current_review_id(item: dict, root: Path = ROOT) -> str | None:
     )
 
 
-def classify(item: dict | None, root: Path = ROOT) -> str:
+def classify(
+    item: dict | None,
+    root: Path = ROOT,
+    current_generation_fingerprint: str | None = None,
+) -> str:
     if not item:
         return "needs_generation"
     assistant = item.get("assistant_review") or {}
@@ -50,12 +58,23 @@ def classify(item: dict | None, root: Path = ROOT) -> str:
         and current_review_id
         and recorded_review_id == current_review_id
     )
-    if decision == "approve" and exact_review_is_current:
+    recorded_fingerprint = str(item.get("generation_fingerprint") or "")
+    fingerprint_is_current = (
+        current_generation_fingerprint is None
+        or (
+            recorded_fingerprint
+            and recorded_fingerprint == current_generation_fingerprint
+        )
+    )
+
+    if decision == "approve" and exact_review_is_current and fingerprint_is_current:
         return "approved"
     if decision == "reject" and exact_review_is_current:
         return "needs_generation"
 
     status = str(item.get("status") or "")
+    if status in {"ready_for_review", "max_refinements_reached"} and not fingerprint_is_current:
+        return "needs_generation"
     if status in RETRYABLE:
         return "needs_generation"
     if status in {"ready_for_review", "max_refinements_reached"}:
@@ -69,6 +88,8 @@ def main() -> int:
         return 10
 
     state = json.loads(STATE.read_text(encoding="utf-8"))
+    tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+    pages = {str(page.get("page_id")): page for page in tome.get("pages", [])}
     results = {
         (str(item.get("page_id")), int(item.get("candidate") or 0)): item
         for item in state.get("results", [])
@@ -78,7 +99,15 @@ def main() -> int:
     rows = []
     for page_id in CANARY_PAGE_IDS:
         item = results.get((page_id, 1))
-        state_name = classify(item)
+        page = pages.get(page_id)
+        current_fingerprint = (
+            page_generation_fingerprint(page, ROOT) if page else None
+        )
+        state_name = classify(
+            item,
+            ROOT,
+            current_generation_fingerprint=current_fingerprint,
+        )
         counts[state_name] += 1
         rows.append((page_id, state_name, str((item or {}).get("status") or "missing")))
 
