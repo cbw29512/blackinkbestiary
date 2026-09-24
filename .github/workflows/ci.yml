@@ -47,7 +47,7 @@ jobs:
           import sys
           sys.path.insert(0, 'art_pipeline')
           from catalog_audit import audit_monster_catalog
-          report = audit_monster_catalog(Path('.'))
+          report = audit_monster_catalog(Path('.').resolve())
           print('CATALOG_ERRORS=', report['errors'])
           print('OWNERSHIP_WARNINGS=', report['ownership_warnings'])
           raise SystemExit(0 if report['pass'] else 1)
