@@ -29,13 +29,15 @@
       "insect anatomy",
       "vampire clothing"
     ],
-    "limb_structure": "Forelimbs are true bat wings formed by elongated finger bones supporting a continuous membrane; hind limbs end in small clawed roosting feet. Never add separate humanoid arms."
+    "limb_structure": "Forelimbs are true bat wings formed by elongated finger bones supporting a continuous membrane; hind limbs end in small clawed roosting feet. Never add separate humanoid arms.",
+    "shape_lock": "Draw true bat anatomy with exactly four limbs total per bat: two forelimbs that ARE the membrane wings and two hind legs/feet; never add separate arms, hands, or an extra wing pair."
   },
   "accuracy_checks": [
     "reads as bat immediately",
     "wing structure is mammalian",
     "no dragon or bird anatomy appears",
-    "fur and membrane detail stay simple"
+    "fur and membrane detail stay simple",
+    "forelimbs are the wings; no separate arms or hands exist"
   ],
   "known_failure_modes": [
     {
