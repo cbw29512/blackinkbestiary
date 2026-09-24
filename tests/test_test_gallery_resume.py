@@ -14,6 +14,21 @@ spec.loader.exec_module(gallery)
 
 
 class TestGalleryResumeTests(unittest.TestCase):
+    def test_clear_selection_for_candidate_removes_only_matching_candidate(self):
+        state = {
+            "selections": {
+                "I-01": {
+                    "candidate": 2,
+                    "source": "assistant_selected",
+                    "review_id": "I-01-C02-Habc",
+                }
+            }
+        }
+        self.assertFalse(gallery.clear_selection_for_candidate(state, "I-01", 1))
+        self.assertIn("I-01", state["selections"])
+        self.assertTrue(gallery.clear_selection_for_candidate(state, "I-01", 2))
+        self.assertNotIn("I-01", state["selections"])
+
     def test_existing_success_is_skipped(self):
         prior = {"status": "ready_for_review"}
         self.assertTrue(gallery.should_skip_candidate(prior, False))
