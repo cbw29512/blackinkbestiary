@@ -81,6 +81,13 @@ def _body_plan_lock(page: dict, spec: dict | None) -> list[str]:
             "SMALL-CREATURE SCALE LOCK: keep the torso, shoulders, limbs, head-to-body ratio, and overall mass visibly small. "
             "Use nearby architecture/props and a closer camera to make the subject readable; never solve composition by turning it into an adult-human-sized or heroic muscular creature."
         )
+        creature_type = str(spec.get("creature_type") or "").lower()
+        if "humanoid" in creature_type:
+            sections.append(
+                "SMALL-HUMANOID SCALE EVIDENCE — NON-NEGOTIABLE: show at least one human-scale architectural reference in the same depth plane. "
+                "For an ordinary dungeon door/corridor, the creature's standing height should read roughly one-third to one-half of the full human-scale opening height, "
+                "with visibly smaller hands, feet, shoulders, and gear. Do not enlarge the creature to fill the frame."
+            )
     if _is_swarm(page, spec):
         sections.append(
             "INDIVIDUAL-SCALE LOCK: every swarm member keeps the same canonical small/tiny anatomy and broadly comparable scale. "
