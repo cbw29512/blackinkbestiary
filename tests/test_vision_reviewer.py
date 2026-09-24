@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 import vision_reviewer as vr
+import vision_review_prompts as vp
 
 
 class VisionReviewerTests(unittest.TestCase):
@@ -119,7 +120,7 @@ class VisionReviewerTests(unittest.TestCase):
             self.assertIn("FINAL QUALITY GATES:\n- ", quality, page["page_id"])
 
     def test_empty_gate_fails_closed(self):
-        with patch.object(vr, "_checks", return_value=[]):
+        with patch.object(vp, "_checks", return_value=[]):
             with self.assertRaises(RuntimeError):
                 vr.build_identity_review_prompt(self.page)
             with self.assertRaises(RuntimeError):
