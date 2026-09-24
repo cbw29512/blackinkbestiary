@@ -12,6 +12,12 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("http://127.0.0.1:8765", text)
         self.assertNotIn("production-state.json", text)
 
+    def test_full_gallery_requires_exact_image_canary_approval(self):
+        text = (ROOT / "scripts" / "run_coloring_book.ps1").read_text(encoding="utf-8")
+        self.assertIn("canary_autopilot_status.py", text)
+        self.assertIn("Full 50-page gallery is blocked", text)
+        self.assertIn("9/9 exact-image approved", text)
+
     def test_start_doc_names_single_entry_point(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
         self.assertIn("START_BLACKINK.bat", text)
