@@ -11,13 +11,16 @@
       "habitat": "Tight trapped stone corridor",
       "moment": "Cackling as a tripwire is triggered",
       "identity_rules": [
-        "small reptilian humanoid",
-        "long snout",
-        "small horn nubs",
+        "small reptilian humanoid only 2–3 feet tall",
+        "long narrow lizard snout",
+        "small horn nubs or short head spines",
+        "visible balancing tail",
         "needle teeth",
-        "ragged leather gear",
-        "oversized spear",
-        "devious trap-maker; not cute"
+        "narrow shoulders and thin limbs with almost no heroic muscle definition",
+        "ragged light leather gear scaled to a tiny creature",
+        "oversized spear relative to the kobold but still small beside human-scale corridor architecture",
+        "human-scale corridor height visibly proves the kobold is much smaller than an adult human",
+        "devious trap-maker; never dragonborn-sized, bodybuilder-built, or cute"
       ],
       "must_include": [
         "small wiry kobold",
@@ -35,7 +38,10 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "adult-human or dragonborn-sized kobold",
+        "broad muscular chest or heroic shoulders",
+        "human-sized hands, feet, or gear"
       ],
       "coloring_rules": {
         "outer_contour": "bold",
@@ -651,8 +657,12 @@
       "habitat": "Limestone cave ceiling",
       "moment": "Peeling away from a stalactite above a lantern",
       "identity_rules": [
-        "Must be immediately recognizable as Darkmantle",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
+        "one continuous non-humanoid leathery mantle/cap body",
+        "the mantle itself is the whole main body, not wings attached to a torso",
+        "small recessed underside mouth centered beneath the mantle",
+        "short dangling underside tentacles",
+        "no separate head silhouette, neck, torso, arms, legs, tail, or wing pair",
+        "part of the mantle body remains physically attached to the stalactite while peeling away"
       ],
       "must_include": [
         "darkmantle disguised against a stalactite",
@@ -668,7 +678,11 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "generic fantasy humanoid anatomy",
+        "dragon or demon head",
+        "separate wings attached to a torso",
+        "arms, legs, or tail"
       ],
       "coloring_rules": {
         "outer_contour": "bold",
