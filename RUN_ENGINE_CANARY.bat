@@ -9,6 +9,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\ensure_local_ai.ps1
 if errorlevel 1 (
   echo.
   echo Local AI runtime could not be started or verified.
+  echo Publishing runtime diagnostic to the review snapshot...
+  python scripts\publish_review_previews.py
   pause
   exit /b 1
 )
