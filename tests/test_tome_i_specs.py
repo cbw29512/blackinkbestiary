@@ -39,14 +39,16 @@ class TomeISpecTests(unittest.TestCase):
             self.assertTrue(spec["accuracy_checks"])
             self.assertTrue(page["must_include"])
 
-    def test_every_page_uses_monster_first_visual_hierarchy(self):
+    def test_every_page_preserves_canonical_scale_in_visual_hierarchy(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         for page in tome["pages"]:
             resolved = resolve_page_spec(page, ROOT)
             composition = resolved.get("composition", "").lower()
-            self.assertIn("large centered or near-centered dominant focal subject", composition, page["page_id"])
-            self.assertIn("60–75% of page height", resolved.get("composition", ""), page["page_id"])
+            self.assertIn("visually dominant focal subject", composition, page["page_id"])
+            self.assertIn("canonical creature scale", composition, page["page_id"])
             self.assertIn("two to four large supporting forms", composition, page["page_id"])
+            self.assertTrue(resolved.get("subject_scale_rule"), page["page_id"])
+            self.assertNotIn("60–75% of page height", resolved.get("composition", ""), page["page_id"])
             self.assertNotIn("composition", page, page["page_id"])
 
     def test_every_page_has_explicit_physicality(self):
