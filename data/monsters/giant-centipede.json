@@ -36,7 +36,8 @@
       "lobster pincers",
       "worm body with only a few legs",
       "spider-style long legs"
-    ]
+    ],
+    "shape_lock": "Draw a long chain of many trunk segments where every visible trunk segment carries exactly one pair of short walking legs, forming a continuous saw-tooth rhythm nearly the whole body length; front mouth claws stay small and mouth-adjacent, never spiderlike or lobsterlike."
   },
   "default_habitats": [
     "underground",
