@@ -159,8 +159,9 @@
         "underground"
       ],
       "terms": [
-        "spiral stair",
-        "stone stair"
+        "stone stair",
+        "stairway",
+        "staircase"
       ],
       "plan_shape": "vertical circulation space",
       "proportions": "stairs dominate the composition and create unmistakable rise/descent",
@@ -712,6 +713,35 @@
       "must_not_drift": [
         "ordinary room",
         "tiny cluttered den"
+      ]
+    },
+    "spiral_stair": {
+      "priority": 130,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "spiral stair",
+        "spiral staircase"
+      ],
+      "plan_shape": "tight helical stair wrapping continuously around a central newel, column, or open shaft",
+      "proportions": "narrow wedge-shaped treads curve around the center; outer wall radius stays visibly tight; vertical rise is obvious",
+      "ceiling": "tight vertical stair enclosure or shaft edge remains visible above/below the helical run",
+      "openings": "small landings connect directly into the spiral; no broad straight landing may dominate",
+      "focal_zone": "the creature occupies the curved tread run between the central newel/shaft and outer wall",
+      "camera": "high or low diagonal view that simultaneously shows curved tread progression, central axis, and outer wall",
+      "must_show": [
+        "central newel, column, or open shaft",
+        "wedge-shaped steps visibly curving around the center",
+        "outer curved wall or circular enclosure",
+        "clear vertical rise/fall through the helix"
+      ],
+      "must_not_drift": [
+        "straight staircase",
+        "ordinary broad stair flight",
+        "flat corridor with a few steps",
+        "grand palace staircase",
+        "random steps with no central axis"
       ]
     }
   }
