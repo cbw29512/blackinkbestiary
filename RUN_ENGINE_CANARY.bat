@@ -4,16 +4,17 @@ cd /d "%~dp0"
 echo.
 echo Black-Ink Bestiary - Engine Canary + Publish
 echo ==============================================
-echo Applying exact-image AI review decisions from GitHub...
+echo Applying exact-image AI review decisions from the engine branch...
 python scripts\apply_review_decisions.py
 if errorlevel 1 (
+  echo.
   echo Review decision import stopped with an error.
   pause
   exit /b 1
 )
 echo.
-echo Regenerating one candidate for the 9-page anatomy/environment canary set...
-python scripts\generate_test_gallery.py --canary --copies 1
+echo Retrying only missing, failed, or exact-image-rejected canary pages...
+python scripts\generate_test_gallery.py --canary-failed --copies 1
 if errorlevel 1 (
   echo.
   echo Canary generation stopped with an error.
@@ -21,7 +22,7 @@ if errorlevel 1 (
   exit /b 1
 )
 echo.
-echo Publishing refreshed review previews...
+echo Publishing refreshed previews to the dedicated review-previews-live branch...
 python scripts\publish_review_previews.py
 if errorlevel 1 (
   echo.
@@ -30,5 +31,5 @@ if errorlevel 1 (
   exit /b 1
 )
 echo.
-echo Canary previews are published and ready for ChatGPT inspection.
+echo Review snapshot published. ChatGPT can inspect it directly from GitHub.
 pause
