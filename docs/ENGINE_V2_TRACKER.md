@@ -14,7 +14,7 @@ New monsters and books should require minimal JSON. Shared intelligence belongs 
 
 Every final page must:
 
-- feature one large, dominant, recognizable monster
+- feature one visually dominant, recognizable creature or creature group at canonical size and proportions
 - keep the monster in a stable, natural, readable pose
 - show an unmistakable environment/lair/territory
 - make the story moment readable at thumbnail size
@@ -40,7 +40,7 @@ Approval requires all three thumbnail pillars, but **colorability is the first p
 - silhouette
 - head/body/limb structure
 - surface treatment
-- normal size impression
+- canonical size impression and scale relationships
 - locomotion
 - must-keep identity
 - prohibited look-alikes
@@ -63,7 +63,7 @@ Page JSON supplies only unique landmark, framing, and interaction.
 ### Page/coloring engine owns
 
 - one dominant subject
-- monster scale and framing
+- framing and focal hierarchy without changing canonical monster scale
 - stable-pose rules
 - coloring density
 - line hierarchy
@@ -82,7 +82,7 @@ These are engine feedback, not isolated page problems.
 - goblin becomes mascot/cute
 - kobold becomes mini-dragon or generic lizard
 - non-flyer appears to hover
-- monster is too small or loses focal dominance
+- framing loses focal dominance, or layout pressure incorrectly inflates a tiny/small creature into heroic mass
 - environment becomes a generic room/cave/ocean
 - setting cannot be identified without caption
 - background repeats the same geometry across pages
@@ -90,6 +90,18 @@ These are engine feedback, not isolated page problems.
 - story moment requires a chaotic jump/fall pose that is poor for static coloring
 - repeated tiny textures turn coloring into homework
 - secondary creatures compete with the primary subject
+
+## 2026-09-24 Canonical Scale + Identity-First Review Lock
+
+The 87-page preview audit exposed two universal failures that are now engine rules:
+
+- **Canonical creature scale outranks composition.** Tiny/small creatures stay tiny/small relative to architecture, traps, furniture, and props. Visual prominence comes from framing, placement, and silhouette clarity—not enlarging the body.
+- **Canonical body plan is immutable.** Species silhouette, proportions, limb topology/counts, and explicit anti-drift traits are hard generation and refinement constraints.
+- **Identity review runs before general quality review.** A candidate must first pass species identity, canonical scale, body plan, limb structure, and known-drift checks. Only then may environment/story/colorability quality be considered.
+- Identity failure is fail-closed and terminal for that refinement pass; a beautiful page cannot compensate for the wrong creature.
+- The nine-page canary set is I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22. Full regeneration remains blocked until this cross-section proves the engine.
+
+This prevents the recurring kobold→dragonborn, goblin/hobgoblin→horned brute, darkmantle/stirge→dragon humanoid, bat→winged humanoid, swarm→wallpaper/giant leader, and centipede→sparse-legged hybrid failures from being treated as page-local accidents.
 
 ## Current Engine Status
 
