@@ -47,8 +47,6 @@ def publish_preview_snapshot(root: Path) -> str:
     engine_branch = output(root, "git", "branch", "--show-current")
     if not engine_branch:
         raise RuntimeError("Review publishing requires a checked-out engine branch")
-    pre_publish_head = output(root, "git", "rev-parse", "HEAD")
-
     safe_to_resync = not tracked_changes_outside_previews(root)
     stage_preview_snapshot(root)
 
@@ -56,6 +54,11 @@ def publish_preview_snapshot(root: Path) -> str:
         ["git", "diff", "--cached", "--quiet"],
         cwd=root,
     ).returncode != 0
+    pre_publish_head = (
+        output(root, "git", "rev-parse", "HEAD")
+        if staged
+        else ""
+    )
 
     publish_head = ""
     if staged:
