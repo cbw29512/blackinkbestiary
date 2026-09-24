@@ -134,6 +134,14 @@ if (-not $runner) { throw "Python was not found." }
 & $runner.Source (Join-Path $root "scripts\apply_review_decisions.py")
 if ($LASTEXITCODE -ne 0) { throw "Review decision applier exited with code $LASTEXITCODE." }
 
+Write-Host "Checking exact-image canary approvals before full gallery..." -ForegroundColor Yellow
+& $runner.Source (Join-Path $root "scripts\canary_autopilot_status.py")
+$canaryExit = $LASTEXITCODE
+if ($canaryExit -ne 0) {
+  throw "Full 50-page gallery is blocked until all nine canary pages have exact-image AI approval. Run RUN_ENGINE_AUTOPILOT.bat (or RUN_ENGINE_CANARY.bat) first."
+}
+Write-Host "Canary approval gate passed: 9/9 exact-image approved." -ForegroundColor Green
+
 $galleryArgs = @("--copies", "4", "--rerun-failed")
 if ($NextRejected) {
   $statePath = Join-Path $root "data\test-gallery-state.json"
