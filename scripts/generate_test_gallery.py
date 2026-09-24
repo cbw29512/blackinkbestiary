@@ -120,7 +120,7 @@ def prepare_edit(cli, client, config, page, seed: int, candidate_no: int, source
     uploaded = client.upload_image(source, subfolder="blackink-refinements")
     path = WORKFLOW_DIR / f"test_{page['page_id'].lower()}_c{candidate_no:02d}_r{pass_no:02d}.json"
     prepare_distilled_image_edit(
-        cli, config["templates"]["modify"], path,
+        cli, config["templates"]["modify"] if "modify" in config["templates"] else config["templates"]["image_edit"], path,
         prompt=build_edit_prompt(page, review_notes(verdict), candidate_no=candidate_no),
         seed=seed, input_image=uploaded["load_image_name"],
         model_filename=unet, clip_filename=clip, vae_filename=vae,
