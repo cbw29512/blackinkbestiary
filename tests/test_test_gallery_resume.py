@@ -60,6 +60,30 @@ class TestGalleryResumeTests(unittest.TestCase):
             )
         )
 
+    def test_review_authority_staleness_is_independent_from_generation(self):
+        prior = {
+            "status": "ready_for_review",
+            "generation_fingerprint": "pixels-same",
+            "review_fingerprint": "review-old",
+        }
+        self.assertFalse(
+            gallery.generation_authority_stale(prior, "pixels-same")
+        )
+        self.assertTrue(
+            gallery.review_authority_stale(prior, "review-new")
+        )
+
+    def test_existing_candidate_path_requires_real_current_png(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-01-C01.png"
+            image.parent.mkdir(parents=True)
+            item = {"image_path": "test-gallery/I-01-C01.png"}
+            with patch.object(gallery, "ROOT", root):
+                self.assertIsNone(gallery.existing_candidate_path(item))
+                image.write_bytes(b"png")
+                self.assertEqual(gallery.existing_candidate_path(item), image)
+
     def test_canary_force_reruns_existing_candidate(self):
         prior = {"status": "ready_for_review"}
         self.assertFalse(gallery.should_skip_candidate(prior, False, force_rerun=True))
