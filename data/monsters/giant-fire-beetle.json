@@ -34,7 +34,9 @@
       "cute ladybug styling",
       "generic beetle with no visible gland structures",
       "more or fewer than six legs"
-    ]
+    ],
+    "shape_lock": "Draw one true beetle with exactly six walking legs, two antennae, domed wing cases, and three unmistakable outlined luminous gland bulges: two by the eyes and one at the rear abdomen. No spider legs, fantasy horns, or extra limbs.",
+    "limb_structure": "Exactly six insect walking legs attached to the thorax, plus two antennae and mandibles; no extra legs or spiderlike appendages."
   },
   "default_habitats": [
     "underground",
