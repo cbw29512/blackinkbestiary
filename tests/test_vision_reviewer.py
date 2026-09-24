@@ -45,6 +45,18 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("bodybuilder-like", prompt)
         self.assertIn("six-pack", prompt)
 
+
+    def test_habitat_story_and_physicality_are_hard_gates(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
+        prompt = vr.build_review_prompt(page)
+        self.assertIn("HARD IDENTITY GATES:", prompt)
+        self.assertIn("Habitat reads as:", prompt)
+        self.assertIn("Scene moment reads as:", prompt)
+        self.assertIn("Physical state reads as:", prompt)
+        self.assertIn("Support/contact is visible and believable:", prompt)
+        self.assertIn("Motion/weight reads correctly:", prompt)
+
     def test_review_uses_generate_endpoint_with_image(self):
         verdict = {
             "pass": False,
