@@ -42,7 +42,7 @@ class ReviewPublishGitTests(unittest.TestCase):
             patch.object(rpg, "tracked_changes_outside_previews", return_value=[]),
             patch.object(rpg, "stage_preview_snapshot"),
             patch.object(rpg, "run", side_effect=lambda root_arg, *args: calls.append((root_arg, args))),
-            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
+            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=1)),
         ):
             result = rpg.publish_preview_snapshot(root)
 
@@ -77,6 +77,33 @@ class ReviewPublishGitTests(unittest.TestCase):
             calls,
         )
 
+    def test_unchanged_snapshot_does_not_repoint_live_branch(self):
+        root = Path("C:/fake")
+        outputs = {
+            ("git", "branch", "--show-current"): "feat/environment-spatial-hardening",
+            ("git", "rev-parse", "origin/review-previews-live"): "live123",
+        }
+
+        def fake_output(_root, *args):
+            return outputs[tuple(args)]
+
+        calls = []
+        with (
+            patch.object(rpg, "output", side_effect=fake_output),
+            patch.object(rpg, "tracked_changes_outside_previews", return_value=[]),
+            patch.object(rpg, "stage_preview_snapshot"),
+            patch.object(rpg, "run", side_effect=lambda root_arg, *args: calls.append((root_arg, args))),
+            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
+        ):
+            result = rpg.publish_preview_snapshot(root)
+
+        self.assertEqual(result, "live123")
+        self.assertFalse(any(args[:2] == ("git", "push") for _, args in calls))
+        self.assertIn(
+            (root, ("git", "fetch", "origin", "feat/environment-spatial-hardening")),
+            calls,
+        )
+
     def test_publish_does_not_resync_when_other_tracked_changes_exist(self):
         root = Path("C:/fake")
         outputs = {
@@ -93,7 +120,7 @@ class ReviewPublishGitTests(unittest.TestCase):
             patch.object(rpg, "tracked_changes_outside_previews", return_value=[" M scripts/local.py"]),
             patch.object(rpg, "stage_preview_snapshot"),
             patch.object(rpg, "run", side_effect=lambda root_arg, *args: calls.append((root_arg, args))),
-            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
+            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=1)),
         ):
             rpg.publish_preview_snapshot(root)
 
