@@ -213,6 +213,28 @@ class PromptTests(unittest.TestCase):
         self.assertIn("two forelimbs that ARE the membrane wings", text)
         self.assertIn("Never add separate humanoid arms", text)
 
+    def test_early_tome_i_story_objects_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        shrine = build_prompt(pages["I-02"])
+        self.assertIn("SHRINE-OFFERING PROOF", shrine)
+        self.assertIn("coin is visibly held or raised", shrine)
+
+        ham = build_prompt(pages["I-03"])
+        self.assertIn("HAM-OBJECT PROOF", ham)
+        self.assertIn("one protruding bone end", ham)
+
+        captain = build_prompt(pages["I-07"])
+        self.assertIn("MAP-COMMAND PROOF", captain)
+        self.assertIn("open map lies on the table", captain)
+
+        stalker = build_prompt(pages["I-09"])
+        self.assertIn("SILENCE-GESTURE PROOF", stalker)
+        self.assertIn("DRAGGED-SACK PROOF", stalker)
+        self.assertIn("CROUCHED-DRAGGING LOCK", stalker)
+        self.assertIn("overhead boundary is visibly low enough to force a crouch", stalker)
+
     def test_remaining_tome_i_story_actions_have_literal_visual_proof(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         pages = {page["page_id"]: page for page in tome["pages"]}
