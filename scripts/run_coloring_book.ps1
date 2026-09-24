@@ -8,12 +8,6 @@ Write-Host ""
 Write-Host "Black-Ink Bestiary - Automated Test Gallery" -ForegroundColor Cyan
 Write-Host "================================================"
 
-Write-Host "Ensuring local AI artist and semantic reviewer are ready..." -ForegroundColor Yellow
-& (Join-Path $root "scripts\ensure_local_ai.ps1")
-if ($LASTEXITCODE -ne 0) {
-  throw "Local AI runtime preflight failed with code $LASTEXITCODE."
-}
-
 $runner = Get-Command python -ErrorAction SilentlyContinue
 if (-not $runner) { $runner = Get-Command py -ErrorAction SilentlyContinue }
 if (-not $runner) { throw "Python was not found." }
@@ -29,6 +23,13 @@ Write-Host "Running local engine preflight before full gallery generation..." -F
 if ($LASTEXITCODE -ne 0) {
   & $runner.Source (Join-Path $root "scripts\publish_review_previews.py")
   throw "Engine preflight failed; diagnostic snapshot was published."
+}
+
+Write-Host "Ensuring local AI artist and semantic reviewer are ready..." -ForegroundColor Yellow
+& (Join-Path $root "scripts\ensure_local_ai.ps1")
+if ($LASTEXITCODE -ne 0) {
+  & $runner.Source (Join-Path $root "scripts\publish_review_previews.py")
+  throw "Local AI runtime preflight failed; diagnostic snapshot was published."
 }
 
 & $runner.Source (Join-Path $root "scripts\apply_review_decisions.py")
