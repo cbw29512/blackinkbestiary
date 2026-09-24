@@ -5,6 +5,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class EngineLauncherContractTests(unittest.TestCase):
+    def test_local_runtime_and_gallery_state_are_gitignored(self):
+        ignored = set(
+            line.strip()
+            for line in (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        )
+        self.assertIn("data/local-runtime-status.json", ignored)
+        self.assertIn("data/test-gallery-state.json", ignored)
+        self.assertIn("data/test-gallery-state.json.tmp", ignored)
+        self.assertIn("web/test-gallery/*", ignored)
+
     def test_canary_syncs_before_starting_local_ai(self):
         text = (ROOT / "RUN_ENGINE_CANARY.bat").read_text(encoding="utf-8")
         self.assertLess(
