@@ -268,6 +268,44 @@ class PromptTests(unittest.TestCase):
         self.assertIn("LINE-ART LIGHT PROOF", beetle)
         self.assertIn("nearby rock/timber surface", beetle)
 
+    def test_second_half_story_interactions_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        cube = build_prompt(pages["I-24"])
+        self.assertIn("SUSPENDED-CONTENTS PROOF", cube)
+        self.assertIn("enclosed within the continuous transparent/translucent body volume", cube)
+
+        pudding = build_prompt(pages["I-25"])
+        self.assertIn("CORROSION-CONTACT PROOF", pudding)
+        self.assertIn("damage must begin exactly where the creature contacts the metal", pudding)
+
+        jelly = build_prompt(pages["I-26"])
+        self.assertIn("SPLIT-BODY PROOF", jelly)
+        self.assertIn("exactly the required separate body masses", jelly)
+
+        chest = build_prompt(pages["I-27"])
+        door = build_prompt(pages["I-28"])
+        self.assertIn("MIMIC-REVEAL PROOF", chest)
+        self.assertIn("MIMIC-REVEAL PROOF", door)
+
+        roper = build_prompt(pages["I-35"])
+        self.assertIn("CAMOUFLAGE-BREAK PROOF", roper)
+
+        basilisk = build_prompt(pages["I-43"])
+        cockatrice = build_prompt(pages["I-44"])
+        self.assertIn("PETRIFICATION PROOF", basilisk)
+        self.assertIn("PETRIFICATION PROOF", cockatrice)
+
+        behir = build_prompt(pages["I-47"])
+        self.assertIn("LIGHTNING-CONTACT PROOF", behir)
+
+        shrieker = build_prompt(pages["I-48"])
+        self.assertIn("ALARM-VIBRATION PROOF", shrieker)
+
+        lich = build_prompt(pages["I-50"])
+        self.assertIn("GUARDED-FOCUS PROOF", lich)
+
     def test_new_shape_locks_cover_known_non_canary_failures(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         pages = {page["page_id"]: page for page in tome["pages"]}
