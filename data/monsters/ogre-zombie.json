@@ -68,7 +68,15 @@
       "horns or horn nubs",
       "healthy alert expression",
       "clean living-ogre skin"
-    ]
+    ],
+    "shape_lock": "Draw a massive hornless ogre corpse with the same blunt heavy giant proportions as a living ogre, but visibly slumped and asymmetrical: sunken eyes, slack jaw, sagging shoulders, stiff uneven joints, two or three restrained torn-skin or exposed-bone edge cues, and heavy chains that visibly drag from shackles. Keep the damage sparse, non-gory, and easy to color."
   },
-  "anatomy_variant": true
+  "anatomy_variant": true,
+  "known_failure_modes": [
+    {
+      "id": "living_ogre_drift",
+      "symptom": "creature reads as a healthy living ogre wearing decorative chains",
+      "correction": "make the face vacant and sunken, slump the shoulders, stiffen the gait, add sparse clean corpse damage, and make the chains visibly drag from shackles"
+    }
+  ]
 }
