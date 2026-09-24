@@ -120,6 +120,22 @@ def interaction_proof_rules(page: dict) -> list[str]:
         rules.append(
             "GUARDED-FOCUS PROOF: the guarded object must be clearly visible and spatially tied to the creature's stance or gesture; the creature must visibly control/interpose the space around it rather than merely stand elsewhere in the room."
         )
+    if ("wrap" in text or "wrapping" in text or "smother" in text) and ("victim" in text or "target" in text):
+        rules.append(
+            "WRAP-CONTACT PROOF: the wrapping body/material must visibly contact and curve around the target at multiple points while its named support/base remains physically readable. Do not show the wrapper merely rearing beside the target."
+        )
+    if "orbit" in text or "orbiting" in text:
+        rules.append(
+            "ORBIT PROOF: the moving subject must visibly occupy a curved path around the named anchor/landmark, with orientation tangent to that path and the anchor clearly inside the implied orbit. Do not substitute generic hovering nearby."
+        )
+    if "statue" in text and ("beginning to move" in text or "starting to move" in text or "awakening" in text):
+        rules.append(
+            "STATUE-AWAKENING PROOF: part of the subject must still align with its rigid display/perch pose while one limb, head, or body section visibly breaks that static alignment. The transition must read as one statue coming alive, not as an ordinary creature standing beside a statue."
+        )
+    if ("tendril" in text or "tendrils" in text) and ("toward" in text or "reaching" in text or "reach" in text):
+        rules.append(
+            "REACH-TARGET PROOF: at least one canonical tendril/extension must visibly point toward and close the distance to the named target while the main body remains supported as required. Do not turn the whole creature into an unsupported tentacle mass."
+        )
     return rules
 
 
