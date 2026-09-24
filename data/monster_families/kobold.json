@@ -12,7 +12,7 @@
     "core_identity": "A small lean reptilian humanoid built for traps, pack tactics, and underground survival rather than brute strength.",
     "silhouette": "Short wiry reptilian body, long balancing tail, narrow shoulders, slightly hunched alert posture, clawed hands and long clawed feet.",
     "head_features": "Long narrow draconic snout, small sharp teeth, pronounced brow, swept horn nubs or short head spines, alert predatory eyes.",
-    "body_shape": "Lean torso and limbs with clear reptilian anatomy and light digitigrade-looking legs.",
+    "body_shape": "Tiny 2–3-foot reptilian humanoid with a narrow chest, slim shoulders, thin arms and legs, and very little visible muscle mass; never adult-human or dragonborn proportions.",
     "surface": "Sparse simplified scales with large open coloring regions.",
     "must_keep": [
       "long reptilian snout",
@@ -28,7 +28,11 @@
       "cute mascot proportions",
       "bulky ogre-like build",
       "dragon wings",
-      "dense scale texture"
+      "dense scale texture",
+      "broad humanlike chest or six-pack abdomen",
+      "adult-human or dragonborn body proportions",
+      "thick muscular arms or shoulders",
+      "large heroic dragon-person silhouette"
     ],
     "limb_structure": "Lean reptilian arms with clawed hands, light digitigrade-looking legs with long clawed feet, and a visible balancing tail. No wings unless a specific future variant explicitly supplies them."
   },
@@ -37,7 +41,9 @@
     "tail is visible",
     "horns or head spines are visible",
     "body reads reptilian rather than furry",
-    "small wiry silhouette is preserved"
+    "small wiry silhouette is preserved",
+    "body is visibly tiny relative to human-scale doors, traps, chests, and corridor blocks",
+    "torso stays narrow and lightly built with no bodybuilder definition"
   ],
   "known_failure_modes": [
     {
@@ -47,8 +53,8 @@
     },
     {
       "id": "dragonborn_drift",
-      "symptom": "body becomes large heroic dragon-person",
-      "correction": "reduce size and mass; restore small wiry trap-maker proportions"
+      "symptom": "body becomes adult-human sized, broad-chested, muscular, dragonborn-like, or heroically proportioned",
+      "correction": "shrink to obvious 2–3-foot scale, narrow shoulders and torso, remove bodybuilder muscle definition, and restore thin trap-maker limbs"
     },
     {
       "id": "over_scaled",
