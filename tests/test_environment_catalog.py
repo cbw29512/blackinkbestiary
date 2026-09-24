@@ -139,6 +139,19 @@ class EnvironmentCatalogTests(unittest.TestCase):
         ground = (palette["components"].get("ground_planes") or {}).get("text", "").lower()
         self.assertIn("stair", ground)
 
+    def test_explicit_page_authority_suppresses_duplicate_palette_roles(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-14")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertNotIn("landmarks", palette["components"])
+        self.assertNotIn("interaction_patterns", palette["components"])
+        self.assertNotIn("lighting_features", palette["components"])
+
+    def test_kicked_lantern_page_does_not_add_second_random_light(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-04")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertNotIn("lighting_features", palette["components"])
+        self.assertNotIn("interaction_patterns", palette["components"])
+
     def test_tome_i_background_fingerprints_are_unique(self):
         fingerprints = [environment_fingerprint(page) for page in self.tome["pages"]]
         self.assertEqual(len(fingerprints), len(set(fingerprints)))
