@@ -60,5 +60,32 @@
     "coiling",
     "concealment",
     "sudden striking"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium thick wormlike aberration whose long body and four-tentacle facial opening read larger and heavier than a normal snake.",
+    "natural_posture": "Legless body coils or crawls in continuous ground contact while the four facial tentacles open around the central beak.",
+    "behavior_style": [
+      "ambush hunting",
+      "coiling",
+      "concealment",
+      "sudden striking"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "snake_drift",
+      "symptom": "front becomes a normal snake head or jaw",
+      "correction": "remove snake skull and restore exactly four facial tentacles surrounding one central beak"
+    },
+    {
+      "id": "tentacle_count_drift",
+      "symptom": "face has more or fewer than four primary tentacles",
+      "correction": "restore exactly four evenly arranged muscular facial tentacles"
+    }
   ]
 }
