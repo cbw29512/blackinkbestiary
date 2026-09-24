@@ -8,7 +8,7 @@
     "core_identity": "An enormous bat with a broad membrane wingspan, powerful clawed feet, and an unmistakable natural bat silhouette.",
     "silhouette": "Wide folded or partly opened wings, hanging inverted body, large pointed ears, narrow torso, clawed feet capable of gripping overhead support.",
     "head_features": "Natural bat face with large ears, short muzzle, small eyes, no monstrous humanoid features.",
-    "body_shape": "Light flying mammal body with very long finger-boned wings and compact torso.",
+    "body_shape": "Natural bat body: the two forelimbs ARE the two membrane wings, each supported by elongated finger bones; compact torso and two hind legs/feet only. There is no separate pair of arms.",
     "surface": "Short fur on body and smooth wing membranes with minimal vein lines.",
     "signature_gear": [],
     "attitude": [
@@ -30,7 +30,11 @@
       "vampire clothing",
       "horns",
       "insect anatomy",
-      "dense fur texture"
+      "dense fur texture",
+      "separate arms in addition to wings",
+      "human hands",
+      "catlike humanoid torso",
+      "tail longer than a natural bat membrane tail"
     ]
   },
   "default_habitats": [
@@ -44,7 +48,9 @@
     "hanging pose is plausible",
     "scale is obvious",
     "environment remains secondary to the bat",
-    "open wing areas are colorable"
+    "open wing areas are colorable",
+    "exactly two forelimbs and they are the wings; no separate arms exist",
+    "hind feet grip the overhead support while the head hangs below"
   ],
   "reference": {
     "image": null,
