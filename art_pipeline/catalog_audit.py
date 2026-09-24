@@ -81,6 +81,7 @@ def audit_monster_catalog(root: Path) -> dict:
     monster_dir = root / "data" / "monsters"
     family_dir = root / "data" / "monster_families"
     specs = []
+    resolved_specs: list[tuple[Path, dict]] = []
     groups: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
     errors: list[str] = []
     ownership_warnings: list[str] = []
@@ -104,7 +105,8 @@ def audit_monster_catalog(root: Path) -> dict:
                 errors.append(f"{path.name}: schema v4 monster requires broad default_habitats")
         errors.extend(minimal_recipe_errors(path.stem, monster_dir, family_dir))
         try:
-            resolve_monster_spec(path.stem, monster_dir, family_dir)
+            resolved = resolve_monster_spec(path.stem, monster_dir, family_dir)
+            resolved_specs.append((path, resolved))
         except RuntimeError as exc:
             errors.append(f"{path.name}: could not resolve through universal engine: {exc}")
         family = str(spec.get("family_profile") or spec.get("family") or "").strip()
@@ -129,9 +131,18 @@ def audit_monster_catalog(root: Path) -> dict:
     try:
         contract = load_monster_contract(root / "config" / "universal_monster_contract.json")
         required_family_paths = contract.get("family_profile_required") or []
+        required_resolved_paths = contract.get("resolved_required") or []
     except RuntimeError as exc:
         errors.append(f"monster contract could not be loaded: {exc}")
         required_family_paths = []
+        required_resolved_paths = []
+
+    for path, resolved in resolved_specs:
+        missing = _missing_paths(resolved, required_resolved_paths)
+        if missing:
+            errors.append(
+                f"{path.name}: resolved monster missing review DNA: {', '.join(missing)}"
+            )
 
     family_profiles = 0
     for path in sorted(family_dir.glob("*.json")):
