@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import tempfile
@@ -13,10 +14,28 @@ assert spec.loader
 spec.loader.exec_module(review)
 
 
+def review_id(page_id: str, candidate: int, payload: bytes) -> str:
+    digest = hashlib.sha256(payload).hexdigest()
+    return f"{page_id}-C{candidate:02d}-H{digest[:16]}"
+
+
 class ReviewDecisionTests(unittest.TestCase):
-    def test_review_id_binds_seed(self):
-        item = {"page_id": "I-05", "candidate": 2, "seed": 12345}
-        self.assertEqual(review.review_id_for(item), "I-05-C02-S12345")
+    def test_review_id_binds_exact_image_bytes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-05-C02.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"candidate-version-a")
+            item = {
+                "page_id": "I-05",
+                "candidate": 2,
+                "image_path": "test-gallery/I-05-C02.png",
+            }
+            with patch.object(review, "ROOT", root):
+                self.assertEqual(
+                    review.review_id_for(item),
+                    review_id("I-05", 2, b"candidate-version-a"),
+                )
 
     def test_stale_rejection_does_not_poison_regenerated_candidate(self):
         with tempfile.TemporaryDirectory() as td:
@@ -38,7 +57,7 @@ class ReviewDecisionTests(unittest.TestCase):
             }), encoding="utf-8")
             decisions_path.write_text(json.dumps({
                 "reviews": [{
-                    "review_id": "I-05-C02-S111",
+                    "review_id": review_id("I-05", 2, b"old-image"),
                     "decision": "reject",
                     "notes": "old version was too muscular",
                 }]
@@ -71,7 +90,7 @@ class ReviewDecisionTests(unittest.TestCase):
             }), encoding="utf-8")
             decisions_path.write_text(json.dumps({
                 "reviews": [{
-                    "review_id": "I-05-C02-S222",
+                    "review_id": review_id("I-05", 2, b"bad-image"),
                     "decision": "reject",
                     "notes": "too muscular; reads as a hero portrait",
                 }]
