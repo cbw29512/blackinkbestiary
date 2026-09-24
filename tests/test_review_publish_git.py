@@ -104,15 +104,16 @@ class ReviewPublishGitTests(unittest.TestCase):
             calls,
         )
 
-    def test_publish_does_not_resync_when_other_tracked_changes_exist(self):
+    def test_publish_preserves_local_edits_but_removes_temporary_preview_commit(self):
         root = Path("C:/fake")
-        outputs = {
-            ("git", "branch", "--show-current"): "feat/environment-spatial-hardening",
-            ("git", "rev-parse", "HEAD"): "abc123",
-        }
+        heads = iter(["base123", "preview456"])
 
         def fake_output(_root, *args):
-            return outputs[tuple(args)]
+            if tuple(args) == ("git", "branch", "--show-current"):
+                return "feat/environment-spatial-hardening"
+            if tuple(args) == ("git", "rev-parse", "HEAD"):
+                return next(heads)
+            raise KeyError(tuple(args))
 
         calls = []
         with (
@@ -122,9 +123,27 @@ class ReviewPublishGitTests(unittest.TestCase):
             patch.object(rpg, "run", side_effect=lambda root_arg, *args: calls.append((root_arg, args))),
             patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=1)),
         ):
-            rpg.publish_preview_snapshot(root)
+            result = rpg.publish_preview_snapshot(root)
 
-        self.assertFalse(any(args[:2] == ("git", "reset") for _, args in calls))
+        self.assertEqual(result, "preview456")
+        self.assertIn(
+            (
+                root,
+                (
+                    "git",
+                    "push",
+                    "--force",
+                    "origin",
+                    "preview456:refs/heads/review-previews-live",
+                ),
+            ),
+            calls,
+        )
+        self.assertIn((root, ("git", "reset", "--mixed", "base123")), calls)
+        self.assertFalse(any(args[:2] == ("git", "fetch") for _, args in calls))
+        self.assertFalse(
+            any(args[:3] == ("git", "reset", "--hard") for _, args in calls)
+        )
 
 
 if __name__ == "__main__":
