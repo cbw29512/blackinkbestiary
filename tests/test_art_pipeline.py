@@ -12,6 +12,7 @@ from prompt_builder import build_prompt, load_monster_spec
 from image_edit_profile import prepare_distilled_image_edit
 from workflow_adapter import PROMPT_TOKEN, SEED_TOKEN, prepare_workflow, validate_template
 from qa import inspect_png
+from physicality_prompt import MODE_CONTACT_RULES
 
 
 class PromptTests(unittest.TestCase):
@@ -285,6 +286,15 @@ class PromptTests(unittest.TestCase):
         beetle = build_prompt(pages["I-21"])
         self.assertIn("exactly six walking legs", beetle.lower())
         self.assertIn("three unmistakable outlined luminous gland bulges", beetle.lower())
+
+    def test_every_tome_i_physicality_mode_has_universal_contact_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        modes = {
+            str((page.get("physicality") or {}).get("mode") or "").strip().lower()
+            for page in tome["pages"]
+        }
+        self.assertNotIn("", modes)
+        self.assertEqual(sorted(modes.difference(MODE_CONTACT_RULES)), [])
 
     def test_modify_notes_enter_prompt(self):
         page = {
