@@ -772,6 +772,35 @@
         "wide room with freestanding creature",
         "flat corridor with no deep shaft transition"
       ]
+    },
+    "natural_fungal_hall": {
+      "priority": 135,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "mushroom hall",
+        "fungal aisle",
+        "oversized mushroom canopy"
+      ],
+      "plan_shape": "elongated natural cavern aisle defined by oversized fungal growth rather than built walls",
+      "proportions": "length exceeds width enough to read as a hall-like aisle, while irregular rock/fungal boundaries keep the space natural",
+      "ceiling": "natural cavern roof and/or overlapping giant mushroom caps form the visible overhead canopy",
+      "openings": "one primary open ground lane continues through the fungal chamber with only minor side gaps",
+      "focal_zone": "one dominant rooted fungus occupies the aisle while two or three larger cap/stalk forms frame the route without becoming a dense forest",
+      "camera": "wide low-angle or eye-level aisle view showing open ground, flanking stalks/caps, and a natural rear rock boundary",
+      "must_show": [
+        "open natural floor lane",
+        "oversized mushroom caps or stalks defining both sides of the aisle",
+        "natural rock boundary or cavern roof",
+        "broad white gaps between fungal forms"
+      ],
+      "must_not_drift": [
+        "built masonry gallery",
+        "cathedral arches",
+        "dense mushroom forest",
+        "generic empty cavern"
+      ]
     }
   }
 }
