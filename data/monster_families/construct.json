@@ -29,7 +29,8 @@
       "unnecessary eyes or mouth",
       "ornate micro-detail"
     ],
-    "limb_structure": "Use only articulation that the original object plausibly possesses. Armor may articulate at its joints, a sword has no limbs, a rug folds and curls, and no invented biological or robot limbs are added."
+    "limb_structure": "Use only articulation that the original object plausibly possesses. Armor may articulate at its joints, a sword has no limbs, a rug folds and curls, and no invented biological or robot limbs are added.",
+    "shape_lock": "Draw the original object as the complete creature silhouette. Animate only through the object's real joints, folds, orientation, or levitation: armor articulates at armor joints, a weapon remains one weapon, cloth remains one sheet. Add no flesh body, hidden wearer, robot limbs, eyes, mouth, or mascot face unless a specific monster variant explicitly requires it."
   },
   "accuracy_checks": [
     "object identity reads before added magical motion",
