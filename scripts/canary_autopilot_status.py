@@ -68,7 +68,7 @@ def classify(
         )
     )
 
-    if decision == "approve" and exact_review_is_current and fingerprint_is_current:
+    if decision in {"approve", "select"} and exact_review_is_current and fingerprint_is_current:
         return "approved"
     if decision == "reject" and exact_review_is_current:
         return "needs_generation"
