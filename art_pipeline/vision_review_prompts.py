@@ -55,16 +55,10 @@ IDENTITY GATES:
 - """ + "\n- ".join(selected)
 
 
-def build_scene_review_prompt(page: dict) -> str:
+def build_environment_review_prompt(page: dict) -> str:
     checks = _checks(page)
     prefixes = (
         "Habitat reads as:",
-        "Scene moment reads as:",
-        "Required element present:",
-        "Physical state reads as:",
-        "Support/contact is visible and believable:",
-        "Motion/weight reads correctly:",
-        "Mode-specific contact geometry reads correctly:",
         "Environment matches profile:",
         "Spatial type reads without the monster:",
         "Material language is visible:",
@@ -76,6 +70,37 @@ def build_scene_review_prompt(page: dict) -> str:
         "Space does not drift into:",
         "Unique landmark is visible:",
         "Framing differs from repeated generic backgrounds:",
+        "Environment geometry differs meaningfully from nearby pages",
+        "Environment check:",
+    )
+    selected = [item for item in checks if item.startswith(prefixes)]
+    return """You are the Black-Ink Bestiary ENVIRONMENT GEOMETRY GATE.
+Inspect only the visible setting. Ignore creature beauty and action quality except where creature scale proves the space.
+
+Fail closed. PASS only if the named habitat, material language, spatial envelope, required architecture/terrain, and unique landmark are visibly readable in the image.
+A generic corridor is not a crawlway. Ordinary steps are not a spiral stair. A web field is not automatically a dungeon hall. A flat grate is not a vertical shaft.
+If the environment could be mistaken for one of the forbidden drift spaces, fail.
+If the creature is correct but the place is generic or spatially wrong, fail.
+
+DEFECT WORDING RULE: describe the visible environmental failure in negative language. Never copy a positive gate verbatim into defects.
+Return exactly one compact JSON object and nothing else:
+{"pass": true|false, "score": 0-100, "defects": ["specific visible environment defect"], "preserve": ["specific visible environment success"]}
+At most 4 defects and 3 preserve items; each under 80 characters.
+Any environment failure must be pass=false and score 49 or lower.
+
+ENVIRONMENT GATES:
+- """ + "\n- ".join(selected)
+
+
+def build_action_review_prompt(page: dict) -> str:
+    checks = _checks(page)
+    prefixes = (
+        "Scene moment reads as:",
+        "Required element present:",
+        "Physical state reads as:",
+        "Support/contact is visible and believable:",
+        "Motion/weight reads correctly:",
+        "Mode-specific contact geometry reads correctly:",
         "Monster/environment interaction reads clearly:",
         "One clear story beat reads as:",
         "Environment participates through:",
@@ -92,25 +117,26 @@ def build_scene_review_prompt(page: dict) -> str:
         "No jumping, falling, dropping, or accidental hovering",
     )
     selected = [item for item in checks if item.startswith(prefixes)]
-    return """You are the Black-Ink Bestiary SCENE AND PHYSICALITY GATE.
-Inspect the image itself, not the requested caption.
+    return """You are the Black-Ink Bestiary ACTION AND PHYSICALITY GATE.
+Inspect the visible action, contact, support, and cause-and-effect. The environment has already been checked separately.
 
-Fail closed. PASS only if the named place, required action, required object relationships, and physical support are visibly present.
-Standing near an object is NOT the same as performing the required action.
-A normal stair is NOT a cramped spiral stair. A creature standing on stairs is NOT visibly wedged.
-A web background is NOT automatically a dungeon hall; required stone architecture must be visible.
-A generic corridor is NOT automatically the named habitat.
-If a required prop, interaction, spatial relation, support, or cause-and-effect is ambiguous or merely implied, fail.
+Fail closed. PASS only if the required verb/action, prop relationship, support/contact, motion/weight, and story interaction are visibly present.
+Standing near an object is not performing the action. Holding a lantern is not kicking it. Standing on stairs is not being wedged. A nearby nest is not nest defense unless the body visibly guards it.
+If contact, direction, support, or cause-and-effect is ambiguous or merely implied, fail.
 
-DEFECT WORDING RULE: defects must describe the visible failure, not copy a required gate. Do NOT return "Habitat reads as: Cramped Spiral Stair"; return "cramped spiral stair is not visible" or "stairs read straight, not spiral". Do NOT return "Scene moment reads as: kicking over a lantern"; return "lantern is not being kicked over".
-Preserve items must describe literal visible scene geometry/action, not repeat the requested labels.
+DEFECT WORDING RULE: defects must describe the visible action/physicality failure, not copy a required gate.
 Return exactly one compact JSON object and nothing else:
-{"pass": true|false, "score": 0-100, "defects": ["specific visible scene defect"], "preserve": ["specific visible scene success"]}
+{"pass": true|false, "score": 0-100, "defects": ["specific visible action defect"], "preserve": ["specific visible action success"]}
 At most 4 defects and 3 preserve items; each under 80 characters.
-Any scene failure must be pass=false and score 49 or lower.
+Any action failure must be pass=false and score 49 or lower.
 
-SCENE / PHYSICALITY GATES:
+ACTION / PHYSICALITY GATES:
 - """ + "\n- ".join(selected)
+
+
+def build_scene_review_prompt(page: dict) -> str:
+    """Compatibility helper for callers/tests that still want one scene prompt."""
+    return build_environment_review_prompt(page) + "\n\n" + build_action_review_prompt(page)
 
 
 def build_review_prompt(page: dict) -> str:
