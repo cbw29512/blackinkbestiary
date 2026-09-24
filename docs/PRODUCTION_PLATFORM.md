@@ -114,6 +114,20 @@ The four candidates remain compositionally independent. Refinement may repair an
 
 The automated loop is bounded: one initial render plus up to four refinement passes per candidate. It may stop early only when the visual quality gate passes. Semantic inspection uses the non-thinking `qwen3-vl:4b-instruct` Ollama model; the generic `qwen3-vl:4b` tag resolves to the thinking variant and is not accepted because it can spend the generation budget on reasoning without emitting the required JSON verdict. If the configured runtime cannot perform semantic image inspection, it must fail closed and require human review; it must never label technical pixel checks as semantic AI review.
 
+## GitHub Assistant Review Loop
+
+Large local galleries do not need to be uploaded into chat. The local machine keeps the production PNGs; `PUBLISH_REVIEW_PREVIEWS.bat` creates smaller JPEG review copies in `review-previews/`, writes an exact-version manifest, commits them, and pushes them to the current GitHub branch.
+
+Every published candidate receives a `review_id` containing page, candidate number, and seed. Assistant decisions in `review-previews/decisions.json` must target that exact `review_id`. This prevents an old rejection from accidentally rejecting a newly regenerated image that reused the same page/candidate slot.
+
+A rejection removes the final local gallery copy, records the assistant notes, and marks only that exact candidate `assistant_rejected`. The next regeneration receives those notes as a fresh-generation correction rather than blindly repeating the previous prompt. `RERUN_NEXT_REJECTED.bat` applies current GitHub decisions, reruns only the first rejected candidate, and republishes the new preview. Stale JPEG review previews are removed on the next publish.
+
+The intended loop is:
+
+`generate locally → publish lightweight previews → assistant inspects exact image → approve/reject exact review_id → pull decisions → rerun one rejected candidate → republish → reinspect`
+
+Human `Approve & Lock` remains the final production admission gate.
+
 ## Human Quality Gate
 
 Technical QA does not claim to understand visual semantics.
