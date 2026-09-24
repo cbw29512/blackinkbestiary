@@ -390,6 +390,7 @@ def main() -> int:
                 current_review_fingerprint,
             )
 
+            reviewer_recheck_failed = False
             if (
                 prior
                 and not stale_generation_authority
@@ -427,6 +428,7 @@ def main() -> int:
                         else "max_refinements_reached"
                     )
                     if not refreshed_review.get("pass"):
+                        reviewer_recheck_failed = True
                         clear_selection_for_candidate(
                             state,
                             page["page_id"],
@@ -451,7 +453,10 @@ def main() -> int:
                     args.canary
                     or (args.canary_failed and stale_generation_authority)
                 ),
-                retry_max_refinements=not args.canary_failed,
+                retry_max_refinements=(
+                    not args.canary_failed
+                    or reviewer_recheck_failed
+                ),
             ):
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
                 continue
