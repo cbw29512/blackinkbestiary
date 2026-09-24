@@ -72,6 +72,41 @@ class PromptTests(unittest.TestCase):
         self.assertIn("stolen ham", text)
 
 
+    def test_identity_review_uses_structural_rebuild_not_preservation(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-14")
+        text = build_edit_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "dragon head and separate wings are visible",
+                "failed_dimensions": ["wrong body plan"],
+                "preserve_dimensions": ["stone ceiling"],
+            },
+            candidate_no=1,
+        )
+        self.assertIn("IDENTITY REBUILD MODE", text)
+        self.assertIn("Rebuild the creature silhouette, scale, proportions, limb topology", text)
+        self.assertIn("redrawing most or all of the creature", text)
+        self.assertNotIn("Preserve the existing framing, camera angle, pose", text)
+
+    def test_scene_review_can_rebuild_pose_and_environment_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-10")
+        text = build_edit_prompt(
+            page,
+            {
+                "stage": "scene",
+                "text": "spiral stair is not visible",
+                "failed_dimensions": ["missing stair geometry"],
+                "preserve_dimensions": ["ogre anatomy"],
+            },
+            candidate_no=1,
+        )
+        self.assertIn("SCENE REBUILD MODE", text)
+        self.assertIn("rebuild pose, prop placement, contact geometry, camera/framing", text)
+        self.assertIn("moving the creature, props, or camera", text)
+
     def test_runtime_standards_do_not_reinflate_small_creatures(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
