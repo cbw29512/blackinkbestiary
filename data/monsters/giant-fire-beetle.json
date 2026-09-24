@@ -65,5 +65,32 @@
     "burrowing through debris",
     "foraging",
     "defensive biting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large true beetle with low domed shell, exactly six legs, and three signature gland forms large enough to read clearly.",
+    "natural_posture": "All six walking legs support the low beetle body while antennae and mandibles orient toward its route or target.",
+    "behavior_style": [
+      "crawling",
+      "burrowing through debris",
+      "foraging",
+      "defensive biting"
+    ],
+    "environment_fit": [
+      "underground",
+      "caves",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "generic_beetle_drift",
+      "symptom": "signature luminous gland structures disappear",
+      "correction": "restore three distinct gland bulges: two beside the eyes and one at the rear abdomen"
+    },
+    {
+      "id": "leg_count_drift",
+      "symptom": "beetle gains spider legs or loses the six-leg insect plan",
+      "correction": "restore exactly six thoracic walking legs"
+    }
   ]
 }
