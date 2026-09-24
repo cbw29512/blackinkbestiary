@@ -36,7 +36,7 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
             "Preserve only clearly successful background/environment elements. Rebuild the creature silhouette, scale, proportions, limb topology, and pose as needed from the canonical written authority. "
             "Do NOT preserve incorrect anatomy, heroic mass, extra limbs, invented wings, wrong species proportions, or a pose that forces the wrong body plan."
         )
-    elif stage == "scene":
+    elif stage in {"environment", "scene", "action"}:
         repair_strategy = (
             "SCENE REBUILD MODE — NON-NEGOTIABLE: preserve correct creature anatomy and coloring style, but rebuild pose, prop placement, contact geometry, camera/framing, or environment structure as needed so the required action and place read literally. "
             "Do not preserve a neutral pose or generic setting merely because it is attractive."
