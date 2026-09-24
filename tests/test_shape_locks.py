@@ -23,7 +23,7 @@ class ShapeLockTests(unittest.TestCase):
 
     def test_darkmantle_shape_lock_forbids_humanoid_topology(self):
         text = build_prompt(self.pages["I-14"])
-        self.assertIn("one continuous non-humanoid mantle body", text)
+        self.assertIn("one continuous ceiling-clinging cloak/cap body", text)
         self.assertIn("no separate torso", text)
         self.assertIn("NON-FLIGHT POSE LOCK", text)
         self.assertIn("not airborne", text)
