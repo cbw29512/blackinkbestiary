@@ -144,7 +144,8 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("Canonical scale reads as:", prompt)
         self.assertIn("Canonical body plan reads as:", prompt)
         self.assertIn("adult-human heroic mass", prompt)
-        self.assertIn("If a bugbear reads gorilla/ape/bodybuilder, fail.", prompt)
+        self.assertIn("page-specific prohibited look-alike or known drift", prompt)
+        self.assertIn("Reject identity drift:", prompt)
 
     def test_identity_failure_stops_before_quality_review(self):
         verdict = {
