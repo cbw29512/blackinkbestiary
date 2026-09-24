@@ -27,7 +27,8 @@
       "dense gill texture",
       "octopus body replacing fungus"
     ],
-    "limb_structure": "No humanoid limbs. The body remains rooted; cap, stalk, shelves, pores, and variant-specific tendrils provide all visible extension or motion."
+    "limb_structure": "No humanoid limbs. The body remains rooted; cap, stalk, shelves, pores, and variant-specific tendrils provide all visible extension or motion.",
+    "shape_lock": "Draw one rooted fungal body built from a broad cap/shelf/colony form above a thick stalk or rooted base. Keep the base visibly attached to floor, soil, wood, or stone. Variant tendrils remain secondary growths from the fungus; add no humanoid legs, arms, animal head, eyes, or face."
   },
   "accuracy_checks": [
     "reads as fungus first",
