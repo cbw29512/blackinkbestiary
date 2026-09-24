@@ -214,7 +214,7 @@ class EnvironmentCatalogTests(unittest.TestCase):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         palette = assemble_environment_palette(page, ROOT)
         self.assertIn("hazards", palette["components"])
-        self.assertIn("lighting_features", palette["components"])
+        self.assertNotIn("lighting_features", palette["components"])
         self.assertIn("ground_planes", palette["components"])
         self.assertIn("trap", palette["contexts"])
         self.assertTrue(any(item["overlay_id"] == "trap_zone" for item in palette["overlays"]))
