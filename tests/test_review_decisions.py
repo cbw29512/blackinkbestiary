@@ -1,0 +1,92 @@
+import importlib.util
+import json
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "scripts" / "apply_review_decisions.py"
+spec = importlib.util.spec_from_file_location("apply_review_decisions", SCRIPT)
+review = importlib.util.module_from_spec(spec)
+assert spec.loader
+spec.loader.exec_module(review)
+
+
+class ReviewDecisionTests(unittest.TestCase):
+    def test_review_id_binds_seed(self):
+        item = {"page_id": "I-05", "candidate": 2, "seed": 12345}
+        self.assertEqual(review.review_id_for(item), "I-05-C02-S12345")
+
+    def test_stale_rejection_does_not_poison_regenerated_candidate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_path = root / "state.json"
+            decisions_path = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-05-C02.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"new-image")
+            state_path.write_text(json.dumps({
+                "results": [{
+                    "page_id": "I-05",
+                    "candidate": 2,
+                    "seed": 222,
+                    "status": "ready_for_review",
+                    "image_path": "test-gallery/I-05-C02.png",
+                }],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_path.write_text(json.dumps({
+                "reviews": [{
+                    "review_id": "I-05-C02-S111",
+                    "decision": "reject",
+                    "notes": "old version was too muscular",
+                }]
+            }), encoding="utf-8")
+
+            with patch.object(review, "ROOT", root), patch.object(review, "STATE", state_path), patch.object(review, "DECISIONS", decisions_path):
+                self.assertEqual(review.main(), 0)
+
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(state["results"][0]["status"], "ready_for_review")
+            self.assertTrue(image.exists())
+
+    def test_exact_rejection_marks_retryable_and_deletes_final_preview_source(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_path = root / "state.json"
+            decisions_path = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-05-C02.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"bad-image")
+            state_path.write_text(json.dumps({
+                "results": [{
+                    "page_id": "I-05",
+                    "candidate": 2,
+                    "seed": 222,
+                    "status": "ready_for_review",
+                    "image_path": "test-gallery/I-05-C02.png",
+                }],
+                "selections": {"I-05": {"candidate": 2}},
+            }), encoding="utf-8")
+            decisions_path.write_text(json.dumps({
+                "reviews": [{
+                    "review_id": "I-05-C02-S222",
+                    "decision": "reject",
+                    "notes": "too muscular; reads as a hero portrait",
+                }]
+            }), encoding="utf-8")
+
+            with patch.object(review, "ROOT", root), patch.object(review, "STATE", state_path), patch.object(review, "DECISIONS", decisions_path):
+                self.assertEqual(review.main(), 0)
+
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            item = state["results"][0]
+            self.assertEqual(item["status"], "assistant_rejected")
+            self.assertEqual(item["assistant_review"]["notes"], "too muscular; reads as a hero portrait")
+            self.assertFalse(image.exists())
+            self.assertNotIn("I-05", state["selections"])
+
+
+if __name__ == "__main__":
+    unittest.main()
