@@ -191,13 +191,14 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("UNIQUE BACKGROUND LANDMARK", text)
         self.assertIn("MONSTER / ENVIRONMENT INTERACTION", text)
 
-    def test_reference_composition_keeps_monster_large_and_centered(self):
+    def test_reference_composition_preserves_canonical_scale(self):
         standard = json.loads(
             (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
         )
         ref = standard["reference_composition"]
-        self.assertEqual(ref["monster_page_height_target"], [0.6, 0.75])
-        self.assertIn("centered", ref["placement"])
+        self.assertIsNone(ref["monster_page_height_target"])
+        self.assertIsNone(ref["monster_hard_max_page_height"])
+        self.assertIn("canonical size and proportions preserved", ref["placement"])
         self.assertIn("full or nearly full silhouette", ref["placement"])
         self.assertEqual(ref["environment_major_forms"], [2, 4])
 
