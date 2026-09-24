@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "contract_id": "black-ink-monster-v2",
   "purpose": "Monster JSON answers what the creature is and where it can plausibly exist. Family profiles carry shared anatomy and anti-drift intelligence; the universal environment and page engines turn broad habitat compatibility into unique scenery and story composition.",
   "minimal_recipe_required": [
@@ -43,7 +43,7 @@
   ],
   "rules": [
     "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
-    "visual_identity.shape_lock is an optional short positive geometry instruction for body plans that image models commonly distort. It states what to draw, not just what to avoid, and generation/review treat it as authoritative.",
+    "visual_identity.shape_lock is required family-level positive geometry for the body plan. It states what to draw, not just what to avoid, and generation/review treat it as authoritative.",
     "Monster recipes should only state what differs from the family.",
     "Known family failure modes must be injected into generation and review, not merely stored.",
     "Page recipes own scene-specific props, exact habitat interaction, exact pose, and story moment. Monster data may declare a creature-required physical relationship, but the environment engine supplies the actual supporting scenery.",
@@ -66,6 +66,7 @@
     "visual_identity.head_features",
     "visual_identity.body_shape",
     "visual_identity.limb_structure",
+    "visual_identity.shape_lock",
     "visual_identity.surface",
     "visual_identity.must_keep",
     "visual_identity.must_avoid",
