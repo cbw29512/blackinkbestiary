@@ -210,7 +210,9 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
     ]
 
     if candidate_no is not None:
-        variant = CANDIDATE_COMPOSITIONS[(candidate_no - 1) % len(CANDIDATE_COMPOSITIONS)]
+        escape_offset = int((review_notes or {}).get("composition_escape_offset") or 0)
+        variant_index = (candidate_no - 1 + escape_offset) % len(CANDIDATE_COMPOSITIONS)
+        variant = CANDIDATE_COMPOSITIONS[variant_index]
         sections.append(
             f"CANDIDATE {candidate_no} COMPOSITION LOCK: {variant}. "
             "This candidate must be compositionally distinct from the other candidates for this page. "
@@ -234,6 +236,11 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             sections.append(
                 "REGENERATION RULE: rebuild the failed composition from the canonical page recipe. "
                 "Do not preserve a bad layout or failed creature silhouette merely because parts of the previous attempt were attractive."
+            )
+        if review_notes.get("stagnation_escalation"):
+            sections.append(
+                "STAGNATION ESCAPE RULE: the previous structural repair failed at the same review stage. "
+                "Use the alternate composition lock above to change camera/pose/landmark geometry materially while preserving canonical identity and required habitat/action."
             )
         if text and review_stage != "identity":
             sections.append(f"LATEST REVIEW CORRECTION: {text}")
