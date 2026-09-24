@@ -35,7 +35,8 @@
       "human hands",
       "catlike humanoid torso",
       "tail longer than a natural bat membrane tail"
-    ]
+    ],
+    "shape_lock": "Draw exactly four limbs total: two forelimbs that ARE the membrane wings and two hind legs/feet used for roosting; no separate arms, hands, or extra wing pair may exist."
   },
   "default_habitats": [
     "caves",
