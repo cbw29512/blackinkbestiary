@@ -31,7 +31,9 @@
       "humanoid face",
       "horned dragon head",
       "dense tiny scales"
-    ]
+    ],
+    "limb_structure": "Exactly eight short reptilian walking legs support one low heavy body, with one thick tapering tail. No wings, arms, or additional limb pairs.",
+    "shape_lock": "Draw one squat heavy reptile with one broad head, one low trunk, exactly eight short sturdy legs distributed under the body, and one thick tail. The belly stays close to the ground; do not collapse the anatomy into a four-legged lizard, snake, or dragon."
   },
   "default_habitats": [
     "caves",
