@@ -43,7 +43,7 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("identity and anatomy gate", lower)
         self.assertIn("fail closed", lower)
         self.assertIn("adult-human heroic mass", prompt)
-        self.assertIn("Any identity failure should score 49 or lower", prompt)
+        self.assertIn("Any identity failure must be pass=false and score 49 or lower", prompt)
 
     def test_goblin_bodybuilder_drift_is_a_hard_identity_gate(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
