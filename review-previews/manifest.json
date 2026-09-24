@@ -3,36 +3,38 @@
   "candidate_count": 9,
   "candidates": [
     {
-      "review_id": "I-01-C01-Hbcccb57c5c62d222",
+      "review_id": "I-01-C01-H9b8795fad043d2ea",
       "page_id": "I-01",
       "monster_name": "Kobold Warrior",
       "candidate": 1,
-      "seed": 746397541631382336,
+      "seed": 7567955539378186440,
       "preview": "review-previews/I-01-C01.jpg",
       "source_image": "test-gallery/I-01-C01.png",
-      "source_sha256": "bcccb57c5c62d2225f14a52a21e413f6ca547276a4a55716b3bb8bfb37692334",
+      "source_sha256": "9b8795fad043d2ea07fc26117e19c19ce97068474080ce44b7081aaf685cd3b9",
       "visual_review": {
-        "pass": true,
-        "score": 95,
-        "defects": [],
+        "pass": false,
+        "score": 45,
+        "defects": [
+          "body is adult-human sized, broad-chested, muscular, dragonborn-like, or heroically proportioned"
+        ],
         "preserve": [
-          "Kobold Warrior identity",
-          "Trapped Stone Corridor habitat",
-          "Cackling trap-triggered story moment"
+          "long draconic snout is obvious",
+          "tail is visible",
+          "body reads reptilian rather than furry"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:23:38.041308+00:00"
+      "status": "max_refinements_reached",
+      "finished_at": "2026-09-24T14:39:38.971912+00:00"
     },
     {
-      "review_id": "I-04-C01-Hc37f1d875f12f962",
+      "review_id": "I-04-C01-Hccf7a35191d2d05d",
       "page_id": "I-04",
       "monster_name": "Goblin Warrior",
       "candidate": 1,
-      "seed": 5032887689694050324,
+      "seed": 6125469128827572585,
       "preview": "review-previews/I-04-C01.jpg",
       "source_image": "test-gallery/I-04-C01.png",
-      "source_sha256": "c37f1d875f12f96217f4b1c2912a886a90cd51b6ba0d4af1e6623e0791cb6784",
+      "source_sha256": "ccf7a35191d2d05de4e1671d918a913095f34ad1d264d6acc76d2ccf94eb9c03",
       "visual_review": {
         "pass": true,
         "score": 95,
@@ -44,39 +46,39 @@
         ]
       },
       "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:24:04.232765+00:00"
+      "finished_at": "2026-09-24T14:39:59.508429+00:00"
     },
     {
-      "review_id": "I-08-C01-H7afe9c61189c6172",
+      "review_id": "I-08-C01-H2021cb200860ef32",
       "page_id": "I-08",
       "monster_name": "Bugbear Warrior",
       "candidate": 1,
-      "seed": 2926196380821843408,
+      "seed": 1921310463933763656,
       "preview": "review-previews/I-08-C01.jpg",
       "source_image": "test-gallery/I-08-C01.png",
-      "source_sha256": "7afe9c61189c617295a4e058a4c94b75f214cbf5b072f1ec5a78bbe2d38a7c67",
+      "source_sha256": "2021cb200860ef32e8022a51901c28e7608c974049fd3ff426556a1e53f500bf",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
-          "large broken ceiling breach overhead",
+          "large ceiling breach overhead",
           "fallen masonry used as cover",
           "dungeon hall perspective"
         ]
       },
       "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:24:23.893119+00:00"
+      "finished_at": "2026-09-24T14:40:41.393265+00:00"
     },
     {
-      "review_id": "I-10-C01-H802d4c1a768a5521",
+      "review_id": "I-10-C01-Hfcbc36f35644e9b4",
       "page_id": "I-10",
       "monster_name": "Ogre",
       "candidate": 1,
-      "seed": 2193680129367762990,
+      "seed": 4998718374930566784,
       "preview": "review-previews/I-10-C01.jpg",
       "source_image": "test-gallery/I-10-C01.png",
-      "source_sha256": "802d4c1a768a55218fe0b87005c25827d8f0c768e6aea78c5d32a2be012ff0cb",
+      "source_sha256": "fcbc36f35644e9b40ba20be3da94cd2c6c22e7f2ca7b935206862a32888784be",
       "visual_review": {
         "pass": true,
         "score": 95,
@@ -84,67 +86,65 @@
         "preserve": [
           "massive ogre",
           "cramped spiral stair",
-          "wedged awkwardly pose"
+          "wedged awkwardly on the stairs"
         ]
       },
       "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:24:41.936762+00:00"
+      "finished_at": "2026-09-24T14:40:59.731311+00:00"
     },
     {
-      "review_id": "I-14-C01-Hf4e531b9df02d93e",
+      "review_id": "I-14-C01-H783d0553e82b51b5",
       "page_id": "I-14",
       "monster_name": "Darkmantle",
       "candidate": 1,
-      "seed": 1000371535061779654,
+      "seed": 2351234977131057554,
       "preview": "review-previews/I-14-C01.jpg",
       "source_image": "test-gallery/I-14-C01.png",
-      "source_sha256": "f4e531b9df02d93e6cb2d2d4f7235a74f588ded0d330ddd254b1973a977a79f2",
+      "source_sha256": "783d0553e82b51b5336643f43ccc382510e7aff16321c8124f80084d06f9df79",
       "visual_review": {
         "pass": false,
-        "score": 30,
+        "score": 20,
         "defects": [
-          "Dragon head, horns, tail, arms, legs, or separate wings present"
+          "dragon head, horns, tail, arms, legs, or separate wings visible"
         ],
         "preserve": [
-          "Limestone Drip Cave environment",
-          "Peeling away from stalactite above lantern",
-          "Lantern below"
+          "body is compact"
         ]
       },
       "status": "max_refinements_reached",
-      "finished_at": "2026-09-24T13:26:05.808174+00:00"
+      "finished_at": "2026-09-24T14:42:17.305775+00:00"
     },
     {
-      "review_id": "I-16-C01-Hc45ca84557624d32",
+      "review_id": "I-16-C01-H50f1672455941847",
       "page_id": "I-16",
       "monster_name": "Giant Bat",
       "candidate": 1,
-      "seed": 8348776549925015045,
+      "seed": 5159307407140067306,
       "preview": "review-previews/I-16-C01.jpg",
       "source_image": "test-gallery/I-16-C01.png",
-      "source_sha256": "c45ca84557624d3217ce705209759657563fa83bc30879c9fa98fdf846aeeac9",
+      "source_sha256": "50f1672455941847bd1eb5094ce29b1cd118a0cff19290669c97f3ee02329ef8",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
-          "Giant Bat",
-          "Underground River Cavern",
-          "Hanging with wings partly wrapped"
+          "giant bat hangs from ceiling",
+          "underground river below",
+          "partly wrapped wings"
         ]
       },
       "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:26:24.807304+00:00"
+      "finished_at": "2026-09-24T14:42:36.003026+00:00"
     },
     {
-      "review_id": "I-19-C01-Hbbf745d5cda15e6c",
+      "review_id": "I-19-C01-H20e83be840e2a5e7",
       "page_id": "I-19",
       "monster_name": "Rat Swarm",
       "candidate": 1,
-      "seed": 1973200606747069182,
+      "seed": 7728729289538678443,
       "preview": "review-previews/I-19-C01.jpg",
       "source_image": "test-gallery/I-19-C01.png",
-      "source_sha256": "bbf745d5cda15e6c45e3d140d0699412f6b2af2311787f040984308bac13f359",
+      "source_sha256": "20e83be840e2a5e7bcd880a44e06074e1ac9dd88753253daf07173873c9ab719",
       "visual_review": {
         "pass": true,
         "score": 95,
@@ -156,17 +156,17 @@
         ]
       },
       "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:26:43.354513+00:00"
+      "finished_at": "2026-09-24T14:42:55.638020+00:00"
     },
     {
-      "review_id": "I-20-C01-H4c618b5045b5e887",
+      "review_id": "I-20-C01-Hfcbab3eb8071c29d",
       "page_id": "I-20",
       "monster_name": "Giant Centipede",
       "candidate": 1,
-      "seed": 913428925130567194,
+      "seed": 7219337370054324039,
       "preview": "review-previews/I-20-C01.jpg",
       "source_image": "test-gallery/I-20-C01.png",
-      "source_sha256": "4c618b5045b5e88774709136f651f3094a8bb5923893a3871e66a3000f2bd6dd",
+      "source_sha256": "fcbab3eb8071c29da13cd97390c872e7fa70504655950afddc08fdb57d631b86",
       "visual_review": {
         "pass": true,
         "score": 95,
@@ -178,27 +178,29 @@
         ]
       },
       "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:27:01.458578+00:00"
+      "finished_at": "2026-09-24T14:43:13.958132+00:00"
     },
     {
-      "review_id": "I-22-C01-H48e50f67c1e6bec1",
+      "review_id": "I-22-C01-H6b56a538a7d9edc7",
       "page_id": "I-22",
       "monster_name": "Giant Spider",
       "candidate": 1,
-      "seed": 6663063278898319894,
+      "seed": 4371653112846069511,
       "preview": "review-previews/I-22-C01.jpg",
       "source_image": "test-gallery/I-22-C01.png",
-      "source_sha256": "48e50f67c1e6bec12d51803d9381168d2b237e64079c0ba34731b5bcdce2c238",
+      "source_sha256": "6b56a538a7d9edc7632f763f65c18e7e8f97b1cb503bfdf94d58c61ab27ecdeb",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
-          "giant spider waits at the web center"
+          "eight-legged silhouette",
+          "web-filled dungeon hall",
+          "giant spider waits at web center"
         ]
       },
       "status": "ready_for_review",
-      "finished_at": "2026-09-24T13:27:20.529382+00:00"
+      "finished_at": "2026-09-24T14:43:32.705532+00:00"
     }
   ]
 }
