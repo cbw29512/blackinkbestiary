@@ -31,7 +31,9 @@
       "humanoid eyes",
       "too many tiny teeth",
       "dense segment detail"
-    ]
+    ],
+    "limb_structure": "No arms, legs, fins, wings, or external walking appendages. The body is one enormous continuous segmented cylinder ending anteriorly in a circular tooth-ringed maw.",
+    "shape_lock": "Draw one colossal limbless segmented worm: a huge cylindrical body with broad repeated segments and one circular front maw ringed with inward-pointing teeth. There is no separate skull, snake face, dragon head, eye-bearing head, or limb of any kind."
   },
   "default_habitats": [
     "underground",
