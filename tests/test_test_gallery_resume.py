@@ -177,6 +177,51 @@ class TestGalleryResumeTests(unittest.TestCase):
             self.assertEqual(prepare_calls[0]["stage"], "identity")
             self.assertEqual(prepare_calls[0]["routing_recommendation"], "regenerate")
 
+    def test_repeated_identity_failure_rotates_composition_on_fresh_regeneration(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "web" / "candidates").mkdir(parents=True)
+            initial = root / "initial.png"
+            initial.write_bytes(b"x")
+            r1 = root / "web" / "candidates" / "r1.png"
+            r2 = root / "web" / "candidates" / "r2.png"
+            r1.write_bytes(b"1")
+            r2.write_bytes(b"2")
+
+            verdicts = iter([
+                {"pass": False, "score": 40, "stage": "identity", "defects": ["wrong species"], "preserve": []},
+                {"pass": False, "score": 41, "stage": "identity", "defects": ["still wrong species"], "preserve": []},
+                {"pass": True, "score": 95, "stage": "quality", "defects": [], "preserve": []},
+            ])
+            feedbacks = []
+            generated = iter(["candidates/r1.png", "candidates/r2.png"])
+
+            def fake_prepare(cli, config, page, seed, candidate_no, review_feedback=None):
+                feedbacks.append(dict(review_feedback or {}))
+                return root / f"workflow-{len(feedbacks)}.json"
+
+            with (
+                patch.object(gallery, "ROOT", root),
+                patch.object(gallery, "reload_authority", return_value={}),
+                patch.object(gallery, "review_image", side_effect=lambda *a, **k: next(verdicts)),
+                patch.object(gallery, "prepare", side_effect=fake_prepare),
+                patch.object(gallery, "execute_candidate", side_effect=lambda *a, **k: next(generated)),
+            ):
+                gallery.refine_candidate(
+                    cli=object(),
+                    client=object(),
+                    config={"vision_reviewer": {"max_refinement_passes": 2}},
+                    page={"page_id": "X-01"},
+                    candidate_no=1,
+                    seed=100,
+                    initial=initial,
+                )
+
+            self.assertEqual(len(feedbacks), 2)
+            self.assertNotIn("composition_escape_offset", feedbacks[0])
+            self.assertEqual(feedbacks[1]["composition_escape_offset"], 2)
+            self.assertTrue(feedbacks[1]["stagnation_escalation"])
+
     def test_scene_failure_still_uses_image_edit(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
