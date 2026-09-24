@@ -446,11 +446,15 @@ def main() -> int:
             try:
                 review_feedback = None
                 if prior and prior.get("status") == "assistant_rejected":
-                    notes = ((prior.get("assistant_review") or {}).get("notes") or "").strip()
+                    assistant_review = prior.get("assistant_review") or {}
+                    notes = (assistant_review.get("notes") or "").strip()
+                    stage = str(assistant_review.get("stage") or "").strip().lower()
                     review_feedback = {
                         "text": notes or "Previous candidate was rejected during visual review. Rebuild the failed composition.",
                         "routing_recommendation": "regenerate",
                     }
+                    if stage in {"identity", "environment", "action", "quality"}:
+                        review_feedback["stage"] = stage
                 workflow = prepare(cli, config, page, seed, candidate_no, review_feedback)
                 relative = execute_candidate(
                     cli, client, workflow, page["page_id"], candidate_no, inspect_candidate
