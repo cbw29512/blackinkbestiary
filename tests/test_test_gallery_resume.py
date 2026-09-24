@@ -434,6 +434,63 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertEqual(feedback["routing_recommendation"], "regenerate")
         self.assertEqual(feedback["text"], "wrong body plan")
 
+    def test_expanding_canary_state_to_multi_candidate_clears_auto_selection(self):
+        with tempfile.TemporaryDirectory() as td:
+            state_path = Path(td) / "state.json"
+            state_path.write_text(json.dumps({
+                "schema_version": 3,
+                "copies_per_page": 1,
+                "results": [{
+                    "page_id": "I-01",
+                    "candidate": 1,
+                    "status": "ready_for_review",
+                    "assistant_review": {
+                        "decision": "approve",
+                        "review_id": "I-01-C01-Habc",
+                    },
+                }],
+                "selections": {
+                    "I-01": {
+                        "candidate": 1,
+                        "source": "assistant_review",
+                        "review_id": "I-01-C01-Habc",
+                    }
+                },
+            }), encoding="utf-8")
+            with patch.object(gallery, "STATE_FILE", state_path):
+                state = gallery.load_or_init_state(4, False)
+
+            self.assertEqual(state["copies_per_page"], 4)
+            self.assertEqual(state["selections"], {})
+            self.assertEqual(
+                state["results"][0]["assistant_review"]["decision"],
+                "approve",
+            )
+
+    def test_expanding_to_multi_candidate_preserves_explicit_selection(self):
+        with tempfile.TemporaryDirectory() as td:
+            state_path = Path(td) / "state.json"
+            state_path.write_text(json.dumps({
+                "schema_version": 3,
+                "copies_per_page": 1,
+                "results": [],
+                "selections": {
+                    "I-01": {
+                        "candidate": 1,
+                        "source": "assistant_selected",
+                        "review_id": "I-01-C01-Habc",
+                    }
+                },
+            }), encoding="utf-8")
+            with patch.object(gallery, "STATE_FILE", state_path):
+                state = gallery.load_or_init_state(4, False)
+
+            self.assertEqual(state["copies_per_page"], 4)
+            self.assertEqual(
+                state["selections"]["I-01"]["source"],
+                "assistant_selected",
+            )
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
