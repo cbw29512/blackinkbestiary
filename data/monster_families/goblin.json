@@ -36,7 +36,8 @@
       "reptilian claws",
       "demonic tail"
     ],
-    "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure."
+    "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure.",
+    "shape_lock": "Draw a small wiry goblin with narrow torso, thin forearms/calves, oversized pointed ears, no tail, and no heroic chest/ab definition; nearby human-scale masonry, door hardware, furniture, or props must prove the goblin is much smaller than an adult human."
   },
   "accuracy_checks": [
     "goblin reads ugly-cunning rather than cute",
