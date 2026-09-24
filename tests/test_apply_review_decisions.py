@@ -15,6 +15,41 @@ spec.loader.exec_module(apply)
 
 
 class ApplyReviewDecisionsTests(unittest.TestCase):
+    def test_rejection_stage_classifier_prioritizes_structural_failures(self):
+        self.assertEqual(
+            apply.classify_rejection_stage({
+                "notes": "Goblin is too muscular and is not kicking the lantern."
+            }),
+            "identity",
+        )
+        self.assertEqual(
+            apply.classify_rejection_stage({
+                "notes": "Spider is usable but the stone dungeon hall is missing and web field is too dense."
+            }),
+            "environment",
+        )
+        self.assertEqual(
+            apply.classify_rejection_stage({
+                "notes": "Anatomy is correct but the lantern is not being kicked."
+            }),
+            "action",
+        )
+        self.assertEqual(
+            apply.classify_rejection_stage({
+                "notes": "Composition has a decorative border and wallpaper density."
+            }),
+            "quality",
+        )
+
+    def test_explicit_rejection_stage_overrides_note_inference(self):
+        self.assertEqual(
+            apply.classify_rejection_stage({
+                "stage": "action",
+                "notes": "Contains the word anatomy but action is the intended failure."
+            }),
+            "action",
+        )
+
     def test_latest_exact_image_decision_wins(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
