@@ -61,6 +61,11 @@ def _required_object_rules(page: dict) -> list[str]:
         rules.append(
             "Required pit must have a clear structural rim/opening and readable interior hazard without excessive tiny spikes."
         )
+    if "lantern" in text and ("kick" in text or "kicking" in text):
+        rules.append(
+            "KICKED LANTERN LOCK: the lantern is a floor-level impact target, not something held in the creature's hand. "
+            "Show the striking foot visibly contacting the lantern while the lantern tips, skids, or tumbles away from its prior position."
+        )
     return rules
 
 def environment_prompt_sections(page: dict, root: Path) -> list[str]:
