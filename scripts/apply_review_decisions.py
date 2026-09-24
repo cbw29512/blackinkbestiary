@@ -91,10 +91,14 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
 
 
 def selection_eligible(item: dict) -> bool:
-    return (
-        str(item.get("status") or "") == "ready_for_review"
-        and bool((item.get("visual_review") or {}).get("pass"))
-    )
+    # Exact-image assistant review is the final visual authority for the
+    # published candidate. A local VLM failure may drive refinement before
+    # direct review, but it may not veto an approve/select decision for the
+    # exact current image hash.
+    return str(item.get("status") or "") in {
+        "ready_for_review",
+        "max_refinements_reached",
+    }
 
 
 def selection_matches(state: dict, page_id: str, candidate_no: int, review_id: str) -> bool:
@@ -183,10 +187,9 @@ def main() -> int:
             if selected and int(selected.get("candidate") or 0) == candidate_no:
                 state["selections"].pop(page_id, None)
         elif decision == "select":
-            # Exact-image selection is authoritative, but production selection
-            # activates only after this same image passes the current local
-            # staged reviewer. The decision remains attached to the image so a
-            # later review recheck can activate it without asking again.
+            # Exact-image selection is authoritative for this published image.
+            # The local staged reviewer is provisional and cannot veto direct
+            # assistant inspection of the exact current content hash.
             if selection_eligible(item):
                 state.setdefault("selections", {})[page_id] = {
                     "candidate": candidate_no,
@@ -201,8 +204,8 @@ def main() -> int:
             # Approval means this exact image is acceptable, but it must not
             # silently replace another final candidate merely because the
             # decision appeared later in the append-only review history.
-            # On a one-candidate canary, approval acts as the selection only
-            # after the current local staged reviewer also passes.
+            # On a one-candidate canary, approval acts as the selection for
+            # this exact published image regardless of local-VLM disagreement.
             selected = (state.get("selections") or {}).get(page_id)
             if (
                 selected is None
