@@ -44,7 +44,8 @@
       "furry or fluffy silhouette",
       "heroic human proportions",
       "excessive armor detail"
-    ]
+    ],
+    "shape_lock": "Draw a small wiry goblin with narrow torso, thin forearms/calves, oversized ears, no tail, and no heroic chest/ab definition; nearby human-scale masonry, door hardware, or lantern must prove the goblin is much smaller than an adult human."
   },
   "default_habitats": [
     "underground",
