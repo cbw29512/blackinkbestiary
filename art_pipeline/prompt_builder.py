@@ -183,6 +183,12 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "because its canonical color is dark or black. Communicate dark coloration with sparse contour/texture cues while "
             "leaving the interior predominantly white and colorable. No large black masses."
         ),
+        (
+            "PAGE-EDGE LOCK — NON-NEGOTIABLE: draw only the scene itself on the white page. "
+            "Never draw a decorative rectangular border, inset artwork frame, comic panel box, picture-frame line, or enclosing rectangle around the illustration. "
+            "Architecture, webs, grates, rails, shelves, and masonry may form local straight lines, but they must not connect into a page-sized frame. "
+            "Keep clean white print margins without outlining those margins."
+        ),
         f"SUBJECT: {page['monster_name']}.",
         *_body_plan_lock(page, spec),
         recovery_lock,
