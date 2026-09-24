@@ -31,7 +31,9 @@
       "dragon anatomy",
       "graphic filth detail",
       "dense skin texture"
-    ]
+    ],
+    "limb_structure": "Exactly three stout weight-bearing legs support the central body. Exactly two long grasping tentacles extend outward, and exactly one separate eyestalk rises above the central mouth.",
+    "shape_lock": "Draw one low bulky central body with exactly three thick legs, exactly two long grasping tentacles, exactly one elevated eyestalk, and one large mouth embedded in the body. No separate head, humanoid torso, extra eyestalks, or octopus-style tentacle count."
   },
   "default_habitats": [
     "sewers",
