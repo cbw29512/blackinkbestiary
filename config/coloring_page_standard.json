@@ -51,7 +51,8 @@
     "Secondary creatures may support a story beat, but they must remain smaller, simpler, and visually subordinate to the primary monster.",
     "Represent repeated materials such as coins, chainmail, scales, masonry, fur, webs, and rubble with selective marks and larger grouped regions rather than exhaustive tiny repetition.",
     "Every creature must have readable physical grounding: visible contact with a support surface, or explicit and believable airborne/hanging motion logic.",
-    "A creature in midair may not use a neutral standing pose; center of gravity, limb gesture, and source/trajectory cues must explain why it is airborne."
+    "A creature in midair may not use a neutral standing pose; center of gravity, limb gesture, and source/trajectory cues must explain why it is airborne.",
+    "Canonical dark or black coloration is never rendered as a solid black fill; preserve predominantly white colorable interiors and communicate darkness only with sparse line cues."
   ],
   "environment_object_scale": {
     "major_objects": "large enough to color comfortably and recognize at thumbnail size",
@@ -72,7 +73,8 @@
     "creature appears to hover because feet or body do not contact any support and no airborne action is readable",
     "falling or jumping creature uses a static standing pose in midair",
     "more than one competing primary monster",
-    "essential anatomy or story prop crosses the print safe area"
+    "essential anatomy or story prop crosses the print safe area",
+    "large solid-black filled creature or scenery region that removes usable coloring area"
   ],
   "reference_composition": {
     "source": "user-approved visual references",
@@ -100,5 +102,23 @@
     "rule": "When story and coloring usability conflict, simplify the story. Never add clutter, tiny props, extra figures, unstable motion, or dense linework merely to make the narrative more elaborate.",
     "preferred_story_expression": "one clear verb + simple body language + one environmental interaction",
     "maximum_primary_beats": 1
+  },
+  "candidate_set_policy": {
+    "copies": 4,
+    "rule": "A four-candidate review set must explore four materially different compositions, not merely four seeds of the same composition.",
+    "dimensions": [
+      "camera angle",
+      "subject placement",
+      "pose",
+      "landmark relationship",
+      "story interaction"
+    ],
+    "invariant": [
+      "canonical monster identity",
+      "required anatomy",
+      "named habitat",
+      "required story beat",
+      "colorability"
+    ]
   }
 }
