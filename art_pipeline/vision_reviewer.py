@@ -49,11 +49,14 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         "stream": False,
         "format": {"type": "object", "properties": {"pass": {"type": "boolean"}, "score": {"type": "integer"}, "defects": {"type": "array", "items": {"type": "string"}}, "preserve": {"type": "array", "items": {"type": "string"}}}, "required": ["pass", "score", "defects", "preserve"]},
         "messages": [{"role": "user", "content": build_review_prompt(page), "images": [encoded]}],
-        "options": {"temperature": 0},
+        "options": {"temperature": 0, "num_predict": 1024},
+        "think": False,
     }
     result = _request(settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/chat", payload)
     message = result.get("message") or {}
     raw = (message.get("content") or "").strip()
+    if not raw and isinstance(result.get("response"), str):
+        raw = result["response"].strip()
     if not raw:
         thinking = (message.get("thinking") or "").strip()
         raise VisionReviewError("Vision reviewer returned an empty answer" + (f"; thinking={thinking[:500]}" if thinking else "") + f"; response_keys={sorted(result.keys())}")
