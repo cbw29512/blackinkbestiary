@@ -86,7 +86,7 @@ Write-Host "Starting/resuming Tome I: 50 pages x 4 candidates (up to 200 images)
 $runner = Get-Command python -ErrorAction SilentlyContinue
 if (-not $runner) { $runner = Get-Command py -ErrorAction SilentlyContinue }
 if (-not $runner) { throw "Python was not found." }
-& $runner.Source (Join-Path $root "scripts\generate_test_gallery.py") --copies 4
+& $runner.Source (Join-Path $root "scripts\generate_test_gallery.py") --copies 4 --rerun-failed
 if ($LASTEXITCODE -ne 0) { throw "Gallery runner exited with code $LASTEXITCODE." }
 
 Write-Host ""
