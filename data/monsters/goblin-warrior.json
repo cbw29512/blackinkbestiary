@@ -39,5 +39,6 @@
     "skirmishing",
     "scavenging",
     "quick retreat"
-  ]
+  ],
+  "description": "A goblin warrior variant equipped for dirty fighting and quick skirmishing with light scavenged gear."
 }
