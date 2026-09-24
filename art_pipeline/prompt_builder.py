@@ -13,12 +13,12 @@ try:
     from .environment_prompt import environment_checklist, environment_prompt_sections
     from .physicality_prompt import physicality_checklist, physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
-    from .story_prompt import story_checklist, story_sections
+    from .story_prompt import critical_scene_lock, story_checklist, story_sections
 except ImportError:
     from environment_prompt import environment_checklist, environment_prompt_sections
     from physicality_prompt import physicality_checklist, physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
-    from story_prompt import story_checklist, story_sections
+    from story_prompt import critical_scene_lock, story_checklist, story_sections
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
@@ -144,6 +144,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
         f"SUBJECT: {page['monster_name']}.",
         *_body_plan_lock(page, spec),
+        critical_scene_lock(page),
         (
             "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Treat every countable body structure in the canonical creature "
             "identity as exact, not approximate. Never invent or duplicate heads, faces, eyes, horns, antennae, arms, hands, "
