@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from monster_catalog import resolve_monster_spec
 from prompt_builder import build_prompt
+from vision_review_prompts import build_identity_review_prompt
 
 
 class CreatureCatalogTests(unittest.TestCase):
@@ -102,6 +103,21 @@ class CreatureCatalogTests(unittest.TestCase):
             spec = resolve_monster_spec(monster_id)
             self.assertIn(phrase, spec["visual_identity"]["shape_lock"], monster_id)
             self.assertTrue(spec["catalog"]["minimal_recipe"], monster_id)
+
+    def test_tome_i_failure_modes_reach_generation_and_identity_review(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            spec = resolve_monster_spec(page["monster_spec_id"])
+            generation = build_prompt(page)
+            identity_review = build_identity_review_prompt(page)
+            failures = spec.get("known_failure_modes") or []
+            self.assertTrue(failures, page["page_id"])
+            for failure in failures:
+                symptom = str(failure.get("symptom") or "").strip()
+                correction = str(failure.get("correction") or "").strip()
+                self.assertIn(symptom, generation, page["page_id"])
+                self.assertIn(correction, generation, page["page_id"])
+                self.assertIn(symptom, identity_review, page["page_id"])
 
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
