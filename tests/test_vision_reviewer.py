@@ -38,6 +38,13 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("FINAL COLORING-PAGE GATE", prompt)
 
 
+    def test_identity_prompt_has_one_defect_wording_rule(self):
+        prompt = vr.build_identity_review_prompt(self.page)
+        self.assertEqual(
+            prompt.count("DEFECT WORDING RULE: defects must describe what is visibly wrong or absent."),
+            1,
+        )
+
     def test_identity_prompt_is_fail_closed_and_scale_focused(self):
         prompt = vr.build_identity_review_prompt(self.page)
         lower = prompt.lower()
