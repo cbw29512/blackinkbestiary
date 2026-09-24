@@ -82,6 +82,27 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
         self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
 
+    def test_canary_ordinary_variants_do_not_redeclare_family_anatomy(self):
+        for monster_id in ("kobold-warrior", "goblin-warrior", "ogre", "giant-bat"):
+            raw = json.loads(
+                (ROOT / "data" / "monsters" / f"{monster_id}.json").read_text(encoding="utf-8")
+            )
+            self.assertNotIn("visual_identity", raw, monster_id)
+            self.assertIn("family_profile", raw, monster_id)
+            self.assertTrue(raw.get("visual_overrides") is not None, monster_id)
+
+    def test_canary_variants_inherit_family_shape_locks(self):
+        expected = {
+            "kobold-warrior": "one-third to one-half",
+            "goblin-warrior": "small wiry goblin",
+            "ogre": "massive heavy-bellied giant",
+            "giant-bat": "exactly four limbs total",
+        }
+        for monster_id, phrase in expected.items():
+            spec = resolve_monster_spec(monster_id)
+            self.assertIn(phrase, spec["visual_identity"]["shape_lock"], monster_id)
+            self.assertTrue(spec["catalog"]["minimal_recipe"], monster_id)
+
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
         keep = spec["visual_identity"]["must_keep"]
