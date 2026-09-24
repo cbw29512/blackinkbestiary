@@ -72,5 +72,32 @@
     "blood feeding",
     "clinging",
     "ambush hunting"
+  ],
+  "scene_identity": {
+    "size_impression": "Tiny flying feeders that remain individually small and comparable in scale; the group never contains a human-sized focal creature.",
+    "natural_posture": "Small bodies fly, cling, or feed with membrane wings and grasping feet while long straight proboscises orient toward targets.",
+    "behavior_style": [
+      "swarming flight",
+      "blood feeding",
+      "clinging",
+      "ambush hunting"
+    ],
+    "environment_fit": [
+      "underground",
+      "caves",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_humanoid_drift",
+      "symptom": "one or more stirges become winged humanoid/dragon/demon figures",
+      "correction": "restore tiny compact non-humanoid bodies with one membrane wing pair, small grasping legs, and long facial proboscis"
+    },
+    {
+      "id": "giant_leader_drift",
+      "symptom": "one oversized stirge dominates the group",
+      "correction": "keep individuals similarly tiny with no giant focal leader"
+    }
   ]
 }
