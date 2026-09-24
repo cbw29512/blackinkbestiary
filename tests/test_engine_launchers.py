@@ -12,6 +12,13 @@ class EngineLauncherContractTests(unittest.TestCase):
             text.index("scripts\\ensure_local_ai.ps1"),
         )
 
+    def test_full_gallery_syncs_before_runtime_script(self):
+        text = (ROOT / "RUN_COLORING_BOOK.bat").read_text(encoding="utf-8")
+        self.assertLess(
+            text.index("scripts\\sync_engine_for_run.py"),
+            text.index("scripts\\run_coloring_book.ps1"),
+        )
+
     def test_autopilot_syncs_before_starting_local_ai(self):
         text = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         self.assertLess(
