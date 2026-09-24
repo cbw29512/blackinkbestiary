@@ -2,7 +2,60 @@ from __future__ import annotations
 
 from prompt_builder import build_supervisor_checklist
 
-IDENTITY_DEFECT_WORDING_RULE = """" + IDENTITY_DEFECT_WORDING_RULE + """
+
+def _checks(page: dict) -> list[str]:
+    # Keep the small local VLM focused: universal/page/environment layers may
+    # produce the same gate more than once. Exact duplicates add token pressure
+    # without adding evidence, so preserve first occurrence only.
+    seen = set()
+    unique = []
+    for item in build_supervisor_checklist(page):
+        text = str(item or "").strip()
+        if not text or text in seen:
+            continue
+        seen.add(text)
+        unique.append(text)
+    return unique
+
+
+def _require_selected(page: dict, stage: str, selected: list[str]) -> list[str]:
+    if not selected:
+        raise RuntimeError(
+            f"{page.get('page_id')}: {stage} vision gate has no concrete review checks"
+        )
+    return selected
+
+
+def build_identity_review_prompt(page: dict) -> str:
+    checks = _checks(page)
+    prefixes = (
+        "Clearly recognizable as ",
+        "Canonical scale reads as:",
+        "Canonical body plan reads as:",
+        "Shape-first body geometry reads as:",
+        "Identity check:",
+        "Reject identity drift:",
+        "Swarm reads as ",
+    )
+    selected = _require_selected(
+        page,
+        "identity",
+        [item for item in checks if item.startswith(prefixes)],
+    )
+    return """You are the Black-Ink Bestiary IDENTITY AND ANATOMY GATE.
+Inspect only what is visibly present in the image. Do not trust the requested creature name as evidence.
+
+Fail closed. PASS only if every listed identity gate is visibly satisfied.
+If the creature could reasonably be mistaken for a forbidden look-alike, fail.
+If canonical small/tiny scale is not proved by nearby human-scale architecture/props, fail.
+If a small creature has adult-human heroic mass, broad chest, six-pack, thick shoulders, or oversized limbs, fail.
+If a bugbear reads gorilla/ape/bodybuilder, fail.
+If a bat has separate arms plus wings, fail.
+If a centipede lacks one leg pair on every visible trunk segment, fail.
+If a swarm has an oversized leader, fail.
+If any required limb/body structure is extra, missing, duplicated, merged, branched, or replaced by scenery, fail.
+
+DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases may be reported directly when visibly true.
 Do not use the requested label as a preserve item. Preserve items must describe literal visible morphology.
 Return exactly one compact JSON object and nothing else:
 {"pass": true|false, "score": 0-100, "defects": ["specific visible identity defect"], "preserve": ["specific visible morphology"]}
