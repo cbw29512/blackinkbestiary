@@ -60,5 +60,32 @@
     "short powered flight",
     "defensive pecking",
     "territorial behavior"
+  ],
+  "scene_identity": {
+    "size_impression": "Small compact rooster-reptile hybrid whose body remains clearly smaller than human scale.",
+    "natural_posture": "Two clawed bird legs support the compact torso while leathery wings fold or spread from the sides and the serpentine tail trails behind.",
+    "behavior_style": [
+      "ground foraging",
+      "short powered flight",
+      "defensive pecking",
+      "territorial behavior"
+    ],
+    "environment_fit": [
+      "wilderness",
+      "ruins",
+      "farmland"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "chicken_drift",
+      "symptom": "hybrid becomes an ordinary chicken without leathery wings or reptilian tail",
+      "correction": "restore leathery wing pair, rooster head/comb, and long serpentine tail"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "creature becomes a four-legged dragon or drake",
+      "correction": "remove dragon forelegs/body; keep exactly two bird legs, one wing pair, rooster head, and tail"
+    }
   ]
 }
