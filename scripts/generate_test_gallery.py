@@ -460,6 +460,29 @@ def main() -> int:
                         "score": int(refreshed_review.get("score") or 0),
                     }))
 
+            assistant_repair_source = None
+            assistant_repair_verdict = None
+            if prior and str(prior.get("status") or "") == "assistant_rejected":
+                assistant_review = prior.get("assistant_review") or {}
+                assistant_stage = str(assistant_review.get("stage") or "").strip().lower()
+                rejected_source = existing_candidate_path(prior)
+                if (
+                    assistant_stage in {"environment", "action", "quality"}
+                    and rejected_source is not None
+                ):
+                    assistant_notes = str(assistant_review.get("notes") or "").strip()
+                    assistant_repair_source = rejected_source
+                    assistant_repair_verdict = {
+                        "pass": False,
+                        "score": 0,
+                        "stage": assistant_stage,
+                        "defects": [
+                            assistant_notes
+                            or "Exact-image review rejected this stage and requires targeted repair."
+                        ],
+                        "preserve": [],
+                    }
+
             if should_skip_candidate(
                 prior,
                 retry_failed,
@@ -506,7 +529,31 @@ def main() -> int:
                     }
                     if stage in {"identity", "environment", "action", "quality"}:
                         review_feedback["stage"] = stage
-                if reviewer_recheck_source is not None:
+                if assistant_repair_source is not None:
+                    # Exact-image environment/action/quality rejection keeps the
+                    # successful creature pixels and performs one targeted edit
+                    # before returning to the normal staged reviewer loop.
+                    workflow = prepare_edit(
+                        cli,
+                        client,
+                        config,
+                        page,
+                        seed + 1,
+                        candidate_no,
+                        assistant_repair_source,
+                        assistant_repair_verdict,
+                        1,
+                    )
+                    relative = execute_candidate(
+                        cli,
+                        client,
+                        workflow,
+                        f"{page['page_id']}-C{candidate_no:02d}-A01",
+                        1,
+                        inspect_candidate,
+                    )
+                    source = ROOT / "web" / relative
+                elif reviewer_recheck_source is not None:
                     # Reuse the current exact image as the refinement source.
                     # refine_candidate will route identity failures to fresh
                     # text generation, while environment/action/quality
