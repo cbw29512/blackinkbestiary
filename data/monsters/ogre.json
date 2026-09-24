@@ -35,7 +35,10 @@
       "bodybuilder definition",
       "tiny human proportions",
       "ornate armor",
-      "excessive skin texture"
+      "excessive skin texture",
+      "horns or horn nubs",
+      "devil-like pointed ears",
+      "six-pack bodybuilder definition"
     ]
   },
   "default_habitats": [
@@ -48,7 +51,9 @@
     "body is massive rather than lanky",
     "head is broad and coarse",
     "clothing is simple",
-    "pose can read awkward or clumsy"
+    "pose can read awkward or clumsy",
+    "head is hornless and coarse rather than demonic",
+    "mass comes from heavy giant proportions, not sculpted superhero muscles"
   ],
   "reference": {
     "image": null,
