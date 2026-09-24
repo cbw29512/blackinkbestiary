@@ -42,7 +42,6 @@ jobs:
           python -m json.tool data/environment_spatial_envelopes.json > /dev/null
           for file in data/environment_components/*.json; do python -m json.tool "$file" > /dev/null; done
           python -m json.tool data/series.json > /dev/null
-          python -m unittest discover -s tests -v
           python - <<'PY'
           from pathlib import Path
           import sys
@@ -53,6 +52,7 @@ jobs:
           print('OWNERSHIP_WARNINGS=', report['ownership_warnings'])
           raise SystemExit(0 if report['pass'] else 1)
           PY
+          python -m unittest discover -s tests -v
           python scripts/audit_active_book.py
           python scripts/audit_series.py
           python -m compileall -q art_pipeline scripts server.py
