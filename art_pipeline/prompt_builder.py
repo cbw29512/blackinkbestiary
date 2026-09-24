@@ -208,14 +208,9 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "Camera/framing may change apparent prominence but MUST NOT change canonical creature scale, body mass, or species proportions."
         )
 
-    modify = page.get("modify")
-    if modify:
-        sections.extend([
-            _items("PRESERVE", modify.get("preserve")),
-            _items("CHANGE", modify.get("change")),
-            _items("DO NOT CHANGE / DO NOT INTRODUCE", modify.get("avoid")),
-            "This is a targeted refinement. Preserve the successful scene and simplify only the requested areas.",
-        ])
+    # Legacy page modify/preserve recipes apply only when editing an existing
+    # source image. Fresh text-to-image generation has nothing to preserve and
+    # must build directly from canonical monster/environment/page authority.
 
     if review_notes:
         tags = review_notes.get("quick_tags") or []
