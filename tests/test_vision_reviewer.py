@@ -35,6 +35,16 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("under 80 characters", prompt)
         self.assertIn("emit the JSON verdict immediately", prompt)
 
+
+    def test_goblin_bodybuilder_drift_is_a_hard_identity_gate(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-05")
+        prompt = vr.build_review_prompt(page)
+        self.assertIn("HARD IDENTITY GATES:", prompt)
+        self.assertIn("forces pass=false", prompt)
+        self.assertIn("bodybuilder-like", prompt)
+        self.assertIn("six-pack", prompt)
+
     def test_review_uses_generate_endpoint_with_image(self):
         verdict = {
             "pass": False,
