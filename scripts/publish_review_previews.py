@@ -43,6 +43,12 @@ def load_pillow():
 Image = load_pillow()
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
+from page_contract import resolve_page_spec
+from studio_config import active_book_paths
+
 STATE = ROOT / "data" / "test-gallery-state.json"
 RUNTIME_STATUS = ROOT / "data" / "local-runtime-status.json"
 SOURCE_DIR = ROOT / "web" / "test-gallery"
@@ -136,6 +142,22 @@ def restore_final_from_history(item: dict) -> Path | None:
     return destination
 
 
+def current_authority_fingerprints(root: Path = ROOT) -> dict[str, dict]:
+    paths = active_book_paths(root)
+    tome = json.loads(paths["manifest"].read_text(encoding="utf-8"))
+    result = {}
+    for raw in tome.get("pages", []):
+        page = resolve_page_spec(raw, root)
+        page_id = str(page.get("page_id") or "")
+        if not page_id:
+            continue
+        result[page_id] = {
+            "generation": page_generation_fingerprint(page, root),
+            "review": page_review_fingerprint(page, root),
+        }
+    return result
+
+
 def main() -> int:
     state = {"results": [], "selections": {}}
     if STATE.exists():
@@ -143,6 +165,7 @@ def main() -> int:
 
     PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
     SOURCE_DIR.mkdir(parents=True, exist_ok=True)
+    current_authority = current_authority_fingerprints(ROOT)
 
     metadata = {
         (str(item.get("page_id")), int(item.get("candidate") or 0)): item
@@ -211,11 +234,22 @@ def main() -> int:
 
         selection = (state.get("selections") or {}).get(page_id) or {}
         exact_review_id = f"{page_id}-C{candidate:02d}-H{digest[:16]}"
+        authority = current_authority.get(page_id) or {}
+        generation_authority_current = bool(
+            authority.get("generation")
+            and str(item.get("generation_fingerprint") or "") == authority["generation"]
+        )
+        review_authority_current = bool(
+            authority.get("review")
+            and str(item.get("review_fingerprint") or "") == authority["review"]
+        )
         selected = (
             int(selection.get("candidate") or 0) == candidate
             and str(selection.get("review_id") or "") == exact_review_id
             and str(item.get("status") or "") == "ready_for_review"
             and bool((item.get("visual_review") or {}).get("pass"))
+            and generation_authority_current
+            and review_authority_current
         )
         published.append({
             "review_id": exact_review_id,
@@ -227,6 +261,8 @@ def main() -> int:
             "engine_commit": item.get("engine_commit") or "unknown",
             "generation_fingerprint": item.get("generation_fingerprint") or "unknown",
             "review_fingerprint": item.get("review_fingerprint") or "unknown",
+            "generation_authority_current": generation_authority_current,
+            "review_authority_current": review_authority_current,
             "review_checked_at": item.get("review_checked_at"),
             "preview": f"review-previews/{name}",
             "source_image": source.relative_to(ROOT / "web").as_posix(),
