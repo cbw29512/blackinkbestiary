@@ -1,19 +1,14 @@
 {
-  "schema_version": 1,
-  "purpose": "Keep every Black-Ink page easy and satisfying to color: the monster is the large centered focal subject, while an accurate varied environment frames and supports the story.",
+  "schema_version": 2,
+  "purpose": "Keep every Black-Ink page easy and satisfying to color: the creature is the first-read focal subject at its canonical scale and proportions, while an accurate varied environment frames and supports the story.",
   "benchmark_notes": [
     "Comparable bold-and-easy coloring books emphasize large, bold, simple designs and easy-to-color spaces.",
     "Black-Ink keeps that accessibility but uses richer fantasy environments and stronger creature identity."
   ],
   "composition_targets": {
     "primary_subject": {
-      "preferred_page_height_fraction": [
-        0.6,
-        0.75
-      ],
-      "hard_max_page_height_fraction": 0.82,
-      "placement": "centered or near-centered in the primary visual field",
-      "rule": "Exactly one primary monster is the dominant focal subject, centered or near-centered, normally occupying about 60–75% of page height. Secondary creatures may appear only when required by the scene and must remain clearly subordinate.",
+      "placement": "centered, near-centered, or compositionally emphasized without altering canonical creature scale",
+      "rule": "Exactly one primary monster, object-creature, or creature group is the dominant focal subject through framing, placement, and silhouette clarity while preserving canonical size and proportions. Tiny/small creatures may occupy less page height and should use nearby architecture/props as scale evidence rather than being enlarged. Secondary creatures may appear only when required by the scene and must remain clearly subordinate.",
       "count": 1
     },
     "environment": {
@@ -38,13 +33,13 @@
   "shape_rules": [
     "Story should be communicated with simple body language and one clear environment interaction, not with extra clutter.",
     "If a story beat requires many props or small details, reduce it to the simplest recognizable version.",
-    "The monster is the dominant central focal shape and should be the first thing the eye reads.",
+    "The creature or creature group is the first thing the eye reads, but its canonical size and proportions are immutable; use framing and placement instead of enlarging its body.",
     "Keep the full or nearly full monster silhouette visible; avoid cropping major anatomy unless the page concept explicitly requires a close-up.",
     "Favor broad contiguous coloring regions over tiny enclosed islands.",
     "Use bold outer contours and lighter simpler interior detail.",
     "Build the environment from a few large colorable forms such as arches, rocks, trees, ruins, doors, stairs, pillars, shelves, or ledges.",
     "Avoid micro-texture such as repeated scales, fur strokes, cracks, pebbles, bubbles, leaves, barnacles, bricks, coins, or rubble unless only a few are needed for identity.",
-    "Frame the monster with environment forms instead of placing equally dominant objects beside it.",
+    "Frame the creature with environment forms and preserve scale references that prove its canonical size; avoid equally dominant unrelated objects.",
     "Story-critical props must remain readable but visually subordinate to the monster.",
     "Background depth should come from overlap and perspective of large forms, not from filling empty space with tiny objects.",
     "Do not add a decorative rectangular artwork frame or inset page border; use clean white page margins only.",
@@ -60,7 +55,7 @@
     "tiny_objects": "avoid unless essential to the story or identity"
   },
   "automatic_failures": [
-    "monster is small, off-center without narrative purpose, or visually secondary to the environment",
+    "creature is visually secondary because framing failed, or its canonical scale/proportions were altered to make it dominate",
     "monster fills nearly the entire page and erases habitat identity",
     "environment consists mostly of tiny repeated details",
     "too many small enclosed coloring cells",
@@ -78,12 +73,9 @@
   ],
   "reference_composition": {
     "source": "user-approved visual references",
-    "monster_page_height_target": [
-      0.6,
-      0.75
-    ],
-    "monster_hard_max_page_height": 0.82,
-    "placement": "centered or near-centered; full or nearly full silhouette visible",
+    "monster_page_height_target": null,
+    "monster_hard_max_page_height": null,
+    "placement": "centered or near-centered when appropriate; canonical size and proportions preserved; full or nearly full silhouette visible",
     "environment_role": "frame the monster around and behind it using large readable shapes",
     "environment_major_forms": [
       2,
