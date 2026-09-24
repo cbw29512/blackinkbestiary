@@ -209,11 +209,17 @@ def main() -> int:
             im.thumbnail((768, 1024))
             im.save(target, "JPEG", quality=82, optimize=True)
 
+        selection = (state.get("selections") or {}).get(page_id) or {}
+        selected = (
+            int(selection.get("candidate") or 0) == candidate
+            and str(selection.get("review_id") or "") == f"{page_id}-C{candidate:02d}-H{digest[:16]}"
+        )
         published.append({
             "review_id": f"{page_id}-C{candidate:02d}-H{digest[:16]}",
             "page_id": page_id,
             "monster_name": item.get("monster_name"),
             "candidate": candidate,
+            "selected": selected,
             "seed": item.get("seed"),
             "engine_commit": item.get("engine_commit") or "unknown",
             "generation_fingerprint": item.get("generation_fingerprint") or "unknown",
@@ -284,6 +290,7 @@ def main() -> int:
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
         "runtime": runtime,
+        "selections": state.get("selections") or {},
         "candidates": published,
         "diagnostics": diagnostics,
     }, indent=2) + "\n", encoding="utf-8")
