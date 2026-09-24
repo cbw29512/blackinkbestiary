@@ -97,8 +97,9 @@ The 87-page preview audit exposed two universal failures that are now engine rul
 
 - **Canonical creature scale outranks composition.** Tiny/small creatures stay tiny/small relative to architecture, traps, furniture, and props. Visual prominence comes from framing, placement, and silhouette clarity—not enlarging the body.
 - **Canonical body plan is immutable.** Species silhouette, proportions, limb topology/counts, and explicit anti-drift traits are hard generation and refinement constraints.
-- **Identity review runs before general quality review.** A candidate must first pass species identity, canonical scale, body plan, limb structure, and known-drift checks. Only then may environment/story/colorability quality be considered.
-- Identity failure is fail-closed and terminal for that refinement pass; a beautiful page cannot compensate for the wrong creature.
+- **Four-stage review is fail-closed:** identity/anatomy → environment geometry → action/physicality → print/colorability quality.
+- Identity failure regenerates from fresh written authority rather than image-editing a fundamentally wrong body plan. Later-stage failures may use cumulative image editing.
+- Review-stage progress outranks local numeric score, so an older identity-failing image can never beat a structurally correct later-stage image.
 - The nine-page canary set is I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22. Full regeneration remains blocked until this cross-section proves the engine.
 
 This prevents the recurring kobold→dragonborn, goblin/hobgoblin→horned brute, darkmantle/stirge→dragon humanoid, bat→winged humanoid, swarm→wallpaper/giant leader, and centipede→sparse-legged hybrid failures from being treated as page-local accidents.
@@ -126,7 +127,8 @@ This prevents the recurring kobold→dragonborn, goblin/hobgoblin→horned brute
 2. family DNA audit across every repeated monster family — **implemented; all 14 reusable family profiles pass the expanded DNA contract and catalog audit**
 3. environment variation depth across every book family — **implemented; all 8 environment families now inherit geometry, landmark, prop, interaction, and anti-repetition pools**
 4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented; review state records failed and preserved dimensions**
-5. Golden Five reference pages before mass regeneration — **calibration gate implemented; human-approved reference pages still required**
+5. Nine-page exact-image canary before full batch regeneration — **implemented; 9/9 current-hash approvals required by the launcher**
+6. Golden Five human reference calibration — **retained as a separate Studio calibration lane**
 
 ## Working Rule
 
@@ -188,7 +190,7 @@ The written rule is now being enforced in engine behavior, not just documentatio
 - environment and archetype rules no longer describe the three visual requirements as co-equal with coloring usability
 - new first-class colorability defects include cramped coloring spaces, excessive line density, story-overload, and fundamentally uncolorable composition
 
-**Next hardening priority:** family DNA coverage across every repeated monster family, followed by environment-variation depth and the Golden Five reference pages.
+**Next hardening priority:** direct review of the next published nine-page canary, then fix only observed engine/data failures before controlled full-gallery generation.
 
 
 ## 2026-09-22 Monster Family DNA Update
@@ -201,7 +203,7 @@ Variant monster JSON remains minimal. A variant may use `scene_overrides` only w
 
 **Validation:** the first complete 14-family state passed Studio checks on the branch.
 
-**Next hardening priority:** Golden Five reference pages, then controlled Tome I regeneration.
+**Next hardening priority:** exact-image canary validation, then controlled Tome I regeneration; Golden Five remains the separate human calibration lane.
 
 
 ## 2026-09-22 Environment Variation Depth Update
@@ -216,7 +218,7 @@ Environment variety is now a first-class universal engine layer rather than an i
 - series readiness now fails if an environment family has no valid variation definition
 - CI validates the registry and regression tests verify complete family coverage
 
-**Next hardening priority:** build the Golden Five reference pages and use them to calibrate the generation/review loop before mass rebuilding Tome I.
+**Next hardening priority:** complete the automated nine-page canary before mass rebuilding Tome I; use Golden Five separately to calibrate final human review quality.
 
 
 ## 2026-09-22 Golden Five Calibration Gate
