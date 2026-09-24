@@ -7,45 +7,6 @@
   "family": "goblin",
   "size": "small",
   "creature_type": "goblinoid humanoid",
-  "visual_identity": {
-    "core_identity": "A small, wiry, scrappy goblinoid scavenger: ugly-cunning rather than cute, with quick hands, oversized pointed ears, a broad flattened nose, angular cheeks, and a wide sharp-toothed grin.",
-    "silhouette": "Small narrow torso, thin limbs, slightly hunched or darting posture, oversized pointed ears, large quick hands and feet; sparse scalp hair at most, never a furry outline.",
-    "head_features": "Oversized pointed ears; broad flattened goblinoid nose; angular cheekbones; low brow; sharp chin; wide mouth with irregular small teeth; lively predatory eyes. The face must not resemble an elf child, imp, devil, or furry gremlin.",
-    "body_shape": "Small narrow-chested humanoid with lean sinewy limbs, long quick fingers, slightly crouched posture, and light scavenger proportions rather than heroic or muscular anatomy.",
-    "surface": "Mostly bare leathery-looking skin represented with clean line art; sparse hair only. No fur covering, fluffy cheeks, fuzzy limbs, or animal pelt silhouette.",
-    "signature_gear": [
-      "patched tunic",
-      "rope belt",
-      "small scavenged knife or simple hand tool",
-      "small stolen or scavenged trinket"
-    ],
-    "attitude": [
-      "mischievous",
-      "cowardly when isolated",
-      "opportunistic",
-      "quick"
-    ],
-    "must_keep": [
-      "oversized pointed ears",
-      "broad flattened goblinoid nose",
-      "angular scrappy face",
-      "small wiry body",
-      "hunched or darting scavenger posture",
-      "simple scavenged clothing"
-    ],
-    "must_avoid": [
-      "reptilian snout",
-      "tail",
-      "heavy armor",
-      "orc-like tusks",
-      "childlike cartoon proportions",
-      "cute elf-child face",
-      "imp or devil face",
-      "furry or fluffy silhouette",
-      "animal muzzle",
-      "heroic upright physique"
-    ]
-  },
   "default_habitats": [
     "underground",
     "ruins",
@@ -71,5 +32,22 @@
     "skittish movement",
     "group fighting",
     "quick retreat"
+  ],
+  "visual_overrides": {
+    "signature_gear": [
+      "patched tunic",
+      "rope belt",
+      "small scavenged knife or simple hand tool",
+      "small stolen or scavenged trinket"
+    ],
+    "attitude": [
+      "mischievous",
+      "cowardly when isolated",
+      "opportunistic",
+      "quick"
+    ]
+  },
+  "variant_traits": [
+    "goblin minion"
   ]
 }
