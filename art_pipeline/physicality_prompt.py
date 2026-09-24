@@ -16,6 +16,34 @@ UNSTABLE_COLORING_MODES = {
     "midair",
 }
 
+MODE_CONTACT_RULES = {
+    "kicking": (
+        "KICKING CONTACT LOCK: one support foot is visibly planted; the striking foot visibly contacts the target; "
+        "the target is tipped, displaced, or reacting to impact. Do not put the target in the creature's hand."
+    ),
+    "wedged": (
+        "WEDGED CONTACT LOCK: the body is visibly compressed between at least two architectural boundaries. "
+        "Torso or limbs must touch both constraining surfaces so the creature cannot read as freely standing or posing."
+    ),
+    "attached-peeling": (
+        "ATTACHED-PEELING LOCK: one continuous portion of the creature remains visibly attached overhead while the rest of the body peels away. "
+        "Do not replace body attachment with hands, feet, chains, ropes, or an invented hanging limb."
+    ),
+    "hanging": (
+        "HANGING CONTACT LOCK: the creature's canonical gripping anatomy visibly bears its weight from the overhead support. "
+        "Do not invent extra hands, arms, hooks, ropes, or limbs to explain suspension."
+    ),
+    "ground-swarm": (
+        "GROUND-SWARM CONTACT LOCK: individuals visibly emerge from the origin and contact the walking surface in one directional flow with broad white gaps."
+    ),
+    "coiled-contact": (
+        "COILED-CONTACT LOCK: the body visibly rests against the support surface or object along multiple points; no unsupported floating segments."
+    ),
+    "web-supported": (
+        "WEB-SUPPORTED LOCK: multiple canonical legs visibly contact tensioned web strands and the body sits where those strands support its weight."
+    ),
+}
+
 
 def powered_airborne(mode: str) -> bool:
     return str(mode or "").strip().lower() in POWERED_AIR_MODES
@@ -42,10 +70,13 @@ def physicality_sections(page: dict) -> list[str]:
         if can_fly
         else "FLIGHT RULE: this creature cannot fly. Keep it in a stable natural pose with clear support/contact; no jumping, falling, dropping, hovering, or midair freeze-frames."
     )
+    mode = str(physicality.get("mode") or "").strip().lower()
+    mode_rule = MODE_CONTACT_RULES.get(mode, "")
     return [
         f"PHYSICAL STATE: {physicality.get('mode', '')}.",
         f"PHYSICAL SUPPORT / CONTACT: {physicality.get('support', '')}.",
         f"PHYSICAL MOTION / WEIGHT: {physicality.get('motion', '')}.",
+        mode_rule,
         flight_rule,
         "STATIC COLORING RULE: prioritize readable anatomy and a stable natural pose over dramatic motion.",
     ]
@@ -54,11 +85,18 @@ def physicality_sections(page: dict) -> list[str]:
 def physicality_checklist(page: dict) -> list[str]:
     physicality = page.get("physicality") or {}
     can_fly = bool((page.get("locomotion") or {}).get("can_fly"))
-    return [
+    mode = str(physicality.get("mode") or "").strip().lower()
+    mode_rule = MODE_CONTACT_RULES.get(mode, "")
+    checks = [
         f"Physical state reads as: {physicality.get('mode', '')}",
         f"Support/contact is visible and believable: {physicality.get('support', '')}",
         f"Motion/weight reads correctly: {physicality.get('motion', '')}",
+    ]
+    if mode_rule:
+        checks.append(f"Mode-specific contact geometry reads correctly: {mode_rule}")
+    checks.extend([
         f"Controlled powered flight allowed by monster data: {can_fly}",
         "Pose is stable, natural, and easy to read in a static coloring page",
         "No jumping, falling, dropping, or accidental hovering",
-    ]
+    ])
+    return checks
