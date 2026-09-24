@@ -49,6 +49,9 @@ def _validate_spec(root: Path, monster_dir: Path, page: dict) -> list[str]:
     missing = sorted(REQUIRED_VISUAL_FIELDS.difference(visual))
     if missing:
         errors.append(f"{page_id}: monster spec missing visual fields: {', '.join(missing)}")
+    for field in ("limb_structure", "shape_lock"):
+        if not str(visual.get(field) or "").strip():
+            errors.append(f"{page_id}: monster spec {field} cannot be empty")
     if not visual.get("must_keep"):
         errors.append(f"{page_id}: monster spec must_keep cannot be empty")
     if not visual.get("must_avoid"):
