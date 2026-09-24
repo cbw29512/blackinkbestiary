@@ -74,11 +74,25 @@ def _canonical_sections(spec: dict | None) -> list[str]:
     return [part for part in sections if part and not part.endswith(":")]
 
 
-def build_prompt(page: dict, review_notes: dict | None = None) -> str:
+CANDIDATE_COMPOSITIONS = [
+    "eye-level three-quarter view; subject offset slightly left; environment landmark visible behind and to the right; clear foreground-to-background depth",
+    "low three-quarter view; subject offset slightly right; story interaction prominent in the lower foreground; strong depth without cropping anatomy",
+    "higher oblique view; subject near center; habitat geometry surrounds the subject asymmetrically; preserve broad open coloring regions",
+    "side or diagonal narrative view; subject crosses the scene rather than posing frontally; landmark and interaction form a readable triangle with the subject",
+]
+
+
+def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int | None = None) -> str:
     page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
+        (
+            "BLACK-INK COLORABILITY LOCK: This is an uncolored coloring-book page. Use black contour lines on white paper. "
+            "NEVER fill a creature, shadow, liquid, fur, shell, ooze, clothing, or background region with solid black merely "
+            "because its canonical color is dark or black. Communicate dark coloration with sparse contour/texture cues while "
+            "leaving the interior predominantly white and colorable. No large black masses."
+        ),
         f"SUBJECT: {page['monster_name']}.",
         *_canonical_sections(spec),
         (
@@ -111,6 +125,15 @@ def build_prompt(page: dict, review_notes: dict | None = None) -> str:
             "The final art must remain original Black-Ink coloring-book line art."
         ),
     ]
+
+    if candidate_no is not None:
+        variant = CANDIDATE_COMPOSITIONS[(candidate_no - 1) % len(CANDIDATE_COMPOSITIONS)]
+        sections.append(
+            f"CANDIDATE {candidate_no} COMPOSITION LOCK: {variant}. "
+            "This candidate must be compositionally distinct from the other candidates for this page. "
+            "Do not default to a centered frontal portrait when this lock specifies another view. "
+            "Vary camera angle, subject placement, pose, landmark relationship, and story interaction while preserving canonical anatomy."
+        )
 
     modify = page.get("modify")
     if modify:
