@@ -4,40 +4,6 @@
   "family": "hobgoblin",
   "size": "medium",
   "creature_type": "goblinoid humanoid",
-  "visual_identity": {
-    "core_identity": "A veteran hobgoblin officer whose authority comes from disciplined posture, better equipment, and command presence.",
-    "silhouette": "Medium athletic goblinoid with upright stance, squared shoulders.",
-    "head_features": "Angular mature goblinoid face, pointed ears, stern brows, controlled expression, visible scars kept sparse.",
-    "body_shape": "Athletic soldierly humanoid, slightly broader than a rank-and-file hobgoblin but never bulky.",
-    "surface": "Smooth skin with a few scars; simple armor planes suitable for coloring.",
-    "signature_gear": [
-      "better-fitted martial armor",
-      "officer sash or insignia",
-      "straight sword",
-      "practical dagger"
-    ],
-    "attitude": [
-      "commanding",
-      "calculating",
-      "disciplined",
-      "unflinching"
-    ],
-    "must_keep": [
-      "hobgoblin facial identity",
-      "medium athletic proportions",
-      "visible rank marker",
-      "organized military gear",
-      "command posture"
-    ],
-    "must_avoid": [
-      "goblin-small proportions",
-      "orc tusks",
-      "barbaric fur overload",
-      "royal crown",
-      "full ornate plate",
-      "reptilian anatomy"
-    ]
-  },
   "default_habitats": [
     "fortifications",
     "ruins",
@@ -65,5 +31,22 @@
     "disciplined fighting",
     "formation leadership",
     "guarding"
+  ],
+  "visual_overrides": {
+    "signature_gear": [
+      "better-fitted martial armor",
+      "officer sash or insignia",
+      "straight sword",
+      "practical dagger"
+    ],
+    "attitude": [
+      "commanding",
+      "calculating",
+      "disciplined",
+      "unflinching"
+    ]
+  },
+  "variant_traits": [
+    "hobgoblin captain"
   ]
 }
