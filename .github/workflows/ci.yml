@@ -6,8 +6,7 @@ on:
   pull_request:
 
 permissions:
-  contents: read
-  statuses: write
+  contents: write
 
 jobs:
   test:
@@ -83,24 +82,32 @@ jobs:
           else
             echo 'ci-output.txt was not produced.' >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Publish compact CI diagnostic status
+      - name: Publish compact CI diagnostic branch
         if: steps.validate.outcome == 'failure' && github.event_name == 'push'
-        env:
-          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           python - <<'PY'
-          import json, os, re, urllib.request
+          import json, os, re
           from pathlib import Path
           text = Path('ci-output.txt').read_text(encoding='utf-8', errors='replace') if Path('ci-output.txt').exists() else ''
           lines = text.splitlines()
-          picked = next((line.strip() for line in lines if re.search(r'^(FAIL:|ERROR:)|AssertionError|FAILED \(', line.strip())), 'CI checks failed; see workflow run')
-          picked = re.sub(r'\s+', ' ', picked)[:135]
-          url = f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/statuses/{os.environ['GITHUB_SHA']}"
-          body = json.dumps({'state':'error','context':'blackink/ci-diagnostic','description':picked}).encode()
-          req = urllib.request.Request(url, data=body, method='POST', headers={'Authorization':f"Bearer {os.environ['GH_TOKEN']}",'Accept':'application/vnd.github+json','Content-Type':'application/json'})
-          urllib.request.urlopen(req, timeout=20).read()
+          failure = next((line.strip() for line in lines if re.search(r'^(FAIL:|ERROR:)|AssertionError|FAILED \(', line.strip())), 'CI checks failed; see tail')
+          payload = {
+              'head_sha': os.environ.get('GITHUB_SHA'),
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'first_failure': failure,
+              'tail': lines[-120:],
+          }
+          Path('/tmp/ci-diagnostic.json').write_text(json.dumps(payload, indent=2) + '\n', encoding='utf-8')
           PY
+          git config user.name 'blackink-ci'
+          git config user.email 'blackink-ci@users.noreply.github.com'
+          git checkout --orphan ci-diagnostics-tmp
+          git rm -rf . >/dev/null 2>&1 || true
+          cp /tmp/ci-diagnostic.json ci-diagnostic.json
+          git add ci-diagnostic.json
+          git commit -m "CI diagnostic $GITHUB_SHA"
+          git push --force origin HEAD:refs/heads/ci-diagnostics
       - name: Preserve CI failure status
         if: steps.validate.outcome == 'failure'
         run: exit 1
