@@ -503,6 +503,13 @@ class PromptTests(unittest.TestCase):
         self.assertIn("exactly four long flexible tendrils", fungus.lower())
         self.assertNotIn("four or more flexible tendrils", fungus.lower())
 
+    def test_minotaur_intersection_uses_passage_fill_scale_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-33")
+        text = build_prompt(page)
+        self.assertIn("PASSAGE-FILL PROOF", text)
+        self.assertIn("route, intersection, or crossing", text)
+
     def test_late_tome_i_relationships_have_literal_story_proof(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         pages = {page["page_id"]: page for page in tome["pages"]}
