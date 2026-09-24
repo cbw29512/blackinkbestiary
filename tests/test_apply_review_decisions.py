@@ -185,6 +185,97 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                 ["approve", "approve"],
             )
 
+    def test_select_is_deferred_until_local_visual_review_passes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-01-C02.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"two")
+            digest = hashlib.sha256(b"two").hexdigest()[:16]
+            review_id = f"I-01-C02-H{digest}"
+
+            state_file.write_text(json.dumps({
+                "copies_per_page": 4,
+                "results": [{
+                    "page_id": "I-01",
+                    "candidate": 2,
+                    "status": "max_refinements_reached",
+                    "image_path": "test-gallery/I-01-C02.png",
+                    "visual_review": {
+                        "pass": False,
+                        "stage": "quality",
+                        "defects": ["border"],
+                    },
+                }],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({
+                "reviews": [{
+                    "review_id": review_id,
+                    "decision": "select",
+                    "notes": "best exact image after direct inspection",
+                }],
+            }), encoding="utf-8")
+
+            with (
+                patch.object(apply, "ROOT", root),
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["results"][0]["assistant_review"]["decision"], "select")
+            self.assertEqual(state["selections"], {})
+
+    def test_deferred_select_activates_after_later_local_review_pass(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-01-C02.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"two")
+            digest = hashlib.sha256(b"two").hexdigest()[:16]
+            review_id = f"I-01-C02-H{digest}"
+            stored_review = {
+                "review_id": review_id,
+                "decision": "select",
+                "notes": "best exact image after direct inspection",
+            }
+
+            state_file.write_text(json.dumps({
+                "copies_per_page": 4,
+                "results": [{
+                    "page_id": "I-01",
+                    "candidate": 2,
+                    "status": "ready_for_review",
+                    "image_path": "test-gallery/I-01-C02.png",
+                    "visual_review": {"pass": True, "stage": "quality", "defects": []},
+                    "assistant_review": stored_review,
+                }],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({
+                "reviews": [stored_review],
+            }), encoding="utf-8")
+
+            with (
+                patch.object(apply, "ROOT", root),
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["selections"]["I-01"], {
+                "candidate": 2,
+                "source": "assistant_selected",
+                "review_id": review_id,
+            })
+
     def test_select_explicitly_chooses_one_final_candidate(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
@@ -203,6 +294,7 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                     "candidate": 2,
                     "status": "ready_for_review",
                     "image_path": "test-gallery/I-01-C02.png",
+                    "visual_review": {"pass": True, "stage": "quality", "defects": []},
                 }],
                 "selections": {},
             }), encoding="utf-8")
