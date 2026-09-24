@@ -74,5 +74,32 @@
     "clinging",
     "dropping attack",
     "mantle-body gliding"
+  ],
+  "scene_identity": {
+    "size_impression": "Small ceiling ambusher whose compact mantle body is much smaller than a humanoid and reads as a living cloak/cap rather than a person.",
+    "natural_posture": "One continuous mantle body presses against overhead support with short tentacles hanging beneath the rim.",
+    "behavior_style": [
+      "overhead ambush",
+      "clinging",
+      "dropping attack",
+      "mantle-body gliding"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_humanoid_drift",
+      "symptom": "image invents dragon/demon head, torso, arms, legs, tail, or separate wings",
+      "correction": "remove all separate humanoid/reptilian anatomy and restore one continuous mantle body with underside mouth and short tentacles"
+    },
+    {
+      "id": "bat_drift",
+      "symptom": "creature becomes a conventional bat with wing limbs and head",
+      "correction": "remove bat head/limb topology; mantle itself is the full body"
+    }
   ]
 }
