@@ -19,6 +19,17 @@ class EngineLauncherContractTests(unittest.TestCase):
             text.index("scripts\\run_coloring_book.ps1"),
         )
 
+    def test_full_gallery_always_publishes_review_snapshot(self):
+        text = (ROOT / "RUN_COLORING_BOOK.bat").read_text(encoding="utf-8")
+        self.assertIn('set "RUN_EXIT=%ERRORLEVEL%"', text)
+        self.assertIn("scripts\\publish_review_previews.py", text)
+        self.assertLess(
+            text.index("scripts\\run_coloring_book.ps1"),
+            text.index("scripts\\publish_review_previews.py"),
+        )
+        self.assertIn("Partial/diagnostic full-gallery snapshot published to GitHub.", text)
+        self.assertIn("Full-gallery review snapshot published to GitHub.", text)
+
     def test_autopilot_syncs_before_starting_local_ai(self):
         text = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         self.assertLess(
