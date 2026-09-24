@@ -320,6 +320,23 @@ class PromptTests(unittest.TestCase):
         self.assertIn("more white space", text)
 
 
+    def test_every_tome_i_physicality_mode_is_owned_by_universal_engine(self):
+        from physicality_prompt import MODE_CONTACT_RULES, POWERED_AIR_MODES, locomotion_errors
+
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        supported = set(MODE_CONTACT_RULES) | set(POWERED_AIR_MODES)
+        modes = {
+            str((page.get("physicality") or {}).get("mode") or "").strip().lower()
+            for page in tome["pages"]
+        }
+        self.assertTrue(modes.issubset(supported), sorted(modes.difference(supported)))
+
+        bogus = dict(tome["pages"][0])
+        bogus["physicality"] = dict(bogus["physicality"])
+        bogus["physicality"]["mode"] = "dramatic-mystery-pose"
+        errors = locomotion_errors(bogus)
+        self.assertTrue(any("has no universal contact/airborne rule" in item for item in errors))
+
 class WorkflowTests(unittest.TestCase):
     def test_template_tokens_replace(self):
         template = {"1": {"inputs": {"text": PROMPT_TOKEN, "seed": SEED_TOKEN}}}
