@@ -141,6 +141,16 @@ CANDIDATE_COMPOSITIONS = [
 def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int | None = None) -> str:
     page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
+    review_stage = str((review_notes or {}).get("stage") or "").strip().lower()
+    review_text = str((review_notes or {}).get("text") or "").strip()
+    identity_recovery = ""
+    if review_stage == "identity" and review_text:
+        identity_recovery = (
+            "IDENTITY RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed species/anatomy review. "
+            "Generate a fresh creature from canonical written authority and explicitly correct these visible failures: "
+            + review_text
+            + ". Do not imitate or preserve the failed creature silhouette from the prior attempt."
+        )
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
         (
@@ -151,6 +161,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
         f"SUBJECT: {page['monster_name']}.",
         *_body_plan_lock(page, spec),
+        identity_recovery,
         critical_scene_lock(page),
         (
             "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Treat every countable body structure in the canonical creature "
@@ -214,18 +225,18 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
 
     if review_notes:
         tags = review_notes.get("quick_tags") or []
-        text = (review_notes.get("text") or "").strip()
+        text = review_text
         failed_dimensions = review_notes.get("failed_dimensions") or []
         route = str(review_notes.get("routing_recommendation") or "").strip()
         if failed_dimensions:
-            sections.append(_items("FAILED QUALITY DIMENSIONS TO REBUILD", failed_dimensions))
+            sections.append(_items("FAILED REVIEW REQUIREMENTS TO CORRECT", failed_dimensions))
         if route == "regenerate":
             sections.append(
                 "REGENERATION RULE: rebuild the failed composition from the canonical page recipe. "
-                "Do not preserve a bad layout merely because parts of the previous attempt were attractive."
+                "Do not preserve a bad layout or failed creature silhouette merely because parts of the previous attempt were attractive."
             )
-        if text:
-            sections.append(f"LATEST HUMAN NOTE: {text}")
+        if text and review_stage != "identity":
+            sections.append(f"LATEST REVIEW CORRECTION: {text}")
         if tags:
             sections.append(_items("LATEST HUMAN QUICK CHANGES", tags))
             sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
