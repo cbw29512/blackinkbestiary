@@ -34,7 +34,10 @@
       "fast athletic pose",
       "troll proportions",
       "ornate gear",
-      "dense decay texture"
+      "dense decay texture",
+      "horns or horn nubs",
+      "healthy alert expression",
+      "clean living-ogre skin"
     ]
   },
   "default_habitats": [
@@ -48,7 +51,9 @@
     "chains are visible",
     "undeath is clear without gore",
     "movement looks slow and heavy",
-    "coloring areas remain open"
+    "coloring areas remain open",
+    "sunken eyes, slack jaw, torn skin, or exposed bone edges make undeath unmistakable",
+    "head is hornless"
   ],
   "reference": {
     "image": null,
