@@ -273,6 +273,20 @@ def main() -> int:
             "finished_at": item.get("finished_at"),
         })
 
+    effective_selections = {}
+    for item in published:
+        if not item.get("selected"):
+            continue
+        page_id = str(item.get("page_id") or "")
+        if not page_id:
+            continue
+        selection = (state.get("selections") or {}).get(page_id) or {}
+        effective_selections[page_id] = {
+            "candidate": int(item.get("candidate") or 0),
+            "source": selection.get("source"),
+            "review_id": item.get("review_id"),
+        }
+
     for stale in PREVIEW_DIR.glob("*.jpg"):
         if stale.name not in active_preview_names:
             stale.unlink()
@@ -329,7 +343,7 @@ def main() -> int:
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
         "runtime": runtime,
-        "selections": state.get("selections") or {},
+        "selections": effective_selections,
         "candidates": published,
         "diagnostics": diagnostics,
     }, indent=2) + "\n", encoding="utf-8")
