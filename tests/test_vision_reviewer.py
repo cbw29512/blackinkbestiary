@@ -36,6 +36,13 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("emit the JSON verdict immediately", prompt)
 
 
+    def test_identity_prompt_is_fail_closed_and_scale_focused(self):
+        prompt = vr.build_identity_review_prompt(self.page)
+        self.assertIn("identity and anatomy gate", prompt)
+        self.assertIn("FAIL CLOSED", prompt)
+        self.assertIn("adult-human-sized heroic mass", prompt)
+        self.assertIn("Any identity failure should score 49 or lower", prompt)
+
     def test_goblin_bodybuilder_drift_is_a_hard_identity_gate(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-05")
@@ -66,10 +73,10 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("canonical scale/proportion gate", prompt)
         self.assertIn("canonical body-plan gate", prompt)
 
-    def test_review_uses_generate_endpoint_with_image(self):
+    def test_identity_failure_stops_before_quality_review(self):
         verdict = {
             "pass": False,
-            "score": 20,
+            "score": 80,
             "defects": ["wrong monster identity"],
             "preserve": ["stone corridor"],
         }
@@ -87,15 +94,33 @@ class VisionReviewerTests(unittest.TestCase):
             ) as request:
                 result = vr.review_image(self.page, image_path, self.config)
 
-        self.assertEqual(result, verdict)
+        self.assertFalse(result["pass"])
+        self.assertEqual(result["score"], 49)
+        self.assertEqual(request.call_count, 1)
         url, payload = request.call_args.args[:2]
         self.assertTrue(url.endswith("/api/generate"))
-        self.assertIn("prompt", payload)
-        self.assertIn("images", payload)
+        self.assertIn("identity and anatomy gate", payload["prompt"])
         self.assertEqual(len(payload["images"]), 1)
-        self.assertNotIn("messages", payload)
         self.assertFalse(payload["stream"])
         self.assertFalse(payload["think"])
+
+    def test_identity_pass_runs_quality_review(self):
+        identity = {"pass": True, "score": 96, "defects": [], "preserve": ["kobold scale"]}
+        quality = {"pass": True, "score": 92, "defects": [], "preserve": ["clear corridor"]}
+        with tempfile.TemporaryDirectory() as td:
+            image_path = Path(td) / "candidate.png"
+            image_path.write_bytes(b"x")
+            with patch.object(
+                vr,
+                "_request",
+                side_effect=[
+                    {"response": json.dumps(identity)},
+                    {"response": json.dumps(quality)},
+                ],
+            ) as request:
+                result = vr.review_image(self.page, image_path, self.config)
+        self.assertEqual(result, quality)
+        self.assertEqual(request.call_count, 2)
 
     def test_truncated_non_json_reports_ollama_diagnostics(self):
         with tempfile.TemporaryDirectory() as td:
