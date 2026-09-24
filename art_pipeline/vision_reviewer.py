@@ -7,9 +7,10 @@ import urllib.request
 from pathlib import Path
 
 from vision_review_prompts import (
+    build_action_review_prompt,
+    build_environment_review_prompt,
     build_identity_review_prompt,
     build_review_prompt,
-    build_scene_review_prompt,
 )
 
 
@@ -185,7 +186,8 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
     url = settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/generate"
     gates = (
         ("Identity", build_identity_review_prompt(page)),
-        ("Scene", build_scene_review_prompt(page)),
+        ("Environment", build_environment_review_prompt(page)),
+        ("Action", build_action_review_prompt(page)),
         ("Quality", build_review_prompt(page)),
     )
     for stage, prompt in gates:
