@@ -672,6 +672,78 @@
       "candidate": 1,
       "decision": "reject",
       "notes": "Reject: spider anatomy is usable, but the page is mostly a dense web field with an inset border and does not read as a stone dungeon hall/arch. Keep eight legs, simplify web density, remove border, and make the stone hall unmistakable."
+    },
+    {
+      "review_id": "I-01-C01-H9b8795fad043d2ea",
+      "page_id": "I-01",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: still a full-size muscular dragonborn-like warrior. Preserve reptilian head/tail, but make the kobold unmistakably 2–3 feet tall with narrow shoulders, thin limbs, small gear, and human-scale corridor/trap elements proving its scale.",
+      "stage": "identity"
+    },
+    {
+      "review_id": "I-04-C01-Hccf7a35191d2d05d",
+      "page_id": "I-04",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: goblin is upright and heroic/muscular, visibly has a tail, and is not kicking over a lantern. Restore small wiry goblin anatomy with no tail/bodybuilder mass and make the lantern-kick action visibly occur.",
+      "stage": "identity"
+    },
+    {
+      "review_id": "I-08-C01-H2021cb200860ef32",
+      "page_id": "I-08",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: bugbear still reads as an ape/bodybuilder brute with broad heroic chest and short heavy arms. Restore rangy goblinoid anatomy, very long arms, selective shaggy hair, narrower torso, and non-primate face.",
+      "stage": "identity"
+    },
+    {
+      "review_id": "I-10-C01-Hfcbc36f35644e9b4",
+      "page_id": "I-10",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: ogre is merely standing on ordinary stairs. The scene must visibly be a cramped spiral stair with inner column/curving steps and the ogre physically wedged/compressed against the architecture.",
+      "stage": "environment"
+    },
+    {
+      "review_id": "I-14-C01-H783d0553e82b51b5",
+      "page_id": "I-14",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: still a humanoid dragon/demon with head, horns, arms, legs, tail, and separate wings. Rebuild from non-humanoid darkmantle body plan: one broad leathery mantle body with underside mouth/head and short dangling tentacles, clinging overhead.",
+      "stage": "identity"
+    },
+    {
+      "review_id": "I-16-C01-H50f1672455941847",
+      "page_id": "I-16",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: giant bat has separate humanoid arms/hands in addition to wings. Natural bat anatomy only: the two forelimbs ARE the two membrane wings; only two hind legs/feet may grip the overhead support.",
+      "stage": "identity"
+    },
+    {
+      "review_id": "I-19-C01-H20e83be840e2a5e7",
+      "page_id": "I-19",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: swarm is wallpaper-dense with far more than the controlled 12–24 rats and includes an inset rectangular frame. Use a smaller directional stream of comparable rats with broad white gaps and no decorative frame.",
+      "stage": "quality"
+    },
+    {
+      "review_id": "I-20-C01-Hfcbab3eb8071c29d",
+      "page_id": "I-20",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: centipede has sparse spiderlike legs rather than one pair on every visible trunk segment; old-bone interaction and catacomb niche hall are not readable. Restore continuous leg rhythm and the required scene.",
+      "stage": "identity"
+    },
+    {
+      "review_id": "I-22-C01-H6b56a538a7d9edc7",
+      "page_id": "I-22",
+      "candidate": 1,
+      "decision": "reject",
+      "notes": "Reject: spider anatomy is usable, but the page is mostly a dense web field with an inset border and does not read as a stone dungeon hall/arch. Keep eight legs, simplify web density, remove border, and make the stone hall unmistakable.",
+      "stage": "environment"
     }
   ]
 }
