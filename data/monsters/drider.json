@@ -64,5 +64,32 @@
     "climbing",
     "web use",
     "ranged hunting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large fused humanoid-spider creature whose broad eight-legged lower body visibly supports a normal-sized humanoid upper torso.",
+    "natural_posture": "Spider lower body carries the weight on eight legs while the humanoid torso remains upright enough for deliberate hand/weapon use.",
+    "behavior_style": [
+      "stalking",
+      "climbing",
+      "web use",
+      "ranged hunting"
+    ],
+    "environment_fit": [
+      "underground",
+      "caves",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "centaur_drift",
+      "symptom": "lower body becomes horse-like or gains human legs",
+      "correction": "restore continuous waist fusion into spider cephalothorax/abdomen with exactly eight spider legs"
+    },
+    {
+      "id": "leg_count_drift",
+      "symptom": "spider lower body has fewer or more than eight legs",
+      "correction": "restore exactly eight jointed spider legs and no human legs"
+    }
   ]
 }
