@@ -45,6 +45,16 @@
       "id": "black_mass_drift",
       "symptom": "dark ooze becomes a solid black shape",
       "correction": "use outline-driven form with open white interior and sparse contour marks"
+    },
+    {
+      "id": "humanoid_ooze_drift",
+      "symptom": "ooze becomes a muscular humanoid, person, or creature with arms and legs",
+      "correction": "remove humanoid anatomy entirely; restore faceless limbless variant-specific ooze geometry supported by the environment"
+    },
+    {
+      "id": "cube_blob_drift",
+      "symptom": "gelatinous cube loses straight cube geometry and becomes a rounded blob or upright slime creature",
+      "correction": "restore a single transparent geometric cube with straight readable edges, no head, no face, no limbs, and sparse suspended contents"
     }
   ],
   "scene_identity": {
