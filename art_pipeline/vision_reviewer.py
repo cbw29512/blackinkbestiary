@@ -183,6 +183,7 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
 def review_notes(verdict: dict) -> dict:
     return {
         "text": "Correct these visible defects: " + "; ".join(str(x) for x in verdict.get("defects", [])),
+        "stage": str(verdict.get("stage") or "").strip().lower(),
         "failed_dimensions": [str(x) for x in verdict.get("defects", [])],
         "preserve_dimensions": [str(x) for x in verdict.get("preserve", [])],
     }
