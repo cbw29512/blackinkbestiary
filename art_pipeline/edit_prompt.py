@@ -29,12 +29,32 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
     """Build a preservation-first prompt for editing the current candidate."""
     page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
+    stage = str((review_notes or {}).get("stage") or "").strip().lower()
+    if stage == "identity":
+        repair_strategy = (
+            "IDENTITY REBUILD MODE — NON-NEGOTIABLE: the subject anatomy/body plan is structurally wrong. "
+            "Preserve only clearly successful background/environment elements. Rebuild the creature silhouette, scale, proportions, limb topology, and pose as needed from the canonical written authority. "
+            "Do NOT preserve incorrect anatomy, heroic mass, extra limbs, invented wings, wrong species proportions, or a pose that forces the wrong body plan."
+        )
+    elif stage == "scene":
+        repair_strategy = (
+            "SCENE REBUILD MODE — NON-NEGOTIABLE: preserve correct creature anatomy and coloring style, but rebuild pose, prop placement, contact geometry, camera/framing, or environment structure as needed so the required action and place read literally. "
+            "Do not preserve a neutral pose or generic setting merely because it is attractive."
+        )
+    elif stage == "quality":
+        repair_strategy = (
+            "QUALITY REPAIR MODE: preserve correct creature anatomy, scene action, perspective, and environment identity. "
+            "Simplify clutter, web/rat wallpaper density, borders, black fill, line density, and other print/colorability defects without redesigning the successful composition."
+        )
+    else:
+        repair_strategy = (
+            "TARGETED REPAIR MODE: preserve successful parts, but written canonical authority outranks the input image. "
+            "Rebuild any anatomy, scene, or environment element that conflicts with the requirements."
+        )
+
     sections = [
-        "EDIT THE PROVIDED CURRENT COLORING PAGE. Do not redesign it from scratch.",
-        (
-            "Preserve the existing framing, camera angle, pose, perspective, and successful background elements. "
-            "Preserve anatomy only when it matches the canonical body-plan and scale locks below; rebuild incorrect species anatomy rather than polishing it."
-        ),
+        "EDIT THE PROVIDED CURRENT COLORING PAGE.",
+        repair_strategy,
         f"SUBJECT MUST REMAIN: {page['monster_name']}.",
         *_body_plan_lock(page, spec),
         *_canonical_sections(spec),
@@ -87,10 +107,21 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
             sections.append(_items("HUMAN QUICK CHANGES", tags))
             sections.append(_items("TARGETED REMEDIATION", expand_defect_tags(ROOT, tags)))
 
-    sections.append(
-        "Correct every listed defect across monster, environment, and story moment, but do not invent unrelated changes. "
-        "Make the smallest set of edits needed to satisfy the requirements. "
-        "Keep every successful part of the provided image unchanged. "
-        "Return one clean black-on-white printable coloring page."
-    )
+    if stage == "identity":
+        final_instruction = (
+            "Correct every listed identity/anatomy defect completely, even if that requires redrawing most or all of the creature. "
+            "Preserve successful environment elements only where they do not force the wrong scale/body plan. "
+            "Return one clean black-on-white printable coloring page."
+        )
+    elif stage == "scene":
+        final_instruction = (
+            "Correct every listed scene/physicality defect completely, even if that requires moving the creature, props, or camera and rebuilding affected environment geometry. "
+            "Preserve correct anatomy and successful unrelated background elements. Return one clean black-on-white printable coloring page."
+        )
+    else:
+        final_instruction = (
+            "Correct every listed defect without inventing unrelated changes. Keep every successful part of the provided image unchanged where compatible with the written authority. "
+            "Return one clean black-on-white printable coloring page."
+        )
+    sections.append(final_instruction)
     return "\n\n".join(part for part in sections if part)
