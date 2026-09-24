@@ -50,6 +50,20 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("local_runtime_failed", publisher)
         self.assertIn('"runtime": runtime', publisher)
 
+    def test_generation_entry_points_run_publishable_engine_preflight(self):
+        canary = (ROOT / "RUN_ENGINE_CANARY.bat").read_text(encoding="utf-8")
+        autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
+        full = (ROOT / "scripts" / "run_coloring_book.ps1").read_text(encoding="utf-8")
+        publisher = (ROOT / "scripts" / "publish_review_previews.py").read_text(encoding="utf-8")
+
+        for text in (canary, autopilot, full):
+            self.assertIn("engine_preflight.py", text)
+            self.assertIn("publish_review_previews.py", text)
+
+        self.assertIn("engine-preflight-status.json", publisher)
+        self.assertIn("engine_preflight_failed", publisher)
+        self.assertIn('"engine_preflight": engine_preflight', publisher)
+
     def test_start_doc_names_single_entry_point(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
         self.assertIn("START_BLACKINK.bat", text)
