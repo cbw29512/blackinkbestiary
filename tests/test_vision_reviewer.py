@@ -42,7 +42,7 @@ class VisionReviewerTests(unittest.TestCase):
         lower = prompt.lower()
         self.assertIn("identity and anatomy gate", lower)
         self.assertIn("fail closed", lower)
-        self.assertIn("adult-human-sized heroic mass", prompt)
+        self.assertIn("adult-human heroic mass", prompt)
         self.assertIn("Any identity failure should score 49 or lower", prompt)
 
     def test_goblin_bodybuilder_drift_is_a_hard_identity_gate(self):
