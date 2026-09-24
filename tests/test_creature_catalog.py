@@ -104,6 +104,20 @@ class CreatureCatalogTests(unittest.TestCase):
             self.assertIn(phrase, spec["visual_identity"]["shape_lock"], monster_id)
             self.assertTrue(spec["catalog"]["minimal_recipe"], monster_id)
 
+    def test_every_tome_i_monster_resolves_positive_shape_and_limb_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            spec = resolve_monster_spec(page["monster_spec_id"])
+            visual = spec.get("visual_identity") or {}
+            self.assertTrue(
+                str(visual.get("shape_lock") or "").strip(),
+                f"{page['page_id']}:{page['monster_spec_id']} missing shape_lock",
+            )
+            self.assertTrue(
+                str(visual.get("limb_structure") or "").strip(),
+                f"{page['page_id']}:{page['monster_spec_id']} missing limb_structure",
+            )
+
     def test_tome_i_failure_modes_reach_generation_and_identity_review(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         for page in tome["pages"]:
