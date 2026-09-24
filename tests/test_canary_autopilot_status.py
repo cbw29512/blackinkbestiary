@@ -55,6 +55,33 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
             }
             self.assertEqual(status.classify(item, root), "approved")
 
+    def test_stale_generation_fingerprint_requires_regeneration(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-01-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"candidate")
+            digest = hashlib.sha256(b"candidate").hexdigest()[:16]
+            item = {
+                "page_id": "I-01",
+                "candidate": 1,
+                "status": "ready_for_review",
+                "image_path": "test-gallery/I-01-C01.png",
+                "generation_fingerprint": "old-engine",
+                "assistant_review": {
+                    "decision": "approve",
+                    "review_id": f"I-01-C01-H{digest}",
+                },
+            }
+            self.assertEqual(
+                status.classify(
+                    item,
+                    root,
+                    current_generation_fingerprint="new-engine",
+                ),
+                "needs_generation",
+            )
+
     def test_stale_approval_does_not_approve_changed_image(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
