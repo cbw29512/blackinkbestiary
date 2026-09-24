@@ -4,6 +4,15 @@ cd /d "%~dp0"
 echo.
 echo Black-Ink Bestiary - Engine Canary + Publish
 echo ==============================================
+echo Synchronizing the latest engine rules and AI decisions...
+python scripts\sync_engine_for_run.py
+if errorlevel 1 (
+  echo.
+  echo Engine sync stopped because the workstation has protected tracked edits or is on the wrong branch.
+  pause
+  exit /b 1
+)
+echo.
 echo Ensuring local AI artist and semantic reviewer are ready...
 powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\ensure_local_ai.ps1"
 if errorlevel 1 (
@@ -11,15 +20,6 @@ if errorlevel 1 (
   echo Local AI runtime could not be started or verified.
   echo Publishing runtime diagnostic to the review snapshot...
   python scripts\publish_review_previews.py
-  pause
-  exit /b 1
-)
-echo.
-echo Synchronizing the latest engine rules and AI decisions...
-python scripts\sync_engine_for_run.py
-if errorlevel 1 (
-  echo.
-  echo Engine sync stopped because the workstation has protected tracked edits or is on the wrong branch.
   pause
   exit /b 1
 )
