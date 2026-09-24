@@ -30,6 +30,36 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertTrue(gallery.should_skip_candidate(prior, False))
         self.assertFalse(gallery.should_skip_candidate(prior, True))
 
+    def test_stale_generation_authority_forces_canary_rerun(self):
+        prior = {
+            "status": "ready_for_review",
+            "generation_fingerprint": "old",
+        }
+        self.assertTrue(gallery.generation_authority_stale(prior, "new"))
+        self.assertFalse(
+            gallery.should_skip_candidate(
+                prior,
+                True,
+                force_rerun=gallery.generation_authority_stale(prior, "new"),
+                retry_max_refinements=False,
+            )
+        )
+
+    def test_current_generation_authority_keeps_reviewable_candidate_skipped(self):
+        prior = {
+            "status": "ready_for_review",
+            "generation_fingerprint": "same",
+        }
+        self.assertFalse(gallery.generation_authority_stale(prior, "same"))
+        self.assertTrue(
+            gallery.should_skip_candidate(
+                prior,
+                True,
+                force_rerun=gallery.generation_authority_stale(prior, "same"),
+                retry_max_refinements=False,
+            )
+        )
+
     def test_canary_force_reruns_existing_candidate(self):
         prior = {"status": "ready_for_review"}
         self.assertFalse(gallery.should_skip_candidate(prior, False, force_rerun=True))
