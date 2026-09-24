@@ -151,8 +151,22 @@ def prepare_edit(cli, client, config, page, seed: int, candidate_no: int, source
 
 
 def verdict_rank(verdict: dict) -> tuple:
-    # Passed work always wins; otherwise prefer the reviewer score, then fewer defects.
-    return (1 if verdict.get("pass") else 0, int(verdict.get("score") or 0), -len(verdict.get("defects") or []))
+    stage = str(verdict.get("stage") or "").strip().lower()
+    # Passed work always wins. Among failures, gate progress outranks numeric
+    # score: reaching scene proves identity passed; reaching quality proves
+    # identity + scene passed. Never restore an older identity-failing image
+    # merely because its local-model score is numerically higher.
+    stage_progress = {
+        "identity": 1,
+        "scene": 2,
+        "quality": 3,
+    }.get(stage, 0)
+    return (
+        1 if verdict.get("pass") else 0,
+        stage_progress,
+        int(verdict.get("score") or 0),
+        -len(verdict.get("defects") or []),
+    )
 
 
 def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, initial: Path) -> tuple[Path, dict, list]:
