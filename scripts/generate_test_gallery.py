@@ -175,8 +175,9 @@ def prepare_edit(cli, client, config, page, seed: int, candidate_no: int, source
 def verdict_rank(verdict: dict) -> tuple:
     stage = str(verdict.get("stage") or "").strip().lower()
     # Passed work always wins. Among failures, gate progress outranks numeric
-    # score: reaching scene proves identity passed; reaching quality proves
-    # identity + scene passed. Never restore an older identity-failing image
+    # score: environment proves identity passed; action proves identity +
+    # environment passed; quality proves all structural gates passed. Never
+    # restore an older identity-failing image
     # merely because its local-model score is numerically higher.
     stage_progress = {
         "identity": 1,
@@ -213,6 +214,7 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
                 break
             trailing_same_stage += 1
 
+        identity_stagnation = stage == "identity" and trailing_same_stage >= 2
         structural_stagnation = (
             stage in {"environment", "scene", "action"}
             and trailing_same_stage >= 2
@@ -224,8 +226,10 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
             # composition and rebuild fresh from written authority + defects.
             feedback = review_notes(verdict)
             feedback["routing_recommendation"] = "regenerate"
-            feedback["stagnation_escalation"] = bool(structural_stagnation)
-            if structural_stagnation:
+            feedback["stagnation_escalation"] = bool(
+                structural_stagnation or identity_stagnation
+            )
+            if structural_stagnation or identity_stagnation:
                 feedback["composition_escape_offset"] = pass_no
             workflow = prepare(
                 cli,
