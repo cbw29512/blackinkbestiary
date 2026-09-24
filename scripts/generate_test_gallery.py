@@ -225,6 +225,8 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
             feedback = review_notes(verdict)
             feedback["routing_recommendation"] = "regenerate"
             feedback["stagnation_escalation"] = bool(structural_stagnation)
+            if structural_stagnation:
+                feedback["composition_escape_offset"] = pass_no
             workflow = prepare(
                 cli,
                 config,
