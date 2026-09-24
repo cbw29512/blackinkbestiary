@@ -66,5 +66,32 @@
     "motionless camouflage",
     "gliding attack",
     "wrapping prey"
+  ],
+  "scene_identity": {
+    "size_impression": "Large broad mantle creature whose width comes from one continuous cloak-like body rather than a bat torso with separate wings.",
+    "natural_posture": "Body lies, hangs, or peels as one flexible mantle surface; support comes from the mantle/body itself, never invented hands or feet.",
+    "behavior_style": [
+      "overhead clinging",
+      "motionless camouflage",
+      "gliding attack",
+      "wrapping prey"
+    ],
+    "environment_fit": [
+      "underground",
+      "caves",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "bat_drift",
+      "symptom": "creature becomes a giant bat with a separate torso and limb-based wings",
+      "correction": "merge the silhouette back into one continuous cloak/manta body with integrated underside face and one tail"
+    },
+    {
+      "id": "humanoid_drift",
+      "symptom": "arms, legs, shoulders, or humanoid torso appear",
+      "correction": "remove humanoid anatomy completely; preserve only mantle body, integrated face, and trailing tail"
+    }
   ]
 }
