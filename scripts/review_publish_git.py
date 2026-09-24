@@ -56,18 +56,24 @@ def publish_preview_snapshot(root: Path) -> str:
         cwd=root,
     ).returncode != 0
 
+    publish_head = ""
     if staged:
         run(root, "git", "commit", "-m", "Publish coloring book review previews")
-
-    publish_head = output(root, "git", "rev-parse", "HEAD")
-    run(
-        root,
-        "git",
-        "push",
-        "--force",
-        "origin",
-        f"{publish_head}:refs/heads/{REVIEW_BRANCH}",
-    )
+        publish_head = output(root, "git", "rev-parse", "HEAD")
+        run(
+            root,
+            "git",
+            "push",
+            "--force",
+            "origin",
+            f"{publish_head}:refs/heads/{REVIEW_BRANCH}",
+        )
+    else:
+        # Never repoint the live review branch at an engine commit merely
+        # because the generated snapshot is unchanged. The prior live snapshot
+        # remains the authoritative handoff until new preview bytes exist.
+        publish_head = output(root, "git", "rev-parse", f"origin/{REVIEW_BRANCH}")
+        print("Review snapshot unchanged; leaving review-previews-live untouched.")
 
     if safe_to_resync:
         # Generated PNGs and gallery state are untracked; hard-resetting tracked
