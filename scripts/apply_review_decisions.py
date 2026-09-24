@@ -38,6 +38,18 @@ def classify_rejection_stage(review: dict) -> str:
         return explicit
 
     notes = str(review.get("notes") or "").lower()
+    identity_ok_phrases = (
+        "anatomy is correct",
+        "anatomy is usable",
+        "anatomy is close",
+        "anatomy looks correct",
+        "creature anatomy is correct",
+        "creature identity is correct",
+        "identity is correct",
+        "identity is usable",
+    )
+    identity_already_ok = any(phrase in notes for phrase in identity_ok_phrases)
+
     identity_terms = (
         "anatomy", "body plan", "body-plan", "dragonborn", "humanoid dragon",
         "extra arm", "extra arms", "separate humanoid arms", "too muscular",
@@ -67,6 +79,8 @@ def classify_rejection_stage(review: dict) -> str:
         ("action", action_terms),
         ("quality", quality_terms),
     ):
+        if stage == "identity" and identity_already_ok:
+            continue
         if any(term in notes for term in terms):
             return stage
     return ""
