@@ -4,7 +4,18 @@ from prompt_builder import build_supervisor_checklist
 
 
 def _checks(page: dict) -> list[str]:
-    return build_supervisor_checklist(page)
+    # Keep the small local VLM focused: universal/page/environment layers may
+    # produce the same gate more than once. Exact duplicates add token pressure
+    # without adding evidence, so preserve first occurrence only.
+    seen = set()
+    unique = []
+    for item in build_supervisor_checklist(page):
+        text = str(item or "").strip()
+        if not text or text in seen:
+            continue
+        seen.add(text)
+        unique.append(text)
+    return unique
 
 
 def build_identity_review_prompt(page: dict) -> str:
