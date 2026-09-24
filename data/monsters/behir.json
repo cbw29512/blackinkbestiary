@@ -30,10 +30,12 @@
       "centipede insect head",
       "humanoid arms",
       "smooth legless snake",
-      "dense scales"
+      "dense scales",
+      "only four legs",
+      "most visible torso segments lacking paired legs"
     ],
-    "limb_structure": "Many paired short reptilian legs repeat along the long serpentine torso. The legs remain small relative to body length; no wings, humanoid arms, insect head, or four-limbed dragon body.",
-    "shape_lock": "Draw one very long serpentine reptile whose torso visibly carries repeated paired short legs along much of its length, ending in a tapering tail. Raise one horned reptilian head from the coils. Keep the silhouette snake-long and many-legged, never dragon-shaped or insect-headed."
+    "limb_structure": "Repeated paired short reptilian legs continue along much of the long serpentine torso; multiple distinct left/right leg pairs must remain visible in sequence. The legs stay small relative to body length; no wings, humanoid arms, insect head, four-limbed dragon body, or legless snake body.",
+    "shape_lock": "Draw one very long serpentine reptile whose torso visibly carries repeated paired short legs along most of its visible length, with multiple leg pairs clearly readable in sequence, ending in a tapering tail. Raise one horned reptilian head from the coils. Keep the silhouette snake-long and many-legged, never dragon-shaped, four-legged, or legless."
   },
   "default_habitats": [
     "caves",
@@ -46,7 +48,8 @@
     "head is reptilian",
     "no wings appear",
     "coiled body remains readable",
-    "lightning remains secondary to anatomy"
+    "lightning remains secondary to anatomy",
+    "multiple paired legs remain visibly repeated along the long torso"
   ],
   "reference": {
     "image": null,
