@@ -47,6 +47,7 @@ def publish_preview_snapshot(root: Path) -> str:
     engine_branch = output(root, "git", "branch", "--show-current")
     if not engine_branch:
         raise RuntimeError("Review publishing requires a checked-out engine branch")
+    pre_publish_head = output(root, "git", "rev-parse", "HEAD")
 
     safe_to_resync = not tracked_changes_outside_previews(root)
     stage_preview_snapshot(root)
@@ -83,9 +84,14 @@ def publish_preview_snapshot(root: Path) -> str:
         run(root, "git", "reset", "--hard", f"origin/{engine_branch}")
         print(f"Local code resynced to origin/{engine_branch}.")
     else:
+        if staged:
+            # The preview commit belongs only to review-previews-live. Remove it
+            # from the local engine branch without discarding unrelated working
+            # tree edits. Preview files may remain modified and are disposable.
+            run(root, "git", "reset", "--mixed", pre_publish_head)
         print(
-            "Preview snapshot published, but local tracked changes outside "
-            "review-previews were detected; automatic code resync was skipped."
+            "Preview snapshot published; unrelated tracked working-tree edits "
+            "were preserved, and the temporary preview commit was removed locally."
         )
 
     return publish_head
