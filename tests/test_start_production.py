@@ -36,6 +36,19 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("ollama.Source", text)
         self.assertIn("Semantic vision smoke test", text)
         self.assertIn("Starting ComfyUI Desktop", text)
+        self.assertIn("local-runtime-status.json", text)
+        self.assertIn('Write-RuntimeStatus "failed"', text)
+        self.assertIn('Write-RuntimeStatus "ready"', text)
+
+    def test_runtime_failures_are_published_for_remote_diagnosis(self):
+        autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
+        canary = (ROOT / "RUN_ENGINE_CANARY.bat").read_text(encoding="utf-8")
+        publisher = (ROOT / "scripts" / "publish_review_previews.py").read_text(encoding="utf-8")
+        for text in (autopilot, canary):
+            self.assertIn("publish_review_previews.py", text)
+        self.assertIn("local-runtime-status.json", publisher)
+        self.assertIn("local_runtime_failed", publisher)
+        self.assertIn('"runtime": runtime', publisher)
 
     def test_start_doc_names_single_entry_point(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
