@@ -166,6 +166,7 @@ def build_review_prompt(page: dict) -> str:
         "Space does not drift into:",
         "Unique landmark is visible:",
         "Framing differs from repeated generic backgrounds:",
+        "Environment geometry differs meaningfully from nearby pages",
         "Environment check:",
         "Monster/environment interaction reads clearly:",
         "One clear story beat reads as:",
@@ -184,7 +185,7 @@ def build_review_prompt(page: dict) -> str:
     )
     selected = [item for item in checks if not item.startswith(excluded_prefixes)]
     return """You are the Black-Ink Bestiary FINAL COLORING-PAGE GATE.
-The candidate has already been checked for species identity and scene requirements.
+The candidate has already been checked for species identity, environment geometry, and action/physicality requirements.
 Now red-team the actual image for any remaining production failure.
 
 Fail closed for: decorative/inset rectangular frames, wallpaper-density swarms, excessive repeated web/rat/detail patterns, clutter, tiny coloring cells, unreadable silhouette, malformed leftover anatomy, large black fills, grayscale/shading, weak negative space, or print-layout problems.
