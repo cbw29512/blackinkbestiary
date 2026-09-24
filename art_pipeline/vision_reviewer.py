@@ -47,7 +47,7 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         "model": settings.get("model", "qwen3-vl:4b"),
         "stream": False,
         "messages": [{"role": "user", "content": build_review_prompt(page), "images": [encoded]}],
-        "options": {"temperature": 0, "num_predict": 1024},
+        "options": {"temperature": 0, "num_predict": 4096},
         "think": False,
     }
     result = _request(settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/chat", payload)
@@ -57,7 +57,23 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         raw = result["response"].strip()
     if not raw:
         thinking = (message.get("thinking") or "").strip()
-        raise VisionReviewError("Vision reviewer returned an empty answer" + (f"; thinking={thinking[:500]}" if thinking else "") + f"; response_keys={sorted(result.keys())}")
+        if thinking:
+            # Some Qwen3-VL/Ollama builds place the entire answer in the thinking
+            # channel. Recover a JSON object if one is actually present there;
+            # otherwise report the diagnostic and fail closed.
+            start = thinking.rfind("{")
+            while start >= 0:
+                candidate = thinking[start:].strip()
+                try:
+                    parsed = json.loads(candidate)
+                    if isinstance(parsed, dict):
+                        raw = candidate
+                        break
+                except json.JSONDecodeError:
+                    pass
+                start = thinking.rfind("{", 0, start)
+        if not raw:
+            raise VisionReviewError("Vision reviewer returned an empty answer" + (f"; thinking={thinking[:1000]}" if thinking else "") + f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}; response_keys={sorted(result.keys())}")
     try:
         verdict = json.loads(raw)
     except json.JSONDecodeError as exc:
