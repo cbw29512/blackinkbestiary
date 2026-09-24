@@ -123,7 +123,11 @@ class VisionReviewerTests(unittest.TestCase):
                 ],
             ) as request:
                 result = vr.review_image(self.page, image_path, self.config)
-        self.assertEqual(result, quality)
+        self.assertEqual(result["pass"], quality["pass"])
+        self.assertEqual(result["score"], quality["score"])
+        self.assertEqual(result["defects"], quality["defects"])
+        self.assertEqual(result["preserve"], quality["preserve"])
+        self.assertEqual(result["stage"], "quality")
         self.assertEqual(request.call_count, 3)
 
     def test_scene_failure_stops_before_quality_gate(self):
