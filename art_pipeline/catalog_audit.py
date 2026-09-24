@@ -144,6 +144,26 @@ def audit_monster_catalog(root: Path) -> dict:
                 f"{path.name}: resolved monster missing review DNA: {', '.join(missing)}"
             )
 
+        failure_ids = set()
+        for index, failure in enumerate(resolved.get("known_failure_modes") or [], 1):
+            if not isinstance(failure, dict):
+                errors.append(
+                    f"{path.name}: known_failure_modes[{index}] must be an object"
+                )
+                continue
+            for field in ("id", "symptom", "correction"):
+                if not str(failure.get(field) or "").strip():
+                    errors.append(
+                        f"{path.name}: known_failure_modes[{index}] missing {field}"
+                    )
+            failure_id = str(failure.get("id") or "").strip()
+            if failure_id:
+                if failure_id in failure_ids:
+                    errors.append(
+                        f"{path.name}: duplicate known failure id {failure_id!r}"
+                    )
+                failure_ids.add(failure_id)
+
     family_profiles = 0
     for path in sorted(family_dir.glob("*.json")):
         family_profiles += 1
