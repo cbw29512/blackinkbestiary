@@ -578,9 +578,10 @@
       ],
       "must_avoid": [
         "ornate wall carving",
-        "same straight corridor framing on every page"
+        "single straight corridor with no visible turn or branch",
+        "broad open chamber"
       ],
-      "spatial_envelope": "narrow_built_corridor"
+      "spatial_envelope": "labyrinth_branch"
     },
     "underground.antechamber": {
       "name": "Dungeon Antechamber",
