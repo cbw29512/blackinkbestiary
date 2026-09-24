@@ -79,6 +79,17 @@ def verdict_rank(verdict: dict) -> tuple:
     )
 
 
+def current_reviewable_keys(state: dict) -> set[tuple[str, int]]:
+    allowed = {"ready_for_review", "max_refinements_reached"}
+    return {
+        (str(item.get("page_id")), int(item.get("candidate") or 0))
+        for item in state.get("results", [])
+        if item.get("page_id")
+        and int(item.get("candidate") or 0) > 0
+        and str(item.get("status") or "") in allowed
+    }
+
+
 def existing_history_source(item: dict) -> Path | None:
     candidates = []
     for step in item.get("pass_history") or []:
@@ -140,11 +151,7 @@ def main() -> int:
         if not destination.exists() and restore_final_from_history(item):
             restored += 1
 
-    reviewable_keys = {
-        (str(item.get("page_id")), int(item.get("candidate") or 0))
-        for item in reviewable
-        if item.get("page_id") and int(item.get("candidate") or 0) > 0
-    }
+    reviewable_keys = current_reviewable_keys(state)
 
     sources = []
     for source in sorted(SOURCE_DIR.glob("*.png")):
