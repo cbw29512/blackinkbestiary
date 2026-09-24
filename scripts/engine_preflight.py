@@ -9,6 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATUS = ROOT / "data" / "engine-preflight-status.json"
 
+# unit-test-launch is the externally documented preflight launch contract.
+# The machine-readable check stage remains "unit-tests" for backward compatibility.
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
