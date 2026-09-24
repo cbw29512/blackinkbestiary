@@ -14,10 +14,13 @@ class StartProductionContractTests(unittest.TestCase):
 
     def test_full_gallery_requires_exact_image_canary_approval(self):
         text = (ROOT / "scripts" / "run_coloring_book.ps1").read_text(encoding="utf-8")
+        self.assertIn("ensure_local_ai.ps1", text)
         self.assertIn("sync_engine_for_run.py", text)
         self.assertIn("canary_autopilot_status.py", text)
         self.assertIn("Full 50-page gallery is blocked", text)
         self.assertIn("9/9 exact-image approved", text)
+        self.assertNotIn("function Test-Comfy", text)
+        self.assertNotIn("/api/tags", text)
 
     def test_canary_launchers_self_start_local_ai_runtime(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
