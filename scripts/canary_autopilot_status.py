@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -17,14 +18,41 @@ RETRYABLE = {
 }
 
 
-def classify(item: dict | None) -> str:
+def _current_image_path(item: dict, root: Path = ROOT) -> Path:
+    image_path = item.get("image_path")
+    if image_path:
+        return root / "web" / str(image_path)
+    return root / "web" / "test-gallery" / (
+        f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}.png"
+    )
+
+
+def _current_review_id(item: dict, root: Path = ROOT) -> str | None:
+    path = _current_image_path(item, root)
+    if not path.exists() or not path.is_file():
+        return None
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    return (
+        f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}-"
+        f"H{digest[:16]}"
+    )
+
+
+def classify(item: dict | None, root: Path = ROOT) -> str:
     if not item:
         return "needs_generation"
     assistant = item.get("assistant_review") or {}
     decision = str(assistant.get("decision") or "").lower()
-    if decision == "approve":
+    recorded_review_id = str(assistant.get("review_id") or "")
+    current_review_id = _current_review_id(item, root)
+    exact_review_is_current = bool(
+        recorded_review_id
+        and current_review_id
+        and recorded_review_id == current_review_id
+    )
+    if decision == "approve" and exact_review_is_current:
         return "approved"
-    if decision == "reject":
+    if decision == "reject" and exact_review_is_current:
         return "needs_generation"
 
     status = str(item.get("status") or "")
