@@ -223,3 +223,21 @@ Any production failure must be pass=false and score 49 or lower.
 
 FINAL QUALITY GATES:
 - """ + "\n- ".join(selected)
+
+
+def review_stage_errors(page: dict) -> list[str]:
+    errors = []
+    builders = (
+        ("identity", build_identity_review_prompt),
+        ("environment", build_environment_review_prompt),
+        ("action", build_action_review_prompt),
+        ("quality", build_review_prompt),
+    )
+    for stage, builder in builders:
+        try:
+            builder(page)
+        except RuntimeError as exc:
+            errors.append(
+                f"{page.get('page_id')}: {stage} review gate invalid: {exc}"
+            )
+    return errors
