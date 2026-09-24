@@ -68,6 +68,43 @@ class GenerationFingerprintTests(unittest.TestCase):
 
         self.assertNotEqual(first, second)
 
+    def test_monster_family_authority_change_changes_generation_fingerprint(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            monsters = root / "data" / "monsters"
+            families = root / "data" / "monster_families"
+            monsters.mkdir(parents=True)
+            families.mkdir(parents=True)
+            (monsters / "kobold-warrior.json").write_text(
+                json.dumps({
+                    "monster_id": "kobold-warrior",
+                    "family_profile": "kobold",
+                }),
+                encoding="utf-8",
+            )
+            family = families / "kobold.json"
+            family.write_text('{"identity_version":1}', encoding="utf-8")
+            first = fingerprint.page_generation_fingerprint(self._page(), root)
+            family.write_text('{"identity_version":2}', encoding="utf-8")
+            second = fingerprint.page_generation_fingerprint(self._page(), root)
+            self.assertNotEqual(first, second)
+
+    def test_environment_authority_change_changes_generation_fingerprint(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            families = root / "data" / "environment_families"
+            components = root / "data" / "environment_components"
+            families.mkdir(parents=True)
+            components.mkdir(parents=True)
+            family = families / "underground.json"
+            component = components / "underground.json"
+            family.write_text('{"version":1}', encoding="utf-8")
+            component.write_text('{"version":1}', encoding="utf-8")
+            first = fingerprint.page_generation_fingerprint(self._page(), root)
+            component.write_text('{"version":2}', encoding="utf-8")
+            second = fingerprint.page_generation_fingerprint(self._page(), root)
+            self.assertNotEqual(first, second)
+
     def test_unrelated_document_change_does_not_change_fingerprint(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
