@@ -278,6 +278,15 @@ class PromptTests(unittest.TestCase):
         self.assertIn("CROUCHED-DRAGGING LOCK", stalker)
         self.assertIn("overhead boundary is visibly low enough to force a crouch", stalker)
 
+    def test_ogre_zombie_has_positive_undead_shape_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-11")
+        text = build_prompt(page)
+        self.assertIn("massive hornless ogre corpse", text.lower())
+        self.assertIn("sunken eyes", text.lower())
+        self.assertIn("chains visibly drag from shackles", text.lower())
+        self.assertIn("healthy living ogre wearing decorative chains", text.lower())
+
     def test_remaining_tome_i_story_actions_have_literal_visual_proof(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         pages = {page["page_id"]: page for page in tome["pages"]}
