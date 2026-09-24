@@ -37,8 +37,8 @@
       "worm body with only a few legs",
       "spider-style long legs"
     ],
-    "shape_lock": "Draw a long chain of many trunk segments where every visible trunk segment carries exactly one pair of short walking legs, forming a continuous saw-tooth rhythm nearly the whole body length; front mouth claws stay small and mouth-adjacent, never spiderlike or lobsterlike.",
-    "limb_structure": "Every visible trunk segment carries exactly one pair of short walking legs, producing a continuous paired-leg rhythm from behind the head toward the tail. The head has antennae and small mouth-adjacent poison claws only; no giant pincers or spider legs."
+    "shape_lock": "Draw a long chain of many trunk segments where every visible trunk segment carries exactly one pair of short walking legs, forming a continuous saw-tooth rhythm nearly the whole body length; front mouth claws stay small and mouth-adjacent, never spiderlike or lobsterlike; the rear tapers to a plain terminal body segment with no scorpion bulb, barb, telson, or raised stinger.",
+    "limb_structure": "Every visible trunk segment carries exactly one pair of short walking legs, producing a continuous paired-leg rhythm from behind the head toward the tail. The head has antennae and small mouth-adjacent poison claws only. The rear ends as a simple tapering terminal segment with no tail weapon, stinger, bulb, barb, telson, giant pincers, or spider legs."
   },
   "default_habitats": [
     "underground",
@@ -54,7 +54,8 @@
     "line density remains manageable",
     "every visible trunk segment carries one pair of legs",
     "continuous repeating leg rhythm runs along nearly the entire body",
-    "front poison claws stay small mouth-adjacent forcipules, not giant pincers"
+    "front poison claws stay small mouth-adjacent forcipules, not giant pincers",
+    "rear body ends in a plain taper with no scorpion-style stinger or tail weapon"
   ],
   "reference": {
     "image": null,
@@ -94,6 +95,11 @@
       "id": "spider_drift",
       "symptom": "legs become a few oversized spiderlike limbs",
       "correction": "replace sparse large limbs with many small repeated centipede leg pairs"
+    },
+    {
+      "id": "scorpion_tail_drift",
+      "symptom": "rear body grows a raised scorpion-like tail, bulb, barb, telson, or stinger",
+      "correction": "continue ordinary centipede segmentation to a simple tapering terminal segment with no tail weapon"
     }
   ]
 }
