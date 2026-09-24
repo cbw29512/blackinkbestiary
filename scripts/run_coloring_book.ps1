@@ -17,7 +17,13 @@ if (-not (Test-Comfy)) {
   $comfyRoot = Join-Path $workspace "ComfyUI"
   $mainPy = Join-Path $comfyRoot "main.py"
   if (-not (Test-Path $mainPy)) {
-    throw "Project-local ComfyUI was not found at $mainPy. Run CHECK_LOCAL_SETUP.bat and install the local workspace first."
+    Write-Host "Project-local ComfyUI is missing. Bootstrapping it now..." -ForegroundColor Yellow
+    $setup = Join-Path $root "scripts\bootstrap_comfyui.ps1"
+    if (-not (Test-Path $setup)) { throw "Missing bootstrap script: $setup" }
+    powershell -NoProfile -ExecutionPolicy Bypass -File $setup
+    if ($LASTEXITCODE -ne 0 -or -not (Test-Path $mainPy)) {
+      throw "Automatic ComfyUI bootstrap did not complete successfully."
+    }
   }
 
   $python = Get-Command python -ErrorAction SilentlyContinue
