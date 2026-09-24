@@ -77,7 +77,18 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
         state = read_json(STATE_FILE)
         state.setdefault("results", [])
         state.setdefault("selections", {})
-        state["copies_per_page"] = max(int(state.get("copies_per_page") or 0), copies)
+        previous_copies = int(state.get("copies_per_page") or 0)
+        next_copies = max(previous_copies, copies)
+        if previous_copies <= 1 and next_copies > 1:
+            # Canary approval may auto-select its only candidate. Once the same
+            # state expands into a multi-candidate production gallery, final
+            # choice must be explicit across the candidate set. Keep the exact
+            # image approval on the result record, but clear only the automatic
+            # one-candidate selection.
+            for page_id, selection in list(state["selections"].items()):
+                if str((selection or {}).get("source") or "") == "assistant_review":
+                    state["selections"].pop(page_id, None)
+        state["copies_per_page"] = next_copies
         state["updated_at"] = utc_now()
         state.pop("completed_at", None)
         return state
