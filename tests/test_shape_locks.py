@@ -34,6 +34,33 @@ class ShapeLockTests(unittest.TestCase):
         self.assertIn("two forelimbs that ARE the membrane wings", bat)
         self.assertIn("every visible trunk segment carries exactly one pair", centipede)
 
+    def test_small_humanoid_prompt_uses_literal_architecture_ratio(self):
+        text = build_prompt(self.pages["I-01"])
+        self.assertIn("SMALL-HUMANOID SCALE EVIDENCE", text)
+        self.assertIn("one-third to one-half", text)
+        self.assertIn("normal doorway/corridor opening", text)
+
+    def test_supported_darkmantle_prompt_suppresses_flight_cues(self):
+        text = build_prompt(self.pages["I-14"])
+        self.assertIn("NON-FLIGHT POSE LOCK", text)
+        self.assertIn("not airborne", text)
+        self.assertIn("one continuous ceiling-clinging cloak/cap body", text)
+        self.assertNotIn("controlled natural flight, but flight capability", text)
+
+    def test_spiral_stair_uses_dedicated_helical_envelope(self):
+        text = build_prompt(self.pages["I-10"])
+        self.assertIn("SPACE ENVELOPE: spiral_stair", text)
+        self.assertIn("wedge-shaped steps visibly curving around the center", text)
+        self.assertIn("central newel, column, or open shaft", text)
+        self.assertIn("straight staircase", text)
+
+    def test_kicking_scene_requires_visible_impact_contact(self):
+        text = build_prompt(self.pages["I-04"])
+        self.assertIn("KICKING CONTACT LOCK", text)
+        self.assertIn("striking foot visibly contacts the target", text)
+        self.assertIn("KICKED LANTERN LOCK", text)
+        self.assertIn("lantern tips, skids, or tumbles", text)
+
     def test_shape_lock_is_an_identity_review_gate(self):
         checks = build_supervisor_checklist(self.pages["I-14"])
         self.assertTrue(any(item.startswith("Shape-first body geometry reads as:") for item in checks))
