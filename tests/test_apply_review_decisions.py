@@ -64,6 +64,44 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
             self.assertTrue(image.exists())
             self.assertEqual(state["selections"]["I-01"]["review_id"], review_id)
 
+    def test_current_image_hashes_are_indexed_once_per_item(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            state_file.write_text(json.dumps({
+                "results": [
+                    {"page_id": "I-01", "candidate": 1, "status": "ready_for_review"},
+                    {"page_id": "I-04", "candidate": 1, "status": "ready_for_review"},
+                ],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({
+                "reviews": [
+                    {"review_id": "old-1", "decision": "reject"},
+                    {"review_id": "old-2", "decision": "reject"},
+                    {"review_id": "old-3", "decision": "approve"},
+                    {"review_id": "old-4", "decision": "approve"},
+                ],
+            }), encoding="utf-8")
+
+            seen = []
+            def fake_review_id(item):
+                seen.append((item["page_id"], item["candidate"]))
+                return f"current-{item['page_id']}"
+
+            with (
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+                patch.object(apply, "review_id_for", side_effect=fake_review_id),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            self.assertEqual(
+                seen,
+                [("I-01", 1), ("I-04", 1)],
+            )
+
     def test_reapplying_same_approval_is_idempotent(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
