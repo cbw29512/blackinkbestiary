@@ -24,6 +24,12 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertTrue(gallery.should_skip_candidate(prior, False))
         self.assertFalse(gallery.should_skip_candidate(prior, True))
 
+
+    def test_assistant_rejected_candidate_can_be_retried(self):
+        prior = {"status": "assistant_rejected"}
+        self.assertTrue(gallery.should_skip_candidate(prior, False))
+        self.assertFalse(gallery.should_skip_candidate(prior, True))
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
