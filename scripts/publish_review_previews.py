@@ -210,12 +210,15 @@ def main() -> int:
             im.save(target, "JPEG", quality=82, optimize=True)
 
         selection = (state.get("selections") or {}).get(page_id) or {}
+        exact_review_id = f"{page_id}-C{candidate:02d}-H{digest[:16]}"
         selected = (
             int(selection.get("candidate") or 0) == candidate
-            and str(selection.get("review_id") or "") == f"{page_id}-C{candidate:02d}-H{digest[:16]}"
+            and str(selection.get("review_id") or "") == exact_review_id
+            and str(item.get("status") or "") == "ready_for_review"
+            and bool((item.get("visual_review") or {}).get("pass"))
         )
         published.append({
-            "review_id": f"{page_id}-C{candidate:02d}-H{digest[:16]}",
+            "review_id": exact_review_id,
             "page_id": page_id,
             "monster_name": item.get("monster_name"),
             "candidate": candidate,
