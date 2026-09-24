@@ -140,12 +140,24 @@ def main() -> int:
         if not destination.exists() and restore_final_from_history(item):
             restored += 1
 
+    reviewable_keys = {
+        (str(item.get("page_id")), int(item.get("candidate") or 0))
+        for item in reviewable
+        if item.get("page_id") and int(item.get("candidate") or 0) > 0
+    }
+
     sources = []
     for source in sorted(SOURCE_DIR.glob("*.png")):
         match = CANDIDATE_RE.match(source.name)
         if not match:
             continue
-        sources.append((source, match.group("page"), int(match.group("candidate"))))
+        key = (match.group("page"), int(match.group("candidate")))
+        # Local directories can retain historical PNGs across runs. Current
+        # gallery state is authoritative; orphan files must never reappear in
+        # the GitHub review snapshot.
+        if key not in reviewable_keys:
+            continue
+        sources.append((source, key[0], key[1]))
 
     print(
         f"Found {len(sources)} finalized gallery PNGs"
