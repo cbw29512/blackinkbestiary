@@ -94,7 +94,7 @@ def prepare(cli, config, page, seed: int, candidate_no: int) -> Path:
         cli,
         config["templates"]["text_to_image"],
         path,
-        prompt=build_prompt(page),
+        prompt=build_prompt(page, candidate_no=candidate_no),
         seed=seed,
         model_filename=unet,
         clip_filename=clip,
