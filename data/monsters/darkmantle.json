@@ -5,10 +5,10 @@
   "size": "small",
   "creature_type": "cave aberration",
   "visual_identity": {
-    "core_identity": "An ambush creature that resembles a leathery stalactite-like mantle while clinging overhead until it peels away and drops.",
-    "silhouette": "Flattened manta-like leathery body with broad mantle edges and several short dangling tentacles beneath.",
-    "head_features": "Small central underside head or beak-like mouth largely hidden beneath the mantle, with simple predatory features.",
-    "body_shape": "Compact central body under a wide flexible mantle, short gripping tentacles, no humanoid limbs.",
+    "core_identity": "A small ceiling-clinging cave aberration whose entire body is one leathery cloak-like mantle that hugs a stalactite, then peels away to expose a hidden underside mouth and short tentacles.",
+    "silhouette": "One continuous cloak-like cap or inverted leathery cone with a broad rim; short tentacles hang from the underside. No separate torso, neck, head silhouette, arms, legs, tail, or wing pair.",
+    "head_features": "A small mouth and simple predatory features are recessed into the underside center of the mantle rather than forming a separate projecting head.",
+    "body_shape": "The mantle itself is the complete main body: one compact overhead cap/disc with a broad edge and short underside tentacles.",
     "surface": "Leathery membrane with sparse folds and simple underside texture.",
     "signature_gear": [],
     "attitude": [
@@ -38,7 +38,7 @@
       "arms or legs",
       "upright humanoid torso"
     ],
-    "shape_lock": "Draw one continuous non-humanoid mantle body: a broad leathery disc/cone is the creature's entire main body, with a small underside mouth and short tentacles hanging from the lower edge; there is no separate torso, humanoid head, arms, legs, tail, or pair of wings."
+    "shape_lock": "Draw one continuous ceiling-clinging cloak/cap body. The broad leathery mantle IS the creature, not wings attached to something else. Place a small underside mouth near the center and several short tentacles under the rim. There is no separate head silhouette, torso, neck, arms, legs, tail, or wing pair."
   },
   "default_habitats": [
     "caves",
@@ -49,7 +49,7 @@
     "reads as mantle-like cave predator",
     "clinging ambush posture is obvious",
     "tentacles are visible",
-    "shape differs from a bat",
+    "shape reads as one cloak-like mantle body, not a bat, dragon, or humanoid",
     "body is compact",
     "linework remains open",
     "no dragon head, horns, tail, arms, legs, or separate wings",
@@ -67,11 +67,11 @@
     "overhead_attachment: ambush posture requires a believable overhead support; environment engine chooses the ceiling, rock, beam, branch, or other compatible support"
   ],
   "schema_version": 4,
-  "description": "An ambush creature that resembles a leathery stalactite-like mantle while clinging overhead until it peels away and drops. Compact central body under a wide flexible mantle, short gripping tentacles, no humanoid limbs. Leathery membrane with sparse folds and simple underside texture.",
+  "description": "Small ceiling ambusher formed from one continuous leathery mantle body with an underside mouth and short tentacles; it clings like a living cloak against overhead stone.",
   "behavior_traits": [
     "overhead ambush",
     "clinging",
     "dropping attack",
-    "powered flight"
+    "mantle-body gliding"
   ]
 }
