@@ -19,7 +19,7 @@ from image_edit_profile import prepare_distilled_image_edit
 from edit_prompt import build_edit_prompt
 from vision_reviewer import VisionReviewError, review_image, review_notes
 from generation_runtime import model_filename, read_json
-from generation_fingerprint import page_generation_fingerprint
+from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from manifest_validation import validate_manifest
 from page_contract import resolve_page_spec
 from prompt_builder import build_prompt
@@ -97,6 +97,22 @@ def generation_authority_stale(prior: dict | None, current_fingerprint: str) -> 
         and str(prior.get("generation_fingerprint") or "")
         != str(current_fingerprint or "")
     )
+
+
+def review_authority_stale(prior: dict | None, current_fingerprint: str) -> bool:
+    return bool(
+        prior
+        and str(prior.get("review_fingerprint") or "")
+        != str(current_fingerprint or "")
+    )
+
+
+def existing_candidate_path(item: dict) -> Path | None:
+    image_path = str(item.get("image_path") or "").strip()
+    if not image_path:
+        return None
+    path = ROOT / "web" / image_path
+    return path if path.exists() and path.is_file() else None
 
 
 def should_skip_candidate(
@@ -343,10 +359,64 @@ def main() -> int:
             prior = existing.get((page["page_id"], candidate_no))
             retry_failed = args.rerun_failed or args.canary_failed
             current_fingerprint = page_generation_fingerprint(page, ROOT)
+            current_review_fingerprint = page_review_fingerprint(page, ROOT)
             stale_generation_authority = generation_authority_stale(
                 prior,
                 current_fingerprint,
             )
+            stale_review_authority = review_authority_stale(
+                prior,
+                current_review_fingerprint,
+            )
+
+            if (
+                prior
+                and not stale_generation_authority
+                and stale_review_authority
+                and str(prior.get("status") or "") in {"ready_for_review", "max_refinements_reached"}
+            ):
+                prior_image = existing_candidate_path(prior)
+                if prior_image is not None:
+                    reload_authority()
+                    try:
+                        refreshed_review = review_image(page, prior_image, config)
+                    except VisionReviewError as exc:
+                        prior["status"] = "vision_reviewer_failed"
+                        prior["error"] = str(exc)
+                        prior["review_fingerprint"] = current_review_fingerprint
+                        prior["review_checked_at"] = utc_now()
+                        state["updated_at"] = utc_now()
+                        write_state(state)
+                        print(json.dumps({
+                            "page_id": page["page_id"],
+                            "candidate": candidate_no,
+                            "status": "review_recheck_failed",
+                            "error": str(exc),
+                        }))
+                        raise SystemExit(
+                            "FATAL: semantic vision reviewer failed while rechecking an existing candidate."
+                        )
+                    prior["visual_review"] = refreshed_review
+                    prior["review_fingerprint"] = current_review_fingerprint
+                    prior["review_checked_at"] = utc_now()
+                    prior["engine_commit"] = engine_commit()
+                    prior["status"] = (
+                        "ready_for_review"
+                        if refreshed_review.get("pass")
+                        else "max_refinements_reached"
+                    )
+                    prior.pop("error", None)
+                    state["updated_at"] = utc_now()
+                    write_state(state)
+                    print(json.dumps({
+                        "page_id": page["page_id"],
+                        "candidate": candidate_no,
+                        "status": "review_rechecked",
+                        "review_stage": refreshed_review.get("stage"),
+                        "review_pass": bool(refreshed_review.get("pass")),
+                        "score": int(refreshed_review.get("score") or 0),
+                    }))
+
             if should_skip_candidate(
                 prior,
                 retry_failed,
@@ -370,6 +440,7 @@ def main() -> int:
                 "seed": seed,
                 "engine_commit": engine_commit(),
                 "generation_fingerprint": current_fingerprint,
+                "review_fingerprint": current_review_fingerprint,
                 "started_at": utc_now(),
             }
             try:
