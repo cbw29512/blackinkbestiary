@@ -29,7 +29,8 @@
       "heroic human proportions",
       "orc-like bulk",
       "reptilian snout",
-      "tail"
+      "tail",
+      "bodybuilder chest, six-pack abs, or oversized heroic shoulders"
     ],
     "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure."
   },
@@ -38,7 +39,8 @@
     "ears and broad nose establish goblinoid identity",
     "body remains small and wiry",
     "surface is not furry",
-    "posture is quick, hunched, or opportunistic"
+    "posture is quick, hunched, or opportunistic",
+    "torso stays narrow and wiry with no bodybuilder chest, six-pack abs, or oversized shoulders"
   ],
   "known_failure_modes": [
     {
@@ -58,8 +60,8 @@
     },
     {
       "id": "heroic_humanoid_drift",
-      "symptom": "upright muscular heroic body",
-      "correction": "reduce muscle mass and use a smaller crouched scavenger posture"
+      "symptom": "body becomes upright, broad-chested, bodybuilder-like, six-pack muscular, or heroically proportioned",
+      "correction": "shrink the frame, narrow the chest and shoulders, remove bodybuilder muscle definition, and restore thin wiry limbs with a crouched scavenger posture"
     }
   ],
   "scene_identity": {
