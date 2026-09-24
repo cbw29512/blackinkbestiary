@@ -60,5 +60,32 @@
     "refuse feeding",
     "tentacle grappling",
     "territorial ambush"
+  ],
+  "scene_identity": {
+    "size_impression": "Large low bulky aberration whose unusual scale is defined by a heavy central body, three legs, two long tentacles, and one eyestalk.",
+    "natural_posture": "Three stout legs bear the central mass while two grasping tentacles reach independently and the single eyestalk rises above the mouth.",
+    "behavior_style": [
+      "scavenging",
+      "refuse feeding",
+      "tentacle grappling",
+      "territorial ambush"
+    ],
+    "environment_fit": [
+      "sewers",
+      "underground",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "octopus_drift",
+      "symptom": "body gains many tentacles and loses three-legged support",
+      "correction": "restore exactly three weight-bearing legs and exactly two long grasping tentacles"
+    },
+    {
+      "id": "eyestalk_count_drift",
+      "symptom": "multiple eyestalks appear",
+      "correction": "restore exactly one elevated eyestalk above the central mouth"
+    }
   ]
 }
