@@ -21,6 +21,8 @@ jobs:
           python-version: "3.12"
       - name: Validate JSON and run state-machine tests
         run: |
+          set -o pipefail
+          {
           python -m json.tool data/tome-I.json > /dev/null
           python -m json.tool data/production-state.json > /dev/null
           python -m json.tool config/studio.json > /dev/null
@@ -60,3 +62,11 @@ jobs:
           node --check web/golden-five-view.js
           node --check web/golden-five.js
           node --check web/test-gallery.js
+          } 2>&1 | tee ci-output.txt
+      - name: Upload CI diagnostic output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-output
+          path: ci-output.txt
+          if-no-files-found: warn
