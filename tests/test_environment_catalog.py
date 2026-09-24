@@ -139,6 +139,19 @@ class EnvironmentCatalogTests(unittest.TestCase):
         ground = (palette["components"].get("ground_planes") or {}).get("text", "").lower()
         self.assertIn("stair", ground)
 
+    def test_i45_resolves_tunnel_to_shaft_transition(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-45")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        envelope = resolve_spatial_envelope(profile)
+        text = build_prompt(page)
+
+        self.assertEqual(envelope["envelope_id"], "mine_tunnel_to_shaft")
+        self.assertIn("tunnel", envelope["plan_shape"].lower())
+        self.assertIn("shaft", envelope["plan_shape"].lower())
+        self.assertIn("both tunnel side boundaries", text)
+        self.assertIn("deep shaft opening", text)
+        self.assertIn("PASSAGE-FILL PROOF", text)
+
     def test_explicit_page_authority_suppresses_duplicate_palette_roles(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-14")
         palette = assemble_environment_palette(page, ROOT)
