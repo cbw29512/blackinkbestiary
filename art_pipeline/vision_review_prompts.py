@@ -33,6 +33,7 @@ If a swarm has an oversized leader, fail.
 If any required limb/body structure is extra, missing, duplicated, merged, branched, or replaced by scenery, fail.
 
 DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases such as "head becomes round and goblin-like" may be reported directly when visibly true.
+DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases may be reported directly when visibly true.
 Do not use the requested label as a preserve item. Preserve items must describe literal visible morphology.
 Return exactly one compact JSON object and nothing else:
 {"pass": true|false, "score": 0-100, "defects": ["specific visible identity defect"], "preserve": ["specific visible morphology"]}
@@ -76,6 +77,7 @@ A web background is NOT automatically a dungeon hall; required stone architectur
 A generic corridor is NOT automatically the named habitat.
 If a required prop, interaction, spatial relation, support, or cause-and-effect is ambiguous or merely implied, fail.
 
+DEFECT WORDING RULE: defects must describe the visible failure, not copy a required gate. Do NOT return "Habitat reads as: Cramped Spiral Stair"; return "cramped spiral stair is not visible" or "stairs read straight, not spiral". Do NOT return "Scene moment reads as: kicking over a lantern"; return "lantern is not being kicked over".
 DEFECT WORDING RULE: defects must describe the visible failure, not copy a required gate. Do NOT return "Habitat reads as: Cramped Spiral Stair"; return "cramped spiral stair is not visible" or "stairs read straight, not spiral". Do NOT return "Scene moment reads as: kicking over a lantern"; return "lantern is not being kicked over".
 Preserve items must describe literal visible scene geometry/action, not repeat the requested labels.
 Return exactly one compact JSON object and nothing else:
