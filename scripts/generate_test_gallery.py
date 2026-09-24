@@ -208,11 +208,14 @@ def main() -> int:
     parser.add_argument("--reset", action="store_true", help="Start a fresh gallery and discard prior test state")
     parser.add_argument("--rerun-failed", action="store_true", help="Retry candidates whose prior status was failed")
     parser.add_argument("--canary", action="store_true", help="Run the nine-page engine canary set and force those selected candidates to regenerate")
+    parser.add_argument("--canary-failed", action="store_true", help="Run the nine-page canary set but retry only missing, failed, or assistant-rejected candidates")
     args = parser.parse_args()
     if args.copies < 1:
         raise SystemExit("--copies must be at least 1")
-    if args.canary and (args.only or args.start or args.candidate is not None):
-        raise SystemExit("--canary cannot be combined with --only, --start, or --candidate")
+    if args.canary and args.canary_failed:
+        raise SystemExit("--canary and --canary-failed are mutually exclusive")
+    if (args.canary or args.canary_failed) and (args.only or args.start or args.candidate is not None):
+        raise SystemExit("--canary/--canary-failed cannot be combined with --only, --start, or --candidate")
     if args.candidate is not None and not args.only:
         raise SystemExit("--candidate requires --only")
     if args.candidate is not None and args.candidate < 1:
@@ -223,7 +226,7 @@ def main() -> int:
     client.health()
     cli = ComfyCli()
     pages = load_pages()
-    if args.canary:
+    if args.canary or args.canary_failed:
         wanted = set(CANARY_PAGE_IDS)
         pages = [page for page in pages if page["page_id"] in wanted]
         if [page["page_id"] for page in pages] != list(CANARY_PAGE_IDS):
@@ -252,7 +255,8 @@ def main() -> int:
         candidate_numbers = [args.candidate] if args.candidate is not None else range(1, args.copies + 1)
         for candidate_no in candidate_numbers:
             prior = existing.get((page["page_id"], candidate_no))
-            if should_skip_candidate(prior, args.rerun_failed, force_rerun=args.canary):
+            retry_failed = args.rerun_failed or args.canary_failed
+            if should_skip_candidate(prior, retry_failed, force_rerun=args.canary):
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
                 continue
             if prior:
@@ -313,7 +317,7 @@ def main() -> int:
     state["updated_at"] = utc_now()
     write_state(state)
     print(f"Test gallery complete: {len(state['results'])} attempts")
-    if args.canary:
+    if args.canary or args.canary_failed:
         summary = canary_summary(state)
         print(f"CANARY SUMMARY: {summary['ready']}/{summary['total']} ready_for_review")
         for row in summary["rows"]:
