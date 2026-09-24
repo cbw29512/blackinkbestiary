@@ -490,6 +490,19 @@ class PromptTests(unittest.TestCase):
         self.assertIn("REACH-TARGET PROOF", fungus)
         self.assertIn("main body remains supported", fungus)
 
+    def test_later_monster_soft_copy_does_not_conflict_with_hard_anatomy_or_colorability(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        armor = build_prompt(pages["I-29"])
+        self.assertIn("predominantly white negative space", armor)
+        self.assertIn("no solid-black void", armor.lower())
+        self.assertNotIn("empty darkness where a face would be", armor.lower())
+
+        fungus = build_prompt(pages["I-49"])
+        self.assertIn("exactly four long flexible tendrils", fungus.lower())
+        self.assertNotIn("four or more flexible tendrils", fungus.lower())
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
