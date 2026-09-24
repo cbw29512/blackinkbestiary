@@ -36,7 +36,9 @@
       "legs",
       "second arm",
       "complete humanoid body"
-    ]
+    ],
+    "shape_lock": "Draw exactly one severed troll arm only: one elongated forearm ending in one oversized clawed hand. The fingers act as the walking supports. No head, torso, shoulder-body mass, second arm, legs, or complete troll may appear.",
+    "limb_structure": "Exactly one elongated arm ending in exactly one clawed hand; the fingers contact the floor as walking supports. No other limb or body segment exists."
   },
   "default_habitats": [
     "underground",
