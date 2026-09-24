@@ -4,6 +4,15 @@ cd /d "%~dp0"
 echo.
 echo Black-Ink Bestiary - Engine Canary + Publish
 echo ==============================================
+echo Synchronizing the latest engine rules and AI decisions...
+python scripts\sync_engine_for_run.py
+if errorlevel 1 (
+  echo.
+  echo Engine sync stopped because the workstation has protected tracked edits or is on the wrong branch.
+  pause
+  exit /b 1
+)
+echo.
 echo Applying exact-image AI review decisions from the engine branch...
 python scripts\apply_review_decisions.py
 if errorlevel 1 (
