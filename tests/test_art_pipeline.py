@@ -176,7 +176,7 @@ class PromptTests(unittest.TestCase):
         page = next(page for page in tome["pages"] if page["page_id"] == "I-16")
         text = build_prompt(page)
         self.assertIn("two forelimbs that ARE the membrane wings", text)
-        self.assertIn("There is no separate pair of arms", text)
+        self.assertIn("Never add separate humanoid arms", text)
 
     def test_modify_notes_enter_prompt(self):
         page = {
