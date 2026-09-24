@@ -150,9 +150,12 @@ def interaction_proof_rules(page: dict) -> list[str]:
         rules.append(
             "WATER-CONTACT PROOF: visible ripple arcs must originate where the creature/body contacts the water surface; do not place decorative ripples elsewhere or leave the body floating above the waterline."
         )
-    if ("fill" in text or "filling" in text) and any(term in text for term in ("tunnel", "passage", "shaft", "corridor")):
+    if ("fill" in text or "filling" in text) and any(
+        term in text
+        for term in ("tunnel", "passage", "shaft", "corridor", "intersection", "crossing")
+    ):
         rules.append(
-            "PASSAGE-FILL PROOF: the creature's body must visibly approach both sides of the named passage and use the passage boundaries as scale evidence; do not show a small creature floating in a wide generic opening."
+            "PASSAGE-FILL PROOF: the creature's body must visibly constrain the named route, intersection, or crossing and use its nearby boundaries as scale evidence; do not show a small figure floating in an oversized generic opening."
         )
     return rules
 
