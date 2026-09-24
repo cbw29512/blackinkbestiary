@@ -40,6 +40,14 @@ def _items(label: str, values) -> str:
 def load_monster_spec(page: dict) -> dict | None:
     return load_monster_for_page(page)
 
+def _is_swarm(page: dict, spec: dict | None) -> bool:
+    return (
+        str(page.get("archetype") or "") == "swarm_scene"
+        or str((spec or {}).get("size") or "").lower() == "swarm"
+        or str((spec or {}).get("creature_type") or "").lower().startswith("swarm of ")
+    )
+
+
 def _canonical_sections(spec: dict | None) -> list[str]:
     if not spec:
         return []
@@ -109,7 +117,11 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "CREATURE-ONLY AUTHORITY: canonical monster data describes the creature only. Any place words inherited "
             "from legacy monster text are descriptive lore or scale context, never scenery instructions. Do not add walls, "
             "corridors, caves, treasure, pillars, furniture, ruins, water, vegetation, lighting, traps, or other background "
-            "elements because the monster text mentions them. Build all scenery exclusively from the selected page environment."
+            "elements because the monster text mentions them. Build all scenery exclusively from the selected page environment. "
+            "CREATURE/SCENERY OWNERSHIP FIREWALL: scenery must never become anatomy. Chains, ropes, roots, rails, beams, torches, "
+            "rocks, web strands, tools, props, furniture, and architectural lines may touch the creature only where the page recipe "
+            "explicitly requires a physical interaction. They may never sprout from, merge into, replace, or duplicate limbs, tails, "
+            "wings, horns, antennae, mandibles, or other body structures."
         ),
         (
             "HABITAT EXPANSION RULE: broad creature habitat tags are compatibility inputs only. The universal environment engine must flesh the selected habitat into specific spatial geometry, surfaces, landmarks, lighting, depth, hazards, vegetation or water, architecture where appropriate, and supporting props without copying a canned monster scene.\n\n"
@@ -183,10 +195,22 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         f"required elements={required}. "
         "Universal family/component libraries may enrich these requirements but may not replace them."
     )
+    if _is_swarm(page, spec):
+        sections.append(
+            "SWARM COMPOSITION LOCK — NON-NEGOTIABLE: the collective swarm is the dominant subject, not one oversized leader. "
+            "Use a controlled population of similarly scaled individuals arranged in one readable directional flow with obvious origin, "
+            "broad negative-space gaps, and no wallpaper density. Vary the group silhouette, not the anatomy or scale of a single member."
+        )
+        subject_test = (
+            "the collective swarm must dominate through one readable group shape and direction; no single oversized member may dominate; "
+            "individuals remain countable enough to read while broad white gaps preserve colorability"
+        )
+    else:
+        subject_test = "the monster must be the large centered or near-centered dominant focal subject and unmistakable at thumbnail size"
+
     sections.append(
         "Final test: COLORABILITY IS THE GOVERNING CONSTRAINT. The page must first be inviting and satisfying to color, "
-        "with broad open regions, clean line hierarchy, and no fiddly density. Under that constraint, the monster must be "
-        "the large centered or near-centered dominant focal subject and unmistakable at thumbnail size; the environment "
+        "with broad open regions, clean line hierarchy, and no fiddly density. Under that constraint, " + subject_test + "; the environment "
         "must be unmistakably the named habitat; and one simple story moment must read immediately. Monster and environment "
         "must feel physically connected through perspective, scale, and interaction. If story or environment detail competes "
         "with coloring usability, simplify the story/environment detail."
@@ -198,11 +222,16 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
 def build_supervisor_checklist(page: dict) -> list[str]:
     page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
+    subject_check = (
+        "Swarm reads as one controlled collective subject with clear directional flow, broad negative-space gaps, and no oversized leader"
+        if _is_swarm(page, spec)
+        else "Monster is large, centered or near-centered, and visually dominant"
+    )
     checks = [
         f"Clearly recognizable as {page['monster_name']}",
         f"Habitat reads as: {page['habitat']}",
         f"Scene moment reads as: {page['moment']}",
-        "Monster is large, centered or near-centered, and visually dominant",
+        subject_check,
         "Large open white coloring regions",
         "Outer contours stronger than interior detail",
         "No grayscale wash or painterly shading",
