@@ -9,10 +9,9 @@ permissions:
   contents: read
 
 jobs:
-  catalog:
-    name: catalog-and-schema
+  test:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,8 +19,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate JSON and monster catalog
-        shell: bash
+      - name: Validate JSON and run state-machine tests
         run: |
           python -m json.tool data/tome-I.json > /dev/null
           python -m json.tool data/production-state.json > /dev/null
@@ -54,35 +52,7 @@ jobs:
           print('OWNERSHIP_WARNINGS=', report['ownership_warnings'])
           raise SystemExit(0 if report['pass'] else 1)
           PY
-
-  unit:
-    name: python-unit-tests
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Run unit tests
-        run: python -m unittest discover -s tests -v
-
-  audit:
-    name: production-and-js-audit
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Run production audits and syntax checks
-        shell: bash
-        run: |
+          python -m unittest discover -s tests -v
           python scripts/audit_active_book.py
           python scripts/audit_series.py
           python -m compileall -q art_pipeline scripts server.py
