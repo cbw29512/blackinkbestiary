@@ -76,7 +76,7 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
 def should_skip_candidate(prior: dict | None, rerun_failed: bool) -> bool:
     if not prior:
         return False
-    return not (rerun_failed and prior.get("status") in {"failed", "technical_qa_failed"})
+    return not (rerun_failed and prior.get("status") in {"failed", "technical_qa_failed", "vision_reviewer_failed"})
 
 
 def load_pages() -> list[dict]:
