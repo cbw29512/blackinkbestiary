@@ -32,13 +32,30 @@ def main() -> int:
         "test_*.py",
         "-v",
     ]
-    result = subprocess.run(
-        command,
-        cwd=ROOT,
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            command,
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+    except OSError as exc:
+        payload = {
+            "schema_version": 1,
+            "status": "failed",
+            "stage": "unit-test-launch",
+            "started_at": started,
+            "updated_at": utc_now(),
+            "returncode": None,
+            "python": sys.executable,
+            "command": command,
+            "output_tail": [f"Could not launch local unit tests: {exc}"],
+        }
+        write_status(payload)
+        print(payload["output_tail"][0])
+        return 1
+
     combined = ((result.stdout or "") + "\n" + (result.stderr or "")).strip()
     lines = combined.splitlines()
     tail = lines[-120:]
