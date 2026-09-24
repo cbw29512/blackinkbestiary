@@ -100,6 +100,20 @@ Generated PNGs must satisfy:
 
 A technical QA failure is retried automatically with a fresh seed before stopping the page.
 
+## Iterative AI Art-Director Gate
+
+Every independent composition candidate follows the same authority-first loop:
+
+`reread written authority → generate → inspect the rendered image → compare image to authority → refine the existing image → reread authority → reinspect`
+
+The written monster family, monster JSON, environment contract, page recipe, anatomy rules, and coloring-page standard are reloaded before every generation or refinement pass. The previous image is never treated as authority.
+
+A refinement preserves successful composition and artwork while correcting observed defects. It must use image editing rather than silently replacing the candidate with an unrelated text-to-image composition. Each candidate retains its pass history and best-so-far image so a later regression cannot destroy a better earlier result.
+
+The four candidates remain compositionally independent. Refinement may repair anatomy, identity, environment, story readability, colorability, clutter, or malformed structures, but it may not collapse all candidates into the same composition.
+
+The automated loop is bounded: one initial render plus up to four refinement passes per candidate. It may stop early only when the visual quality gate passes. If the configured runtime cannot perform semantic image inspection, it must fail closed and require human review; it must never label technical pixel checks as semantic AI review.
+
 ## Human Quality Gate
 
 Technical QA does not claim to understand visual semantics.
