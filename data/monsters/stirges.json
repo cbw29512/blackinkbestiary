@@ -37,7 +37,9 @@
       "long reptilian tail",
       "separate humanoid arms",
       "single dominant giant creature"
-    ]
+    ],
+    "shape_lock": "Draw several tiny compact flying pests, each built around one small animal-like body, one long straight needle proboscis projecting from the face, and one pair of membrane wings. Keep every individual tiny and non-humanoid; no giant leader, humanoid torso, dragon head, horns, or reptilian tail.",
+    "limb_structure": "Each stirge has one compact body, one long facial proboscis, one pair of membrane wings, and small grasping legs/feet; never add humanoid arms or a separate heroic torso."
   },
   "default_habitats": [
     "underground",
