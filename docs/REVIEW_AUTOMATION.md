@@ -39,7 +39,7 @@ The local semantic reviewer is intentionally fail-closed and staged:
 
 A later-stage failure outranks an earlier-stage failure even when its numeric reviewer score is lower. Reaching the environment gate proves identity passed; reaching action proves identity + environment passed; reaching quality proves identity + environment + action passed.
 
-**Identity failures regenerate from text authority.** Do not image-edit a fundamentally wrong body plan and expect it to become canonical. Environment, action, and quality failures use cumulative image-edit refinement so successful creature identity can be preserved while the scene is repaired.
+**Identity failures regenerate from text authority immediately.** Do not image-edit a fundamentally wrong body plan and expect it to become canonical. Environment and action failures get one cumulative image-edit repair so successful identity can survive; if the same structural gate fails again, escalate to fresh text-to-image regeneration with an alternate composition. Quality failures remain preservation-first image edits unless an exact-image rejection explicitly routes a fresh quality rebuild.
 
 Exact-image approval is valid only for the current candidate content hash. If candidate bytes change, old approval is stale and the image returns to review.
 
