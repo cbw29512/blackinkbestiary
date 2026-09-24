@@ -4,6 +4,7 @@ import hashlib
 import importlib
 import json
 import re
+import shutil
 import subprocess
 import sys
 from collections import Counter
@@ -59,6 +60,47 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def verdict_rank(verdict: dict) -> tuple:
+    return (
+        1 if verdict.get("pass") else 0,
+        int(verdict.get("score") or 0),
+        -len(verdict.get("defects") or []),
+    )
+
+
+def existing_history_source(item: dict) -> Path | None:
+    candidates = []
+    for step in item.get("pass_history") or []:
+        image = str(step.get("image") or "").strip()
+        if not image:
+            continue
+        path = Path(image)
+        if not path.is_absolute():
+            path = ROOT / "web" / path
+        if path.exists() and path.is_file():
+            candidates.append((verdict_rank(step.get("review") or {}), path))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda pair: pair[0], reverse=True)
+    return candidates[0][1]
+
+
+def restore_final_from_history(item: dict) -> Path | None:
+    page_id = str(item.get("page_id") or "")
+    candidate = int(item.get("candidate") or 0)
+    if not page_id or candidate < 1:
+        return None
+    destination = SOURCE_DIR / f"{page_id}-C{candidate:02d}.png"
+    if destination.exists():
+        return destination
+    source = existing_history_source(item)
+    if source is None:
+        return None
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(source, destination)
+    return destination
+
+
 def main() -> int:
     state = {"results": [], "selections": {}}
     if STATE.exists():
@@ -73,6 +115,20 @@ def main() -> int:
         if item.get("page_id") and int(item.get("candidate") or 0) > 0
     }
 
+    restored = 0
+    reviewable = [
+        item for item in state.get("results", [])
+        if item.get("status") in {"ready_for_review", "max_refinements_reached"}
+    ]
+    for item in reviewable:
+        page_id = str(item.get("page_id") or "")
+        candidate = int(item.get("candidate") or 0)
+        if not page_id or candidate < 1:
+            continue
+        destination = SOURCE_DIR / f"{page_id}-C{candidate:02d}.png"
+        if not destination.exists() and restore_final_from_history(item):
+            restored += 1
+
     sources = []
     for source in sorted(SOURCE_DIR.glob("*.png")):
         match = CANDIDATE_RE.match(source.name)
@@ -80,7 +136,21 @@ def main() -> int:
             continue
         sources.append((source, match.group("page"), int(match.group("candidate"))))
 
-    print(f"Found {len(sources)} finalized gallery PNGs; local state has {len(state.get('results', []))} result records.")
+    print(
+        f"Found {len(sources)} finalized gallery PNGs"
+        f" ({restored} restored from pass history); "
+        f"local state has {len(state.get('results', []))} result records."
+    )
+
+    if not sources and reviewable:
+        statuses = Counter(str(item.get("status") or "unknown") for item in state.get("results", []))
+        history_images = sum(len(item.get("pass_history") or []) for item in reviewable)
+        print("State statuses: " + ", ".join(f"{k}={v}" for k, v in sorted(statuses.items())))
+        print(f"Reviewable records contain {history_images} pass-history image references.")
+        raise SystemExit(
+            "Reviewable gallery records exist, but none of their finalized or pass-history image files still exist locally. "
+            "The publisher will not replace the GitHub manifest with an empty gallery."
+        )
 
     published = []
     active_preview_names = set()
@@ -119,12 +189,6 @@ def main() -> int:
         "candidate_count": len(published),
         "candidates": published,
     }, indent=2) + "\n", encoding="utf-8")
-
-    if not published:
-        statuses = Counter(str(item.get("status") or "unknown") for item in state.get("results", []))
-        if statuses:
-            print("No finalized PNGs were found. State statuses: " + ", ".join(f"{k}={v}" for k, v in sorted(statuses.items())))
-        print(f"Expected finalized images under: {SOURCE_DIR}")
 
     run("git", "add", "review-previews")
     status = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT)
