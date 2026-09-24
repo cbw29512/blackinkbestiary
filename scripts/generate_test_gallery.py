@@ -88,7 +88,7 @@ def load_pages() -> list[dict]:
     return [resolve_page_spec(page, ROOT) for page in tome["pages"]]
 
 
-def prepare(cli, config, page, seed: int, candidate_no: int) -> Path:
+def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: dict | None = None) -> Path:
     unet = model_filename(config, "diffusion_models")
     clip = model_filename(config, "text_encoders")
     vae = model_filename(config, "vae")
@@ -97,7 +97,7 @@ def prepare(cli, config, page, seed: int, candidate_no: int) -> Path:
         cli,
         config["templates"]["text_to_image"],
         path,
-        prompt=build_prompt(page, candidate_no=candidate_no),
+        prompt=build_prompt(page, review_feedback, candidate_no=candidate_no),
         seed=seed,
         model_filename=unet,
         clip_filename=clip,
@@ -219,7 +219,14 @@ def main() -> int:
                 "started_at": utc_now(),
             }
             try:
-                workflow = prepare(cli, config, page, seed, candidate_no)
+                review_feedback = None
+                if prior and prior.get("status") == "assistant_rejected":
+                    notes = ((prior.get("assistant_review") or {}).get("notes") or "").strip()
+                    review_feedback = {
+                        "text": notes or "Previous candidate was rejected during visual review. Rebuild the failed composition.",
+                        "routing_recommendation": "regenerate",
+                    }
+                workflow = prepare(cli, config, page, seed, candidate_no, review_feedback)
                 relative = execute_candidate(
                     cli, client, workflow, page["page_id"], candidate_no, inspect_candidate
                 )
