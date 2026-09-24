@@ -16,6 +16,25 @@ GENERATION_EXECUTION_FILES = (
     "art_pipeline/workflow_adapter.py",
 )
 
+# Declarative files are direct pixel authority, not incidental implementation.
+# Hash them by content so a temporary/test root and the production root behave
+# identically even though prompt_builder itself owns a repository-global ROOT.
+# Source-code helpers remain covered by resolved prompt hashing unless they
+# change execution semantics.
+GENERATION_DECLARATIVE_FILES = (
+    "config/universal_monster_contract.json",
+    "config/universal_environment_contract.json",
+    "config/universal_page_contract.json",
+    "config/universal_story_contract.json",
+    "config/coloring_page_standard.json",
+    "config/environment_standard.json",
+    "config/page_archetypes.json",
+    "config/kdp_print_standard.json",
+    "data/environment_overlays.json",
+    "data/environment_spatial_envelopes.json",
+    "data/environment_variation_families.json",
+)
+
 REVIEW_AUTHORITY_FILES = (
     "art_pipeline/vision_review_prompts.py",
     "art_pipeline/vision_reviewer.py",
@@ -120,7 +139,44 @@ def page_generation_fingerprint(page: dict, root: Path = ROOT) -> str:
 
     for relative in GENERATION_EXECUTION_FILES:
         _hash_file(digest, root, relative)
+    for relative in GENERATION_DECLARATIVE_FILES:
+        _hash_file(digest, root, relative)
     _hash_json_payload(digest, "GENERATION_STACK", _generation_stack_payload(root))
+
+    spec_id = str(page.get("monster_spec_id") or "").strip()
+    if spec_id:
+        monster_rel = f"data/monsters/{spec_id}.json"
+        _hash_file(digest, root, monster_rel)
+        monster_path = root / monster_rel
+        if monster_path.exists() and monster_path.is_file():
+            monster = _read_json(monster_path)
+            family = str(
+                monster.get("family_profile") or monster.get("family") or ""
+            ).strip()
+            if family:
+                _hash_file(
+                    digest,
+                    root,
+                    f"data/monster_families/{family}.json",
+                )
+
+    environment_id = str(page.get("environment_profile_id") or "").strip()
+    environment_family = (
+        environment_id.split(".", 1)[0]
+        if "." in environment_id
+        else ""
+    )
+    if environment_family:
+        _hash_file(
+            digest,
+            root,
+            f"data/environment_families/{environment_family}.json",
+        )
+        _hash_file(
+            digest,
+            root,
+            f"data/environment_components/{environment_family}.json",
+        )
 
     _hash_json_payload(
         digest,
