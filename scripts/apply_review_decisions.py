@@ -86,6 +86,21 @@ def classify_rejection_stage(review: dict) -> str:
     return ""
 
 
+def selection_eligible(item: dict) -> bool:
+    return (
+        str(item.get("status") or "") == "ready_for_review"
+        and bool((item.get("visual_review") or {}).get("pass"))
+    )
+
+
+def selection_matches(state: dict, page_id: str, candidate_no: int, review_id: str) -> bool:
+    selected = (state.get("selections") or {}).get(page_id) or {}
+    return (
+        int(selected.get("candidate") or 0) == candidate_no
+        and str(selected.get("review_id") or "") == review_id
+    )
+
+
 def main() -> int:
     if not DECISIONS.exists() or not STATE.exists():
         return 0
@@ -127,12 +142,26 @@ def main() -> int:
         }
         if stage:
             next_review["stage"] = stage
-        if item.get("assistant_review") == next_review:
-            continue
-        item["assistant_review"] = next_review
-
         page_id = str(item.get("page_id"))
         candidate_no = int(item.get("candidate") or 0)
+
+        same_review = item.get("assistant_review") == next_review
+        if (
+            same_review
+            and decision != "select"
+        ):
+            continue
+        if (
+            same_review
+            and decision == "select"
+            and (
+                not selection_eligible(item)
+                or selection_matches(state, page_id, candidate_no, target_review_id)
+            )
+        ):
+            continue
+
+        item["assistant_review"] = next_review
 
         if decision == "reject":
             item["status"] = "assistant_rejected"
@@ -143,12 +172,20 @@ def main() -> int:
             if selected and int(selected.get("candidate") or 0) == candidate_no:
                 state["selections"].pop(page_id, None)
         elif decision == "select":
-            # Full-gallery final choice: acceptable AND explicitly selected.
-            state.setdefault("selections", {})[page_id] = {
-                "candidate": candidate_no,
-                "source": "assistant_selected",
-                "review_id": target_review_id,
-            }
+            # Exact-image selection is authoritative, but production selection
+            # activates only after this same image passes the current local
+            # staged reviewer. The decision remains attached to the image so a
+            # later review recheck can activate it without asking again.
+            if selection_eligible(item):
+                state.setdefault("selections", {})[page_id] = {
+                    "candidate": candidate_no,
+                    "source": "assistant_selected",
+                    "review_id": target_review_id,
+                }
+            else:
+                selected = (state.get("selections") or {}).get(page_id)
+                if selected and int(selected.get("candidate") or 0) == candidate_no:
+                    state["selections"].pop(page_id, None)
         else:
             # Approval means this exact image is acceptable, but it must not
             # silently replace another final candidate merely because the
