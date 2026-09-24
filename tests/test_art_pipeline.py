@@ -470,6 +470,26 @@ class PromptTests(unittest.TestCase):
         for text in (identity, environment, action, quality):
             self.assertNotIn("LATEST REVIEW CORRECTION:", text)
 
+    def test_later_tome_i_relationships_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        sword = build_prompt(pages["I-30"])
+        self.assertIn("ORBIT PROOF", sword)
+        self.assertIn("anchor clearly inside the implied orbit", sword)
+
+        rug = build_prompt(pages["I-31"])
+        self.assertIn("WRAP-CONTACT PROOF", rug)
+        self.assertIn("contact and curve around the target", rug)
+
+        gargoyle = build_prompt(pages["I-32"])
+        self.assertIn("STATUE-AWAKENING PROOF", gargoyle)
+        self.assertIn("one statue coming alive", gargoyle)
+
+        fungus = build_prompt(pages["I-49"])
+        self.assertIn("REACH-TARGET PROOF", fungus)
+        self.assertIn("main body remains supported", fungus)
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
