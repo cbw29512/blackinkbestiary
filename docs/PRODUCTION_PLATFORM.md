@@ -116,9 +116,9 @@ The automated loop is bounded: one initial render plus up to four refinement pas
 
 ## GitHub Assistant Review Loop
 
-Large local galleries do not need to be uploaded into chat. The local machine keeps the production PNGs; `PUBLISH_REVIEW_PREVIEWS.bat` creates smaller JPEG review copies in `review-previews/`, writes an exact-version manifest, commits them, and pushes them to the current GitHub branch.
+Large local galleries do not need to be uploaded into chat. The local machine keeps the production PNGs; `PUBLISH_REVIEW_PREVIEWS.bat` scans the actual finalized PNGs in `web/test-gallery/`, creates smaller JPEG review copies in `review-previews/`, writes an exact-image manifest, commits them, and pushes them to the current GitHub branch. The gallery files themselves are the source of truth for publication; state metadata only enriches the manifest.
 
-Every published candidate receives a `review_id` containing page, candidate number, and seed. Assistant decisions in `review-previews/decisions.json` must target that exact `review_id`. This prevents an old rejection from accidentally rejecting a newly regenerated image that reused the same page/candidate slot.
+Every published candidate receives a `review_id` containing page, candidate number, and a SHA-256 fingerprint of the actual finalized PNG. Assistant decisions in `review-previews/decisions.json` must target that exact `review_id`. This prevents an old rejection from accidentally rejecting a newly regenerated image that reused the same page/candidate slot, even if state metadata is stale.
 
 A rejection removes the final local gallery copy, records the assistant notes, and marks only that exact candidate `assistant_rejected`. The next regeneration receives those notes as a fresh-generation correction rather than blindly repeating the previous prompt. `RERUN_NEXT_REJECTED.bat` applies current GitHub decisions, reruns only the first rejected candidate, and republishes the new preview. Stale JPEG review previews are removed on the next publish.
 
