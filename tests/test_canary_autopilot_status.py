@@ -83,6 +83,66 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
                 "needs_generation",
             )
 
+    def test_stale_reviewer_authority_blocks_old_exact_image_approval(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-01-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"candidate")
+            digest = hashlib.sha256(b"candidate").hexdigest()[:16]
+            item = {
+                "page_id": "I-01",
+                "candidate": 1,
+                "status": "ready_for_review",
+                "image_path": "test-gallery/I-01-C01.png",
+                "generation_fingerprint": "gen-current",
+                "review_fingerprint": "review-old",
+                "visual_review": {"pass": True},
+                "assistant_review": {
+                    "decision": "approve",
+                    "review_id": f"I-01-C01-H{digest}",
+                },
+            }
+            self.assertEqual(
+                status.classify(
+                    item,
+                    root,
+                    current_generation_fingerprint="gen-current",
+                    current_review_fingerprint="review-new",
+                ),
+                "needs_generation",
+            )
+
+    def test_exact_image_approval_also_requires_current_visual_review_pass(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-01-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"candidate")
+            digest = hashlib.sha256(b"candidate").hexdigest()[:16]
+            item = {
+                "page_id": "I-01",
+                "candidate": 1,
+                "status": "max_refinements_reached",
+                "image_path": "test-gallery/I-01-C01.png",
+                "generation_fingerprint": "gen-current",
+                "review_fingerprint": "review-current",
+                "visual_review": {"pass": False},
+                "assistant_review": {
+                    "decision": "approve",
+                    "review_id": f"I-01-C01-H{digest}",
+                },
+            }
+            self.assertEqual(
+                status.classify(
+                    item,
+                    root,
+                    current_generation_fingerprint="gen-current",
+                    current_review_fingerprint="review-current",
+                ),
+                "awaiting_review",
+            )
+
     def test_stale_approval_does_not_approve_changed_image(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
