@@ -39,7 +39,8 @@
       "six-pack superhero torso",
       "short arms ending above the hips"
     ],
-    "limb_structure": "Very long humanoid arms with large hands, stable bipedal legs, and large grounded feet; proportions are rangy goblinoid rather than knuckle-walking primate."
+    "limb_structure": "Very long humanoid arms with large hands, stable bipedal legs, and large grounded feet; proportions are rangy goblinoid rather than knuckle-walking primate.",
+    "shape_lock": "Draw a rangy long-armed goblinoid: narrow ribcage, arms hanging unusually low toward the knees, long forearms and hands, selective shaggy hair, and a goblinoid—not gorilla—face; no sculpted pectorals, six-pack, or bodybuilder shoulder mass."
   },
   "accuracy_checks": [
     "face reads goblinoid before furry brute",
