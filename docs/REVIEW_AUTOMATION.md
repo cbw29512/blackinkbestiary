@@ -47,6 +47,16 @@ Review publication is state-authoritative. Orphan historical PNGs on the worksta
 
 The full 50-page / 4-candidate gallery is blocked until all nine canary pages have current exact-image approvals.
 
+## Exact-image decision meanings
+
+`review-previews/decisions.json` is append-only review history keyed by the exact image content hash.
+
+- **reject** — the exact image is unacceptable; remove it from selection and regenerate that candidate when appropriate.
+- **approve** — the exact image is acceptable. On the one-candidate canary, this is enough to satisfy the exact-image gate. In a multi-candidate production set, approval does **not** silently choose the final page.
+- **select** — the exact image is acceptable **and** is the explicit final candidate for that page.
+
+For four-candidate production pages, exactly one acceptable candidate should receive `select`. Other acceptable alternatives may remain `approve`, and rejected candidates remain `reject`. Decision-file ordering must never determine the final page choice.
+
 ## Safety rules
 
 - `review-previews/decisions.json` is engine-owned. The local preview publisher must never overwrite it from stale workstation state.
