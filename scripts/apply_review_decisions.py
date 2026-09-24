@@ -32,6 +32,46 @@ def review_id_for(item: dict) -> str | None:
     return f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}-H{digest[:16]}"
 
 
+def classify_rejection_stage(review: dict) -> str:
+    explicit = str(review.get("stage") or "").strip().lower()
+    if explicit in {"identity", "environment", "action", "quality"}:
+        return explicit
+
+    notes = str(review.get("notes") or "").lower()
+    identity_terms = (
+        "anatomy", "body plan", "body-plan", "dragonborn", "humanoid dragon",
+        "extra arm", "extra arms", "separate humanoid arms", "too muscular",
+        "bodybuilder", "gorilla", "ape", "wrong creature", "small wiry",
+        "scale", "horn", "tail", "centipede has sparse", "leg pair",
+    )
+    environment_terms = (
+        "environment", "habitat", "corridor", "hall", "stair", "spiral",
+        "crawlway", "shaft", "catacomb", "arch", "stone hall", "mine",
+        "web-filled dungeon", "does not read as",
+    )
+    action_terms = (
+        "kicking", "kick", "wedged", "drag", "defending", "defend",
+        "feeding", "offering", "signaling", "signal", "interaction",
+        "contact", "recoil", "crawling", "story",
+    )
+    quality_terms = (
+        "wallpaper", "dense web", "too dense", "border", "frame",
+        "black fill", "grayscale", "clutter", "coloring", "negative space",
+    )
+
+    # Structural identity must be repaired first. Then setting geometry, then
+    # action/contact, then print-quality cleanup.
+    for stage, terms in (
+        ("identity", identity_terms),
+        ("environment", environment_terms),
+        ("action", action_terms),
+        ("quality", quality_terms),
+    ):
+        if any(term in notes for term in terms):
+            return stage
+    return ""
+
+
 def main() -> int:
     if not DECISIONS.exists() or not STATE.exists():
         return 0
@@ -65,11 +105,14 @@ def main() -> int:
 
         decision = str(review.get("decision") or "").lower()
         notes = str(review.get("notes") or "")
+        stage = classify_rejection_stage(review) if decision == "reject" else ""
         next_review = {
             "review_id": target_review_id,
             "decision": decision,
             "notes": notes,
         }
+        if stage:
+            next_review["stage"] = stage
         if item.get("assistant_review") == next_review:
             continue
         item["assistant_review"] = next_review
