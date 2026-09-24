@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from generation_fingerprint import page_generation_fingerprint
+from page_contract import resolve_page_spec
 STATE = ROOT / "data" / "test-gallery-state.json"
 CANARY_PAGE_IDS = (
     "I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22",
@@ -89,7 +90,11 @@ def main() -> int:
 
     state = json.loads(STATE.read_text(encoding="utf-8"))
     tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
-    pages = {str(page.get("page_id")): page for page in tome.get("pages", [])}
+    pages = {
+        str(page.get("page_id")): resolve_page_spec(page, ROOT)
+        for page in tome.get("pages", [])
+        if page.get("page_id")
+    }
     results = {
         (str(item.get("page_id")), int(item.get("candidate") or 0)): item
         for item in state.get("results", [])
