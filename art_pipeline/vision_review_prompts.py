@@ -53,6 +53,7 @@ def build_scene_review_prompt(page: dict) -> str:
         "Physical state reads as:",
         "Support/contact is visible and believable:",
         "Motion/weight reads correctly:",
+        "Mode-specific contact geometry reads correctly:",
         "Environment matches profile:",
         "Spatial type reads without the monster:",
         "Material language is visible:",
