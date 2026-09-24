@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from prompt_builder import load_monster_spec
 from page_contract import resolve_page_spec
+from vision_review_prompts import review_stage_errors
 
 
 class TomeISpecTests(unittest.TestCase):
@@ -77,6 +78,11 @@ class TomeISpecTests(unittest.TestCase):
             self.assertTrue(resolved.get("subject_scale_rule"), page["page_id"])
             self.assertNotIn("60–75% of page height", resolved.get("composition", ""), page["page_id"])
             self.assertNotIn("composition", page, page["page_id"])
+
+    def test_every_page_has_nonempty_four_stage_review_contract(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            self.assertEqual(review_stage_errors(page), [], page["page_id"])
 
     def test_every_page_has_explicit_physicality(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
