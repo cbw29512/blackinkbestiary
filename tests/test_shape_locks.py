@@ -25,7 +25,8 @@ class ShapeLockTests(unittest.TestCase):
         text = build_prompt(self.pages["I-14"])
         self.assertIn("one continuous non-humanoid mantle body", text)
         self.assertIn("no separate torso", text)
-        self.assertIn("flight capability never invents wings", text)
+        self.assertIn("NON-FLIGHT POSE LOCK", text)
+        self.assertIn("not airborne", text)
 
     def test_bat_and_centipede_shape_locks_are_literal(self):
         bat = build_prompt(self.pages["I-16"])
