@@ -65,12 +65,22 @@ def locomotion_errors(page: dict) -> list[str]:
 def physicality_sections(page: dict) -> list[str]:
     physicality = page.get("physicality") or {}
     can_fly = bool((page.get("locomotion") or {}).get("can_fly"))
-    flight_rule = (
-        "FLIGHT RULE: this creature may use controlled natural flight, but flight capability never invents wings, arms, or a new body plan. Use only the canonical locomotion anatomy already defined for the creature; avoid diving, falling, leaping, or chaotic midair freeze-frames."
-        if can_fly
-        else "FLIGHT RULE: this creature cannot fly. Keep it in a stable natural pose with clear support/contact; no jumping, falling, dropping, hovering, or midair freeze-frames."
-    )
     mode = str(physicality.get("mode") or "").strip().lower()
+    if can_fly and powered_airborne(mode):
+        flight_rule = (
+            "FLIGHT RULE: this page uses controlled natural flight. Flight capability never invents wings, arms, or a new body plan; "
+            "use only the canonical locomotion anatomy already defined for the creature."
+        )
+    elif can_fly:
+        flight_rule = (
+            f"NON-FLIGHT POSE LOCK: although this creature can fly in other contexts, this page is explicitly {mode or 'supported'}, not airborne. "
+            "Do not depict flight, spread invented wings, or add/alter limbs to imply flight. Preserve only the canonical body plan and the required support/contact."
+        )
+    else:
+        flight_rule = (
+            "FLIGHT RULE: this creature cannot fly. Keep it in a stable natural pose with clear support/contact; "
+            "no jumping, falling, dropping, hovering, or midair freeze-frames."
+        )
     mode_rule = MODE_CONTACT_RULES.get(mode, "")
     return [
         f"PHYSICAL STATE: {physicality.get('mode', '')}.",
