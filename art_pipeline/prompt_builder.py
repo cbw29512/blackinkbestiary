@@ -303,7 +303,7 @@ def build_supervisor_checklist(page: dict) -> list[str]:
         "Outer contours stronger than interior detail",
         "No grayscale wash or painterly shading",
         "No dense crosshatching or excessive tiny texture",
-        "No text, border, logo, or watermark",
+        "No text, logo, or watermark; no decorative rectangular artwork frame or inset picture box; only normal blank page margins",
     ]
     checks.extend(environment_checklist(page, ROOT))
     checks.extend(story_checklist(page, ROOT))
