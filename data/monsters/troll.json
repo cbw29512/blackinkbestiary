@@ -4,45 +4,6 @@
   "family": "troll",
   "size": "large",
   "creature_type": "giant humanoid",
-  "visual_identity": {
-    "core_identity": "A tall predatory giant with a narrow torso, very long clawed arms, powerful regeneration, and a wary hatred of fire.",
-    "silhouette": "Tall lanky humanoid with a severe hunch, long legs, arms hanging near the ground, and oversized clawed hands.",
-    "head_features": "Long coarse face, pronounced nose and brow, wide predatory mouth with sharp teeth, deep-set eyes.",
-    "body_shape": "Deceptively thin but powerful humanoid frame with elongated limbs, hunched upper back, broad hands, and large clawed feet.",
-    "surface": "Thick rubbery bumpy hide with sparse wart-like irregularities and coarse messy hair on the head; keep texture broad and colorable.",
-    "signature_gear": [
-      "minimal ragged loincloth",
-      "simple scavenged belt"
-    ],
-    "attitude": [
-      "hungry",
-      "suspicious",
-      "feral",
-      "fire-wary"
-    ],
-    "must_keep": [
-      "severe hunch",
-      "very long hanging arms",
-      "long ungainly legs",
-      "deceptively lean but powerful frame",
-      "massive claws",
-      "bumpy rubbery hide",
-      "coarse messy hair"
-    ],
-    "must_avoid": [
-      "ogre belly",
-      "orc armor",
-      "reptilian scales",
-      "cute features",
-      "short arms",
-      "dense skin texture",
-      "horns or horn nubs",
-      "full-body fur",
-      "broad bodybuilder chest",
-      "six-pack superhero torso",
-      "ogre-like short thick limbs"
-    ]
-  },
   "default_habitats": [
     "forest",
     "caves"
@@ -73,5 +34,20 @@
     "hunched upright movement",
     "persistent pursuit",
     "wariness around fire"
+  ],
+  "visual_overrides": {
+    "signature_gear": [
+      "minimal ragged loincloth",
+      "simple scavenged belt"
+    ],
+    "attitude": [
+      "hungry",
+      "suspicious",
+      "feral",
+      "fire-wary"
+    ]
+  },
+  "variant_traits": [
+    "troll"
   ]
 }
