@@ -10,15 +10,23 @@
 
 Never use the engine branch as the generated-image handoff.
 
+## Operator handoff rule
+
+**GitHub is the handoff. Terminal output is not.** The operator must not be required to copy/paste generation logs, reviewer JSON, image paths, or failure output back into ChatGPT. Local launchers must publish reviewable images, partial results, runtime failures, and diagnostics to `review-previews-live`; ChatGPT reads that branch directly and writes exact-image decisions/fixes back to the engine branch.
+
+If a local run fails before every page completes, publish whatever completed plus diagnostic state. A failure trapped only in the Windows terminal is an automation defect.
+
+
 ## Automated loop
 
 1. The local launcher reads exact-image decisions from the engine branch.
 2. `apply_review_decisions.py` marks matching local candidates approved/rejected by content hash.
-3. `generate_test_gallery.py --canary-failed --copies 1` retries only missing, failed, or assistant-rejected canary pages.
+3. `generate_test_gallery.py --canary-failed --copies 1` reconciles generation/review fingerprints, rechecks existing PNGs when only review authority changed, and renders only missing, failed, assistant-rejected, or generation-stale canary pages.
 4. `publish_review_previews.py` builds lightweight JPG previews and a content-hashed manifest.
 5. `review_publish_git.py` force-publishes that snapshot to `review-previews-live`.
 6. ChatGPT reads the live branch, inspects the actual images, and writes exact-image decisions back to the engine branch.
 7. Repeat until the canary genuinely passes direct image inspection.
+8. After 9/9 exact-image canary approval, the full-gallery launcher generates/resumes the 50-page candidate set and always publishes completed/diagnostic state back to GitHub.
 
 ## Review and refinement authority
 
