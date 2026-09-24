@@ -48,6 +48,42 @@ def _is_swarm(page: dict, spec: dict | None) -> bool:
     )
 
 
+def _body_plan_lock(page: dict, spec: dict | None) -> list[str]:
+    """Build highest-priority species geometry and canonical-scale constraints."""
+    if not spec:
+        return []
+    visual = spec.get("visual_identity") or {}
+    size = str(spec.get("size") or "").strip().lower() or "unspecified"
+    scale_rule = str(page.get("subject_scale_rule") or "").strip()
+    sections = [
+        (
+            f"CANONICAL SCALE LOCK — NON-NEGOTIABLE: {page.get('monster_name', '')} is size category {size}. "
+            f"{scale_rule} Canonical size outranks composition; framing may move closer, but body mass and proportions may not be enlarged or reduced to make the subject more dramatic."
+        ),
+        f"CANONICAL BODY PLAN LOCK — NON-NEGOTIABLE: {visual.get('silhouette', '')}",
+        f"CANONICAL PROPORTION LOCK — NON-NEGOTIABLE: {visual.get('body_shape', '')}",
+        f"CANONICAL LIMB TOPOLOGY LOCK — NON-NEGOTIABLE: {visual.get('limb_structure', '')}",
+        _items("ANATOMY THAT MUST REMAIN", visual.get("must_keep")),
+        _items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid")),
+        (
+            "SPECIES LOCK — NON-NEGOTIABLE: do not reinterpret this subject as a generic fantasy hero, dragon-person, demon, orc, "
+            "bodybuilder, furry brute, humanoid, or other familiar archetype unless that anatomy is explicitly part of the canonical creature description above. "
+            "When the requested creature has an unusual non-humanoid body plan, preserve that body plan literally rather than forcing it onto a humanoid torso."
+        ),
+    ]
+    if size in {"tiny", "small"}:
+        sections.append(
+            "SMALL-CREATURE SCALE LOCK: keep the torso, shoulders, limbs, head-to-body ratio, and overall mass visibly small. "
+            "Use nearby architecture/props and a closer camera to make the subject readable; never solve composition by turning it into an adult-human-sized or heroic muscular creature."
+        )
+    if _is_swarm(page, spec):
+        sections.append(
+            "INDIVIDUAL-SCALE LOCK: every swarm member keeps the same canonical small/tiny anatomy and broadly comparable scale. "
+            "The GROUP may dominate the page; no individual may become a giant focal leader."
+        )
+    return [part for part in sections if part and not part.endswith(":")]
+
+
 def _canonical_sections(spec: dict | None) -> list[str]:
     if not spec:
         return []
@@ -102,6 +138,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "leaving the interior predominantly white and colorable. No large black masses."
         ),
         f"SUBJECT: {page['monster_name']}.",
+        *_body_plan_lock(page, spec),
         (
             "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Treat every countable body structure in the canonical creature "
             "identity as exact, not approximate. Never invent or duplicate heads, faces, eyes, horns, antennae, arms, hands, "
@@ -154,7 +191,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             f"CANDIDATE {candidate_no} COMPOSITION LOCK: {variant}. "
             "This candidate must be compositionally distinct from the other candidates for this page. "
             "Do not default to a centered frontal portrait when this lock specifies another view. "
-            "Vary camera angle, subject placement, pose, landmark relationship, and story interaction while preserving canonical anatomy."
+            "Vary camera angle, subject placement, pose, landmark relationship, and story interaction while preserving canonical anatomy. "
+            "Camera/framing may change apparent prominence but MUST NOT change canonical creature scale, body mass, or species proportions."
         )
 
     modify = page.get("modify")
@@ -225,12 +263,14 @@ def build_supervisor_checklist(page: dict) -> list[str]:
     subject_check = (
         "Swarm reads as one controlled collective subject with clear directional flow, broad negative-space gaps, and no oversized leader"
         if _is_swarm(page, spec)
-        else "Monster is large, centered or near-centered, and visually dominant"
+        else "Monster is visually dominant through framing while preserving canonical size, body mass, and species proportions"
     )
     checks = [
         f"Clearly recognizable as {page['monster_name']}",
         f"Habitat reads as: {page['habitat']}",
         f"Scene moment reads as: {page['moment']}",
+        f"Canonical scale reads as: {str((spec or {}).get('size') or '').lower()} — {page.get('subject_scale_rule', '')}",
+        f"Canonical body plan reads as: {((spec or {}).get('visual_identity') or {}).get('silhouette', '')}; limbs: {((spec or {}).get('visual_identity') or {}).get('limb_structure', '')}",
         subject_check,
         "Large open white coloring regions",
         "Outer contours stronger than interior detail",
