@@ -57,6 +57,11 @@ def _body_plan_lock(page: dict, spec: dict | None) -> list[str]:
     scale_rule = str(page.get("subject_scale_rule") or "").strip()
     sections = [
         (
+            f"SHAPE-FIRST RENDER LOCK — NON-NEGOTIABLE: {visual.get('shape_lock', '')}"
+            if str(visual.get("shape_lock") or "").strip()
+            else ""
+        ),
+        (
             f"CANONICAL SCALE LOCK — NON-NEGOTIABLE: {page.get('monster_name', '')} is size category {size}. "
             f"{scale_rule} Canonical size outranks composition; framing may move closer, but body mass and proportions may not be enlarged or reduced to make the subject more dramatic."
         ),
@@ -271,6 +276,7 @@ def build_supervisor_checklist(page: dict) -> list[str]:
         f"Scene moment reads as: {page['moment']}",
         f"Canonical scale reads as: {str((spec or {}).get('size') or '').lower()} — {page.get('subject_scale_rule', '')}",
         f"Canonical body plan reads as: {((spec or {}).get('visual_identity') or {}).get('silhouette', '')}; limbs: {((spec or {}).get('visual_identity') or {}).get('limb_structure', '')}",
+        f"Shape-first body geometry reads as: {((spec or {}).get('visual_identity') or {}).get('shape_lock', '')}" if str(((spec or {}).get("visual_identity") or {}).get("shape_lock") or "").strip() else "",
         subject_check,
         "Large open white coloring regions",
         "Outer contours stronger than interior detail",
