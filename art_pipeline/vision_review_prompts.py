@@ -71,7 +71,6 @@ def build_environment_review_prompt(page: dict) -> str:
         "Unique landmark is visible:",
         "Framing differs from repeated generic backgrounds:",
         "Environment geometry differs meaningfully from nearby pages",
-        "Environment check:",
     )
     selected = [item for item in checks if item.startswith(prefixes)]
     return """You are the Black-Ink Bestiary ENVIRONMENT GEOMETRY GATE.
@@ -167,6 +166,7 @@ def build_review_prompt(page: dict) -> str:
         "Space does not drift into:",
         "Unique landmark is visible:",
         "Framing differs from repeated generic backgrounds:",
+        "Environment check:",
         "Monster/environment interaction reads clearly:",
         "One clear story beat reads as:",
         "Environment participates through:",
