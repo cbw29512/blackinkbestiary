@@ -38,6 +38,20 @@ class TestGalleryResumeTests(unittest.TestCase):
             ("I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22"),
         )
 
+    def test_canary_summary_reports_each_required_page(self):
+        state = {"results": []}
+        for page_id in gallery.CANARY_PAGE_IDS:
+            state["results"].append({
+                "page_id": page_id,
+                "candidate": 1,
+                "status": "ready_for_review",
+                "visual_review": {"score": 93, "defects": []},
+            })
+        summary = gallery.canary_summary(state)
+        self.assertEqual(summary["ready"], len(gallery.CANARY_PAGE_IDS))
+        self.assertEqual(summary["total"], len(gallery.CANARY_PAGE_IDS))
+        self.assertEqual([row["page_id"] for row in summary["rows"]], list(gallery.CANARY_PAGE_IDS))
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
