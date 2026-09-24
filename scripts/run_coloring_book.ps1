@@ -24,6 +24,13 @@ if ($LASTEXITCODE -ne 0) {
   throw "Engine sync refused or failed with code $LASTEXITCODE."
 }
 
+Write-Host "Running local engine preflight before full gallery generation..." -ForegroundColor Yellow
+& $runner.Source (Join-Path $root "scripts\engine_preflight.py")
+if ($LASTEXITCODE -ne 0) {
+  & $runner.Source (Join-Path $root "scripts\publish_review_previews.py")
+  throw "Engine preflight failed; diagnostic snapshot was published."
+}
+
 & $runner.Source (Join-Path $root "scripts\apply_review_decisions.py")
 if ($LASTEXITCODE -ne 0) {
   throw "Review decision applier exited with code $LASTEXITCODE."
