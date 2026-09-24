@@ -30,7 +30,11 @@
       "orc-like bulk",
       "reptilian snout",
       "tail",
-      "bodybuilder chest, six-pack abs, or oversized heroic shoulders"
+      "bodybuilder chest, six-pack abs, or oversized heroic shoulders",
+      "horns or horn nubs",
+      "clawed animal feet",
+      "reptilian claws",
+      "demonic tail"
     ],
     "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure."
   },
@@ -40,7 +44,9 @@
     "body remains small and wiry",
     "surface is not furry",
     "posture is quick, hunched, or opportunistic",
-    "torso stays narrow and wiry with no bodybuilder chest, six-pack abs, or oversized shoulders"
+    "torso stays narrow and wiry with no bodybuilder chest, six-pack abs, or oversized shoulders",
+    "no horns, tail, claws, or animal feet",
+    "hands and feet remain humanoid despite exaggerated goblin proportions"
   ],
   "known_failure_modes": [
     {
@@ -62,6 +68,11 @@
       "id": "heroic_humanoid_drift",
       "symptom": "body becomes upright, broad-chested, bodybuilder-like, six-pack muscular, or heroically proportioned",
       "correction": "shrink the frame, narrow the chest and shoulders, remove bodybuilder muscle definition, and restore thin wiry limbs with a crouched scavenger posture"
+    },
+    {
+      "id": "demon_drift",
+      "symptom": "horns, tail, claws, or imp-like demonic anatomy appears",
+      "correction": "remove horns, tail, claws, and animal feet; restore bare goblinoid head, humanoid hands/feet, broad nose, and oversized pointed ears"
     }
   ],
   "scene_identity": {
