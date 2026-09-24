@@ -67,6 +67,7 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                     "candidate": 1,
                     "status": "ready_for_review",
                     "image_path": "test-gallery/I-01-C01.png",
+                    "visual_review": {"pass": True, "stage": "quality", "defects": []},
                 }],
                 "selections": {},
             }), encoding="utf-8")
@@ -136,6 +137,88 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                 seen,
                 [("I-01", 1), ("I-04", 1)],
             )
+
+    def test_single_candidate_approval_is_deferred_until_local_review_passes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-01-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"candidate")
+            digest = hashlib.sha256(b"candidate").hexdigest()[:16]
+            review_id = f"I-01-C01-H{digest}"
+
+            state_file.write_text(json.dumps({
+                "copies_per_page": 1,
+                "results": [{
+                    "page_id": "I-01",
+                    "candidate": 1,
+                    "status": "max_refinements_reached",
+                    "image_path": "test-gallery/I-01-C01.png",
+                    "visual_review": {"pass": False, "stage": "quality", "defects": ["border"]},
+                }],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({
+                "reviews": [{
+                    "review_id": review_id,
+                    "decision": "approve",
+                    "notes": "exact image acceptable after direct inspection",
+                }],
+            }), encoding="utf-8")
+
+            with (
+                patch.object(apply, "ROOT", root),
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["results"][0]["assistant_review"]["decision"], "approve")
+            self.assertEqual(state["selections"], {})
+
+    def test_deferred_single_candidate_approval_activates_after_local_pass(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-01-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"candidate")
+            digest = hashlib.sha256(b"candidate").hexdigest()[:16]
+            review_id = f"I-01-C01-H{digest}"
+            review = {
+                "review_id": review_id,
+                "decision": "approve",
+                "notes": "exact image acceptable after direct inspection",
+            }
+
+            state_file.write_text(json.dumps({
+                "copies_per_page": 1,
+                "results": [{
+                    "page_id": "I-01",
+                    "candidate": 1,
+                    "status": "ready_for_review",
+                    "image_path": "test-gallery/I-01-C01.png",
+                    "visual_review": {"pass": True, "stage": "quality", "defects": []},
+                    "assistant_review": review,
+                }],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({"reviews": [review]), encoding="utf-8")
+
+            with (
+                patch.object(apply, "ROOT", root),
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["selections"]["I-01"]["candidate"], 1)
+            self.assertEqual(state["selections"]["I-01"]["review_id"], review_id)
 
     def test_multi_candidate_approvals_do_not_silently_select_last_candidate(self):
         with tempfile.TemporaryDirectory() as td:
@@ -342,6 +425,7 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                     "candidate": 1,
                     "status": "ready_for_review",
                     "image_path": "test-gallery/I-01-C01.png",
+                    "visual_review": {"pass": True, "stage": "quality", "defects": []},
                     "assistant_review": assistant_review,
                 }],
                 "selections": {
