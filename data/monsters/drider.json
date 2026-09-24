@@ -35,7 +35,9 @@
       "six spider legs",
       "full insect head",
       "overly ornate armor"
-    ]
+    ],
+    "limb_structure": "Exactly two humanoid arms emerge from the upper torso. The humanoid waist fuses directly into one spider cephalothorax/abdomen assembly with exactly eight spider legs; no human legs, horse body, or extra limb pair.",
+    "shape_lock": "Draw one fused creature: a humanoid upper torso with exactly two arms rising directly from a giant spider lower body with exactly eight jointed legs. The waist-to-spider fusion must be continuous and obvious; add no human legs, centaur body, or separate spider companion."
   },
   "default_habitats": [
     "underground",
