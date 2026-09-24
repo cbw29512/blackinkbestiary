@@ -66,5 +66,32 @@
     "sudden attack",
     "perching",
     "powered flight"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium squat stone humanoid predator whose mass reads architectural and heavy, not dragon-sized.",
+    "natural_posture": "Clawed feet and hands brace against stone support; folded wings stay attached to the back without hiding the humanoid stone body.",
+    "behavior_style": [
+      "motionless camouflage",
+      "sudden attack",
+      "perching",
+      "powered flight"
+    ],
+    "environment_fit": [
+      "ruins",
+      "fortifications",
+      "settlements"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "stone creature becomes quadrupedal or dragon-bodied",
+      "correction": "restore two arms, two bipedal legs, one humanoid torso, horned grotesque head, and one folded wing pair"
+    },
+    {
+      "id": "angel_drift",
+      "symptom": "face/body becomes smooth human or feather-winged angelic",
+      "correction": "restore grotesque stone face, claws, batlike wings, and chipped stone planes"
+    }
   ]
 }
