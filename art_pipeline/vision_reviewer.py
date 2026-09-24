@@ -23,6 +23,30 @@ def _request(url: str, payload: dict, timeout: float = 180.0) -> dict:
         raise VisionReviewError(f"Vision reviewer unavailable or invalid: {exc}") from exc
 
 
+def build_identity_review_prompt(page: dict) -> str:
+    checks = build_supervisor_checklist(page)
+    identity_prefixes = (
+        "Clearly recognizable as ",
+        "Canonical scale reads as:",
+        "Canonical body plan reads as:",
+        "Identity check:",
+        "Reject identity drift:",
+        "Swarm reads as ",
+    )
+    identity_checks = [item for item in checks if item.startswith(identity_prefixes)]
+    return """You are the Black-Ink Bestiary identity and anatomy gate.
+Inspect ONLY the PROVIDED IMAGE. Ignore beauty, style polish, environment quality, and composition except where they prove creature scale.
+Your only job is to decide whether the pictured creature is visibly the required species/body plan at the required scale.
+FAIL CLOSED: if any required identity trait, scale relationship, body-plan feature, limb topology/count, or anti-drift rule is visibly wrong, pass=false.
+Do not give the image the benefit of the doubt because it is attractive or fantasy-themed. Generic dragon-person, demon, orc, furry brute, heroic bodybuilder, or humanoid reinterpretations fail unless explicitly canonical.
+For countable anatomy, reject extra, missing, duplicated, merged, branched, or scenery-grown limbs/appendages. Ordinary perspective occlusion is allowed only when the body plan still reads coherently.
+For tiny/small creatures, reject adult-human-sized heroic mass even when the face is approximately correct. For swarms, reject an oversized leader.
+Return exactly one compact JSON object and nothing else:\n{"pass": true|false, "score": 0-100, "defects": ["specific visible identity defect"], "preserve": ["successful visible identity feature"]}
+Report at most 4 defects and at most 3 preserve items, each under 80 characters. A passing identity image should normally score 90-100. Any identity failure should score 49 or lower.
+IDENTITY / ANATOMY GATES:
+- """ + "\n- ".join(identity_checks)
+
+
 def build_review_prompt(page: dict) -> str:
     checks = build_supervisor_checklist(page)
     hard_prefixes = ("Clearly recognizable as ", "Habitat reads as:", "Scene moment reads as:", "Canonical scale reads as:", "Canonical body plan reads as:", "Identity check:", "Reject identity drift:", "Required element present:", "Physical state reads as:", "Support/contact is visible and believable:", "Motion/weight reads correctly:", "Swarm reads as ")
@@ -45,25 +69,11 @@ OTHER QUALITY REQUIREMENTS:
 - """ + "\n- ".join(other_checks)
 
 
-def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
-    settings = config.get("vision_reviewer") or {}
-    if settings.get("provider") != "ollama":
-        raise VisionReviewError("Required vision_reviewer.provider must be ollama")
-    image_path = Path(image_path)
-    encoded = base64.b64encode(image_path.read_bytes()).decode("ascii")
-    payload = {
-        "model": settings.get("model", "qwen3-vl:4b"),
-        "stream": False,
-        "prompt": build_review_prompt(page),
-        "images": [encoded],
-        "options": {"temperature": 0, "num_predict": 4096},
-        "think": False,
-    }
-    result = _request(settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/generate", payload)
+def _parse_verdict(result: dict, stage: str) -> dict:
     raw = (result.get("response") or "").strip() if isinstance(result, dict) else ""
     if not raw:
         raise VisionReviewError(
-            "Vision reviewer returned an empty answer"
+            f"{stage} reviewer returned an empty answer"
             f"; done_reason={result.get('done_reason') if isinstance(result, dict) else None}"
             f"; eval_count={result.get('eval_count') if isinstance(result, dict) else None}"
             f"; response_keys={sorted(result.keys()) if isinstance(result, dict) else []}"
@@ -71,8 +81,6 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
     try:
         verdict = json.loads(raw)
     except json.JSONDecodeError:
-        # Accept harmless markdown fences or a short preamble only when a
-        # complete JSON object is present. Never invent or repair missing data.
         start = raw.find("{")
         end = raw.rfind("}")
         if start >= 0 and end > start:
@@ -80,12 +88,12 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
                 verdict = json.loads(raw[start:end + 1])
             except json.JSONDecodeError as exc:
                 raise VisionReviewError(
-                    f"Vision reviewer returned non-JSON content: {raw[:300]}"
+                    f"{stage} reviewer returned non-JSON content: {raw[:300]}"
                     f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}"
                 ) from exc
         else:
             raise VisionReviewError(
-                f"Vision reviewer returned non-JSON content: {raw[:300]}"
+                f"{stage} reviewer returned non-JSON content: {raw[:300]}"
                 f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}"
             )
     score = verdict.get("score")
@@ -101,11 +109,51 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         or not isinstance(preserve, list)
         or not all(isinstance(x, str) for x in preserve)
     ):
-        raise VisionReviewError(f"Vision reviewer returned invalid verdict: {verdict}")
-    # Keep repair prompts bounded even if the local model ignores the requested caps.
+        raise VisionReviewError(f"{stage} reviewer returned invalid verdict: {verdict}")
     verdict["defects"] = defects[:4]
     verdict["preserve"] = preserve[:3]
     return verdict
+
+
+def _vision_payload(settings: dict, prompt: str, encoded: str, max_tokens: int) -> dict:
+    return {
+        "model": settings.get("model", "qwen3-vl:4b"),
+        "stream": False,
+        "prompt": prompt,
+        "images": [encoded],
+        "options": {"temperature": 0, "num_predict": max_tokens},
+        "think": False,
+    }
+
+
+def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
+    settings = config.get("vision_reviewer") or {}
+    if settings.get("provider") != "ollama":
+        raise VisionReviewError("Required vision_reviewer.provider must be ollama")
+    image_path = Path(image_path)
+    try:
+        encoded = base64.b64encode(image_path.read_bytes()).decode("ascii")
+    except OSError as exc:
+        raise VisionReviewError(f"Could not read image for vision review: {image_path}: {exc}") from exc
+
+    url = settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/generate"
+
+    identity_result = _request(
+        url,
+        _vision_payload(settings, build_identity_review_prompt(page), encoded, 2048),
+    )
+    identity_verdict = _parse_verdict(identity_result, "Identity")
+    if not identity_verdict.get("pass"):
+        # Identity failure is terminal for this refinement pass. Keep the score
+        # below passing range even if the local model ignored the prompt's cap.
+        identity_verdict["score"] = min(int(identity_verdict.get("score") or 0), 49)
+        return identity_verdict
+
+    quality_result = _request(
+        url,
+        _vision_payload(settings, build_review_prompt(page), encoded, 4096),
+    )
+    return _parse_verdict(quality_result, "Quality")
 
 
 def review_notes(verdict: dict) -> dict:
