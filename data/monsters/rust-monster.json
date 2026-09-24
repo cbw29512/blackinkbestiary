@@ -31,7 +31,9 @@
       "giant horns",
       "humanoid face",
       "dense antenna detail"
-    ]
+    ],
+    "limb_structure": "Exactly four sturdy walking legs support the low armored body. A paired set of extremely long sensory antennae projects forward from the small head, with one flexible tail behind; no wings, humanoid limbs, or extra insect leg pairs.",
+    "shape_lock": "Draw one low armored four-legged scavenger with exactly four legs, a small blunt head, two extremely long forward-sweeping antennae, arched plated back, and one flexible tail. Keep it alien and low to the ground, not doglike, dragonlike, or six-legged."
   },
   "default_habitats": [
     "underground",
