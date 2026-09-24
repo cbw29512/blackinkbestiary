@@ -63,7 +63,9 @@ class UniversalPageContractTests(unittest.TestCase):
         text = build_prompt(self.minimal_page())
         self.assertIn("SUBJECT: Kobold Warrior", text)
         self.assertIn("HABITAT: Trapped Stone Corridor", text)
-        self.assertIn("60–75% of page height", text)
+        self.assertIn("CANONICAL SCALE LOCK", text)
+        self.assertIn("first-read focal subject through framing", text)
+        self.assertNotIn("60–75% of page height", text)
         self.assertIn("PHYSICAL SUPPORT / CONTACT", text)
         self.assertIn("GLOBAL ENVIRONMENT STANDARD", text)
 
