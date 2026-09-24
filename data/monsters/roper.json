@@ -31,7 +31,9 @@
       "walking legs",
       "dense rock texture",
       "tree-like branches"
-    ]
+    ],
+    "limb_structure": "No walking legs or humanoid arms. The broad base remains anchored to the ground while several long simple rope-like tendrils emerge from the conical body; one eye and one mouth are embedded in the trunk itself.",
+    "shape_lock": "Draw one rooted stalagmite-shaped cone with a broad anchored base, one embedded central eye, one horizontal toothed mouth, and a limited set of long rope-like tendrils extending from the sides. Add no legs, humanoid torso, octopus head, branches, or extra eyes."
   },
   "default_habitats": [
     "caves",
