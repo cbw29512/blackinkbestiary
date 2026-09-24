@@ -60,5 +60,32 @@
     "subsurface pursuit",
     "engulfing attack",
     "tunneling"
+  ],
+  "scene_identity": {
+    "size_impression": "Gargantuan limbless subterranean worm whose visible body thickness and tunnel scale make it overwhelming without inventing a dragon head.",
+    "natural_posture": "Continuous segmented cylinder fills and contacts the tunnel route; the circular maw leads the movement while most body mass continues behind.",
+    "behavior_style": [
+      "burrowing",
+      "subsurface pursuit",
+      "engulfing attack",
+      "tunneling"
+    ],
+    "environment_fit": [
+      "underground",
+      "deep earth",
+      "caves"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_head_drift",
+      "symptom": "front becomes a dragon, snake, or animal skull",
+      "correction": "remove separate skull/face and restore one circular muscular tooth-ringed maw at the end of the cylinder"
+    },
+    {
+      "id": "limb_drift",
+      "symptom": "legs, fins, wings, or arms appear",
+      "correction": "remove all appendages; body is one continuous limbless segmented cylinder"
+    }
   ]
 }
