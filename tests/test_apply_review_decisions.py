@@ -83,6 +83,49 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
             "identity",
         )
 
+    def test_environment_rejection_keeps_exact_image_for_repair(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-10-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"good-ogre-bad-stair")
+            digest = hashlib.sha256(b"good-ogre-bad-stair").hexdigest()[:16]
+            review_id = f"I-10-C01-H{digest}"
+
+            state_file.write_text(json.dumps({
+                "copies_per_page": 1,
+                "results": [{
+                    "page_id": "I-10",
+                    "candidate": 1,
+                    "status": "ready_for_review",
+                    "image_path": "test-gallery/I-10-C01.png",
+                    "visual_review": {"pass": True, "stage": "quality", "defects": []},
+                }],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({
+                "reviews": [{
+                    "review_id": review_id,
+                    "decision": "reject",
+                    "stage": "environment",
+                    "notes": "spiral stair is not visible",
+                }],
+            }), encoding="utf-8")
+
+            with (
+                patch.object(apply, "ROOT", root),
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["results"][0]["status"], "assistant_rejected")
+            self.assertEqual(state["results"][0]["assistant_review"]["stage"], "environment")
+            self.assertTrue(image.exists())
+
     def test_latest_exact_image_decision_wins(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
