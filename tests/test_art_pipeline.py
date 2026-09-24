@@ -82,6 +82,14 @@ class PromptTests(unittest.TestCase):
         self.assertNotIn("one large centered unmistakable monster", text)
         self.assertNotIn("normally occupying about 60–75% of page height", text)
 
+    def test_fresh_generation_ignores_legacy_modify_preserve_recipe(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(page)
+        self.assertNotIn("PRESERVE: kobold pose", text)
+        self.assertNotIn("This is a targeted refinement.", text)
+        self.assertIn("PAGE RECIPE LOCK", text)
+
     def test_story_contract_drives_generation_prompt(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
