@@ -31,7 +31,9 @@
       "humanoid face",
       "wings",
       "dense shell pattern"
-    ]
+    ],
+    "limb_structure": "Exactly six insect legs attach to the thorax/body: one pair of reinforced digging forelegs plus two additional walking pairs. The head carries paired mandibles and short antennae; no wings, spider legs, humanoid limbs, or scorpion tail.",
+    "shape_lock": "Draw one long low armored insect with a broad thorax, segmented tapered abdomen, exactly six legs, and two oversized mandibles. Keep the body horizontal and burrowing-built; forelegs are heavy digging limbs while the remaining legs stay insectlike and lower to the ground."
   },
   "default_habitats": [
     "underground",
