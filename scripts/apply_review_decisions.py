@@ -87,6 +87,19 @@ def main() -> int:
                 state["selections"].pop(page_id, None)
         elif decision == "select":
             # Full-gallery final choice: acceptable AND explicitly selected.
+            # A later explicit selection for the same page supersedes the prior
+            # selection, but the prior image remains acceptable rather than
+            # carrying a second contradictory "select" state.
+            for other in state.get("results", []):
+                if other is item or str(other.get("page_id")) != page_id:
+                    continue
+                other_review = other.get("assistant_review") or {}
+                if str(other_review.get("decision") or "").lower() == "select":
+                    other["assistant_review"] = {
+                        **other_review,
+                        "decision": "approve",
+                        "selection_superseded_by": target_review_id,
+                    }
             state.setdefault("selections", {})[page_id] = {
                 "candidate": candidate_no,
                 "source": "assistant_selected",
