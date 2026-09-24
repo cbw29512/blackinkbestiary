@@ -1,3 +1,4 @@
+param([switch]$NextRejected)
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
@@ -132,7 +133,25 @@ if (-not $runner) { $runner = Get-Command py -ErrorAction SilentlyContinue }
 if (-not $runner) { throw "Python was not found." }
 & $runner.Source (Join-Path $root "scripts\apply_review_decisions.py")
 if ($LASTEXITCODE -ne 0) { throw "Review decision applier exited with code $LASTEXITCODE." }
-& $runner.Source (Join-Path $root "scripts\generate_test_gallery.py") --copies 4 --rerun-failed
+
+$galleryArgs = @("--copies", "4", "--rerun-failed")
+if ($NextRejected) {
+  $statePath = Join-Path $root "data\test-gallery-state.json"
+  if (-not (Test-Path $statePath)) {
+    Write-Host "No gallery state exists yet; nothing rejected to rerun." -ForegroundColor Yellow
+    exit 0
+  }
+  $galleryState = Get-Content $statePath -Raw | ConvertFrom-Json
+  $rejected = @($galleryState.results | Where-Object { $_.status -eq "assistant_rejected" } | Select-Object -First 1)
+  if (-not $rejected -or $rejected.Count -eq 0) {
+    Write-Host "No assistant-rejected candidate is waiting to rerun." -ForegroundColor Green
+    exit 0
+  }
+  $target = $rejected[0]
+  Write-Host "Rerunning one rejected candidate: $($target.page_id) C$($target.candidate)" -ForegroundColor Yellow
+  $galleryArgs += @("--only", [string]$target.page_id, "--candidate", [string]$target.candidate)
+}
+& $runner.Source (Join-Path $root "scripts\generate_test_gallery.py") @galleryArgs
 if ($LASTEXITCODE -ne 0) { throw "Gallery runner exited with code $LASTEXITCODE." }
 
 Write-Host ""
