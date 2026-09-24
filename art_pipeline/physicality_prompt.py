@@ -42,6 +42,22 @@ MODE_CONTACT_RULES = {
     "web-supported": (
         "WEB-SUPPORTED LOCK: multiple canonical legs visibly contact tensioned web strands and the body sits where those strands support its weight."
     ),
+    "descending": (
+        "DESCENDING CONTACT LOCK: at least one weight-bearing foot is visibly planted on a stair tread while the body is shifted toward a lower tread. "
+        "The pose must read as moving down the stair, not standing neutrally on level ground."
+    ),
+    "crawling": (
+        "CRAWLING CONTACT LOCK: the subject is supported by the canonical contact points named by the page recipe and visibly advances across the surface. "
+        "Do not replace crawling with an upright body, floating pose, or neutral still life."
+    ),
+    "feeding-swarm": (
+        "FEEDING-SWARM CONTACT LOCK: several individuals visibly attach to or feed from the target while the rest cluster nearby at comparable scale. "
+        "The target-contact points must be obvious; no giant leader or wallpaper-density swarm."
+    ),
+    "grounded": (
+        "GROUNDED CONTACT LOCK: all visible weight-bearing feet or paws contact the named support surface. "
+        "Body language must visibly express the page's required action rather than a neutral portrait pose."
+    ),
 }
 
 
