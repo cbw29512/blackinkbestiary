@@ -4,7 +4,37 @@
   "family": "ogre",
   "size": "large",
   "creature_type": "undead giant humanoid",
-  "visual_identity": {
+  "default_habitats": [
+    "underground",
+    "ruins",
+    "wilderness"
+  ],
+  "accuracy_checks": [
+    "reads as ogre and zombie simultaneously",
+    "large scale remains obvious",
+    "chains are visible",
+    "undeath is clear without gore",
+    "movement looks slow and heavy",
+    "coloring areas remain open",
+    "sunken eyes, slack jaw, torn skin, or exposed bone edges make undeath unmistakable",
+    "head is hornless"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  },
+  "schema_version": 4,
+  "identity_version": 1,
+  "family_profile": "ogre",
+  "description": "A dead ogre animated into a slow hulking corpse, preserving the ogre's huge proportions while showing restrained unmistakable undeath. Huge heavy ogre frame with sagging posture, stiff joints, and asymmetrical undead movement. Sparse torn skin, a few exposed bone edges or stitched tears, kept clean and non-gory for coloring.",
+  "behavior_traits": [
+    "relentless pursuit",
+    "clumsy striking",
+    "mindless wandering",
+    "direct attack"
+  ],
+  "visual_overrides": {
     "core_identity": "A dead ogre animated into a slow hulking corpse, preserving the ogre's huge proportions while showing restrained unmistakable undeath.",
     "silhouette": "Massive slumped giant with drooping shoulders, uneven gait, thick limbs, and dragging chains.",
     "head_features": "Broad ogre face with sunken eyes, slack jaw, damaged but recognizable features, no graphic gore.",
@@ -40,34 +70,5 @@
       "clean living-ogre skin"
     ]
   },
-  "default_habitats": [
-    "underground",
-    "ruins",
-    "wilderness"
-  ],
-  "accuracy_checks": [
-    "reads as ogre and zombie simultaneously",
-    "large scale remains obvious",
-    "chains are visible",
-    "undeath is clear without gore",
-    "movement looks slow and heavy",
-    "coloring areas remain open",
-    "sunken eyes, slack jaw, torn skin, or exposed bone edges make undeath unmistakable",
-    "head is hornless"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 4,
-  "identity_version": 1,
-  "family_profile": "ogre",
-  "description": "A dead ogre animated into a slow hulking corpse, preserving the ogre's huge proportions while showing restrained unmistakable undeath. Huge heavy ogre frame with sagging posture, stiff joints, and asymmetrical undead movement. Sparse torn skin, a few exposed bone edges or stitched tears, kept clean and non-gory for coloring.",
-  "behavior_traits": [
-    "relentless pursuit",
-    "clumsy striking",
-    "mindless wandering",
-    "direct attack"
-  ]
+  "anatomy_variant": true
 }
