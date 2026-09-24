@@ -34,7 +34,8 @@
       "thick muscular arms or shoulders",
       "large heroic dragon-person silhouette"
     ],
-    "limb_structure": "Lean reptilian arms with clawed hands, light digitigrade-looking legs with long clawed feet, and a visible balancing tail. No wings unless a specific future variant explicitly supplies them."
+    "limb_structure": "Lean reptilian arms with clawed hands, light digitigrade-looking legs with long clawed feet, and a visible balancing tail. No wings unless a specific future variant explicitly supplies them.",
+    "shape_lock": "Draw a clearly miniature 2–3-foot reptilian humanoid with a narrow ribcage, shoulders no wider than the head-plus-neck silhouette, thin limbs, and no visible pectoral/abdominal bodybuilding; a human-scale doorway or trap fixture in the same plane must read more than twice the creature's height."
   },
   "accuracy_checks": [
     "long draconic snout is obvious",
