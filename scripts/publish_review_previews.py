@@ -186,10 +186,28 @@ def main() -> int:
         if stale.name not in active_preview_names:
             stale.unlink()
 
+    diagnostics = []
+    for item in state.get("results", []):
+        status = str(item.get("status") or "")
+        if status in {"ready_for_review", "max_refinements_reached"}:
+            continue
+        diagnostics.append({
+            "page_id": item.get("page_id"),
+            "monster_name": item.get("monster_name"),
+            "candidate": item.get("candidate"),
+            "status": status,
+            "error": item.get("error"),
+            "started_at": item.get("started_at"),
+            "finished_at": item.get("finished_at"),
+            "visual_review": item.get("visual_review"),
+        })
+
     MANIFEST.write_text(json.dumps({
-        "schema_version": 2,
+        "schema_version": 3,
         "candidate_count": len(published),
+        "diagnostic_count": len(diagnostics),
         "candidates": published,
+        "diagnostics": diagnostics,
     }, indent=2) + "\n", encoding="utf-8")
 
     try:
