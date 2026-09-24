@@ -12,19 +12,26 @@ def load_pillow():
         from PIL import Image
         return Image
     except ModuleNotFoundError:
-        print("Pillow is required for lightweight GitHub review previews. Installing it automatically...")
+        print(f"Pillow is required for lightweight GitHub review previews. Installing it into: {sys.executable}")
         try:
             subprocess.run(
-                [sys.executable, "-m", "pip", "install", "--user", "Pillow"],
+                [sys.executable, "-m", "pip", "install", "--disable-pip-version-check", "Pillow"],
                 check=True,
             )
         except (OSError, subprocess.CalledProcessError) as exc:
             raise SystemExit(
-                "Could not install Pillow automatically. Run: python -m pip install --user Pillow"
+                f"Could not install Pillow into the active Python ({sys.executable}). "
+                f"Run: \"{sys.executable}\" -m pip install Pillow"
             ) from exc
         importlib.invalidate_caches()
-        from PIL import Image
-        return Image
+        try:
+            from PIL import Image
+            return Image
+        except ModuleNotFoundError as exc:
+            raise SystemExit(
+                f"Pillow installed but is still not importable by the active Python ({sys.executable}). "
+                "Close this window, reopen PowerShell, and rerun PUBLISH_REVIEW_PREVIEWS.bat."
+            ) from exc
 
 
 Image = load_pillow()
