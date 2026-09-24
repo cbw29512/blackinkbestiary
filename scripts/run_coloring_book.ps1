@@ -44,10 +44,17 @@ if (-not (Test-Comfy)) {
 
   if (Test-Path $knownMain) {
     Write-Host "Found existing ComfyUI Desktop install: $knownInstall" -ForegroundColor Green
-    $desktopExe = Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA "Programs") -Filter "ComfyUI*.exe" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+    $desktopExe = @(
+      (Join-Path $env:LOCALAPPDATA "Programs\ComfyUI\ComfyUI.exe"),
+      (Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI.exe"),
+      (Join-Path $env:LOCALAPPDATA "Programs\ComfyUI Desktop\ComfyUI.exe")
+    ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+    if (-not $desktopExe) {
+      $desktopExe = Get-ChildItem -Path $env:LOCALAPPDATA -Include "ComfyUI.exe","ComfyUI Desktop.exe" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+    }
     if ($desktopExe) {
       Write-Host "Launching ComfyUI Desktop..." -ForegroundColor Yellow
-      Start-Process -FilePath $desktopExe.FullName | Out-Null
+      Start-Process -FilePath ([string]$desktopExe) | Out-Null
     } else {
       Write-Host "Launching the existing Black-Ink install with its own Python environment..." -ForegroundColor Yellow
       $embedded = @(
