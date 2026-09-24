@@ -204,10 +204,16 @@ class TestGalleryResumeTests(unittest.TestCase):
             "score": 49,
             "defects": ["wrong creature"],
         }
-        scene_fail = {
+        environment_fail = {
             "pass": False,
-            "stage": "scene",
+            "stage": "environment",
             "score": 45,
+            "defects": ["wrong room"],
+        }
+        action_fail = {
+            "pass": False,
+            "stage": "action",
+            "score": 42,
             "defects": ["missing action"],
         }
         quality_fail = {
@@ -216,8 +222,9 @@ class TestGalleryResumeTests(unittest.TestCase):
             "score": 40,
             "defects": ["too dense"],
         }
-        self.assertGreater(gallery.verdict_rank(scene_fail), gallery.verdict_rank(identity_fail))
-        self.assertGreater(gallery.verdict_rank(quality_fail), gallery.verdict_rank(scene_fail))
+        self.assertGreater(gallery.verdict_rank(environment_fail), gallery.verdict_rank(identity_fail))
+        self.assertGreater(gallery.verdict_rank(action_fail), gallery.verdict_rank(environment_fail))
+        self.assertGreater(gallery.verdict_rank(quality_fail), gallery.verdict_rank(action_fail))
 
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
