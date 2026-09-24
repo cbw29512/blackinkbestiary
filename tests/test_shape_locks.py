@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from prompt_builder import build_prompt, build_supervisor_checklist
+from monster_catalog import resolve_monster_spec
 
 
 class ShapeLockTests(unittest.TestCase):
@@ -74,6 +75,21 @@ class ShapeLockTests(unittest.TestCase):
             shape_lock = str((payload.get("visual_identity") or {}).get("shape_lock") or "").strip()
             if not shape_lock:
                 missing.append(path.name)
+        self.assertEqual(missing, [])
+
+    def test_every_tome_i_monster_resolves_complete_positive_anatomy_contract(self):
+        missing = []
+        for path in sorted((ROOT / "data" / "monsters").glob("*.json")):
+            spec_id = path.stem
+            resolved = resolve_monster_spec(spec_id)
+            visual = resolved.get("visual_identity") or {}
+            absent = [
+                key
+                for key in ("shape_lock", "limb_structure", "silhouette", "body_shape")
+                if not str(visual.get(key) or "").strip()
+            ]
+            if absent:
+                missing.append((spec_id, absent))
         self.assertEqual(missing, [])
 
     def test_shape_lock_is_an_identity_review_gate(self):
