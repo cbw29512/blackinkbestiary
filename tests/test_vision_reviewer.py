@@ -106,6 +106,29 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertNotIn("Environment check:", environment)
         self.assertNotIn("Environment check:", quality)
 
+    def test_every_tome_i_page_populates_all_four_review_gates(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            identity = vr.build_identity_review_prompt(page)
+            environment = vr.build_environment_review_prompt(page)
+            action = vr.build_action_review_prompt(page)
+            quality = vr.build_review_prompt(page)
+            self.assertIn("IDENTITY GATES:\n- ", identity, page["page_id"])
+            self.assertIn("ENVIRONMENT GATES:\n- ", environment, page["page_id"])
+            self.assertIn("ACTION / PHYSICALITY GATES:\n- ", action, page["page_id"])
+            self.assertIn("FINAL QUALITY GATES:\n- ", quality, page["page_id"])
+
+    def test_empty_gate_fails_closed(self):
+        with patch.object(vr, "_checks", return_value=[]):
+            with self.assertRaises(RuntimeError):
+                vr.build_identity_review_prompt(self.page)
+            with self.assertRaises(RuntimeError):
+                vr.build_environment_review_prompt(self.page)
+            with self.assertRaises(RuntimeError):
+                vr.build_action_review_prompt(self.page)
+            with self.assertRaises(RuntimeError):
+                vr.build_review_prompt(self.page)
+
     def test_canonical_scale_and_body_plan_are_hard_gates(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-01")
