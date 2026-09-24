@@ -37,7 +37,8 @@
       "worm body with only a few legs",
       "spider-style long legs"
     ],
-    "shape_lock": "Draw a long chain of many trunk segments where every visible trunk segment carries exactly one pair of short walking legs, forming a continuous saw-tooth rhythm nearly the whole body length; front mouth claws stay small and mouth-adjacent, never spiderlike or lobsterlike."
+    "shape_lock": "Draw a long chain of many trunk segments where every visible trunk segment carries exactly one pair of short walking legs, forming a continuous saw-tooth rhythm nearly the whole body length; front mouth claws stay small and mouth-adjacent, never spiderlike or lobsterlike.",
+    "limb_structure": "Every visible trunk segment carries exactly one pair of short walking legs, producing a continuous paired-leg rhythm from behind the head toward the tail. The head has antennae and small mouth-adjacent poison claws only; no giant pincers or spider legs."
   },
   "default_habitats": [
     "underground",
