@@ -178,6 +178,57 @@ class PromptTests(unittest.TestCase):
         self.assertIn("two forelimbs that ARE the membrane wings", text)
         self.assertIn("Never add separate humanoid arms", text)
 
+    def test_remaining_tome_i_story_actions_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        zombie = build_prompt(pages["I-11"])
+        self.assertIn("CHAIN-DRAG PROOF", zombie)
+        self.assertIn("touch the floor or stair treads", zombie)
+
+        troll = build_prompt(pages["I-12"])
+        self.assertIn("REGENERATION PROOF", troll)
+        self.assertIn("FIRE-REACTION PROOF", troll)
+
+        limb = build_prompt(pages["I-13"])
+        self.assertIn("SEVERED-LIMB MOTION PROOF", limb)
+        self.assertIn("complete moving subject", limb)
+
+        stirges = build_prompt(pages["I-15"])
+        self.assertIn("FEEDING-CONTACT PROOF", stirges)
+        self.assertIn("proboscises visibly contacting", stirges)
+
+        bats = build_prompt(pages["I-17"])
+        self.assertIn("VERTICAL-ORIGIN PROOF", bats)
+        self.assertIn("well/shaft opening", bats)
+
+        rat = build_prompt(pages["I-18"])
+        self.assertIn("NEST-DEFENSE PROOF", rat)
+        self.assertIn("interpose itself", rat)
+
+        beetle = build_prompt(pages["I-21"])
+        self.assertIn("LINE-ART LIGHT PROOF", beetle)
+        self.assertIn("nearby rock/timber surface", beetle)
+
+    def test_new_shape_locks_cover_known_non_canary_failures(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        troll = build_prompt(pages["I-12"])
+        self.assertIn("very long arms hanging toward the knees", troll)
+        self.assertIn("no horns", troll.lower())
+
+        limb = build_prompt(pages["I-13"])
+        self.assertIn("exactly one severed troll arm only", limb.lower())
+
+        stirges = build_prompt(pages["I-15"])
+        self.assertIn("one long straight needle proboscis", stirges.lower())
+        self.assertIn("no giant leader", stirges.lower())
+
+        beetle = build_prompt(pages["I-21"])
+        self.assertIn("exactly six walking legs", beetle.lower())
+        self.assertIn("three unmistakable outlined luminous gland bulges", beetle.lower())
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
