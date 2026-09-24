@@ -108,7 +108,7 @@ Every independent composition candidate follows the same authority-first loop:
 
 The written monster family, monster JSON, environment contract, page recipe, anatomy rules, and coloring-page standard are reloaded before every generation or refinement pass. The previous image is never treated as authority.
 
-A refinement preserves successful composition and artwork while correcting observed defects. It must use image editing rather than silently replacing the candidate with an unrelated text-to-image composition. Each candidate retains its pass history and best-so-far image so a later regression cannot destroy a better earlier result.
+Refinement is stage-aware. Identity/anatomy failures regenerate from written canonical authority because a fundamentally wrong body plan is a bad image-edit source. Environment, action/physicality, and print-quality failures use cumulative image editing so successful creature identity and already-correct work can be preserved. Each candidate retains its pass history, and best-so-far selection ranks review-stage progress before local numeric score so an older identity-failing image cannot beat a structurally correct later-stage image.
 
 The four candidates remain compositionally independent. Refinement may repair anatomy, identity, environment, story readability, colorability, clutter, or malformed structures, but it may not collapse all candidates into the same composition.
 
@@ -116,7 +116,7 @@ The automated loop is bounded: one initial render plus up to four refinement pas
 
 ## GitHub Assistant Review Loop
 
-Large local galleries do not need to be uploaded into chat. The local machine keeps the production PNGs; `PUBLISH_REVIEW_PREVIEWS.bat` scans the actual finalized PNGs in `web/test-gallery/`, creates smaller JPEG review copies in `review-previews/`, writes an exact-image manifest, commits them, and pushes them to the current GitHub branch. The gallery files themselves are the source of truth for publication; state metadata only enriches the manifest.
+Large local galleries do not need to be uploaded into chat. The local machine keeps the production PNGs; the publisher creates smaller JPEG review copies in `review-previews/`, writes an exact-image manifest, and publishes the snapshot to the dedicated `review-previews-live` branch. Current gallery state is authoritative for eligibility: historical/orphan PNGs left on disk are ignored unless the current state marks that exact page/candidate reviewable. Non-image generation failures are published as diagnostics when possible.
 
 Every published candidate receives a `review_id` containing page, candidate number, and a SHA-256 fingerprint of the actual finalized PNG. Assistant decisions in `review-previews/decisions.json` must target that exact `review_id`. This prevents an old rejection from accidentally rejecting a newly regenerated image that reused the same page/candidate slot, even if state metadata is stale.
 
@@ -124,9 +124,9 @@ A rejection removes the final local gallery copy, records the assistant notes, a
 
 The intended loop is:
 
-`generate locally → publish lightweight previews → assistant inspects exact image → approve/reject exact review_id → pull decisions → rerun one rejected candidate → republish → reinspect`
+`sync engine → apply exact-image decisions → generate/retry only actionable pages → publish lightweight snapshot → assistant inspects exact image → approve/reject exact review_id → pull decisions → repeat`
 
-Human `Approve & Lock` remains the final production admission gate.
+The nine-page engine canary is a preflight gate for automated batch generation. It requires current content-hash-valid exact-image approvals for I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22. The older Golden Five remains a separate human production-calibration concept in the Studio; it is not the same state machine as the automated canary. Human `Approve & Lock` remains the final admission gate for finished book pages.
 
 ## Human Quality Gate
 
