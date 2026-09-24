@@ -27,7 +27,8 @@
       "dense bubbles",
       "tentacle-monster anatomy unless variant requires it"
     ],
-    "limb_structure": "No fixed limbs, joints, hands, or feet. The body flows, pools, sheets, or holds variant-specific geometry against surrounding architecture."
+    "limb_structure": "No fixed limbs, joints, hands, or feet. The body flows, pools, sheets, or holds variant-specific geometry against surrounding architecture.",
+    "shape_lock": "Draw one continuous faceless limbless mass whose outline follows the variant geometry—blob, sheet, cube, or flow—and visibly conforms to nearby support surfaces. Use no head, eyes, mouth, hands, feet, humanoid torso, or invented tentacles unless the specific monster variant explicitly defines them."
   },
   "accuracy_checks": [
     "ooze has no accidental face",
