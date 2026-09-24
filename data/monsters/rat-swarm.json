@@ -34,7 +34,8 @@
       "wallpaper density of rats",
       "more than about two dozen visible rats",
       "oversized foreground leader rat"
-    ]
+    ],
+    "shape_lock": "Draw one directional stream of roughly 12–24 comparable rats with broad white gaps between clusters; no oversized leader, no wallpaper fill, and no decorative frame around the art."
   },
   "default_habitats": [
     "underground",
