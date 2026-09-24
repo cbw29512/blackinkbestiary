@@ -73,6 +73,26 @@ class PromptTests(unittest.TestCase):
         self.assertIn("stolen ham", text)
 
 
+    def test_fresh_identity_regeneration_promotes_feedback_into_early_hard_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "Correct these visible defects: creature reads adult-human sized",
+                "failed_dimensions": ["creature reads adult-human sized"],
+                "routing_recommendation": "regenerate",
+            },
+            candidate_no=1,
+        )
+        self.assertIn("IDENTITY RECOVERY LOCK", text)
+        self.assertIn("previous image failed species/anatomy review", text)
+        self.assertIn("creature reads adult-human sized", text)
+        self.assertIn("FAILED REVIEW REQUIREMENTS TO CORRECT", text)
+        self.assertNotIn("LATEST HUMAN NOTE", text)
+        self.assertLess(text.index("IDENTITY RECOVERY LOCK"), text.index("CRITICAL SCENE LOCK"))
+
     def test_identity_review_uses_structural_rebuild_not_preservation(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-14")
