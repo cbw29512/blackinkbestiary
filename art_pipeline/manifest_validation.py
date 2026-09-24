@@ -11,6 +11,7 @@ try:
     from .physicality_prompt import locomotion_errors
     from .source_scope import source_scope_errors
     from .story_prompt import story_errors
+    from .vision_review_prompts import review_stage_errors
 except ImportError:
     from quality_system import archetype_rules
     from monster_catalog import minimal_recipe_errors, resolve_monster_spec
@@ -19,6 +20,7 @@ except ImportError:
     from physicality_prompt import locomotion_errors
     from source_scope import source_scope_errors
     from story_prompt import story_errors
+    from vision_review_prompts import review_stage_errors
 
 
 REQUIRED_PAGE_FIELDS = {"page_id", "order", "monster_spec_id", "moment", "archetype"}
@@ -138,6 +140,7 @@ def validate_manifest(root: Path, tome: dict, monster_dir: Path) -> list[str]:
         errors.extend(_validate_environment(page))
         errors.extend(_validate_physicality(page))
         errors.extend(story_errors(page, root))
+        errors.extend(review_stage_errors(page))
         try:
             resolved = resolve_page_spec(page, root)
             if not str(resolved.get("monster_name") or "").strip():
