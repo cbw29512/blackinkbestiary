@@ -49,6 +49,7 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
                 "candidate": 1,
                 "status": "ready_for_review",
                 "image_path": "test-gallery/I-01-C01.png",
+                "visual_review": {"pass": True},
                 "assistant_review": {
                     "decision": "approve",
                     "review_id": f"I-01-C01-H{digest}",
