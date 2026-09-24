@@ -13,6 +13,16 @@ if errorlevel 1 (
   exit /b 1
 )
 echo.
+echo Running local engine preflight before GPU work...
+python scripts\engine_preflight.py
+if errorlevel 1 (
+  echo.
+  echo Engine preflight failed. Publishing diagnostic to GitHub...
+  python scripts\publish_review_previews.py
+  pause
+  exit /b 1
+)
+echo.
 echo Ensuring local AI artist and semantic reviewer are ready...
 powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\ensure_local_ai.ps1"
 if errorlevel 1 (
