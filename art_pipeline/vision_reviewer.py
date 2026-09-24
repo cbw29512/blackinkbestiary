@@ -25,12 +25,12 @@ def _request(url: str, payload: dict, timeout: float = 180.0) -> dict:
 
 def build_review_prompt(page: dict) -> str:
     checks = build_supervisor_checklist(page)
-    hard_prefixes = ("Clearly recognizable as ", "Identity check:", "Reject identity drift:", "Required element present:")
+    hard_prefixes = ("Clearly recognizable as ", "Habitat reads as:", "Scene moment reads as:", "Identity check:", "Reject identity drift:", "Required element present:", "Physical state reads as:", "Support/contact is visible and believable:", "Motion/weight reads correctly:", "Swarm reads as ")
     hard_identity = [item for item in checks if item.startswith(hard_prefixes)]
     other_checks = [item for item in checks if item not in hard_identity]
     return """You are the Black-Ink Bestiary visual quality inspector.
 Inspect the PROVIDED IMAGE, then compare only what is visibly present with the written requirements below.
-HARD RULE: any failed monster-identity gate, known identity-drift condition, missing required element, or malformed anatomy forces pass=false. A beautiful image cannot compensate for the wrong body type, scale, silhouette, or creature identity.
+HARD RULE: any failed monster-identity gate, habitat gate, story-moment gate, physical support/interaction gate, known identity-drift condition, missing required element, swarm composition gate, or malformed anatomy forces pass=false. A beautiful image cannot compensate for the wrong creature, wrong environment, wrong story beat, unsupported pose, or unreadable required interaction.
 Be strict about extra/missing/duplicated limbs, hands, heads, tails, wings, eyes and other anatomy; malformed attachments;
 monster identity; body proportions; signature features; environment identity; story readability; clutter; solid-black masses; grayscale/shading;
 large usable coloring regions; and creature/scenery separation.
