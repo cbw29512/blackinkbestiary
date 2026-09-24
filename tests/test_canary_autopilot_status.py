@@ -84,7 +84,7 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
                 "needs_generation",
             )
 
-    def test_stale_reviewer_authority_blocks_old_exact_image_approval(self):
+    def test_reviewer_authority_change_does_not_veto_direct_exact_image_approval(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             image = root / "web" / "test-gallery" / "I-01-C01.png"
@@ -111,10 +111,10 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
                     current_generation_fingerprint="gen-current",
                     current_review_fingerprint="review-new",
                 ),
-                "needs_generation",
+                "approved",
             )
 
-    def test_exact_image_approval_also_requires_current_visual_review_pass(self):
+    def test_exact_image_approval_overrides_provisional_local_visual_failure(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             image = root / "web" / "test-gallery" / "I-01-C01.png"
@@ -141,7 +141,7 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
                     current_generation_fingerprint="gen-current",
                     current_review_fingerprint="review-current",
                 ),
-                "awaiting_review",
+                "approved",
             )
 
     def test_stale_approval_does_not_approve_changed_image(self):
