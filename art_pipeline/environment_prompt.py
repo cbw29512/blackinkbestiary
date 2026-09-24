@@ -59,7 +59,8 @@ def _required_object_rules(page: dict) -> list[str]:
         )
     if "pit" in text:
         rules.append(
-            "Required pit must have a clear structural rim/opening and readable interior hazard without excessive tiny spikes."
+            "PIT-TRAP GEOMETRY LOCK: the pit is an opening cut into and interrupting the walking floor plane, with its rim flush or nearly flush with surrounding flagstones/ground. "
+            "Its interior drops below floor level and any spikes rise from inside that recessed opening. Never draw a raised circular masonry well, basin, freestanding ring, planter, or above-floor container and call it a pit."
         )
     if "lantern" in text and ("kick" in text or "kicking" in text):
         rules.append(
@@ -159,6 +160,10 @@ def environment_checklist(page: dict, root: Path) -> list[str]:
         "Monster leaves enough surrounding page area for the habitat to read",
         "Background depth comes from a few large forms, not micro-detail",
     ]
+    checks.extend(
+        f"Required object geometry reads correctly: {item}"
+        for item in _required_object_rules(page)
+    )
     checks.extend(f"Environment check: {item}" for item in environment_approval_checks(root))
     checks.extend(f"Colorability failure to reject: {item}" for item in coloring_page_failures(root))
     return checks
