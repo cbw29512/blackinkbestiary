@@ -8,7 +8,7 @@ echo ================================================
 
 :LOOP
 echo.
-echo [1/6] Synchronizing engine rules and AI decisions...
+echo [1/7] Synchronizing engine rules and AI decisions...
 python scripts\sync_engine_for_run.py
 if errorlevel 1 (
   echo Engine sync blocked. Autopilot will retry in 5 minutes.
@@ -17,7 +17,17 @@ if errorlevel 1 (
 )
 
 echo.
-echo [2/6] Ensuring local AI artist and semantic reviewer are ready...
+echo [2/7] Running local engine preflight before GPU work...
+python scripts\engine_preflight.py
+if errorlevel 1 (
+  echo Engine preflight failed. Publishing diagnostic before retry...
+  python scripts\publish_review_previews.py
+  timeout /t 300 /nobreak >nul
+  goto LOOP
+)
+
+echo.
+echo [3/7] Ensuring local AI artist and semantic reviewer are ready...
 powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\ensure_local_ai.ps1"
 if errorlevel 1 (
   echo Local AI runtime is not ready. Publishing runtime diagnostic before retry...
@@ -30,7 +40,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [3/6] Applying exact-image AI review decisions...
+echo [4/7] Applying exact-image AI review decisions...
 python scripts\apply_review_decisions.py
 if errorlevel 1 (
   echo Decision import failed. Autopilot will retry in 5 minutes.
@@ -39,7 +49,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [4/6] Checking canary state...
+echo [5/7] Checking canary state...
 python scripts\canary_autopilot_status.py
 set "STATE_EXIT=!ERRORLEVEL!"
 if "!STATE_EXIT!"=="0" (
@@ -52,7 +62,7 @@ if "!STATE_EXIT!"=="0" (
 
 echo.
 if "!STATE_EXIT!"=="10" (
-  echo [5/6] Reconciling canary state and generating only pages that truly need new pixels...
+  echo [6/7] Reconciling canary state and generating only pages that truly need new pixels...
 ) else (
   echo [5/6] Reconciling review authority on existing images; current pixels will be skipped unless stale or failed...
 )
@@ -60,7 +70,7 @@ python scripts\generate_test_gallery.py --canary-failed --copies 1
 set "GEN_EXIT=!ERRORLEVEL!"
 
 echo.
-echo [6/6] Publishing the latest review/diagnostic snapshot...
+echo [7/7] Publishing the latest review/diagnostic snapshot...
 python scripts\publish_review_previews.py
 set "PUB_EXIT=!ERRORLEVEL!"
 if not "!PUB_EXIT!"=="0" (
