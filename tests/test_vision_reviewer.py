@@ -211,6 +211,25 @@ class VisionReviewerTests(unittest.TestCase):
             ],
         )
 
+    def test_positive_interaction_gate_echo_becomes_failure_statement(self):
+        prompt = """SCENE / PHYSICALITY GATES:
+- Interaction proof is visible: KICKING CONTACT LOCK: foot contacts lantern
+- Mode-specific contact geometry reads correctly: one foot planted
+"""
+        verdict = {
+            "pass": False,
+            "score": 45,
+            "defects": [
+                "Interaction proof is visible: KICKING CONTACT LOCK: foot contacts lantern",
+                "Mode-specific contact geometry reads correctly: one foot planted",
+            ],
+            "preserve": [],
+        }
+        normalized = vr._normalize_gate_echoes(verdict, prompt)
+        self.assertTrue(
+            all(item.startswith("Required condition not visibly satisfied:") for item in normalized["defects"])
+        )
+
     def test_pass_with_defects_is_forced_to_fail(self):
         verdict = {"pass": True, "score": 95, "defects": ["visible decorative frame"], "preserve": []}
         parsed = vr._parse_verdict({"response": json.dumps(verdict)}, "Quality")
