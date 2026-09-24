@@ -31,7 +31,9 @@
       "long snake body",
       "humanoid traits",
       "dense plate texture"
-    ]
+    ],
+    "limb_structure": "Exactly four powerful digging legs support the compact body, ending in heavy claws. One dorsal fin rises from the armored back; there are no wings, extra insect legs, or fish fins replacing limbs.",
+    "shape_lock": "Draw one low barrel-bodied quadruped with exactly four thick digging legs, a wedge-shaped predatory head, broad armored back, and one obvious shark-like dorsal fin. The creature stays land-bound and massive rather than fish-shaped, serpentine, or six-legged."
   },
   "default_habitats": [
     "underground",
