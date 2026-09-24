@@ -503,6 +503,26 @@ class PromptTests(unittest.TestCase):
         self.assertIn("exactly four long flexible tendrils", fungus.lower())
         self.assertNotIn("four or more flexible tendrils", fungus.lower())
 
+    def test_late_tome_i_relationships_have_literal_story_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        watcher = build_prompt(pages["I-23"])
+        self.assertIn("GAZE-TARGET PROOF", watcher)
+        self.assertIn("readable sightline", watcher)
+
+        mouther = build_prompt(pages["I-42"])
+        self.assertIn("WATER-CONTACT PROOF", mouther)
+        self.assertIn("ripple arcs must originate", mouther)
+
+        worm = build_prompt(pages["I-45"])
+        self.assertIn("PASSAGE-FILL PROOF", worm)
+        self.assertIn("use the passage boundaries as scale evidence", worm)
+
+        drider = build_prompt(pages["I-46"])
+        self.assertIn("AIM-DIRECTION PROOF", drider)
+        self.assertIn("share the named direction", drider)
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
