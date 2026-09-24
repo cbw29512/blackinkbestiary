@@ -4,7 +4,35 @@
   "family": "ooze",
   "size": "large",
   "creature_type": "ooze",
-  "visual_identity": {
+  "default_habitats": [
+    "underground",
+    "ruins",
+    "sewers"
+  ],
+  "accuracy_checks": [
+    "ooze is distinct from ordinary puddle",
+    "metal corrosion is visible",
+    "contact deformation remains physically believable",
+    "body remains outline-driven",
+    "no facial features appear",
+    "dark identity does not destroy coloring space"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  },
+  "schema_version": 4,
+  "identity_version": 1,
+  "family_profile": "ooze",
+  "description": "A heavy corrosive ooze that flows as an irregular low mass and destroys metal on contact. Amorphous viscous mass with no fixed anatomy; shape conforms around contacted obstacles. Smooth dark-associated ooze represented by strong outer contour and sparse internal gloss lines, not a filled black silhouette.",
+  "behavior_traits": [
+    "slow creeping",
+    "surface clinging",
+    "engulfing",
+    "opportunistic feeding"
+  ],
+  "visual_overrides": {
     "core_identity": "A heavy corrosive ooze that flows as an irregular low mass and destroys metal on contact.",
     "silhouette": "Broad spreading puddle-like mass with lobed edges, climbing tendrils, and sagging drips around obstacles.",
     "head_features": "No head, eyes, or face.",
@@ -33,32 +61,5 @@
       "cute slime face"
     ]
   },
-  "default_habitats": [
-    "underground",
-    "ruins",
-    "sewers"
-  ],
-  "accuracy_checks": [
-    "ooze is distinct from ordinary puddle",
-    "metal corrosion is visible",
-    "contact deformation remains physically believable",
-    "body remains outline-driven",
-    "no facial features appear",
-    "dark identity does not destroy coloring space"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 4,
-  "identity_version": 1,
-  "family_profile": "ooze",
-  "description": "A heavy corrosive ooze that flows as an irregular low mass and destroys metal on contact. Amorphous viscous mass with no fixed anatomy; shape conforms around contacted obstacles. Smooth dark-associated ooze represented by strong outer contour and sparse internal gloss lines, not a filled black silhouette.",
-  "behavior_traits": [
-    "slow creeping",
-    "surface clinging",
-    "engulfing",
-    "opportunistic feeding"
-  ]
+  "anatomy_variant": true
 }
