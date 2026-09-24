@@ -223,6 +223,7 @@ def main() -> int:
             "source_image": source.relative_to(ROOT / "web").as_posix(),
             "source_sha256": digest,
             "visual_review": item.get("visual_review"),
+            "assistant_review": item.get("assistant_review"),
             "status": item.get("status"),
             "finished_at": item.get("finished_at"),
         })
@@ -249,6 +250,7 @@ def main() -> int:
             "started_at": item.get("started_at"),
             "finished_at": item.get("finished_at"),
             "visual_review": item.get("visual_review"),
+            "assistant_review": item.get("assistant_review"),
         })
 
     runtime = None
