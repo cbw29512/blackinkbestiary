@@ -7,7 +7,7 @@
   "visual_identity": {
     "core_identity": "An oversized beetle with a heavy oval shell and prominent luminous gland structures that make it recognizable even in black-and-white line art.",
     "silhouette": "Low oval beetle body, domed wing cases, six stout legs, short antennae, broad head.",
-    "head_features": "Compact insect head with mandibles, short antennae, and distinct rounded gland bulges near the head.",
+    "head_features": "Compact insect head with mandibles, short antennae, and TWO distinct rounded luminous gland bulges above/near the eyes.",
     "body_shape": "Three-part insect body with hard domed elytra, six legs, and a compact abdomen.",
     "surface": "Large smooth armor plates with restrained segment lines; gland areas outlined clearly rather than shaded.",
     "signature_gear": [],
@@ -22,7 +22,8 @@
       "domed beetle shell",
       "visible luminous gland shapes",
       "mandibles",
-      "low beetle posture"
+      "low beetle posture",
+      "three distinct luminous glands: two near the eyes and one at the rear abdomen"
     ],
     "must_avoid": [
       "spider anatomy",
@@ -30,7 +31,9 @@
       "dragon features",
       "glowing text effects",
       "dense shell texture",
-      "cute ladybug styling"
+      "cute ladybug styling",
+      "generic beetle with no visible gland structures",
+      "more or fewer than six legs"
     ]
   },
   "default_habitats": [
@@ -44,7 +47,9 @@
     "gland structures are visible",
     "mine setting benefits from implied glow",
     "shell remains colorable",
-    "no extra fantasy anatomy obscures beetle identity"
+    "no extra fantasy anatomy obscures beetle identity",
+    "exactly three outlined luminous gland shapes are visible: two by the eyes and one near the rear abdomen",
+    "exactly six walking legs are visible or unambiguously implied"
   ],
   "reference": {
     "image": null,
