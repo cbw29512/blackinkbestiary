@@ -7,6 +7,36 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
 
+$runtimeStatusPath = Join-Path $root "data\local-runtime-status.json"
+
+function Write-RuntimeStatus(
+  [string]$Status,
+  [string]$Stage,
+  [string]$Message
+) {
+  $payload = [ordered]@{
+    schema_version = 1
+    status = $Status
+    stage = $Stage
+    message = $Message
+    updated_at = (Get-Date).ToUniversalTime().ToString("o")
+  }
+  $parent = Split-Path -Parent $runtimeStatusPath
+  if (-not (Test-Path $parent)) {
+    New-Item -ItemType Directory -Path $parent -Force | Out-Null
+  }
+  $payload | ConvertTo-Json -Depth 4 | Set-Content -Path $runtimeStatusPath -Encoding UTF8
+}
+
+trap {
+  $message = [string]$_.Exception.Message
+  try { Write-RuntimeStatus "failed" "preflight" $message } catch {}
+  Write-Host "Local AI runtime preflight failed: $message" -ForegroundColor Red
+  exit 1
+}
+
+Write-RuntimeStatus "starting" "preflight" "Checking local artist and semantic reviewer."
+
 $configPath = Join-Path $root "config\local_ai_stack.json"
 if (-not (Test-Path $configPath)) { throw "Missing local AI config: $configPath" }
 $config = Get-Content $configPath -Raw | ConvertFrom-Json
@@ -120,5 +150,6 @@ try {
   throw "Semantic vision smoke test failed: $($_.Exception.Message)"
 }
 
+Write-RuntimeStatus "ready" "complete" "Local artist and semantic reviewer are ready."
 Write-Host "Local artist + semantic reviewer ready." -ForegroundColor Green
 exit 0
