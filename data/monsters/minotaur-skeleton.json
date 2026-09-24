@@ -34,7 +34,9 @@
       "graphic gore",
       "tiny human skeleton proportions",
       "ornate armor"
-    ]
+    ],
+    "shape_lock": "Draw one large bipedal minotaur skeleton: exactly one broad bull skull with long bovine muzzle and two sweeping horns, one exposed humanoid rib cage/spine, exactly two skeletal arms, and exactly two long skeletal legs ending in hoof-like skeletal feet. No flesh torso, human skull, goat skull, quadruped hindquarters, extra horns, or extra limbs.",
+    "limb_structure": "Exactly two skeletal humanoid arms and two bipedal skeletal legs beneath one horned bull skull; exposed ribs and spine connect the frame, with no centaur body, extra limbs, or fleshy replacement anatomy."
   },
   "default_habitats": [
     "underground",
