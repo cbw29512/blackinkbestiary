@@ -76,7 +76,7 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
 def should_skip_candidate(prior: dict | None, rerun_failed: bool) -> bool:
     if not prior:
         return False
-    return not (rerun_failed and prior.get("status") in {"failed", "technical_qa_failed", "vision_reviewer_failed"})
+    return not (rerun_failed and prior.get("status") in {"failed", "technical_qa_failed", "vision_reviewer_failed", "assistant_rejected"})
 
 
 def load_pages() -> list[dict]:
@@ -162,12 +162,17 @@ def main() -> int:
     parser.add_argument("--copies", type=int, default=4, help="Independent candidates per monster/page")
     parser.add_argument("--start", help="Optional page id to start/resume from, e.g. I-24")
     parser.add_argument("--only", help="Optional page id to test repeatedly")
+    parser.add_argument("--candidate", type=int, help="Optional candidate number to run (requires --only)")
     parser.add_argument("--seed", type=int, help="Base seed for reproducible testing")
     parser.add_argument("--reset", action="store_true", help="Start a fresh gallery and discard prior test state")
     parser.add_argument("--rerun-failed", action="store_true", help="Retry candidates whose prior status was failed")
     args = parser.parse_args()
     if args.copies < 1:
         raise SystemExit("--copies must be at least 1")
+    if args.candidate is not None and not args.only:
+        raise SystemExit("--candidate requires --only")
+    if args.candidate is not None and args.candidate < 1:
+        raise SystemExit("--candidate must be at least 1")
 
     config = read_json(CONFIG_FILE)
     client = ComfyClient(config["comfy_url"])
@@ -195,7 +200,8 @@ def main() -> int:
 
     sequence = len(state.get("results", []))
     for page in pages:
-        for candidate_no in range(1, args.copies + 1):
+        candidate_numbers = [args.candidate] if args.candidate is not None else range(1, args.copies + 1)
+        for candidate_no in candidate_numbers:
             prior = existing.get((page["page_id"], candidate_no))
             if should_skip_candidate(prior, args.rerun_failed):
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
