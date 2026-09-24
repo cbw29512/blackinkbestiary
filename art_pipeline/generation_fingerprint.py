@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -121,6 +122,12 @@ def _resolved_candidate_prompts(page: dict, root: Path) -> list[str]:
     try:
         from .prompt_builder import build_prompt
     except ImportError:
+        # This module is also loaded directly by isolated tests/tools rather
+        # than as part of the art_pipeline package. Make the sibling modules
+        # importable without requiring callers to mutate sys.path first.
+        module_dir = str(Path(__file__).resolve().parent)
+        if module_dir not in sys.path:
+            sys.path.insert(0, module_dir)
         from prompt_builder import build_prompt
 
     # Candidate composition policy currently exposes four canonical variants.
