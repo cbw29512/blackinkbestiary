@@ -65,7 +65,7 @@ The production audit rejects missing fields, duplicate IDs/orders, missing canon
 
 `config/environment_standard.json` is global across all books. Colorability is the governing constraint; beneath it, every page must independently satisfy three visual requirements:
 
-- unmistakable monster identity — visually dominant, large, and centered or near-centered
+- unmistakable monster identity — first-read dominant through framing and silhouette clarity while preserving canonical creature scale and proportions
 - unmistakable environment identity — supportive framing around the monster
 - unmistakable story moment
 
@@ -75,7 +75,7 @@ Simplification removes clutter, not habitat identity.
 
 ### Coloring-page scale standard
 
-`config/coloring_page_standard.json` keeps pages easy to color: a large centered monster as the dominant focal form, 2–4 major supporting environmental forms, sparse secondary objects, and broad open white regions. The system explicitly rejects micro-texture, tiny enclosed coloring islands, and monster scaling that erases the environment.
+`config/coloring_page_standard.json` keeps pages easy to color: one first-read monster or creature group emphasized through framing at canonical scale, 2–4 major supporting environmental forms, sparse secondary objects, and broad open white regions. The system explicitly rejects micro-texture, tiny enclosed coloring islands, and any scaling that changes canonical creature size/proportions.
 
 ### Defect remediation
 
