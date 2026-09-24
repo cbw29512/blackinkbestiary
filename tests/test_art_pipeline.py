@@ -175,7 +175,7 @@ class PromptTests(unittest.TestCase):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-16")
         text = build_prompt(page)
-        self.assertIn("the two forelimbs ARE the two membrane wings", text)
+        self.assertIn("two forelimbs that ARE the membrane wings", text)
         self.assertIn("There is no separate pair of arms", text)
 
     def test_modify_notes_enter_prompt(self):
