@@ -688,8 +688,8 @@
       },
       "physicality": {
         "mode": "attached-peeling",
-        "support": "part of the darkmantle remains visibly attached to the stalactite",
-        "motion": "body peels downward from the attachment point toward the lantern"
+        "support": "the leathery mantle body/rim itself remains visibly attached to the stalactite; no hands, feet, arms, or legs provide support",
+        "motion": "the continuous mantle body peels downward from that body-surface attachment while short underside tentacles hang free toward the lantern"
       }
     },
     {
@@ -784,8 +784,8 @@
       },
       "physicality": {
         "mode": "hanging",
-        "support": "claws or feet visibly grip the cavern ceiling",
-        "motion": "body hangs inverted with wings partly wrapped and gravity clearly downward"
+        "support": "both canonical hind feet only visibly grip the cavern ceiling; the two forelimbs remain membrane wings and never become separate hands or arms",
+        "motion": "body hangs inverted from the hind feet while the forelimb-wings wrap partly around the body and gravity reads clearly downward"
       }
     },
     {
