@@ -29,6 +29,12 @@ class VisionReviewerTests(unittest.TestCase):
             "archetype": "trap_scene",
         }
 
+    def test_final_quality_gate_explicitly_rejects_decorative_artwork_frames(self):
+        prompt = vr.build_review_prompt(self.page)
+        self.assertIn("decorative rectangular artwork frame", prompt)
+        self.assertIn("inset picture box", prompt)
+        self.assertIn("normal blank page margins", prompt)
+
     def test_prompt_bounds_verdict_size(self):
         prompt = vr.build_review_prompt(self.page)
         lower = prompt.lower()
