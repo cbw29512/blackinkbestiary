@@ -30,6 +30,14 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertTrue(gallery.should_skip_candidate(prior, False))
         self.assertFalse(gallery.should_skip_candidate(prior, True))
 
+    def test_canary_force_reruns_existing_candidate(self):
+        prior = {"status": "ready_for_review"}
+        self.assertFalse(gallery.should_skip_candidate(prior, False, force_rerun=True))
+        self.assertEqual(
+            gallery.CANARY_PAGE_IDS,
+            ("I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22"),
+        )
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
