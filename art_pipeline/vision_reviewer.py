@@ -25,16 +25,24 @@ def _request(url: str, payload: dict, timeout: float = 180.0) -> dict:
 
 def build_review_prompt(page: dict) -> str:
     checks = build_supervisor_checklist(page)
+    hard_prefixes = ("Clearly recognizable as ", "Identity check:", "Reject identity drift:", "Required element present:")
+    hard_identity = [item for item in checks if item.startswith(hard_prefixes)]
+    other_checks = [item for item in checks if item not in hard_identity]
     return """You are the Black-Ink Bestiary visual quality inspector.
 Inspect the PROVIDED IMAGE, then compare only what is visibly present with the written requirements below.
+HARD RULE: any failed monster-identity gate, known identity-drift condition, missing required element, or malformed anatomy forces pass=false. A beautiful image cannot compensate for the wrong body type, scale, silhouette, or creature identity.
 Be strict about extra/missing/duplicated limbs, hands, heads, tails, wings, eyes and other anatomy; malformed attachments;
-monster identity; signature features; environment identity; story readability; clutter; solid-black masses; grayscale/shading;
+monster identity; body proportions; signature features; environment identity; story readability; clutter; solid-black masses; grayscale/shading;
 large usable coloring regions; and creature/scenery separation.
 Do not assume a requested feature exists merely because the text says it should.
 Return exactly one compact JSON object and nothing else:\n{"pass": true|false, "score": 0-100, "defects": ["specific visible defect"], "preserve": ["successful visible feature"]}
-Report at most 4 defects and at most 3 preserve items. Each item must be a short phrase under 80 characters.\nPrioritize only the defects that matter most for the next image edit.\nPass only when there is no meaningful visible defect worth another edit. Inspect silently and emit the JSON verdict immediately. Do not write step-by-step reasoning.
-REQUIREMENTS:
-- """ + "\n- ".join(checks)
+Report at most 4 defects and at most 3 preserve items. Each item must be a short phrase under 80 characters.
+Prioritize only the defects that matter most for the next image edit.
+Pass only when there is no meaningful visible defect worth another edit. Inspect silently and emit the JSON verdict immediately. Do not write step-by-step reasoning.
+HARD IDENTITY GATES:
+- """ + "\n- ".join(hard_identity) + """
+OTHER QUALITY REQUIREMENTS:
+- """ + "\n- ".join(other_checks)
 
 
 def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
