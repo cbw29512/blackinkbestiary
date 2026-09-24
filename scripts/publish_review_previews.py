@@ -51,6 +51,7 @@ from studio_config import active_book_paths
 
 STATE = ROOT / "data" / "test-gallery-state.json"
 RUNTIME_STATUS = ROOT / "data" / "local-runtime-status.json"
+ENGINE_PREFLIGHT_STATUS = ROOT / "data" / "engine-preflight-status.json"
 SOURCE_DIR = ROOT / "web" / "test-gallery"
 PREVIEW_DIR = ROOT / "review-previews"
 MANIFEST = PREVIEW_DIR / "manifest.json"
@@ -312,6 +313,34 @@ def main() -> int:
             "assistant_review": item.get("assistant_review"),
         })
 
+    engine_preflight = None
+    if ENGINE_PREFLIGHT_STATUS.exists():
+        try:
+            engine_preflight = json.loads(
+                ENGINE_PREFLIGHT_STATUS.read_text(encoding="utf-8-sig")
+            )
+        except (OSError, json.JSONDecodeError) as exc:
+            engine_preflight = {
+                "schema_version": 1,
+                "status": "failed",
+                "stage": "engine-preflight-status-read",
+                "message": f"Could not read engine preflight status: {exc}",
+            }
+
+    if engine_preflight and str(engine_preflight.get("status") or "").lower() == "failed":
+        diagnostics.append({
+            "page_id": None,
+            "monster_name": None,
+            "candidate": None,
+            "status": "engine_preflight_failed",
+            "error": "Local engine/unit-test preflight failed",
+            "stage": engine_preflight.get("stage"),
+            "started_at": engine_preflight.get("started_at"),
+            "finished_at": engine_preflight.get("updated_at"),
+            "output_tail": engine_preflight.get("output_tail"),
+            "visual_review": None,
+        })
+
     runtime = None
     if RUNTIME_STATUS.exists():
         try:
@@ -343,6 +372,7 @@ def main() -> int:
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
         "runtime": runtime,
+        "engine_preflight": engine_preflight,
         "selections": effective_selections,
         "candidates": published,
         "diagnostics": diagnostics,
