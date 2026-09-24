@@ -10,8 +10,8 @@
   "visual_identity": {
     "core_identity": "A small, lean reptilian humanoid built for ambushes and traps rather than brute force.",
     "silhouette": "Short but wiry body, long balancing tail, narrow shoulders, slightly hunched alert posture, long clawed feet.",
-    "head_features": "Long narrow draconic snout, sharp small teeth, pronounced brow, swept horn nubs or short head spines, alert predatory eyes.",
-    "body_shape": "Lean torso and limbs with visible reptilian anatomy; digitigrade-looking legs and clawed hands and feet.",
+    "head_features": "Long narrow lizard-like snout, sharp small teeth, pronounced brow, tiny swept horn nubs or short head spines, alert predatory eyes.",
+    "body_shape": "Very small narrow torso with slim shoulders and thin limbs; lightly built reptilian anatomy with digitigrade-looking legs and clawed hands and feet, never adult-human or heroic proportions.",
     "surface": "Scaled skin suggested with sparse, simple scale marks rather than dense texture.",
     "signature_gear": [
       "oversized spear",
@@ -47,7 +47,7 @@
     "ruins"
   ],
   "accuracy_checks": [
-    "long draconic snout is obvious",
+    "long narrow lizard-like snout is obvious",
     "tail is visible",
     "horns or head spines are visible",
     "body reads reptilian rather than furry",
@@ -59,7 +59,7 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference art controls anatomy and silhouette, never rendering style. Black-Ink house style controls the final line-art treatment."
   },
-  "description": "A small, lean reptilian humanoid built for ambushes and traps rather than brute force. Lean torso and limbs with visible reptilian anatomy; digitigrade-looking legs and clawed hands and feet. Scaled skin suggested with sparse, simple scale marks rather than dense texture.",
+  "description": "A very small lean reptilian humanoid trap-maker built for ambushes rather than brute force, with narrow torso, thin limbs, long balancing tail, and sparse simple scales.",
   "behavior_traits": [
     "trap-aware skirmishing",
     "ambushing",
