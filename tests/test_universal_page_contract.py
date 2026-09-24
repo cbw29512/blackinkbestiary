@@ -44,7 +44,10 @@ class UniversalPageContractTests(unittest.TestCase):
         page = resolve_page_spec(raw, ROOT)
         self.assertEqual(page["monster_name"], "Kobold Warrior")
         self.assertEqual(page["habitat"], "Trapped Stone Corridor")
-        self.assertIn("60–75% of page height", page["composition"])
+        self.assertIn("visually dominant focal subject", page["composition"])
+        self.assertIn("canonical creature scale", page["composition"])
+        self.assertTrue(page.get("subject_scale_rule"))
+        self.assertNotIn("60–75% of page height", page["composition"])
         self.assertTrue(page["must_avoid"])
         self.assertEqual(page["_resolved"]["contract_id"], "black-ink-page-v1")
 
