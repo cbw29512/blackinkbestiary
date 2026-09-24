@@ -100,7 +100,7 @@ $smokeBody = @{
   model = $visionModel
   stream = $false
   think = $false
-  messages = @(@{ role = "user"; content = "Reply with exactly this JSON and nothing else: {\"pass\":true,\"score\":100,\"defects\":[],\"preserve\":[]}" })
+  messages = @(@{ role = "user"; content = 'Reply with exactly this JSON and nothing else: {"pass":true,"score":100,"defects":[],"preserve":[]}' })
   options = @{ temperature = 0; num_predict = 128 }
 } | ConvertTo-Json -Depth 8
 try {
