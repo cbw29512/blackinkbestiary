@@ -32,6 +32,7 @@ If a centipede lacks one leg pair on every visible trunk segment, fail.
 If a swarm has an oversized leader, fail.
 If any required limb/body structure is extra, missing, duplicated, merged, branched, or replaced by scenery, fail.
 
+DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases such as "head becomes round and goblin-like" may be reported directly when visibly true.
 Do not use the requested label as a preserve item. Preserve items must describe literal visible morphology.
 Return exactly one compact JSON object and nothing else:
 {"pass": true|false, "score": 0-100, "defects": ["specific visible identity defect"], "preserve": ["specific visible morphology"]}
@@ -75,6 +76,7 @@ A web background is NOT automatically a dungeon hall; required stone architectur
 A generic corridor is NOT automatically the named habitat.
 If a required prop, interaction, spatial relation, support, or cause-and-effect is ambiguous or merely implied, fail.
 
+DEFECT WORDING RULE: defects must describe the visible failure, not copy a required gate. Do NOT return "Habitat reads as: Cramped Spiral Stair"; return "cramped spiral stair is not visible" or "stairs read straight, not spiral". Do NOT return "Scene moment reads as: kicking over a lantern"; return "lantern is not being kicked over".
 Preserve items must describe literal visible scene geometry/action, not repeat the requested labels.
 Return exactly one compact JSON object and nothing else:
 {"pass": true|false, "score": 0-100, "defects": ["specific visible scene defect"], "preserve": ["specific visible scene success"]}
@@ -123,6 +125,7 @@ Do not reward an attractive illustration if it would be tedious to color.
 For swarm pages, broad white gaps and controlled population are mandatory.
 For web pages, webs must not become dense wallpaper that erases the environment.
 Pass only when there is no meaningful visible defect worth another edit.
+DEFECT WORDING RULE: describe the visible production failure in plain negative language. Never copy a positive quality requirement verbatim into defects.
 
 Return exactly one compact JSON object and nothing else:
 {"pass": true|false, "score": 0-100, "defects": ["specific visible production defect"], "preserve": ["specific visible production success"]}
