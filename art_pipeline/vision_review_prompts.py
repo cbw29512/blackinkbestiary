@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from prompt_builder import build_supervisor_checklist
 
+IDENTITY_DEFECT_WORDING_RULE = "DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write \"body reads reptilian rather than furry\" as a defect; write \"body does not read clearly reptilian\" or \"body reads furry/mammalian\". Do NOT write \"Canonical scale reads as: small\" as a defect; write \"creature reads adult-human sized\". Negative drift phrases such as \"head becomes round and goblin-like\" may be reported directly when visibly true."
+
 
 def _checks(page: dict) -> list[str]:
     # Keep the small local VLM focused: universal/page/environment layers may
@@ -55,8 +57,8 @@ If a centipede lacks one leg pair on every visible trunk segment, fail.
 If a swarm has an oversized leader, fail.
 If any required limb/body structure is extra, missing, duplicated, merged, branched, or replaced by scenery, fail.
 
-DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases such as "head becomes round and goblin-like" may be reported directly when visibly true.
 DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases may be reported directly when visibly true.
+""" + IDENTITY_DEFECT_WORDING_RULE + """
 Do not use the requested label as a preserve item. Preserve items must describe literal visible morphology.
 Return exactly one compact JSON object and nothing else:
 {"pass": true|false, "score": 0-100, "defects": ["specific visible identity defect"], "preserve": ["specific visible morphology"]}
