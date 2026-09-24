@@ -58,6 +58,10 @@ MODE_CONTACT_RULES = {
         "GROUNDED CONTACT LOCK: all visible weight-bearing feet or paws contact the named support surface. "
         "Body language must visibly express the page's required action rather than a neutral portrait pose."
     ),
+    "crouched-dragging": (
+        "CROUCHED-DRAGGING LOCK: the overhead boundary is visibly low enough to force a crouch; knees/torso compress under it while one hand or rope visibly drags the named object along the floor. "
+        "The creature may not stand upright in a normal-height passage."
+    ),
 }
 
 
