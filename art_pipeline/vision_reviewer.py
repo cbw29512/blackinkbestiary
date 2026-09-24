@@ -47,12 +47,16 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
     payload = {
         "model": settings.get("model", "qwen3-vl:4b"),
         "stream": False,
-        "format": "json",
+        "format": {"type": "object", "properties": {"pass": {"type": "boolean"}, "score": {"type": "integer"}, "defects": {"type": "array", "items": {"type": "string"}}, "preserve": {"type": "array", "items": {"type": "string"}}}, "required": ["pass", "score", "defects", "preserve"]},
         "messages": [{"role": "user", "content": build_review_prompt(page), "images": [encoded]}],
         "options": {"temperature": 0},
     }
     result = _request(settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/chat", payload)
-    raw = ((result.get("message") or {}).get("content") or "").strip()
+    message = result.get("message") or {}
+    raw = (message.get("content") or "").strip()
+    if not raw:
+        thinking = (message.get("thinking") or "").strip()
+        raise VisionReviewError("Vision reviewer returned an empty answer" + (f"; thinking={thinking[:500]}" if thinking else "") + f"; response_keys={sorted(result.keys())}")
     try:
         verdict = json.loads(raw)
     except json.JSONDecodeError as exc:
