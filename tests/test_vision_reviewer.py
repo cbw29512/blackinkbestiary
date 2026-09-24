@@ -144,6 +144,49 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertFalse(result["pass"])
         self.assertEqual(request.call_count, 2)
 
+    def test_positive_identity_gate_echo_becomes_failure_statement(self):
+        prompt = """IDENTITY GATES:
+- Identity check: body reads reptilian rather than furry
+- Reject identity drift: head becomes round and goblin-like
+"""
+        verdict = {
+            "pass": False,
+            "score": 45,
+            "defects": [
+                "body reads reptilian rather than furry",
+                "head becomes round and goblin-like",
+            ],
+            "preserve": [],
+        }
+        normalized = vr._normalize_gate_echoes(verdict, prompt)
+        self.assertEqual(
+            normalized["defects"][0],
+            "Required condition not visibly satisfied: body reads reptilian rather than furry",
+        )
+        self.assertEqual(
+            normalized["defects"][1],
+            "head becomes round and goblin-like",
+        )
+
+    def test_positive_scene_gate_echo_becomes_failure_statement(self):
+        prompt = """SCENE / PHYSICALITY GATES:
+- Habitat reads as: Cramped Spiral Stair
+"""
+        verdict = {
+            "pass": False,
+            "score": 45,
+            "defects": ["Habitat reads as: Cramped Spiral Stair"],
+            "preserve": [],
+        }
+        normalized = vr._normalize_gate_echoes(verdict, prompt)
+        self.assertEqual(
+            normalized["defects"],
+            [
+                "Required condition not visibly satisfied: "
+                "Habitat reads as: Cramped Spiral Stair"
+            ],
+        )
+
     def test_pass_with_defects_is_forced_to_fail(self):
         verdict = {"pass": True, "score": 95, "defects": ["visible decorative frame"], "preserve": []}
         parsed = vr._parse_verdict({"response": json.dumps(verdict)}, "Quality")
