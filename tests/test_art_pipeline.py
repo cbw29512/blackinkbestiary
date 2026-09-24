@@ -109,6 +109,20 @@ class PromptTests(unittest.TestCase):
         self.assertIn("REFERENCE RULE", text)
         self.assertIn("anatomy, silhouette, and identity only", text)
 
+    def test_generation_prompt_has_hard_anatomy_integrity_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        kobold = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        spider = next(page for page in tome["pages"] if page["page_id"] == "I-22")
+        kobold_text = build_prompt(kobold, candidate_no=1)
+        spider_text = build_prompt(spider, candidate_no=2)
+        for text in (kobold_text, spider_text):
+            self.assertIn("ANATOMICAL INTEGRITY LOCK", text)
+            self.assertIn("Never invent or duplicate heads", text)
+            self.assertIn("may not branch", text)
+            self.assertIn("Candidate variation may change pose only", text)
+        self.assertIn("visible balancing tail", kobold_text)
+        self.assertIn("Exactly eight jointed arachnid legs", spider_text)
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
