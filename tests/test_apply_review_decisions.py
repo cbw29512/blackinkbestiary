@@ -214,7 +214,7 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                 [("I-01", 1), ("I-04", 1)],
             )
 
-    def test_single_candidate_approval_is_deferred_until_local_review_passes(self):
+    def test_single_candidate_approval_selects_exact_image_despite_local_failure(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             state_file = root / "state.json"
@@ -253,9 +253,13 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
 
             state = json.loads(state_file.read_text(encoding="utf-8"))
             self.assertEqual(state["results"][0]["assistant_review"]["decision"], "approve")
-            self.assertEqual(state["selections"], {})
+            self.assertEqual(state["selections"]["I-01"], {
+                "candidate": 1,
+                "source": "assistant_review",
+                "review_id": review_id,
+            })
 
-    def test_deferred_single_candidate_approval_activates_after_local_pass(self):
+    def test_stored_single_candidate_approval_restores_selection(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             state_file = root / "state.json"
@@ -344,7 +348,7 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                 ["approve", "approve"],
             )
 
-    def test_select_is_deferred_until_local_visual_review_passes(self):
+    def test_select_explicitly_overrides_provisional_local_failure(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             state_file = root / "state.json"
@@ -387,9 +391,13 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
 
             state = json.loads(state_file.read_text(encoding="utf-8"))
             self.assertEqual(state["results"][0]["assistant_review"]["decision"], "select")
-            self.assertEqual(state["selections"], {})
+            self.assertEqual(state["selections"]["I-01"], {
+                "candidate": 2,
+                "source": "assistant_selected",
+                "review_id": review_id,
+            })
 
-    def test_deferred_select_activates_after_later_local_review_pass(self):
+    def test_stored_select_restores_explicit_selection(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             state_file = root / "state.json"
