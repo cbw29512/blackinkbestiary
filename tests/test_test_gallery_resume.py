@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import tempfile
@@ -56,6 +57,40 @@ class TestGalleryResumeTests(unittest.TestCase):
                 retry_max_refinements=True,
             )
         )
+
+    def test_current_exact_assistant_approval_is_terminal_even_if_local_review_failed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "I-01-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"approved-image")
+            digest = hashlib.sha256(b"approved-image").hexdigest()[:16]
+            prior = {
+                "page_id": "I-01",
+                "candidate": 1,
+                "status": "max_refinements_reached",
+                "image_path": "test-gallery/I-01-C01.png",
+                "generation_fingerprint": "gen-current",
+                "review_fingerprint": "review-old",
+                "visual_review": {"pass": False, "stage": "quality"},
+                "assistant_review": {
+                    "decision": "approve",
+                    "review_id": f"I-01-C01-H{digest}",
+                },
+            }
+            with patch.object(gallery, "ROOT", root):
+                self.assertTrue(
+                    gallery.exact_assistant_approval_is_current(
+                        prior,
+                        "gen-current",
+                    )
+                )
+                self.assertFalse(
+                    gallery.exact_assistant_approval_is_current(
+                        prior,
+                        "gen-new",
+                    )
+                )
 
     def test_non_identity_assistant_rejection_reuses_exact_image_for_targeted_edit(self):
         with tempfile.TemporaryDirectory() as td:
