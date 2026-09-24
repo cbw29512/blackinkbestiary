@@ -216,6 +216,16 @@ class PromptTests(unittest.TestCase):
             self.assertIn("Never draw a decorative rectangular border", text)
             self.assertIn("must not connect into a page-sized frame", text)
 
+    def test_swarm_population_range_is_a_hard_generation_limit(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+        for page_id in ("I-17", "I-19"):
+            text = build_prompt(pages[page_id], candidate_no=1)
+            self.assertIn("roughly 12–24", text)
+            self.assertIn("hard composition limit", text)
+            self.assertIn("do not exceed it", text)
+            self.assertIn("broad negative-space gaps", text)
+
     def test_swarm_prompt_uses_collective_subject_not_giant_leader(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         bat_swarm = next(page for page in tome["pages"] if page["page_id"] == "I-17")
