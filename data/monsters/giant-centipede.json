@@ -68,5 +68,32 @@
     "crevice hiding",
     "scavenging",
     "sudden biting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large elongated arthropod whose length comes from many repeating trunk segments rather than a thick worm or spider body.",
+    "natural_posture": "Body stays close to the support surface with one pair of slender walking legs attached to every visible trunk segment.",
+    "behavior_style": [
+      "wall crawling",
+      "crevice hiding",
+      "scavenging",
+      "sudden biting"
+    ],
+    "environment_fit": [
+      "underground",
+      "ruins",
+      "sewers"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "worm_drift",
+      "symptom": "legs disappear and body becomes a legless worm",
+      "correction": "restore one visible leg pair on every visible trunk segment"
+    },
+    {
+      "id": "spider_drift",
+      "symptom": "legs become a few oversized spiderlike limbs",
+      "correction": "replace sparse large limbs with many small repeated centipede leg pairs"
+    }
   ]
 }
