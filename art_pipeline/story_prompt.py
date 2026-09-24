@@ -157,6 +157,14 @@ def interaction_proof_rules(page: dict) -> list[str]:
         rules.append(
             "PASSAGE-FILL PROOF: the creature's body must visibly constrain the named route, intersection, or crossing and use its nearby boundaries as scale evidence; do not show a small figure floating in an oversized generic opening."
         )
+    if "pointing" in text or "points " in text:
+        rules.append(
+            "POINTING-DIRECTION PROOF: the pointing hand, weapon, or tool must form one unmistakable directional line away from the body toward the intended space or target; do not substitute a neutral held-object pose."
+        )
+    if "shield-wall" in text or "shield wall" in text:
+        rules.append(
+            "FORMATION-LEADERSHIP PROOF: the primary leader must be visually distinct while two or more subordinate overlapping shields establish one aligned formation behind or beside them. Secondary soldiers/shields must not become competing focal subjects or a crowd wall."
+        )
     return rules
 
 
