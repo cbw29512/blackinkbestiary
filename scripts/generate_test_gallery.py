@@ -16,7 +16,7 @@ from comfy_client import ComfyClient
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
 from image_edit_profile import prepare_distilled_image_edit
 from edit_prompt import build_edit_prompt
-from vision_reviewer import review_image, review_notes
+from vision_reviewer import VisionReviewError, review_image, review_notes
 from generation_runtime import model_filename, read_json
 from manifest_validation import validate_manifest
 from page_contract import resolve_page_spec
@@ -229,6 +229,13 @@ def main() -> int:
                     "visual_review": visual_verdict,
                     "pass_history": pass_history,
                 })
+            except VisionReviewError as exc:
+                record.update({"status": "vision_reviewer_failed", "error": str(exc), "finished_at": utc_now()})
+                state["results"].append(record)
+                state["updated_at"] = utc_now()
+                write_state(state)
+                print(json.dumps(record))
+                raise SystemExit("FATAL: semantic vision reviewer failed; gallery stopped before generating more unchecked candidates.")
             except TechnicalQAError as exc:
                 record.update({"status": "technical_qa_failed", "error": str(exc)})
             except Exception as exc:
