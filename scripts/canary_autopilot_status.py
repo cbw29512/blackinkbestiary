@@ -83,18 +83,22 @@ def classify(
     return "needs_generation"
 
 
+def load_canary_pages(root: Path = ROOT) -> dict[str, dict]:
+    tome = json.loads((root / "data" / "tome-I.json").read_text(encoding="utf-8"))
+    return {
+        str(page.get("page_id")): resolve_page_spec(page, root)
+        for page in tome.get("pages", [])
+        if page.get("page_id") in CANARY_PAGE_IDS
+    }
+
+
 def main() -> int:
     if not STATE.exists():
         print("AUTOPILOT STATUS: no gallery state yet; generation required.")
         return 10
 
     state = json.loads(STATE.read_text(encoding="utf-8"))
-    tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
-    pages = {
-        str(page.get("page_id")): resolve_page_spec(page, ROOT)
-        for page in tome.get("pages", [])
-        if page.get("page_id")
-    }
+    pages = load_canary_pages(ROOT)
     results = {
         (str(item.get("page_id")), int(item.get("candidate") or 0)): item
         for item in state.get("results", [])
