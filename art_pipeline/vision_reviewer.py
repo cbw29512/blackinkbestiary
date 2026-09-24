@@ -150,6 +150,7 @@ def _normalize_gate_echoes(verdict: dict, prompt: str) -> dict:
 def _run_gate(url: str, settings: dict, encoded: str, prompt: str, stage: str) -> dict:
     verdict = _parse_verdict(_request(url, _payload(settings, prompt, encoded)), stage)
     verdict = _normalize_gate_echoes(verdict, prompt)
+    verdict["stage"] = stage.lower()
     if not verdict["pass"]:
         verdict["score"] = min(verdict["score"], 49)
     return verdict
