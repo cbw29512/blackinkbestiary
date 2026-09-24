@@ -314,10 +314,19 @@ def main() -> int:
         for candidate_no in candidate_numbers:
             prior = existing.get((page["page_id"], candidate_no))
             retry_failed = args.rerun_failed or args.canary_failed
+            current_fingerprint = page_generation_fingerprint(page, ROOT)
+            stale_generation_authority = bool(
+                prior
+                and str(prior.get("generation_fingerprint") or "")
+                != current_fingerprint
+            )
             if should_skip_candidate(
                 prior,
                 retry_failed,
-                force_rerun=args.canary,
+                force_rerun=(
+                    args.canary
+                    or (args.canary_failed and stale_generation_authority)
+                ),
                 retry_max_refinements=not args.canary_failed,
             ):
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
@@ -333,7 +342,7 @@ def main() -> int:
                 "candidate": candidate_no,
                 "seed": seed,
                 "engine_commit": engine_commit(),
-                "generation_fingerprint": page_generation_fingerprint(page, ROOT),
+                "generation_fingerprint": current_fingerprint,
                 "started_at": utc_now(),
             }
             try:
