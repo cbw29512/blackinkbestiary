@@ -66,6 +66,26 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("Support/contact is visible and believable:", prompt)
         self.assertIn("Motion/weight reads correctly:", prompt)
 
+    def test_review_stages_do_not_leak_into_final_quality_gate(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
+
+        identity = vr.build_identity_review_prompt(page)
+        scene = vr.build_scene_review_prompt(page)
+        quality = vr.build_review_prompt(page)
+
+        self.assertIn("Shape-first body geometry reads as:", identity)
+        self.assertNotIn("Shape-first body geometry reads as:", quality)
+
+        self.assertIn("Mode-specific contact geometry reads correctly:", scene)
+        self.assertIn("One clear story beat reads as:", scene)
+        self.assertIn("Environment participates through:", scene)
+
+        self.assertNotIn("Mode-specific contact geometry reads correctly:", quality)
+        self.assertNotIn("One clear story beat reads as:", quality)
+        self.assertNotIn("Environment participates through:", quality)
+        self.assertNotIn("Controlled powered flight allowed by monster data:", quality)
+
     def test_canonical_scale_and_body_plan_are_hard_gates(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-01")
