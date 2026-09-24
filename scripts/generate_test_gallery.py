@@ -191,6 +191,7 @@ def canary_summary(state: dict) -> dict:
             "page_id": page_id,
             "status": str(item.get("status") or "missing"),
             "score": int(((item.get("visual_review") or {}).get("score")) or 0),
+            "stage": str(((item.get("visual_review") or {}).get("stage")) or ""),
             "defects": list(((item.get("visual_review") or {}).get("defects")) or []),
         })
     ready = sum(1 for row in rows if row["status"] == "ready_for_review")
@@ -318,7 +319,8 @@ def main() -> int:
         for row in summary["rows"]:
             defects = "; ".join(row["defects"]) if row["defects"] else "none"
             print(
-                f"  {row['page_id']}: {row['status']} score={row['score']} defects={defects}"
+                f"  {row['page_id']}: {row['status']} stage={row['stage'] or 'n/a'} "
+                f"score={row['score']} defects={defects}"
             )
     return 0
 
