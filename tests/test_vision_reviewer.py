@@ -95,6 +95,17 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertNotIn("Environment participates through:", quality)
         self.assertNotIn("Controlled powered flight allowed by monster data:", quality)
 
+    def test_environment_gate_uses_concrete_geometry_not_generic_question_dump(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
+        environment = vr.build_environment_review_prompt(page)
+        quality = vr.build_review_prompt(page)
+
+        self.assertIn("Space envelope matches:", environment)
+        self.assertIn("Unique landmark is visible:", environment)
+        self.assertNotIn("Environment check:", environment)
+        self.assertNotIn("Environment check:", quality)
+
     def test_canonical_scale_and_body_plan_are_hard_gates(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-01")
