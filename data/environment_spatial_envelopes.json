@@ -801,6 +801,36 @@
         "dense mushroom forest",
         "generic empty cavern"
       ]
+    },
+    "labyrinth_branch": {
+      "priority": 145,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "labyrinth",
+        "maze intersection",
+        "blind corner",
+        "hard ninety-degree turn"
+      ],
+      "plan_shape": "tight branching masonry maze passage with a readable turn, T-junction, or four-way intersection",
+      "proportions": "corridor widths remain narrow, but at least one branch or hard turn visibly breaks the single straight travel axis",
+      "ceiling": "continuous built stone ceiling or arch system remains close enough to preserve confinement",
+      "openings": "two or more route options, or one unmistakable blind corner with a side passage, must be visible in the composition",
+      "focal_zone": "the creature occupies the branch/turn decision point rather than a generic straight hallway",
+      "camera": "three-quarter or corner-reveal perspective showing at least two route directions without opening into a chamber",
+      "must_show": [
+        "at least two distinct maze directions or one unmistakable ninety-degree corner reveal",
+        "high or close stone walls preserving corridor confinement",
+        "clear floor lanes continuing into separate routes",
+        "one simple corner/intersection landmark"
+      ],
+      "must_not_drift": [
+        "single straight corridor with no branch",
+        "broad open room",
+        "grand hall",
+        "natural cavern"
+      ]
     }
   }
 }
