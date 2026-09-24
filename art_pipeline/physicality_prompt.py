@@ -62,6 +62,102 @@ MODE_CONTACT_RULES = {
         "CROUCHED-DRAGGING LOCK: the overhead boundary is visibly low enough to force a crouch; knees/torso compress under it while one hand or rope visibly drags the named object along the floor. "
         "The creature may not stand upright in a normal-height passage."
     ),
+    "amorphous-contact": (
+        "AMORPHOUS-CONTACT LOCK: the continuous body visibly deforms against the named support surface along a broad contact edge. "
+        "Ripples, compression, or spread must originate at that contact; the mass may not hover or stand on invented limbs."
+    ),
+    "anchored": (
+        "ANCHORED LOCK: the main body/base remains visibly planted at one fixed support area while tendrils, arms, or other canonical extensions move away from it. "
+        "The anchor point must stay obvious and weight-bearing."
+    ),
+    "architectural-attachment": (
+        "ARCHITECTURAL-ATTACHMENT LOCK: the creature/object remains visibly hinged, framed, embedded, bolted, rooted, or otherwise continuous with the named architecture. "
+        "Living features emerge from that attached body; do not detach the subject into free space."
+    ),
+    "burrowing": (
+        "BURROWING LOCK: a substantial portion of the body remains visibly inside or beneath the ground mass while soil/earth overlaps the body boundary and marks a readable travel path. "
+        "Do not show the creature simply running or floating above intact ground."
+    ),
+    "bursting-from-ground": (
+        "GROUND-BURST LOCK: the lower body remains visibly inside the fresh breach while displaced earth/stone radiates from that same opening and the upper body emerges through it. "
+        "The breach must be the unmistakable source of motion."
+    ),
+    "ceiling-cling": (
+        "CEILING-CLING LOCK: multiple canonical contact points visibly grip the overhead surface and the body stays close to that plane. "
+        "Do not leave a gap that makes the subject look airborne or hanging from invented supports."
+    ),
+    "climbing-ooze": (
+        "CLIMBING-OOZE LOCK: one continuous ooze mass visibly adheres to the climbed surface at multiple broad contact areas and deforms over/through its geometry. "
+        "No feet, hands, unsupported floating lobes, or detached pieces unless the page explicitly requires a split body."
+    ),
+    "coiled-support": (
+        "COILED-SUPPORT LOCK: multiple coils visibly wrap, press against, or rest on the named support so the support carries the body's weight. "
+        "Coils may not float beside the object without contact."
+    ),
+    "crawling-emergence": (
+        "CRAWLING-EMERGENCE LOCK: the body visibly contacts the floor/rubble while part of it still passes through or around the origin opening/cover. "
+        "The leading end advances away from that origin with a clear emergence path."
+    ),
+    "elevated-standing": (
+        "ELEVATED-STANDING LOCK: all visible weight-bearing feet are planted on the top surface of the named elevated support. "
+        "Show the support top and foot contact clearly; no hovering above it or standing beside it."
+    ),
+    "embedded-rising": (
+        "EMBEDDED-RISING LOCK: the lower body remains visibly buried/embedded in the named material while the upper body rises out of it. "
+        "The material must overlap the body at the emergence boundary so the subject cannot read as standing on top."
+    ),
+    "flying-swarm": (
+        "FLYING-SWARM LOCK: the group follows one readable airborne flow from a visible origin or through a clear route, with members at comparable scale and broad white gaps. "
+        "No giant leader, random wallpaper scatter, or ambiguous source direction."
+    ),
+    "grounded-feeding": (
+        "GROUNDED-FEEDING LOCK: canonical weight-bearing limbs visibly contact the ground/support while the actual feeding anatomy visibly contacts the target material. "
+        "Standing near or merely looking at the food/metal/target is not feeding."
+    ),
+    "magical-flight": (
+        "MAGICAL-FLIGHT LOCK: unsupported flight is intentional and clearly directional, with body/object orientation matching a visible path around or toward the named landmark. "
+        "Do not invent wings, limbs, ropes, or supports to explain magical flight."
+    ),
+    "object-supported": (
+        "OBJECT-SUPPORTED LOCK: the disguised/animated object body visibly rests on its named floor, plinth, shelf, wall, or other support while transformation occurs through that same object structure. "
+        "Do not detach the monster body from the object or make the object hover unintentionally."
+    ),
+    "rearing-from-floor": (
+        "REARING-FROM-FLOOR LOCK: the lower edge/base remains visibly in contact with the floor while the upper portion rises, bends, or wraps upward. "
+        "The anchored base must explain the leverage; do not float the whole subject."
+    ),
+    "rooted": (
+        "ROOTED LOCK: the stalk/base visibly grows from, penetrates, or spreads into the named floor/soil/wood/stone support. "
+        "Upper structures may react or extend, but the rooted base remains stationary and unmistakably attached."
+    ),
+    "running": (
+        "RUNNING LOCK: at least one canonical foot visibly contacts the ground while the other leg drives through a stride and the torso leans along a clear travel direction. "
+        "Do not use a neutral standing pose or an unsupported midair freeze-frame."
+    ),
+    "sliding-ooze": (
+        "SLIDING-OOZE LOCK: the continuous ooze body keeps a broad visible contact edge with the floor and deforms along the direction of travel; where the page names walls/bars, side contact must also be visible. "
+        "No walking limbs or floating gaps."
+    ),
+    "stepping-down": (
+        "STEPPING-DOWN LOCK: show active weight transfer between two elevations: one foot/contact remains on the higher support while another reaches or bears weight on the lower surface. "
+        "The pose must not read as simply standing on either level."
+    ),
+    "stepping-from-perch": (
+        "STEPPING-FROM-PERCH LOCK: at least one canonical contact point remains on the perch while another reaches or contacts the destination surface. "
+        "The transition path must be visible; do not convert the movement into hovering or flight unless the page explicitly calls for it."
+    ),
+    "tunnel-emergence": (
+        "TUNNEL-EMERGENCE LOCK: the body visibly contacts the tunnel floor/walls around the opening while the leading anatomy advances through the route. "
+        "The tunnel boundaries must frame the subject and prove both emergence direction and scale."
+    ),
+    "walking-turn": (
+        "WALKING-TURN LOCK: at least one weight-bearing foot stays visibly planted while hips/torso/shoulders rotate into the new direction and the other leg advances around the turn. "
+        "Do not substitute a static frontal pose."
+    ),
+    "web-hanging": (
+        "WEB-HANGING LOCK: canonical legs/body contact tensioned web strands or web anchors at multiple visible support points, and those strands visibly carry the weight. "
+        "Do not invent ropes, hooks, extra limbs, or unsupported hovering."
+    ),
 }
 
 
