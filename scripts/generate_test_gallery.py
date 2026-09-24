@@ -91,6 +91,14 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
     }
 
 
+def generation_authority_stale(prior: dict | None, current_fingerprint: str) -> bool:
+    return bool(
+        prior
+        and str(prior.get("generation_fingerprint") or "")
+        != str(current_fingerprint or "")
+    )
+
+
 def should_skip_candidate(
     prior: dict | None,
     rerun_failed: bool,
@@ -315,10 +323,9 @@ def main() -> int:
             prior = existing.get((page["page_id"], candidate_no))
             retry_failed = args.rerun_failed or args.canary_failed
             current_fingerprint = page_generation_fingerprint(page, ROOT)
-            stale_generation_authority = bool(
-                prior
-                and str(prior.get("generation_fingerprint") or "")
-                != current_fingerprint
+            stale_generation_authority = generation_authority_stale(
+                prior,
+                current_fingerprint,
             )
             if should_skip_candidate(
                 prior,
