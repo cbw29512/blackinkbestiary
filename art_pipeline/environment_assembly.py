@@ -86,17 +86,23 @@ def _compatibility_score(item: dict, contexts: set[str]) -> tuple[int, int, int,
     tags = {str(x).lower() for x in item.get("contexts") or [] if str(x).strip()}
     if not tags:
         return None
-    if "universal" in tags:
-        # Universal components are safe fallbacks, but an exact specific match
-        # should beat them whenever one exists.
-        return (0, 0, 0, -len(tags))
 
     overlap = tags.intersection(contexts)
+    foreign = tags.difference(contexts)
+
+    if "universal" in tags:
+        # Safe fallback: below a true profile-context match, above any option
+        # carrying a foreign specialized tag such as volcanic/crystal/fungal.
+        return (2, 0, 0, -len(tags))
+
     if not overlap:
         return None
-    foreign = tags.difference(contexts)
-    exact = 1 if not foreign else 0
-    return (exact, len(overlap), -len(foreign), -len(tags))
+    if not foreign:
+        return (3, len(overlap), 0, -len(tags))
+
+    # Partial compatibility is allowed only as a last resort when neither an
+    # exact context match nor a universal fallback exists.
+    return (1, len(overlap), -len(foreign), -len(tags))
 
 
 def _pick(items: list[dict], contexts: set[str], key: str, order: int) -> dict:
