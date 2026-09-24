@@ -33,7 +33,7 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("at most 4 defects", prompt)
         self.assertIn("at most 3 preserve items", prompt)
         self.assertIn("under 80 characters", prompt)
-        self.assertIn("emit the JSON verdict immediately", prompt)
+        self.assertIn("FINAL COLORING-PAGE GATE", prompt)
 
 
     def test_identity_prompt_is_fail_closed_and_scale_focused(self):
@@ -46,9 +46,9 @@ class VisionReviewerTests(unittest.TestCase):
     def test_goblin_bodybuilder_drift_is_a_hard_identity_gate(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-05")
-        prompt = vr.build_review_prompt(page)
-        self.assertIn("HARD IDENTITY GATES:", prompt)
-        self.assertIn("forces pass=false", prompt)
+        prompt = vr.build_identity_review_prompt(page)
+        self.assertIn("IDENTITY GATES:", prompt)
+        self.assertIn("Fail closed", prompt)
         self.assertIn("bodybuilder-like", prompt)
         self.assertIn("six-pack", prompt)
 
@@ -56,8 +56,8 @@ class VisionReviewerTests(unittest.TestCase):
     def test_habitat_story_and_physicality_are_hard_gates(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
-        prompt = vr.build_review_prompt(page)
-        self.assertIn("HARD IDENTITY GATES:", prompt)
+        prompt = vr.build_scene_review_prompt(page)
+        self.assertIn("SCENE / PHYSICALITY GATES:", prompt)
         self.assertIn("Habitat reads as:", prompt)
         self.assertIn("Scene moment reads as:", prompt)
         self.assertIn("Physical state reads as:", prompt)
@@ -67,11 +67,11 @@ class VisionReviewerTests(unittest.TestCase):
     def test_canonical_scale_and_body_plan_are_hard_gates(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-01")
-        prompt = vr.build_review_prompt(page)
+        prompt = vr.build_identity_review_prompt(page)
         self.assertIn("Canonical scale reads as:", prompt)
         self.assertIn("Canonical body plan reads as:", prompt)
-        self.assertIn("canonical scale/proportion gate", prompt)
-        self.assertIn("canonical body-plan gate", prompt)
+        self.assertIn("adult-human heroic mass", prompt)
+        self.assertIn("If a bugbear reads gorilla/ape/bodybuilder, fail.", prompt)
 
     def test_identity_failure_stops_before_quality_review(self):
         verdict = {
@@ -104,9 +104,10 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertFalse(payload["stream"])
         self.assertFalse(payload["think"])
 
-    def test_identity_pass_runs_quality_review(self):
-        identity = {"pass": True, "score": 96, "defects": [], "preserve": ["kobold scale"]}
-        quality = {"pass": True, "score": 92, "defects": [], "preserve": ["clear corridor"]}
+    def test_all_three_gates_must_pass(self):
+        identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}
+        scene = {"pass": True, "score": 94, "defects": [], "preserve": ["tripwire crosses floor"]}
+        quality = {"pass": True, "score": 92, "defects": [], "preserve": ["broad white regions"]}
         with tempfile.TemporaryDirectory() as td:
             image_path = Path(td) / "candidate.png"
             image_path.write_bytes(b"x")
@@ -115,12 +116,37 @@ class VisionReviewerTests(unittest.TestCase):
                 "_request",
                 side_effect=[
                     {"response": json.dumps(identity)},
+                    {"response": json.dumps(scene)},
                     {"response": json.dumps(quality)},
                 ],
             ) as request:
                 result = vr.review_image(self.page, image_path, self.config)
         self.assertEqual(result, quality)
+        self.assertEqual(request.call_count, 3)
+
+    def test_scene_failure_stops_before_quality_gate(self):
+        identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}
+        scene = {"pass": False, "score": 42, "defects": ["tripwire action is not visible"], "preserve": ["stone corridor"]}
+        with tempfile.TemporaryDirectory() as td:
+            image_path = Path(td) / "candidate.png"
+            image_path.write_bytes(b"x")
+            with patch.object(
+                vr,
+                "_request",
+                side_effect=[
+                    {"response": json.dumps(identity)},
+                    {"response": json.dumps(scene)},
+                ],
+            ) as request:
+                result = vr.review_image(self.page, image_path, self.config)
+        self.assertFalse(result["pass"])
         self.assertEqual(request.call_count, 2)
+
+    def test_pass_with_defects_is_forced_to_fail(self):
+        verdict = {"pass": True, "score": 95, "defects": ["visible decorative frame"], "preserve": []}
+        parsed = vr._parse_verdict({"response": json.dumps(verdict)}, "Quality")
+        self.assertFalse(parsed["pass"])
+        self.assertEqual(parsed["score"], 49)
 
     def test_truncated_non_json_reports_ollama_diagnostics(self):
         with tempfile.TemporaryDirectory() as td:
