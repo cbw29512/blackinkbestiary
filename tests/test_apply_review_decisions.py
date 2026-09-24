@@ -50,6 +50,39 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
             "action",
         )
 
+    def test_rejection_stage_falls_back_to_current_local_review_stage(self):
+        review = {
+            "decision": "reject",
+            "notes": "Reject: this exact image still needs another repair pass.",
+        }
+        item = {
+            "visual_review": {
+                "pass": False,
+                "stage": "environment",
+            }
+        }
+        self.assertEqual(
+            apply.classify_rejection_stage(review, item),
+            "environment",
+        )
+
+    def test_explicit_rejection_stage_overrides_local_review_stage(self):
+        review = {
+            "decision": "reject",
+            "stage": "identity",
+            "notes": "Reject: structural anatomy is wrong.",
+        }
+        item = {
+            "visual_review": {
+                "pass": False,
+                "stage": "quality",
+            }
+        }
+        self.assertEqual(
+            apply.classify_rejection_stage(review, item),
+            "identity",
+        )
+
     def test_latest_exact_image_decision_wins(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
