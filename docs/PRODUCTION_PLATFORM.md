@@ -112,7 +112,7 @@ A refinement preserves successful composition and artwork while correcting obser
 
 The four candidates remain compositionally independent. Refinement may repair anatomy, identity, environment, story readability, colorability, clutter, or malformed structures, but it may not collapse all candidates into the same composition.
 
-The automated loop is bounded: one initial render plus up to four refinement passes per candidate. It may stop early only when the visual quality gate passes. If the configured runtime cannot perform semantic image inspection, it must fail closed and require human review; it must never label technical pixel checks as semantic AI review.
+The automated loop is bounded: one initial render plus up to four refinement passes per candidate. It may stop early only when the visual quality gate passes. Semantic inspection uses the non-thinking `qwen3-vl:4b-instruct` Ollama model; the generic `qwen3-vl:4b` tag resolves to the thinking variant and is not accepted because it can spend the generation budget on reasoning without emitting the required JSON verdict. If the configured runtime cannot perform semantic image inspection, it must fail closed and require human review; it must never label technical pixel checks as semantic AI review.
 
 ## Human Quality Gate
 
