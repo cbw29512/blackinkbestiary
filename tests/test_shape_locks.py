@@ -62,6 +62,20 @@ class ShapeLockTests(unittest.TestCase):
         self.assertIn("KICKED LANTERN LOCK", text)
         self.assertIn("lantern tips, skids, or tumbles", text)
 
+    def test_every_monster_family_has_required_positive_shape_lock(self):
+        contract = json.loads(
+            (ROOT / "config" / "universal_monster_contract.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("visual_identity.shape_lock", contract["family_profile_required"])
+
+        missing = []
+        for path in sorted((ROOT / "data" / "monster_families").glob("*.json")):
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            shape_lock = str((payload.get("visual_identity") or {}).get("shape_lock") or "").strip()
+            if not shape_lock:
+                missing.append(path.name)
+        self.assertEqual(missing, [])
+
     def test_shape_lock_is_an_identity_review_gate(self):
         checks = build_supervisor_checklist(self.pages["I-14"])
         self.assertTrue(any(item.startswith("Shape-first body geometry reads as:") for item in checks))
