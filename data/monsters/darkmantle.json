@@ -30,7 +30,13 @@
       "octopus-only body",
       "humanoid face",
       "large dragon wings",
-      "dense membrane veins"
+      "dense membrane veins",
+      "dragon head",
+      "horns",
+      "tail",
+      "true bat or dragon wings",
+      "arms or legs",
+      "upright humanoid torso"
     ]
   },
   "default_habitats": [
@@ -44,7 +50,9 @@
     "tentacles are visible",
     "shape differs from a bat",
     "body is compact",
-    "linework remains open"
+    "linework remains open",
+    "no dragon head, horns, tail, arms, legs, or separate wings",
+    "mantle itself is the broad leathery body rather than wings attached to a humanoid"
   ],
   "reference": {
     "image": null,
