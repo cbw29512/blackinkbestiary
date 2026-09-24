@@ -63,8 +63,15 @@ def sha256_file(path: Path) -> str:
 
 
 def verdict_rank(verdict: dict) -> tuple:
+    stage = str(verdict.get("stage") or "").strip().lower()
+    stage_progress = {
+        "identity": 1,
+        "scene": 2,
+        "quality": 3,
+    }.get(stage, 0)
     return (
         1 if verdict.get("pass") else 0,
+        stage_progress,
         int(verdict.get("score") or 0),
         -len(verdict.get("defects") or []),
     )
