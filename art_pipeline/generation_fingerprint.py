@@ -6,33 +6,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-GENERATION_AUTHORITY_FILES = (
-    "config/universal_monster_contract.json",
-    "config/universal_environment_contract.json",
-    "config/universal_page_contract.json",
-    "config/universal_story_contract.json",
-    "config/coloring_page_standard.json",
-    "config/environment_standard.json",
-    "config/page_archetypes.json",
-    "config/kdp_print_standard.json",
-    "data/environment_overlays.json",
-    "data/environment_spatial_envelopes.json",
-    "data/environment_variation_families.json",
-    "art_pipeline/prompt_builder.py",
-    "art_pipeline/monster_catalog.py",
-    "art_pipeline/environment_catalog.py",
-    "art_pipeline/environment_components.py",
-    "art_pipeline/environment_assembly.py",
-    "art_pipeline/environment_prompt.py",
-    "art_pipeline/environment_spatial.py",
-    "art_pipeline/physicality_prompt.py",
-    "art_pipeline/story_prompt.py",
-    "art_pipeline/style_rules.py",
-    "art_pipeline/page_contract.py",
-    "art_pipeline/edit_prompt.py",
+# Raw-file hashing is reserved for execution code that can change pixels even
+# when the resolved text prompt is identical. Prompt-construction authority is
+# hashed through the actual candidate prompts below so unrelated helper/comment
+# edits do not force expensive rerenders.
+GENERATION_EXECUTION_FILES = (
     "art_pipeline/flux2_klein_profile.py",
-    "art_pipeline/image_edit_profile.py",
     "art_pipeline/generation_runtime.py",
+    "art_pipeline/workflow_adapter.py",
 )
 
 REVIEW_AUTHORITY_FILES = (
@@ -115,38 +96,55 @@ def _page_authority_payload(page: dict) -> dict:
     return {key: page.get(key) for key in PAGE_AUTHORITY_FIELDS}
 
 
+def _resolved_candidate_prompts(page: dict, root: Path) -> list[str]:
+    # Import lazily to keep the fingerprint module lightweight and avoid
+    # module-order coupling during catalog/test imports.
+    try:
+        from .prompt_builder import build_prompt
+    except ImportError:
+        from prompt_builder import build_prompt
+
+    # Candidate composition policy currently exposes four canonical variants.
+    # Hash all four so changes to any production composition invalidate only
+    # pages whose resolved prompt text actually changes.
+    return [
+        build_prompt(page, candidate_no=candidate_no)
+        for candidate_no in range(1, 5)
+    ]
+
+
 def page_generation_fingerprint(page: dict, root: Path = ROOT) -> str:
-    """Hash only authority that can materially change rendered candidate pixels."""
+    """Hash resolved pixel authority, not incidental prompt-source file bytes."""
     digest = hashlib.sha256()
-    for relative in GENERATION_AUTHORITY_FILES:
+    digest.update(b"BLACKINK_GENERATION_FINGERPRINT_V2\0")
+
+    for relative in GENERATION_EXECUTION_FILES:
         _hash_file(digest, root, relative)
     _hash_json_payload(digest, "GENERATION_STACK", _generation_stack_payload(root))
 
-    spec_id = str(page.get("monster_spec_id") or "").strip()
-    if spec_id:
-        monster_rel = f"data/monsters/{spec_id}.json"
-        _hash_file(digest, root, monster_rel)
-        monster_path = root / monster_rel
-        if monster_path.exists():
-            monster = _read_json(monster_path)
-            family = str(monster.get("family_profile") or monster.get("family") or "").strip()
-            if family:
-                _hash_file(digest, root, f"data/monster_families/{family}.json")
-
-    environment_id = str(page.get("environment_profile_id") or "").strip()
-    environment_family = environment_id.split(".", 1)[0] if "." in environment_id else ""
-    if environment_family:
-        _hash_file(digest, root, f"data/environment_families/{environment_family}.json")
-        _hash_file(digest, root, f"data/environment_components/{environment_family}.json")
-
-    payload = json.dumps(
+    _hash_json_payload(
+        digest,
+        "PAGE_AUTHORITY",
         _page_authority_payload(page),
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-    ).encode("utf-8")
-    digest.update(b"PAGE\0")
-    digest.update(payload)
+    )
+    _hash_json_payload(
+        digest,
+        "RESOLVED_CANDIDATE_PROMPTS",
+        _resolved_candidate_prompts(page, root),
+    )
+
+    reference = str(page.get("reference_image") or "").strip()
+    if reference:
+        ref_path = Path(reference)
+        if not ref_path.is_absolute():
+            ref_path = root / reference
+        if ref_path.exists() and ref_path.is_file():
+            digest.update(b"REFERENCE_IMAGE\0")
+            digest.update(ref_path.read_bytes())
+            digest.update(b"\0")
+        else:
+            digest.update(f"MISSING_REFERENCE:{reference}\0".encode("utf-8"))
+
     return digest.hexdigest()
 
 
