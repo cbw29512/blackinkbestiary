@@ -30,6 +30,18 @@ class EngineLauncherContractTests(unittest.TestCase):
             text.index("scripts\\run_coloring_book.ps1"),
         )
 
+    def test_full_gallery_runs_local_preflight_before_gpu_runtime(self):
+        text = (ROOT / "RUN_COLORING_BOOK.bat").read_text(encoding="utf-8")
+        self.assertIn("scripts\\engine_preflight.py", text)
+        self.assertLess(
+            text.index("scripts\\engine_preflight.py"),
+            text.index("scripts\\run_coloring_book.ps1"),
+        )
+        self.assertIn(
+            "Engine preflight failed. Publishing diagnostic snapshot instead of starting generation...",
+            text,
+        )
+
     def test_full_gallery_always_publishes_review_snapshot(self):
         text = (ROOT / "RUN_COLORING_BOOK.bat").read_text(encoding="utf-8")
         self.assertIn('set "RUN_EXIT=%ERRORLEVEL%"', text)
