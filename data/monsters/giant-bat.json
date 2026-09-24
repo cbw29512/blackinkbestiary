@@ -38,5 +38,6 @@
     "echolocation hunting",
     "inverted roosting",
     "swarming movement"
-  ]
+  ],
+  "description": "A giant-scale bat variant used for solitary roosting, hunting, and controlled natural flight."
 }
