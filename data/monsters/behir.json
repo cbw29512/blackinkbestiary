@@ -31,7 +31,9 @@
       "humanoid arms",
       "smooth legless snake",
       "dense scales"
-    ]
+    ],
+    "limb_structure": "Many paired short reptilian legs repeat along the long serpentine torso. The legs remain small relative to body length; no wings, humanoid arms, insect head, or four-limbed dragon body.",
+    "shape_lock": "Draw one very long serpentine reptile whose torso visibly carries repeated paired short legs along much of its length, ending in a tapering tail. Raise one horned reptilian head from the coils. Keep the silhouette snake-long and many-legged, never dragon-shaped or insect-headed."
   },
   "default_habitats": [
     "caves",
