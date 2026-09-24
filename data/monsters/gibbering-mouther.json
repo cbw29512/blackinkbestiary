@@ -31,7 +31,9 @@
       "tentacle octopus form",
       "solid black shading",
       "too many tiny mouths causing clutter"
-    ]
+    ],
+    "limb_structure": "No fixed arms, legs, hands, feet, or single head. The body is one low amorphous crawling mass with soft pseudopod-like lower edges only; mouths and eyes are embedded across the same continuous body.",
+    "shape_lock": "Draw one low irregular mound with no head or skeleton, several distinct mouths and scattered eyes embedded across the same continuous surface, and only soft crawling pseudopod edges at the base. Never organize the features into one face, humanoid torso, octopus, or tentacled head."
   },
   "default_habitats": [
     "underground",
