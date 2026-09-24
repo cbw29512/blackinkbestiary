@@ -53,19 +53,14 @@ if (-not (Test-Comfy)) {
       $desktopExe = Get-ChildItem -Path $env:LOCALAPPDATA -Include "ComfyUI.exe","ComfyUI Desktop.exe" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
     }
     if ($desktopExe) {
-      Write-Host "Launching ComfyUI Desktop..." -ForegroundColor Yellow
-      Start-Process -FilePath ([string]$desktopExe) | Out-Null
+      $desktopPath = if ($desktopExe -is [System.IO.FileInfo]) { $desktopExe.FullName } else { [string]$desktopExe }
+      Write-Host "Launching ComfyUI Desktop: $desktopPath" -ForegroundColor Yellow
+      Start-Process -FilePath $desktopPath | Out-Null
     } else {
-      Write-Host "Launching the existing Black-Ink install with its own Python environment..." -ForegroundColor Yellow
-      $embedded = @(
-        (Join-Path (Split-Path -Parent $knownInstall) "python_embeded\python.exe"),
-        (Join-Path (Split-Path -Parent $knownInstall) ".venv\Scripts\python.exe"),
-        (Join-Path $knownInstall ".venv\Scripts\python.exe")
-      ) | Where-Object { Test-Path $_ } | Select-Object -First 1
-      if (-not $embedded) {
-        throw "Found the existing ComfyUI install but not its runtime. Open ComfyUI Desktop once, then rerun RUN_COLORING_BOOK.bat."
-      }
-      Start-Process -FilePath $embedded -ArgumentList @($knownMain, "--listen", "127.0.0.1", "--port", "8188") -WorkingDirectory $knownInstall -WindowStyle Minimized | Out-Null
+      Write-Host "ComfyUI Desktop executable was not found automatically." -ForegroundColor Red
+      Write-Host "The model install exists at: $knownInstall"
+      Write-Host "Do not reinstall anything. Open your existing ComfyUI Desktop app manually, wait until it is fully loaded, then rerun RUN_COLORING_BOOK.bat."
+      throw "ComfyUI Desktop app is required; refusing to start its managed install with a guessed Python runtime."
     }
   } else {
     $mainPy = Find-ComfyMain
@@ -77,12 +72,12 @@ if (-not (Test-Comfy)) {
 
   Write-Host "Waiting for ComfyUI API..." -ForegroundColor Yellow
   $ready = $false
-  for ($i = 0; $i -lt 120; $i++) {
+  for ($i = 0; $i -lt 45; $i++) {
     Start-Sleep -Seconds 2
     if (Test-Comfy) { $ready = $true; break }
     if (($i + 1) % 10 -eq 0) { Write-Host "  still starting... $((($i + 1) * 2)) seconds" }
   }
-  if (-not $ready) { throw "ComfyUI Desktop did not expose the API at $($config.comfy_url) within 4 minutes." }
+  if (-not $ready) { throw "ComfyUI Desktop did not expose the API at $($config.comfy_url) within 90 seconds. Do not reinstall; open the existing ComfyUI Desktop app and rerun." }
 }
 
 Write-Host "ComfyUI API ready." -ForegroundColor Green
