@@ -741,12 +741,12 @@
     },
     "underground.mine-shaft": {
       "name": "Deep Mine Shaft",
-      "description": "Large excavated vertical or sloping mine passage reinforced by timber and dominated by depth.",
+      "description": "Large excavated mine route where a timber-braced tunnel opens directly into a much deeper shaft, preserving both horizontal confinement and dramatic depth.",
       "visual_cues": [
-        "large timber supports",
-        "deep shaft opening",
-        "ore cart rail",
-        "rough-cut rock wall"
+        "timber-braced tunnel approach",
+        "deep shaft opening at the end or side of the route",
+        "ore cart rail or rail platform crossing the transition",
+        "rough-cut rock walls continuing from tunnel into shaft"
       ],
       "colorable_forms": [
         "large beams",
@@ -754,9 +754,11 @@
         "simple shaft opening"
       ],
       "must_avoid": [
-        "modern elevator machinery"
+        "modern elevator machinery",
+        "pure vertical shaft with no tunnel approach",
+        "generic open cavern"
       ],
-      "spatial_envelope": "vertical_shaft"
+      "spatial_envelope": "mine_tunnel_to_shaft"
     },
     "underground.service-crawlway": {
       "name": "Low Dungeon Service Crawlway",
