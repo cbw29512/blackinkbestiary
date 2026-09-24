@@ -31,7 +31,9 @@
       "feathered angel wings",
       "cute farm-bird look",
       "dense feathers"
-    ]
+    ],
+    "limb_structure": "Exactly two clawed birdlike legs support the body, with one pair of leathery wings and one long serpentine tail. The head is rooster-like with beak, comb, and wattles; no extra legs or dragon forelimbs.",
+    "shape_lock": "Draw one small compact hybrid with a rooster head and comb, one pair of leathery wings, exactly two clawed bird legs, and one long curling reptilian tail. Keep the torso birdlike and small; never turn it into a four-legged dragon or ordinary chicken."
   },
   "default_habitats": [
     "wilderness",
