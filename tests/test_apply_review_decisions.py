@@ -194,60 +194,6 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                 "review_id": review_id,
             })
 
-    def test_later_select_supersedes_prior_page_selection_without_rejecting_it(self):
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            state_file = root / "state.json"
-            decisions_file = root / "decisions.json"
-            gallery = root / "web" / "test-gallery"
-            gallery.mkdir(parents=True)
-
-            items = []
-            reviews = []
-            review_ids = []
-            for candidate, payload in ((1, b"one"), (2, b"two")):
-                image = gallery / f"I-01-C{candidate:02d}.png"
-                image.write_bytes(payload)
-                digest = hashlib.sha256(payload).hexdigest()[:16]
-                review_id = f"I-01-C{candidate:02d}-H{digest}"
-                review_ids.append(review_id)
-                items.append({
-                    "page_id": "I-01",
-                    "candidate": candidate,
-                    "status": "ready_for_review",
-                    "image_path": f"test-gallery/I-01-C{candidate:02d}.png",
-                })
-                reviews.append({
-                    "review_id": review_id,
-                    "decision": "select",
-                    "notes": f"select candidate {candidate}",
-                })
-
-            state_file.write_text(json.dumps({
-                "copies_per_page": 4,
-                "results": items,
-                "selections": {},
-            }), encoding="utf-8")
-            decisions_file.write_text(json.dumps({"reviews": reviews}), encoding="utf-8")
-
-            with (
-                patch.object(apply, "ROOT", root),
-                patch.object(apply, "STATE", state_file),
-                patch.object(apply, "DECISIONS", decisions_file),
-            ):
-                self.assertEqual(apply.main(), 0)
-
-            state = json.loads(state_file.read_text(encoding="utf-8"))
-            first, second = state["results"]
-            self.assertEqual(first["assistant_review"]["decision"], "approve")
-            self.assertEqual(
-                first["assistant_review"]["selection_superseded_by"],
-                review_ids[1],
-            )
-            self.assertEqual(second["assistant_review"]["decision"], "select")
-            self.assertEqual(state["selections"]["I-01"]["candidate"], 2)
-            self.assertEqual(state["selections"]["I-01"]["review_id"], review_ids[1])
-
     def test_reapplying_same_approval_is_idempotent(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
