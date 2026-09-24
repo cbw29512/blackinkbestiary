@@ -103,6 +103,44 @@ def current_reviewable_keys(state: dict) -> set[tuple[str, int]]:
     }
 
 
+def review_readiness_summary(state: dict, published: list[dict]) -> dict:
+    page_ids = sorted({
+        str(item.get("page_id"))
+        for item in state.get("results", [])
+        if item.get("page_id")
+    })
+    by_page: dict[str, list[dict]] = {}
+    for item in published:
+        by_page.setdefault(str(item.get("page_id")), []).append(item)
+
+    acceptable_pages = 0
+    selected_pages = 0
+    unresolved_pages = []
+    for page_id in page_ids:
+        candidates = by_page.get(page_id, [])
+        acceptable = [
+            item for item in candidates
+            if str(((item.get("assistant_review") or {}).get("decision")) or "").lower()
+            in {"approve", "select"}
+        ]
+        selected = [item for item in candidates if item.get("selected") is True]
+        if acceptable:
+            acceptable_pages += 1
+        if len(selected) == 1:
+            selected_pages += 1
+        elif int(state.get("copies_per_page") or 1) > 1:
+            unresolved_pages.append(page_id)
+
+    return {
+        "scope_page_count": len(page_ids),
+        "copies_per_page": int(state.get("copies_per_page") or 0),
+        "published_candidate_count": len(published),
+        "pages_with_acceptable_candidate": acceptable_pages,
+        "pages_with_explicit_selection": selected_pages,
+        "pages_needing_selection": unresolved_pages,
+    }
+
+
 def existing_history_source(item: dict) -> Path | None:
     candidates = []
     for step in item.get("pass_history") or []:
@@ -291,6 +329,7 @@ def main() -> int:
         "diagnostic_count": len(diagnostics),
         "runtime": runtime,
         "selections": state.get("selections") or {},
+        "review_readiness": review_readiness_summary(state, published),
         "candidates": published,
         "diagnostics": diagnostics,
     }, indent=2) + "\n", encoding="utf-8")
