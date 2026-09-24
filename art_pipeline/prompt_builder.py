@@ -293,7 +293,9 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         sections.append(
             "SWARM COMPOSITION LOCK — NON-NEGOTIABLE: the collective swarm is the dominant subject, not one oversized leader. "
             "Use a controlled population of similarly scaled individuals arranged in one readable directional flow with obvious origin, "
-            "broad negative-space gaps, and no wallpaper density. Vary the group silhouette, not the anatomy or scale of a single member."
+            "broad negative-space gaps, and no wallpaper density. If canonical swarm identity gives an approximate visible population range, "
+            "treat that range as a hard composition limit: do not exceed it and do not replace it with an uncountable crowd. "
+            "Vary the group silhouette, not the anatomy or scale of a single member."
         )
         subject_test = (
             "the collective swarm must dominate through one readable group shape and direction; no single oversized member may dominate; "
