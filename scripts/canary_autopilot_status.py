@@ -76,14 +76,16 @@ def classify(
             and recorded_review_fingerprint == current_review_fingerprint
         )
     )
-    visual_review_passes = bool((item.get("visual_review") or {}).get("pass"))
 
+    # Direct exact-image review is the final canary authority. The local VLM
+    # remains a provisional triage/refinement gate and may not veto a current
+    # content-hash-bound assistant approval. Generation-authority changes still
+    # invalidate the canary because the approved pixels no longer test the
+    # current engine prompt/contract.
     if (
         decision in {"approve", "select"}
         and exact_review_is_current
         and fingerprint_is_current
-        and review_fingerprint_is_current
-        and visual_review_passes
     ):
         return "approved"
     if decision == "reject" and exact_review_is_current:
