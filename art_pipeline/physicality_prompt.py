@@ -169,6 +169,11 @@ def locomotion_errors(page: dict) -> list[str]:
     mode = str((page.get("physicality") or {}).get("mode") or "").strip().lower()
     can_fly = bool((page.get("locomotion") or {}).get("can_fly"))
     errors = []
+    supported_modes = set(MODE_CONTACT_RULES) | set(POWERED_AIR_MODES)
+    if mode and mode not in supported_modes and mode not in UNSTABLE_COLORING_MODES:
+        errors.append(
+            f"{page.get('page_id')}: physicality mode {mode!r} has no universal contact/airborne rule"
+        )
     if mode in UNSTABLE_COLORING_MODES:
         errors.append(
             f"{page.get('page_id')}: unstable coloring pose {mode!r} is not allowed"
