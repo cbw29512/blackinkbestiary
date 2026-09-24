@@ -92,6 +92,9 @@ try {
 $visionModel = [string]$vision.model
 $installedVision = @($ollamaTags.models | ForEach-Object { [string]$_.name })
 if (-not ($installedVision | Where-Object { $_ -eq $visionModel -or $_ -like "$visionModel*" })) {
+  if ($visionModel -like "*-instruct" -and ($installedVision | Where-Object { $_ -eq ($visionModel -replace "-instruct$", "") })) {
+    throw "The installed Qwen3-VL model is the thinking variant and can consume its output budget before returning the JSON verdict. This project requires $visionModel. Run: ollama pull $visionModel"
+  }
   throw "Required vision model $visionModel is not installed in Ollama. Run: ollama pull $visionModel"
 }
 Write-Host "Semantic vision reviewer ready: $visionModel" -ForegroundColor Green
