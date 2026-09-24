@@ -1,11 +1,33 @@
 from __future__ import annotations
 
+import importlib
 import json
 import subprocess
 import sys
 from pathlib import Path
 
-from PIL import Image
+
+def load_pillow():
+    try:
+        from PIL import Image
+        return Image
+    except ModuleNotFoundError:
+        print("Pillow is required for lightweight GitHub review previews. Installing it automatically...")
+        try:
+            subprocess.run(
+                [sys.executable, "-m", "pip", "install", "--user", "Pillow"],
+                check=True,
+            )
+        except (OSError, subprocess.CalledProcessError) as exc:
+            raise SystemExit(
+                "Could not install Pillow automatically. Run: python -m pip install --user Pillow"
+            ) from exc
+        importlib.invalidate_caches()
+        from PIL import Image
+        return Image
+
+
+Image = load_pillow()
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "data" / "test-gallery-state.json"
