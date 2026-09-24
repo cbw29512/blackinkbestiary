@@ -1,132 +1,18 @@
 param([switch]$NextRejected)
+
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
-$config = Get-Content (Join-Path $root "config\local_ai_stack.json") -Raw | ConvertFrom-Json
-$health = "$($config.comfy_url.TrimEnd('/'))/system_stats"
-
-function Test-Comfy {
-  try { Invoke-RestMethod -Uri $health -TimeoutSec 2 | Out-Null; return $true } catch { return $false }
-}
-
-function Find-ComfyMain {
-  $candidates = @(
-    (Join-Path $root ".blackink-comfy\ComfyUI\main.py"),
-    (Join-Path $env:USERPROFILE "Desktop\ComfyUI\main.py"),
-    (Join-Path $env:USERPROFILE "Documents\ComfyUI\main.py"),
-    (Join-Path $env:USERPROFILE "ComfyUI\main.py"),
-    (Join-Path $env:LOCALAPPDATA "Programs\ComfyUI\resources\ComfyUI\main.py"),
-    (Join-Path $env:LOCALAPPDATA "ComfyUI\resources\ComfyUI\main.py")
-  )
-  foreach ($p in $candidates) { if ($p -and (Test-Path $p)) { return $p } }
-
-  $roots = @(
-    (Join-Path $env:USERPROFILE "Desktop"),
-    (Join-Path $env:USERPROFILE "Documents"),
-    $env:LOCALAPPDATA
-  )
-  foreach ($searchRoot in $roots) {
-    if (-not $searchRoot -or -not (Test-Path $searchRoot)) { continue }
-    $hit = Get-ChildItem -Path $searchRoot -Filter main.py -File -Recurse -ErrorAction SilentlyContinue |
-      Where-Object { $_.FullName -match "[\\/]ComfyUI[\\/]main\.py$" } |
-      Select-Object -First 1
-    if ($hit) { return $hit.FullName }
-  }
-  return $null
-}
 
 Write-Host ""
 Write-Host "Black-Ink Bestiary - Automated Test Gallery" -ForegroundColor Cyan
 Write-Host "================================================"
 
-if (-not (Test-Comfy)) {
-  $knownInstall = Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary\ComfyUI"
-  $knownMain = Join-Path $knownInstall "main.py"
-
-  if (Test-Path $knownMain) {
-    Write-Host "Found existing ComfyUI Desktop install: $knownInstall" -ForegroundColor Green
-    $desktopExe = @(
-      (Join-Path $env:LOCALAPPDATA "Programs\ComfyUI\ComfyUI.exe"),
-      (Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI.exe"),
-      (Join-Path $env:LOCALAPPDATA "Programs\ComfyUI Desktop\ComfyUI.exe")
-    ) | Where-Object { Test-Path $_ } | Select-Object -First 1
-    if (-not $desktopExe) {
-      $desktopExe = Get-ChildItem -Path $env:LOCALAPPDATA -Include "ComfyUI.exe","ComfyUI Desktop.exe" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
-    }
-    if ($desktopExe) {
-      $desktopPath = if ($desktopExe -is [System.IO.FileInfo]) { $desktopExe.FullName } else { [string]$desktopExe }
-      Write-Host "Launching ComfyUI Desktop: $desktopPath" -ForegroundColor Yellow
-      Start-Process -FilePath $desktopPath | Out-Null
-    } else {
-      Write-Host "ComfyUI Desktop executable was not found automatically." -ForegroundColor Red
-      Write-Host "The model install exists at: $knownInstall"
-      Write-Host "Do not reinstall anything. Open your existing ComfyUI Desktop app manually, wait until it is fully loaded, then rerun RUN_COLORING_BOOK.bat."
-      throw "ComfyUI Desktop app is required; refusing to start its managed install with a guessed Python runtime."
-    }
-  } else {
-    $mainPy = Find-ComfyMain
-    if (-not $mainPy) {
-      throw "Existing ComfyUI installation was not found. Open ComfyUI Desktop once, then rerun RUN_COLORING_BOOK.bat."
-    }
-    throw "A ComfyUI core folder was found at $mainPy, but this launcher will not start it with the wrong Python environment. Open ComfyUI Desktop once, then rerun."
-  }
-
-  Write-Host "Waiting for ComfyUI API..." -ForegroundColor Yellow
-  $ready = $false
-  for ($i = 0; $i -lt 45; $i++) {
-    Start-Sleep -Seconds 2
-    if (Test-Comfy) { $ready = $true; break }
-    if (($i + 1) % 10 -eq 0) { Write-Host "  still starting... $((($i + 1) * 2)) seconds" }
-  }
-  if (-not $ready) { throw "ComfyUI Desktop did not expose the API at $($config.comfy_url) within 90 seconds. Do not reinstall; open the existing ComfyUI Desktop app and rerun." }
+Write-Host "Ensuring local AI artist and semantic reviewer are ready..." -ForegroundColor Yellow
+& (Join-Path $root "scripts\ensure_local_ai.ps1")
+if ($LASTEXITCODE -ne 0) {
+  throw "Local AI runtime preflight failed with code $LASTEXITCODE."
 }
-
-Write-Host "ComfyUI API ready." -ForegroundColor Green
-
-$vision = $config.vision_reviewer
-if (-not $vision -or -not $vision.required) { throw "Required semantic vision reviewer is not configured." }
-try {
-  $ollamaTags = Invoke-RestMethod -Uri "$($vision.base_url.TrimEnd('/'))/api/tags" -TimeoutSec 3
-} catch {
-  throw "Semantic vision reviewer is required but Ollama is not reachable at $($vision.base_url). Start/install Ollama before running the gallery."
-}
-$visionModel = [string]$vision.model
-$installedVision = @($ollamaTags.models | ForEach-Object { [string]$_.name })
-if (-not ($installedVision | Where-Object { $_ -eq $visionModel -or $_ -like "$visionModel*" })) {
-  $ollama = Get-Command ollama -ErrorAction SilentlyContinue
-  if (-not $ollama) {
-    throw "Required vision model $visionModel is not installed and the Ollama CLI was not found."
-  }
-  Write-Host "Required semantic reviewer $visionModel is not installed. Pulling it now..." -ForegroundColor Yellow
-  & $ollama.Source pull $visionModel
-  if ($LASTEXITCODE -ne 0) {
-    throw "Ollama could not install required vision model $visionModel."
-  }
-  $ollamaTags = Invoke-RestMethod -Uri "$($vision.base_url.TrimEnd('/'))/api/tags" -TimeoutSec 5
-  $installedVision = @($ollamaTags.models | ForEach-Object { [string]$_.name })
-  if (-not ($installedVision | Where-Object { $_ -eq $visionModel -or $_ -like "$visionModel*" })) {
-    throw "Ollama pull completed but required vision model $visionModel is still not visible."
-  }
-}
-Write-Host "Semantic vision reviewer ready: $visionModel" -ForegroundColor Green
-Write-Host "Running semantic vision smoke test..." -ForegroundColor Yellow
-$smokeBody = @{
-  model = $visionModel
-  stream = $false
-  prompt = 'Reply with exactly this JSON and nothing else: {"pass":true,"score":100,"defects":[],"preserve":[]}'
-  options = @{ temperature = 0; num_predict = 2048 }
-} | ConvertTo-Json -Depth 8
-try {
-  $smoke = Invoke-RestMethod -Method Post -Uri "$($vision.base_url.TrimEnd('/'))/api/generate" -ContentType "application/json" -Body $smokeBody -TimeoutSec 120
-  $smokeContent = [string]$smoke.response
-  if ([string]::IsNullOrWhiteSpace($smokeContent)) { throw "empty response from Ollama generate API (done_reason=$($smoke.done_reason); eval_count=$($smoke.eval_count))" }
-  $smokeVerdict = $smokeContent | ConvertFrom-Json
-  if ($null -eq $smokeVerdict.pass -or $null -eq $smokeVerdict.defects) { throw "invalid structured response: $smokeContent" }
-} catch {
-  throw "Semantic vision smoke test failed before image generation: $($_.Exception.Message)"
-}
-Write-Host "Semantic vision smoke test passed." -ForegroundColor Green
-Write-Host "Starting/resuming Tome I test gallery: 50 pages x 4 candidates (up to 200 images)..." -ForegroundColor Green
 
 $runner = Get-Command python -ErrorAction SilentlyContinue
 if (-not $runner) { $runner = Get-Command py -ErrorAction SilentlyContinue }
@@ -134,10 +20,14 @@ if (-not $runner) { throw "Python was not found." }
 
 Write-Host "Synchronizing latest engine rules and AI decisions..." -ForegroundColor Yellow
 & $runner.Source (Join-Path $root "scripts\sync_engine_for_run.py")
-if ($LASTEXITCODE -ne 0) { throw "Engine sync refused or failed with code $LASTEXITCODE." }
+if ($LASTEXITCODE -ne 0) {
+  throw "Engine sync refused or failed with code $LASTEXITCODE."
+}
 
 & $runner.Source (Join-Path $root "scripts\apply_review_decisions.py")
-if ($LASTEXITCODE -ne 0) { throw "Review decision applier exited with code $LASTEXITCODE." }
+if ($LASTEXITCODE -ne 0) {
+  throw "Review decision applier exited with code $LASTEXITCODE."
+}
 
 Write-Host "Checking exact-image canary approvals before full gallery..." -ForegroundColor Yellow
 & $runner.Source (Join-Path $root "scripts\canary_autopilot_status.py")
@@ -154,18 +44,29 @@ if ($NextRejected) {
     Write-Host "No gallery state exists yet; nothing rejected to rerun." -ForegroundColor Yellow
     exit 0
   }
+
   $galleryState = Get-Content $statePath -Raw | ConvertFrom-Json
-  $rejected = @($galleryState.results | Where-Object { $_.status -eq "assistant_rejected" } | Select-Object -First 1)
+  $rejected = @(
+    $galleryState.results |
+      Where-Object { $_.status -eq "assistant_rejected" } |
+      Select-Object -First 1
+  )
   if (-not $rejected -or $rejected.Count -eq 0) {
     Write-Host "No assistant-rejected candidate is waiting to rerun." -ForegroundColor Green
     exit 0
   }
+
   $target = $rejected[0]
   Write-Host "Rerunning one rejected candidate: $($target.page_id) C$($target.candidate)" -ForegroundColor Yellow
   $galleryArgs += @("--only", [string]$target.page_id, "--candidate", [string]$target.candidate)
+} else {
+  Write-Host "Starting/resuming Tome I test gallery: 50 pages x 4 candidates (up to 200 images)..." -ForegroundColor Green
 }
+
 & $runner.Source (Join-Path $root "scripts\generate_test_gallery.py") @galleryArgs
-if ($LASTEXITCODE -ne 0) { throw "Gallery runner exited with code $LASTEXITCODE." }
+if ($LASTEXITCODE -ne 0) {
+  throw "Gallery runner exited with code $LASTEXITCODE."
+}
 
 Write-Host ""
 Write-Host "Gallery run complete." -ForegroundColor Green
