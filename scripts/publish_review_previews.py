@@ -55,6 +55,18 @@ def run(*args: str) -> None:
     subprocess.run(args, cwd=ROOT, check=True)
 
 
+def engine_commit() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=ROOT,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return "unknown"
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -203,6 +215,7 @@ def main() -> int:
             "monster_name": item.get("monster_name"),
             "candidate": candidate,
             "seed": item.get("seed"),
+            "engine_commit": item.get("engine_commit") or "unknown",
             "preview": f"review-previews/{name}",
             "source_image": source.relative_to(ROOT / "web").as_posix(),
             "source_sha256": digest,
@@ -225,6 +238,7 @@ def main() -> int:
             "monster_name": item.get("monster_name"),
             "candidate": item.get("candidate"),
             "status": status,
+            "engine_commit": item.get("engine_commit") or "unknown",
             "error": item.get("error"),
             "started_at": item.get("started_at"),
             "finished_at": item.get("finished_at"),
@@ -257,7 +271,8 @@ def main() -> int:
         })
 
     MANIFEST.write_text(json.dumps({
-        "schema_version": 4,
+        "schema_version": 5,
+        "snapshot_engine_commit": engine_commit(),
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
         "runtime": runtime,
