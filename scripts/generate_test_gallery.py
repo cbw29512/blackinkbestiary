@@ -77,12 +77,24 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
     }
 
 
-def should_skip_candidate(prior: dict | None, rerun_failed: bool, force_rerun: bool = False) -> bool:
+def should_skip_candidate(
+    prior: dict | None,
+    rerun_failed: bool,
+    force_rerun: bool = False,
+    retry_max_refinements: bool = True,
+) -> bool:
     if not prior:
         return False
     if force_rerun:
         return False
-    retryable = {"failed", "technical_qa_failed", "vision_reviewer_failed", "assistant_rejected", "max_refinements_reached"}
+    retryable = {
+        "failed",
+        "technical_qa_failed",
+        "vision_reviewer_failed",
+        "assistant_rejected",
+    }
+    if retry_max_refinements:
+        retryable.add("max_refinements_reached")
     return not (rerun_failed and prior.get("status") in retryable)
 
 
@@ -256,7 +268,12 @@ def main() -> int:
         for candidate_no in candidate_numbers:
             prior = existing.get((page["page_id"], candidate_no))
             retry_failed = args.rerun_failed or args.canary_failed
-            if should_skip_candidate(prior, retry_failed, force_rerun=args.canary):
+            if should_skip_candidate(
+                prior,
+                retry_failed,
+                force_rerun=args.canary,
+                retry_max_refinements=not args.canary_failed,
+            ):
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
                 continue
             if prior:
