@@ -18,8 +18,8 @@ class ShapeLockTests(unittest.TestCase):
     def test_kobold_shape_lock_proves_miniature_scale(self):
         text = build_prompt(self.pages["I-01"])
         self.assertIn("SHAPE-FIRST RENDER LOCK", text)
-        self.assertIn("human-scale doorway or trap fixture", text)
-        self.assertIn("more than twice the creature's height", text)
+        self.assertIn("normal doorway/corridor opening", text)
+        self.assertIn("one-third to one-half", text)
 
     def test_darkmantle_shape_lock_forbids_humanoid_topology(self):
         text = build_prompt(self.pages["I-14"])
