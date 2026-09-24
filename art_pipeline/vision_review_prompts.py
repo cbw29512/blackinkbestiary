@@ -49,11 +49,9 @@ Fail closed. PASS only if every listed identity gate is visibly satisfied.
 If the creature could reasonably be mistaken for a forbidden look-alike, fail.
 If canonical small/tiny scale is not proved by nearby human-scale architecture/props, fail.
 If a small creature has adult-human heroic mass, broad chest, six-pack, thick shoulders, or oversized limbs, fail.
-If a bugbear reads gorilla/ape/bodybuilder, fail.
-If a bat has separate arms plus wings, fail.
-If a centipede lacks one leg pair on every visible trunk segment, fail.
-If a swarm has an oversized leader, fail.
+If any page-specific prohibited look-alike or known drift is visibly present, fail.
 If any required limb/body structure is extra, missing, duplicated, merged, branched, or replaced by scenery, fail.
+If a collective/swarm page violates its page-specific scale/population rule, fail.
 
 DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases may be reported directly when visibly true.
 Do not use the requested label as a preserve item. Preserve items must describe literal visible morphology.
@@ -92,8 +90,8 @@ def build_environment_review_prompt(page: dict) -> str:
 Inspect only the visible setting. Ignore creature beauty and action quality except where creature scale proves the space.
 
 Fail closed. PASS only if the named habitat, material language, spatial envelope, required architecture/terrain, and unique landmark are visibly readable in the image.
-A generic corridor is not a crawlway. Ordinary steps are not a spiral stair. A web field is not automatically a dungeon hall. A flat grate is not a vertical shaft.
-If the environment could be mistaken for one of the forbidden drift spaces, fail.
+Do not accept a generic approximation of the named place: required spatial envelope, boundaries, depth, materials, and landmark relationships must be visibly demonstrated.
+If the environment could be mistaken for one of the page-specific forbidden drift spaces, fail.
 If the creature is correct but the place is generic or spatially wrong, fail.
 
 DEFECT WORDING RULE: describe the visible environmental failure in negative language. Never copy a positive gate verbatim into defects.
@@ -139,7 +137,7 @@ def build_action_review_prompt(page: dict) -> str:
 Inspect the visible action, contact, support, and cause-and-effect. The environment has already been checked separately.
 
 Fail closed. PASS only if the required verb/action, prop relationship, support/contact, motion/weight, and story interaction are visibly present.
-Standing near an object is not performing the action. Holding a lantern is not kicking it. Standing on stairs is not being wedged. A nearby nest is not nest defense unless the body visibly guards it.
+Proximity is not action. The image must visibly demonstrate the page-specific verb through body pose, contact geometry, direction, support, prop response, or cause-and-effect as required.
 If contact, direction, support, or cause-and-effect is ambiguous or merely implied, fail.
 
 DEFECT WORDING RULE: defects must describe the visible action/physicality failure, not copy a required gate.
