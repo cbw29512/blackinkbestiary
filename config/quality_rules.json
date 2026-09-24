@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "defects": {
     "more white space": {
       "action": "modify",
@@ -83,7 +83,7 @@
     },
     "composition wrong": {
       "action": "regenerate",
-      "directive": "Rebuild the composition with colorability as the governing constraint. Keep one large readable monster, two to four broad habitat cues, and one simple story beat. Monster identity, environment identity, and story moment must each read clearly, but none may reduce broad open coloring regions or create clutter.",
+      "directive": "Rebuild the composition with colorability as the governing constraint. Keep one visually dominant creature or creature group at canonical size and proportions, two to four broad habitat cues, and one simple story beat. Monster identity, environment identity, and story moment must each read clearly, but none may reduce broad open coloring regions or create clutter.",
       "affects": [
         "colorability",
         "monster_identity",
@@ -159,7 +159,7 @@
     },
     "monster too large": {
       "action": "modify",
-      "directive": "Reduce the monster only enough to restore readable habitat and story interaction. Keep it large, centered or near-centered, and clearly the dominant focal subject; do not shrink it into a secondary figure.",
+      "directive": "If the subject crowds out habitat/story readability, pull the camera back or rebalance framing while preserving canonical creature size, body mass, and species proportions. Do not physically shrink a canonically large creature or alter anatomy merely to fit the layout.",
       "affects": [
         "colorability",
         "environment_identity"
@@ -182,7 +182,7 @@
     },
     "monster too small": {
       "action": "modify",
-      "directive": "Enlarge the monster into the dominant central focal subject. Preserve the successful environment and story beat, but scale the creature to roughly 60–75% of page height in ordinary scenes while keeping its full silhouette comfortably inside the page.",
+      "directive": "Strengthen focal prominence with a closer camera, better placement, cleaner silhouette separation, and reduced competing background scale. Preserve canonical creature size and proportions; never enlarge a tiny/small creature into a medium/large heroic body.",
       "affects": [
         "monster_identity"
       ]
@@ -203,7 +203,7 @@
     },
     "secondary figures compete": {
       "action": "modify",
-      "directive": "Keep the primary monster large, centered or near-centered, and clearly dominant. Shrink, simplify, push back, or remove nonessential secondary figures so they support the story without creating competing focal subjects.",
+      "directive": "Keep the primary creature or creature group as the first-read focal subject at canonical scale. Shrink, simplify, push back, or remove nonessential secondary figures so they support the story without forcing the primary creature to change size or proportions.",
       "affects": [
         "colorability",
         "monster_identity"
@@ -264,7 +264,7 @@
       "affects": [
         "colorability"
       ],
-      "directive": "Regenerate the composition from the page recipe with broad open coloring regions as the first requirement. Use one dominant monster, a few large environment forms, clean black line art, and one simple story beat; do not preserve cluttered micro-detail from the failed page."
+      "directive": "Regenerate the composition from the page recipe with broad open coloring regions as the first requirement. Use one visually dominant creature or creature group at canonical scale, a few large environment forms, clean black line art, and one simple story beat; do not preserve cluttered micro-detail from the failed page."
     }
   },
   "review_dimensions": [
