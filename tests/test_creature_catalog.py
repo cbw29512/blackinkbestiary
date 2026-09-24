@@ -71,6 +71,15 @@ class CreatureCatalogTests(unittest.TestCase):
         report = audit_monster_catalog(ROOT)
         self.assertEqual(report["errors"], [])
         self.assertTrue(report["pass"])
+        self.assertTrue(report["positive_geometry"]["complete"])
+        self.assertEqual(
+            report["positive_geometry"]["shape_locked"],
+            report["positive_geometry"]["resolved_specs"],
+        )
+        self.assertEqual(
+            report["positive_geometry"]["limb_structured"],
+            report["positive_geometry"]["resolved_specs"],
+        )
 
     def test_family_scene_dna_is_injected_into_prompt(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
