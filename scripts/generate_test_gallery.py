@@ -146,7 +146,7 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
     for pass_no in range(1, max_refinements + 1):
         if verdict.get("pass"):
             break
-        workflow = prepare_edit(cli, client, config, page, seed + pass_no, candidate_no, best, verdict, pass_no)
+        workflow = prepare_edit(cli, client, config, page, seed + pass_no, candidate_no, best, best_verdict, pass_no)
         relative = execute_candidate(cli, client, workflow, f"{page['page_id']}-C{candidate_no:02d}-R{pass_no:02d}", pass_no, inspect_candidate)
         current = ROOT / "web" / relative
         reload_authority()
