@@ -26,6 +26,7 @@ def main() -> int:
     PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
 
     published = []
+    active_preview_names = set()
     for item in state.get("results", []):
         if item.get("status") not in {"ready_for_review", "max_refinements_reached"}:
             continue
@@ -38,12 +39,15 @@ def main() -> int:
 
         name = f"{item['page_id']}-C{int(item['candidate']):02d}.jpg"
         target = PREVIEW_DIR / name
+        active_preview_names.add(name)
         with Image.open(source) as im:
             im = im.convert("RGB")
             im.thumbnail((768, 1024))
             im.save(target, "JPEG", quality=82, optimize=True)
 
+        review_id = f"{item['page_id']}-C{int(item['candidate']):02d}-S{item.get('seed')}"
         published.append({
+            "review_id": review_id,
             "page_id": item.get("page_id"),
             "monster_name": item.get("monster_name"),
             "candidate": item.get("candidate"),
@@ -53,6 +57,10 @@ def main() -> int:
             "visual_review": item.get("visual_review"),
             "finished_at": item.get("finished_at"),
         })
+
+    for stale in PREVIEW_DIR.glob("*.jpg"):
+        if stale.name not in active_preview_names:
+            stale.unlink()
 
     MANIFEST.write_text(json.dumps({
         "schema_version": 1,
