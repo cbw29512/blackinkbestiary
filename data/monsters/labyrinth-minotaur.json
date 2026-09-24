@@ -4,39 +4,6 @@
   "family": "minotaur",
   "size": "large",
   "creature_type": "monstrous humanoid",
-  "visual_identity": {
-    "core_identity": "A massive bull-headed humanoid defined by sweeping horns, hooves, powerful movement, and a heavy axe.",
-    "silhouette": "Very broad shoulders, bull head with wide horns, thick humanoid torso, powerful legs ending in hooves, two-handed axe.",
-    "head_features": "Bull head with long muzzle, flared nostrils, heavy brow, bovine ears, large curved horns.",
-    "body_shape": "Large muscular humanoid torso and arms with powerful legs and hooved feet; animal head only, not full bull body.",
-    "surface": "Short sparse body hair with simple hide areas; no dense fur.",
-    "signature_gear": [
-      "large two-handed axe",
-      "simple belt or harness",
-      "minimal practical gear"
-    ],
-    "attitude": [
-      "aggressive",
-      "territorial",
-      "relentless",
-      "charging"
-    ],
-    "must_keep": [
-      "bull head",
-      "large curved horns",
-      "hooved feet",
-      "massive humanoid body",
-      "large axe"
-    ],
-    "must_avoid": [
-      "centaur body",
-      "human head",
-      "goat features",
-      "tiny horns",
-      "full plate armor",
-      "dense fur texture"
-    ]
-  },
   "default_habitats": [
     "underground",
     "ruins",
@@ -64,5 +31,21 @@
     "charging",
     "patrolling",
     "weapon fighting"
+  ],
+  "visual_overrides": {
+    "signature_gear": [
+      "large two-handed axe",
+      "simple belt or harness",
+      "minimal practical gear"
+    ],
+    "attitude": [
+      "aggressive",
+      "territorial",
+      "relentless",
+      "charging"
+    ]
+  },
+  "variant_traits": [
+    "labyrinth minotaur"
   ]
 }
