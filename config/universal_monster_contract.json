@@ -124,5 +124,14 @@
     ],
     "occlusion_rule": "A limb may be partially or fully hidden by perspective or the creature's own body, but hidden anatomy does not authorize drawing an extra replacement limb.",
     "exception_rule": "Creatures with variable, numerous, amorphous, swarm, or variant-specific appendages follow their family/monster contract instead of a generic fixed count."
-  }
+  },
+  "resolved_required": [
+    "visual_identity.shape_lock",
+    "visual_identity.limb_structure",
+    "scene_identity.size_impression",
+    "scene_identity.natural_posture",
+    "scene_identity.behavior_style",
+    "accuracy_checks",
+    "known_failure_modes"
+  ]
 }
