@@ -52,6 +52,45 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertEqual(summary["total"], len(gallery.CANARY_PAGE_IDS))
         self.assertEqual([row["page_id"] for row in summary["rows"]], list(gallery.CANARY_PAGE_IDS))
 
+    def test_refinement_uses_latest_image_even_when_score_does_not_improve(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "web" / "candidates").mkdir(parents=True)
+            initial = root / "initial.png"
+            initial.write_bytes(b"x")
+            seen_sources = []
+
+            def fake_prepare_edit(cli, client, config, page, seed, candidate_no, source, verdict, pass_no):
+                seen_sources.append(Path(source))
+                return root / f"workflow-{pass_no}.json"
+
+            generated = iter(["candidates/r1.png", "candidates/r2.png"])
+            verdicts = iter([
+                {"pass": False, "score": 45, "defects": ["same"], "preserve": []},
+                {"pass": False, "score": 45, "defects": ["same"], "preserve": []},
+                {"pass": False, "score": 45, "defects": ["same"], "preserve": []},
+            ])
+
+            with (
+                patch.object(gallery, "ROOT", root),
+                patch.object(gallery, "reload_authority", return_value={}),
+                patch.object(gallery, "review_image", side_effect=lambda *a, **k: next(verdicts)),
+                patch.object(gallery, "prepare_edit", side_effect=fake_prepare_edit),
+                patch.object(gallery, "execute_candidate", side_effect=lambda *a, **k: next(generated)),
+            ):
+                gallery.refine_candidate(
+                    cli=object(),
+                    client=object(),
+                    config={"vision_reviewer": {"max_refinement_passes": 2}},
+                    page={"page_id": "X-01"},
+                    candidate_no=1,
+                    seed=100,
+                    initial=initial,
+                )
+
+            self.assertEqual(seen_sources[0], initial)
+            self.assertEqual(seen_sources[1], root / "web" / "candidates" / "r1.png")
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
