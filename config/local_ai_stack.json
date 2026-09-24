@@ -44,5 +44,12 @@
     "current_page_only": true
   },
   "comfyui_version": "0.36.0",
-  "workspace": ".blackink-comfy"
+  "workspace": ".blackink-comfy",
+  "vision_reviewer": {
+    "provider": "ollama",
+    "base_url": "http://127.0.0.1:11434",
+    "model": "qwen3-vl:4b",
+    "required": true,
+    "max_refinement_passes": 4
+  }
 }
