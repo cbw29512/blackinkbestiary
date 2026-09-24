@@ -1,4 +1,5 @@
 import hashlib
+import json
 import importlib.util
 import tempfile
 import unittest
@@ -100,6 +101,35 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
                 },
             }
             self.assertEqual(status.classify(item, root), "awaiting_review")
+
+    def test_canary_page_loader_uses_resolved_generation_authority(self):
+        pages = status.load_canary_pages(ROOT)
+        resolved = pages["I-01"]
+
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        raw = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+
+        resolved_fp = status.page_generation_fingerprint(resolved, ROOT)
+        raw_fp = status.page_generation_fingerprint(raw, ROOT)
+
+        self.assertEqual(resolved["monster_name"], "Kobold Warrior")
+        self.assertIn("small wiry silhouette is preserved", resolved["identity_rules"])
+        self.assertNotEqual(raw_fp, resolved_fp)
+
+        item = {
+            "page_id": "I-01",
+            "candidate": 1,
+            "status": "ready_for_review",
+            "generation_fingerprint": resolved_fp,
+        }
+        self.assertEqual(
+            status.classify(
+                item,
+                ROOT,
+                current_generation_fingerprint=resolved_fp,
+            ),
+            "awaiting_review",
+        )
 
     def test_missing_and_technical_failures_require_generation(self):
         self.assertEqual(status.classify(None), "needs_generation")
