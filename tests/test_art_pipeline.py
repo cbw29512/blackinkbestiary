@@ -72,6 +72,16 @@ class PromptTests(unittest.TestCase):
         self.assertIn("stolen ham", text)
 
 
+    def test_runtime_standards_do_not_reinflate_small_creatures(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(page).lower()
+        self.assertIn("canonical scale lock", text)
+        self.assertIn("canonical creature scale is immutable", text)
+        self.assertIn("first-read focal subject at canonical scale and proportions", text)
+        self.assertNotIn("one large centered unmistakable monster", text)
+        self.assertNotIn("normally occupying about 60–75% of page height", text)
+
     def test_story_contract_drives_generation_prompt(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
