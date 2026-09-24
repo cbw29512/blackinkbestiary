@@ -396,6 +396,29 @@ class TestGalleryResumeTests(unittest.TestCase):
             self.assertTrue(prepare_feedback[0]["stagnation_escalation"])
             self.assertEqual(prepare_feedback[0]["routing_recommendation"], "regenerate")
 
+    def test_assistant_rejection_stage_is_forwarded_to_fresh_generation(self):
+        prior = {
+            "status": "assistant_rejected",
+            "assistant_review": {
+                "decision": "reject",
+                "stage": "identity",
+                "notes": "wrong body plan",
+            },
+        }
+        assistant_review = prior.get("assistant_review") or {}
+        notes = (assistant_review.get("notes") or "").strip()
+        stage = str(assistant_review.get("stage") or "").strip().lower()
+        feedback = {
+            "text": notes or "Previous candidate was rejected during visual review. Rebuild the failed composition.",
+            "routing_recommendation": "regenerate",
+        }
+        if stage in {"identity", "environment", "action", "quality"}:
+            feedback["stage"] = stage
+
+        self.assertEqual(feedback["stage"], "identity")
+        self.assertEqual(feedback["routing_recommendation"], "regenerate")
+        self.assertEqual(feedback["text"], "wrong body plan")
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
