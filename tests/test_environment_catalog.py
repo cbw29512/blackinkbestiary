@@ -110,6 +110,35 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("raises a coin toward the natural rock shrine", text)
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
 
+    def test_limestone_cave_palette_rejects_foreign_subtype_components(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-14")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertIn("natural", palette["contexts"])
+        self.assertIn("cave", palette["contexts"])
+        self.assertIn("limestone", palette["contexts"])
+        selected = " ".join(
+            str(item.get("text") or "").lower()
+            for item in palette["components"].values()
+        )
+        self.assertIn("limestone", selected)
+        self.assertNotIn("basalt", selected)
+        self.assertNotIn("packed soil", selected)
+        self.assertNotIn("fungal", selected)
+        self.assertNotIn("improvised throne", selected)
+
+    def test_spiral_stair_palette_promotes_stair_context(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-10")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertIn("stair", palette["contexts"])
+        self.assertEqual(
+            resolve_spatial_envelope(
+                resolve_environment_profile(page["environment_profile_id"])
+            )["envelope_id"],
+            "spiral_stair",
+        )
+        ground = (palette["components"].get("ground_planes") or {}).get("text", "").lower()
+        self.assertIn("stair", ground)
+
     def test_tome_i_background_fingerprints_are_unique(self):
         fingerprints = [environment_fingerprint(page) for page in self.tome["pages"]]
         self.assertEqual(len(fingerprints), len(set(fingerprints)))
