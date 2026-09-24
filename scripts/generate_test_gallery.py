@@ -14,6 +14,9 @@ from candidate_runner import TechnicalQAError, execute_candidate
 from comfy_cli_runner import ComfyCli
 from comfy_client import ComfyClient
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
+from image_edit_profile import prepare_distilled_image_edit
+from edit_prompt import build_edit_prompt
+from vision_reviewer import review_image, review_notes
 from generation_runtime import model_filename, read_json
 from manifest_validation import validate_manifest
 from page_contract import resolve_page_spec
@@ -61,7 +64,7 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
         state.pop("completed_at", None)
         return state
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "started_at": utc_now(),
         "updated_at": utc_now(),
         "copies_per_page": copies,
@@ -106,6 +109,52 @@ def prepare(cli, config, page, seed: int, candidate_no: int) -> Path:
     if not verdict.get("valid"):
         raise RuntimeError("Prepared workflow failed validation: " + json.dumps(verdict))
     return path
+
+
+def prepare_edit(cli, client, config, page, seed: int, candidate_no: int, source: Path, verdict: dict, pass_no: int) -> Path:
+    # Reload written authority before EVERY repair pass. The source image is never authority.
+    reload_authority()
+    unet = model_filename(config, "diffusion_models")
+    clip = model_filename(config, "text_encoders")
+    vae = model_filename(config, "vae")
+    uploaded = client.upload_image(source, subfolder="blackink-refinements")
+    path = WORKFLOW_DIR / f"test_{page['page_id'].lower()}_c{candidate_no:02d}_r{pass_no:02d}.json"
+    prepare_distilled_image_edit(
+        cli, config["templates"]["modify"], path,
+        prompt=build_edit_prompt(page, review_notes(verdict), candidate_no=candidate_no),
+        seed=seed, input_image=uploaded["load_image_name"],
+        model_filename=unet, clip_filename=clip, vae_filename=vae,
+    )
+    checked = envelope_data(cli.validate_workflow(path)) or {}
+    if not checked.get("valid"):
+        raise RuntimeError("Prepared refinement workflow failed validation: " + json.dumps(checked))
+    return path
+
+
+def verdict_rank(verdict: dict) -> tuple:
+    # Passed work always wins; otherwise prefer the reviewer score, then fewer defects.
+    return (1 if verdict.get("pass") else 0, int(verdict.get("score") or 0), -len(verdict.get("defects") or []))
+
+
+def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, initial: Path) -> tuple[Path, dict, list]:
+    max_refinements = int((config.get("vision_reviewer") or {}).get("max_refinement_passes", 4))
+    current = initial
+    reload_authority()
+    verdict = review_image(page, current, config)
+    history = [{"pass": 0, "image": str(current), "review": verdict}]
+    best, best_verdict = current, verdict
+    for pass_no in range(1, max_refinements + 1):
+        if verdict.get("pass"):
+            break
+        workflow = prepare_edit(cli, client, config, page, seed + pass_no, candidate_no, best, verdict, pass_no)
+        relative = execute_candidate(cli, client, workflow, f"{page['page_id']}-C{candidate_no:02d}-R{pass_no:02d}", pass_no, inspect_candidate)
+        current = ROOT / "web" / relative
+        reload_authority()
+        verdict = review_image(page, current, config)
+        history.append({"pass": pass_no, "image": str(current), "review": verdict})
+        if verdict_rank(verdict) > verdict_rank(best_verdict):
+            best, best_verdict = current, verdict
+    return best, best_verdict, history
 
 
 def main() -> int:
@@ -169,9 +218,17 @@ def main() -> int:
                     cli, client, workflow, page["page_id"], candidate_no, inspect_candidate
                 )
                 source = ROOT / "web" / relative
+                best, visual_verdict, pass_history = refine_candidate(
+                    cli, client, config, page, candidate_no, seed, source
+                )
                 destination = OUTPUT_DIR / f"{page['page_id']}-C{candidate_no:02d}.png"
-                destination.write_bytes(source.read_bytes())
-                record.update({"status": "ready_for_review", "image_path": destination.relative_to(ROOT / "web").as_posix()})
+                destination.write_bytes(best.read_bytes())
+                record.update({
+                    "status": "ready_for_review" if visual_verdict.get("pass") else "max_refinements_reached",
+                    "image_path": destination.relative_to(ROOT / "web").as_posix(),
+                    "visual_review": visual_verdict,
+                    "pass_history": pass_history,
+                })
             except TechnicalQAError as exc:
                 record.update({"status": "technical_qa_failed", "error": str(exc)})
             except Exception as exc:
