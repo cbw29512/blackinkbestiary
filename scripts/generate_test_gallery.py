@@ -36,6 +36,10 @@ AUTHORITY_FILES = [
     ROOT / "config" / "coloring_page_standard.json",
 ]
 
+CANARY_PAGE_IDS = (
+    "I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22",
+)
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -73,10 +77,13 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
     }
 
 
-def should_skip_candidate(prior: dict | None, rerun_failed: bool) -> bool:
+def should_skip_candidate(prior: dict | None, rerun_failed: bool, force_rerun: bool = False) -> bool:
     if not prior:
         return False
-    return not (rerun_failed and prior.get("status") in {"failed", "technical_qa_failed", "vision_reviewer_failed", "assistant_rejected"})
+    if force_rerun:
+        return False
+    retryable = {"failed", "technical_qa_failed", "vision_reviewer_failed", "assistant_rejected", "max_refinements_reached"}
+    return not (rerun_failed and prior.get("status") in retryable)
 
 
 def load_pages() -> list[dict]:
@@ -166,9 +173,12 @@ def main() -> int:
     parser.add_argument("--seed", type=int, help="Base seed for reproducible testing")
     parser.add_argument("--reset", action="store_true", help="Start a fresh gallery and discard prior test state")
     parser.add_argument("--rerun-failed", action="store_true", help="Retry candidates whose prior status was failed")
+    parser.add_argument("--canary", action="store_true", help="Run the nine-page engine canary set and force those selected candidates to regenerate")
     args = parser.parse_args()
     if args.copies < 1:
         raise SystemExit("--copies must be at least 1")
+    if args.canary and (args.only or args.start or args.candidate is not None):
+        raise SystemExit("--canary cannot be combined with --only, --start, or --candidate")
     if args.candidate is not None and not args.only:
         raise SystemExit("--candidate requires --only")
     if args.candidate is not None and args.candidate < 1:
@@ -179,7 +189,12 @@ def main() -> int:
     client.health()
     cli = ComfyCli()
     pages = load_pages()
-    if args.only:
+    if args.canary:
+        wanted = set(CANARY_PAGE_IDS)
+        pages = [page for page in pages if page["page_id"] in wanted]
+        if [page["page_id"] for page in pages] != list(CANARY_PAGE_IDS):
+            raise SystemExit("Canary page set is incomplete or out of order")
+    elif args.only:
         pages = [p for p in pages if p["page_id"] == args.only]
         if not pages:
             raise SystemExit(f"Unknown page id: {args.only}")
@@ -203,7 +218,7 @@ def main() -> int:
         candidate_numbers = [args.candidate] if args.candidate is not None else range(1, args.copies + 1)
         for candidate_no in candidate_numbers:
             prior = existing.get((page["page_id"], candidate_no))
-            if should_skip_candidate(prior, args.rerun_failed):
+            if should_skip_candidate(prior, args.rerun_failed, force_rerun=args.canary):
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
                 continue
             if prior:
