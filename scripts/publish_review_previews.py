@@ -10,6 +10,8 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from review_publish_git import REVIEW_BRANCH, publish_preview_snapshot
+
 
 def load_pillow():
     try:
@@ -190,21 +192,16 @@ def main() -> int:
         "candidates": published,
     }, indent=2) + "\n", encoding="utf-8")
 
-    run("git", "add", "review-previews")
-    status = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT)
-    if status.returncode == 0:
-        print(f"Review previews already published locally: {len(published)} candidates")
-        return 0
-
-    run("git", "commit", "-m", "Publish coloring book review previews")
     try:
-        run("git", "push")
-    except subprocess.CalledProcessError:
-        print("Previews were committed locally, but git push failed.")
-        print("Run: git push")
+        publish_preview_snapshot(ROOT)
+    except (OSError, RuntimeError, subprocess.CalledProcessError) as exc:
+        print(f"Review preview publication failed: {exc}")
         return 1
 
-    print(f"Published {len(published)} review previews to GitHub.")
+    print(
+        f"Published {len(published)} review previews to GitHub branch "
+        f"{REVIEW_BRANCH}."
+    )
     return 0
 
 
