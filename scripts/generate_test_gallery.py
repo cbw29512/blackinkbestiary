@@ -204,12 +204,27 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
         if verdict.get("pass"):
             break
         stage = str(verdict.get("stage") or "").strip().lower()
-        if stage == "identity":
-            # A bad species/body-plan image is a poor edit source. Regenerate
-            # from canonical text authority instead of anchoring the next pass
-            # to the wrong silhouette/proportions.
+        trailing_same_stage = 0
+        for step in reversed(history):
+            review = step.get("review") or {}
+            if review.get("pass"):
+                break
+            if str(review.get("stage") or "").strip().lower() != stage:
+                break
+            trailing_same_stage += 1
+
+        structural_stagnation = (
+            stage in {"environment", "scene", "action"}
+            and trailing_same_stage >= 2
+        )
+        if stage == "identity" or structural_stagnation:
+            # Wrong anatomy should never be anchored to a bad source image.
+            # Likewise, if an environment/action edit failed to advance the
+            # same gate once, stop spending passes polishing the same broken
+            # composition and rebuild fresh from written authority + defects.
             feedback = review_notes(verdict)
             feedback["routing_recommendation"] = "regenerate"
+            feedback["stagnation_escalation"] = bool(structural_stagnation)
             workflow = prepare(
                 cli,
                 config,
@@ -219,9 +234,8 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
                 feedback,
             )
         else:
-            # Scene/quality refinement is cumulative: edit the most recent
-            # candidate so corrected contact, geometry, and simplification can
-            # accumulate across passes.
+            # First environment/action repair and all quality repairs are
+            # cumulative image edits so successful anatomy/scene work survives.
             workflow = prepare_edit(
                 cli,
                 client,
