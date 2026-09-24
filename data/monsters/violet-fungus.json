@@ -25,7 +25,7 @@
   "schema_version": 4,
   "identity_version": 1,
   "family_profile": "fungus",
-  "description": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body. Rooted fungal stalk with cap and four or more flexible tendrils emerging around the upper stalk. Simple cap and stalk with sparse spots; tendrils smooth and uncluttered. Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
+  "description": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body. Rooted fungal stalk with cap and exactly four long flexible tendrils emerging around the upper stalk. Simple cap and stalk with sparse spots; tendrils smooth and uncluttered. Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
   "behavior_traits": [
     "stationary growth",
     "tentacle lashing",
@@ -36,7 +36,7 @@
     "core_identity": "A rooted predatory fungus that resembles an ordinary large mushroom until several long whip-like tendrils lash from its body.",
     "silhouette": "Thick mushroom stalk and cap with multiple long narrow tendrils extending outward in sweeping curves.",
     "head_features": "No head, eyes, or mouth; cap remains mushroom-like.",
-    "body_shape": "Rooted fungal stalk with cap and four or more flexible tendrils emerging around the upper stalk.",
+    "body_shape": "Rooted fungal stalk with cap and exactly four long flexible tendrils emerging around the upper stalk.",
     "surface": "Simple cap and stalk with sparse spots; tendrils smooth and uncluttered.",
     "signature_gear": [],
     "attitude": [
@@ -47,7 +47,7 @@
     ],
     "must_keep": [
       "mushroom body",
-      "multiple long tendrils",
+      "exactly four long tendrils",
       "rooted posture",
       "no face",
       "clear contrast between cap and tendrils"
