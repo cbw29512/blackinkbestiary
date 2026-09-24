@@ -37,7 +37,8 @@
       "true bat or dragon wings",
       "arms or legs",
       "upright humanoid torso"
-    ]
+    ],
+    "shape_lock": "Draw one continuous non-humanoid mantle body: a broad leathery disc/cone is the creature's entire main body, with a small underside mouth and short tentacles hanging from the lower edge; there is no separate torso, humanoid head, arms, legs, tail, or pair of wings."
   },
   "default_habitats": [
     "caves",
