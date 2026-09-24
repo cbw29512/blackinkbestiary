@@ -60,5 +60,32 @@
     "engulfing",
     "chaotic vocalization",
     "opportunistic feeding"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium low spreading amorphous mass whose footprint is broader than tall and never resolves into a humanoid body.",
+    "natural_posture": "One continuous body deforms broadly against the ground with mouths and eyes distributed across the same crawling mass.",
+    "behavior_style": [
+      "slow crawling",
+      "engulfing",
+      "chaotic vocalization",
+      "opportunistic feeding"
+    ],
+    "environment_fit": [
+      "underground",
+      "wetlands",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "single_face_drift",
+      "symptom": "eyes and mouths organize into one giant face/head",
+      "correction": "redistribute multiple independent mouths and eyes across the continuous amorphous body"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "body becomes a central head with long tentacles",
+      "correction": "remove octopus topology; keep one low shapeless mound with only soft pseudopod-like lower edges"
+    }
   ]
 }
