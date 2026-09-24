@@ -328,6 +328,28 @@ class TestGalleryResumeTests(unittest.TestCase):
 
             self.assertEqual(edit_sources, [initial])
 
+    def test_reviewer_only_recheck_reuses_pixels_except_identity_failure(self):
+        self.assertFalse(
+            gallery.reuse_existing_image_after_reviewer_recheck({
+                "pass": False,
+                "stage": "identity",
+            })
+        )
+        for stage in ("environment", "scene", "action", "quality"):
+            self.assertTrue(
+                gallery.reuse_existing_image_after_reviewer_recheck({
+                    "pass": False,
+                    "stage": stage,
+                }),
+                stage,
+            )
+        self.assertFalse(
+            gallery.reuse_existing_image_after_reviewer_recheck({
+                "pass": True,
+                "stage": "quality",
+            })
+        )
+
     def test_review_gate_progress_beats_higher_score_from_earlier_failure(self):
         identity_fail = {
             "pass": False,
