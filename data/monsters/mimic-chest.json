@@ -34,7 +34,9 @@
       "dense treasure clutter",
       "ornate carving overload",
       "text labels"
-    ]
+    ],
+    "shape_lock": "Draw one complete rectangular treasure chest as the entire creature silhouette. The hinged lid itself forms the upper jaw and the box body forms the lower jaw; tongue and any pseudopod emerge from chest seams only. No separate head, torso, animal legs, or creature body may appear behind or beneath the chest.",
+    "limb_structure": "No separate biological limbs. The chest body remains one object; tongue/pseudopod forms may emerge only from lid, seam, hinge, or panel structure."
   },
   "default_habitats": [
     "underground",
