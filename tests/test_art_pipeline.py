@@ -207,6 +207,15 @@ class PromptTests(unittest.TestCase):
         self.assertIn("no giant leader", text)
         self.assertIn("SWARM COMPOSITION LOCK", text)
 
+    def test_generation_prompt_has_top_level_no_frame_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page_id in ("I-19", "I-22"):
+            page = next(page for page in tome["pages"] if page["page_id"] == page_id)
+            text = build_prompt(page)
+            self.assertIn("PAGE-EDGE LOCK — NON-NEGOTIABLE", text)
+            self.assertIn("Never draw a decorative rectangular border", text)
+            self.assertIn("must not connect into a page-sized frame", text)
+
     def test_swarm_prompt_uses_collective_subject_not_giant_leader(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         bat_swarm = next(page for page in tome["pages"] if page["page_id"] == "I-17")
