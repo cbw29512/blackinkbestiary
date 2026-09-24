@@ -7,40 +7,6 @@
   "family": "kobold",
   "size": "small",
   "creature_type": "reptilian humanoid",
-  "visual_identity": {
-    "core_identity": "A small reptilian kobold with a ceremonial caretaker role, more ritual-minded than heavily armed but still wary and dangerous.",
-    "silhouette": "Short wiry reptilian body with a long tail and slightly bowed, reverent posture.",
-    "head_features": "Long narrow snout, sharp teeth, alert eyes, small backward horn nubs or head spines.",
-    "body_shape": "Lean scaled torso, thin limbs, clawed hands and long clawed feet.",
-    "surface": "Sparse simplified scales with large open body regions suitable for coloring.",
-    "signature_gear": [
-      "simple ritual sash or leather cords",
-      "small coin pouch",
-      "crude charm or shrine token"
-    ],
-    "attitude": [
-      "reverent",
-      "possessive",
-      "nervous",
-      "watchful"
-    ],
-    "must_keep": [
-      "long reptilian snout",
-      "visible tail",
-      "horn nubs or head spines",
-      "small lean body",
-      "clawed hands and feet",
-      "recognizable kobold anatomy"
-    ],
-    "must_avoid": [
-      "goblin face",
-      "furry body",
-      "cute priest caricature",
-      "ornate high-fantasy robes",
-      "dense jewelry clutter",
-      "dragon wings"
-    ]
-  },
   "default_habitats": [
     "underground",
     "caves",
@@ -65,5 +31,21 @@
     "scavenging",
     "guarding",
     "cautious retreat"
+  ],
+  "visual_overrides": {
+    "signature_gear": [
+      "simple ritual sash or leather cords",
+      "small coin pouch",
+      "crude charm or shrine token"
+    ],
+    "attitude": [
+      "reverent",
+      "possessive",
+      "nervous",
+      "watchful"
+    ]
+  },
+  "variant_traits": [
+    "kobold shrine-keeper"
   ]
 }
