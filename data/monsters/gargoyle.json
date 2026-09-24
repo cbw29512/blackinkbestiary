@@ -31,7 +31,9 @@
       "living flesh texture",
       "huge wings hiding body",
       "ornate cathedral clutter"
-    ]
+    ],
+    "limb_structure": "Exactly two clawed arms and two clawed bipedal legs form the humanoid stone body, plus one pair of folded batlike wings attached to the back. No extra arms, dragon quadruped limbs, or feathered wings.",
+    "shape_lock": "Draw one squat stone humanoid with exactly two arms, two bent legs, one horned grotesque head, and one pair of folded batlike wings attached behind the shoulders/back. Keep the body compact and crouched like architectural sculpture, not a four-legged dragon."
   },
   "default_habitats": [
     "ruins",
