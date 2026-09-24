@@ -24,6 +24,7 @@ except ImportError:
 REQUIRED_PAGE_FIELDS = {"page_id", "order", "monster_spec_id", "moment", "archetype"}
 REQUIRED_VISUAL_FIELDS = {
     "core_identity", "silhouette", "head_features", "body_shape", "surface",
+    "limb_structure", "shape_lock",
     "signature_gear", "attitude", "must_keep", "must_avoid",
 }
 
