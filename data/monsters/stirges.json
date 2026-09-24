@@ -36,9 +36,11 @@
       "horns",
       "long reptilian tail",
       "separate humanoid arms",
-      "single dominant giant creature"
+      "single dominant giant creature",
+      "more than about nine visible stirges",
+      "wallpaper density of repeated stirges"
     ],
-    "shape_lock": "Draw several tiny compact flying pests, each built around one small animal-like body, one long straight needle proboscis projecting from the face, and one pair of membrane wings. Keep every individual tiny and non-humanoid; no giant leader, humanoid torso, dragon head, horns, or reptilian tail.",
+    "shape_lock": "Draw roughly 5–9 tiny compact flying pests, each built around one small animal-like body, one long straight needle proboscis projecting from the face, and one pair of membrane wings. Keep every individual tiny, comparable in scale, and separated by broad white gaps; no giant leader, wallpaper-density cloud, humanoid torso, dragon head, horns, or reptilian tail.",
     "limb_structure": "Each stirge has one compact body, one long facial proboscis, one pair of membrane wings, and small grasping legs/feet; never add humanoid arms or a separate heroic torso."
   },
   "default_habitats": [
@@ -55,7 +57,9 @@
     "creatures are not mistaken for bats",
     "each stirge is a tiny compact flying animal, never humanoid",
     "no single giant creature dominates the group",
-    "long straight proboscis is the defining face feature"
+    "long straight proboscis is the defining face feature",
+    "visible stirge population stays controlled at roughly 5–9 individuals",
+    "broad white gaps separate the feeding group"
   ],
   "reference": {
     "image": null,
