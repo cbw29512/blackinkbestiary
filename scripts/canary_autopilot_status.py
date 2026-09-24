@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from generation_fingerprint import page_generation_fingerprint
+from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from page_contract import resolve_page_spec
 STATE = ROOT / "data" / "test-gallery-state.json"
 CANARY_PAGE_IDS = (
@@ -47,6 +47,7 @@ def classify(
     item: dict | None,
     root: Path = ROOT,
     current_generation_fingerprint: str | None = None,
+    current_review_fingerprint: str | None = None,
 ) -> str:
     if not item:
         return "needs_generation"
@@ -67,14 +68,33 @@ def classify(
             and recorded_fingerprint == current_generation_fingerprint
         )
     )
+    recorded_review_fingerprint = str(item.get("review_fingerprint") or "")
+    review_fingerprint_is_current = (
+        current_review_fingerprint is None
+        or (
+            recorded_review_fingerprint
+            and recorded_review_fingerprint == current_review_fingerprint
+        )
+    )
+    visual_review_passes = bool((item.get("visual_review") or {}).get("pass"))
 
-    if decision in {"approve", "select"} and exact_review_is_current and fingerprint_is_current:
+    if (
+        decision in {"approve", "select"}
+        and exact_review_is_current
+        and fingerprint_is_current
+        and review_fingerprint_is_current
+        and visual_review_passes
+    ):
         return "approved"
     if decision == "reject" and exact_review_is_current:
         return "needs_generation"
 
     status = str(item.get("status") or "")
-    if status in {"ready_for_review", "max_refinements_reached"} and not fingerprint_is_current:
+    if status in {"ready_for_review", "max_refinements_reached"} and (
+        not fingerprint_is_current or not review_fingerprint_is_current
+    ):
+        # The canary runner will re-render if generation authority changed, or
+        # re-review the existing exact image if only reviewer authority changed.
         return "needs_generation"
     if status in RETRYABLE:
         return "needs_generation"
@@ -112,10 +132,14 @@ def main() -> int:
         current_fingerprint = (
             page_generation_fingerprint(page, ROOT) if page else None
         )
+        current_review = (
+            page_review_fingerprint(page, ROOT) if page else None
+        )
         state_name = classify(
             item,
             ROOT,
             current_generation_fingerprint=current_fingerprint,
+            current_review_fingerprint=current_review,
         )
         counts[state_name] += 1
         rows.append((page_id, state_name, str((item or {}).get("status") or "missing")))
