@@ -22,6 +22,7 @@ class GenerationFingerprintTests(unittest.TestCase):
             "environment_variant": {"landmark": "pit", "framing": "corridor", "interaction": "tripwire"},
             "physicality": {"mode": "grounded", "support": "floor", "motion": "lean"},
             "moment": "triggering a tripwire",
+            "identity_rules": ["small reptilian humanoid"],
             "must_include": ["pit"],
             "must_avoid": [],
         }
@@ -36,6 +37,36 @@ class GenerationFingerprintTests(unittest.TestCase):
             path.write_text('{"version": 2}', encoding="utf-8")
             second = fingerprint.page_generation_fingerprint(self._page(), root)
             self.assertNotEqual(first, second)
+
+    def test_reviewer_change_does_not_force_rerender_but_changes_review_fingerprint(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "art_pipeline").mkdir(parents=True)
+            reviewer = root / "art_pipeline" / "vision_review_prompts.py"
+            reviewer.write_text("version = 1", encoding="utf-8")
+
+            first_generation = fingerprint.page_generation_fingerprint(self._page(), root)
+            first_review = fingerprint.page_review_fingerprint(self._page(), root)
+
+            reviewer.write_text("version = 2", encoding="utf-8")
+
+            second_generation = fingerprint.page_generation_fingerprint(self._page(), root)
+            second_review = fingerprint.page_review_fingerprint(self._page(), root)
+
+            self.assertEqual(first_generation, second_generation)
+            self.assertNotEqual(first_review, second_review)
+
+    def test_page_identity_rule_change_changes_generation_fingerprint(self):
+        first_page = self._page()
+        second_page = self._page()
+        second_page["identity_rules"] = ["one continuous non-humanoid mantle body"]
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first = fingerprint.page_generation_fingerprint(first_page, root)
+            second = fingerprint.page_generation_fingerprint(second_page, root)
+
+        self.assertNotEqual(first, second)
 
     def test_unrelated_document_change_does_not_change_fingerprint(self):
         with tempfile.TemporaryDirectory() as td:
