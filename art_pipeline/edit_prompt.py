@@ -25,7 +25,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
+def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no: int | None = None) -> str:
     """Build a preservation-first prompt for editing the current candidate."""
     page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
@@ -52,6 +52,16 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None) -> str:
         _items("MUST AVOID", page.get("must_avoid")),
         f"COMPOSITION TARGET: {page.get('composition', '')}".strip(),
         "HOUSE STYLE MUST REMAIN: " + "; ".join(STYLE_RULES) + ".",
+        (
+            f"CANDIDATE {candidate_no} COMPOSITION IDENTITY MUST REMAIN FIXED. "
+            "Refinement may repair defects but must not drift into another candidate composition."
+            if candidate_no is not None else ""
+        ),
+        (
+            "ORIGINAL AUTHORITY OVERRIDES THE INPUT IMAGE. The provided image is evidence, not truth. "
+            "If its anatomy, monster identity, environment, story beat, or coloring-page structure conflicts with "
+            "the canonical monster/family/page requirements above, correct the image to match the written authority."
+        ),
     ]
 
     modify = page.get("modify") or {}
