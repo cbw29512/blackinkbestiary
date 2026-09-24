@@ -24,21 +24,30 @@ if errorlevel 1 (
 echo.
 echo Retrying only missing, failed, or exact-image-rejected canary pages...
 python scripts\generate_test_gallery.py --canary-failed --copies 1
-if errorlevel 1 (
-  echo.
-  echo Canary generation stopped with an error.
-  pause
-  exit /b 1
-)
+set "GEN_EXIT=%ERRORLEVEL%"
+
 echo.
-echo Publishing refreshed previews to the dedicated review-previews-live branch...
+if not "%GEN_EXIT%"=="0" (
+  echo Canary generation reported an error. Publishing all completed/diagnostic results anyway...
+) else (
+  echo Canary generation completed. Publishing refreshed previews...
+)
+echo Publishing snapshot to the dedicated review-previews-live branch...
 python scripts\publish_review_previews.py
-if errorlevel 1 (
+set "PUB_EXIT=%ERRORLEVEL%"
+if not "%PUB_EXIT%"=="0" (
   echo.
   echo Preview publishing stopped with an error.
   pause
-  exit /b 1
+  exit /b %PUB_EXIT%
 )
+
 echo.
+if not "%GEN_EXIT%"=="0" (
+  echo Partial/diagnostic review snapshot published. ChatGPT can inspect the completed work directly from GitHub.
+  pause
+  exit /b %GEN_EXIT%
+)
+
 echo Review snapshot published. ChatGPT can inspect it directly from GitHub.
 pause
