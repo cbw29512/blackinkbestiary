@@ -33,7 +33,11 @@
       "knuckle-walking posture",
       "generic caveman face",
       "heroic bodybuilder stance",
-      "floating or unsupported pose"
+      "floating or unsupported pose",
+      "horns or horn nubs",
+      "tail",
+      "six-pack superhero torso",
+      "short arms ending above the hips"
     ],
     "limb_structure": "Very long humanoid arms with large hands, stable bipedal legs, and large grounded feet; proportions are rangy goblinoid rather than knuckle-walking primate."
   },
@@ -44,7 +48,10 @@
     "arms are visibly long without gorilla proportions",
     "torso stays humanoid and rangy rather than barrel-chested",
     "fur is selective and does not hide anatomy",
-    "pose is stably supported by the environment"
+    "pose is stably supported by the environment",
+    "no horns or tail",
+    "arms extend visibly below the hips",
+    "abdomen and chest are not sculpted like a superhero"
   ],
   "known_failure_modes": [
     {
@@ -64,8 +71,8 @@
     },
     {
       "id": "brute_drift",
-      "symptom": "body becomes a generic hulking bodybuilder",
-      "correction": "narrow the waist and chest, lengthen the arms, keep muscle simple, and restore stealthy goblinoid proportions"
+      "symptom": "body becomes horned, short-armed, six-pack muscular, or a generic hulking bodybuilder",
+      "correction": "remove horns and tail, narrow the torso, lengthen arms below the hips, keep muscle simple, and restore stealthy rangy goblinoid proportions"
     },
     {
       "id": "hover_drift",
