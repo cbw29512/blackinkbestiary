@@ -198,6 +198,15 @@ class PromptTests(unittest.TestCase):
         self.assertIn("Exactly eight jointed arachnid legs", spider_text)
 
 
+    def test_stirge_swarm_population_is_bounded_and_colorable(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-15")
+        text = build_prompt(page, candidate_no=1)
+        self.assertIn("roughly 5–9 tiny compact flying pests", text)
+        self.assertIn("broad white gaps", text)
+        self.assertIn("no giant leader", text)
+        self.assertIn("SWARM COMPOSITION LOCK", text)
+
     def test_swarm_prompt_uses_collective_subject_not_giant_leader(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         bat_swarm = next(page for page in tome["pages"] if page["page_id"] == "I-17")
