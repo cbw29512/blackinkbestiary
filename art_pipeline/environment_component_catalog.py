@@ -47,6 +47,21 @@ def infer_contexts(profile: dict, catalog: dict) -> set[str]:
         terms = [str(item).lower() for item in rule.get("terms") or []]
         if any(term and term in text for term in terms):
             contexts.update(str(item).lower() for item in rule.get("add") or [])
+
+    # Component contexts are also a reusable vocabulary. If a concrete tag is
+    # literally named by the environment profile (spiral stair -> stair,
+    # limestone cave -> limestone/cave, webbed hall -> webbed/hall), preserve
+    # that specificity instead of collapsing everything to broad family tags.
+    known_tags = {
+        str(tag).lower()
+        for items in (catalog.get("groups") or {}).values()
+        for item in (items or [])
+        for tag in (item.get("contexts") or [])
+        if str(tag).strip()
+    }
+    for tag in known_tags:
+        if tag not in {"universal", str(profile.get("environment_family") or "").lower()} and tag in text:
+            contexts.add(tag)
     return contexts
 
 
