@@ -115,6 +115,16 @@ def existing_candidate_path(item: dict) -> Path | None:
     return path if path.exists() and path.is_file() else None
 
 
+def clear_selection_for_candidate(state: dict, page_id: str, candidate_no: int) -> bool:
+    selected = (state.get("selections") or {}).get(str(page_id))
+    if not selected:
+        return False
+    if int(selected.get("candidate") or 0) != int(candidate_no):
+        return False
+    state["selections"].pop(str(page_id), None)
+    return True
+
+
 def should_skip_candidate(
     prior: dict | None,
     rerun_failed: bool,
@@ -405,6 +415,12 @@ def main() -> int:
                         if refreshed_review.get("pass")
                         else "max_refinements_reached"
                     )
+                    if not refreshed_review.get("pass"):
+                        clear_selection_for_candidate(
+                            state,
+                            page["page_id"],
+                            candidate_no,
+                        )
                     prior.pop("error", None)
                     state["updated_at"] = utc_now()
                     write_state(state)
@@ -429,6 +445,11 @@ def main() -> int:
                 print(json.dumps({"page_id": page["page_id"], "candidate": candidate_no, "status": "skipped_existing"}))
                 continue
             if prior:
+                clear_selection_for_candidate(
+                    state,
+                    page["page_id"],
+                    candidate_no,
+                )
                 state["results"].remove(prior)
             sequence += 1
             reload_authority()
