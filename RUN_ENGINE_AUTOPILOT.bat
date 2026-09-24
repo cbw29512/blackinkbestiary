@@ -8,7 +8,16 @@ echo ================================================
 
 :LOOP
 echo.
-echo [1/6] Ensuring local AI artist and semantic reviewer are ready...
+echo [1/6] Synchronizing engine rules and AI decisions...
+python scripts\sync_engine_for_run.py
+if errorlevel 1 (
+  echo Engine sync blocked. Autopilot will retry in 5 minutes.
+  timeout /t 300 /nobreak >nul
+  goto LOOP
+)
+
+echo.
+echo [2/6] Ensuring local AI artist and semantic reviewer are ready...
 powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\ensure_local_ai.ps1"
 if errorlevel 1 (
   echo Local AI runtime is not ready. Publishing runtime diagnostic before retry...
@@ -16,15 +25,6 @@ if errorlevel 1 (
   if errorlevel 1 (
     echo Runtime diagnostic publishing also failed; keeping the local status file for the next retry.
   )
-  timeout /t 300 /nobreak >nul
-  goto LOOP
-)
-
-echo.
-echo [2/6] Synchronizing engine rules and AI decisions...
-python scripts\sync_engine_for_run.py
-if errorlevel 1 (
-  echo Engine sync blocked. Autopilot will retry in 5 minutes.
   timeout /t 300 /nobreak >nul
   goto LOOP
 )
