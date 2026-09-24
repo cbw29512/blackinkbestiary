@@ -63,5 +63,32 @@
     "tentacle ambush",
     "grappling",
     "anchored hunting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large vertical cave ambusher whose height comes from a rooted stalagmite-like trunk and long tendrils, not a walking giant body.",
+    "natural_posture": "Broad base remains visibly planted while the conical trunk stays upright and tendrils extend from it.",
+    "behavior_style": [
+      "motionless camouflage",
+      "tentacle ambush",
+      "grappling",
+      "anchored hunting"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "tree_octopus_drift",
+      "symptom": "body becomes branching tree or octopus head",
+      "correction": "restore one conical stalagmite trunk with embedded eye/mouth and limited rope-like side tendrils"
+    },
+    {
+      "id": "walking_drift",
+      "symptom": "creature gains legs or detaches from its base",
+      "correction": "remove walking limbs and restore broad anchored base in continuous ground contact"
+    }
   ]
 }
