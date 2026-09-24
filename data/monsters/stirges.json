@@ -30,7 +30,13 @@
       "feathered birds",
       "cute faces",
       "huge swarm clutter",
-      "humanoid features"
+      "humanoid features",
+      "large humanoid centerpiece",
+      "dragon or demon head",
+      "horns",
+      "long reptilian tail",
+      "separate humanoid arms",
+      "single dominant giant creature"
     ]
   },
   "default_habitats": [
@@ -44,7 +50,10 @@
     "multiple creatures read separately",
     "feeding or attack posture does not obscure creature identity",
     "swarm stays colorable",
-    "creatures are not mistaken for bats"
+    "creatures are not mistaken for bats",
+    "each stirge is a tiny compact flying animal, never humanoid",
+    "no single giant creature dominates the group",
+    "long straight proboscis is the defining face feature"
   ],
   "reference": {
     "image": null,
