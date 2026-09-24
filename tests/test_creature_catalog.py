@@ -127,6 +127,21 @@ class CreatureCatalogTests(unittest.TestCase):
                 f"{page['page_id']}:{page['monster_spec_id']} missing limb_structure",
             )
 
+    def test_tome_i_positive_geometry_reaches_generation_and_identity_review(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            spec = resolve_monster_spec(page["monster_spec_id"])
+            visual = spec["visual_identity"]
+            shape_lock = str(visual["shape_lock"]).strip()
+            limb_structure = str(visual["limb_structure"]).strip()
+            generation = build_prompt(page)
+            identity_review = build_identity_review_prompt(page)
+
+            self.assertIn(shape_lock, generation, page["page_id"])
+            self.assertIn(limb_structure, generation, page["page_id"])
+            self.assertIn(shape_lock, identity_review, page["page_id"])
+            self.assertIn(limb_structure, identity_review, page["page_id"])
+
     def test_tome_i_failure_modes_reach_generation_and_identity_review(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         for page in tome["pages"]:
