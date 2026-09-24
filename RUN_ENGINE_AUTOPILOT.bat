@@ -50,16 +50,14 @@ if "!STATE_EXIT!"=="0" (
   exit /b 0
 )
 
+echo.
 if "!STATE_EXIT!"=="10" (
-  echo.
-  echo [5/6] Generating only missing, failed, or AI-rejected pages...
-  python scripts\generate_test_gallery.py --canary-failed --copies 1
-  set "GEN_EXIT=!ERRORLEVEL!"
+  echo [5/6] Reconciling canary state and generating only pages that truly need new pixels...
 ) else (
-  echo.
-  echo [5/6] All current images are waiting for AI review; no GPU regeneration needed.
-  set "GEN_EXIT=0"
+  echo [5/6] Reconciling review authority on existing images; current pixels will be skipped unless stale or failed...
 )
+python scripts\generate_test_gallery.py --canary-failed --copies 1
+set "GEN_EXIT=!ERRORLEVEL!"
 
 echo.
 echo [6/6] Publishing the latest review/diagnostic snapshot...
