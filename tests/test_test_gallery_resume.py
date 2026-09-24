@@ -91,6 +91,112 @@ class TestGalleryResumeTests(unittest.TestCase):
             self.assertEqual(seen_sources[0], initial)
             self.assertEqual(seen_sources[1], root / "web" / "candidates" / "r1.png")
 
+    def test_identity_failure_regenerates_from_text_instead_of_editing_bad_image(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "web" / "candidates").mkdir(parents=True)
+            initial = root / "initial.png"
+            initial.write_bytes(b"x")
+
+            generated = root / "web" / "candidates" / "regen.png"
+            generated.write_bytes(b"y")
+            prepare_calls = []
+            edit_calls = []
+
+            verdicts = iter([
+                {
+                    "pass": False,
+                    "score": 40,
+                    "stage": "identity",
+                    "defects": ["wrong body plan"],
+                    "preserve": ["stone wall"],
+                },
+                {
+                    "pass": True,
+                    "score": 95,
+                    "stage": "quality",
+                    "defects": [],
+                    "preserve": ["correct anatomy"],
+                },
+            ])
+
+            def fake_prepare(cli, config, page, seed, candidate_no, review_feedback=None):
+                prepare_calls.append(review_feedback)
+                return root / "workflow.json"
+
+            with (
+                patch.object(gallery, "ROOT", root),
+                patch.object(gallery, "reload_authority", return_value={}),
+                patch.object(gallery, "review_image", side_effect=lambda *a, **k: next(verdicts)),
+                patch.object(gallery, "prepare", side_effect=fake_prepare),
+                patch.object(gallery, "prepare_edit", side_effect=lambda *a, **k: edit_calls.append(a)),
+                patch.object(gallery, "execute_candidate", return_value="candidates/regen.png"),
+            ):
+                gallery.refine_candidate(
+                    cli=object(),
+                    client=object(),
+                    config={"vision_reviewer": {"max_refinement_passes": 2}},
+                    page={"page_id": "X-01"},
+                    candidate_no=1,
+                    seed=100,
+                    initial=initial,
+                )
+
+            self.assertEqual(len(prepare_calls), 1)
+            self.assertEqual(edit_calls, [])
+            self.assertEqual(prepare_calls[0]["stage"], "identity")
+            self.assertEqual(prepare_calls[0]["routing_recommendation"], "regenerate")
+
+    def test_scene_failure_still_uses_image_edit(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "web" / "candidates").mkdir(parents=True)
+            initial = root / "initial.png"
+            initial.write_bytes(b"x")
+            edited = root / "web" / "candidates" / "edit.png"
+            edited.write_bytes(b"y")
+
+            verdicts = iter([
+                {
+                    "pass": False,
+                    "score": 40,
+                    "stage": "scene",
+                    "defects": ["missing spiral stair"],
+                    "preserve": ["ogre anatomy"],
+                },
+                {
+                    "pass": True,
+                    "score": 95,
+                    "stage": "quality",
+                    "defects": [],
+                    "preserve": ["scene fixed"],
+                },
+            ])
+            edit_sources = []
+
+            def fake_edit(cli, client, config, page, seed, candidate_no, source, verdict, pass_no):
+                edit_sources.append(Path(source))
+                return root / "workflow.json"
+
+            with (
+                patch.object(gallery, "ROOT", root),
+                patch.object(gallery, "reload_authority", return_value={}),
+                patch.object(gallery, "review_image", side_effect=lambda *a, **k: next(verdicts)),
+                patch.object(gallery, "prepare_edit", side_effect=fake_edit),
+                patch.object(gallery, "execute_candidate", return_value="candidates/edit.png"),
+            ):
+                gallery.refine_candidate(
+                    cli=object(),
+                    client=object(),
+                    config={"vision_reviewer": {"max_refinement_passes": 2}},
+                    page={"page_id": "X-01"},
+                    candidate_no=1,
+                    seed=100,
+                    initial=initial,
+                )
+
+            self.assertEqual(edit_sources, [initial])
+
     def test_resume_preserves_results_and_selections(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
