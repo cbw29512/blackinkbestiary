@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -43,6 +44,18 @@ CANARY_PAGE_IDS = (
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def engine_commit() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=ROOT,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return "unknown"
 
 
 def reload_authority() -> dict:
@@ -318,6 +331,7 @@ def main() -> int:
                 "monster_name": page["monster_name"],
                 "candidate": candidate_no,
                 "seed": seed,
+                "engine_commit": engine_commit(),
                 "started_at": utc_now(),
             }
             try:
