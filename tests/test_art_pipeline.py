@@ -354,6 +354,30 @@ class PromptTests(unittest.TestCase):
         self.assertNotIn("", modes)
         self.assertEqual(sorted(modes.difference(MODE_CONTACT_RULES)), [])
 
+    def test_stagnation_escalation_rotates_candidate_composition(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-10")
+
+        normal = build_prompt(page, candidate_no=1)
+        escaped = build_prompt(
+            page,
+            {
+                "stage": "environment",
+                "text": "spiral stair is not visible",
+                "failed_dimensions": ["spiral stair is not visible"],
+                "routing_recommendation": "regenerate",
+                "stagnation_escalation": True,
+                "composition_escape_offset": 2,
+            },
+            candidate_no=1,
+        )
+
+        self.assertIn("STAGNATION ESCAPE RULE", escaped)
+        self.assertNotEqual(
+            next(line for line in normal.splitlines() if line.startswith("CANDIDATE 1 COMPOSITION LOCK")),
+            next(line for line in escaped.splitlines() if line.startswith("CANDIDATE 1 COMPOSITION LOCK")),
+        )
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
