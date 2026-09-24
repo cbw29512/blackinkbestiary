@@ -409,6 +409,48 @@ class PromptTests(unittest.TestCase):
             next(line for line in escaped.splitlines() if line.startswith("CANDIDATE 1 COMPOSITION LOCK")),
         )
 
+    def test_fresh_generation_promotes_stage_specific_review_recovery_locks(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        identity = build_prompt(
+            pages["I-14"],
+            {"stage": "identity", "text": "humanoid dragon body is visible", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("IDENTITY RECOVERY LOCK", identity)
+        self.assertIn("humanoid dragon body is visible", identity)
+
+        environment = build_prompt(
+            pages["I-10"],
+            {"stage": "environment", "text": "spiral stair does not read", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("ENVIRONMENT RECOVERY LOCK", environment)
+        self.assertIn("setting must read correctly even if the creature is mentally removed", environment)
+        self.assertIn("spiral stair does not read", environment)
+
+        action = build_prompt(
+            pages["I-04"],
+            {"stage": "action", "text": "lantern is not being kicked", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("ACTION RECOVERY LOCK", action)
+        self.assertIn("required verb must be visible without a caption", action)
+        self.assertIn("lantern is not being kicked", action)
+
+        quality = build_prompt(
+            pages["I-19"],
+            {"stage": "quality", "text": "wallpaper density and inset border", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("QUALITY RECOVERY LOCK", quality)
+        self.assertIn("Broad white colorable regions", quality)
+        self.assertIn("wallpaper density and inset border", quality)
+
+        for text in (identity, environment, action, quality):
+            self.assertNotIn("LATEST REVIEW CORRECTION:", text)
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
