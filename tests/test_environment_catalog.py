@@ -139,6 +139,29 @@ class EnvironmentCatalogTests(unittest.TestCase):
         ground = (palette["components"].get("ground_planes") or {}).get("text", "").lower()
         self.assertIn("stair", ground)
 
+    def test_labyrinth_pages_use_branching_maze_envelope(self):
+        for page_id in ("I-33", "I-34"):
+            page = next(page for page in self.tome["pages"] if page["page_id"] == page_id)
+            profile = resolve_environment_profile(page["environment_profile_id"])
+            envelope = resolve_spatial_envelope(profile)
+            text = build_prompt(page)
+
+            self.assertEqual(envelope["envelope_id"], "labyrinth_branch")
+            self.assertIn("branch", envelope["plan_shape"].lower())
+            self.assertIn("single straight corridor", " ".join(envelope["must_not_drift"]).lower())
+            self.assertIn("maze directions", text)
+
+    def test_i48_mushroom_hall_is_natural_not_masonry_gallery(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-48")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        envelope = resolve_spatial_envelope(profile)
+        text = build_prompt(page)
+
+        self.assertEqual(envelope["envelope_id"], "natural_fungal_hall")
+        self.assertIn("natural cavern aisle", envelope["plan_shape"].lower())
+        self.assertIn("built masonry gallery", " ".join(envelope["must_not_drift"]).lower())
+        self.assertIn("oversized mushroom caps", text)
+
     def test_i45_resolves_tunnel_to_shaft_transition(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-45")
         profile = resolve_environment_profile(page["environment_profile_id"])
