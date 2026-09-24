@@ -6,8 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-CORE_AUTHORITY_FILES = (
-    "config/local_ai_stack.json",
+GENERATION_AUTHORITY_FILES = (
     "config/universal_monster_contract.json",
     "config/universal_environment_contract.json",
     "config/universal_page_contract.json",
@@ -31,27 +30,34 @@ CORE_AUTHORITY_FILES = (
     "art_pipeline/style_rules.py",
     "art_pipeline/page_contract.py",
     "art_pipeline/edit_prompt.py",
+    "art_pipeline/flux2_klein_profile.py",
+    "art_pipeline/image_edit_profile.py",
+    "art_pipeline/generation_runtime.py",
+)
+
+REVIEW_AUTHORITY_FILES = (
     "art_pipeline/vision_review_prompts.py",
     "art_pipeline/vision_reviewer.py",
     "art_pipeline/qa.py",
     "art_pipeline/png_content_qa.py",
-    "art_pipeline/flux2_klein_profile.py",
-    "art_pipeline/image_edit_profile.py",
-    "art_pipeline/candidate_runner.py",
-    "art_pipeline/generation_runtime.py",
-    "scripts/generate_test_gallery.py",
 )
 
 PAGE_AUTHORITY_FIELDS = (
     "page_id",
+    "monster_name",
+    "habitat",
     "monster_spec_id",
     "archetype",
     "environment_profile_id",
     "environment_variant",
     "physicality",
     "moment",
+    "identity_rules",
     "must_include",
     "must_avoid",
+    "coloring_rules",
+    "reference_image",
+    "modify",
     "composition",
 )
 
@@ -71,15 +77,50 @@ def _hash_file(digest, root: Path, relative: str) -> None:
     digest.update(b"\0")
 
 
+def _hash_json_payload(digest, label: str, payload) -> None:
+    digest.update(label.encode("utf-8"))
+    digest.update(b"\0")
+    digest.update(
+        json.dumps(
+            payload,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+        ).encode("utf-8")
+    )
+    digest.update(b"\0")
+
+
+def _generation_stack_payload(root: Path) -> dict:
+    path = root / "config" / "local_ai_stack.json"
+    if not path.exists():
+        return {"missing": True}
+    payload = _read_json(path)
+    return {
+        "model": payload.get("model"),
+        "templates": payload.get("templates"),
+        "models": payload.get("models"),
+    }
+
+
+def _review_stack_payload(root: Path) -> dict:
+    path = root / "config" / "local_ai_stack.json"
+    if not path.exists():
+        return {"missing": True}
+    payload = _read_json(path)
+    return {"vision_reviewer": payload.get("vision_reviewer")}
+
+
 def _page_authority_payload(page: dict) -> dict:
     return {key: page.get(key) for key in PAGE_AUTHORITY_FIELDS}
 
 
 def page_generation_fingerprint(page: dict, root: Path = ROOT) -> str:
-    """Hash only authority that can materially change this page generation/review."""
+    """Hash only authority that can materially change rendered candidate pixels."""
     digest = hashlib.sha256()
-    for relative in CORE_AUTHORITY_FILES:
+    for relative in GENERATION_AUTHORITY_FILES:
         _hash_file(digest, root, relative)
+    _hash_json_payload(digest, "GENERATION_STACK", _generation_stack_payload(root))
 
     spec_id = str(page.get("monster_spec_id") or "").strip()
     if spec_id:
@@ -106,4 +147,15 @@ def page_generation_fingerprint(page: dict, root: Path = ROOT) -> str:
     ).encode("utf-8")
     digest.update(b"PAGE\0")
     digest.update(payload)
+    return digest.hexdigest()
+
+
+def page_review_fingerprint(page: dict, root: Path = ROOT) -> str:
+    """Hash reviewer/QA authority separately so review changes do not imply rerender."""
+    digest = hashlib.sha256()
+    digest.update(page_generation_fingerprint(page, root).encode("ascii"))
+    digest.update(b"\0")
+    for relative in REVIEW_AUTHORITY_FILES:
+        _hash_file(digest, root, relative)
+    _hash_json_payload(digest, "REVIEW_STACK", _review_stack_payload(root))
     return digest.hexdigest()
