@@ -58,29 +58,38 @@ class VisionReviewerTests(unittest.TestCase):
     def test_habitat_story_and_physicality_are_hard_gates(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
-        prompt = vr.build_scene_review_prompt(page)
-        self.assertIn("SCENE / PHYSICALITY GATES:", prompt)
-        self.assertIn("Habitat reads as:", prompt)
-        self.assertIn("Scene moment reads as:", prompt)
-        self.assertIn("Physical state reads as:", prompt)
-        self.assertIn("Support/contact is visible and believable:", prompt)
-        self.assertIn("Motion/weight reads correctly:", prompt)
+        environment = vr.build_environment_review_prompt(page)
+        action = vr.build_action_review_prompt(page)
+        self.assertIn("ENVIRONMENT GATES:", environment)
+        self.assertIn("Habitat reads as:", environment)
+        self.assertIn("Space envelope matches:", environment)
+        self.assertIn("ACTION / PHYSICALITY GATES:", action)
+        self.assertIn("Scene moment reads as:", action)
+        self.assertIn("Physical state reads as:", action)
+        self.assertIn("Support/contact is visible and believable:", action)
+        self.assertIn("Motion/weight reads correctly:", action)
 
     def test_review_stages_do_not_leak_into_final_quality_gate(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
 
         identity = vr.build_identity_review_prompt(page)
-        scene = vr.build_scene_review_prompt(page)
+        environment = vr.build_environment_review_prompt(page)
+        action = vr.build_action_review_prompt(page)
         quality = vr.build_review_prompt(page)
 
         self.assertIn("Shape-first body geometry reads as:", identity)
         self.assertNotIn("Shape-first body geometry reads as:", quality)
 
-        self.assertIn("Mode-specific contact geometry reads correctly:", scene)
-        self.assertIn("One clear story beat reads as:", scene)
-        self.assertIn("Environment participates through:", scene)
+        self.assertIn("Space envelope matches:", environment)
+        self.assertNotIn("Scene moment reads as:", environment)
 
+        self.assertIn("Mode-specific contact geometry reads correctly:", action)
+        self.assertIn("One clear story beat reads as:", action)
+        self.assertIn("Environment participates through:", action)
+        self.assertNotIn("Habitat reads as:", action)
+
+        self.assertNotIn("Space envelope matches:", quality)
         self.assertNotIn("Mode-specific contact geometry reads correctly:", quality)
         self.assertNotIn("One clear story beat reads as:", quality)
         self.assertNotIn("Environment participates through:", quality)
@@ -126,9 +135,10 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertFalse(payload["stream"])
         self.assertFalse(payload["think"])
 
-    def test_all_three_gates_must_pass(self):
+    def test_all_four_gates_must_pass(self):
         identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}
-        scene = {"pass": True, "score": 94, "defects": [], "preserve": ["tripwire crosses floor"]}
+        environment = {"pass": True, "score": 95, "defects": [], "preserve": ["stone corridor"]}
+        action = {"pass": True, "score": 94, "defects": [], "preserve": ["tripwire crosses floor"]}
         quality = {"pass": True, "score": 92, "defects": [], "preserve": ["broad white regions"]}
         with tempfile.TemporaryDirectory() as td:
             image_path = Path(td) / "candidate.png"
@@ -138,7 +148,8 @@ class VisionReviewerTests(unittest.TestCase):
                 "_request",
                 side_effect=[
                     {"response": json.dumps(identity)},
-                    {"response": json.dumps(scene)},
+                    {"response": json.dumps(environment)},
+                    {"response": json.dumps(action)},
                     {"response": json.dumps(quality)},
                 ],
             ) as request:
@@ -148,11 +159,11 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertEqual(result["defects"], quality["defects"])
         self.assertEqual(result["preserve"], quality["preserve"])
         self.assertEqual(result["stage"], "quality")
-        self.assertEqual(request.call_count, 3)
+        self.assertEqual(request.call_count, 4)
 
-    def test_scene_failure_stops_before_quality_gate(self):
+    def test_environment_failure_stops_before_action_gate(self):
         identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}
-        scene = {"pass": False, "score": 42, "defects": ["tripwire action is not visible"], "preserve": ["stone corridor"]}
+        environment = {"pass": False, "score": 42, "defects": ["spiral stair is not visible"], "preserve": ["stone wall"]}
         with tempfile.TemporaryDirectory() as td:
             image_path = Path(td) / "candidate.png"
             image_path.write_bytes(b"x")
@@ -161,12 +172,34 @@ class VisionReviewerTests(unittest.TestCase):
                 "_request",
                 side_effect=[
                     {"response": json.dumps(identity)},
-                    {"response": json.dumps(scene)},
+                    {"response": json.dumps(environment)},
                 ],
             ) as request:
                 result = vr.review_image(self.page, image_path, self.config)
         self.assertFalse(result["pass"])
+        self.assertEqual(result["stage"], "environment")
         self.assertEqual(request.call_count, 2)
+
+    def test_action_failure_stops_before_quality_gate(self):
+        identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}
+        environment = {"pass": True, "score": 95, "defects": [], "preserve": ["stone corridor"]}
+        action = {"pass": False, "score": 42, "defects": ["tripwire action is not visible"], "preserve": ["stone corridor"]}
+        with tempfile.TemporaryDirectory() as td:
+            image_path = Path(td) / "candidate.png"
+            image_path.write_bytes(b"x")
+            with patch.object(
+                vr,
+                "_request",
+                side_effect=[
+                    {"response": json.dumps(identity)},
+                    {"response": json.dumps(environment)},
+                    {"response": json.dumps(action)},
+                ],
+            ) as request:
+                result = vr.review_image(self.page, image_path, self.config)
+        self.assertFalse(result["pass"])
+        self.assertEqual(result["stage"], "action")
+        self.assertEqual(request.call_count, 3)
 
     def test_positive_identity_gate_echo_becomes_failure_statement(self):
         prompt = """IDENTITY GATES:
