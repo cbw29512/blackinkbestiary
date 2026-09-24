@@ -46,38 +46,27 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
     payload = {
         "model": settings.get("model", "qwen3-vl:4b"),
         "stream": False,
-        "messages": [{"role": "user", "content": build_review_prompt(page), "images": [encoded]}],
-        "options": {"temperature": 0, "num_predict": 8192},
+        "prompt": build_review_prompt(page),
+        "images": [encoded],
+        "options": {"temperature": 0, "num_predict": 4096},
         "think": False,
     }
-    result = _request(settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/chat", payload)
-    message = result.get("message") or {}
-    raw = (message.get("content") or "").strip()
-    if not raw and isinstance(result.get("response"), str):
-        raw = result["response"].strip()
+    result = _request(settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/generate", payload)
+    raw = (result.get("response") or "").strip() if isinstance(result, dict) else ""
     if not raw:
-        thinking = (message.get("thinking") or "").strip()
-        if thinking:
-            # Some Qwen3-VL/Ollama builds place the entire answer in the thinking
-            # channel. Recover a JSON object if one is actually present there;
-            # otherwise report the diagnostic and fail closed.
-            start = thinking.rfind("{")
-            while start >= 0:
-                candidate = thinking[start:].strip()
-                try:
-                    parsed = json.loads(candidate)
-                    if isinstance(parsed, dict):
-                        raw = candidate
-                        break
-                except json.JSONDecodeError:
-                    pass
-                start = thinking.rfind("{", 0, start)
-        if not raw:
-            raise VisionReviewError("Vision reviewer returned an empty answer" + (f"; thinking={thinking[:1000]}" if thinking else "") + f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}; response_keys={sorted(result.keys())}")
+        raise VisionReviewError(
+            "Vision reviewer returned an empty answer"
+            f"; done_reason={result.get('done_reason') if isinstance(result, dict) else None}"
+            f"; eval_count={result.get('eval_count') if isinstance(result, dict) else None}"
+            f"; response_keys={sorted(result.keys()) if isinstance(result, dict) else []}"
+        )
     try:
         verdict = json.loads(raw)
     except json.JSONDecodeError as exc:
-        raise VisionReviewError(f"Vision reviewer returned non-JSON content: {raw[:200]}") from exc
+        raise VisionReviewError(
+            f"Vision reviewer returned non-JSON content: {raw[:300]}"
+            f"; done_reason={result.get('done_reason')}; eval_count={result.get('eval_count')}"
+        ) from exc
     score = verdict.get("score")
     preserve = verdict.get("preserve")
     defects = verdict.get("defects")
