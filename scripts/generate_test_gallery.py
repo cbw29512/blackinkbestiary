@@ -164,6 +164,26 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
     return best, best_verdict, history
 
 
+def canary_summary(state: dict) -> dict:
+    wanted = set(CANARY_PAGE_IDS)
+    latest = {
+        (str(item.get("page_id")), int(item.get("candidate") or 0)): item
+        for item in state.get("results", [])
+        if str(item.get("page_id")) in wanted and int(item.get("candidate") or 0) == 1
+    }
+    rows = []
+    for page_id in CANARY_PAGE_IDS:
+        item = latest.get((page_id, 1)) or {}
+        rows.append({
+            "page_id": page_id,
+            "status": str(item.get("status") or "missing"),
+            "score": int(((item.get("visual_review") or {}).get("score")) or 0),
+            "defects": list(((item.get("visual_review") or {}).get("defects")) or []),
+        })
+    ready = sum(1 for row in rows if row["status"] == "ready_for_review")
+    return {"ready": ready, "total": len(rows), "rows": rows}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate a resumable multi-candidate test gallery for every Tome page")
     parser.add_argument("--copies", type=int, default=4, help="Independent candidates per monster/page")
@@ -279,6 +299,14 @@ def main() -> int:
     state["updated_at"] = utc_now()
     write_state(state)
     print(f"Test gallery complete: {len(state['results'])} attempts")
+    if args.canary:
+        summary = canary_summary(state)
+        print(f"CANARY SUMMARY: {summary['ready']}/{summary['total']} ready_for_review")
+        for row in summary["rows"]:
+            defects = "; ".join(row["defects"]) if row["defects"] else "none"
+            print(
+                f"  {row['page_id']}: {row['status']} score={row['score']} defects={defects}"
+            )
     return 0
 
 
