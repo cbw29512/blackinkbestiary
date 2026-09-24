@@ -31,8 +31,7 @@ Be strict about extra/missing/duplicated limbs, hands, heads, tails, wings, eyes
 monster identity; signature features; environment identity; story readability; clutter; solid-black masses; grayscale/shading;
 large usable coloring regions; and creature/scenery separation.
 Do not assume a requested feature exists merely because the text says it should.
-Return JSON only:
-{"pass": true|false, "score": 0-100, "defects": ["specific visible defect"], "preserve": ["successful visible feature"]}
+Return exactly one compact JSON object and nothing else:\n{"pass": true|false, "score": 0-100, "defects": ["specific visible defect"], "preserve": ["successful visible feature"]}
 Pass only when there is no meaningful visible defect worth another edit.
 REQUIREMENTS:
 - """ + "\n- ".join(checks)
@@ -47,7 +46,6 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
     payload = {
         "model": settings.get("model", "qwen3-vl:4b"),
         "stream": False,
-        "format": {"type": "object", "properties": {"pass": {"type": "boolean"}, "score": {"type": "integer"}, "defects": {"type": "array", "items": {"type": "string"}}, "preserve": {"type": "array", "items": {"type": "string"}}}, "required": ["pass", "score", "defects", "preserve"]},
         "messages": [{"role": "user", "content": build_review_prompt(page), "images": [encoded]}],
         "options": {"temperature": 0, "num_predict": 1024},
         "think": False,
