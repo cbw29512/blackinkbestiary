@@ -94,6 +94,16 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "leaving the interior predominantly white and colorable. No large black masses."
         ),
         f"SUBJECT: {page['monster_name']}.",
+        (
+            "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Treat every countable body structure in the canonical creature "
+            "identity as exact, not approximate. Never invent or duplicate heads, faces, eyes, horns, antennae, arms, hands, "
+            "fingers, legs, feet, wings, tails, tentacles, mandibles, pincers, or other appendages. A normal bilateral creature "
+            "must keep a coherent left/right body plan; limbs must attach once at anatomically plausible joints and may not branch, "
+            "merge, sprout from scenery, or appear as detached extras. If canonical anatomy says a structure is absent, do not add it. "
+            "If canonical anatomy gives a number such as two arms, four legs, eight spider legs, one tail, or two wings, that number is "
+            "an exact hard limit. Pose and camera angle may hide part of a limb behind the body, but may never create an extra limb to "
+            "make the pose readable. Candidate variation may change pose only; it may not change anatomy."
+        ),
         *_canonical_sections(spec),
         (
             "CREATURE-ONLY AUTHORITY: canonical monster data describes the creature only. Any place words inherited "
