@@ -123,6 +123,43 @@ class PromptTests(unittest.TestCase):
         self.assertIn("visible balancing tail", kobold_text)
         self.assertIn("Exactly eight jointed arachnid legs", spider_text)
 
+
+    def test_swarm_prompt_uses_collective_subject_not_giant_leader(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        bat_swarm = next(page for page in tome["pages"] if page["page_id"] == "I-17")
+        text = build_prompt(bat_swarm, candidate_no=1)
+        self.assertIn("SWARM COMPOSITION LOCK", text)
+        self.assertIn("no single oversized member may dominate", text)
+        self.assertIn("controlled population", text)
+        self.assertIn("broad white gaps", text)
+
+    def test_prompt_has_creature_scenery_ownership_firewall(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        text = build_prompt(tome["pages"][0])
+        self.assertIn("CREATURE/SCENERY OWNERSHIP FIREWALL", text)
+        self.assertIn("may never sprout from, merge into, replace, or duplicate limbs", text)
+
+    def test_centipede_prompt_requires_leg_pair_on_every_visible_segment(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-20")
+        text = build_prompt(page)
+        self.assertIn("ONE PAIR of slender walking legs attached to EVERY visible trunk segment", text)
+        self.assertIn("sparse legs only near the head", text)
+
+    def test_fire_beetle_prompt_requires_three_signature_glands(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-21")
+        text = build_prompt(page)
+        self.assertIn("three distinct luminous glands", text)
+        self.assertIn("two by the eyes and one near the rear abdomen", text)
+
+    def test_giant_bat_prompt_forbids_separate_arms(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-16")
+        text = build_prompt(page)
+        self.assertIn("the two forelimbs ARE the two membrane wings", text)
+        self.assertIn("There is no separate pair of arms", text)
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
