@@ -20,6 +20,25 @@ Never use the engine branch as the generated-image handoff.
 6. ChatGPT reads the live branch, inspects the actual images, and writes exact-image decisions back to the engine branch.
 7. Repeat until the canary genuinely passes direct image inspection.
 
+## Review and refinement authority
+
+The local semantic reviewer is intentionally fail-closed and staged:
+
+1. **Identity / anatomy** — species identity, canonical scale, body plan, limb topology, known drift.
+2. **Environment geometry** — named habitat, material language, spatial envelope, architecture/terrain, landmark.
+3. **Action / physicality** — required verb, prop relationship, support/contact, motion/weight, story cause-and-effect.
+4. **Print / colorability quality** — line density, negative space, borders, black fill, wallpaper repetition, print usability.
+
+A later-stage failure outranks an earlier-stage failure even when its numeric reviewer score is lower. Reaching the environment gate proves identity passed; reaching action proves identity + environment passed; reaching quality proves identity + environment + action passed.
+
+**Identity failures regenerate from text authority.** Do not image-edit a fundamentally wrong body plan and expect it to become canonical. Environment, action, and quality failures use cumulative image-edit refinement so successful creature identity can be preserved while the scene is repaired.
+
+Exact-image approval is valid only for the current candidate content hash. If candidate bytes change, old approval is stale and the image returns to review.
+
+Review publication is state-authoritative. Orphan historical PNGs on the workstation are never eligible for the live review snapshot unless current gallery state marks that page/candidate reviewable.
+
+The full 50-page / 4-candidate gallery is blocked until all nine canary pages have current exact-image approvals.
+
 ## Safety rules
 
 - `review-previews/decisions.json` is engine-owned. The local preview publisher must never overwrite it from stale workstation state.
