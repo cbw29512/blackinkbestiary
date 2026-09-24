@@ -102,6 +102,98 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                 [("I-01", 1), ("I-04", 1)],
             )
 
+    def test_multi_candidate_approvals_do_not_silently_select_last_candidate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            gallery = root / "web" / "test-gallery"
+            gallery.mkdir(parents=True)
+
+            results = []
+            reviews = []
+            for candidate, payload in ((1, b"one"), (2, b"two")):
+                image = gallery / f"I-01-C{candidate:02d}.png"
+                image.write_bytes(payload)
+                digest = hashlib.sha256(payload).hexdigest()[:16]
+                review_id = f"I-01-C{candidate:02d}-H{digest}"
+                results.append({
+                    "page_id": "I-01",
+                    "candidate": candidate,
+                    "status": "ready_for_review",
+                    "image_path": f"test-gallery/I-01-C{candidate:02d}.png",
+                })
+                reviews.append({
+                    "review_id": review_id,
+                    "decision": "approve",
+                    "notes": "acceptable",
+                })
+
+            state_file.write_text(json.dumps({
+                "copies_per_page": 4,
+                "results": results,
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({"reviews": reviews}), encoding="utf-8")
+
+            with (
+                patch.object(apply, "ROOT", root),
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["selections"], {})
+            self.assertEqual(
+                [item["assistant_review"]["decision"] for item in state["results"]],
+                ["approve", "approve"],
+            )
+
+    def test_select_explicitly_chooses_one_final_candidate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_file = root / "state.json"
+            decisions_file = root / "decisions.json"
+            image = root / "web" / "test-gallery" / "I-01-C02.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"two")
+            digest = hashlib.sha256(b"two").hexdigest()[:16]
+            review_id = f"I-01-C02-H{digest}"
+
+            state_file.write_text(json.dumps({
+                "copies_per_page": 4,
+                "results": [{
+                    "page_id": "I-01",
+                    "candidate": 2,
+                    "status": "ready_for_review",
+                    "image_path": "test-gallery/I-01-C02.png",
+                }],
+                "selections": {},
+            }), encoding="utf-8")
+            decisions_file.write_text(json.dumps({
+                "reviews": [{
+                    "review_id": review_id,
+                    "decision": "select",
+                    "notes": "best final candidate",
+                }],
+            }), encoding="utf-8")
+
+            with (
+                patch.object(apply, "ROOT", root),
+                patch.object(apply, "STATE", state_file),
+                patch.object(apply, "DECISIONS", decisions_file),
+            ):
+                self.assertEqual(apply.main(), 0)
+
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            self.assertEqual(state["results"][0]["assistant_review"]["decision"], "select")
+            self.assertEqual(state["selections"]["I-01"], {
+                "candidate": 2,
+                "source": "assistant_selected",
+                "review_id": review_id,
+            })
+
     def test_reapplying_same_approval_is_idempotent(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
