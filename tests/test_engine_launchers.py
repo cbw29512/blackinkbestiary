@@ -34,7 +34,7 @@ class EngineLauncherContractTests(unittest.TestCase):
         )
         self.assertLess(
             text.index("scripts\\generate_test_gallery.py"),
-            text.index("scripts\\publish_review_previews.py"),
+            text.rindex("scripts\\publish_review_previews.py"),
         )
         self.assertNotIn(
             "All current images are waiting for AI review; no GPU regeneration needed.",
