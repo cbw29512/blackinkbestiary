@@ -45,7 +45,7 @@ def main() -> int:
     for review in reviews:
         target_review_id = str(review.get("review_id") or "")
         decision = str(review.get("decision") or "").lower()
-        if not target_review_id or decision not in {"approve", "reject"}:
+        if not target_review_id or decision not in {"approve", "reject", "select"}:
             continue
         latest_by_review_id[target_review_id] = review
 
@@ -74,20 +74,35 @@ def main() -> int:
             continue
         item["assistant_review"] = next_review
 
+        page_id = str(item.get("page_id"))
+        candidate_no = int(item.get("candidate") or 0)
+
         if decision == "reject":
             item["status"] = "assistant_rejected"
             rejected_image = current_image_path(item)
             if rejected_image.exists():
                 rejected_image.unlink()
-            selected = (state.get("selections") or {}).get(str(item.get("page_id")))
-            if selected and int(selected.get("candidate") or 0) == int(item.get("candidate") or 0):
-                state["selections"].pop(str(item.get("page_id")), None)
-        else:
-            state.setdefault("selections", {})[str(item.get("page_id"))] = {
-                "candidate": int(item.get("candidate") or 0),
-                "source": "assistant_review",
+            selected = (state.get("selections") or {}).get(page_id)
+            if selected and int(selected.get("candidate") or 0) == candidate_no:
+                state["selections"].pop(page_id, None)
+        elif decision == "select":
+            # Full-gallery final choice: acceptable AND explicitly selected.
+            state.setdefault("selections", {})[page_id] = {
+                "candidate": candidate_no,
+                "source": "assistant_selected",
                 "review_id": target_review_id,
             }
+        else:
+            # Approval means this exact image is acceptable, but it must not
+            # silently replace another final candidate merely because the
+            # decision appeared later in the append-only review history.
+            selected = (state.get("selections") or {}).get(page_id)
+            if selected is None and int(state.get("copies_per_page") or 1) <= 1:
+                state.setdefault("selections", {})[page_id] = {
+                    "candidate": candidate_no,
+                    "source": "assistant_review",
+                    "review_id": target_review_id,
+                }
 
         changed = True
         applied += 1
