@@ -735,9 +735,11 @@
         "broad floor"
       ],
       "must_avoid": [
-        "hundreds of tiny mushrooms"
+        "hundreds of tiny mushrooms",
+        "built masonry gallery",
+        "cathedral arches"
       ],
-      "spatial_envelope": "built_hall_gallery"
+      "spatial_envelope": "natural_fungal_hall"
     },
     "underground.mine-shaft": {
       "name": "Deep Mine Shaft",
