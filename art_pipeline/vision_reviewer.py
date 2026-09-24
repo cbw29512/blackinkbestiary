@@ -32,7 +32,7 @@ monster identity; signature features; environment identity; story readability; c
 large usable coloring regions; and creature/scenery separation.
 Do not assume a requested feature exists merely because the text says it should.
 Return exactly one compact JSON object and nothing else:\n{"pass": true|false, "score": 0-100, "defects": ["specific visible defect"], "preserve": ["successful visible feature"]}
-Pass only when there is no meaningful visible defect worth another edit.
+Pass only when there is no meaningful visible defect worth another edit. Keep analysis terse: inspect silently, then emit the JSON verdict immediately. Do not write step-by-step reasoning.
 REQUIREMENTS:
 - """ + "\n- ".join(checks)
 
@@ -47,7 +47,7 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         "model": settings.get("model", "qwen3-vl:4b"),
         "stream": False,
         "messages": [{"role": "user", "content": build_review_prompt(page), "images": [encoded]}],
-        "options": {"temperature": 0, "num_predict": 4096},
+        "options": {"temperature": 0, "num_predict": 8192},
         "think": False,
     }
     result = _request(settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/chat", payload)
