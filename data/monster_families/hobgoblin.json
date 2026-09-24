@@ -32,7 +32,11 @@
       "feral crouch",
       "wild furry silhouette",
       "cute elf face",
-      "reptilian features"
+      "reptilian features",
+      "horns or horn nubs",
+      "tail",
+      "clawed animal feet",
+      "six-pack bodybuilder torso"
     ],
     "limb_structure": "Balanced athletic humanoid arms and legs with controlled hand placement and stable booted or armored feet; no giant, animal, or exaggerated goblin limb proportions."
   },
@@ -42,7 +46,9 @@
     "no tusks or animal muzzle",
     "ears are pointed but proportionally smaller than a goblin's",
     "body remains medium athletic rather than hulking",
-    "posture and equipment communicate military discipline"
+    "posture and equipment communicate military discipline",
+    "head has no horns and no tusks",
+    "feet and hands remain humanoid rather than clawed"
   ],
   "known_failure_modes": [
     {
@@ -64,6 +70,11 @@
       "id": "elf_drift",
       "symptom": "face becomes handsome or elf-like",
       "correction": "restore broad flattened goblinoid nose, heavy brow, angular cheeks, and stern predatory eyes"
+    },
+    {
+      "id": "demon_drift",
+      "symptom": "horns, tail, claws, or devil-like facial anatomy appears",
+      "correction": "remove demonic features and restore a hornless stern goblinoid soldier with pointed ears, broad flattened nose, and humanoid hands/feet"
     }
   ],
   "scene_identity": {
