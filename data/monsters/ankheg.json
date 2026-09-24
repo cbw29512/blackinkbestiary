@@ -60,5 +60,32 @@
     "ambush hunting",
     "tunneling",
     "sudden emergence"
+  ],
+  "scene_identity": {
+    "size_impression": "Large, low-slung burrowing insect whose armored body and heavy digging forelegs make it clearly larger than a person without becoming dragonlike.",
+    "natural_posture": "Body held close to the ground with six legs supporting the thorax and abdomen; reinforced forelegs brace, dig, or emerge through soil.",
+    "behavior_style": [
+      "burrowing",
+      "ambush hunting",
+      "tunneling",
+      "sudden emergence"
+    ],
+    "environment_fit": [
+      "underground",
+      "wilderness",
+      "farmland"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "spider_drift",
+      "symptom": "body gains eight spiderlike legs or loses insect three-part structure",
+      "correction": "restore exactly six legs, reinforced digging forelegs, broad thorax, segmented abdomen, mandibles, and short antennae"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "head/body becomes reptilian or dragonlike",
+      "correction": "remove dragon skull, horns, wings, and reptilian torso; restore armored insect head, mandibles, and low six-legged body"
+    }
   ]
 }
