@@ -155,8 +155,12 @@ def exact_image_authority_approved(item: dict, root: Path = ROOT) -> bool:
     relative = str(item.get("image_path") or "").strip()
     if not relative:
         return False
-    path = root / "web" / relative
-    if not path.exists() or not path.is_file():
+    relative_path = Path(relative)
+    if relative_path.is_absolute() or ".." in relative_path.parts:
+        return False
+    web_root = (root / "web").resolve()
+    path = (web_root / relative_path).resolve()
+    if web_root not in path.parents or not path.exists() or not path.is_file():
         return False
 
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
