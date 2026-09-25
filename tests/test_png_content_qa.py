@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from qa import inspect_candidate
-from png_content_qa import enforce_print_safe_margin
+from png_content_qa import enforce_print_safe_margin, normalize_monochrome_line_art
 
 
 def _chunk(kind: bytes, data: bytes) -> bytes:
@@ -98,6 +98,39 @@ class PngContentQATests(unittest.TestCase):
             self.assertFalse(result["pass"])
             self.assertIn("unexpected_color_content", result["reasons"])
             self.assertGreater(result["content_qa"]["chromatic_ratio"], 0.01)
+
+    def test_monochrome_normalization_removes_accidental_color_before_qa(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "colored-fixed.png"
+            _write_rgb_png(
+                path,
+                lambda x, y: (200, 20, 20)
+                if 120 <= x < 648 and 180 <= y < 844
+                else (255, 255, 255),
+            )
+            before = inspect_candidate(path)
+            self.assertIn("unexpected_color_content", before["reasons"])
+
+            report = normalize_monochrome_line_art(path)
+            after = inspect_candidate(path)
+
+            self.assertTrue(report["changed"])
+            self.assertEqual(report["source_color_type"], 2)
+            self.assertEqual(after["content_qa"]["chromatic_ratio"], 0.0)
+            self.assertNotIn("unexpected_color_content", after["reasons"])
+            self.assertTrue(after["content_qa"]["pass"])
+
+    def test_monochrome_normalization_is_idempotent_for_grayscale(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "gray.png"
+            _write_grayscale_png(
+                path,
+                lambda x, y: 0 if 200 <= x < 568 and 300 <= y < 724 else 255,
+            )
+            before = path.read_bytes()
+            report = normalize_monochrome_line_art(path)
+            self.assertFalse(report["changed"])
+            self.assertEqual(path.read_bytes(), before)
 
     def test_decorative_edge_frame_fails_safe_margin_contract(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -86,6 +86,64 @@ def _png_chunk(kind: bytes, data: bytes) -> bytes:
     return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", crc)
 
 
+def normalize_monochrome_line_art(path: str | Path) -> dict:
+    """Remove accidental RGB color deterministically before production QA."""
+    path = Path(path)
+    raw = path.read_bytes()
+    if not raw.startswith(PNG_SIGNATURE):
+        raise ValueError("not_png")
+
+    width, height, color_type, rows = _decode_rows(raw)
+    if color_type == 0:
+        return {
+            "path": str(path),
+            "width": width,
+            "height": height,
+            "source_color_type": color_type,
+            "changed": False,
+        }
+
+    grayscale_rows: list[bytes] = []
+    for source in rows:
+        out = bytearray()
+        if color_type == 2:
+            for i in range(0, len(source), 3):
+                r, g, b = source[i:i + 3]
+                out.append((299 * r + 587 * g + 114 * b) // 1000)
+        elif color_type == 4:
+            for i in range(0, len(source), 2):
+                gray, alpha = source[i:i + 2]
+                out.append((gray * alpha + 255 * (255 - alpha)) // 255)
+        elif color_type == 6:
+            for i in range(0, len(source), 4):
+                r, g, b, alpha = source[i:i + 4]
+                luma = (299 * r + 587 * g + 114 * b) // 1000
+                out.append((luma * alpha + 255 * (255 - alpha)) // 255)
+        else:
+            raise ValueError("unsupported_png_pixel_format")
+        grayscale_rows.append(bytes(out))
+
+    scanlines = bytearray()
+    for row in grayscale_rows:
+        scanlines.append(0)
+        scanlines.extend(row)
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0)
+    path.write_bytes(
+        PNG_SIGNATURE
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"IDAT", zlib.compress(bytes(scanlines), 6))
+        + _png_chunk(b"IEND", b"")
+    )
+    return {
+        "path": str(path),
+        "width": width,
+        "height": height,
+        "source_color_type": color_type,
+        "changed": True,
+    }
+
+
 def enforce_print_safe_margin(
     path: str | Path,
     margin_ratio: float = 0.045,
