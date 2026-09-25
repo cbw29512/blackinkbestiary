@@ -64,6 +64,42 @@ SCOPE_RULES = {
 }
 
 
+def learning_observations(records: list[dict]) -> list[dict]:
+    """Expand each candidate into distinct review observations without double-counting."""
+    observations = []
+    for record in learning_observations(records):
+        page_id = str(record.get("page_id") or "")
+        candidate = int(record.get("candidate") or 0)
+
+        # Preserve top-level technical/assistant evidence, but if pass_history
+        # exists do not also count visual_review because it mirrors the final pass.
+        base = {
+            "page_id": page_id,
+            "candidate": candidate,
+            "status": record.get("status"),
+            "error": record.get("error"),
+            "assistant_review": record.get("assistant_review"),
+            "visual_review": (
+                None if record.get("pass_history") else record.get("visual_review")
+            ),
+            "evidence_source": "candidate_record",
+        }
+        observations.append(base)
+
+        for step in record.get("pass_history") or []:
+            review = step.get("review") or {}
+            if not review:
+                continue
+            observations.append({
+                "page_id": page_id,
+                "candidate": candidate,
+                "pass": step.get("pass"),
+                "visual_review": review,
+                "evidence_source": "refinement_pass",
+            })
+    return observations
+
+
 def build_learning_queue(records: list[dict], root: Path = ROOT) -> list[dict]:
     taxonomy = load_taxonomy(root / "config" / "defect_taxonomy.json")
     labels = taxonomy_labels(taxonomy)
@@ -79,6 +115,9 @@ def build_learning_queue(records: list[dict], root: Path = ROOT) -> list[dict]:
             evidence[code][page_id or "<unknown>"] += 1
             examples.setdefault(code, []).append({
                 "page_id": page_id,
+                "candidate": record.get("candidate"),
+                "pass": record.get("pass"),
+                "evidence_source": record.get("evidence_source"),
                 "stage": (record.get("visual_review") or {}).get("stage"),
                 "defects": list((record.get("visual_review") or {}).get("defects") or []),
             })

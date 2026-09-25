@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from defect_taxonomy import classify_text, count_defects, load_taxonomy
-from learning_feedback import build_learning_queue
+from learning_feedback import build_learning_queue, learning_observations
 from prompt_load import prompt_load_report
 from quality_history import canary_metrics, current_page_records, evaluate_readiness, generation_efficiency, quality_contract_fingerprint
 
@@ -43,6 +43,57 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(counts["TECH_SAFE_MARGIN"], 1)
         self.assertEqual(counts["SWARM_WALLPAPER"], 1)
         self.assertEqual(counts["SWARM_OVERSIZED_LEADER"], 1)
+
+    def test_learning_queue_uses_each_refinement_pass_without_double_counting_final(self):
+        records = [{
+            "page_id": "I-04",
+            "candidate": 1,
+            "status": "max_refinements_reached",
+            "visual_review": {
+                "stage": "identity",
+                "defects": ["bodybuilder chest and oversized shoulders"],
+            },
+            "pass_history": [
+                {
+                    "pass": 0,
+                    "review": {
+                        "stage": "identity",
+                        "defects": ["bodybuilder chest and oversized shoulders"],
+                    },
+                },
+                {
+                    "pass": 1,
+                    "review": {
+                        "stage": "identity",
+                        "defects": ["body reads heroically muscular"],
+                    },
+                },
+                {
+                    "pass": 2,
+                    "review": {
+                        "stage": "identity",
+                        "defects": ["bodybuilder chest and six-pack abs"],
+                    },
+                },
+            ],
+        }]
+        observations = learning_observations(records)
+        self.assertEqual(len(observations), 4)
+
+        queue = build_learning_queue(records, ROOT)
+        item = next(
+            row for row in queue
+            if row["defect_code"] == "IDENTITY_HEROIC_BULK"
+        )
+        self.assertEqual(item["evidence_count"], 3)
+        self.assertEqual(item["distinct_pages"], 1)
+        self.assertEqual(item["priority"], "high")
+        self.assertTrue(
+            all(
+                example["evidence_source"] == "refinement_pass"
+                for example in item["examples"]
+            )
+        )
 
     def test_learning_queue_scopes_limb_failure_to_master_and_monster(self):
         records = [{
