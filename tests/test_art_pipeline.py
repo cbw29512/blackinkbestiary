@@ -760,7 +760,7 @@ class QATests(unittest.TestCase):
         self.assertNotIn("IDENTITY-FIRST RECOVERY MODE", prompt)
         self.assertIn("ENVIRONMENT:", prompt)
         self.assertIn("ACTION:", prompt)
-        self.assertIn("MOMENT:", prompt)
+        self.assertIn("STORY BEAT:", prompt)
 
     def test_generation_uses_compact_self_check_while_review_keeps_full_checklist(self):
         from prompt_builder import build_page_verification_checklist
