@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -88,6 +89,12 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
         "black fill", "grayscale", "clutter", "coloring", "negative space",
     )
 
+    def has_term(term: str) -> bool:
+        # Match semantic terms as whole tokens/phrases. Short anatomy words such
+        # as "ape", "arm", and "ear" must not fire inside unrelated words such
+        # as "wallpaper", "farm", or "clear".
+        return bool(re.search(r"(?<!\\w)" + re.escape(term) + r"(?!\\w)", notes))
+
     # Structural identity must be repaired first. Then setting geometry, then
     # action/contact, then print-quality cleanup.
     for stage, terms in (
@@ -98,7 +105,7 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
     ):
         if stage == "identity" and identity_already_ok:
             continue
-        if any(term in notes for term in terms):
+        if any(has_term(term) for term in terms):
             return stage
 
     local_stage = str(((item or {}).get("visual_review") or {}).get("stage") or "").strip().lower()
