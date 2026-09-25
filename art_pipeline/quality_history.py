@@ -264,8 +264,12 @@ def _generic_assembly_exists(root: Path) -> bool:
 def print_package_report(root: Path = ROOT) -> dict:
     qa_path = root / "art_pipeline" / "qa.py"
     png_path = root / "art_pipeline" / "png_content_qa.py"
+    assembly_path = root / "art_pipeline" / "book_assembly.py"
     qa_text = qa_path.read_text(encoding="utf-8") if qa_path.exists() else ""
     png_text = png_path.read_text(encoding="utf-8") if png_path.exists() else ""
+    assembly_text = (
+        assembly_path.read_text(encoding="utf-8") if assembly_path.exists() else ""
+    )
     proof_candidates = (
         root / "build" / "final-interior.pdf",
         root / "output" / "final-interior.pdf",
@@ -275,14 +279,25 @@ def print_package_report(root: Path = ROOT) -> dict:
         "kdp_standard": (root / "config" / "kdp_print_standard.json").exists(),
         "exact_export_qa": "def inspect_kdp_export" in qa_text,
         "deterministic_safe_margin": "def enforce_print_safe_margin" in png_text,
+        "binding_gutter_validation": (
+            "def inspect_binding_gutter" in qa_text
+            and "def binding_side_for_page" in assembly_text
+        ),
+        "license_attribution_page": (
+            (root / "config" / "source_attribution.json").exists()
+            and "def attribution_lines" in assembly_text
+            and "credits_lines=credits" in assembly_text
+        ),
         "generic_assembly_pipeline": _generic_assembly_exists(root),
         "reproducible_final_proof": any(path.exists() for path in proof_candidates),
     }
     weights = {
-        "kdp_standard": 20,
-        "exact_export_qa": 20,
-        "deterministic_safe_margin": 15,
-        "generic_assembly_pipeline": 25,
+        "kdp_standard": 15,
+        "exact_export_qa": 15,
+        "deterministic_safe_margin": 10,
+        "binding_gutter_validation": 10,
+        "license_attribution_page": 10,
+        "generic_assembly_pipeline": 20,
         "reproducible_final_proof": 20,
     }
     score = sum(weights[name] for name, passed in components.items() if passed)
