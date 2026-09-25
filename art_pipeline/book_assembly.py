@@ -20,6 +20,57 @@ def _pdf_escape(value: str) -> str:
     return str(value).replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
 
 
+def attribution_lines(root: Path) -> list[str]:
+    path = root / "config" / "source_attribution.json"
+    config = json.loads(path.read_text(encoding="utf-8"))
+    required = (
+        "heading",
+        "work_title",
+        "attribution_party",
+        "source_url",
+        "license_name",
+        "license_short_name",
+        "license_url",
+    )
+    missing = [key for key in required if not str(config.get(key) or "").strip()]
+    if missing:
+        raise RuntimeError(
+            "source attribution config is incomplete: " + ", ".join(missing)
+        )
+    if str(config.get("placement") or "") != "append_final_page":
+        raise RuntimeError("source attribution placement must be append_final_page")
+    if bool(config.get("additional_wizards_attribution")):
+        raise RuntimeError("additional Wizards attribution is not permitted by project policy")
+
+    return [
+        str(config["heading"]),
+        "",
+        str(config["work_title"]),
+        f"By {config['attribution_party']}",
+        f"Source: {config['source_url']}",
+        "",
+        f"Licensed under {config['license_name']} ({config['license_short_name']})",
+        f"License: {config['license_url']}",
+    ]
+
+
+def _text_page_content(lines: list[str]) -> bytes:
+    commands = [
+        "BT",
+        "/F1 18 Tf",
+        "72 720 Td",
+    ]
+    first = True
+    for line in lines:
+        if not first:
+            commands.append("0 -24 Td")
+        first = False
+        if line:
+            commands.append(f"({_pdf_escape(line)}) Tj")
+    commands.append("ET")
+    return ("\n".join(commands) + "\n").encode("ascii")
+
+
 def _png_pixels(path: Path) -> tuple[int, int, str, bytes]:
     raw = path.read_bytes()
     width, height, color_type, rows = _decode_rows(raw)
@@ -58,8 +109,9 @@ def assemble_pdf(
     output_path: Path,
     *,
     title: str = "Black Ink Bestiary",
+    credits_lines: list[str] | None = None,
 ) -> dict:
-    """Build a deterministic image-only 8.5x11 PDF from ordered PNG pages."""
+    """Build a deterministic 8.5x11 PDF from ordered PNG pages plus optional credits."""
     if not image_paths:
         raise ValueError("no_pages_to_assemble")
 
@@ -116,6 +168,29 @@ def assemble_pdf(
         )
         page_refs.append(page_obj)
 
+    if credits_lines:
+        font_obj = len(objects) + 1
+        objects.append(
+            b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"
+        )
+        credits_content = _text_page_content(credits_lines)
+        content_obj = len(objects) + 1
+        objects.append(
+            f"<< /Length {len(credits_content)} >>\nstream\n".encode("ascii")
+            + credits_content
+            + b"endstream"
+        )
+        page_obj = len(objects) + 1
+        objects.append(
+            (
+                f"<< /Type /Page /Parent 2 0 R "
+                f"/MediaBox [0 0 {PAGE_WIDTH_PT} {PAGE_HEIGHT_PT}] "
+                f"/Resources << /Font << /F1 {font_obj} 0 R >> >> "
+                f"/Contents {content_obj} 0 R >>"
+            ).encode("ascii")
+        )
+        page_refs.append(page_obj)
+
     objects[1] = (
         f"<< /Type /Pages /Count {len(page_refs)} /Kids ["
         + " ".join(f"{ref} 0 R" for ref in page_refs)
@@ -156,7 +231,9 @@ def assemble_pdf(
     digest = hashlib.sha256(output).hexdigest()
     return {
         "output": str(output_path),
-        "pages": len(image_paths),
+        "pages": len(page_refs),
+        "art_pages": len(image_paths),
+        "credits_page": bool(credits_lines),
         "sha256": digest,
         "bytes": len(output),
         "page_width_pt": PAGE_WIDTH_PT,
@@ -208,7 +285,14 @@ def assemble_locked_book(
 ) -> dict:
     pages = locked_page_paths(root, manifest, state)
     title = str(manifest.get("title") or manifest.get("tome_id") or "Black Ink Bestiary")
-    report = assemble_pdf(pages, output_path, title=title)
+    credits = attribution_lines(root)
+    report = assemble_pdf(
+        pages,
+        output_path,
+        title=title,
+        credits_lines=credits,
+    )
     report["book_id"] = manifest.get("tome_id") or manifest.get("book_id")
     report["title"] = title
+    report["attribution_source_id"] = "dnd-srd-5.2.1"
     return report
