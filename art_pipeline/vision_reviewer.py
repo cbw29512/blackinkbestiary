@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import json
+import re
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -150,6 +151,98 @@ def _positive_gate_values(prompt: str) -> set[str]:
     return values
 
 
+def _semantic_tokens(text: str) -> set[str]:
+    stop = {
+        "a", "an", "and", "are", "as", "at", "be", "by", "for", "from",
+        "has", "have", "in", "is", "it", "of", "on", "or", "the", "to",
+        "with", "without", "reads", "read", "visible", "appears", "exist",
+        "exists", "clearly", "must", "remain", "stays", "stay",
+    }
+    return {
+        token for token in re.findall(r"[a-z0-9]+", str(text or "").lower())
+        if len(token) > 1 and token not in stop
+    }
+
+
+def _semantic_overlap(left: str, right: str) -> float:
+    a = _semantic_tokens(left)
+    b = _semantic_tokens(right)
+    if not a or not b:
+        return 0.0
+    return len(a & b) / min(len(a), len(b))
+
+
+def _positive_gate_echoes(verdict: dict, prompt: str) -> list[dict]:
+    positive = sorted(_positive_gate_values(prompt))
+    issues = []
+    for defect in verdict.get("defects") or []:
+        defect_text = str(defect).strip()
+        if not defect_text:
+            continue
+        best_gate = None
+        best_score = 0.0
+        for gate in positive:
+            score = _semantic_overlap(defect_text, gate)
+            if score > best_score:
+                best_score = score
+                best_gate = gate
+        if best_gate and best_score >= 0.72:
+            issues.append({
+                "kind": "positive_gate_echo",
+                "defect": defect_text,
+                "gate": best_gate,
+                "overlap": round(best_score, 3),
+            })
+    return issues
+
+
+def _defect_preserve_conflicts(verdict: dict) -> list[dict]:
+    issues = []
+    for defect in verdict.get("defects") or []:
+        for preserve in verdict.get("preserve") or []:
+            score = _semantic_overlap(str(defect), str(preserve))
+            if score >= 0.82:
+                issues.append({
+                    "kind": "defect_preserve_conflict",
+                    "defect": str(defect),
+                    "preserve": str(preserve),
+                    "overlap": round(score, 3),
+                })
+    return issues
+
+
+def _verdict_consistency_issues(verdict: dict, prompt: str) -> list[dict]:
+    return _positive_gate_echoes(verdict, prompt) + _defect_preserve_conflicts(verdict)
+
+
+def _consistency_retry_prompt(prompt: str, issues: list[dict]) -> str:
+    details = []
+    for issue in issues[:4]:
+        if issue["kind"] == "positive_gate_echo":
+            details.append(
+                f'Defect "{issue["defect"]}" closely echoes positive requirement '
+                f'"{issue["gate"]}".'
+            )
+        else:
+            details.append(
+                f'Defect "{issue["defect"]}" conflicts with preserve '
+                f'"{issue["preserve"]}".'
+            )
+    return (
+        prompt
+        + "\n\nREVIEW CONSISTENCY RETRY — REINSPECT THE IMAGE.\n"
+        + "Your prior verdict contained wording that may describe a satisfied "
+          "requirement instead of a visible failure, or it contradicted a preserve item.\n"
+        + "If the condition is visibly satisfied, REMOVE it from defects and place it "
+          "in preserve if useful. If it is violated, rewrite the defect in explicit "
+          "negative observable language describing what is wrong, missing, extra, "
+          "incorrect, oversized, undersized, or unclear. Re-evaluate pass/fail from "
+          "the image. Return a fresh JSON object only.\n"
+        + "Consistency issues:\n- "
+        + "\n- ".join(details)
+    )
+
+
 def _normalize_gate_echoes(verdict: dict, prompt: str) -> dict:
     positive = _positive_gate_values(prompt)
     normalized = []
@@ -165,6 +258,20 @@ def _normalize_gate_echoes(verdict: dict, prompt: str) -> dict:
 
 def _run_gate(url: str, settings: dict, encoded: str, prompt: str, stage: str) -> dict:
     verdict = _parse_verdict(_request(url, _payload(settings, prompt, encoded)), stage)
+    issues = _verdict_consistency_issues(verdict, prompt)
+    if issues:
+        retry_prompt = _consistency_retry_prompt(prompt, issues)
+        verdict = _parse_verdict(
+            _request(url, _payload(settings, retry_prompt, encoded)),
+            stage,
+        )
+        retry_issues = _verdict_consistency_issues(verdict, prompt)
+        if retry_issues:
+            raise VisionReviewError(
+                f"{stage} reviewer remained self-contradictory after consistency retry: "
+                f"{retry_issues[:2]}"
+            )
+
     verdict = _normalize_gate_echoes(verdict, prompt)
     verdict["stage"] = stage.lower()
     if not verdict["pass"]:

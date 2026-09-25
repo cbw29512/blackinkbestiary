@@ -344,6 +344,76 @@ class VisionReviewerTests(unittest.TestCase):
             all(item.startswith("Required condition not visibly satisfied:") for item in normalized["defects"])
         )
 
+    def test_paraphrased_positive_gate_echo_gets_one_consistency_retry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-16")
+        malformed = {
+            "pass": False,
+            "score": 45,
+            "defects": [
+                "forelimbs are wings, not separate arms",
+                "no dragon or bird anatomy",
+            ],
+            "preserve": ["four limbs total"],
+        }
+        corrected = {
+            "pass": False,
+            "score": 45,
+            "defects": ["creature has a humanoid torso and adult-human proportions"],
+            "preserve": ["forelimbs are the wings", "no dragon or bird anatomy"],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            image_path = Path(td) / "candidate.png"
+            image_path.write_bytes(b"x")
+            with patch.object(
+                vr,
+                "_request",
+                side_effect=[
+                    {"response": json.dumps(malformed)},
+                    {"response": json.dumps(corrected)},
+                ],
+            ) as request:
+                result = vr.review_image(page, image_path, self.config)
+
+        self.assertEqual(request.call_count, 2)
+        self.assertFalse(result["pass"])
+        self.assertEqual(
+            result["defects"],
+            ["creature has a humanoid torso and adult-human proportions"],
+        )
+
+    def test_reviewer_consistency_retry_fails_closed_if_still_self_contradictory(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-16")
+        malformed = {
+            "pass": False,
+            "score": 45,
+            "defects": ["forelimbs are wings, not separate arms"],
+            "preserve": ["four limbs total"],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            image_path = Path(td) / "candidate.png"
+            image_path.write_bytes(b"x")
+            with patch.object(
+                vr,
+                "_request",
+                side_effect=[
+                    {"response": json.dumps(malformed)},
+                    {"response": json.dumps(malformed)},
+                ],
+            ):
+                with self.assertRaises(vr.VisionReviewError):
+                    vr.review_image(page, image_path, self.config)
+
+    def test_semantic_overlap_detects_close_positive_paraphrase(self):
+        self.assertGreaterEqual(
+            vr._semantic_overlap(
+                "forelimbs are wings, not separate arms",
+                "forelimbs are the wings; no separate arms or hands exist",
+            ),
+            0.72,
+        )
+
     def test_pass_with_defects_is_forced_to_fail(self):
         verdict = {"pass": True, "score": 95, "defects": ["visible decorative frame"], "preserve": []}
         parsed = vr._parse_verdict({"response": json.dumps(verdict)}, "Quality")
