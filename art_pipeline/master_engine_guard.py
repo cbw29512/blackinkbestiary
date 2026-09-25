@@ -32,7 +32,17 @@ def forbidden_engine_literals(root: Path = ROOT) -> dict[str, str]:
 
     series = _read(root / "data" / "series.json")
     for book in series.get("books", []):
-        manifest_path = root / str(book.get("manifest_path") or "")
+        book_id = str(book.get("book_id") or "").strip()
+        title = str(book.get("title") or "").strip()
+        manifest_relative = str(book.get("manifest_path") or "").strip()
+        if book_id:
+            terms[book_id.lower()] = f"book_id:{book_id}"
+        if title and len(title) >= 5:
+            terms[title.lower()] = f"book_title:{title}"
+        if manifest_relative:
+            terms[manifest_relative.lower()] = f"manifest_path:{manifest_relative}"
+
+        manifest_path = root / manifest_relative
         if not manifest_path.exists():
             continue
         manifest = _read(manifest_path)
@@ -146,7 +156,8 @@ def audit_master_engine_separation(root: Path = ROOT) -> dict:
         "forbidden_literal_count": len(forbidden),
         "violations": violations,
         "rule": (
-            "Master engine code may consume monster/page data generically but may not "
-            "contain literal monster IDs, monster display names, or production page IDs."
+            "Master engine code may consume production data generically but may not "
+            "contain literal monster IDs/names, book IDs/titles/manifest paths, or "
+            "production page IDs."
         ),
     }
