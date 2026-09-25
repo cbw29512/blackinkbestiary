@@ -19,7 +19,7 @@ function Write-RuntimeStatus(
   [string]$Message,
   [string]$Detail = ""
 ) {
-  Write-RuntimeStatus $Status $Stage $Message $Detail
+  Write-BlackInkRuntimeStatus $runtimeStatusPath $Status $Stage $Message $Detail
 }
 
 function Set-RuntimeStage(
