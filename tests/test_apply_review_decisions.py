@@ -287,7 +287,7 @@ class ApplyReviewDecisionsTests(unittest.TestCase):
                 }],
                 "selections": {},
             }), encoding="utf-8")
-            decisions_file.write_text(json.dumps({"reviews": [review]), encoding="utf-8")
+            decisions_file.write_text(json.dumps({"reviews": [review]}), encoding="utf-8")
 
             with (
                 patch.object(apply, "ROOT", root),
