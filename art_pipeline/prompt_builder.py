@@ -196,6 +196,24 @@ def _brief_items(label: str, values, limit: int | None = None) -> str:
     return f"{label}: " + "; ".join(cleaned) + "." if cleaned else ""
 
 
+def _signature_geometry_lines(visual: dict) -> list[str]:
+    """Promote count/topology-sensitive creature geometry into the compact brief."""
+    quantity_terms = (
+        "exactly ", "one pair", "two ", "three ", "four ", "five ", "six ",
+        "seven ", "eight ", "every visible", "per visible", "pair of",
+    )
+    lines = []
+    body_shape = str(visual.get("body_shape") or "").strip()
+    if body_shape and any(term in body_shape.lower() for term in quantity_terms):
+        lines.append("SIGNATURE BODY GEOMETRY — NON-NEGOTIABLE: " + body_shape)
+    for item in visual.get("must_keep") or []:
+        value = str(item or "").strip()
+        lower = value.lower()
+        if value and any(term in lower for term in quantity_terms) and value not in lines:
+            lines.append("SIGNATURE FEATURE LOCK — NON-NEGOTIABLE: " + value)
+    return lines[:3]
+
+
 def _review_recovery_lock(review_notes: dict | None) -> str:
     stage = str((review_notes or {}).get("stage") or "").strip().lower()
     text = str((review_notes or {}).get("text") or "").strip()
@@ -276,6 +294,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 5),
         _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
     ]
+    identity_lines.extend(_signature_geometry_lines(visual))
     creature_type = str(spec.get("creature_type") or "").lower()
     if size in {"tiny", "small"} and "humanoid" in creature_type:
         identity_lines.append(
