@@ -61,7 +61,7 @@ class ReviewPublishGitTests(unittest.TestCase):
                         "git",
                         "fetch",
                         "origin",
-                        "review-previews-live:refs/remotes/origin/review-previews-live",
+                        "+review-previews-live:refs/remotes/origin/review-previews-live",
                     ),
                 ),
                 calls,
