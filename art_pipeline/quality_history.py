@@ -305,7 +305,7 @@ def print_package_report(root: Path = ROOT) -> dict:
 
 
 def replication_report(root: Path, series_report: dict) -> dict:
-    future = [row for row in series_report.get("books", []) if row.get("book_id") != "TOME-I"]
+    future = [row for row in series_report.get("books", []) if row.get("registry_status") != "production"]
     contracts = (
         "config/universal_page_contract.json",
         "config/universal_monster_contract.json",
