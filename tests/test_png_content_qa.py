@@ -8,7 +8,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from qa import inspect_candidate
+from qa import inspect_candidate\nfrom png_content_qa import enforce_print_safe_margin
 
 
 def _chunk(kind: bytes, data: bytes) -> bytes:
@@ -121,6 +121,38 @@ class PngContentQATests(unittest.TestCase):
             self.assertFalse(result["pass"])
             self.assertIn("safe_margin_too_busy", result["reasons"])
             self.assertGreater(result["content_qa"]["safe_margin_dark_ratio"], 0.02)
+
+
+    def test_margin_enforcement_clears_edge_frame_before_qa(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "frame-fixed.png"
+            _write_grayscale_png(
+                path,
+                lambda x, y: 0
+                if (
+                    x < 8
+                    or x >= 760
+                    or y < 8
+                    or y >= 1016
+                    or (
+                        300 <= x < 468
+                        and 400 <= y < 624
+                        and (x % 32 == 0 or y % 32 == 0)
+                    )
+                )
+                else 255,
+            )
+            before = inspect_candidate(path)
+            self.assertIn("safe_margin_too_busy", before["reasons"])
+
+            margin = enforce_print_safe_margin(path)
+            after = inspect_candidate(path)
+
+            self.assertGreaterEqual(margin["margin_x"], int(768 * 0.04))
+            self.assertGreaterEqual(margin["margin_y"], int(1024 * 0.04))
+            self.assertNotIn("safe_margin_too_busy", after["reasons"])
+            self.assertTrue(after["content_qa"]["pass"])
+
 
 
 if __name__ == "__main__":
