@@ -46,60 +46,63 @@ if (-not (Test-Path $configPath -PathType Leaf)) { throw "Missing local AI confi
 $config = Get-Content $configPath -Raw | ConvertFrom-Json
 
 $comfyHealth = "$($config.comfy_url.TrimEnd('/'))/system_stats"
+$launchArgs = @(
+  @($config.production_policy.comfy_launch_args) |
+    Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
+    ForEach-Object { [string]$_ }
+)
+$launchMode = [string]$config.production_policy.comfy_launch_mode
+if ([string]::IsNullOrWhiteSpace($launchMode)) { $launchMode = "managed_direct_python" }
+
+$comfyStdout = Join-Path $root "data\comfy-runtime.stdout.log"
+$comfyStderr = Join-Path $root "data\comfy-runtime.stderr.log"
+
 Set-RuntimeStage "comfy-health" "Checking ComfyUI API." $comfyHealth
 if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
-  $comfyCli = Join-Path $root ".blackink-tools\Scripts\comfy.exe"
-  if (-not (Test-Path $comfyCli -PathType Leaf)) { throw "Pinned comfy-cli is missing: $comfyCli" }
-
   Set-RuntimeStage "comfy-discovery" "Locating Black-Ink ComfyUI workspace."
   $comfyWorkspace = Find-BlackInkComfyWorkspace $root ([string]$config.workspace)
   if (-not $comfyWorkspace) { throw "Black-Ink ComfyUI workspace root could not be found." }
 
   $comfyRoot = Join-Path $comfyWorkspace "ComfyUI"
   $mainPy = Join-Path $comfyRoot "main.py"
-
-  Set-RuntimeStage "comfy-stop" "Clearing any stale comfy-cli background record." $comfyWorkspace
-  $null = Invoke-BlackInkCommand $comfyCli @("--workspace=$comfyWorkspace", "stop")
-
-  Set-RuntimeStage "comfy-launch" "Starting ComfyUI Desktop instance through pinned comfy-cli." "CLI: $comfyCli; workspace: $comfyWorkspace"
-  $launch = Invoke-BlackInkCommand $comfyCli @(
-    "--workspace=$comfyWorkspace", "launch", "--background", "--",
-    "--listen", "127.0.0.1", "--port", "8188"
-  )
-
-  if ($launch.exit_code -ne 0 -and -not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
-    $comfyPython = Find-BlackInkComfyPython $comfyWorkspace
-    $launchOutput = [string]$launch.output
-    if ($launchOutput.Length -gt 1800) { $launchOutput = $launchOutput.Substring($launchOutput.Length - 1800) }
-
-    if (-not $comfyPython) {
-      $script:CurrentDetail = "CLI exit=$($launch.exit_code); workspace=$comfyWorkspace; output=$launchOutput"
-      throw "Pinned comfy-cli failed and no valid ComfyUI workspace Python was found."
-    }
-
-    $fallbackStdout = Join-Path $root "data\comfy-fallback.stdout.log"
-    $fallbackStderr = Join-Path $root "data\comfy-fallback.stderr.log"
-    Set-RuntimeStage "comfy-fallback-launch" "comfy-cli failed; launching ComfyUI directly with its Desktop venv." "Python: $comfyPython; main: $mainPy; cli_output: $launchOutput"
-    $null = Start-BlackInkDetachedLocalProcess $comfyPython @(
-      $mainPy, "--listen", "127.0.0.1", "--port", "8188"
-    ) $comfyRoot $fallbackStdout $fallbackStderr
+  $comfyPython = Find-BlackInkComfyPython $comfyWorkspace
+  if (-not $comfyPython) {
+    throw "No valid ComfyUI workspace Python was found for persistent logged launch."
   }
 
-  Set-RuntimeStage "comfy-wait" "Waiting for Black-Ink ComfyUI API." $comfyHealth
+  # Stop a stale comfy-cli-managed process when possible, but do not require
+  # comfy-cli for recovery. The direct workspace Python is the stable authority.
+  $comfyCli = Join-Path $root ".blackink-tools\Scripts\comfy.exe"
+  if (Test-Path $comfyCli -PathType Leaf) {
+    Set-RuntimeStage "comfy-stop" "Clearing any stale comfy-cli background record." $comfyWorkspace
+    $null = Invoke-BlackInkCommand $comfyCli @("--workspace=$comfyWorkspace", "stop")
+  }
+
+  if ($launchMode -ne "managed_direct_python") {
+    throw "Unsupported production_policy.comfy_launch_mode: $launchMode"
+  }
+
+  $runtimeArgs = @(
+    $mainPy,
+    "--listen", "127.0.0.1",
+    "--port", "8188"
+  ) + $launchArgs
+
+  $argSummary = ($runtimeArgs | ForEach-Object { [string]$_ }) -join " "
+  Set-RuntimeStage "comfy-launch" "Starting logged ComfyUI runtime." "Python: $comfyPython; args: $argSummary; stdout: $comfyStdout; stderr: $comfyStderr"
+  $launchMethod = Start-BlackInkDetachedLocalProcess $comfyPython $runtimeArgs $comfyRoot $comfyStdout $comfyStderr
+
+  Set-RuntimeStage "comfy-wait" "Waiting for logged ComfyUI API after $launchMethod." $comfyHealth
   try {
     Wait-BlackInkEndpoint $comfyHealth $ComfyTimeoutSeconds "ComfyUI"
   } catch {
-    $stdoutTail = Get-BlackInkLogTail $fallbackStdout
-    $stderrTail = Get-BlackInkLogTail $fallbackStderr
-    $cliTail = if ($launchOutput) { [string]$launchOutput } else { "" }
-    if ($cliTail.Length -gt 1800) {
-      $cliTail = $cliTail.Substring($cliTail.Length - 1800)
-    }
-    $script:CurrentDetail = "workspace=$comfyWorkspace; cli_output=$cliTail; fallback_stdout=$stdoutTail; fallback_stderr=$stderrTail"
+    $stdoutTail = Get-BlackInkLogTail $comfyStdout
+    $stderrTail = Get-BlackInkLogTail $comfyStderr
+    $script:CurrentDetail = "workspace=$comfyWorkspace; launch_args=$argSummary; stdout=$stdoutTail; stderr=$stderrTail"
     throw
   }
 }
-Write-Host "ComfyUI ready." -ForegroundColor Green
+Write-Host "ComfyUI ready. Runtime logs: data/comfy-runtime.stdout.log + data/comfy-runtime.stderr.log" -ForegroundColor Green
 
 $vision = $config.vision_reviewer
 if (-not $vision -or -not $vision.required) { throw "Required semantic vision reviewer is not configured." }
