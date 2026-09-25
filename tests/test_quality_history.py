@@ -95,6 +95,37 @@ class QualityHistoryTests(unittest.TestCase):
             )
         )
 
+    def test_learning_queue_surfaces_assistant_notes_as_evidence_text(self):
+        records = [{
+            "page_id": "I-04",
+            "candidate": 2,
+            "status": "assistant_rejected",
+            "assistant_review": {
+                "notes": "Reject: goblin has bodybuilder chest and oversized shoulders",
+            },
+        }]
+        queue = build_learning_queue(records, ROOT)
+        item = next(
+            row for row in queue
+            if row["defect_code"] == "IDENTITY_HEROIC_BULK"
+        )
+        self.assertIn("bodybuilder chest", item["examples"][0]["evidence_text"][0])
+
+    def test_learning_queue_escalates_cross_family_pattern_to_master_engine(self):
+        records = [
+            {"page_id": "I-01", "visual_review": {"defects": ["bodybuilder chest"]}},
+            {"page_id": "I-04", "visual_review": {"defects": ["heroically muscular"]}},
+            {"page_id": "I-08", "visual_review": {"defects": ["muscular superhero mass"]}},
+        ]
+        queue = build_learning_queue(records, ROOT)
+        item = next(
+            row for row in queue
+            if row["defect_code"] == "IDENTITY_HEROIC_BULK"
+        )
+        self.assertGreaterEqual(item["distinct_families"], 3)
+        self.assertIn("master_engine", item["scope"])
+        self.assertIn("multiple monster families", item["master_engine_lesson"])
+
     def test_learning_queue_scopes_limb_failure_to_master_and_monster(self):
         records = [{
             "page_id": "I-04",
