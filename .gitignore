@@ -22,3 +22,5 @@ data/test-gallery-state.json
 data/test-gallery-state.json.tmp
 web/test-gallery/*
 data/engine-preflight-status.json
+data/comfy-runtime.stdout.log
+data/comfy-runtime.stderr.log
