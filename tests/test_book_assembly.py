@@ -9,7 +9,12 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from book_assembly import assemble_pdf, binding_side_for_page, locked_page_paths
+from book_assembly import (
+    assemble_pdf,
+    attribution_lines,
+    binding_side_for_page,
+    locked_page_paths,
+)
 
 
 def _chunk(kind: bytes, data: bytes) -> bytes:
@@ -53,6 +58,56 @@ class BookAssemblyTests(unittest.TestCase):
             self.assertTrue(payload.startswith(b"%PDF-1.4"))
             self.assertIn(b"/Count 2", payload)
             self.assertIn(b"/MediaBox [0 0 612 792]", payload)
+
+    def test_optional_credits_page_is_deterministic_and_appended_last(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first = root / "one.png"
+            _write_gray_png(first)
+            credits = [
+                "Legal Attribution",
+                "",
+                "System Reference Document 5.2.1",
+                "By Wizards of the Coast LLC",
+            ]
+
+            a = root / "credits-a.pdf"
+            b = root / "credits-b.pdf"
+            report_a = assemble_pdf(
+                [first],
+                a,
+                title="Synthetic Tome",
+                credits_lines=credits,
+            )
+            report_b = assemble_pdf(
+                [first],
+                b,
+                title="Synthetic Tome",
+                credits_lines=credits,
+            )
+
+            self.assertEqual(report_a["art_pages"], 1)
+            self.assertEqual(report_a["pages"], 2)
+            self.assertTrue(report_a["credits_page"])
+            self.assertEqual(report_a["sha256"], report_b["sha256"])
+            payload = a.read_bytes()
+            self.assertIn(b"/Count 2", payload)
+            self.assertIn(b"Legal Attribution", payload)
+            self.assertIn(b"System Reference Document 5.2.1", payload)
+            # The image page object is emitted before the credits page objects.
+            self.assertLess(payload.index(b"/Subtype /Image"), payload.index(b"Legal Attribution"))
+
+    def test_project_attribution_metadata_supplies_required_credit_elements(self):
+        lines = attribution_lines(ROOT)
+        joined = "\n".join(lines)
+        self.assertIn("System Reference Document 5.2.1", joined)
+        self.assertIn("Wizards of the Coast LLC", joined)
+        self.assertIn("https://www.dndbeyond.com/srd", joined)
+        self.assertIn("Creative Commons Attribution 4.0 International", joined)
+        self.assertIn(
+            "https://creativecommons.org/licenses/by/4.0/legalcode",
+            joined,
+        )
 
     def test_binding_side_alternates_for_interior_pages(self):
         self.assertEqual(binding_side_for_page(1), "left")
