@@ -48,6 +48,10 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn('Set-RuntimeStage "ollama-launch"', launcher)
         self.assertIn('Set-RuntimeStage "reviewer-smoke-test"', launcher)
         self.assertIn("Start-BlackInkDetachedLocalProcess", launcher)
+        self.assertIn(".blackink-tools\\Scripts\\comfy.exe", launcher)
+        self.assertIn("--workspace=$comfyWorkspace", launcher)
+        self.assertIn("Find-BlackInkComfyWorkspace", helpers)
+        self.assertIn("Comfy-Desktop\\ComfyUI-Installs\\Black-Ink Bestiary\\ComfyUI", helpers)
         self.assertIn("ShellExecute", helpers)
         self.assertIn("Start-Process failed", helpers)
 
