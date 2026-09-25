@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -15,6 +16,20 @@ def _norm(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
 
 
+def _prompt_budget(root: Path = ROOT) -> dict:
+    path = root / "config" / "coloring_page_standard.json"
+    defaults = {"hard_max_chars": 14000, "hard_max_words": 2000}
+    try:
+        config = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return defaults
+    budget = config.get("generation_prompt_budget") or {}
+    return {
+        "hard_max_chars": int(budget.get("hard_max_chars") or defaults["hard_max_chars"]),
+        "hard_max_words": int(budget.get("hard_max_words") or defaults["hard_max_words"]),
+    }
+
+
 def generation_lint_errors(page: dict, prompt: str, root: Path = ROOT) -> list[str]:
     """Fail cheap before GPU work when resolved generation authority is incomplete."""
     errors: list[str] = []
@@ -24,6 +39,19 @@ def generation_lint_errors(page: dict, prompt: str, root: Path = ROOT) -> list[s
 
     if not text.strip():
         return [f"{page_id}: prompt is empty"]
+
+    budget = _prompt_budget(root)
+    if len(text) > budget["hard_max_chars"]:
+        errors.append(
+            f"{page_id}: generation prompt exceeds hard character budget "
+            f"({len(text)} > {budget['hard_max_chars']})"
+        )
+    word_count = len(text.split())
+    if word_count > budget["hard_max_words"]:
+        errors.append(
+            f"{page_id}: generation prompt exceeds hard word budget "
+            f"({word_count} > {budget['hard_max_words']})"
+        )
 
     for token in ("<missing>", "TODO", "TBD"):
         if token.lower() in text.lower():
