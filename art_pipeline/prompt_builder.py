@@ -196,22 +196,48 @@ def _brief_items(label: str, values, limit: int | None = None) -> str:
     return f"{label}: " + "; ".join(cleaned) + "." if cleaned else ""
 
 
-def _signature_geometry_lines(visual: dict) -> list[str]:
-    """Promote count/topology-sensitive creature geometry into the compact brief."""
+def _signature_geometry_lines(spec: dict) -> list[str]:
+    """Promote count/topology-sensitive identity into the compact model brief."""
+    visual = spec.get("visual_identity") or {}
     quantity_terms = (
         "exactly ", "one pair", "two ", "three ", "four ", "five ", "six ",
         "seven ", "eight ", "every visible", "per visible", "pair of",
     )
+    topology_risk_terms = (
+        "sparse", "too few", "too many", "more or fewer", "extra ",
+        "missing ", "only near", "only at", "only on",
+    )
     lines = []
+
     body_shape = str(visual.get("body_shape") or "").strip()
     if body_shape and any(term in body_shape.lower() for term in quantity_terms):
         lines.append("SIGNATURE BODY GEOMETRY — NON-NEGOTIABLE: " + body_shape)
+
     for item in visual.get("must_keep") or []:
         value = str(item or "").strip()
-        lower = value.lower()
-        if value and any(term in lower for term in quantity_terms) and value not in lines:
+        if value and any(term in value.lower() for term in quantity_terms):
             lines.append("SIGNATURE FEATURE LOCK — NON-NEGOTIABLE: " + value)
-    return lines[:3]
+
+    for item in spec.get("accuracy_checks") or []:
+        value = str(item or "").strip()
+        if value and any(term in value.lower() for term in quantity_terms):
+            lines.append("SIGNATURE ACCURACY LOCK — NON-NEGOTIABLE: " + value)
+
+    for item in visual.get("must_avoid") or []:
+        value = str(item or "").strip()
+        if value and any(term in value.lower() for term in topology_risk_terms):
+            lines.append("SIGNATURE DRIFT TO AVOID — NON-NEGOTIABLE: " + value)
+
+    result = []
+    seen = set()
+    for line in lines:
+        key = line.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(line)
+    return result[:5]
+
 
 
 def _review_recovery_lock(review_notes: dict | None) -> str:
@@ -294,7 +320,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 5),
         _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
     ]
-    identity_lines.extend(_signature_geometry_lines(visual))
+    identity_lines.extend(_signature_geometry_lines(spec))
     creature_type = str(spec.get("creature_type") or "").lower()
     if size in {"tiny", "small"} and "humanoid" in creature_type:
         identity_lines.append(
