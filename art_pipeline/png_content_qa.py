@@ -95,7 +95,7 @@ def inspect_line_art(path: str | Path) -> dict:
     channels = _CHANNELS[color_type]
     x_step = max(1, width // 256)
     y_step = max(1, height // 256)
-    dark = white = total = 0
+    dark = white = midtone = chromatic = total = 0
     min_luma, max_luma = 255, 0
 
     for y in range(0, height, y_step):
