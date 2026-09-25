@@ -10,7 +10,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 from defect_taxonomy import classify_text, count_defects, load_taxonomy
 from learning_feedback import build_learning_queue, learning_observations
 from prompt_load import prompt_load_report
-from quality_history import canary_metrics, current_page_records, evaluate_readiness, generation_efficiency, quality_contract_fingerprint
+from quality_history import canary_metrics, current_page_records, evaluate_readiness, generation_efficiency, print_package_report, quality_contract_fingerprint
 
 
 class QualityHistoryTests(unittest.TestCase):
@@ -223,6 +223,50 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(efficiency["avg_gpu_attempts_per_page"], 2.0)
         self.assertEqual(efficiency["semantic_yield_percent"], 25.0)
         self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
+
+    def test_print_package_requires_gutter_attribution_and_final_proof(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "config").mkdir()
+            (root / "art_pipeline").mkdir()
+            (root / "scripts").mkdir()
+            (root / "config" / "kdp_print_standard.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (root / "config" / "source_attribution.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (root / "art_pipeline" / "qa.py").write_text(
+                "def inspect_kdp_export(): pass\n"
+                "def inspect_binding_gutter(): pass\n",
+                encoding="utf-8",
+            )
+            (root / "art_pipeline" / "png_content_qa.py").write_text(
+                "def enforce_print_safe_margin(): pass\n",
+                encoding="utf-8",
+            )
+            (root / "art_pipeline" / "book_assembly.py").write_text(
+                "def assemble_pdf(): pass\n"
+                "def attribution_lines(): pass\n"
+                "def binding_side_for_page(): pass\n"
+                "credits_lines=credits\n",
+                encoding="utf-8",
+            )
+            (root / "scripts" / "assemble_book.py").write_text(
+                "# generic assembly entry point\n", encoding="utf-8"
+            )
+
+            report = print_package_report(root)
+            self.assertEqual(report["score"], 80)
+            self.assertTrue(report["components"]["binding_gutter_validation"])
+            self.assertTrue(report["components"]["license_attribution_page"])
+            self.assertFalse(report["components"]["reproducible_final_proof"])
+
+            (root / "build").mkdir()
+            (root / "build" / "final-interior.pdf").write_bytes(b"%PDF-test")
+            complete = print_package_report(root)
+            self.assertEqual(complete["score"], 100)
+            self.assertTrue(complete["components"]["reproducible_final_proof"])
 
     def test_foundation_requires_current_autopilot_heartbeat_for_full_score(self):
         from unittest.mock import patch
