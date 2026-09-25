@@ -10,12 +10,14 @@ try:
     from .generation_lint import generation_lint_errors
     from .manifest_validation import validate_manifest
     from .prompt_builder import build_prompt
+    from .studio_config import active_book_paths
 except ImportError:
     from book_promotion import build_manifest_from_plan
     from book_scaffold import build_book_plan, build_book_record
     from generation_lint import generation_lint_errors
     from manifest_validation import validate_manifest
     from prompt_builder import build_prompt
+    from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 PROBE_PAGE_COUNT = 3
@@ -27,9 +29,9 @@ def _read(path: Path) -> dict:
 
 def _probe_source_pages(root: Path) -> list[dict]:
     """Select representative source recipes generically, never by production page ID."""
-    tome = _read(root / "data" / "tome-I.json")
+    manifest = _read(active_book_paths(root)["manifest"])
     pages = sorted(
-        (page for page in tome.get("pages", []) if page.get("monster_spec_id")),
+        (page for page in manifest.get("pages", []) if page.get("monster_spec_id")),
         key=lambda page: int(page.get("order") or 0),
     )
     if len(pages) < PROBE_PAGE_COUNT:
