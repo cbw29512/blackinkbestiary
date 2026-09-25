@@ -432,14 +432,14 @@ def canary_summary(state: dict) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate a resumable multi-candidate test gallery for every Tome page")
     parser.add_argument("--copies", type=int, default=4, help="Independent candidates per monster/page")
-    parser.add_argument("--start", help="Optional page id to start/resume from, e.g. I-24")
+    parser.add_argument("--start", help="Optional page id to start/resume from")
     parser.add_argument("--only", help="Optional page id to test repeatedly")
     parser.add_argument("--candidate", type=int, help="Optional candidate number to run (requires --only)")
     parser.add_argument("--seed", type=int, help="Base seed for reproducible testing")
     parser.add_argument("--reset", action="store_true", help="Start a fresh gallery and discard prior test state")
     parser.add_argument("--rerun-failed", action="store_true", help="Retry candidates whose prior status was failed")
-    parser.add_argument("--canary", action="store_true", help="Run the nine-page engine canary set and force those selected candidates to regenerate")
-    parser.add_argument("--canary-failed", action="store_true", help="Run the nine-page canary set but retry only missing, failed, or assistant-rejected candidates")
+    parser.add_argument("--canary", action="store_true", help="Run the configured engine canary set and force those selected candidates to regenerate")
+    parser.add_argument("--canary-failed", action="store_true", help="Run the configured canary set but retry only missing, failed, or assistant-rejected candidates")
     args = parser.parse_args()
     if args.copies < 1:
         raise SystemExit("--copies must be at least 1")
