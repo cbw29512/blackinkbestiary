@@ -9,7 +9,7 @@ from pathlib import Path
 try:
     from .defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from .learning_feedback import build_learning_queue
-    from .master_engine_guard import audit_master_engine_separation
+    from .master_engine_guard import audit_master_engine_separation, audit_replication_orchestration
     from .production_audit import audit_active_book
     from .prompt_load import prompt_load_report
     from .replication_probe import run_replication_probe
@@ -17,7 +17,7 @@ try:
 except ImportError:
     from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from learning_feedback import build_learning_queue
-    from master_engine_guard import audit_master_engine_separation
+    from master_engine_guard import audit_master_engine_separation, audit_replication_orchestration
     from production_audit import audit_active_book
     from prompt_load import prompt_load_report
     from replication_probe import run_replication_probe
@@ -299,6 +299,7 @@ def replication_report(root: Path, series_report: dict) -> dict:
     )
     probe = run_replication_probe(root)
     separation = audit_master_engine_separation(root)
+    orchestration = audit_replication_orchestration(root)
     components = {
         "universal_contracts": all((root / path).exists() for path in contracts),
         "generic_book_scaffolding": (root / "scripts" / "scaffold_book.py").exists() and (root / "art_pipeline" / "book_scaffold.py").exists(),
@@ -309,6 +310,7 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "synthetic_replication_test": (root / "tests" / "test_replication_readiness.py").exists(),
         "synthetic_pipeline_probe": bool(probe.get("pass")),
         "master_engine_data_separation": bool(separation.get("pass")),
+        "generic_replication_orchestration": bool(orchestration.get("pass")),
     }
     weights = {
         "universal_contracts": 15,
@@ -318,8 +320,9 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "future_book_plans": 5,
         "generic_assembly_pipeline": 15,
         "synthetic_replication_test": 5,
-        "synthetic_pipeline_probe": 25,
+        "synthetic_pipeline_probe": 20,
         "master_engine_data_separation": 10,
+        "generic_replication_orchestration": 5,
     }
     score = sum(weights[name] for name, passed in components.items() if passed)
     return {
@@ -327,6 +330,7 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "components": components,
         "synthetic_pipeline_probe": probe,
         "master_engine_data_separation": separation,
+        "replication_orchestration": orchestration,
     }
 
 
