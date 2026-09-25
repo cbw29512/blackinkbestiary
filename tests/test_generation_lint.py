@@ -37,6 +37,51 @@ class GenerationLintTests(unittest.TestCase):
                 oversized[page["page_id"]] = len(prompt)
         self.assertEqual(oversized, {})
 
+    def test_identity_recovery_prompts_preserve_required_scene_authority(self):
+        canary_ids = {"I-01", "I-08", "I-14", "I-16"}
+        failures = {}
+        for page in self.pages:
+            if page["page_id"] not in canary_ids:
+                continue
+            prompt = build_prompt(
+                page,
+                {
+                    "stage": "identity",
+                    "text": "repeat identity drift",
+                    "stagnation_escalation": True,
+                    "routing_recommendation": "regenerate",
+                },
+                candidate_no=1,
+            )
+            errors = generation_lint_errors(page, prompt, ROOT)
+            if errors:
+                failures[page["page_id"]] = errors
+            self.assertIn("RECOVERY PAGE RECIPE CAPSULE", prompt, page["page_id"])
+            self.assertIn("MODEL ENVIRONMENT PRIORITY CAPSULE", prompt, page["page_id"])
+            self.assertIn("PAGE RECIPE LOCK — NON-NEGOTIABLE:", prompt, page["page_id"])
+        self.assertEqual(failures, {})
+
+    def test_identity_recovery_prompts_stay_within_target_budget(self):
+        standard = json.loads(
+            (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
+        )
+        target = int(standard["generation_prompt_budget"]["target_max_chars"])
+        oversized = {}
+        for page in self.pages:
+            prompt = build_prompt(
+                page,
+                {
+                    "stage": "identity",
+                    "text": "repeat identity drift",
+                    "stagnation_escalation": True,
+                    "routing_recommendation": "regenerate",
+                },
+                candidate_no=1,
+            )
+            if len(prompt) > target:
+                oversized[page["page_id"]] = len(prompt)
+        self.assertEqual(oversized, {})
+
     def test_generation_prompt_priority_order_is_identity_action_environment_style(self):
         for page in self.pages:
             prompt = build_prompt(page, candidate_no=1)
