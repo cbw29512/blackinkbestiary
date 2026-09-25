@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import random
 import subprocess
@@ -16,9 +15,7 @@ from candidate_runner import TechnicalQAError, execute_candidate
 from comfy_cli_runner import ComfyCli
 from comfy_client import ComfyClient
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
-from image_edit_profile import prepare_distilled_image_edit
-from edit_prompt import build_edit_prompt
-from vision_reviewer import VisionReviewError, review_image, review_notes
+from vision_reviewer import VisionReviewError, review_image
 from generation_runtime import model_filename, read_json
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from manifest_validation import validate_manifest
@@ -37,21 +34,11 @@ from qa_recovery import (
 )
 from studio_config import active_book_paths
 
-# Full implementation is also saved in the operator workspace as
-# generate_test_gallery.py. This branch copy includes the stall/recovery
-# control path used by RUN_ENGINE_AUTOPILOT.bat --canary-failed.
-
 CONFIG_FILE = ROOT / "config" / "local_ai_stack.json"
 MONSTER_DIR = ROOT / "data" / "monsters"
 WORKFLOW_DIR = ROOT / "art_pipeline" / "workflows" / "official"
 OUTPUT_DIR = ROOT / "web" / "test-gallery"
 STATE_FILE = ROOT / "data" / "test-gallery-state.json"
-AUTHORITY_FILES = [
-    ROOT / "config" / "universal_monster_contract.json",
-    ROOT / "config" / "universal_environment_contract.json",
-    ROOT / "config" / "universal_page_contract.json",
-    ROOT / "config" / "coloring_page_standard.json",
-]
 CANARY_PAGE_IDS = (
     "I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22",
 )
@@ -94,18 +81,6 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
 
 def generation_authority_stale(prior, current_fingerprint: str) -> bool:
     return bool(prior and str(prior.get("generation_fingerprint") or "") != str(current_fingerprint or ""))
-
-
-def review_authority_stale(prior, current_fingerprint: str) -> bool:
-    return bool(prior and str(prior.get("review_fingerprint") or "") != str(current_fingerprint or ""))
-
-
-def existing_candidate_path(item: dict):
-    image_path = str(item.get("image_path") or "").strip()
-    if not image_path:
-        return None
-    path = ROOT / "web" / image_path
-    return path if path.exists() and path.is_file() else None
 
 
 def clear_selection_for_candidate(state: dict, page_id: str, candidate_no: int) -> bool:
@@ -276,9 +251,11 @@ def main() -> int:
                 source = ROOT / "web" / relative
                 destination = OUTPUT_DIR / f"{page['page_id']}-C{candidate_no:02d}.png"
                 destination.write_bytes(source.read_bytes())
+                visual_verdict = review_image(page, destination, config)
                 record.update({
-                    "status": "ready_for_review",
+                    "status": "ready_for_review" if visual_verdict.get("pass") else "max_refinements_reached",
                     "image_path": destination.relative_to(ROOT / "web").as_posix(),
+                    "visual_review": visual_verdict,
                 })
             except TechnicalQAError as exc:
                 streak = next_qa_fail_streak(prior, current_fingerprint)
