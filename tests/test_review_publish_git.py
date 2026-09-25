@@ -202,6 +202,56 @@ class ReviewPublishGitTests(unittest.TestCase):
             calls,
         )
 
+    def test_publish_push_retries_once_after_refreshing_live_review_state(self):
+        root = Path("C:/fake")
+        heads = iter(["base123", "preview456", "retry789"])
+        sync_heads = iter(["live-before", "live-after"])
+        calls = []
+        push_count = {"value": 0}
+
+        def fake_output(_root, *args):
+            key = tuple(args)
+            if key == ("git", "branch", "--show-current"):
+                return "feat/environment-spatial-hardening"
+            if key == ("git", "rev-parse", "HEAD"):
+                return next(heads)
+            raise KeyError(key)
+
+        def fake_run(root_arg, *args):
+            calls.append((root_arg, args))
+            if args[:2] == ("git", "push"):
+                push_count["value"] += 1
+                if push_count["value"] == 1:
+                    raise subprocess.CalledProcessError(1, args)
+
+        with (
+            patch.object(rpg, "output", side_effect=fake_output),
+            patch.object(rpg, "tracked_changes_outside_previews", return_value=[]),
+            patch.object(rpg, "sync_live_decisions", side_effect=lambda _root: next(sync_heads)),
+            patch.object(rpg, "append_quality_snapshot"),
+            patch.object(rpg, "stage_preview_snapshot"),
+            patch.object(rpg, "run", side_effect=fake_run),
+            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=1)),
+        ):
+            result = rpg.publish_preview_snapshot(root)
+
+        self.assertEqual(result, "retry789")
+        self.assertEqual(push_count["value"], 2)
+        self.assertIn((root, ("git", "commit", "--amend", "--no-edit")), calls)
+        self.assertIn(
+            (
+                root,
+                (
+                    "git",
+                    "push",
+                    "--force-with-lease=refs/heads/review-previews-live:live-after",
+                    "origin",
+                    "retry789:refs/heads/review-previews-live",
+                ),
+            ),
+            calls,
+        )
+
     def test_unchanged_snapshot_does_not_repoint_live_branch(self):
         root = Path("C:/fake")
         outputs = {

@@ -222,6 +222,49 @@ def stage_preview_snapshot(root: Path) -> None:
     run(root, "git", "add", "-A", "review-previews")
 
 
+def push_review_snapshot_with_retry(
+    root: Path,
+    publish_head: str,
+    live_head: str,
+) -> str:
+    """Push once, then safely rebase review data and retry one transient/race failure."""
+    try:
+        run(
+            root,
+            "git",
+            "push",
+            f"--force-with-lease=refs/heads/{REVIEW_BRANCH}:{live_head}",
+            "origin",
+            f"{publish_head}:refs/heads/{REVIEW_BRANCH}",
+        )
+        return publish_head
+    except subprocess.CalledProcessError as first_error:
+        print(
+            "Review snapshot push failed once; refreshing live review decisions/history "
+            "and retrying safely."
+        )
+        latest_live_head = sync_live_decisions(root)
+        append_quality_snapshot(root)
+        stage_preview_snapshot(root)
+        run(root, "git", "commit", "--amend", "--no-edit")
+        retry_head = output(root, "git", "rev-parse", "HEAD")
+        try:
+            run(
+                root,
+                "git",
+                "push",
+                f"--force-with-lease=refs/heads/{REVIEW_BRANCH}:{latest_live_head}",
+                "origin",
+                f"{retry_head}:refs/heads/{REVIEW_BRANCH}",
+            )
+        except subprocess.CalledProcessError as second_error:
+            raise RuntimeError(
+                "Review snapshot push failed twice; leaving local snapshot intact "
+                "for the next autopilot retry."
+            ) from second_error
+        return retry_head
+
+
 def publish_preview_snapshot(root: Path) -> str:
     engine_branch = output(root, "git", "branch", "--show-current")
     if not engine_branch:
@@ -245,13 +288,10 @@ def publish_preview_snapshot(root: Path) -> str:
     if staged:
         run(root, "git", "commit", "-m", "Publish coloring book review previews")
         publish_head = output(root, "git", "rev-parse", "HEAD")
-        run(
+        publish_head = push_review_snapshot_with_retry(
             root,
-            "git",
-            "push",
-            f"--force-with-lease=refs/heads/{REVIEW_BRANCH}:{live_head}",
-            "origin",
-            f"{publish_head}:refs/heads/{REVIEW_BRANCH}",
+            publish_head,
+            live_head,
         )
     else:
         publish_head = live_head
