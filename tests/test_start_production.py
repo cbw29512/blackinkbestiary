@@ -97,6 +97,8 @@ class StartProductionContractTests(unittest.TestCase):
             'and bool((item.get("visual_review") or {}).get("pass"))',
             publisher,
         )
+        self.assertIn("reviewer-disagreement.json", publisher)
+        self.assertIn("reviewer_disagreement_report", publisher)
 
     def test_runtime_failures_are_published_for_remote_diagnosis(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
