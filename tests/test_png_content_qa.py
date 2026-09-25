@@ -8,7 +8,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from qa import inspect_candidate\nfrom png_content_qa import enforce_print_safe_margin
+from qa import inspect_candidate
+from png_content_qa import enforce_print_safe_margin
 
 
 def _chunk(kind: bytes, data: bytes) -> bytes:
