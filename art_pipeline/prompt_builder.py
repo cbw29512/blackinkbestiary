@@ -368,13 +368,29 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
     ]
 
     if identity_focus_mode:
+        recovery_scene_capsule = (
+            "RECOVERY PAGE RECIPE CAPSULE — IMMUTABLE WHILE FIXING IDENTITY: "
+            f"story beat={page.get('moment', '')}; "
+            f"landmark={variant.get('landmark', '')}; "
+            f"framing={variant.get('framing', '')}; "
+            f"interaction={variant.get('interaction', '')}; "
+            f"support={physicality.get('support', '')}; "
+            f"motion={physicality.get('motion', '')}. "
+            "Keep these exact scene facts visible, but render them with the fewest large forms needed so identity remains the dominant problem to solve."
+        )
         sections.extend([
             (
                 "IDENTITY-FIRST RECOVERY MODE — TEMPORARY INTERMEDIATE PASS: solve creature silhouette, exact limb topology, "
-                "canonical body mass, head/body proportions, and size evidence before full narrative scenery. Keep only the largest habitat cue "
-                "and one scale reference. Omit secondary props, repeated texture, micro-detail, and optional story clutter."
+                "canonical body mass, head/body proportions, and size evidence before secondary scene detail. Preserve the immutable page recipe capsule below, "
+                "but omit decorative props, repeated texture, micro-detail, and optional story clutter."
             ),
+            recovery_scene_capsule,
+            *environment_priority_sections(page, ROOT),
             f"HABITAT: {page['habitat']}.",
+            (
+                "PAGE RECIPE LOCK — NON-NEGOTIABLE: the identity, story beat, habitat, landmark, framing, interaction, support, and motion stated above are authoritative; "
+                "identity recovery may simplify their rendering but may not remove, replace, or contradict them."
+            ),
             (
                 "BLACK-INK COLORABILITY LOCK: pure black contour lines on white paper; bold outer contour, lighter simple interior lines, "
                 "large uninterrupted white regions, no grayscale wash, no painterly shading, almost no crosshatching, and no large black masses."
