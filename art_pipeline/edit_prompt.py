@@ -164,12 +164,9 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
         f"CURRENT REVIEW FAILURE — FIX THIS FIRST: {text}" if text else "",
         _brief_items("FAILED QUALITY DIMENSIONS — CORRECT", failed_dimensions, 8),
         _brief_items("PASSED QUALITY DIMENSIONS — PRESERVE", preserve_dimensions, 8),
-        "IDENTITY AUTHORITY:
-" + "\n".join(f"- {line}" for line in _identity_capsule(page, spec, stage)),
-        "SCENE AUTHORITY:
-" + "\n".join(f"- {line}" for line in _scene_capsule(page) if line),
-        "ENVIRONMENT AUTHORITY:
-" + "\n".join(f"- {line}" for line in _environment_capsule(page, stage) if line),
+        "IDENTITY AUTHORITY:\\n" + "\n".join(f"- {line}" for line in _identity_capsule(page, spec, stage)),
+        "SCENE AUTHORITY:\\n" + "\n".join(f"- {line}" for line in _scene_capsule(page) if line),
+        "ENVIRONMENT AUTHORITY:\\n" + "\n".join(f"- {line}" for line in _environment_capsule(page, stage) if line),
         (
             "BLACK-INK STYLE LOCK: pure black contour line art on white paper; bold outer contours, simple lighter interior lines, large uninterrupted white regions, medium-low detail, no grayscale wash, no painterly shading, no dense crosshatching, no text/logo/watermark, no decorative rectangular frame, and no large black masses."
         ),
