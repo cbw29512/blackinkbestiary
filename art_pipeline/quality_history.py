@@ -161,13 +161,13 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
 
         technical = bool(item) and status not in IMAGE_TECHNICAL_FAILURE_STATUSES
         review_pipeline = bool(item) and status not in REVIEW_PIPELINE_FAILURE_STATUSES
-        visual_clean = bool(visual.get("pass"))
-
         decision = str(assistant.get("decision") or "").strip().lower()
-        if decision:
-            semantic = decision in {"approve", "select"}
-        else:
-            semantic = bool(visual) and str(visual.get("stage") or "").lower() == "quality"
+        exact_image_approved = decision in {"approve", "select"}
+
+        # Local VLM output is advisory telemetry only. Required readiness
+        # metrics must never be satisfied by a local score/stage/pass.
+        visual_clean = exact_image_approved
+        semantic = exact_image_approved
 
         passes_all = technical and visual_clean and semantic
         technical_passes += int(technical)
@@ -185,6 +185,7 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
             "all_automated_gates_pass": passes_all,
             "visual_stage": visual.get("stage"),
             "visual_score": visual.get("score"),
+            "local_visual_advisory_pass": bool(visual.get("pass")),
             "assistant_decision": assistant.get("decision"),
         })
 
