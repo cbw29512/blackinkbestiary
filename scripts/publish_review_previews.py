@@ -47,6 +47,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from quality_history import build_quality_snapshot
+from reviewer_audit import reviewer_disagreement_report
 from page_contract import resolve_page_spec
 from studio_config import active_book_paths
 
@@ -58,6 +59,8 @@ SOURCE_DIR = ROOT / "web" / "test-gallery"
 PREVIEW_DIR = ROOT / "review-previews"
 MANIFEST = PREVIEW_DIR / "manifest.json"
 QUALITY_CURRENT = PREVIEW_DIR / "quality-current.json"
+REVIEWER_DISAGREEMENT = PREVIEW_DIR / "reviewer-disagreement.json"
+DECISIONS = PREVIEW_DIR / "decisions.json"
 AUTOPILOT_HEARTBEAT_PREVIEW = PREVIEW_DIR / "autopilot-heartbeat.json"
 CANDIDATE_RE = re.compile(r"^(?P<page>.+)-C(?P<candidate>\d+)\.png$", re.IGNORECASE)
 REVIEWABLE_STATUSES = {
@@ -415,6 +418,29 @@ def main() -> int:
         encoding="utf-8",
     )
 
+    decisions_payload = {"reviews": []}
+    if DECISIONS.exists():
+        try:
+            decisions_payload = json.loads(DECISIONS.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            diagnostics.append({
+                "page_id": None,
+                "monster_name": None,
+                "candidate": None,
+                "status": "review_decisions_read_failed",
+                "error": str(exc),
+                "visual_review": None,
+            })
+
+    reviewer_disagreement = reviewer_disagreement_report(
+        {"candidates": published},
+        decisions_payload,
+    )
+    REVIEWER_DISAGREEMENT.write_text(
+        json.dumps(reviewer_disagreement, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
     MANIFEST.write_text(json.dumps({
         "schema_version": 6,
         "snapshot_engine_commit": engine_commit(),
@@ -423,6 +449,8 @@ def main() -> int:
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
         "quality_snapshot": "review-previews/quality-current.json",
+        "reviewer_disagreement_snapshot": "review-previews/reviewer-disagreement.json",
+        "reviewer_disagreement": reviewer_disagreement,
         "runtime": runtime,
         "autopilot": autopilot,
         "engine_preflight": engine_preflight,
