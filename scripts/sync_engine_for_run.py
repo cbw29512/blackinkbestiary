@@ -106,8 +106,8 @@ def main() -> int:
         return 1
 
     # Preview JPG/manifest changes are disposable generated handoff state.
-    # Exact-image decisions are fetched from the engine branch below, so the
-    # workstation should never preserve a stale local copy over GitHub.
+    # Exact-image decisions are re-imported from the dedicated review branch
+    # after engine synchronization, so stale local preview files are disposable.
     subprocess.run(
         ["git", "restore", "--staged", "--worktree", "review-previews"],
         cwd=ROOT,
@@ -148,7 +148,7 @@ def main() -> int:
         print("Recovering from legacy preview-only branch divergence...")
         run("git", "reset", "--hard", remote_ref)
         print(f"Engine synchronized at {output('git', 'rev-parse', '--short', 'HEAD')}.")
-        return 0
+        return finish_success()
 
     print("Refusing automatic sync because the local and remote engine branches diverged in source code.")
     for path in local_only:
