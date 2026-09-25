@@ -197,32 +197,43 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(metrics["semantic_accuracy"], 0.0)
 
     def test_generation_efficiency_counts_current_gpu_work_only(self):
-        pages = ["A", "B"]
-        state = {"results": [
-            {
-                "page_id": "A",
-                "candidate": 1,
-                "status": "max_refinements_reached",
-                "pass_history": [{}, {}, {}],
-                "visual_review": {"stage": "quality", "pass": False},
-            },
-            {
-                "page_id": "B",
-                "candidate": 1,
-                "status": "ready_for_review",
-                "pass_history": [{}],
-                "visual_review": {"stage": "quality", "pass": True},
-                "assistant_review": {"decision": "approve"},
-            },
-        ]}
-        canary = canary_metrics(state, pages)
-        efficiency = generation_efficiency(state, pages, canary)
-        self.assertEqual(efficiency["gpu_attempts"], 4)
-        self.assertEqual(efficiency["refinement_passes"], 2)
-        self.assertEqual(efficiency["pages_at_max_refinements"], 1)
-        self.assertEqual(efficiency["avg_gpu_attempts_per_page"], 2.0)
-        self.assertEqual(efficiency["semantic_yield_percent"], 25.0)
-        self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "B-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"approved")
+            digest = __import__("hashlib").sha256(b"approved").hexdigest()[:16]
+
+            pages = ["A", "B"]
+            state = {"results": [
+                {
+                    "page_id": "A",
+                    "candidate": 1,
+                    "status": "max_refinements_reached",
+                    "pass_history": [{}, {}, {}],
+                    "visual_review": {"stage": "quality", "pass": False},
+                },
+                {
+                    "page_id": "B",
+                    "candidate": 1,
+                    "status": "ready_for_review",
+                    "image_path": "test-gallery/B-C01.png",
+                    "pass_history": [{}],
+                    "visual_review": {"stage": "quality", "pass": True},
+                    "assistant_review": {
+                        "decision": "approve",
+                        "review_id": f"B-C01-H{digest}",
+                    },
+                },
+            ]}
+            canary = canary_metrics(state, pages, root)
+            efficiency = generation_efficiency(state, pages, canary)
+            self.assertEqual(efficiency["gpu_attempts"], 4)
+            self.assertEqual(efficiency["refinement_passes"], 2)
+            self.assertEqual(efficiency["pages_at_max_refinements"], 1)
+            self.assertEqual(efficiency["avg_gpu_attempts_per_page"], 2.0)
+            self.assertEqual(efficiency["semantic_yield_percent"], 25.0)
+            self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
 
     def test_print_package_requires_gutter_attribution_and_final_proof(self):
         with tempfile.TemporaryDirectory() as td:
@@ -378,28 +389,60 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertFalse(report["automated_100"])
 
     def test_canary_metrics_use_fixed_denominator(self):
-        pages = ["A", "B", "C"]
-        state = {"results": [
-            {
-                "page_id": "A", "candidate": 1, "status": "assistant_rejected",
-                "visual_review": {"pass": True, "stage": "quality", "score": 95},
-                "assistant_review": {"decision": "reject"},
-            },
-            {
-                "page_id": "B", "candidate": 1, "status": "ready_for_review",
-                "visual_review": {"pass": True, "stage": "quality", "score": 96},
-                "assistant_review": {"decision": "approve"},
-            },
-            {
-                "page_id": "C", "candidate": 1, "status": "technical_qa_failed",
-                "error": "safe_margin_too_busy",
-            },
-        ]}
-        report = canary_metrics(state, pages)
-        self.assertEqual(report["technical_qa"], 66.7)
-        self.assertEqual(report["visual_cleanliness"], 33.3)
-        self.assertEqual(report["semantic_accuracy"], 33.3)
-        self.assertEqual(report["all_automated_gates"], 33.3)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "B-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"approved")
+            digest = __import__("hashlib").sha256(b"approved").hexdigest()[:16]
+
+            pages = ["A", "B", "C"]
+            state = {"results": [
+                {
+                    "page_id": "A", "candidate": 1, "status": "assistant_rejected",
+                    "visual_review": {"pass": True, "stage": "quality", "score": 95},
+                    "assistant_review": {"decision": "reject"},
+                },
+                {
+                    "page_id": "B", "candidate": 1, "status": "ready_for_review",
+                    "image_path": "test-gallery/B-C01.png",
+                    "visual_review": {"pass": True, "stage": "quality", "score": 96},
+                    "assistant_review": {
+                        "decision": "approve",
+                        "review_id": f"B-C01-H{digest}",
+                    },
+                },
+                {
+                    "page_id": "C", "candidate": 1, "status": "technical_qa_failed",
+                    "error": "safe_margin_too_busy",
+                },
+            ]}
+            report = canary_metrics(state, pages, root)
+            self.assertEqual(report["technical_qa"], 66.7)
+            self.assertEqual(report["visual_cleanliness"], 33.3)
+            self.assertEqual(report["semantic_accuracy"], 33.3)
+            self.assertEqual(report["all_automated_gates"], 33.3)
+
+    def test_stale_exact_image_approval_never_satisfies_readiness(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            image = root / "web" / "test-gallery" / "A-C01.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"new-pixels")
+            state = {"results": [{
+                "page_id": "A",
+                "candidate": 1,
+                "status": "awaiting_exact_image_review",
+                "image_path": "test-gallery/A-C01.png",
+                "assistant_review": {
+                    "decision": "approve",
+                    "review_id": "A-C01-Hdeadbeefdeadbeef",
+                },
+            }]}
+            report = canary_metrics(state, ["A"], root)
+            self.assertEqual(report["visual_cleanliness"], 0.0)
+            self.assertEqual(report["semantic_accuracy"], 0.0)
+            self.assertFalse(report["rows"][0]["visual_cleanliness_pass"])
 
     def test_prompt_load_measures_fixed_canary_generation_and_review_payloads(self):
         report = prompt_load_report(ROOT, ["I-01", "I-04", "I-19"])
