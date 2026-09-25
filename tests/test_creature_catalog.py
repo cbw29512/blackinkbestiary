@@ -153,7 +153,8 @@ class CreatureCatalogTests(unittest.TestCase):
             failures = spec.get("known_failure_modes") or []
             self.assertTrue(failures, page["page_id"])
             self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", generation, page["page_id"])
-            for failure in failures[:2]:
+            selected = [failures[0], failures[-1]] if len(failures) > 2 else failures
+            for failure in selected:
                 symptom = str(failure.get("symptom") or "").strip()
                 correction = str(failure.get("correction") or "").strip()
                 self.assertIn(symptom, generation, page["page_id"])
