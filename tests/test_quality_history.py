@@ -159,6 +159,21 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(rows[0]["status"], "ready_for_review")
         self.assertEqual(rows[1]["status"], "technical_qa_failed")
 
+    def test_reviewer_failure_does_not_masquerade_as_image_technical_failure(self):
+        state = {
+            "results": [{
+                "page_id": "A",
+                "candidate": 1,
+                "status": "vision_reviewer_failed",
+                "error": "reviewer parser failed",
+            }]
+        }
+        metrics = canary_metrics(state, ["A"])
+        self.assertEqual(metrics["technical_qa"], 100.0)
+        self.assertEqual(metrics["review_pipeline_health"], 0.0)
+        self.assertTrue(metrics["rows"][0]["technical_pass"])
+        self.assertFalse(metrics["rows"][0]["review_pipeline_pass"])
+
     def test_generation_efficiency_counts_current_gpu_work_only(self):
         pages = ["A", "B"]
         state = {"results": [
