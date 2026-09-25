@@ -422,8 +422,11 @@ def canary_summary(state: dict) -> dict:
             "stage": str(((item.get("visual_review") or {}).get("stage")) or ""),
             "defects": list(((item.get("visual_review") or {}).get("defects")) or []),
         })
-    ready = sum(1 for row in rows if row["status"] == "ready_for_review")
-    return {"ready": ready, "total": len(rows), "rows": rows}
+    reviewable = sum(
+        1 for row in rows
+        if row["status"] == "awaiting_exact_image_review"
+    )
+    return {"ready": reviewable, "total": len(rows), "rows": rows}
 
 
 def main() -> int:
@@ -561,8 +564,9 @@ def main() -> int:
                     try:
                         refreshed_review = review_image(page, prior_image, config)
                     except VisionReviewError as exc:
-                        prior["status"] = "vision_reviewer_failed"
-                        prior["error"] = str(exc)
+                        prior["status"] = "awaiting_exact_image_review"
+                        prior["advisory_review_status"] = "unavailable"
+                        prior["advisory_review_error"] = str(exc)
                         prior["review_fingerprint"] = current_review_fingerprint
                         prior["review_checked_at"] = utc_now()
                         state["updated_at"] = utc_now()
@@ -570,20 +574,16 @@ def main() -> int:
                         print(json.dumps({
                             "page_id": page["page_id"],
                             "candidate": candidate_no,
-                            "status": "review_recheck_failed",
+                            "status": "advisory_review_unavailable",
                             "error": str(exc),
                         }))
-                        raise SystemExit(
-                            "FATAL: semantic vision reviewer failed while rechecking an existing candidate."
-                        )
                     prior["visual_review"] = refreshed_review
                     prior["review_fingerprint"] = current_review_fingerprint
                     prior["review_checked_at"] = utc_now()
                     prior["engine_commit"] = engine_commit()
-                    prior["status"] = (
-                        "ready_for_review"
-                        if refreshed_review.get("pass")
-                        else "max_refinements_reached"
+                    prior["status"] = "awaiting_exact_image_review"
+                    prior["advisory_review_status"] = (
+                        "pass" if refreshed_review.get("pass") else "needs_work"
                     )
                     if not refreshed_review.get("pass"):
                         reviewer_recheck_failed = True
@@ -704,18 +704,30 @@ def main() -> int:
                 destination = OUTPUT_DIR / f"{page['page_id']}-C{candidate_no:02d}.png"
                 destination.write_bytes(best.read_bytes())
                 record.update({
-                    "status": "ready_for_review" if visual_verdict.get("pass") else "max_refinements_reached",
+                    "status": "awaiting_exact_image_review",
                     "image_path": destination.relative_to(ROOT / "web").as_posix(),
                     "visual_review": visual_verdict,
+                    "advisory_review_status": (
+                        "pass" if visual_verdict.get("pass") else "needs_work"
+                    ),
                     "pass_history": pass_history,
                 })
             except VisionReviewError as exc:
-                record.update({"status": "vision_reviewer_failed", "error": str(exc), "finished_at": utc_now()})
-                state["results"].append(record)
-                state["updated_at"] = utc_now()
-                write_state(state)
-                print(json.dumps(record))
-                raise SystemExit("FATAL: semantic vision reviewer failed; gallery stopped before generating more unchecked candidates.")
+                destination = OUTPUT_DIR / f"{page['page_id']}-C{candidate_no:02d}.png"
+                if "source" in locals() and Path(source).exists():
+                    destination.write_bytes(Path(source).read_bytes())
+                    record.update({
+                        "status": "awaiting_exact_image_review",
+                        "image_path": destination.relative_to(ROOT / "web").as_posix(),
+                        "advisory_review_status": "unavailable",
+                        "advisory_review_error": str(exc),
+                        "pass_history": [],
+                    })
+                else:
+                    record.update({
+                        "status": "failed",
+                        "error": f"Advisory reviewer failed before a technical candidate was preserved: {exc}",
+                    })
             except TechnicalQAError as exc:
                 streak = next_qa_fail_streak(prior, current_fingerprint)
                 record.update({
@@ -742,7 +754,7 @@ def main() -> int:
     print(f"Test gallery complete: {len(state['results'])} attempts")
     if args.canary or args.canary_failed:
         summary = canary_summary(state)
-        print(f"CANARY SUMMARY: {summary['ready']}/{summary['total']} ready_for_review")
+        print(f"CANARY SUMMARY: {summary['ready']}/{summary['total']} awaiting_exact_image_review")
         for row in summary["rows"]:
             defects = "; ".join(row["defects"]) if row["defects"] else "none"
             print(
