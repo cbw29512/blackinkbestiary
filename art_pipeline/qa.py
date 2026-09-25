@@ -8,6 +8,7 @@ from png_content_qa import _CHANNELS, _decode_rows, inspect_line_art
 
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def inspect_png(path: Path, target_ratio: float = 8.5 / 11, ratio_tolerance: float = 0.04) -> dict:
