@@ -84,16 +84,18 @@
         "too few legs",
         "extra limb",
         "missing limb",
+        "extra (?:arm|leg|wing|tentacle|appendage|hand|foot)",
+        "missing (?:arm|leg|wing|tentacle|appendage|hand|foot)",
+        "(?:third|fourth|fifth|sixth|seventh|eighth|ninth|tenth) (?:arm|leg|wing|tentacle|appendage)",
+        "\\bthree arms\\b",
+        "\\bthree legs\\b",
         "exactly six",
         "exactly eight",
         "one pair of legs",
         "limb.*wrong",
         "sparse spiderlike limbs",
-        "arms do not extend below hips",
-        "separate humanoid arms",
-        "forelimbs must be the wings",
-        "extra arms",
-        "extra wing"
+        "duplicated (?:arm|leg|wing|tentacle|appendage)",
+        "branched (?:arm|leg|wing|tentacle|appendage)"
       ]
     },
     {
