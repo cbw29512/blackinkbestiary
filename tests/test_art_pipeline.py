@@ -734,8 +734,10 @@ class QATests(unittest.TestCase):
         )
 
         self.assertIn("IDENTITY-FIRST RECOVERY MODE", prompt)
-        self.assertIn("IDENTITY:", prompt)
-        self.assertIn("QUALITY:", prompt)
+        self.assertIn("GENERATION SELF-CHECK — IDENTITY RECOVERY", prompt)
+        self.assertIn("exact species silhouette", prompt)
+        self.assertIn("simple open line art", prompt)
+        self.assertNotIn("MANDATORY PAGE VERIFICATION CHECKLIST", prompt)
         self.assertNotIn("ENVIRONMENT:", prompt)
         self.assertNotIn("ACTION:", prompt)
         self.assertNotIn("MOMENT:", prompt)
