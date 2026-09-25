@@ -77,14 +77,27 @@ if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
       throw "Pinned comfy-cli failed and no valid ComfyUI workspace Python was found."
     }
 
+    $fallbackStdout = Join-Path $root "data\comfy-fallback.stdout.log"
+    $fallbackStderr = Join-Path $root "data\comfy-fallback.stderr.log"
     Set-RuntimeStage "comfy-fallback-launch" "comfy-cli failed; launching ComfyUI directly with its Desktop venv." "Python: $comfyPython; main: $mainPy; cli_output: $launchOutput"
     $null = Start-BlackInkDetachedLocalProcess $comfyPython @(
       $mainPy, "--listen", "127.0.0.1", "--port", "8188"
-    ) $comfyRoot
+    ) $comfyRoot $fallbackStdout $fallbackStderr
   }
 
   Set-RuntimeStage "comfy-wait" "Waiting for Black-Ink ComfyUI API." $comfyHealth
-  Wait-BlackInkEndpoint $comfyHealth $ComfyTimeoutSeconds "ComfyUI"
+  try {
+    Wait-BlackInkEndpoint $comfyHealth $ComfyTimeoutSeconds "ComfyUI"
+  } catch {
+    $stdoutTail = Get-BlackInkLogTail $fallbackStdout
+    $stderrTail = Get-BlackInkLogTail $fallbackStderr
+    $cliTail = if ($launchOutput) { [string]$launchOutput } else { "" }
+    if ($cliTail.Length -gt 1800) {
+      $cliTail = $cliTail.Substring($cliTail.Length - 1800)
+    }
+    $script:CurrentDetail = "workspace=$comfyWorkspace; cli_output=$cliTail; fallback_stdout=$stdoutTail; fallback_stderr=$stderrTail"
+    throw
+  }
 }
 Write-Host "ComfyUI ready." -ForegroundColor Green
 
