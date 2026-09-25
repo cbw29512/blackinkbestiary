@@ -22,10 +22,7 @@ function Write-BlackInkRuntimeStatus(
   $payload | ConvertTo-Json -Depth 4 | Set-Content -Path $Path -Encoding UTF8
 }
 
-function Test-BlackInkJsonEndpoint(
-  [string]$Uri,
-  [int]$TimeoutSec = 2
-) {
+function Test-BlackInkJsonEndpoint([string]$Uri, [int]$TimeoutSec = 2) {
   try {
     Invoke-RestMethod -Uri $Uri -TimeoutSec $TimeoutSec | Out-Null
     return $true
@@ -41,9 +38,7 @@ function Wait-BlackInkEndpoint(
 ) {
   $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
   while ((Get-Date) -lt $deadline) {
-    if (Test-BlackInkJsonEndpoint $Uri 2) {
-      return
-    }
+    if (Test-BlackInkJsonEndpoint $Uri 2) { return }
     Start-Sleep -Seconds 2
   }
   throw "$Label did not become ready within $TimeoutSeconds seconds at $Uri."
@@ -54,40 +49,74 @@ function Find-BlackInkComfyWorkspace(
   [string]$ConfiguredWorkspace
 ) {
   $candidates = @()
-
   if ($env:LOCALAPPDATA) {
-    $candidates += Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary\ComfyUI"
+    $candidates += Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary"
   }
   if ($ConfiguredWorkspace) {
-    $workspace = if ([IO.Path]::IsPathRooted($ConfiguredWorkspace)) {
+    $candidate = if ([IO.Path]::IsPathRooted($ConfiguredWorkspace)) {
       $ConfiguredWorkspace
     } else {
       Join-Path $Root $ConfiguredWorkspace
     }
-    $candidates += Join-Path $workspace "ComfyUI"
-    $candidates += $workspace
+    $candidates += $candidate
   }
 
   foreach ($candidate in $candidates | Select-Object -Unique) {
-    if (Test-Path (Join-Path $candidate "main.py") -PathType Leaf) {
+    if (Test-Path (Join-Path $candidate "ComfyUI\main.py") -PathType Leaf) {
       return $candidate
+    }
+    if ((Split-Path $candidate -Leaf) -eq "ComfyUI" -and
+        (Test-Path (Join-Path $candidate "main.py") -PathType Leaf)) {
+      return (Split-Path -Parent $candidate)
     }
   }
   return $null
 }
 
-function Start-BlackInkDetachedLocalProcess(
+function Find-BlackInkComfyPython([string]$Workspace) {
+  $candidates = @(
+    (Join-Path $Workspace "ComfyUI\.venv\Scripts\python.exe"),
+    (Join-Path $Workspace ".venv\Scripts\python.exe"),
+    (Join-Path $Workspace "ComfyUI\venv\Scripts\python.exe"),
+    (Join-Path $Workspace "python_embeded\python.exe")
+  )
+  foreach ($candidate in $candidates) {
+    if (Test-Path $candidate -PathType Leaf) { return $candidate }
+  }
+  return $null
+}
+
+function Invoke-BlackInkCommand(
   [string]$FilePath,
   [string[]]$Arguments = @()
 ) {
+  $text = (& $FilePath @Arguments 2>&1 | Out-String).Trim()
+  return @{
+    exit_code = $LASTEXITCODE
+    output = $text
+  }
+}
+
+function Start-BlackInkDetachedLocalProcess(
+  [string]$FilePath,
+  [string[]]$Arguments = @(),
+  [string]$WorkingDirectory = ""
+) {
   try {
-    Start-Process -FilePath $FilePath -ArgumentList $Arguments -WindowStyle Hidden -ErrorAction Stop | Out-Null
+    $start = @{
+      FilePath = $FilePath
+      ArgumentList = $Arguments
+      WindowStyle = "Hidden"
+      ErrorAction = "Stop"
+    }
+    if ($WorkingDirectory) { $start.WorkingDirectory = $WorkingDirectory }
+    Start-Process @start | Out-Null
     return "Start-Process"
   } catch {
     $firstError = [string]$_.Exception.Message
     try {
       $shell = New-Object -ComObject Shell.Application
-      $shell.ShellExecute($FilePath, ($Arguments -join " "), "", "open", 0)
+      $shell.ShellExecute($FilePath, ($Arguments -join " "), $WorkingDirectory, "open", 0)
       return "ShellExecute"
     } catch {
       throw "Could not launch '$FilePath'. Start-Process failed: $firstError; ShellExecute failed: $($_.Exception.Message)"

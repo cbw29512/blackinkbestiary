@@ -6,7 +6,6 @@ param(
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
-
 . (Join-Path $PSScriptRoot "local_runtime_helpers.ps1")
 
 $runtimeStatusPath = Join-Path $root "data\local-runtime-status.json"
@@ -35,41 +34,53 @@ function Set-RuntimeStage(
 
 trap {
   $message = [string]$_.Exception.Message
-  try {
-    Write-RuntimeStatus "failed" $script:CurrentStage $message $script:CurrentDetail
-  } catch {}
+  try { Write-RuntimeStatus "failed" $script:CurrentStage $message $script:CurrentDetail } catch {}
   Write-Host "Local AI runtime failed at '$($script:CurrentStage)': $message" -ForegroundColor Red
-  if ($script:CurrentDetail) {
-    Write-Host "Context: $($script:CurrentDetail)" -ForegroundColor DarkYellow
-  }
+  if ($script:CurrentDetail) { Write-Host "Context: $($script:CurrentDetail)" -ForegroundColor DarkYellow }
   exit 1
 }
 
 Set-RuntimeStage "config-load" "Reading local AI configuration."
 $configPath = Join-Path $root "config\local_ai_stack.json"
-if (-not (Test-Path $configPath -PathType Leaf)) {
-  throw "Missing local AI config: $configPath"
-}
+if (-not (Test-Path $configPath -PathType Leaf)) { throw "Missing local AI config: $configPath" }
 $config = Get-Content $configPath -Raw | ConvertFrom-Json
 
 $comfyHealth = "$($config.comfy_url.TrimEnd('/'))/system_stats"
 Set-RuntimeStage "comfy-health" "Checking ComfyUI API." $comfyHealth
 if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
-  Set-RuntimeStage "comfy-discovery" "Locating Black-Ink ComfyUI workspace."
   $comfyCli = Join-Path $root ".blackink-tools\Scripts\comfy.exe"
-  if (-not (Test-Path $comfyCli -PathType Leaf)) {
-    throw "Pinned comfy-cli is missing: $comfyCli"
-  }
+  if (-not (Test-Path $comfyCli -PathType Leaf)) { throw "Pinned comfy-cli is missing: $comfyCli" }
 
+  Set-RuntimeStage "comfy-discovery" "Locating Black-Ink ComfyUI workspace."
   $comfyWorkspace = Find-BlackInkComfyWorkspace $root ([string]$config.workspace)
-  if (-not $comfyWorkspace) {
-    throw "Black-Ink ComfyUI workspace with main.py could not be found."
-  }
+  if (-not $comfyWorkspace) { throw "Black-Ink ComfyUI workspace root could not be found." }
+
+  $comfyRoot = Join-Path $comfyWorkspace "ComfyUI"
+  $mainPy = Join-Path $comfyRoot "main.py"
+
+  Set-RuntimeStage "comfy-stop" "Clearing any stale comfy-cli background record." $comfyWorkspace
+  $null = Invoke-BlackInkCommand $comfyCli @("--workspace=$comfyWorkspace", "stop")
 
   Set-RuntimeStage "comfy-launch" "Starting ComfyUI Desktop instance through pinned comfy-cli." "CLI: $comfyCli; workspace: $comfyWorkspace"
-  & $comfyCli "--workspace=$comfyWorkspace" launch --background -- --listen 127.0.0.1 --port 8188
-  if ($LASTEXITCODE -ne 0) {
-    throw "Pinned comfy-cli failed to launch the Black-Ink workspace (exit $LASTEXITCODE)."
+  $launch = Invoke-BlackInkCommand $comfyCli @(
+    "--workspace=$comfyWorkspace", "launch", "--background", "--",
+    "--listen", "127.0.0.1", "--port", "8188"
+  )
+
+  if ($launch.exit_code -ne 0 -and -not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
+    $comfyPython = Find-BlackInkComfyPython $comfyWorkspace
+    $launchOutput = [string]$launch.output
+    if ($launchOutput.Length -gt 1800) { $launchOutput = $launchOutput.Substring($launchOutput.Length - 1800) }
+
+    if (-not $comfyPython) {
+      $script:CurrentDetail = "CLI exit=$($launch.exit_code); workspace=$comfyWorkspace; output=$launchOutput"
+      throw "Pinned comfy-cli failed and no valid ComfyUI workspace Python was found."
+    }
+
+    Set-RuntimeStage "comfy-fallback-launch" "comfy-cli failed; launching ComfyUI directly with its Desktop venv." "Python: $comfyPython; main: $mainPy; cli_output: $launchOutput"
+    $null = Start-BlackInkDetachedLocalProcess $comfyPython @(
+      $mainPy, "--listen", "127.0.0.1", "--port", "8188"
+    ) $comfyRoot
   }
 
   Set-RuntimeStage "comfy-wait" "Waiting for Black-Ink ComfyUI API." $comfyHealth
@@ -78,9 +89,7 @@ if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
 Write-Host "ComfyUI ready." -ForegroundColor Green
 
 $vision = $config.vision_reviewer
-if (-not $vision -or -not $vision.required) {
-  throw "Required semantic vision reviewer is not configured."
-}
+if (-not $vision -or -not $vision.required) { throw "Required semantic vision reviewer is not configured." }
 $ollamaBase = [string]$vision.base_url
 $ollamaTagsUrl = "$($ollamaBase.TrimEnd('/'))/api/tags"
 
@@ -88,14 +97,10 @@ Set-RuntimeStage "ollama-health" "Checking Ollama API." $ollamaTagsUrl
 if (-not (Test-BlackInkJsonEndpoint $ollamaTagsUrl 2)) {
   Set-RuntimeStage "ollama-discovery" "Locating Ollama CLI."
   $ollama = Get-Command ollama -ErrorAction SilentlyContinue
-  if (-not $ollama) {
-    throw "Ollama is not reachable and the ollama CLI is not installed or on PATH."
-  }
+  if (-not $ollama) { throw "Ollama is not reachable and the ollama CLI is not installed or on PATH." }
 
   Set-RuntimeStage "ollama-launch" "Starting Ollama service." $ollama.Source
-  $script:CurrentDetail = "Executable: $($ollama.Source); arguments: serve"
   $launchMethod = Start-BlackInkDetachedLocalProcess $ollama.Source @("serve")
-
   Set-RuntimeStage "ollama-wait" "Waiting for Ollama API after $launchMethod." $ollamaTagsUrl
   Wait-BlackInkEndpoint $ollamaTagsUrl $OllamaTimeoutSeconds "Ollama"
 }
@@ -107,15 +112,10 @@ $tags = Invoke-RestMethod -Uri $ollamaTagsUrl -TimeoutSec 5
 $installed = @($tags.models | ForEach-Object { [string]$_.name })
 if (-not ($installed | Where-Object { $_ -eq $visionModel -or $_ -like "$visionModel*" })) {
   $ollama = Get-Command ollama -ErrorAction SilentlyContinue
-  if (-not $ollama) {
-    throw "Required vision model $visionModel is missing and ollama CLI is unavailable."
-  }
-
+  if (-not $ollama) { throw "Required vision model $visionModel is missing and ollama CLI is unavailable." }
   Set-RuntimeStage "ollama-model-pull" "Installing required semantic vision model." $visionModel
   & $ollama.Source pull $visionModel
-  if ($LASTEXITCODE -ne 0) {
-    throw "Ollama failed to install required vision model $visionModel (exit $LASTEXITCODE)."
-  }
+  if ($LASTEXITCODE -ne 0) { throw "Ollama failed to install required vision model $visionModel (exit $LASTEXITCODE)." }
 }
 
 Set-RuntimeStage "reviewer-smoke-test" "Testing semantic reviewer response." "$ollamaBase / $visionModel"
@@ -128,9 +128,7 @@ $smokeBody = @{
 
 $smoke = Invoke-RestMethod -Method Post -Uri "$($ollamaBase.TrimEnd('/'))/api/generate" -ContentType "application/json" -Body $smokeBody -TimeoutSec 120
 $payload = [string]$smoke.response
-if ([string]::IsNullOrWhiteSpace($payload)) {
-  throw "Semantic vision smoke test returned an empty response."
-}
+if ([string]::IsNullOrWhiteSpace($payload)) { throw "Semantic vision smoke test returned an empty response." }
 $verdict = $payload | ConvertFrom-Json
 if ($verdict.pass -ne $true -or $null -eq $verdict.defects) {
   throw "Semantic vision smoke test returned unexpected structured output: $payload"
