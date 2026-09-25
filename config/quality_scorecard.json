@@ -1,6 +1,6 @@
 {
-  "schema_version": 9,
-  "contract_version": "black-ink-quality-scorecard-v9",
+  "schema_version": 10,
+  "contract_version": "black-ink-quality-scorecard-v10",
   "canary_page_ids": [
     "I-01",
     "I-04",
@@ -36,7 +36,11 @@
     "art_pipeline/quality_history.py",
     "art_pipeline/replication_probe.py",
     "art_pipeline/master_engine_guard.py",
-    "art_pipeline/prompt_load.py"
+    "art_pipeline/prompt_load.py",
+    "config/kdp_print_standard.json",
+    "config/source_attribution.json",
+    "art_pipeline/qa.py",
+    "art_pipeline/book_assembly.py"
   ],
   "metric_policy": {
     "higher_is_better": true,
@@ -48,7 +52,8 @@
     "prompt_load_rule": "Prompt-load telemetry is observational until a stable successful canary baseline establishes useful bounds; do not reward shorter prompts automatically.",
     "foundation_rule": "Foundation Readiness reaches 100 only when runtime, preflight, series audit, active-book structure, and a current same-engine autopilot heartbeat are all healthy.",
     "review_pipeline_rule": "Image technical QA measures PNG/print technical checks only. Vision-reviewer software failures are reported separately as review_pipeline_health and must not masquerade as image QA regression.",
-    "exact_image_authority_rule": "Local vision-review scores are advisory telemetry only. Visual Cleanliness and Semantic Accuracy pass only from a current exact-image approve/select decision; local pass/score/stage may never satisfy a required readiness metric."
+    "exact_image_authority_rule": "Local vision-review scores are advisory telemetry only. Visual Cleanliness and Semantic Accuracy pass only from a current exact-image approve/select decision; local pass/score/stage may never satisfy a required readiness metric.",
+    "print_package_rule": "Print Package Readiness requires exact export QA, deterministic safe margin, alternating binding-gutter validation, a configured source-attribution page, generic deterministic assembly, and a reproducible final proof for 100/100."
   },
   "replication_readiness_contract": {
     "score_100_requires": [
