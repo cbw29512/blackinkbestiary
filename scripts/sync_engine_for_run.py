@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import json
 import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE_BRANCH = "feat/environment-spatial-hardening"
+REVIEW_BRANCH = "review-previews-live"
+DECISIONS_RELATIVE = "review-previews/decisions.json"
+DECISIONS_PATH = ROOT / DECISIONS_RELATIVE
 
 
 def output(*args: str) -> str:
@@ -32,6 +36,38 @@ def changed_paths(base: str, head: str) -> list[str]:
 
 def preview_only_paths(paths: list[str]) -> bool:
     return bool(paths) and all(path.startswith("review-previews/") for path in paths)
+
+
+def sync_review_decisions() -> bool:
+    """Import only exact-image review decisions from the dedicated review branch."""
+    remote_ref = f"origin/{REVIEW_BRANCH}"
+    try:
+        print(f"Fetching latest AI review decisions from {REVIEW_BRANCH}...")
+        run(
+            "git",
+            "fetch",
+            "origin",
+            f"{REVIEW_BRANCH}:refs/remotes/origin/{REVIEW_BRANCH}",
+        )
+        payload = output("git", "show", f"{remote_ref}:{DECISIONS_RELATIVE}")
+        parsed = json.loads(payload)
+    except (subprocess.CalledProcessError, json.JSONDecodeError) as exc:
+        print(f"Could not synchronize AI review decisions: {exc}")
+        return False
+
+    reviews = parsed.get("reviews") if isinstance(parsed, dict) else None
+    if not isinstance(reviews, list):
+        print("Could not synchronize AI review decisions: reviews must be a JSON list.")
+        return False
+
+    DECISIONS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    DECISIONS_PATH.write_text(json.dumps(parsed, indent=2) + "\n", encoding="utf-8")
+    print(f"AI review decisions synchronized: {len(reviews)} exact-image review records.")
+    return True
+
+
+def finish_success() -> int:
+    return 0 if sync_review_decisions() else 1
 
 
 def tracked_changes_outside_previews() -> list[str]:
@@ -87,12 +123,12 @@ def main() -> int:
 
     if local_head == remote_head:
         print(f"Engine already synchronized at {output('git', 'rev-parse', '--short', 'HEAD')}.")
-        return 0
+        return finish_success()
 
     if git_returncode("git", "merge-base", "--is-ancestor", local_head, remote_head) == 0:
         run("git", "merge", "--ff-only", remote_ref)
         print(f"Engine synchronized at {output('git', 'rev-parse', '--short', 'HEAD')}.")
-        return 0
+        return finish_success()
 
     if git_returncode("git", "merge-base", "--is-ancestor", remote_head, local_head) == 0:
         local_only = changed_paths(remote_head, local_head)
@@ -100,7 +136,7 @@ def main() -> int:
             print("Removing legacy local preview-only commit(s) from the engine branch...")
             run("git", "reset", "--hard", remote_ref)
             print(f"Engine synchronized at {output('git', 'rev-parse', '--short', 'HEAD')}.")
-            return 0
+            return finish_success()
         print("Refusing automatic sync because the local engine branch contains non-preview commits not on origin.")
         for path in local_only:
             print("  " + path)
