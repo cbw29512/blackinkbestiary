@@ -40,6 +40,17 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn('Write-RuntimeStatus "failed"', text)
         self.assertIn('Write-RuntimeStatus "ready"', text)
 
+    def test_local_runtime_diagnostics_are_stage_specific_and_modular(self):
+        launcher = (ROOT / "scripts" / "ensure_local_ai.ps1").read_text(encoding="utf-8")
+        helpers = (ROOT / "scripts" / "local_runtime_helpers.ps1").read_text(encoding="utf-8")
+        self.assertIn("Write-BlackInkRuntimeStatus", launcher)
+        self.assertIn('Set-RuntimeStage "comfy-launch"', launcher)
+        self.assertIn('Set-RuntimeStage "ollama-launch"', launcher)
+        self.assertIn('Set-RuntimeStage "reviewer-smoke-test"', launcher)
+        self.assertIn("Start-BlackInkDetachedLocalProcess", launcher)
+        self.assertIn("ShellExecute", helpers)
+        self.assertIn("Start-Process failed", helpers)
+
     def test_runtime_failures_are_published_for_remote_diagnosis(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         canary = (ROOT / "RUN_ENGINE_CANARY.bat").read_text(encoding="utf-8")
