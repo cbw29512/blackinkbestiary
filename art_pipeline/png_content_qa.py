@@ -107,6 +107,9 @@ def inspect_line_art(path: str | Path) -> dict:
             else:
                 r, g, b = row[i], row[i + 1], row[i + 2]
             luma = (299 * r + 587 * g + 114 * b) // 1000
+            is_midtone, is_chromatic = classify_sample(r, g, b)
+            midtone += is_midtone
+            chromatic += is_chromatic
             dark += luma < 80
             white += luma > 245
             total += 1
