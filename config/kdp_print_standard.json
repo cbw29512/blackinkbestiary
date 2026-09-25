@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "standard_id": "black-ink-kdp-8.5x11-v1",
   "purpose": "Final print/export contract for Black-Ink Bestiary interiors.",
   "trim": {
@@ -18,7 +18,12 @@
   "safe_layout": {
     "outer_white_margin_inches": 0.375,
     "gutter_safe_margin_inches": 0.5,
-    "rule": "Keep all essential monster anatomy, story props, and environment-defining forms comfortably inside the safe area. No artwork or linework should rely on trim-edge contact."
+    "rule": "Keep all essential monster anatomy, story props, and environment-defining forms comfortably inside the safe area. No artwork or linework should rely on trim-edge contact.",
+    "gutter_validation": {
+      "white_above_luma": 245,
+      "max_nonwhite_ratio": 0.002,
+      "failure_reason": "binding_gutter_too_busy"
+    }
   },
   "working_art": {
     "minimum_width_px": 768,
