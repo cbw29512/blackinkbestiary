@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from defect_taxonomy import classify_text, count_defects, load_taxonomy
-from quality_history import canary_metrics, quality_contract_fingerprint
+from quality_history import canary_metrics, current_page_records, quality_contract_fingerprint
 
 
 class QualityHistoryTests(unittest.TestCase):
@@ -28,6 +28,23 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(counts["TECH_SAFE_MARGIN"], 1)
         self.assertEqual(counts["SWARM_WALLPAPER"], 1)
         self.assertEqual(counts["SWARM_OVERSIZED_LEADER"], 1)
+
+    def test_current_page_records_ignore_stale_historical_candidates(self):
+        state = {
+            "results": [
+                {"page_id": "I-01", "candidate": 1, "status": "assistant_rejected", "error": "old failure"},
+                {"page_id": "I-01", "candidate": 2, "status": "assistant_rejected", "error": "other old failure"},
+                {"page_id": "I-01", "candidate": 1, "status": "ready_for_review", "visual_review": {"pass": True}},
+                {"page_id": "I-04", "candidate": 1, "status": "technical_qa_failed"},
+            ],
+            "selections": {
+                "I-01": {"candidate": 1, "source": "assistant_selected"},
+            },
+        }
+        rows = current_page_records(state, ["I-01", "I-04"])
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["status"], "ready_for_review")
+        self.assertEqual(rows[1]["status"], "technical_qa_failed")
 
     def test_canary_metrics_use_fixed_denominator(self):
         pages = ["A", "B", "C"]

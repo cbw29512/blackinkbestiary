@@ -112,6 +112,14 @@ class ReviewPublishGitTests(unittest.TestCase):
             self.assertEqual(trend["comparisons"]["semantic_accuracy"]["signed_delta"], "+15.0")
             self.assertEqual(trend["comparisons"]["replication_readiness"]["signed_delta"], "+5.0")
             self.assertEqual(trend["comparisons"]["visual_cleanliness"]["trend"], "regressing")
+            self.assertEqual(
+                trend["defect_comparisons"]["IDENTITY_HEROIC_BULK"]["signed_delta"],
+                "-3",
+            )
+            self.assertEqual(
+                trend["defect_comparisons"]["IDENTITY_HEROIC_BULK"]["trend"],
+                "improving",
+            )
 
             changed = dict(current)
             changed["quality_contract_fingerprint"] = "new-contract"

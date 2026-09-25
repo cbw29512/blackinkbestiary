@@ -56,6 +56,7 @@ def quality_contract_fingerprint(root: Path = ROOT, config: dict | None = None) 
 
 
 def latest_records(state: dict) -> list[dict]:
+    """Latest record for every historical page/candidate pair."""
     latest = {}
     for item in state.get("results", []):
         page_id = str(item.get("page_id") or "")
@@ -66,16 +67,49 @@ def latest_records(state: dict) -> list[dict]:
     return list(latest.values())
 
 
+def current_page_records(state: dict, page_ids: list[str]) -> list[dict]:
+    """Current authoritative record for each requested page.
+
+    Human/assistant selections win when present. Otherwise use the last record
+    written for the page, which is the current autopilot attempt. Historical
+    candidates remain in state for learning but never inflate current defects.
+    """
+    wanted = set(page_ids)
+    by_page: dict[str, list[dict]] = {page_id: [] for page_id in page_ids}
+    for item in state.get("results", []):
+        page_id = str(item.get("page_id") or "")
+        if page_id in wanted and int(item.get("candidate") or 0) > 0:
+            by_page[page_id].append(item)
+
+    selections = state.get("selections") or {}
+    result = []
+    for page_id in page_ids:
+        rows = by_page.get(page_id) or []
+        if not rows:
+            continue
+        selected_candidate = int((selections.get(page_id) or {}).get("candidate") or 0)
+        if selected_candidate:
+            selected_rows = [
+                item for item in rows
+                if int(item.get("candidate") or 0) == selected_candidate
+            ]
+            if selected_rows:
+                result.append(selected_rows[-1])
+                continue
+        result.append(rows[-1])
+    return result
+
+
 def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
-    latest = {
-        (str(item.get("page_id") or ""), int(item.get("candidate") or 0)): item
-        for item in latest_records(state)
+    current = {
+        str(item.get("page_id") or ""): item
+        for item in current_page_records(state, canary_page_ids)
     }
     rows = []
     technical_passes = visual_passes = semantic_passes = all_passes = 0
 
     for page_id in canary_page_ids:
-        item = latest.get((page_id, 1)) or {}
+        item = current.get(page_id) or {}
         status = str(item.get("status") or "missing")
         visual = item.get("visual_review") or {}
         assistant = item.get("assistant_review") or {}
@@ -259,10 +293,16 @@ def build_quality_snapshot(
             "automated_100": bool(metrics) and all(value == 100 for value in values),
         })
 
-    latest = latest_records(state)
     taxonomy = load_taxonomy(root / "config" / "defect_taxonomy.json")
-    defects = count_defects(latest, taxonomy)
-    status_counts = Counter(str(item.get("status") or "unknown") for item in latest)
+    canary_ids = list(scorecard.get("canary_page_ids") or [])
+    current_records = current_page_records(state, canary_ids)
+    historical_records = latest_records(state)
+    defects = count_defects(current_records, taxonomy)
+    historical_defects = count_defects(historical_records, taxonomy)
+    status_counts = Counter(str(item.get("status") or "unknown") for item in current_records)
+    historical_status_counts = Counter(
+        str(item.get("status") or "unknown") for item in historical_records
+    )
     active_row = next((book for book in books if book["active"]), None)
     active_metrics = dict((active_row or {}).get("metrics") or {})
 
@@ -281,8 +321,10 @@ def build_quality_snapshot(
         "print_package": print_report,
         "replication": replication,
         "defect_counts": defects,
+        "historical_defect_counts": historical_defects,
         "defect_labels": taxonomy_labels(taxonomy),
         "status_counts": dict(sorted(status_counts.items())),
+        "historical_status_counts": dict(sorted(historical_status_counts.items())),
         "known_blockers": [code for code, count in defects.items() if count > 0],
     }
     fingerprint_payload = dict(snapshot)

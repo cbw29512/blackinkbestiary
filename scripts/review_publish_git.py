@@ -116,6 +116,7 @@ def append_quality_snapshot(root: Path) -> bool:
         reason = "first recorded baseline for active book"
 
     comparisons = {}
+    defect_comparisons = {}
     if comparable:
         previous_metrics = previous.get("metrics") or {}
         for name, value in (current.get("metrics") or {}).items():
@@ -129,6 +130,22 @@ def append_quality_snapshot(root: Path) -> bool:
                 "delta": delta,
                 "signed_delta": _signed(delta),
                 "trend": "improving" if delta > 0 else "regressing" if delta < 0 else "flat",
+                "higher_is_better": True,
+            }
+
+        current_defects = current.get("defect_counts") or {}
+        previous_defects = previous.get("defect_counts") or {}
+        for code in sorted(set(current_defects) | set(previous_defects)):
+            now = int(current_defects.get(code) or 0)
+            old = int(previous_defects.get(code) or 0)
+            delta = now - old
+            defect_comparisons[code] = {
+                "previous": old,
+                "current": now,
+                "delta": delta,
+                "signed_delta": f"{delta:+d}",
+                "trend": "improving" if delta < 0 else "regressing" if delta > 0 else "flat",
+                "lower_is_better": True,
             }
 
     appended = not history or history[-1].get("measurement_fingerprint") != current.get("measurement_fingerprint")
@@ -154,7 +171,9 @@ def append_quality_snapshot(root: Path) -> bool:
         "current_metrics": current.get("metrics") or {},
         "previous_metrics": (previous or {}).get("metrics") or {},
         "comparisons": comparisons,
+        "defect_comparisons": defect_comparisons,
         "current_defect_counts": current.get("defect_counts") or {},
+        "current_historical_defect_counts": current.get("historical_defect_counts") or {},
         "previous_defect_counts": (previous or {}).get("defect_counts") or {},
         "replication": current.get("replication") or {},
     }
