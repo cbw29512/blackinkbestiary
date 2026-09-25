@@ -1,4 +1,6 @@
 import importlib.util
+import json
+import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
@@ -13,6 +15,47 @@ spec.loader.exec_module(sync)
 
 
 class SyncEngineForRunTests(unittest.TestCase):
+    def test_review_decisions_are_imported_from_dedicated_review_branch(self):
+        calls = []
+        payload = {
+            "schema_version": 1,
+            "reviews": [
+                {
+                    "review_id": "I-01-C01-Habc",
+                    "decision": "reject",
+                    "notes": "wrong identity",
+                }
+            ],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            destination = Path(td) / "review-previews" / "decisions.json"
+            with (
+                patch.object(sync, "DECISIONS_PATH", destination),
+                patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
+                patch.object(sync, "output", return_value=json.dumps(payload)),
+            ):
+                self.assertTrue(sync.sync_review_decisions())
+
+            saved = json.loads(destination.read_text(encoding="utf-8"))
+
+        self.assertEqual(saved, payload)
+        self.assertIn(
+            (
+                "git",
+                "fetch",
+                "origin",
+                f"{sync.REVIEW_BRANCH}:refs/remotes/origin/{sync.REVIEW_BRANCH}",
+            ),
+            calls,
+        )
+
+    def test_review_decision_sync_fails_closed_on_invalid_schema(self):
+        with (
+            patch.object(sync, "run"),
+            patch.object(sync, "output", return_value=json.dumps({"schema_version": 1})),
+        ):
+            self.assertFalse(sync.sync_review_decisions())
+
     def test_preview_only_path_classifier_is_strict(self):
         self.assertTrue(sync.preview_only_paths([
             "review-previews/manifest.json",
@@ -45,6 +88,7 @@ class SyncEngineForRunTests(unittest.TestCase):
             patch.object(sync, "git_returncode", side_effect=[1, 0]),
             patch.object(sync, "changed_paths", return_value=["review-previews/manifest.json"]),
             patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
+            patch.object(sync, "sync_review_decisions", return_value=True),
             patch.object(sync.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
         ):
             self.assertEqual(sync.main(), 0)
@@ -75,6 +119,7 @@ class SyncEngineForRunTests(unittest.TestCase):
             patch.object(sync, "git_returncode", side_effect=[1, 0]),
             patch.object(sync, "changed_paths", return_value=["art_pipeline/prompt_builder.py"]),
             patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
+            patch.object(sync, "sync_review_decisions", return_value=True),
             patch.object(sync.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
         ):
             self.assertEqual(sync.main(), 1)
