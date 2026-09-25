@@ -58,7 +58,8 @@
       "technical QA semantic review scoring duplicate detection print safety preview locking and assembly use unchanged paths",
       "CI covers scaffolded future books",
       "synthetic next-tome test uses a runtime probe that proves scaffold promotion manifest validation prompt resolution and pre-GPU lint through universal contracts",
-      "master engine separation audit proves core art_pipeline code contains no literal monster IDs, monster names, or production page IDs"
+      "master engine separation audit proves core art_pipeline code contains no literal monster IDs, monster names, or production page IDs",
+      "replication-critical generation and canary launch scripts resolve active book, canary set, page counts, and manifest paths from configuration without production book/page literals"
     ],
     "creature_specific_data_allowed": true,
     "creature_name_specific_engine_behavior_allowed": false
