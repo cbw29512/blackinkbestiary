@@ -53,7 +53,8 @@
     "provider": "ollama",
     "base_url": "http://127.0.0.1:11434",
     "model": "qwen3-vl:4b-instruct",
-    "required": true,
-    "max_refinement_passes": 4
+    "required": false,
+    "max_refinement_passes": 4,
+    "authority": "advisory"
   }
 }
