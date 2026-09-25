@@ -60,6 +60,11 @@ MANIFEST = PREVIEW_DIR / "manifest.json"
 QUALITY_CURRENT = PREVIEW_DIR / "quality-current.json"
 AUTOPILOT_HEARTBEAT_PREVIEW = PREVIEW_DIR / "autopilot-heartbeat.json"
 CANDIDATE_RE = re.compile(r"^(?P<page>.+)-C(?P<candidate>\d+)\.png$", re.IGNORECASE)
+REVIEWABLE_STATUSES = {
+    "awaiting_exact_image_review",
+    "ready_for_review",
+    "max_refinements_reached",
+}
 
 
 def run(*args: str) -> None:
@@ -104,7 +109,7 @@ def verdict_rank(verdict: dict) -> tuple:
 
 
 def current_reviewable_keys(state: dict) -> set[tuple[str, int]]:
-    allowed = {"ready_for_review", "max_refinements_reached"}
+    allowed = REVIEWABLE_STATUSES
     return {
         (str(item.get("page_id")), int(item.get("candidate") or 0))
         for item in state.get("results", [])
@@ -181,7 +186,7 @@ def main() -> int:
     restored = 0
     reviewable = [
         item for item in state.get("results", [])
-        if item.get("status") in {"ready_for_review", "max_refinements_reached"}
+        if str(item.get("status") or "") in REVIEWABLE_STATUSES
     ]
     for item in reviewable:
         page_id = str(item.get("page_id") or "")
@@ -248,13 +253,17 @@ def main() -> int:
             authority.get("review")
             and str(item.get("review_fingerprint") or "") == authority["review"]
         )
+        assistant = item.get("assistant_review") or {}
+        exact_assistant_approved = (
+            str(assistant.get("decision") or "").lower() in {"approve", "select"}
+            and str(assistant.get("review_id") or "") == exact_review_id
+        )
         selected = (
             int(selection.get("candidate") or 0) == candidate
             and str(selection.get("review_id") or "") == exact_review_id
-            and str(item.get("status") or "") == "ready_for_review"
-            and bool((item.get("visual_review") or {}).get("pass"))
+            and str(item.get("status") or "") in REVIEWABLE_STATUSES
+            and exact_assistant_approved
             and generation_authority_current
-            and review_authority_current
         )
         published.append({
             "review_id": exact_review_id,
@@ -299,7 +308,7 @@ def main() -> int:
     diagnostics = []
     for item in state.get("results", []):
         status = str(item.get("status") or "")
-        if status in {"ready_for_review", "max_refinements_reached"}:
+        if status in REVIEWABLE_STATUSES:
             continue
         diagnostics.append({
             "page_id": item.get("page_id"),
@@ -407,8 +416,10 @@ def main() -> int:
     )
 
     MANIFEST.write_text(json.dumps({
-        "schema_version": 5,
+        "schema_version": 6,
         "snapshot_engine_commit": engine_commit(),
+        "quality_contract_fingerprint": quality_snapshot.get("quality_contract_fingerprint"),
+        "quality_contract_version": quality_snapshot.get("quality_contract_version"),
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
         "quality_snapshot": "review-previews/quality-current.json",
