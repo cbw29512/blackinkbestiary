@@ -57,6 +57,8 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn('"comfy-stop"', launcher)
         self.assertIn('"comfy-fallback-launch"', launcher)
         self.assertIn("Invoke-BlackInkCommand", launcher)
+        self.assertIn("System.Diagnostics.ProcessStartInfo", helpers)
+        self.assertIn("RedirectStandardError", helpers)
         self.assertIn("ShellExecute", helpers)
         self.assertIn("Start-Process failed", helpers)
 

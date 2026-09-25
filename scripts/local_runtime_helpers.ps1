@@ -90,10 +90,34 @@ function Invoke-BlackInkCommand(
   [string]$FilePath,
   [string[]]$Arguments = @()
 ) {
-  $text = (& $FilePath @Arguments 2>&1 | Out-String).Trim()
-  return @{
-    exit_code = $LASTEXITCODE
-    output = $text
+  $quoted = @($Arguments | ForEach-Object {
+    '"' + ([string]$_).Replace('"', '\\"') + '"'
+  })
+
+  $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+  $startInfo.FileName = $FilePath
+  $startInfo.Arguments = ($quoted -join " ")
+  $startInfo.UseShellExecute = $false
+  $startInfo.RedirectStandardOutput = $true
+  $startInfo.RedirectStandardError = $true
+  $startInfo.CreateNoWindow = $true
+
+  $process = New-Object System.Diagnostics.Process
+  $process.StartInfo = $startInfo
+  try {
+    $null = $process.Start()
+    $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+    $stderrTask = $process.StandardError.ReadToEndAsync()
+    $process.WaitForExit()
+    $stdout = [string]$stdoutTask.Result
+    $stderr = [string]$stderrTask.Result
+    $combined = (($stdout.Trim(), $stderr.Trim()) | Where-Object { $_ }) -join [Environment]::NewLine
+    return @{
+      exit_code = $process.ExitCode
+      output = $combined
+    }
+  } finally {
+    $process.Dispose()
   }
 }
 
