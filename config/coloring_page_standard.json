@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "purpose": "Keep every Black-Ink page easy and satisfying to color: the creature is the first-read focal subject at its canonical scale and proportions, while an accurate varied environment frames and supports the story.",
   "benchmark_notes": [
     "Comparable bold-and-easy coloring books emphasize large, bold, simple designs and easy-to-color spaces.",
@@ -112,5 +112,13 @@
       "required story beat",
       "colorability"
     ]
+  },
+  "technical_qa": {
+    "line_art_luma": {
+      "dark_below": 80,
+      "white_above": 245,
+      "max_midtone_ratio": 0.2,
+      "failure_reason": "excessive_midtone_shading"
+    }
   }
 }
