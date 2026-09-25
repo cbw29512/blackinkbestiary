@@ -25,6 +25,29 @@ class GenerationLintTests(unittest.TestCase):
                 failures[page["page_id"]] = errors
         self.assertEqual(failures, {})
 
+    def test_every_tome_i_prompt_stays_within_target_budget(self):
+        standard = json.loads(
+            (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
+        )
+        target = int(standard["generation_prompt_budget"]["target_max_chars"])
+        oversized = {}
+        for page in self.pages:
+            prompt = build_prompt(page, candidate_no=1)
+            if len(prompt) > target:
+                oversized[page["page_id"]] = len(prompt)
+        self.assertEqual(oversized, {})
+
+    def test_generation_prompt_priority_order_is_identity_action_environment_style(self):
+        for page in self.pages:
+            prompt = build_prompt(page, candidate_no=1)
+            identity = prompt.index("IDENTITY — HIGHEST PRIORITY:")
+            action = prompt.index("ACTION — SECOND PRIORITY:")
+            environment = prompt.index("ENVIRONMENT — THIRD PRIORITY:")
+            style = prompt.index("BLACK-INK COLORABILITY LOCK:")
+            self.assertLess(identity, action, page["page_id"])
+            self.assertLess(action, environment, page["page_id"])
+            self.assertLess(environment, style, page["page_id"])
+
     def test_all_gpu_generation_entrypoints_invoke_pre_gpu_lint(self):
         required = (
             "scripts/generate_test_gallery.py",
