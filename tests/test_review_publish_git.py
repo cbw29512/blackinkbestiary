@@ -84,6 +84,10 @@ class ReviewPublishGitTests(unittest.TestCase):
                     "replication_readiness": 80.0,
                 },
                 "defect_counts": {"IDENTITY_HEROIC_BULK": 5},
+                "generation_efficiency": {
+                    "avg_gpu_attempts_per_page": 5.0,
+                    "semantic_yield_percent": 10.0,
+                },
             }
             (preview / "quality-history.jsonl").write_text(
                 json.dumps(history) + "\n",
@@ -99,6 +103,10 @@ class ReviewPublishGitTests(unittest.TestCase):
                     "replication_readiness": 85.0,
                 },
                 "defect_counts": {"IDENTITY_HEROIC_BULK": 2},
+                "generation_efficiency": {
+                    "avg_gpu_attempts_per_page": 3.5,
+                    "semantic_yield_percent": 20.0,
+                },
             }
             (preview / "quality-current.json").write_text(
                 json.dumps(current),
@@ -119,6 +127,18 @@ class ReviewPublishGitTests(unittest.TestCase):
             self.assertEqual(
                 trend["defect_comparisons"]["IDENTITY_HEROIC_BULK"]["trend"],
                 "improving",
+            )
+            self.assertEqual(
+                trend["efficiency_comparisons"]["avg_gpu_attempts_per_page"]["signed_delta"],
+                "-1.50",
+            )
+            self.assertEqual(
+                trend["efficiency_comparisons"]["avg_gpu_attempts_per_page"]["trend"],
+                "improving",
+            )
+            self.assertEqual(
+                trend["efficiency_comparisons"]["semantic_yield_percent"]["signed_delta"],
+                "+10.00",
             )
 
             changed = dict(current)

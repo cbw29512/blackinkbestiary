@@ -155,6 +155,47 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
     }
 
 
+def generation_efficiency(
+    state: dict,
+    canary_page_ids: list[str],
+    canary: dict | None = None,
+) -> dict:
+    current = current_page_records(state, canary_page_ids)
+    gpu_attempts = 0
+    refinement_passes = 0
+    max_refinement_pages = 0
+
+    for item in current:
+        history = item.get("pass_history") or []
+        attempts = len(history)
+        if attempts == 0 and str(item.get("status") or "") not in {"", "missing"}:
+            attempts = 1
+        gpu_attempts += attempts
+        refinement_passes += max(0, attempts - 1)
+        if str(item.get("status") or "") == "max_refinements_reached":
+            max_refinement_pages += 1
+
+    page_count = len(current)
+    metrics = canary or canary_metrics(state, canary_page_ids)
+    semantic_passes = int(metrics.get("semantic_passes") or 0)
+    all_passes = int(metrics.get("all_passes") or 0)
+
+    return {
+        "pages_considered": page_count,
+        "gpu_attempts": gpu_attempts,
+        "refinement_passes": refinement_passes,
+        "pages_at_max_refinements": max_refinement_pages,
+        "avg_gpu_attempts_per_page": (
+            round(gpu_attempts / page_count, 2) if page_count else None
+        ),
+        "gpu_attempts_per_semantic_pass": (
+            round(gpu_attempts / semantic_passes, 2) if semantic_passes else None
+        ),
+        "semantic_yield_percent": _pct(semantic_passes, gpu_attempts),
+        "all_gate_yield_percent": _pct(all_passes, gpu_attempts),
+    }
+
+
 def _generic_assembly_exists(root: Path) -> bool:
     candidates = (
         "art_pipeline/book_assembly.py",
@@ -247,7 +288,9 @@ def build_quality_snapshot(
     series = audit_series(root)
     active = audit_active_book(root)
     active_book_id = str(active.get("book_id") or "")
-    canary = canary_metrics(state, list(scorecard.get("canary_page_ids") or []))
+    canary_ids = list(scorecard.get("canary_page_ids") or [])
+    canary = canary_metrics(state, canary_ids)
+    efficiency = generation_efficiency(state, canary_ids, canary)
     print_report = print_package_report(root)
     replication = replication_report(root, series)
 
@@ -294,7 +337,6 @@ def build_quality_snapshot(
         })
 
     taxonomy = load_taxonomy(root / "config" / "defect_taxonomy.json")
-    canary_ids = list(scorecard.get("canary_page_ids") or [])
     current_records = current_page_records(state, canary_ids)
     historical_records = latest_records(state)
     defects = count_defects(current_records, taxonomy)
@@ -316,6 +358,7 @@ def build_quality_snapshot(
         "metrics": active_metrics,
         "overall_automated_readiness": (active_row or {}).get("overall_automated_readiness", 0.0),
         "canary": canary,
+        "generation_efficiency": efficiency,
         "books": books,
         "foundation_components": foundation_components,
         "print_package": print_report,

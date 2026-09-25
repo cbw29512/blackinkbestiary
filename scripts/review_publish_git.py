@@ -117,6 +117,7 @@ def append_quality_snapshot(root: Path) -> bool:
 
     comparisons = {}
     defect_comparisons = {}
+    efficiency_comparisons = {}
     if comparable:
         previous_metrics = previous.get("metrics") or {}
         for name, value in (current.get("metrics") or {}).items():
@@ -148,6 +149,38 @@ def append_quality_snapshot(root: Path) -> bool:
                 "lower_is_better": True,
             }
 
+        efficiency_polarity = {
+            "gpu_attempts": "lower",
+            "refinement_passes": "lower",
+            "pages_at_max_refinements": "lower",
+            "avg_gpu_attempts_per_page": "lower",
+            "gpu_attempts_per_semantic_pass": "lower",
+            "semantic_yield_percent": "higher",
+            "all_gate_yield_percent": "higher",
+        }
+        current_efficiency = current.get("generation_efficiency") or {}
+        previous_efficiency = previous.get("generation_efficiency") or {}
+        for name, polarity in efficiency_polarity.items():
+            now = current_efficiency.get(name)
+            old = previous_efficiency.get(name)
+            if not isinstance(now, (int, float)) or not isinstance(old, (int, float)):
+                continue
+            delta = round(float(now) - float(old), 2)
+            if delta == 0:
+                trend_name = "flat"
+            elif polarity == "higher":
+                trend_name = "improving" if delta > 0 else "regressing"
+            else:
+                trend_name = "improving" if delta < 0 else "regressing"
+            efficiency_comparisons[name] = {
+                "previous": old,
+                "current": now,
+                "delta": delta,
+                "signed_delta": f"{delta:+.2f}",
+                "trend": trend_name,
+                f"{polarity}_is_better": True,
+            }
+
     appended = not history or history[-1].get("measurement_fingerprint") != current.get("measurement_fingerprint")
     if appended:
         history.append(current)
@@ -172,6 +205,9 @@ def append_quality_snapshot(root: Path) -> bool:
         "previous_metrics": (previous or {}).get("metrics") or {},
         "comparisons": comparisons,
         "defect_comparisons": defect_comparisons,
+        "efficiency_comparisons": efficiency_comparisons,
+        "current_generation_efficiency": current.get("generation_efficiency") or {},
+        "previous_generation_efficiency": (previous or {}).get("generation_efficiency") or {},
         "current_defect_counts": current.get("defect_counts") or {},
         "current_historical_defect_counts": current.get("historical_defect_counts") or {},
         "previous_defect_counts": (previous or {}).get("defect_counts") or {},

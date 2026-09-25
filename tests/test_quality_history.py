@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from defect_taxonomy import classify_text, count_defects, load_taxonomy
-from quality_history import canary_metrics, current_page_records, quality_contract_fingerprint
+from quality_history import canary_metrics, current_page_records, generation_efficiency, quality_contract_fingerprint
 
 
 class QualityHistoryTests(unittest.TestCase):
@@ -58,6 +58,34 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(len(rows), 2)
         self.assertEqual(rows[0]["status"], "ready_for_review")
         self.assertEqual(rows[1]["status"], "technical_qa_failed")
+
+    def test_generation_efficiency_counts_current_gpu_work_only(self):
+        pages = ["A", "B"]
+        state = {"results": [
+            {
+                "page_id": "A",
+                "candidate": 1,
+                "status": "max_refinements_reached",
+                "pass_history": [{}, {}, {}],
+                "visual_review": {"stage": "quality", "pass": False},
+            },
+            {
+                "page_id": "B",
+                "candidate": 1,
+                "status": "ready_for_review",
+                "pass_history": [{}],
+                "visual_review": {"stage": "quality", "pass": True},
+                "assistant_review": {"decision": "approve"},
+            },
+        ]}
+        canary = canary_metrics(state, pages)
+        efficiency = generation_efficiency(state, pages, canary)
+        self.assertEqual(efficiency["gpu_attempts"], 4)
+        self.assertEqual(efficiency["refinement_passes"], 2)
+        self.assertEqual(efficiency["pages_at_max_refinements"], 1)
+        self.assertEqual(efficiency["avg_gpu_attempts_per_page"], 2.0)
+        self.assertEqual(efficiency["semantic_yield_percent"], 50.0)
+        self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
 
     def test_canary_metrics_use_fixed_denominator(self):
         pages = ["A", "B", "C"]
