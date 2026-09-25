@@ -51,6 +51,8 @@ If canonical small/tiny scale is not proved by nearby human-scale architecture/p
 If a small creature has adult-human heroic mass, broad chest, six-pack, thick shoulders, or oversized limbs, fail.
 If any page-specific prohibited look-alike or known drift is visibly present, fail.
 If any required limb/body structure is extra, missing, duplicated, merged, branched, or replaced by scenery, fail.
+COUNTABLE TOPOLOGY AUDIT: when a gate specifies an exact limb count, repeated appendage pattern, or one-pair-per-segment relationship, literally trace/count the visible structures. Do not assume hidden anatomy fixes a visible violation. If several visible segments lack required appendages, fail.
+SWARM COUNT AUDIT: when a gate gives an approximate visible population range, treat the upper bound as a hard visual limit. Estimate/count the visible members; if the image is clearly over the limit, has wallpaper density, or creates one giant leader, fail identity.
 If a collective/swarm page violates its page-specific scale/population rule, fail.
 
 DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases may be reported directly when visibly true.
@@ -211,8 +213,9 @@ Now red-team the actual image for any remaining production failure.
 
 Fail closed for: decorative/inset rectangular frames, wallpaper-density swarms, excessive repeated web/rat/detail patterns, clutter, tiny coloring cells, unreadable silhouette, malformed leftover anatomy, large black fills, grayscale/shading, weak negative space, or print-layout problems.
 Do not reward an attractive illustration if it would be tedious to color.
-For swarm pages, broad white gaps and controlled population are mandatory.
+For swarm pages, broad white gaps and controlled population are mandatory; clearly excessive visible members are an automatic fail even if each individual is recognizable.
 For web pages, webs must not become dense wallpaper that erases the environment.
+COLORING LOAD AUDIT: judge the whole page, not isolated objects. If repeated grids, webs, bricks, scales, fur marks, or many small creatures create tiny enclosed coloring cells across much of the page, fail for excessive line density even when the line art is technically clean.
 Pass only when there is no meaningful visible defect worth another edit.
 DEFECT WORDING RULE: describe the visible production failure in plain negative language. Never copy a positive quality requirement verbatim into defects.
 
