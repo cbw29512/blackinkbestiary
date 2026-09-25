@@ -87,7 +87,7 @@ def classify(
         return "needs_generation"
 
     status = str(item.get("status") or "")
-    if status in {"ready_for_review", "max_refinements_reached", "technical_qa_stalled"} and (
+    if status in {"awaiting_exact_image_review", "ready_for_review", "max_refinements_reached", "technical_qa_stalled"} and (
         not fingerprint_is_current or not review_fingerprint_is_current
     ):
         return "needs_generation"
@@ -95,7 +95,7 @@ def classify(
         return "awaiting_review"
     if status in RETRYABLE:
         return "needs_generation"
-    if status in {"ready_for_review", "max_refinements_reached"}:
+    if status in {"awaiting_exact_image_review", "ready_for_review", "max_refinements_reached"}:
         return "awaiting_review"
     return "needs_generation"
 
