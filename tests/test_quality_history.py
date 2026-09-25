@@ -174,6 +174,28 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertTrue(metrics["rows"][0]["technical_pass"])
         self.assertFalse(metrics["rows"][0]["review_pipeline_pass"])
 
+    def test_local_reviewer_pass_never_satisfies_authoritative_visual_or_semantic_metrics(self):
+        state = {
+            "results": [{
+                "page_id": "A",
+                "candidate": 1,
+                "status": "ready_for_review",
+                "visual_review": {
+                    "pass": True,
+                    "stage": "quality",
+                    "score": 95,
+                    "defects": [],
+                },
+            }]
+        }
+        metrics = canary_metrics(state, ["A"])
+        row = metrics["rows"][0]
+        self.assertTrue(row["local_visual_advisory_pass"])
+        self.assertFalse(row["visual_cleanliness_pass"])
+        self.assertFalse(row["semantic_accuracy_pass"])
+        self.assertEqual(metrics["visual_cleanliness"], 0.0)
+        self.assertEqual(metrics["semantic_accuracy"], 0.0)
+
     def test_generation_efficiency_counts_current_gpu_work_only(self):
         pages = ["A", "B"]
         state = {"results": [
@@ -331,7 +353,7 @@ class QualityHistoryTests(unittest.TestCase):
         ]}
         report = canary_metrics(state, pages)
         self.assertEqual(report["technical_qa"], 66.7)
-        self.assertEqual(report["visual_cleanliness"], 66.7)
+        self.assertEqual(report["visual_cleanliness"], 33.3)
         self.assertEqual(report["semantic_accuracy"], 33.3)
         self.assertEqual(report["all_automated_gates"], 33.3)
 
