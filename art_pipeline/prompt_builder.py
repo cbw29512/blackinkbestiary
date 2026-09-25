@@ -185,6 +185,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
         (
             "PAGE-EDGE LOCK — NON-NEGOTIABLE: draw only the scene itself on the white page. "
+            "Reserve the outer eight percent of the page on every side as completely blank white print margin: no creature anatomy, weapons, tails, wings, webs, masonry, rails, grates, props, borders, or stray linework may enter that zone. "
             "Never draw a decorative rectangular border, inset artwork frame, comic panel box, picture-frame line, or enclosing rectangle around the illustration. "
             "Architecture, webs, grates, rails, shelves, and masonry may form local straight lines, but they must not connect into a page-sized frame. "
             "Keep clean white print margins without outlining those margins."
