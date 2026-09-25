@@ -44,7 +44,7 @@ class SyncEngineForRunTests(unittest.TestCase):
                 "git",
                 "fetch",
                 "origin",
-                f"{sync.REVIEW_BRANCH}:refs/remotes/origin/{sync.REVIEW_BRANCH}",
+                f"+{sync.REVIEW_BRANCH}:refs/remotes/origin/{sync.REVIEW_BRANCH}",
             ),
             calls,
         )
