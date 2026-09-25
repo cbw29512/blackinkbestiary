@@ -273,7 +273,7 @@ class TestGalleryResumeTests(unittest.TestCase):
             state["results"].append({
                 "page_id": page_id,
                 "candidate": 1,
-                "status": "ready_for_review",
+                "status": "awaiting_exact_image_review",
                 "visual_review": {"score": 93, "defects": []},
             })
         summary = gallery.canary_summary(state)
