@@ -18,7 +18,7 @@ except ImportError:
     from prompt_builder import build_prompt
 
 ROOT = Path(__file__).resolve().parents[1]
-PROBE_SOURCE_PAGE_IDS = ("I-01", "I-16", "I-22")
+PROBE_PAGE_COUNT = 3
 
 
 def _read(path: Path) -> dict:
@@ -26,12 +26,42 @@ def _read(path: Path) -> dict:
 
 
 def _probe_source_pages(root: Path) -> list[dict]:
+    """Select representative source recipes generically, never by production page ID."""
     tome = _read(root / "data" / "tome-I.json")
-    by_id = {str(page.get("page_id")): page for page in tome.get("pages", [])}
-    missing = [page_id for page_id in PROBE_SOURCE_PAGE_IDS if page_id not in by_id]
-    if missing:
-        raise RuntimeError("replication probe source pages missing: " + ", ".join(missing))
-    return [deepcopy(by_id[page_id]) for page_id in PROBE_SOURCE_PAGE_IDS]
+    pages = sorted(
+        (page for page in tome.get("pages", []) if page.get("monster_spec_id")),
+        key=lambda page: int(page.get("order") or 0),
+    )
+    if len(pages) < PROBE_PAGE_COUNT:
+        raise RuntimeError(
+            f"replication probe needs at least {PROBE_PAGE_COUNT} ready source recipes"
+        )
+
+    selected = []
+    seen_shapes = set()
+    for page in pages:
+        shape = (
+            str(page.get("archetype") or ""),
+            str(page.get("environment_profile_id") or page.get("habitat") or ""),
+        )
+        if shape in seen_shapes:
+            continue
+        selected.append(deepcopy(page))
+        seen_shapes.add(shape)
+        if len(selected) == PROBE_PAGE_COUNT:
+            break
+
+    if len(selected) < PROBE_PAGE_COUNT:
+        selected_ids = {id(page) for page in selected}
+        for page in pages:
+            if len(selected) == PROBE_PAGE_COUNT:
+                break
+            # deepcopy makes object identity unusable across lists; compare source page IDs
+            if any(str(existing.get("page_id")) == str(page.get("page_id")) for existing in selected):
+                continue
+            selected.append(deepcopy(page))
+
+    return selected
 
 
 def run_replication_probe(root: Path = ROOT) -> dict:
@@ -107,7 +137,7 @@ def run_replication_probe(root: Path = ROOT) -> dict:
     return {
         "schema_version": 1,
         "probe_id": "synthetic-tome-ix-pre-gpu-v1",
-        "pages": len(PROBE_SOURCE_PAGE_IDS),
+        "pages": len(sources),
         "stages": stages,
         "pass": all(stages.values()) and not errors,
         "errors": errors,
