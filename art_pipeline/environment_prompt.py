@@ -69,6 +69,11 @@ def _required_object_rules(page: dict) -> list[str]:
         )
     return rules
 
+
+def required_object_rules(page: dict) -> list[str]:
+    """Public compact-prompt access to page-specific object/contact geometry."""
+    return list(_required_object_rules(page))
+
 def environment_priority_sections(page: dict, root: Path) -> list[str]:
     """Concise environment identity proof shown before detailed scene prose."""
     profile = load_environment_for_page(page)
