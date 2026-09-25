@@ -106,7 +106,7 @@ def build_learning_queue(records: list[dict], root: Path = ROOT) -> list[dict]:
     evidence: dict[str, Counter] = {}
     examples: dict[str, list[dict]] = {}
 
-    for record in records:
+    for record in learning_observations(records):
         page_id = str(record.get("page_id") or "")
         for code in record_defect_codes(record, taxonomy):
             if code == "UNCLASSIFIED":
