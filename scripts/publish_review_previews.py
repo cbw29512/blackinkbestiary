@@ -53,10 +53,12 @@ from studio_config import active_book_paths
 STATE = ROOT / "data" / "test-gallery-state.json"
 RUNTIME_STATUS = ROOT / "data" / "local-runtime-status.json"
 ENGINE_PREFLIGHT_STATUS = ROOT / "data" / "engine-preflight-status.json"
+AUTOPILOT_HEARTBEAT_STATUS = ROOT / "data" / "autopilot-heartbeat.json"
 SOURCE_DIR = ROOT / "web" / "test-gallery"
 PREVIEW_DIR = ROOT / "review-previews"
 MANIFEST = PREVIEW_DIR / "manifest.json"
 QUALITY_CURRENT = PREVIEW_DIR / "quality-current.json"
+AUTOPILOT_HEARTBEAT_PREVIEW = PREVIEW_DIR / "autopilot-heartbeat.json"
 CANDIDATE_RE = re.compile(r"^(?P<page>.+)-C(?P<candidate>\d+)\.png$", re.IGNORECASE)
 
 
@@ -343,6 +345,29 @@ def main() -> int:
             "visual_review": None,
         })
 
+    autopilot = None
+    if AUTOPILOT_HEARTBEAT_STATUS.exists():
+        try:
+            autopilot = json.loads(
+                AUTOPILOT_HEARTBEAT_STATUS.read_text(encoding="utf-8-sig")
+            )
+            AUTOPILOT_HEARTBEAT_PREVIEW.write_text(
+                json.dumps(autopilot, indent=2) + "\n",
+                encoding="utf-8",
+            )
+        except (OSError, json.JSONDecodeError) as exc:
+            autopilot = {
+                "schema_version": 1,
+                "phase": "heartbeat-read",
+                "status": "failed",
+                "message": f"Could not read autopilot heartbeat: {exc}",
+                "engine_commit": engine_commit(),
+            }
+            AUTOPILOT_HEARTBEAT_PREVIEW.write_text(
+                json.dumps(autopilot, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
     runtime = None
     if RUNTIME_STATUS.exists():
         try:
@@ -387,6 +412,7 @@ def main() -> int:
         "diagnostic_count": len(diagnostics),
         "quality_snapshot": "review-previews/quality-current.json",
         "runtime": runtime,
+        "autopilot": autopilot,
         "engine_preflight": engine_preflight,
         "selections": effective_selections,
         "candidates": published,

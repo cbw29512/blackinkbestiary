@@ -67,6 +67,19 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("ShellExecute", helpers)
         self.assertIn("Start-Process failed", helpers)
 
+    def test_autopilot_publishes_phase_heartbeat_before_gpu_work(self):
+        autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
+        heartbeat = (ROOT / "scripts" / "autopilot_heartbeat.py").read_text(encoding="utf-8")
+        publisher = (ROOT / "scripts" / "publish_review_previews.py").read_text(encoding="utf-8")
+
+        self.assertIn("autopilot_heartbeat.py generating", autopilot)
+        self.assertIn("Publishing pre-GPU heartbeat snapshot", autopilot)
+        self.assertIn("autopilot_heartbeat.py sleeping", autopilot)
+        self.assertIn("autopilot-heartbeat.json", heartbeat)
+        self.assertIn("engine_commit", heartbeat)
+        self.assertIn("autopilot-heartbeat.json", publisher)
+        self.assertIn('"autopilot": autopilot', publisher)
+
     def test_runtime_failures_are_published_for_remote_diagnosis(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         canary = (ROOT / "RUN_ENGINE_CANARY.bat").read_text(encoding="utf-8")
