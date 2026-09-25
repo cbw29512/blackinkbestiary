@@ -120,5 +120,11 @@
       "max_midtone_ratio": 0.2,
       "failure_reason": "excessive_midtone_shading"
     }
+  },
+  "generation_prompt_budget": {
+    "target_max_chars": 12000,
+    "hard_max_chars": 14000,
+    "hard_max_words": 2000,
+    "rule": "The full authority remains in data and review checklists; the image-model prompt must stay compact enough that anatomy, action, environment, and style priorities remain legible."
   }
 }
