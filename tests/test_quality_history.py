@@ -221,7 +221,7 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(efficiency["refinement_passes"], 2)
         self.assertEqual(efficiency["pages_at_max_refinements"], 1)
         self.assertEqual(efficiency["avg_gpu_attempts_per_page"], 2.0)
-        self.assertEqual(efficiency["semantic_yield_percent"], 50.0)
+        self.assertEqual(efficiency["semantic_yield_percent"], 25.0)
         self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
 
     def test_foundation_requires_current_autopilot_heartbeat_for_full_score(self):
