@@ -10,10 +10,26 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from page_contract import resolve_page_spec
+from studio_config import active_book_paths
 STATE = ROOT / "data" / "test-gallery-state.json"
-CANARY_PAGE_IDS = (
-    "I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22",
-)
+QUALITY_SCORECARD = ROOT / "config" / "quality_scorecard.json"
+
+
+def configured_canary_page_ids(root: Path = ROOT) -> tuple[str, ...]:
+    config = json.loads((root / "config" / "quality_scorecard.json").read_text(encoding="utf-8"))
+    page_ids = tuple(
+        str(page_id).strip()
+        for page_id in config.get("canary_page_ids") or []
+        if str(page_id).strip()
+    )
+    if not page_ids:
+        raise RuntimeError("quality scorecard must declare canary_page_ids")
+    if len(page_ids) != len(set(page_ids)):
+        raise RuntimeError("quality scorecard canary_page_ids must be unique")
+    return page_ids
+
+
+CANARY_PAGE_IDS = configured_canary_page_ids()
 
 RETRYABLE = {
     "failed",
@@ -105,11 +121,13 @@ def classify(
 
 
 def load_canary_pages(root: Path = ROOT) -> dict[str, dict]:
-    tome = json.loads((root / "data" / "tome-I.json").read_text(encoding="utf-8"))
+    canary_page_ids = configured_canary_page_ids(root)
+    manifest_path = active_book_paths(root)["manifest"]
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     return {
         str(page.get("page_id")): resolve_page_spec(page, root)
-        for page in tome.get("pages", [])
-        if page.get("page_id") in CANARY_PAGE_IDS
+        for page in manifest.get("pages", [])
+        if page.get("page_id") in canary_page_ids
     }
 
 
