@@ -143,10 +143,10 @@ def environment_compact_sections(page: dict, root: Path) -> list[str]:
         f"SPACE CEILING / OVERHEAD: {envelope.get('ceiling', '')}.",
         _items("SPACE MUST SHOW", envelope.get("must_show")),
         _items("SPACE DRIFT FAILURES", envelope.get("must_not_drift")),
-        _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", load_environment_contract().get("prompt_rules")),
+        _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", (load_environment_contract().get("prompt_rules") or [])[:4]),
         _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
         *component_lines,
-        _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules),
+        _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules[:3]),
         _items("REQUIRED OBJECT PHYSICAL RULES", _required_object_rules(page)),
         (
             "ENVIRONMENT PALETTE RULE: selected components are a small compatible palette, not permission to clutter the page; "
