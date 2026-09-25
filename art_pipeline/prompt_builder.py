@@ -312,12 +312,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
     ]
 
-    sections.append(
-        format_page_verification_checklist(
-            page,
-            stages=("identity", "quality") if identity_focus_mode else None,
-        )
-    )
+    sections.append(format_generation_self_check(identity_focus_mode))
 
     if candidate_no is not None:
         escape_offset = int((review_notes or {}).get("composition_escape_offset") or 0)
@@ -488,3 +483,19 @@ def format_page_verification_checklist(
         lines.append(stage.upper() + ":")
         lines.extend(f"- {item}" for item in checklist[stage])
     return "\n".join(lines)
+
+
+def format_generation_self_check(identity_focus_mode: bool = False) -> str:
+    if identity_focus_mode:
+        return (
+            "GENERATION SELF-CHECK — IDENTITY RECOVERY: before finalizing, verify exact species silhouette, canonical body mass, exact limb topology, "
+            "correct size evidence, simple open line art, and clean white print margins. Do not add scene complexity until identity is correct."
+        )
+    return (
+        "GENERATION SELF-CHECK — BEFORE FINALIZING: "
+        "IDENTITY: exact species silhouette, body mass, limb topology, and canonical size; "
+        "ENVIRONMENT: the selected habitat and unique landmark read through large structural forms; "
+        "ACTION: the required verb/contact/cause-and-effect is visibly clear; "
+        "QUALITY: broad white coloring regions, simple line density, no grayscale/color contamination, and blank print-safe margins. "
+        "The downstream reviewer will enforce the complete resolved checklist."
+    )
