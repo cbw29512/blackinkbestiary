@@ -47,7 +47,7 @@ def sync_review_decisions() -> bool:
             "git",
             "fetch",
             "origin",
-            f"{REVIEW_BRANCH}:refs/remotes/origin/{REVIEW_BRANCH}",
+            f"+{REVIEW_BRANCH}:refs/remotes/origin/{REVIEW_BRANCH}",
         )
         payload = output("git", "show", f"{remote_ref}:{DECISIONS_RELATIVE}")
         parsed = json.loads(payload)
