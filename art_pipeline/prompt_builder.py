@@ -277,6 +277,13 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 7),
         _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
     ]
+    creature_type = str(spec.get("creature_type") or "").lower()
+    if size in {"tiny", "small"} and "humanoid" in creature_type:
+        identity_lines.append(
+            "SMALL-HUMANOID SCALE EVIDENCE — NON-NEGOTIABLE: ordinary human-scale architecture must prove the size; "
+            "the creature should read roughly one-third to one-half of a normal doorway/corridor opening, with smaller hands, feet, shoulders, and gear."
+        )
+
     for key, label in (
         ("positive", "MODEL PRIORITY CAPSULE — READ BEFORE STYLE OR SCENERY"),
         ("negative", "MODEL PRIORITY NEGATIVE LOCK — NON-NEGOTIABLE"),
