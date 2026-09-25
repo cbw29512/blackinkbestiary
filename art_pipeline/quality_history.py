@@ -25,9 +25,13 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 
-TECHNICAL_FAILURE_STATUSES = {
+IMAGE_TECHNICAL_FAILURE_STATUSES = {
     "technical_qa_failed",
     "technical_qa_stalled",
+    "failed",
+}
+
+REVIEW_PIPELINE_FAILURE_STATUSES = {
     "vision_reviewer_failed",
     "failed",
 }
@@ -147,7 +151,7 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
         for item in current_page_records(state, canary_page_ids)
     }
     rows = []
-    technical_passes = visual_passes = semantic_passes = all_passes = 0
+    technical_passes = review_pipeline_passes = visual_passes = semantic_passes = all_passes = 0
 
     for page_id in canary_page_ids:
         item = current.get(page_id) or {}
@@ -155,7 +159,8 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
         visual = item.get("visual_review") or {}
         assistant = item.get("assistant_review") or {}
 
-        technical = bool(item) and status not in TECHNICAL_FAILURE_STATUSES
+        technical = bool(item) and status not in IMAGE_TECHNICAL_FAILURE_STATUSES
+        review_pipeline = bool(item) and status not in REVIEW_PIPELINE_FAILURE_STATUSES
         visual_clean = bool(visual.get("pass"))
 
         decision = str(assistant.get("decision") or "").strip().lower()
@@ -166,6 +171,7 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
 
         passes_all = technical and visual_clean and semantic
         technical_passes += int(technical)
+        review_pipeline_passes += int(review_pipeline)
         visual_passes += int(visual_clean)
         semantic_passes += int(semantic)
         all_passes += int(passes_all)
@@ -173,6 +179,7 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
             "page_id": page_id,
             "status": status,
             "technical_pass": technical,
+            "review_pipeline_pass": review_pipeline,
             "visual_cleanliness_pass": visual_clean,
             "semantic_accuracy_pass": semantic,
             "all_automated_gates_pass": passes_all,
@@ -185,10 +192,12 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
     return {
         "total": total,
         "technical_passes": technical_passes,
+        "review_pipeline_passes": review_pipeline_passes,
         "visual_passes": visual_passes,
         "semantic_passes": semantic_passes,
         "all_passes": all_passes,
         "technical_qa": _pct(technical_passes, total),
+        "review_pipeline_health": _pct(review_pipeline_passes, total),
         "visual_cleanliness": _pct(visual_passes, total),
         "semantic_accuracy": _pct(semantic_passes, total),
         "all_automated_gates": _pct(all_passes, total),
@@ -384,6 +393,7 @@ def build_quality_snapshot(
         metrics = {
             "foundation_readiness": float(foundation),
             "technical_qa_pass_rate": canary["technical_qa"] if is_active else 0.0,
+            "review_pipeline_health": canary["review_pipeline_health"] if is_active else 0.0,
             "visual_cleanliness": canary["visual_cleanliness"] if is_active else 0.0,
             "semantic_accuracy": canary["semantic_accuracy"] if is_active else 0.0,
             "completeness": completeness,
