@@ -18,6 +18,29 @@ class CanaryAutopilotStatusTests(unittest.TestCase):
         self.assertEqual(status.classify({"status": "ready_for_review"}), "awaiting_review")
         self.assertEqual(status.classify({"status": "max_refinements_reached"}), "awaiting_review")
 
+    def test_explicit_exact_image_waiting_state_ignores_advisory_review_drift(self):
+        item = {
+            "status": "awaiting_exact_image_review",
+            "generation_fingerprint": "gen-current",
+            "review_fingerprint": "review-old",
+        }
+        self.assertEqual(
+            status.classify(
+                item,
+                current_generation_fingerprint="gen-current",
+                current_review_fingerprint="review-new",
+            ),
+            "awaiting_review",
+        )
+        self.assertEqual(
+            status.classify(
+                item,
+                current_generation_fingerprint="gen-new",
+                current_review_fingerprint="review-new",
+            ),
+            "needs_generation",
+        )
+
     def test_exact_image_reject_reopens_generation(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
