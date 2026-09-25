@@ -153,6 +153,29 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("page-specific prohibited look-alike or known drift", prompt)
         self.assertIn("Reject identity drift:", prompt)
 
+    def test_identity_gate_requires_literal_topology_and_swarm_count_audits(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        centipede = next(item for item in tome["pages"] if item["page_id"] == "I-20")
+        rats = next(item for item in tome["pages"] if item["page_id"] == "I-19")
+
+        centipede_prompt = vr.build_identity_review_prompt(centipede)
+        rat_prompt = vr.build_identity_review_prompt(rats)
+
+        self.assertIn("COUNTABLE TOPOLOGY AUDIT", centipede_prompt)
+        self.assertIn("one-pair-per-segment", centipede_prompt)
+        self.assertIn("SWARM COUNT AUDIT", rat_prompt)
+        self.assertIn("upper bound as a hard visual limit", rat_prompt)
+        self.assertIn("wallpaper density", rat_prompt)
+
+    def test_quality_gate_rejects_page_wide_micro_pattern_load(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        rats = next(item for item in tome["pages"] if item["page_id"] == "I-19")
+        prompt = vr.build_review_prompt(rats)
+        self.assertIn("COLORING LOAD AUDIT", prompt)
+        self.assertIn("repeated grids", prompt)
+        self.assertIn("excessive line density", prompt)
+        self.assertIn("clearly excessive visible members are an automatic fail", prompt)
+
     def test_identity_failure_stops_before_quality_review(self):
         verdict = {
             "pass": False,
