@@ -93,7 +93,7 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
         # Match semantic terms as whole tokens/phrases. Short anatomy words such
         # as "ape", "arm", and "ear" must not fire inside unrelated words such
         # as "wallpaper", "farm", or "clear".
-        return bool(re.search(r"(?<!\\w)" + re.escape(term) + r"(?!\\w)", notes))
+        return bool(re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", notes))
 
     # Structural identity must be repaired first. Then setting geometry, then
     # action/contact, then print-quality cleanup.
