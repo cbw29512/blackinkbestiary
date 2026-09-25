@@ -9,12 +9,14 @@ from pathlib import Path
 try:
     from .defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from .learning_feedback import build_learning_queue
+    from .master_engine_guard import audit_master_engine_separation
     from .production_audit import audit_active_book
     from .replication_probe import run_replication_probe
     from .series_readiness import audit_series
 except ImportError:
     from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from learning_feedback import build_learning_queue
+    from master_engine_guard import audit_master_engine_separation
     from production_audit import audit_active_book
     from replication_probe import run_replication_probe
     from series_readiness import audit_series
@@ -284,6 +286,7 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "config/universal_story_contract.json",
     )
     probe = run_replication_probe(root)
+    separation = audit_master_engine_separation(root)
     components = {
         "universal_contracts": all((root / path).exists() for path in contracts),
         "generic_book_scaffolding": (root / "scripts" / "scaffold_book.py").exists() and (root / "art_pipeline" / "book_scaffold.py").exists(),
@@ -293,6 +296,7 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "generic_assembly_pipeline": _generic_assembly_exists(root),
         "synthetic_replication_test": (root / "tests" / "test_replication_readiness.py").exists(),
         "synthetic_pipeline_probe": bool(probe.get("pass")),
+        "master_engine_data_separation": bool(separation.get("pass")),
     }
     weights = {
         "universal_contracts": 15,
@@ -302,13 +306,15 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "future_book_plans": 5,
         "generic_assembly_pipeline": 15,
         "synthetic_replication_test": 5,
-        "synthetic_pipeline_probe": 35,
+        "synthetic_pipeline_probe": 25,
+        "master_engine_data_separation": 10,
     }
     score = sum(weights[name] for name, passed in components.items() if passed)
     return {
         "score": score,
         "components": components,
         "synthetic_pipeline_probe": probe,
+        "master_engine_data_separation": separation,
     }
 
 

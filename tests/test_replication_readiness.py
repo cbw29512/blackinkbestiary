@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from book_scaffold import build_book_plan, build_book_record
+from master_engine_guard import audit_master_engine_separation
 from replication_probe import run_replication_probe
 from series_readiness import audit_series
 
@@ -28,6 +29,11 @@ class ReplicationReadinessTests(unittest.TestCase):
         self.assertEqual(book["monster_contract"], "config/universal_monster_contract.json")
         self.assertEqual(book["environment_contract"], "config/universal_environment_contract.json")
         self.assertEqual(book["story_contract"], "config/universal_story_contract.json")
+
+    def test_master_engine_has_no_monster_or_page_special_cases(self):
+        report = audit_master_engine_separation(ROOT)
+        self.assertTrue(report["pass"], report["violations"])
+        self.assertEqual(report["engine_scope"], "art_pipeline/*.py")
 
     def test_synthetic_runtime_probe_reaches_pre_gpu_boundary(self):
         report = run_replication_probe(ROOT)
