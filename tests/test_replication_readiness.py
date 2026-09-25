@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from book_scaffold import build_book_plan, build_book_record
-from master_engine_guard import audit_master_engine_separation
+from master_engine_guard import audit_master_engine_separation, audit_replication_orchestration
 from replication_probe import run_replication_probe
 from series_readiness import audit_series
 
@@ -34,6 +34,13 @@ class ReplicationReadinessTests(unittest.TestCase):
         report = audit_master_engine_separation(ROOT)
         self.assertTrue(report["pass"], report["violations"])
         self.assertEqual(report["engine_scope"], "art_pipeline/*.py")
+
+    def test_replication_orchestration_has_no_production_book_or_page_literals(self):
+        report = audit_replication_orchestration(ROOT)
+        self.assertTrue(report["pass"], report["violations"])
+        self.assertIn("scripts/generate_test_gallery.py", report["orchestration_scope"])
+        self.assertIn("scripts/canary_autopilot_status.py", report["orchestration_scope"])
+        self.assertIn("scripts/run_coloring_book.ps1", report["orchestration_scope"])
 
     def test_synthetic_runtime_probe_reaches_pre_gpu_boundary(self):
         report = run_replication_probe(ROOT)
