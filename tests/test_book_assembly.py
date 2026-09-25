@@ -1,6 +1,7 @@
 import struct
 import tempfile
 import unittest
+from unittest.mock import patch
 import zlib
 from pathlib import Path
 import sys
@@ -8,7 +9,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from book_assembly import assemble_pdf, locked_page_paths
+from book_assembly import assemble_pdf, binding_side_for_page, locked_page_paths
 
 
 def _chunk(kind: bytes, data: bytes) -> bytes:
@@ -52,6 +53,47 @@ class BookAssemblyTests(unittest.TestCase):
             self.assertTrue(payload.startswith(b"%PDF-1.4"))
             self.assertIn(b"/Count 2", payload)
             self.assertIn(b"/MediaBox [0 0 612 792]", payload)
+
+    def test_binding_side_alternates_for_interior_pages(self):
+        self.assertEqual(binding_side_for_page(1), "left")
+        self.assertEqual(binding_side_for_page(2), "right")
+        self.assertEqual(binding_side_for_page(3), "left")
+        self.assertEqual(binding_side_for_page(4), "right")
+
+    def test_locked_page_gate_passes_page_specific_binding_side_to_kdp_qa(self):
+        manifest = {
+            "total_pages": 2,
+            "pages": [
+                {"page_id": "X-01", "order": 1},
+                {"page_id": "X-02", "order": 2},
+            ],
+        }
+        state = {
+            "pages": {
+                "X-01": {
+                    "status": "locked",
+                    "approved_image_path": "approved/one.png",
+                },
+                "X-02": {
+                    "status": "locked",
+                    "approved_image_path": "approved/two.png",
+                },
+            }
+        }
+        calls = []
+
+        def fake_inspect(path, *, binding_side=None):
+            calls.append((Path(path).name, binding_side))
+            return {"pass": True, "reasons": []}
+
+        with tempfile.TemporaryDirectory() as td, patch(
+            "book_assembly.inspect_kdp_export",
+            side_effect=fake_inspect,
+        ):
+            paths = locked_page_paths(Path(td), manifest, state)
+
+        self.assertEqual(len(paths), 2)
+        self.assertEqual(calls, [("one.png", "left"), ("two.png", "right")])
 
     def test_locked_book_gate_rejects_unlocked_page_before_pdf_work(self):
         manifest = {
