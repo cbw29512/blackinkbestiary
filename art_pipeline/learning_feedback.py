@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from collections import Counter
 from pathlib import Path
 
@@ -9,6 +10,62 @@ except ImportError:
     from defect_taxonomy import load_taxonomy, record_defect_codes, taxonomy_labels
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _production_page_families(root: Path) -> dict[str, str]:
+    series = json.loads((root / "data" / "series.json").read_text(encoding="utf-8"))
+    book = next(
+        (
+            row for row in series.get("books", [])
+            if str(row.get("status") or "").lower() == "production"
+        ),
+        None,
+    )
+    if not book:
+        return {}
+    manifest_path = root / str(book.get("manifest_path") or "")
+    if not manifest_path.exists():
+        return {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    result = {}
+    for page in manifest.get("pages", []):
+        page_id = str(page.get("page_id") or "")
+        spec_id = str(page.get("monster_spec_id") or "")
+        if not page_id or not spec_id:
+            continue
+        spec_path = root / "data" / "monsters" / f"{spec_id}.json"
+        if not spec_path.exists():
+            continue
+        spec = json.loads(spec_path.read_text(encoding="utf-8"))
+        family = str(
+            spec.get("family_profile")
+            or spec.get("family")
+            or spec.get("monster_id")
+            or spec_id
+        )
+        result[page_id] = family
+    return result
+
+
+def _evidence_text(record: dict) -> list[str]:
+    visual = record.get("visual_review") or {}
+    defects = [
+        str(value).strip()
+        for value in visual.get("defects") or []
+        if str(value).strip()
+    ]
+    if defects:
+        return defects
+    assistant = record.get("assistant_review") or {}
+    notes = str(assistant.get("notes") or "").strip()
+    if notes:
+        return [notes]
+    error = str(record.get("error") or "").strip()
+    if error:
+        return [error]
+    status = str(record.get("status") or "").strip()
+    return [status] if status else []
+
 
 SCOPE_RULES = {
     "IDENTITY_LIMB_COUNT": {
@@ -104,7 +161,9 @@ def build_learning_queue(records: list[dict], root: Path = ROOT) -> list[dict]:
     taxonomy = load_taxonomy(root / "config" / "defect_taxonomy.json")
     labels = taxonomy_labels(taxonomy)
     evidence: dict[str, Counter] = {}
+    family_evidence: dict[str, set[str]] = {}
     examples: dict[str, list[dict]] = {}
+    page_families = _production_page_families(root)
 
     for record in learning_observations(records):
         page_id = str(record.get("page_id") or "")
@@ -113,13 +172,16 @@ def build_learning_queue(records: list[dict], root: Path = ROOT) -> list[dict]:
                 continue
             evidence.setdefault(code, Counter())
             evidence[code][page_id or "<unknown>"] += 1
+            family = page_families.get(page_id)
+            if family:
+                family_evidence.setdefault(code, set()).add(family)
             examples.setdefault(code, []).append({
                 "page_id": page_id,
                 "candidate": record.get("candidate"),
                 "pass": record.get("pass"),
                 "evidence_source": record.get("evidence_source"),
                 "stage": (record.get("visual_review") or {}).get("stage"),
-                "defects": list((record.get("visual_review") or {}).get("defects") or []),
+                "evidence_text": _evidence_text(record),
             })
 
     queue = []
@@ -127,13 +189,23 @@ def build_learning_queue(records: list[dict], root: Path = ROOT) -> list[dict]:
         rule = SCOPE_RULES.get(code, {"scopes": ["review_only"]})
         total = sum(pages.values())
         distinct_pages = len(pages)
+        distinct_families = len(family_evidence.get(code) or set())
+        scopes = list(rule.get("scopes") or [])
+        master_lesson = rule.get("master_lesson")
+        if distinct_families >= 3 and "master_engine" not in scopes:
+            scopes.append("master_engine")
+            master_lesson = master_lesson or (
+                "This defect now spans multiple monster families; inspect and strengthen "
+                "the universal generation/review contract while preserving family-specific data."
+            )
         queue.append({
             "defect_code": code,
             "label": (labels.get(code) or {}).get("label"),
             "evidence_count": total,
             "distinct_pages": distinct_pages,
-            "scope": list(rule.get("scopes") or []),
-            "master_engine_lesson": rule.get("master_lesson"),
+            "distinct_families": distinct_families,
+            "scope": scopes,
+            "master_engine_lesson": master_lesson,
             "monster_family_lesson": rule.get("monster_lesson"),
             "page_recipe_lesson": rule.get("page_lesson"),
             "priority": "high" if distinct_pages >= 2 or total >= 3 else "normal",
