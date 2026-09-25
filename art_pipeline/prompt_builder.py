@@ -287,6 +287,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
     ]
 
+    sections.append(format_page_verification_checklist(page))
+
     if candidate_no is not None:
         escape_offset = int((review_notes or {}).get("composition_escape_offset") or 0)
         variant_index = (candidate_no - 1 + escape_offset) % len(CANDIDATE_COMPOSITIONS)
@@ -363,38 +365,83 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
 
 
 
-def build_supervisor_checklist(page: dict) -> list[str]:
+def build_page_verification_checklist(page: dict) -> dict[str, list[str]]:
+    """Canonical checklist shared by generation and every review gate."""
     page = resolve_page_spec(page, ROOT)
     spec = load_monster_spec(page)
+    visual = (spec or {}).get("visual_identity") or {}
     subject_check = (
         "Swarm reads as one controlled collective subject with clear directional flow, broad negative-space gaps, and no oversized leader"
         if _is_swarm(page, spec)
         else "Monster is visually dominant through framing while preserving canonical size, body mass, and species proportions"
     )
-    checks = [
+
+    identity = [
         f"Clearly recognizable as {page['monster_name']}",
-        f"Habitat reads as: {page['habitat']}",
-        f"Scene moment reads as: {page['moment']}",
         f"Canonical scale reads as: {str((spec or {}).get('size') or '').lower()} — {page.get('subject_scale_rule', '')}",
-        f"Canonical body plan reads as: {((spec or {}).get('visual_identity') or {}).get('silhouette', '')}; limbs: {((spec or {}).get('visual_identity') or {}).get('limb_structure', '')}",
-        f"Shape-first body geometry reads as: {((spec or {}).get('visual_identity') or {}).get('shape_lock', '')}" if str(((spec or {}).get("visual_identity") or {}).get("shape_lock") or "").strip() else "",
+        f"Canonical body plan reads as: {visual.get('silhouette', '')}; limbs: {visual.get('limb_structure', '')}",
+        f"Shape-first body geometry reads as: {visual.get('shape_lock', '')}" if str(visual.get("shape_lock") or "").strip() else "",
         subject_check,
+    ]
+    if spec:
+        identity.extend(f"Identity check: {item}" for item in spec.get("accuracy_checks", []))
+        identity.extend(
+            f"Reject identity drift: {item.get('symptom')}"
+            for item in spec.get("known_failure_modes", [])
+            if item.get("symptom")
+        )
+
+    environment = [f"Habitat reads as: {page['habitat']}"]
+    environment.extend(environment_checklist(page, ROOT))
+
+    action = [f"Scene moment reads as: {page['moment']}"]
+    action.extend(story_checklist(page, ROOT))
+    action.extend(physicality_checklist(page))
+    for item in page.get("must_include", []):
+        action.append(f"Required element present: {item}")
+
+    quality = [
         "Large open white coloring regions",
         "Outer contours stronger than interior detail",
         "No grayscale wash or painterly shading",
         "No dense crosshatching or excessive tiny texture",
         "No text, logo, or watermark; no decorative rectangular artwork frame or inset picture box; only normal blank page margins",
+        "Outer print-safe margin remains blank white",
+        "No accidental RGB/color contamination",
     ]
-    checks.extend(environment_checklist(page, ROOT))
-    checks.extend(story_checklist(page, ROOT))
-    checks.extend(physicality_checklist(page))
-    if spec:
-        checks.extend(f"Identity check: {item}" for item in spec.get("accuracy_checks", []))
-        checks.extend(
-            f"Reject identity drift: {item.get('symptom')}"
-            for item in spec.get("known_failure_modes", [])
-            if item.get("symptom")
-        )
-    for item in page.get("must_include", []):
-        checks.append(f"Required element present: {item}")
-    return checks
+
+    def clean(values):
+        result = []
+        seen = set()
+        for value in values:
+            item = str(value or "").strip()
+            if not item or item in seen:
+                continue
+            seen.add(item)
+            result.append(item)
+        return result
+
+    return {
+        "identity": clean(identity),
+        "environment": clean(environment),
+        "action": clean(action),
+        "quality": clean(quality),
+    }
+
+
+def build_supervisor_checklist(page: dict) -> list[str]:
+    checklist = build_page_verification_checklist(page)
+    return [
+        item
+        for stage in ("identity", "environment", "action", "quality")
+        for item in checklist[stage]
+    ]
+
+
+def format_page_verification_checklist(page: dict) -> str:
+    checklist = build_page_verification_checklist(page)
+    lines = ["MANDATORY PAGE VERIFICATION CHECKLIST — EVERY ITEM MUST PASS:"]
+    for stage in ("identity", "environment", "action", "quality"):
+        lines.append(stage.upper() + ":")
+        lines.extend(f"- {item}" for item in checklist[stage])
+    return "\n".join(lines)

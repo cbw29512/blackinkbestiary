@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from defect_taxonomy import classify_text, count_defects, load_taxonomy
+from learning_feedback import build_learning_queue
 from quality_history import canary_metrics, current_page_records, evaluate_readiness, generation_efficiency, quality_contract_fingerprint
 
 
@@ -41,6 +42,22 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(counts["TECH_SAFE_MARGIN"], 1)
         self.assertEqual(counts["SWARM_WALLPAPER"], 1)
         self.assertEqual(counts["SWARM_OVERSIZED_LEADER"], 1)
+
+    def test_learning_queue_scopes_limb_failure_to_master_and_monster(self):
+        records = [{
+            "page_id": "I-04",
+            "visual_review": {
+                "stage": "identity",
+                "defects": ["goblin has an extra third arm"],
+            },
+        }]
+        queue = build_learning_queue(records, ROOT)
+        item = next(row for row in queue if row["defect_code"] == "IDENTITY_LIMB_COUNT")
+        self.assertIn("master_engine", item["scope"])
+        self.assertIn("monster_family", item["scope"])
+        self.assertFalse(item["auto_apply"])
+        self.assertIn("exact topology", item["master_engine_lesson"])
+        self.assertIn("appendage drift", item["monster_family_lesson"])
 
     def test_current_page_records_ignore_stale_historical_candidates(self):
         state = {

@@ -1,24 +1,11 @@
 from __future__ import annotations
 
-from prompt_builder import build_supervisor_checklist
+from prompt_builder import build_page_verification_checklist
 
 
-def _checks(page: dict) -> list[str]:
-    # Keep the small local VLM focused: universal/page/environment layers may
-    # produce the same gate more than once. Exact duplicates add token pressure
-    # without adding evidence, so preserve first occurrence only.
-    seen = set()
-    unique = []
-    for item in build_supervisor_checklist(page):
-        text = str(item or "").strip()
-        if not text or text in seen:
-            continue
-        seen.add(text)
-        unique.append(text)
-    return unique
-
-
-def _require_selected(page: dict, stage: str, selected: list[str]) -> list[str]:
+def _checks(page: dict, stage: str) -> list[str]:
+    checklist = build_page_verification_checklist(page)
+    selected = list(checklist.get(stage) or [])
     if not selected:
         raise RuntimeError(
             f"{page.get('page_id')}: {stage} vision gate has no concrete review checks"
@@ -27,21 +14,7 @@ def _require_selected(page: dict, stage: str, selected: list[str]) -> list[str]:
 
 
 def build_identity_review_prompt(page: dict) -> str:
-    checks = _checks(page)
-    prefixes = (
-        "Clearly recognizable as ",
-        "Canonical scale reads as:",
-        "Canonical body plan reads as:",
-        "Shape-first body geometry reads as:",
-        "Identity check:",
-        "Reject identity drift:",
-        "Swarm reads as ",
-    )
-    selected = _require_selected(
-        page,
-        "identity",
-        [item for item in checks if item.startswith(prefixes)],
-    )
+    selected = _checks(page, "identity")
     return """You are the Black-Ink Bestiary IDENTITY AND ANATOMY GATE.
 Inspect only what is visibly present in the image. Do not trust the requested creature name as evidence.
 
@@ -67,27 +40,7 @@ IDENTITY GATES:
 
 
 def build_environment_review_prompt(page: dict) -> str:
-    checks = _checks(page)
-    prefixes = (
-        "Habitat reads as:",
-        "Environment matches profile:",
-        "Spatial type reads without the monster:",
-        "Material language is visible:",
-        "At least one unmistakable location marker is visible:",
-        "Spatial geometry reads correctly:",
-        "Space envelope matches:",
-        "Space proportions read correctly:",
-        "Space overhead/ceiling reads correctly:",
-        "Space does not drift into:",
-        "Unique landmark is visible:",
-        "Framing differs from repeated generic backgrounds:",
-        "Environment geometry differs meaningfully from nearby pages",
-    )
-    selected = _require_selected(
-        page,
-        "environment",
-        [item for item in checks if item.startswith(prefixes)],
-    )
+    selected = _checks(page, "environment")
     return """You are the Black-Ink Bestiary ENVIRONMENT GEOMETRY GATE.
 Inspect only the visible setting. Ignore creature beauty and action quality except where creature scale proves the space.
 
@@ -107,34 +60,7 @@ ENVIRONMENT GATES:
 
 
 def build_action_review_prompt(page: dict) -> str:
-    checks = _checks(page)
-    prefixes = (
-        "Scene moment reads as:",
-        "Required element present:",
-        "Physical state reads as:",
-        "Support/contact is visible and believable:",
-        "Motion/weight reads correctly:",
-        "Mode-specific contact geometry reads correctly:",
-        "Monster/environment interaction reads clearly:",
-        "One clear story beat reads as:",
-        "Environment participates through:",
-        "Interaction proof is visible:",
-        "Body language communicates the action without needing the caption",
-        "The page does not read as a neutral portrait or prop-holding pose",
-        "What single verb describes what the monster is doing?",
-        "Can that action be identified without reading the caption?",
-        "Does at least one environment feature participate?",
-        "Does the pose remain stable and easy to color?",
-        "Would removing the prop destroy the entire story read?",
-        "Controlled powered flight allowed by monster data:",
-        "Pose is stable, natural, and easy to read in a static coloring page",
-        "No jumping, falling, dropping, or accidental hovering",
-    )
-    selected = _require_selected(
-        page,
-        "action",
-        [item for item in checks if item.startswith(prefixes)],
-    )
+    selected = _checks(page, "action")
     return """You are the Black-Ink Bestiary ACTION AND PHYSICALITY GATE.
 Inspect the visible action, contact, support, and cause-and-effect. The environment has already been checked separately.
 
@@ -158,55 +84,7 @@ def build_scene_review_prompt(page: dict) -> str:
 
 
 def build_review_prompt(page: dict) -> str:
-    checks = _checks(page)
-    excluded_prefixes = (
-        "Clearly recognizable as ",
-        "Canonical scale reads as:",
-        "Canonical body plan reads as:",
-        "Shape-first body geometry reads as:",
-        "Identity check:",
-        "Reject identity drift:",
-        "Swarm reads as ",
-        "Habitat reads as:",
-        "Scene moment reads as:",
-        "Required element present:",
-        "Physical state reads as:",
-        "Support/contact is visible and believable:",
-        "Motion/weight reads correctly:",
-        "Mode-specific contact geometry reads correctly:",
-        "Environment matches profile:",
-        "Spatial type reads without the monster:",
-        "Material language is visible:",
-        "At least one unmistakable location marker is visible:",
-        "Spatial geometry reads correctly:",
-        "Space envelope matches:",
-        "Space proportions read correctly:",
-        "Space overhead/ceiling reads correctly:",
-        "Space does not drift into:",
-        "Unique landmark is visible:",
-        "Framing differs from repeated generic backgrounds:",
-        "Environment geometry differs meaningfully from nearby pages",
-        "Environment check:",
-        "Monster/environment interaction reads clearly:",
-        "One clear story beat reads as:",
-        "Environment participates through:",
-        "Interaction proof is visible:",
-        "Body language communicates the action without needing the caption",
-        "The page does not read as a neutral portrait or prop-holding pose",
-        "What single verb describes what the monster is doing?",
-        "Can that action be identified without reading the caption?",
-        "Does at least one environment feature participate?",
-        "Does the pose remain stable and easy to color?",
-        "Would removing the prop destroy the entire story read?",
-        "Controlled powered flight allowed by monster data:",
-        "Pose is stable, natural, and easy to read in a static coloring page",
-        "No jumping, falling, dropping, or accidental hovering",
-    )
-    selected = _require_selected(
-        page,
-        "quality",
-        [item for item in checks if not item.startswith(excluded_prefixes)],
-    )
+    selected = _checks(page, "quality")
     return """You are the Black-Ink Bestiary FINAL COLORING-PAGE GATE.
 The candidate has already been checked for species identity, environment geometry, and action/physicality requirements.
 Now red-team the actual image for any remaining production failure.

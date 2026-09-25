@@ -13,6 +13,15 @@ import vision_review_prompts as vp
 
 
 class VisionReviewerTests(unittest.TestCase):
+    def test_all_tome_i_pages_have_nonempty_shared_checklist_buckets(self):
+        from prompt_builder import build_page_verification_checklist
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            checklist = build_page_verification_checklist(page)
+            self.assertEqual(set(checklist), {"identity", "environment", "action", "quality"})
+            for stage, checks in checklist.items():
+                self.assertTrue(checks, f"{page['page_id']} missing {stage} checks")
+
     def setUp(self):
         self.config = {
             "vision_reviewer": {

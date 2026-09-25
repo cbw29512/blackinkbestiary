@@ -8,11 +8,13 @@ from pathlib import Path
 
 try:
     from .defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
+    from .learning_feedback import build_learning_queue
     from .production_audit import audit_active_book
     from .replication_probe import run_replication_probe
     from .series_readiness import audit_series
 except ImportError:
     from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
+    from learning_feedback import build_learning_queue
     from production_audit import audit_active_book
     from replication_probe import run_replication_probe
     from series_readiness import audit_series
@@ -386,6 +388,7 @@ def build_quality_snapshot(
     historical_records = latest_records(state)
     defects = count_defects(current_records, taxonomy)
     historical_defects = count_defects(historical_records, taxonomy)
+    learning_queue = build_learning_queue(historical_records, root)
     status_counts = Counter(str(item.get("status") or "unknown") for item in current_records)
     historical_status_counts = Counter(
         str(item.get("status") or "unknown") for item in historical_records
@@ -434,6 +437,7 @@ def build_quality_snapshot(
         "replication": replication,
         "defect_counts": defects,
         "historical_defect_counts": historical_defects,
+        "learning_queue": learning_queue,
         "defect_labels": taxonomy_labels(taxonomy),
         "status_counts": dict(sorted(status_counts.items())),
         "historical_status_counts": dict(sorted(historical_status_counts.items())),

@@ -719,6 +719,18 @@ class QATests(unittest.TestCase):
         self.assertIn("gorilla, ape-man, or primate", text)
         self.assertIn("CORRECTION:", text)
 
+    def test_generation_prompt_contains_same_mandatory_page_checklist(self):
+        from prompt_builder import build_page_verification_checklist
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(page)
+        checklist = build_page_verification_checklist(page)
+        self.assertIn("MANDATORY PAGE VERIFICATION CHECKLIST", prompt)
+        for stage in ("identity", "environment", "action", "quality"):
+            self.assertIn(stage.upper() + ":", prompt)
+            for item in checklist[stage]:
+                self.assertIn(item, prompt)
+
     def test_candidate_prompts_are_materially_distinct_and_colorable(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-24")
