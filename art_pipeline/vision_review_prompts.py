@@ -5,7 +5,11 @@ from prompt_builder import build_page_verification_checklist
 
 def _checks(page: dict, stage: str) -> list[str]:
     checklist = build_page_verification_checklist(page)
-    selected = list(checklist.get(stage) or [])
+    return list(checklist.get(stage) or [])
+
+
+def _require_checks(page: dict, stage: str) -> list[str]:
+    selected = _checks(page, stage)
     if not selected:
         raise RuntimeError(
             f"{page.get('page_id')}: {stage} vision gate has no concrete review checks"
@@ -14,7 +18,7 @@ def _checks(page: dict, stage: str) -> list[str]:
 
 
 def build_identity_review_prompt(page: dict) -> str:
-    selected = _checks(page, "identity")
+    selected = _require_checks(page, "identity")
     return """You are the Black-Ink Bestiary IDENTITY AND ANATOMY GATE.
 Inspect only what is visibly present in the image. Do not trust the requested creature name as evidence.
 
@@ -40,7 +44,7 @@ IDENTITY GATES:
 
 
 def build_environment_review_prompt(page: dict) -> str:
-    selected = _checks(page, "environment")
+    selected = _require_checks(page, "environment")
     return """You are the Black-Ink Bestiary ENVIRONMENT GEOMETRY GATE.
 Inspect only the visible setting. Ignore creature beauty and action quality except where creature scale proves the space.
 
@@ -60,7 +64,7 @@ ENVIRONMENT GATES:
 
 
 def build_action_review_prompt(page: dict) -> str:
-    selected = _checks(page, "action")
+    selected = _require_checks(page, "action")
     return """You are the Black-Ink Bestiary ACTION AND PHYSICALITY GATE.
 Inspect the visible action, contact, support, and cause-and-effect. The environment has already been checked separately.
 
@@ -84,7 +88,7 @@ def build_scene_review_prompt(page: dict) -> str:
 
 
 def build_review_prompt(page: dict) -> str:
-    selected = _checks(page, "quality")
+    selected = _require_checks(page, "quality")
     return """You are the Black-Ink Bestiary FINAL COLORING-PAGE GATE.
 The candidate has already been checked for species identity, environment geometry, and action/physicality requirements.
 Now red-team the actual image for any remaining production failure.

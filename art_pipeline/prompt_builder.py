@@ -391,8 +391,13 @@ def build_page_verification_checklist(page: dict) -> dict[str, list[str]]:
             if item.get("symptom")
         )
 
+    environment_raw = environment_checklist(page, ROOT)
     environment = [f"Habitat reads as: {page['habitat']}"]
-    environment.extend(environment_checklist(page, ROOT))
+    environment.extend(
+        item for item in environment_raw
+        if not str(item).startswith("Environment check:")
+        and not str(item).startswith("Colorability failure to reject:")
+    )
 
     action = [f"Scene moment reads as: {page['moment']}"]
     action.extend(story_checklist(page, ROOT))
@@ -409,6 +414,10 @@ def build_page_verification_checklist(page: dict) -> dict[str, list[str]]:
         "Outer print-safe margin remains blank white",
         "No accidental RGB/color contamination",
     ]
+    quality.extend(
+        item for item in environment_raw
+        if str(item).startswith("Colorability failure to reject:")
+    )
 
     def clean(values):
         result = []
