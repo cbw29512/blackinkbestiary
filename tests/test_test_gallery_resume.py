@@ -144,6 +144,67 @@ class TestGalleryResumeTests(unittest.TestCase):
         self.assertTrue(gallery.should_skip_candidate(prior, False))
         self.assertFalse(gallery.should_skip_candidate(prior, True))
 
+    def test_same_fingerprint_semantic_stall_blocks_repeat_gpu_cycle(self):
+        prior = {
+            "status": "max_refinements_reached",
+            "generation_fingerprint": "generation-v1",
+            "review_fingerprint": "review-v1",
+            "visual_review": {
+                "pass": False,
+                "stage": "identity",
+                "defects": ["wrong body plan"],
+            },
+        }
+        self.assertTrue(
+            gallery.same_fingerprint_semantic_stall(
+                prior,
+                "generation-v1",
+                "review-v1",
+            )
+        )
+        self.assertFalse(
+            gallery.same_fingerprint_semantic_stall(
+                prior,
+                "generation-v2",
+                "review-v1",
+            )
+        )
+        self.assertFalse(
+            gallery.same_fingerprint_semantic_stall(
+                prior,
+                "generation-v1",
+                "review-v2",
+            )
+        )
+
+    def test_semantic_stall_reopens_after_authority_change(self):
+        prior = {
+            "status": "semantic_stalled",
+            "generation_fingerprint": "old-generation",
+            "review_fingerprint": "old-review",
+            "visual_review": {
+                "pass": False,
+                "stage": "environment",
+                "defects": ["missing arch"],
+            },
+        }
+        self.assertFalse(
+            gallery.same_fingerprint_semantic_stall(
+                prior,
+                "new-generation",
+                "old-review",
+            )
+        )
+        self.assertTrue(gallery.generation_authority_stale(prior, "new-generation"))
+        self.assertFalse(
+            gallery.should_skip_candidate(
+                prior,
+                True,
+                force_rerun=True,
+                retry_max_refinements=False,
+            )
+        )
+
     def test_stale_generation_authority_forces_canary_rerun(self):
         prior = {
             "status": "ready_for_review",

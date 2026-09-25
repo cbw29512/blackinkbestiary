@@ -153,6 +153,7 @@ def append_quality_snapshot(root: Path) -> bool:
             "gpu_attempts": "lower",
             "refinement_passes": "lower",
             "pages_at_max_refinements": "lower",
+            "pages_semantic_stalled": "lower",
             "avg_gpu_attempts_per_page": "lower",
             "gpu_attempts_per_semantic_pass": "lower",
             "semantic_yield_percent": "higher",

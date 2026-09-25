@@ -164,6 +164,7 @@ def generation_efficiency(
     gpu_attempts = 0
     refinement_passes = 0
     max_refinement_pages = 0
+    semantic_stalled_pages = 0
 
     for item in current:
         history = item.get("pass_history") or []
@@ -172,8 +173,11 @@ def generation_efficiency(
             attempts = 1
         gpu_attempts += attempts
         refinement_passes += max(0, attempts - 1)
-        if str(item.get("status") or "") == "max_refinements_reached":
+        status = str(item.get("status") or "")
+        if status == "max_refinements_reached":
             max_refinement_pages += 1
+        if status == "semantic_stalled":
+            semantic_stalled_pages += 1
 
     page_count = len(current)
     metrics = canary or canary_metrics(state, canary_page_ids)
@@ -185,6 +189,7 @@ def generation_efficiency(
         "gpu_attempts": gpu_attempts,
         "refinement_passes": refinement_passes,
         "pages_at_max_refinements": max_refinement_pages,
+        "pages_semantic_stalled": semantic_stalled_pages,
         "avg_gpu_attempts_per_page": (
             round(gpu_attempts / page_count, 2) if page_count else None
         ),

@@ -130,6 +130,27 @@ def review_authority_stale(prior: dict | None, current_fingerprint: str) -> bool
     )
 
 
+def same_fingerprint_semantic_stall(
+    prior: dict | None,
+    generation_fingerprint: str,
+    review_fingerprint: str,
+) -> bool:
+    """Stop repeating exhausted semantic work until relevant authority changes."""
+    if not prior:
+        return False
+    if str(prior.get("status") or "") not in {
+        "max_refinements_reached",
+        "semantic_stalled",
+    }:
+        return False
+    if str(prior.get("generation_fingerprint") or "") != str(generation_fingerprint or ""):
+        return False
+    if str(prior.get("review_fingerprint") or "") != str(review_fingerprint or ""):
+        return False
+    verdict = prior.get("visual_review") or {}
+    return bool(verdict) and not bool(verdict.get("pass"))
+
+
 def existing_candidate_path(item: dict) -> Path | None:
     image_path = str(item.get("image_path") or "").strip()
     if not image_path:
@@ -452,6 +473,33 @@ def main() -> int:
             retry_failed = args.rerun_failed or args.canary_failed
             current_fingerprint = page_generation_fingerprint(page, ROOT)
             current_review_fingerprint = page_review_fingerprint(page, ROOT)
+            if (
+                not args.canary
+                and same_fingerprint_semantic_stall(
+                    prior,
+                    current_fingerprint,
+                    current_review_fingerprint,
+                )
+            ):
+                if prior and str(prior.get("status") or "") != "semantic_stalled":
+                    prior["status"] = "semantic_stalled"
+                    prior["semantic_stall"] = {
+                        "generation_fingerprint": current_fingerprint,
+                        "review_fingerprint": current_review_fingerprint,
+                        "stage": str((prior.get("visual_review") or {}).get("stage") or ""),
+                        "defects": list((prior.get("visual_review") or {}).get("defects") or []),
+                        "at": utc_now(),
+                    }
+                    state["updated_at"] = utc_now()
+                    write_state(state)
+                print(json.dumps({
+                    "page_id": page["page_id"],
+                    "candidate": candidate_no,
+                    "status": "skipped_semantic_stalled",
+                    "review_stage": str((prior.get("visual_review") or {}).get("stage") or "") if prior else "",
+                    "defects": list((prior.get("visual_review") or {}).get("defects") or []) if prior else [],
+                }))
+                continue
             if same_fingerprint_qa_stall(prior, current_fingerprint):
                 if prior and str(prior.get("status") or "") != "technical_qa_stalled":
                     prior["status"] = "technical_qa_stalled"
