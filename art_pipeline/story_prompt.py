@@ -155,7 +155,7 @@ def interaction_proof_rules(page: dict) -> list[str]:
         for term in ("tunnel", "passage", "shaft", "corridor", "intersection", "crossing")
     ):
         rules.append(
-            "PASSAGE-FILL PROOF: the creature's body must visibly constrain the named route, intersection, or crossing and use its nearby boundaries as scale evidence; do not show a small figure floating in an oversized generic opening."
+            "PASSAGE-FILL PROOF: the creature's body must visibly constrain the named route, intersection, or crossing and use the passage boundaries as scale evidence; do not show a small figure floating in an oversized generic opening."
         )
     if "pointing" in text or "points " in text:
         rules.append(
