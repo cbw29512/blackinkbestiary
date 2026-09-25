@@ -121,26 +121,59 @@ function Invoke-BlackInkCommand(
   }
 }
 
+function Quote-BlackInkArgument([string]$Value) {
+  if ($Value -notmatch '[\s"]') { return $Value }
+  return '"' + $Value.Replace('"', '\\"') + '"'
+}
+
+function Get-BlackInkLogTail(
+  [string]$Path,
+  [int]$MaxChars = 3000
+) {
+  if (-not $Path -or -not (Test-Path $Path -PathType Leaf)) { return "" }
+  $text = Get-Content $Path -Raw -ErrorAction SilentlyContinue
+  if (-not $text) { return "" }
+  $text = $text.Trim()
+  if ($text.Length -gt $MaxChars) {
+    return $text.Substring($text.Length - $MaxChars)
+  }
+  return $text
+}
+
 function Start-BlackInkDetachedLocalProcess(
   [string]$FilePath,
   [string[]]$Arguments = @(),
-  [string]$WorkingDirectory = ""
+  [string]$WorkingDirectory = "",
+  [string]$StdoutPath = "",
+  [string]$StderrPath = ""
 ) {
+  $argumentLine = (@($Arguments | ForEach-Object {
+    Quote-BlackInkArgument ([string]$_)
+  }) -join " ")
+
   try {
     $start = @{
       FilePath = $FilePath
-      ArgumentList = $Arguments
+      ArgumentList = $argumentLine
       WindowStyle = "Hidden"
       ErrorAction = "Stop"
     }
     if ($WorkingDirectory) { $start.WorkingDirectory = $WorkingDirectory }
+    if ($StdoutPath) {
+      Remove-Item $StdoutPath -Force -ErrorAction SilentlyContinue
+      $start.RedirectStandardOutput = $StdoutPath
+    }
+    if ($StderrPath) {
+      Remove-Item $StderrPath -Force -ErrorAction SilentlyContinue
+      $start.RedirectStandardError = $StderrPath
+    }
     Start-Process @start | Out-Null
     return "Start-Process"
   } catch {
     $firstError = [string]$_.Exception.Message
     try {
       $shell = New-Object -ComObject Shell.Application
-      $shell.ShellExecute($FilePath, ($Arguments -join " "), $WorkingDirectory, "open", 0)
+      $shell.ShellExecute($FilePath, $argumentLine, $WorkingDirectory, "open", 0)
       return "ShellExecute"
     } catch {
       throw "Could not launch '$FilePath'. Start-Process failed: $firstError; ShellExecute failed: $($_.Exception.Message)"
