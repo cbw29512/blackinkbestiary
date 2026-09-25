@@ -77,11 +77,6 @@ def classify(
         )
     )
 
-    # Direct exact-image review is the final canary authority. The local VLM
-    # remains a provisional triage/refinement gate and may not veto a current
-    # content-hash-bound assistant approval. Generation-authority changes still
-    # invalidate the canary because the approved pixels no longer test the
-    # current engine prompt/contract.
     if (
         decision in {"approve", "select"}
         and exact_review_is_current
@@ -92,12 +87,12 @@ def classify(
         return "needs_generation"
 
     status = str(item.get("status") or "")
-    if status in {"ready_for_review", "max_refinements_reached"} and (
+    if status in {"ready_for_review", "max_refinements_reached", "technical_qa_stalled"} and (
         not fingerprint_is_current or not review_fingerprint_is_current
     ):
-        # The canary runner will re-render if generation authority changed, or
-        # re-review the existing exact image if only reviewer authority changed.
         return "needs_generation"
+    if status == "technical_qa_stalled":
+        return "awaiting_review"
     if status in RETRYABLE:
         return "needs_generation"
     if status in {"ready_for_review", "max_refinements_reached"}:
