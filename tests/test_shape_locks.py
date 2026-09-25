@@ -16,6 +16,12 @@ class ShapeLockTests(unittest.TestCase):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         cls.pages = {page["page_id"]: page for page in tome["pages"]}
 
+    def test_prompt_reserves_blank_outer_print_margin(self):
+        text = build_prompt(self.pages["I-01"])
+        self.assertIn("outer eight percent of the page", text)
+        self.assertIn("completely blank white print margin", text)
+        self.assertIn("no creature anatomy", text)
+
     def test_kobold_shape_lock_proves_miniature_scale(self):
         text = build_prompt(self.pages["I-01"])
         self.assertIn("SHAPE-FIRST RENDER LOCK", text)
