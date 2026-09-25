@@ -145,7 +145,29 @@ def current_page_records(state: dict, page_ids: list[str]) -> list[dict]:
     return result
 
 
-def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
+def exact_image_authority_approved(item: dict, root: Path = ROOT) -> bool:
+    assistant = item.get("assistant_review") or {}
+    decision = str(assistant.get("decision") or "").strip().lower()
+    review_id = str(assistant.get("review_id") or "").strip()
+    if decision not in {"approve", "select"} or not review_id:
+        return False
+
+    relative = str(item.get("image_path") or "").strip()
+    if not relative:
+        return False
+    path = root / "web" / relative
+    if not path.exists() or not path.is_file():
+        return False
+
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    expected = (
+        f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}-"
+        f"H{digest[:16]}"
+    )
+    return review_id == expected
+
+
+def canary_metrics(state: dict, canary_page_ids: list[str], root: Path = ROOT) -> dict:
     current = {
         str(item.get("page_id") or ""): item
         for item in current_page_records(state, canary_page_ids)
@@ -161,8 +183,7 @@ def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
 
         technical = bool(item) and status not in IMAGE_TECHNICAL_FAILURE_STATUSES
         review_pipeline = bool(item) and status not in REVIEW_PIPELINE_FAILURE_STATUSES
-        decision = str(assistant.get("decision") or "").strip().lower()
-        exact_image_approved = decision in {"approve", "select"}
+        exact_image_approved = exact_image_authority_approved(item, root)
 
         # Local VLM output is advisory telemetry only. Required readiness
         # metrics must never be satisfied by a local score/stage/pass.
