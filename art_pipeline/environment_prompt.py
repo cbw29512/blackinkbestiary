@@ -134,6 +134,7 @@ def environment_compact_sections(page: dict, root: Path) -> list[str]:
         f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
         f"UNIQUE BACKGROUND LANDMARK: {(page.get('environment_variant') or {}).get('landmark', '')}.",
         f"UNIQUE BACKGROUND FRAMING: {(page.get('environment_variant') or {}).get('framing', '')}.",
+        f"MONSTER / ENVIRONMENT INTERACTION: {(page.get('environment_variant') or {}).get('interaction', '')}.",
         _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
         f"SPACE ENVELOPE: {envelope.get('envelope_id', '')}.",
         _items("SPACE MUST SHOW", envelope.get("must_show")),
