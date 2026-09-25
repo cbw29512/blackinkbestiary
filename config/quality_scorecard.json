@@ -1,6 +1,6 @@
 {
-  "schema_version": 7,
-  "contract_version": "black-ink-quality-scorecard-v7",
+  "schema_version": 8,
+  "contract_version": "black-ink-quality-scorecard-v8",
   "canary_page_ids": [
     "I-01",
     "I-04",
@@ -46,7 +46,8 @@
     "series_100_rule": "Every registered book must individually satisfy the book_100_rule.",
     "readiness_floor_rule": "A book readiness floor equals its weakest required category; it must be 100 before the book can be automated 100/100.",
     "prompt_load_rule": "Prompt-load telemetry is observational until a stable successful canary baseline establishes useful bounds; do not reward shorter prompts automatically.",
-    "foundation_rule": "Foundation Readiness reaches 100 only when runtime, preflight, series audit, active-book structure, and a current same-engine autopilot heartbeat are all healthy."
+    "foundation_rule": "Foundation Readiness reaches 100 only when runtime, preflight, series audit, active-book structure, and a current same-engine autopilot heartbeat are all healthy.",
+    "review_pipeline_rule": "Image technical QA measures PNG/print technical checks only. Vision-reviewer software failures are reported separately as review_pipeline_health and must not masquerade as image QA regression."
   },
   "replication_readiness_contract": {
     "score_100_requires": [
