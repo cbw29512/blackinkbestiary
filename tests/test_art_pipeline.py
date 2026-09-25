@@ -790,7 +790,8 @@ class QATests(unittest.TestCase):
             self.assertIn("NEVER fill a creature", text)
             self.assertIn("No large black masses", text)
             self.assertIn("cube with straight readable edges", text)
-            self.assertIn("remove humanoid anatomy entirely", text)
+            self.assertIn("humanoid torso", text)
+            self.assertIn("no head, no face, no limbs", text)
 
 
 if __name__ == "__main__":
