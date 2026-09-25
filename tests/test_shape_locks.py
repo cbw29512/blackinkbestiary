@@ -28,6 +28,25 @@ class ShapeLockTests(unittest.TestCase):
         self.assertIn("normal doorway/corridor opening", text)
         self.assertIn("one-third to one-half", text)
 
+    def test_priority_identity_capsules_precede_scene_detail(self):
+        kobold = build_prompt(self.pages["I-01"])
+        goblin = build_prompt(self.pages["I-04"])
+        bugbear = build_prompt(self.pages["I-08"])
+
+        self.assertIn("MODEL PRIORITY CAPSULE", kobold)
+        self.assertIn("MINIATURE 2–3-foot reptilian trap-maker", kobold)
+        self.assertIn("never large demonic horns", kobold)
+        self.assertLess(kobold.index("MODEL PRIORITY CAPSULE"), kobold.index("HABITAT:"))
+
+        self.assertIn("SMALL WIRY GOBLINOID", goblin)
+        self.assertIn("NO horns, horn nubs, tail, claws", goblin)
+        self.assertLess(goblin.index("MODEL PRIORITY CAPSULE"), goblin.index("HABITAT:"))
+
+        self.assertIn("TALL RANGY GOBLINOID AMBUSHER", bugbear)
+        self.assertIn("very long arms hanging below the hips toward the knees", bugbear)
+        self.assertIn("NO horns, tail, gorilla muzzle", bugbear)
+        self.assertLess(bugbear.index("MODEL PRIORITY CAPSULE"), bugbear.index("HABITAT:"))
+
     def test_darkmantle_shape_lock_forbids_humanoid_topology(self):
         text = build_prompt(self.pages["I-14"])
         self.assertIn("one continuous ceiling-clinging cloak/cap body", text)

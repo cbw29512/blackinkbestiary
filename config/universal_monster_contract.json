@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "contract_id": "black-ink-monster-v2",
   "purpose": "Monster JSON answers what the creature is and where it can plausibly exist. Family profiles carry shared anatomy and anti-drift intelligence; the universal environment and page engines turn broad habitat compatibility into unique scenery and story composition.",
   "minimal_recipe_required": [
@@ -21,7 +21,12 @@
     "visual_identity": {
       "signature_gear": [],
       "attitude": [],
-      "shape_lock": ""
+      "shape_lock": "",
+      "render_priority": {
+        "positive": "",
+        "negative": "",
+        "silhouette_test": ""
+      }
     },
     "default_habitats": [],
     "locomotion": {
@@ -44,6 +49,7 @@
   "rules": [
     "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
     "visual_identity.shape_lock is required family-level positive geometry for the body plan. It states what to draw, not just what to avoid, and generation/review treat it as authoritative.",
+    "Optional visual_identity.render_priority is a concise model-facing capsule for failure-prone families. The universal prompt engine renders it immediately after SUBJECT and before scenery/style; it may prioritize existing family authority but may not contradict canonical anatomy.",
     "Every resolved monster must expose non-empty visual_identity.limb_structure and visual_identity.shape_lock, whether inherited from a family or owned by a standalone full creature record.",
     "Monster recipes should only state what differs from the family.",
     "Known family failure modes must be injected into generation and review, not merely stored.",

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "identity_version": 1,
+  "identity_version": 2,
   "profile_id": "hobgoblin",
   "display_name": "Hobgoblin",
   "taxonomy": {
@@ -39,7 +39,12 @@
       "six-pack bodybuilder torso"
     ],
     "limb_structure": "Balanced athletic humanoid arms and legs with controlled hand placement and stable booted or armored feet; no giant, animal, or exaggerated goblin limb proportions.",
-    "shape_lock": "Draw a medium lean military goblinoid with humanlike overall scale, angular stern face, pointed ears, broad flattened nose, and disciplined posture. Keep the torso athletic but not bodybuilder-bulky; no horns, tusks, tail, claws, animal feet, or orc-like jaw."
+    "shape_lock": "Draw a medium lean military goblinoid with humanlike overall scale, angular stern face, pointed ears, broad flattened nose, and disciplined posture. Keep the torso athletic but not bodybuilder-bulky; no horns, tusks, tail, claws, animal feet, or orc-like jaw.",
+    "render_priority": {
+      "positive": "MEDIUM LEAN MILITARY GOBLINOID with an angular stern face, broad flattened nose, modest pointed ears, clean athletic limb lines, upright trained posture, and organized practical gear.",
+      "negative": "NO horns, tusks, tail, claws, boar muzzle, orc jaw, bodybuilder chest, six-pack torso, hulking shoulders, or tiny goblin proportions.",
+      "silhouette_test": "At thumbnail size the first read must be a disciplined lean soldierly goblinoid, not an orc, demon, or bodybuilder."
+    }
   },
   "accuracy_checks": [
     "reads as disciplined goblinoid soldier before generic fantasy brute",

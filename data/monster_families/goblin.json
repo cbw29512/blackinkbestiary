@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "identity_version": 1,
+  "identity_version": 2,
   "profile_id": "goblin",
   "display_name": "Goblin",
   "taxonomy": {
@@ -37,7 +37,12 @@
       "demonic tail"
     ],
     "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure.",
-    "shape_lock": "Draw a small wiry goblin with narrow torso, thin forearms/calves, oversized pointed ears, no tail, and no heroic chest/ab definition; nearby human-scale masonry, door hardware, furniture, or props must prove the goblin is much smaller than an adult human."
+    "shape_lock": "Draw a small wiry goblin with narrow torso, thin forearms/calves, oversized pointed ears, no tail, and no heroic chest/ab definition; nearby human-scale masonry, door hardware, furniture, or props must prove the goblin is much smaller than an adult human.",
+    "render_priority": {
+      "positive": "SMALL WIRY GOBLINOID with a narrow torso, thin arms and legs, oversized pointed ears, broad flattened nose, angular face, humanoid hands/feet, and a slightly crouched scavenger posture. Human-scale architecture must prove it is much smaller than an adult human.",
+      "negative": "NO horns, horn nubs, tail, claws, animal feet, reptilian snout, broad heroic chest, six-pack abs, oversized shoulders, or muscular warrior proportions.",
+      "silhouette_test": "At thumbnail size the first read must be a small narrow goblin with huge ears and thin limbs, never a demonic or heroic brute."
+    }
   },
   "accuracy_checks": [
     "goblin reads ugly-cunning rather than cute",

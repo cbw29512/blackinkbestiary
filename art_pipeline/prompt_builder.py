@@ -48,6 +48,32 @@ def _is_swarm(page: dict, spec: dict | None) -> bool:
     )
 
 
+def _render_priority_sections(spec: dict | None) -> list[str]:
+    """Short high-priority identity capsule for models prone to prompt dilution."""
+    if not spec:
+        return []
+    priority = ((spec.get("visual_identity") or {}).get("render_priority") or {})
+    if not isinstance(priority, dict):
+        return []
+    sections = []
+    positive = str(priority.get("positive") or "").strip()
+    negative = str(priority.get("negative") or "").strip()
+    silhouette = str(priority.get("silhouette_test") or "").strip()
+    if positive:
+        sections.append(
+            "MODEL PRIORITY CAPSULE — READ BEFORE STYLE OR SCENERY: " + positive
+        )
+    if negative:
+        sections.append(
+            "MODEL PRIORITY NEGATIVE LOCK — NON-NEGOTIABLE: " + negative
+        )
+    if silhouette:
+        sections.append(
+            "MODEL PRIORITY THUMBNAIL TEST — NON-NEGOTIABLE: " + silhouette
+        )
+    return sections
+
+
 def _body_plan_lock(page: dict, spec: dict | None) -> list[str]:
     """Build highest-priority species geometry and canonical-scale constraints."""
     if not spec:
@@ -191,6 +217,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "Keep clean white print margins without outlining those margins."
         ),
         f"SUBJECT: {page['monster_name']}.",
+        *_render_priority_sections(spec),
         *_body_plan_lock(page, spec),
         recovery_lock,
         critical_scene_lock(page),
