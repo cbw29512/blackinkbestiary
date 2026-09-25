@@ -4,6 +4,8 @@ import struct
 import zlib
 from pathlib import Path
 
+from line_art_purity import classify_sample, purity_reasons
+
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 _CHANNELS = {0: 1, 2: 3, 4: 2, 6: 4}
 
