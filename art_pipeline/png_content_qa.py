@@ -80,6 +80,70 @@ def _decode_rows(raw: bytes) -> tuple[int, int, int, list[bytes]]:
     return width, height, color_type, rows
 
 
+
+def _png_chunk(kind: bytes, data: bytes) -> bytes:
+    crc = zlib.crc32(kind + data) & 0xFFFFFFFF
+    return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", crc)
+
+
+def enforce_print_safe_margin(
+    path: str | Path,
+    margin_ratio: float = 0.045,
+) -> dict:
+    """Whiten the outer print-safe band deterministically before QA."""
+    path = Path(path)
+    raw = path.read_bytes()
+    if not raw.startswith(PNG_SIGNATURE):
+        raise ValueError("not_png")
+
+    width, height, color_type, rows = _decode_rows(raw)
+    channels = _CHANNELS[color_type]
+    margin_x = max(1, int(round(width * margin_ratio)))
+    margin_y = max(1, int(round(height * margin_ratio)))
+    updated_rows: list[bytes] = []
+
+    for y, source in enumerate(rows):
+        row = bytearray(source)
+        for x in range(width):
+            if (
+                x < margin_x
+                or x >= width - margin_x
+                or y < margin_y
+                or y >= height - margin_y
+            ):
+                i = x * channels
+                if color_type == 0:
+                    row[i] = 255
+                elif color_type == 2:
+                    row[i:i + 3] = b"\xff\xff\xff"
+                elif color_type == 4:
+                    row[i:i + 2] = b"\xff\xff"
+                elif color_type == 6:
+                    row[i:i + 4] = b"\xff\xff\xff\xff"
+        updated_rows.append(bytes(row))
+
+    scanlines = bytearray()
+    for row in updated_rows:
+        scanlines.append(0)
+        scanlines.extend(row)
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, color_type, 0, 0, 0)
+    path.write_bytes(
+        PNG_SIGNATURE
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"IDAT", zlib.compress(bytes(scanlines), 6))
+        + _png_chunk(b"IEND", b"")
+    )
+    return {
+        "path": str(path),
+        "width": width,
+        "height": height,
+        "margin_ratio": margin_ratio,
+        "margin_x": margin_x,
+        "margin_y": margin_y,
+    }
+
+
 def inspect_line_art(path: str | Path) -> dict:
     raw = Path(path).read_bytes()
     if not raw.startswith(PNG_SIGNATURE):
