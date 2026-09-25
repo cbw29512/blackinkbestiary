@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import struct
 import zlib
 from pathlib import Path
@@ -203,6 +204,11 @@ def enforce_print_safe_margin(
 
 
 def inspect_line_art(path: str | Path) -> dict:
+    policy = _line_art_policy()
+    dark_below = int(policy["dark_below"])
+    white_above = int(policy["white_above"])
+    max_midtone_ratio = float(policy["max_midtone_ratio"])
+    midtone_failure_reason = str(policy["failure_reason"])
     raw = Path(path).read_bytes()
     if not raw.startswith(PNG_SIGNATURE):
         return {"supported": False, "reasons": ["not_png"]}
@@ -233,9 +239,9 @@ def inspect_line_art(path: str | Path) -> dict:
                 luma = (299 * r + 587 * g + 114 * b) // 1000
                 if max(r, g, b) - min(r, g, b) > 12:
                     chromatic += 1
-            is_dark = luma < 80
+            is_dark = luma < dark_below
             dark += is_dark
-            white += luma > 245
+            white += luma > white_above
             total += 1
             if (
                 x < margin_x
@@ -251,6 +257,8 @@ def inspect_line_art(path: str | Path) -> dict:
     dark_ratio = dark / total if total else 0.0
     white_ratio = white / total if total else 0.0
     chromatic_ratio = chromatic / total if total else 0.0
+    midtone = max(0, total - dark - white)
+    midtone_ratio = midtone / total if total else 0.0
     safe_margin_dark_ratio = (
         safe_margin_dark / safe_margin_total if safe_margin_total else 0.0
     )
@@ -263,6 +271,8 @@ def inspect_line_art(path: str | Path) -> dict:
         reasons.append("insufficient_contrast")
     if chromatic_ratio > 0.01:
         reasons.append("unexpected_color_content")
+    if midtone_ratio > max_midtone_ratio:
+        reasons.append(midtone_failure_reason)
     if safe_margin_dark_ratio > 0.02:
         reasons.append("safe_margin_too_busy")
 
@@ -271,6 +281,8 @@ def inspect_line_art(path: str | Path) -> dict:
         "dark_ratio": round(dark_ratio, 4),
         "white_ratio": round(white_ratio, 4),
         "chromatic_ratio": round(chromatic_ratio, 4),
+        "midtone_ratio": round(midtone_ratio, 4),
+        "max_midtone_ratio": max_midtone_ratio,
         "safe_margin_dark_ratio": round(safe_margin_dark_ratio, 4),
         "contrast_range": max_luma - min_luma,
         "pass": not reasons,
