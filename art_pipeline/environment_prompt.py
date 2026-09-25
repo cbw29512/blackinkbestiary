@@ -129,29 +129,19 @@ def environment_compact_sections(page: dict, root: Path) -> list[str]:
         if str(rule).strip()
     ]
     return [
-        (
-            "PAGE ENVIRONMENT AUTHORITY — NON-NEGOTIABLE: the named page habitat and its resolved profile control scenery; "
-            "creature lore may not replace or broaden this setting."
-        ),
+        "PAGE ENVIRONMENT AUTHORITY — NON-NEGOTIABLE: named habitat/profile control scenery; creature lore cannot replace it.",
         f"ENVIRONMENT SPATIAL TYPE: {identity.get('spatial_type', '')}.",
         f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
         _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
         f"SPACE ENVELOPE: {envelope.get('envelope_id', '')}.",
         _items("SPACE MUST SHOW", envelope.get("must_show")),
         _items("SPACE DRIFT FAILURES", envelope.get("must_not_drift")),
-        _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", (load_environment_contract().get("prompt_rules") or [])[:2]),
+        "UNIVERSAL ENVIRONMENT IDENTITY RULES: lock spatial envelope and unmistakable structural markers before decorative detail.",
         _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
         *component_lines,
         _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules[:2]),
-        _items("REQUIRED OBJECT PHYSICAL RULES", _required_object_rules(page)),
-        (
-            "ENVIRONMENT PALETTE RULE: selected components are a small compatible palette, not permission to clutter the page; "
-            "explicit landmark, framing, and interaction remain authoritative."
-        ),
-        (
-            "GLOBAL ENVIRONMENT STANDARD: Colorability is the governing product constraint. Use two to four large readable "
-            "environmental cues; the environment must be unmistakably the named habitat and remain secondary to the creature."
-        ),
+        "ENVIRONMENT PALETTE RULE: selected components are a small palette; landmark, framing, and interaction remain authoritative.",
+        "GLOBAL ENVIRONMENT STANDARD: use two to four large readable cues; named habitat unmistakable; creature remains primary.",
     ]
 
 def environment_prompt_sections(page: dict, root: Path) -> list[str]:
