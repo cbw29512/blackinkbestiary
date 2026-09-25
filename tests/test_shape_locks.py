@@ -54,6 +54,18 @@ class ShapeLockTests(unittest.TestCase):
         self.assertIn("NON-FLIGHT POSE LOCK", text)
         self.assertIn("not airborne", text)
 
+    def test_swarm_priority_capsule_prevents_wallpaper_composition(self):
+        swarm = build_prompt(self.pages["I-19"])
+        self.assertIn("MODEL SWARM PRIORITY CAPSULE", swarm)
+        self.assertIn("few separated clusters", swarm)
+        self.assertIn("broad contiguous white gaps", swarm)
+        self.assertIn("no edge-to-edge carpet of repeated bodies", swarm)
+        self.assertIn("no giant foreground leader", swarm)
+        self.assertLess(
+            swarm.index("MODEL SWARM PRIORITY CAPSULE"),
+            swarm.index("HABITAT:"),
+        )
+
     def test_nonhumanoid_priority_capsules_lock_body_topology(self):
         darkmantle = build_prompt(self.pages["I-14"])
         bat = build_prompt(self.pages["I-16"])

@@ -74,6 +74,24 @@ def _render_priority_sections(spec: dict | None) -> list[str]:
     return sections
 
 
+def _swarm_priority_sections(page: dict, spec: dict | None) -> list[str]:
+    if not _is_swarm(page, spec):
+        return []
+    visual = (spec or {}).get("visual_identity") or {}
+    silhouette = str(visual.get("silhouette") or "").strip()
+    return [
+        (
+            "MODEL SWARM PRIORITY CAPSULE — READ BEFORE SCENERY: treat the swarm as one readable collective shape made from a controlled visible population, "
+            "not as wallpaper. Arrange individuals in a few separated clusters along one clear direction of travel, with broad contiguous white gaps at least about one body-width wide between clusters."
+        ),
+        (
+            "MODEL SWARM NEGATIVE LOCK — NON-NEGOTIABLE: no edge-to-edge carpet of repeated bodies, no uncountable crowd, no giant foreground leader, "
+            "no single mascot animal, and no dense overlap that destroys individual silhouettes. Preserve the canonical population/scale rule: "
+            + silhouette
+        ),
+    ]
+
+
 def _body_plan_lock(page: dict, spec: dict | None) -> list[str]:
     """Build highest-priority species geometry and canonical-scale constraints."""
     if not spec:
@@ -219,6 +237,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         f"SUBJECT: {page['monster_name']}.",
         *_render_priority_sections(spec),
         *_body_plan_lock(page, spec),
+        *_swarm_priority_sections(page, spec),
         *environment_priority_sections(page, ROOT),
         recovery_lock,
         critical_scene_lock(page),
