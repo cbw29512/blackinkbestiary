@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from defect_taxonomy import classify_text, count_defects, load_taxonomy
-from quality_history import canary_metrics, current_page_records, generation_efficiency, quality_contract_fingerprint
+from quality_history import canary_metrics, current_page_records, evaluate_readiness, generation_efficiency, quality_contract_fingerprint
 
 
 class QualityHistoryTests(unittest.TestCase):
@@ -86,6 +86,41 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(efficiency["avg_gpu_attempts_per_page"], 2.0)
         self.assertEqual(efficiency["semantic_yield_percent"], 50.0)
         self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
+
+    def test_readiness_gate_uses_named_required_categories_and_blockers(self):
+        required = [
+            "foundation_readiness",
+            "technical_qa_pass_rate",
+            "visual_cleanliness",
+        ]
+        metrics = {
+            "foundation_readiness": 100,
+            "technical_qa_pass_rate": 100,
+            "visual_cleanliness": 80,
+            "unrelated_bonus_metric": 100,
+        }
+        report = evaluate_readiness(metrics, required, [])
+        self.assertEqual(report["readiness_floor"], 80)
+        self.assertEqual(report["weakest_metric"], "visual_cleanliness")
+        self.assertFalse(report["automated_100"])
+
+        perfect = {name: 100 for name in required}
+        blocked = evaluate_readiness(perfect, required, ["IDENTITY_WRONG_CREATURE"])
+        self.assertFalse(blocked["automated_100"])
+        self.assertEqual(blocked["readiness_floor"], 100)
+
+        clear = evaluate_readiness(perfect, required, [])
+        self.assertTrue(clear["automated_100"])
+
+    def test_missing_required_metric_can_never_claim_100(self):
+        report = evaluate_readiness(
+            {"foundation_readiness": 100},
+            ["foundation_readiness", "technical_qa_pass_rate"],
+            [],
+        )
+        self.assertEqual(report["missing_required_categories"], ["technical_qa_pass_rate"])
+        self.assertEqual(report["readiness_floor"], 0)
+        self.assertFalse(report["automated_100"])
 
     def test_canary_metrics_use_fixed_denominator(self):
         pages = ["A", "B", "C"]

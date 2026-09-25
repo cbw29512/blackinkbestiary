@@ -1,7 +1,17 @@
 {
-  "schema_version": 2,
-  "contract_version": "black-ink-quality-scorecard-v2",
-  "canary_page_ids": ["I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22"],
+  "schema_version": 3,
+  "contract_version": "black-ink-quality-scorecard-v3",
+  "canary_page_ids": [
+    "I-01",
+    "I-04",
+    "I-08",
+    "I-10",
+    "I-14",
+    "I-16",
+    "I-19",
+    "I-20",
+    "I-22"
+  ],
   "required_categories": [
     "foundation_readiness",
     "technical_qa_pass_rate",
@@ -22,14 +32,16 @@
     "config/universal_story_contract.json",
     "config/defect_taxonomy.json",
     "art_pipeline/png_content_qa.py",
-    "art_pipeline/vision_review_prompts.py"
+    "art_pipeline/vision_review_prompts.py",
+    "art_pipeline/quality_history.py"
   ],
   "metric_policy": {
     "higher_is_better": true,
     "comparison_rule": "Only compare snapshots when quality_contract_fingerprint is unchanged.",
     "book_100_rule": "Every required category must equal 100 and known_blockers must be empty.",
     "series_score_rule": "Series readiness equals the weakest registered book overall automated readiness; averages may not hide a weak book.",
-    "series_100_rule": "Every registered book must individually satisfy the book_100_rule."
+    "series_100_rule": "Every registered book must individually satisfy the book_100_rule.",
+    "readiness_floor_rule": "A book readiness floor equals its weakest required category; it must be 100 before the book can be automated 100/100."
   },
   "replication_readiness_contract": {
     "score_100_requires": [

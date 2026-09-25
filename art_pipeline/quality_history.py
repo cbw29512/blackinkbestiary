@@ -55,6 +55,39 @@ def quality_contract_fingerprint(root: Path = ROOT, config: dict | None = None) 
     return digest.hexdigest()
 
 
+def evaluate_readiness(
+    metrics: dict,
+    required_categories: list[str],
+    blockers: list[str] | None = None,
+) -> dict:
+    blockers = list(blockers or [])
+    missing = [name for name in required_categories if name not in metrics]
+    values = [
+        float(metrics.get(name, 0.0))
+        for name in required_categories
+    ]
+    overall = round(sum(values) / len(values), 1) if values else 0.0
+    floor = min(values) if values else 0.0
+    weakest = (
+        min(required_categories, key=lambda name: float(metrics.get(name, 0.0)))
+        if required_categories else None
+    )
+    automated_100 = (
+        not missing
+        and not blockers
+        and bool(required_categories)
+        and all(float(metrics.get(name, 0.0)) == 100.0 for name in required_categories)
+    )
+    return {
+        "overall_automated_readiness": overall,
+        "readiness_floor": floor,
+        "weakest_metric": weakest,
+        "missing_required_categories": missing,
+        "known_blockers": blockers,
+        "automated_100": automated_100,
+    }
+
+
 def latest_records(state: dict) -> list[dict]:
     """Latest record for every historical page/candidate pair."""
     latest = {}
@@ -309,6 +342,7 @@ def build_quality_snapshot(
     }
     foundation = 25 * sum(1 for value in foundation_components.values() if value)
 
+    required_categories = list(scorecard.get("required_categories") or [])
     books = []
     for row in series.get("books", []):
         target = int(row.get("target_pages") or 0)
@@ -318,7 +352,7 @@ def build_quality_snapshot(
         is_active = str(row.get("book_id") or "") == active_book_id
         metrics = {
             "foundation_readiness": float(foundation),
-            "technical_qa": canary["technical_qa"] if is_active else 0.0,
+            "technical_qa_pass_rate": canary["technical_qa"] if is_active else 0.0,
             "visual_cleanliness": canary["visual_cleanliness"] if is_active else 0.0,
             "semantic_accuracy": canary["semantic_accuracy"] if is_active else 0.0,
             "completeness": completeness,
@@ -326,8 +360,7 @@ def build_quality_snapshot(
             "locked_page_progress": locked_progress,
             "replication_readiness": float(replication["score"]),
         }
-        values = list(metrics.values())
-        overall = round(sum(values) / len(values), 1) if values else 0.0
+        readiness = evaluate_readiness(metrics, required_categories)
         books.append({
             "book_id": row.get("book_id"),
             "title": row.get("title"),
@@ -336,9 +369,7 @@ def build_quality_snapshot(
             "recipe_ready": recipe_ready,
             "locked_pages": locked_count,
             "metrics": metrics,
-            "overall_automated_readiness": overall,
-            "weakest_metric": min(metrics, key=metrics.get) if metrics else None,
-            "automated_100": bool(metrics) and all(value == 100 for value in values),
+            **readiness,
         })
 
     taxonomy = load_taxonomy(root / "config" / "defect_taxonomy.json")
@@ -350,8 +381,28 @@ def build_quality_snapshot(
     historical_status_counts = Counter(
         str(item.get("status") or "unknown") for item in historical_records
     )
+    active_blockers = [code for code, count in defects.items() if count > 0]
+    for book in books:
+        blockers = active_blockers if book.get("active") else []
+        book.update(evaluate_readiness(
+            book.get("metrics") or {},
+            required_categories,
+            blockers,
+        ))
+
     active_row = next((book for book in books if book["active"]), None)
     active_metrics = dict((active_row or {}).get("metrics") or {})
+    series_score = min(
+        (float(book.get("overall_automated_readiness") or 0.0) for book in books),
+        default=0.0,
+    )
+    series_readiness_floor = min(
+        (float(book.get("readiness_floor") or 0.0) for book in books),
+        default=0.0,
+    )
+    series_automated_100 = bool(books) and all(
+        bool(book.get("automated_100")) for book in books
+    )
 
     snapshot = {
         "schema_version": 1,
@@ -362,6 +413,10 @@ def build_quality_snapshot(
         "active_book_id": active_book_id,
         "metrics": active_metrics,
         "overall_automated_readiness": (active_row or {}).get("overall_automated_readiness", 0.0),
+        "readiness_floor": (active_row or {}).get("readiness_floor", 0.0),
+        "series_score": series_score,
+        "series_readiness_floor": series_readiness_floor,
+        "series_automated_100": series_automated_100,
         "canary": canary,
         "generation_efficiency": efficiency,
         "books": books,
@@ -373,7 +428,7 @@ def build_quality_snapshot(
         "defect_labels": taxonomy_labels(taxonomy),
         "status_counts": dict(sorted(status_counts.items())),
         "historical_status_counts": dict(sorted(historical_status_counts.items())),
-        "known_blockers": [code for code, count in defects.items() if count > 0],
+        "known_blockers": active_blockers,
     }
     fingerprint_payload = dict(snapshot)
     fingerprint_payload.pop("measured_at", None)

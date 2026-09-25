@@ -37,6 +37,16 @@ class QualityScorecardContractTests(unittest.TestCase):
         self.assertIn("ci covers scaffolded future books", requirements)
         self.assertIn("synthetic next-tome test", requirements)
 
+    def test_scoring_implementation_is_part_of_comparison_authority(self):
+        self.assertIn(
+            "art_pipeline/quality_history.py",
+            self.contract["comparison_authority_paths"],
+        )
+        self.assertIn(
+            "readiness floor",
+            self.contract["metric_policy"]["readiness_floor_rule"].lower(),
+        )
+
     def test_series_score_is_bounded_by_weakest_book(self):
         policy = self.contract["metric_policy"]
         self.assertIn("weakest registered book", policy["series_score_rule"].lower())
