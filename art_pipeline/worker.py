@@ -8,6 +8,7 @@ from pathlib import Path
 
 from comfy_client import ComfyClient, ComfyError
 from prompt_builder import build_prompt, build_supervisor_checklist
+from generation_lint import generation_lint_errors, assert_generation_ready
 from workflow_adapter import load_workflow, prepare_workflow, validate_template
 try:
     from .manifest_validation import validate_manifest
@@ -46,12 +47,14 @@ def readiness(comfy_url: str):
     instruction_snapshot = generation_instruction_snapshot()
     page, page_state = current_context()
     prompt = build_prompt(page, page_state.get("review_notes"))
+    lint_errors = generation_lint_errors(page, prompt, ROOT)
     if not instruction_snapshot:
         raise RuntimeError("Universal generation instructions were not reloaded")
     report = {
         "current_page": page["page_id"],
         "monster": page["monster_name"],
-        "prompt_ready": bool(prompt),
+        "prompt_ready": bool(prompt) and not lint_errors,
+        "generation_lint_errors": lint_errors,
         "workflow_file": str(WORKFLOW_FILE),
         "workflow_ready": False,
         "comfy_url": comfy_url,
@@ -119,6 +122,7 @@ def submit_one(comfy_url: str, seed: int | None):
         raise SystemExit("Workflow template invalid: " + "; ".join(problems))
 
     prompt = build_prompt(page, page_state.get("review_notes"))
+    assert_generation_ready(page, prompt, ROOT)
     seed = seed if seed is not None else random.randint(1, 2**63 - 1)
     workflow = prepare_workflow(template, prompt=prompt, seed=seed)
 

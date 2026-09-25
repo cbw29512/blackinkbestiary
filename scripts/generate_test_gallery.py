@@ -20,6 +20,7 @@ from image_edit_profile import prepare_distilled_image_edit
 from edit_prompt import build_edit_prompt
 from vision_reviewer import VisionReviewError, review_image, review_notes
 from generation_runtime import model_filename, read_json
+from generation_lint import assert_generation_ready
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from manifest_validation import validate_manifest
 from page_contract import resolve_page_spec
@@ -231,11 +232,13 @@ def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: di
     clip = model_filename(config, "text_encoders")
     vae = model_filename(config, "vae")
     path = WORKFLOW_DIR / f"test_{page['page_id'].lower()}_c{candidate_no:02d}.json"
+    prompt = build_prompt(page, review_feedback, candidate_no=candidate_no)
+    assert_generation_ready(page, prompt, ROOT)
     meta = prepare_distilled_text_to_image(
         cli,
         config["templates"]["text_to_image"],
         path,
-        prompt=build_prompt(page, review_feedback, candidate_no=candidate_no),
+        prompt=prompt,
         seed=seed,
         model_filename=unet,
         clip_filename=clip,

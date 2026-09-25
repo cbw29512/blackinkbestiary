@@ -21,6 +21,19 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertIn("IDENTITY_HEROIC_BULK", codes)
         self.assertIn("IDENTITY_HORNS_TUSKS", codes)
 
+        self.assertIn(
+            "IDENTITY_WRONG_CREATURE",
+            classify_text("creature has humanoid arms and a primate muzzle", taxonomy),
+        )
+        self.assertIn(
+            "ENVIRONMENT_GENERIC",
+            classify_text("no central newel or shaft visible", taxonomy),
+        )
+        self.assertIn(
+            "QUALITY_DENSITY",
+            classify_text("excessive repeated rat patterns", taxonomy),
+        )
+
         counts = count_defects([
             {"status": "technical_qa_failed", "error": "safe_margin_too_busy"},
             {"assistant_review": {"notes": "wallpaper-dense swarm with oversized leader"}},

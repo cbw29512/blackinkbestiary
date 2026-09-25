@@ -2,20 +2,221 @@
   "schema_version": 1,
   "taxonomy_id": "black-ink-defects-v1",
   "rules": [
-    {"code": "TECH_SAFE_MARGIN", "category": "technical", "label": "Unsafe print margin", "patterns": ["safe_margin_too_busy", "safe margin", "print-safe.*margin"]},
-    {"code": "TECH_COLOR_CONTAMINATION", "category": "technical", "label": "Unexpected color content", "patterns": ["unexpected_color_content", "color contamination", "chromatic"]},
-    {"code": "TECH_RUNTIME", "category": "technical", "label": "Local runtime failure", "patterns": ["local_runtime_failed", "did not become ready", "runtime failed", "comfyui.*ready"]},
-    {"code": "TECH_PREFLIGHT", "category": "technical", "label": "Engine preflight failure", "patterns": ["engine_preflight_failed", "preflight failed", "unit-test preflight"]},
-    {"code": "IDENTITY_HEROIC_BULK", "category": "identity", "label": "Heroic/bodybuilder bulk drift", "patterns": ["bodybuilder", "muscular", "heroic physique", "too stocky", "reduce bulk", "six-pack", "adult-human-sized"]},
-    {"code": "IDENTITY_HORNS_TUSKS", "category": "identity", "label": "Unwanted horns/tusks/orc drift", "patterns": ["horned", "horns", "tusks", "imp-like", "orc-like", "demon cues"]},
-    {"code": "IDENTITY_LIMB_COUNT", "category": "identity", "label": "Limb/body topology error", "patterns": ["too few legs", "extra limb", "missing limb", "exactly six", "exactly eight", "one pair of legs", "limb.*wrong", "sparse spiderlike limbs"]},
-    {"code": "IDENTITY_WRONG_CREATURE", "category": "identity", "label": "Wrong creature/body plan", "patterns": ["wrong creature", "wrong species", "generic beetle", "dragon humanoid", "dragon-person", "full troll", "fundamentally off-model", "reads as a living ogre", "worm/scorpion anatomy"]},
-    {"code": "SWARM_WALLPAPER", "category": "composition", "label": "Swarm wallpaper density", "patterns": ["wallpaper", "sea of repeated", "wallpaper-dense", "dense.*swarm", "unreadable overlap"]},
-    {"code": "SWARM_OVERSIZED_LEADER", "category": "composition", "label": "Oversized swarm leader", "patterns": ["oversized.*leader", "giant focal", "large central", "dominated by.*giant", "oversized foreground"]},
-    {"code": "ENVIRONMENT_GENERIC", "category": "environment", "label": "Generic/wrong environment", "patterns": ["generic.*background", "generic.*room", "wrong environment", "no masonry", "arches? (?:visible|missing)", "hall.*missing", "niche.*missing", "stalactites?", "stalagmites?"]},
-    {"code": "ACTION_UNCLEAR", "category": "story", "label": "Action/story beat unclear", "patterns": ["not defending", "feeding/posing", "not being .*", "story beat unclear", "interaction.*missing", "neutral pose", "does not clearly read", "action.*unclear"]},
-    {"code": "SIGNATURE_FEATURE_MISSING", "category": "identity", "label": "Signature feature missing", "patterns": ["gland", "proboscis", "regeneration", "signature.*missing", "defining.*missing"]},
-    {"code": "QUALITY_DENSITY", "category": "quality", "label": "Excessive line/detail density", "patterns": ["too busy", "line density", "micro-texture", "clutter", "crosshatch", "too many tiny"]}
+    {
+      "code": "TECH_SAFE_MARGIN",
+      "category": "technical",
+      "label": "Unsafe print margin",
+      "patterns": [
+        "safe_margin_too_busy",
+        "safe margin",
+        "print-safe.*margin"
+      ]
+    },
+    {
+      "code": "TECH_COLOR_CONTAMINATION",
+      "category": "technical",
+      "label": "Unexpected color content",
+      "patterns": [
+        "unexpected_color_content",
+        "color contamination",
+        "chromatic"
+      ]
+    },
+    {
+      "code": "TECH_RUNTIME",
+      "category": "technical",
+      "label": "Local runtime failure",
+      "patterns": [
+        "local_runtime_failed",
+        "did not become ready",
+        "runtime failed",
+        "comfyui.*ready"
+      ]
+    },
+    {
+      "code": "TECH_PREFLIGHT",
+      "category": "technical",
+      "label": "Engine preflight failure",
+      "patterns": [
+        "engine_preflight_failed",
+        "preflight failed",
+        "unit-test preflight"
+      ]
+    },
+    {
+      "code": "IDENTITY_HEROIC_BULK",
+      "category": "identity",
+      "label": "Heroic/bodybuilder bulk drift",
+      "patterns": [
+        "bodybuilder",
+        "muscular",
+        "heroic physique",
+        "too stocky",
+        "reduce bulk",
+        "six-pack",
+        "adult-human-sized",
+        "adult-human sized",
+        "adult human sized",
+        "broad-chested",
+        "broad chested",
+        "superhero mass",
+        "heroically muscular"
+      ]
+    },
+    {
+      "code": "IDENTITY_HORNS_TUSKS",
+      "category": "identity",
+      "label": "Unwanted horns/tusks/orc drift",
+      "patterns": [
+        "horned",
+        "horns",
+        "tusks",
+        "imp-like",
+        "orc-like",
+        "demon cues"
+      ]
+    },
+    {
+      "code": "IDENTITY_LIMB_COUNT",
+      "category": "identity",
+      "label": "Limb/body topology error",
+      "patterns": [
+        "too few legs",
+        "extra limb",
+        "missing limb",
+        "exactly six",
+        "exactly eight",
+        "one pair of legs",
+        "limb.*wrong",
+        "sparse spiderlike limbs",
+        "arms do not extend below hips",
+        "separate humanoid arms",
+        "forelimbs must be the wings",
+        "extra arms",
+        "extra wing"
+      ]
+    },
+    {
+      "code": "IDENTITY_WRONG_CREATURE",
+      "category": "identity",
+      "label": "Wrong creature/body plan",
+      "patterns": [
+        "wrong creature",
+        "wrong species",
+        "generic beetle",
+        "dragon humanoid",
+        "dragon-person",
+        "full troll",
+        "fundamentally off-model",
+        "reads as a living ogre",
+        "worm/scorpion anatomy",
+        "goblin-like round",
+        "goblin like round",
+        "primate muzzle",
+        "humanoid arms",
+        "catlike body",
+        "gorilla",
+        "ape-like",
+        "ape like",
+        "bear-man",
+        "dragon head"
+      ]
+    },
+    {
+      "code": "SWARM_WALLPAPER",
+      "category": "composition",
+      "label": "Swarm wallpaper density",
+      "patterns": [
+        "wallpaper",
+        "sea of repeated",
+        "wallpaper-dense",
+        "dense.*swarm",
+        "unreadable overlap"
+      ]
+    },
+    {
+      "code": "SWARM_OVERSIZED_LEADER",
+      "category": "composition",
+      "label": "Oversized swarm leader",
+      "patterns": [
+        "oversized.*leader",
+        "giant focal",
+        "large central",
+        "dominated by.*giant",
+        "oversized foreground"
+      ]
+    },
+    {
+      "code": "ENVIRONMENT_GENERIC",
+      "category": "environment",
+      "label": "Generic/wrong environment",
+      "patterns": [
+        "generic.*background",
+        "generic.*room",
+        "wrong environment",
+        "no masonry",
+        "arches? (?:visible|missing)",
+        "hall.*missing",
+        "niche.*missing",
+        "stalactites?",
+        "stalagmites?",
+        "central newel",
+        "newel or shaft",
+        "shaft visible",
+        "masonry or arches",
+        "masonry.*missing",
+        "arch.*not visible",
+        "burial niche",
+        "coffin niche"
+      ]
+    },
+    {
+      "code": "ACTION_UNCLEAR",
+      "category": "story",
+      "label": "Action/story beat unclear",
+      "patterns": [
+        "not defending",
+        "feeding/posing",
+        "not being .*",
+        "story beat unclear",
+        "interaction.*missing",
+        "neutral pose",
+        "does not clearly read",
+        "action.*unclear"
+      ]
+    },
+    {
+      "code": "SIGNATURE_FEATURE_MISSING",
+      "category": "identity",
+      "label": "Signature feature missing",
+      "patterns": [
+        "gland",
+        "proboscis",
+        "regeneration",
+        "signature.*missing",
+        "defining.*missing"
+      ]
+    },
+    {
+      "code": "QUALITY_DENSITY",
+      "category": "quality",
+      "label": "Excessive line/detail density",
+      "patterns": [
+        "too busy",
+        "line density",
+        "micro-texture",
+        "clutter",
+        "crosshatch",
+        "too many tiny",
+        "excessive repeated",
+        "repeated .*patterns",
+        "repeated bodies"
+      ]
+    }
   ],
-  "fallback": {"code": "UNCLASSIFIED", "category": "unknown", "label": "Unclassified defect"}
+  "fallback": {
+    "code": "UNCLASSIFIED",
+    "category": "unknown",
+    "label": "Unclassified defect"
+  }
 }
