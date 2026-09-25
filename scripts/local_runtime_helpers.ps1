@@ -49,23 +49,28 @@ function Wait-BlackInkEndpoint(
   throw "$Label did not become ready within $TimeoutSeconds seconds at $Uri."
 }
 
-function Find-BlackInkComfyDesktopExe {
-  $candidates = @(
-    (Join-Path $env:LOCALAPPDATA "Programs\ComfyUI\ComfyUI.exe"),
-    (Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI.exe"),
-    (Join-Path $env:LOCALAPPDATA "Programs\ComfyUI Desktop\ComfyUI.exe")
-  )
-  foreach ($candidate in $candidates) {
-    if ($candidate -and (Test-Path $candidate -PathType Leaf)) {
-      return $candidate
+function Find-BlackInkComfyWorkspace(
+  [string]$Root,
+  [string]$ConfiguredWorkspace
+) {
+  $candidates = @()
+
+  if ($env:LOCALAPPDATA) {
+    $candidates += Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary\ComfyUI"
+  }
+  if ($ConfiguredWorkspace) {
+    $workspace = if ([IO.Path]::IsPathRooted($ConfiguredWorkspace)) {
+      $ConfiguredWorkspace
+    } else {
+      Join-Path $Root $ConfiguredWorkspace
     }
+    $candidates += Join-Path $workspace "ComfyUI"
+    $candidates += $workspace
   }
 
-  if ($env:LOCALAPPDATA -and (Test-Path $env:LOCALAPPDATA)) {
-    $hit = Get-ChildItem -Path $env:LOCALAPPDATA -Include "ComfyUI.exe","ComfyUI Desktop.exe" -File -Recurse -ErrorAction SilentlyContinue |
-      Select-Object -First 1
-    if ($hit) {
-      return $hit.FullName
+  foreach ($candidate in $candidates | Select-Object -Unique) {
+    if (Test-Path (Join-Path $candidate "main.py") -PathType Leaf) {
+      return $candidate
     }
   }
   return $null
