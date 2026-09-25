@@ -314,6 +314,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 3),
         _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 4),
         _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 3),
+        _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures, 2),
     ]
     identity_lines.extend(_signature_geometry_lines(spec))
     creature_type = str(spec.get("creature_type") or "").lower()
@@ -384,17 +385,20 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         object_rules = list(required_object_rules(page))
         mode = str(physicality.get("mode") or "").strip().lower()
         mode_rule = str(MODE_CONTACT_RULES.get(mode) or "").strip()
+        physicality_rules = physicality_sections(page)
+        flight_rule = str(physicality_rules[4] if len(physicality_rules) > 4 else "").strip()
 
         action_lines = [
             f"STORY BEAT: {page.get('moment', '')}.",
             f"STORY/ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
-            f"SUPPORT / CONTACT: {physicality.get('support', '')}.",
-            f"MOTION / WEIGHT: {physicality.get('motion', '')}.",
+            f"PHYSICAL SUPPORT / CONTACT: {physicality.get('support', '')}.",
+            f"PHYSICAL MOTION / WEIGHT: {physicality.get('motion', '')}.",
             mode_rule,
+            flight_rule,
             *action_rules,
             *object_rules,
             (
-                "ACTION TEST — NON-NEGOTIABLE: the required verb and cause-and-effect must read at thumbnail size. "
+                "STATIC STORY TEST: the required verb and cause-and-effect must read at thumbnail size, not as a character portrait. "
                 "Reject standing, posing, holding, or mere proximity when the page calls for a specific action."
             ),
         ]
@@ -434,7 +438,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         sections.extend([
             (
                 "BLACK-INK COLORABILITY LOCK: pure black contour line art on white paper; bold outer contour, simple lighter interior lines, "
-                "medium-low detail, large uninterrupted white regions, no grayscale wash, painterly shading, dense crosshatching, text, logo, watermark, or large solid-black masses."
+                "medium-low detail, large uninterrupted white regions, predominantly white negative space, no solid-black void, no grayscale wash, "
+                "painterly shading, dense crosshatching, text, logo, watermark, or large solid-black masses."
             ),
             (
                 "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent of the page as completely blank white print margin; "
