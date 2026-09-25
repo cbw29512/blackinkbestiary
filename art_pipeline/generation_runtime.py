@@ -8,10 +8,12 @@ from pathlib import Path
 try:
     from .manifest_validation import validate_manifest
     from .page_contract import resolve_page_spec
+    from .png_content_qa import enforce_print_safe_margin
     from .studio_config import active_book_paths
 except ImportError:
     from manifest_validation import validate_manifest
     from page_contract import resolve_page_spec
+    from png_content_qa import enforce_print_safe_margin
     from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -119,6 +121,7 @@ def collect_output(client, images: list[dict], page_id: str, attempt: int, inspe
     for index, image in enumerate(images, 1):
         destination = CANDIDATE_DIR / f"{page_id}-A{attempt:03d}-{index}.png"
         client.download_image(image, destination)
+        enforce_print_safe_margin(destination)
         report = inspector(destination)
         reports.append(report)
         if accepted is None and report.get("pass"):
