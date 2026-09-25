@@ -1,0 +1,68 @@
+import struct
+import tempfile
+import unittest
+import zlib
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from book_assembly import assemble_pdf, locked_page_paths
+
+
+def _chunk(kind: bytes, data: bytes) -> bytes:
+    crc = zlib.crc32(kind + data) & 0xFFFFFFFF
+    return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", crc)
+
+
+def _write_gray_png(path: Path, width: int = 16, height: int = 20) -> None:
+    rows = bytearray()
+    for y in range(height):
+        rows.append(0)
+        for x in range(width):
+            rows.append(0 if (x == width // 2 or y == height // 2) else 255)
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0)
+    path.write_bytes(
+        b"\x89PNG\r\n\x1a\n"
+        + _chunk(b"IHDR", ihdr)
+        + _chunk(b"IDAT", zlib.compress(bytes(rows), 9))
+        + _chunk(b"IEND", b"")
+    )
+
+
+class BookAssemblyTests(unittest.TestCase):
+    def test_pdf_assembly_is_deterministic_and_ordered(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first = root / "one.png"
+            second = root / "two.png"
+            _write_gray_png(first)
+            _write_gray_png(second)
+
+            a = root / "a.pdf"
+            b = root / "b.pdf"
+            report_a = assemble_pdf([first, second], a, title="Synthetic Tome")
+            report_b = assemble_pdf([first, second], b, title="Synthetic Tome")
+
+            self.assertEqual(report_a["pages"], 2)
+            self.assertEqual(report_a["sha256"], report_b["sha256"])
+            self.assertEqual(a.read_bytes(), b.read_bytes())
+            payload = a.read_bytes()
+            self.assertTrue(payload.startswith(b"%PDF-1.4"))
+            self.assertIn(b"/Count 2", payload)
+            self.assertIn(b"/MediaBox [0 0 612 792]", payload)
+
+    def test_locked_book_gate_rejects_unlocked_page_before_pdf_work(self):
+        manifest = {
+            "total_pages": 1,
+            "pages": [{"page_id": "X-01", "order": 1}],
+        }
+        state = {"pages": {"X-01": {"status": "queued"}}}
+        with tempfile.TemporaryDirectory() as td:
+            with self.assertRaisesRegex(RuntimeError, "page is not locked"):
+                locked_page_paths(Path(td), manifest, state)
+
+
+if __name__ == "__main__":
+    unittest.main()

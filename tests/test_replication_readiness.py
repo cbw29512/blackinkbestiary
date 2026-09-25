@@ -28,6 +28,10 @@ class ReplicationReadinessTests(unittest.TestCase):
         self.assertEqual(book["environment_contract"], "config/universal_environment_contract.json")
         self.assertEqual(book["story_contract"], "config/universal_story_contract.json")
 
+    def test_replication_suite_includes_generic_book_assembly(self):
+        self.assertTrue((ROOT / "art_pipeline" / "book_assembly.py").exists())
+        self.assertTrue((ROOT / "scripts" / "assemble_book.py").exists())
+
     def test_existing_eight_book_series_still_passes_generic_audit(self):
         report = audit_series(ROOT)
         self.assertTrue(report["pass"])
