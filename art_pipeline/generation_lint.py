@@ -111,3 +111,76 @@ def assert_generation_ready(page: dict, prompt: str, root: Path = ROOT) -> None:
     errors = generation_lint_errors(page, prompt, root)
     if errors:
         raise RuntimeError("generation_lint_failed: " + " | ".join(errors))
+
+
+def edit_prompt_lint_errors(page: dict, prompt: str, root: Path = ROOT) -> list[str]:
+    """Fail before GPU edit work when a compact repair prompt loses authority."""
+    errors: list[str] = []
+    text = str(prompt or "")
+    normalized_prompt = _norm(text)
+    page_id = str(page.get("page_id") or "<unknown>")
+
+    if not text.strip():
+        return [f"{page_id}: edit prompt is empty"]
+
+    budget = _prompt_budget(root)
+    if len(text) > budget["hard_max_chars"]:
+        errors.append(
+            f"{page_id}: edit prompt exceeds hard character budget "
+            f"({len(text)} > {budget['hard_max_chars']})"
+        )
+    word_count = len(text.split())
+    if word_count > budget["hard_max_words"]:
+        errors.append(
+            f"{page_id}: edit prompt exceeds hard word budget "
+            f"({word_count} > {budget['hard_max_words']})"
+        )
+
+    for token in ("<missing>", "TODO", "TBD"):
+        if token.lower() in text.lower():
+            errors.append(f"{page_id}: unresolved placeholder {token!r} reached edit prompt")
+
+    subject = str(page.get("monster_name") or "").strip()
+    if subject and _norm(subject) not in normalized_prompt:
+        errors.append(f"{page_id}: resolved subject missing from edit prompt")
+
+    spec = load_monster_for_page(page, root / "data" / "monsters")
+    visual = (spec or {}).get("visual_identity") or {}
+    for field in ("shape_lock", "limb_structure"):
+        value = str(visual.get(field) or "").strip()
+        if not value:
+            errors.append(f"{page_id}: monster {field} is empty")
+        elif _norm(value) not in normalized_prompt:
+            errors.append(f"{page_id}: monster {field} authority missing from edit prompt")
+
+    variant = page.get("environment_variant") or {}
+    for field in ("landmark", "framing", "interaction"):
+        value = str(variant.get(field) or "").strip()
+        if not value:
+            errors.append(f"{page_id}: environment_variant.{field} is empty")
+        elif _norm(value) not in normalized_prompt:
+            errors.append(f"{page_id}: environment_variant.{field} missing from edit prompt")
+
+    physicality = page.get("physicality") or {}
+    for field in ("support", "motion"):
+        value = str(physicality.get(field) or "").strip()
+        if not value:
+            errors.append(f"{page_id}: physicality.{field} is empty")
+        elif _norm(value) not in normalized_prompt:
+            errors.append(f"{page_id}: physicality.{field} missing from edit prompt")
+
+    for required in (
+        "PAGE RECIPE LOCK — NON-NEGOTIABLE:",
+        "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE:",
+        "MODEL ENVIRONMENT PRIORITY CAPSULE",
+    ):
+        if required not in text:
+            errors.append(f"{page_id}: required edit lock missing: {required}")
+
+    return errors
+
+
+def assert_edit_ready(page: dict, prompt: str, root: Path = ROOT) -> None:
+    errors = edit_prompt_lint_errors(page, prompt, root)
+    if errors:
+        raise RuntimeError("edit_prompt_lint_failed: " + " | ".join(errors))
