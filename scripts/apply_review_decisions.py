@@ -50,16 +50,33 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
     )
     identity_already_ok = any(phrase in notes for phrase in identity_ok_phrases)
 
+    monster_name = str((item or {}).get("monster_name") or "").strip().lower()
+    identity_name_failure = bool(
+        monster_name
+        and (
+            f"does not read as {monster_name}" in notes
+            or f"doesn't read as {monster_name}" in notes
+            or f"not a {monster_name}" in notes
+            or f"not an {monster_name}" in notes
+        )
+    )
+    if identity_name_failure and not identity_already_ok:
+        return "identity"
+
     identity_terms = (
-        "anatomy", "body plan", "body-plan", "dragonborn", "humanoid dragon",
-        "extra arm", "extra arms", "separate humanoid arms", "too muscular",
-        "bodybuilder", "gorilla", "ape", "wrong creature", "small wiry",
-        "scale", "horn", "tail", "centipede has sparse", "leg pair",
+        "anatomy", "body plan", "body-plan", "species", "silhouette",
+        "proportion", "dragonborn", "humanoid dragon", "goblinoid",
+        "reptilian", "mammalian", "furry", "snout", "muzzle", "face",
+        "ear", "ears", "limb", "limbs", "wing", "wings", "arm", "arms",
+        "leg", "legs", "extra arm", "extra arms", "separate humanoid arms",
+        "too muscular", "bodybuilder", "gorilla", "ape", "wrong creature",
+        "wrong monster", "small wiry", "scale", "horn", "tail",
+        "centipede has sparse", "leg pair",
     )
     environment_terms = (
         "environment", "habitat", "corridor", "hall", "stair", "spiral",
         "crawlway", "shaft", "catacomb", "arch", "stone hall", "mine",
-        "web-filled dungeon", "does not read as",
+        "web-filled dungeon",
     )
     action_terms = (
         "kicking", "kick", "wedged", "drag", "defending", "defend",
