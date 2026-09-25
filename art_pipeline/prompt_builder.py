@@ -438,8 +438,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         sections.extend([
             (
                 "BLACK-INK COLORABILITY LOCK: pure black contour line art on white paper; bold outer contour, simple lighter interior lines, "
-                "medium-low detail, large uninterrupted white regions, predominantly white negative space, no solid-black void, no grayscale wash, "
-                "painterly shading, dense crosshatching, text, logo, watermark, or large solid-black masses."
+                "medium-low detail, large uninterrupted white regions, predominantly white negative space. NEVER fill a creature or scenery region with solid black; "
+                "no solid-black void, grayscale wash, painterly shading, dense crosshatching, text, logo, or watermark. No large black masses."
             ),
             (
                 "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent of the page as completely blank white print margin; "
