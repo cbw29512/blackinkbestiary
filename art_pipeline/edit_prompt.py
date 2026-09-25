@@ -12,6 +12,7 @@ try:
     )
     from .physicality_prompt import MODE_CONTACT_RULES
     from .quality_system import expand_defect_tags
+    from .generation_lint import assert_edit_ready
 except ImportError:
     from page_contract import resolve_page_spec
     from prompt_builder import _brief_items, load_monster_spec
@@ -22,6 +23,7 @@ except ImportError:
     )
     from physicality_prompt import MODE_CONTACT_RULES
     from quality_system import expand_defect_tags
+    from generation_lint import assert_edit_ready
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -219,4 +221,6 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
             "Return one clean black-on-white printable coloring page."
         )
     sections.append(final_instruction)
-    return "\n\n".join(part for part in sections if str(part or "").strip())
+    prompt = "\n\n".join(part for part in sections if str(part or "").strip())
+    assert_edit_ready(page, prompt, ROOT)
+    return prompt
