@@ -10,15 +10,15 @@ except ImportError:
     from page_contract import resolve_page_spec
 
 try:
-    from .environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections
-    from .physicality_prompt import physicality_checklist, physicality_sections
+    from .environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections, required_object_rules
+    from .physicality_prompt import MODE_CONTACT_RULES, physicality_checklist, physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
-    from .story_prompt import critical_scene_lock, story_checklist, story_sections
+    from .story_prompt import critical_scene_lock, interaction_proof_rules, story_checklist, story_sections
 except ImportError:
-    from environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections
-    from physicality_prompt import physicality_checklist, physicality_sections
+    from environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections, required_object_rules
+    from physicality_prompt import MODE_CONTACT_RULES, physicality_checklist, physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
-    from story_prompt import critical_scene_lock, story_checklist, story_sections
+    from story_prompt import critical_scene_lock, interaction_proof_rules, story_checklist, story_sections
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
@@ -182,211 +182,251 @@ CANDIDATE_COMPOSITIONS = [
 ]
 
 
+def _brief_items(label: str, values, limit: int | None = None) -> str:
+    cleaned = []
+    seen = set()
+    for value in values or []:
+        item = str(value or "").strip()
+        if not item or item in seen:
+            continue
+        seen.add(item)
+        cleaned.append(item)
+        if limit is not None and len(cleaned) >= limit:
+            break
+    return f"{label}: " + "; ".join(cleaned) + "." if cleaned else ""
+
+
+def _review_recovery_lock(review_notes: dict | None) -> str:
+    stage = str((review_notes or {}).get("stage") or "").strip().lower()
+    text = str((review_notes or {}).get("text") or "").strip()
+    if not text:
+        return ""
+    if stage == "identity":
+        return (
+            "IDENTITY RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed species/anatomy review. "
+            "Rebuild from canonical written authority and correct these visible failures: " + text + ". "
+            "Do not preserve the failed silhouette."
+        )
+    if stage == "environment":
+        return (
+            "ENVIRONMENT RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed environment geometry/identity review. "
+            "Keep correct creature anatomy, but rebuild setting geometry so the setting must read correctly even if the creature is mentally removed. "
+            "Correct: " + text + "."
+        )
+    if stage in {"action", "scene"}:
+        return (
+            "ACTION RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed the required visible action/contact review. "
+            "Rebuild pose, prop placement, support/contact, and cause-and-effect. The required verb must be visible without a caption. "
+            "Correct: " + text + "."
+        )
+    if stage == "quality":
+        return (
+            "QUALITY RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed printable coloring-page quality review. "
+            "Preserve correct identity, setting, and action while simplifying density. Broad white colorable regions are mandatory. "
+            "Correct: " + text + "."
+        )
+    return f"LATEST REVIEW CORRECTION: {text}"
+
+
 def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int | None = None) -> str:
+    """Compile full page authority into a short, priority-ordered FLUX brief.
+
+    Full-fidelity authority remains in monster/environment/page data and the
+    downstream verification checklist. The model-facing prompt intentionally
+    removes repeated prose so hard anatomy/action/environment requirements do
+    not compete with dozens of lower-priority restatements.
+    """
     page = resolve_page_spec(page, ROOT)
-    spec = load_monster_spec(page)
+    spec = load_monster_spec(page) or {}
+    visual = spec.get("visual_identity") or {}
+    scene = spec.get("scene_identity") or {}
+    variant = page.get("environment_variant") or {}
+    physicality = page.get("physicality") or {}
+    render_priority = visual.get("render_priority") or {}
     review_stage = str((review_notes or {}).get("stage") or "").strip().lower()
     review_text = str((review_notes or {}).get("text") or "").strip()
     identity_focus_mode = bool(
         review_stage == "identity"
         and (review_notes or {}).get("stagnation_escalation")
     )
-    recovery_lock = ""
-    if review_stage == "identity" and review_text:
-        recovery_lock = (
-            "IDENTITY RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed species/anatomy review. "
-            "Generate a fresh creature from canonical written authority and explicitly correct these visible failures: "
-            + review_text
-            + ". Do not imitate or preserve the failed creature silhouette from the prior attempt."
-        )
-    elif review_stage == "environment" and review_text:
-        recovery_lock = (
-            "ENVIRONMENT RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed environment geometry/identity review. "
-            "Keep canonical creature anatomy, but rebuild room/terrain geometry, camera, scale references, landmark placement, and supporting architecture as needed. "
-            "The setting must read correctly even if the creature is mentally removed. Explicitly correct these visible failures: "
-            + review_text
-            + ". Do not preserve a generic or spatially wrong background."
-        )
-    elif review_stage in {"action", "scene"} and review_text:
-        recovery_lock = (
-            "ACTION RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed the required visible action/contact review. "
-            "Keep canonical creature identity and any correct setting geometry, but rebuild pose, prop placement, support/contact, and cause-and-effect as needed. "
-            "The required verb must be visible without a caption. Explicitly correct these visible failures: "
-            + review_text
-            + ". Do not preserve a neutral pose or merely place the creature near the required prop."
-        )
-    elif review_stage == "quality" and review_text:
-        recovery_lock = (
-            "QUALITY RECOVERY LOCK — NON-NEGOTIABLE: the previous image failed printable coloring-page quality review. "
-            "Preserve canonical identity, correct environment, and clear action while simplifying line density and repeated detail, removing decorative borders/inset frames, large black fills, grayscale, clutter, or wallpaper patterns as needed. "
-            "Explicitly correct these visible failures: "
-            + review_text
-            + ". Broad white colorable regions and a clean silhouette are mandatory."
-        )
-    identity_focus_directive = ""
-    if identity_focus_mode:
-        identity_focus_directive = (
-            "IDENTITY-FIRST RECOVERY MODE — TEMPORARY INTERMEDIATE PASS: solve the creature silhouette, exact limb topology, "
-            "canonical body mass, head/body proportions, and size evidence before solving the full narrative scene. Keep the background "
-            "deliberately simple: only the largest structural habitat cue and one human-scale reference needed to prove creature size. "
-            "Omit secondary props, decorative scenery, repeated texture, micro-detail, and optional story clutter. Do not sacrifice identity "
-            "to satisfy environment richness in this pass. Once identity passes, later environment/action repair stages may add the remaining scene detail."
+
+    size = str(spec.get("size") or "").strip().lower() or "unspecified"
+    failures = [
+        f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
+        for item in spec.get("known_failure_modes") or []
+        if item.get("symptom") and item.get("correction")
+    ]
+
+    identity_lines = [
+        f"SUBJECT: {page['monster_name']}.",
+        (
+            f"CANONICAL SCALE LOCK — NON-NEGOTIABLE: size category {size}. "
+            f"{page.get('subject_scale_rule', '')} Canonical creature scale is immutable; use framing rather than enlarging the body. "
+            "The monster remains the first-read focal subject at canonical scale and proportions."
+        ),
+        f"SHAPE-FIRST RENDER LOCK — NON-NEGOTIABLE: {visual.get('shape_lock', '')}",
+        f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}",
+        f"CANONICAL BODY: {visual.get('body_shape', '')}",
+        f"CANONICAL LIMBS / EXTREMITIES: {visual.get('limb_structure', '')}",
+        f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}",
+        _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 8),
+        _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 12),
+        _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 10),
+        _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures, 5),
+    ]
+    for key, label in (
+        ("positive", "MODEL PRIORITY CAPSULE — READ BEFORE STYLE OR SCENERY"),
+        ("negative", "MODEL PRIORITY NEGATIVE LOCK — NON-NEGOTIABLE"),
+        ("silhouette_test", "MODEL PRIORITY THUMBNAIL TEST — NON-NEGOTIABLE"),
+    ):
+        value = str(render_priority.get(key) or "").strip()
+        if value:
+            identity_lines.append(f"{label}: {value}")
+
+    identity_lines.append(
+        "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Never invent or duplicate heads, eyes, horns, antennae, arms, hands, "
+        "legs, feet, wings, tails, tentacles, mandibles, pincers, or other appendages. Limbs attach once at plausible joints and may not branch, "
+        "merge, or sprout from scenery. Exact canonical counts are hard limits. Candidate variation may change pose only; it may not change anatomy."
+    )
+    identity_lines.append(
+        "CREATURE/SCENERY OWNERSHIP FIREWALL: scenery and props may touch the creature only where the recipe requires interaction; "
+        "they may never sprout from, merge into, replace, or duplicate limbs, tails, wings, horns, antennae, mandibles, or other anatomy."
+    )
+
+    if _is_swarm(page, spec):
+        identity_lines.extend(_swarm_priority_sections(page, spec))
+        identity_lines.append(
+            "SWARM COMPOSITION LOCK — NON-NEGOTIABLE: use the canonical controlled population as a hard composition limit; do not exceed it. "
+            "The collective swarm is one readable directional shape with broad negative-space gaps; no single oversized member may dominate and no giant leader."
         )
 
-    environment_detail_sections = (
-        [] if identity_focus_mode else environment_prompt_sections(page, ROOT)
-    )
-    story_detail_sections = (
-        [] if identity_focus_mode else story_sections(page, ROOT)
-    )
-    physicality_detail_sections = (
-        [] if identity_focus_mode else physicality_sections(page)
-    )
+    recovery_lock = _review_recovery_lock(review_notes)
 
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
         (
-            "BLACK-INK COLORABILITY LOCK: This is an uncolored coloring-book page. Use black contour lines on white paper. "
-            "NEVER fill a creature, shadow, liquid, fur, shell, ooze, clothing, or background region with solid black merely "
-            "because its canonical color is dark or black. Communicate dark coloration with sparse contour/texture cues while "
-            "leaving the interior predominantly white and colorable. No large black masses."
+            "PRIORITY ORDER — OBEY IN THIS ORDER: 1) exact creature body plan/anatomy, 2) canonical size/proportions, "
+            "3) the one visible story action/contact, 4) unmistakable environment geometry, 5) clean coloring-book style. "
+            "If lower-priority detail conflicts with a higher-priority requirement, remove the lower-priority detail."
         ),
-        (
-            "PAGE-EDGE LOCK — NON-NEGOTIABLE: draw only the scene itself on the white page. "
-            "Reserve the outer eight percent of the page on every side as completely blank white print margin: no creature anatomy, weapons, tails, wings, webs, masonry, rails, grates, props, borders, or stray linework may enter that zone. "
-            "Never draw a decorative rectangular border, inset artwork frame, comic panel box, picture-frame line, or enclosing rectangle around the illustration. "
-            "Architecture, webs, grates, rails, shelves, and masonry may form local straight lines, but they must not connect into a page-sized frame. "
-            "Keep clean white print margins without outlining those margins."
-        ),
-        f"SUBJECT: {page['monster_name']}.",
-        *_render_priority_sections(spec),
-        *_body_plan_lock(page, spec),
-        *_swarm_priority_sections(page, spec),
-        *environment_priority_sections(page, ROOT),
         recovery_lock,
-        identity_focus_directive,
-        critical_scene_lock(page),
-        (
-            "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Treat every countable body structure in the canonical creature "
-            "identity as exact, not approximate. Never invent or duplicate heads, faces, eyes, horns, antennae, arms, hands, "
-            "fingers, legs, feet, wings, tails, tentacles, mandibles, pincers, or other appendages. A normal bilateral creature "
-            "must keep a coherent left/right body plan; limbs must attach once at anatomically plausible joints and may not branch, "
-            "merge, sprout from scenery, or appear as detached extras. If canonical anatomy says a structure is absent, do not add it. "
-            "If canonical anatomy gives a number such as two arms, four legs, eight spider legs, one tail, or two wings, that number is "
-            "an exact hard limit. Pose and camera angle may hide part of a limb behind the body, but may never create an extra limb to "
-            "make the pose readable. Candidate variation may change pose only; it may not change anatomy."
-        ),
-        *_canonical_sections(spec),
-        (
-            "CREATURE-ONLY AUTHORITY: canonical monster data describes the creature only. Any place words inherited "
-            "from legacy monster text are descriptive lore or scale context, never scenery instructions. Do not add walls, "
-            "corridors, caves, treasure, pillars, furniture, ruins, water, vegetation, lighting, traps, or other background "
-            "elements because the monster text mentions them. Build all scenery exclusively from the selected page environment. "
-            "CREATURE/SCENERY OWNERSHIP FIREWALL: scenery must never become anatomy. Chains, ropes, roots, rails, beams, torches, "
-            "rocks, web strands, tools, props, furniture, and architectural lines may touch the creature only where the page recipe "
-            "explicitly requires a physical interaction. They may never sprout from, merge into, replace, or duplicate limbs, tails, "
-            "wings, horns, antennae, mandibles, or other body structures."
-        ),
-        (
-            "HABITAT EXPANSION RULE: broad creature habitat tags are compatibility inputs only. The universal environment engine must flesh the selected habitat into specific spatial geometry, surfaces, landmarks, lighting, depth, hazards, vegetation or water, architecture where appropriate, and supporting props without copying a canned monster scene.\n\n"
-            "PAGE ENVIRONMENT AUTHORITY: the named HABITAT and resolved environment profile below are mandatory and "
-            "override all general creature habitat preferences. Creature-family environment_fit data is planning-only "
-            "and must never replace, broaden, or reinterpret this selected page environment."
-        ),
-        f"HABITAT: {page['habitat']}.",
-        *environment_detail_sections,
-        ("" if identity_focus_mode else f"MOMENT: {page['moment']}."),
-        *story_detail_sections,
-        *physicality_detail_sections,
-        ("" if identity_focus_mode else f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}."),
-        ("" if identity_focus_mode else f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}"),
-        _items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules")),
-        _items("MUST INCLUDE", page.get("must_include")),
-        _items("MUST AVOID", page.get("must_avoid")),
-        f"COMPOSITION: {page.get('composition', '')}".strip(),
-        "HOUSE STYLE: " + "; ".join(STYLE_RULES) + ".",
-        (
-            "REFERENCE RULE: any reference image is for creature anatomy, silhouette, and identity only. "
-            "Do not copy its composition, rendering, colors, pose, or background. "
-            "The final art must remain original Black-Ink coloring-book line art."
-        ),
+        "IDENTITY — HIGHEST PRIORITY:\n" + "\n".join(f"- {x}" for x in identity_lines if x and not x.endswith(":")),
     ]
 
-    sections.append(format_generation_self_check(identity_focus_mode))
+    if identity_focus_mode:
+        sections.extend([
+            (
+                "IDENTITY-FIRST RECOVERY MODE — TEMPORARY INTERMEDIATE PASS: solve creature silhouette, exact limb topology, "
+                "canonical body mass, head/body proportions, and size evidence before full narrative scenery. Keep only the largest habitat cue "
+                "and one scale reference. Omit secondary props, repeated texture, micro-detail, and optional story clutter."
+            ),
+            f"HABITAT: {page['habitat']}.",
+            *environment_priority_sections(page, ROOT),
+            (
+                "BLACK-INK COLORABILITY LOCK: pure black contour lines on white paper; bold outer contour, lighter simple interior lines, "
+                "large uninterrupted white regions, no grayscale wash, no painterly shading, almost no crosshatching, and no large black masses."
+            ),
+            (
+                "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent as blank white print margin. "
+                "Never draw a decorative rectangular border; architecture must not connect into a page-sized frame."
+            ),
+            format_generation_self_check(True),
+        ])
+    else:
+        action_rules = list(interaction_proof_rules(page))
+        object_rules = list(required_object_rules(page))
+        mode = str(physicality.get("mode") or "").strip().lower()
+        mode_rule = str(MODE_CONTACT_RULES.get(mode) or "").strip()
 
-    if candidate_no is not None:
-        escape_offset = int((review_notes or {}).get("composition_escape_offset") or 0)
-        variant_index = (candidate_no - 1 + escape_offset) % len(CANDIDATE_COMPOSITIONS)
-        variant = CANDIDATE_COMPOSITIONS[variant_index]
-        sections.append(
-            f"CANDIDATE {candidate_no} COMPOSITION LOCK: {variant}. "
-            "This candidate must be compositionally distinct from the other candidates for this page. "
-            "Do not default to a centered frontal portrait when this lock specifies another view. "
-            "Vary camera angle, subject placement, pose, landmark relationship, and story interaction while preserving canonical anatomy. "
-            "Camera/framing may change apparent prominence but MUST NOT change canonical creature scale, body mass, or species proportions."
-        )
+        action_lines = [
+            f"MOMENT: {page.get('moment', '')}.",
+            f"STORY BEAT: {page.get('moment', '')}.",
+            f"STORY/ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
+            f"PHYSICAL SUPPORT / CONTACT: {physicality.get('support', '')}.",
+            f"PHYSICAL MOTION / WEIGHT: {physicality.get('motion', '')}.",
+            mode_rule,
+            *action_rules,
+            *object_rules,
+            (
+                "STATIC STORY TEST: the page must read as one clear verb/action at thumbnail size, not as a character portrait "
+                "or a monster merely holding props."
+            ),
+        ]
+        environment_lines = [
+            f"HABITAT: {page['habitat']}.",
+            *environment_priority_sections(page, ROOT),
+            f"UNIQUE BACKGROUND LANDMARK: {variant.get('landmark', '')}.",
+            f"UNIQUE BACKGROUND FRAMING: {variant.get('framing', '')}.",
+            f"MONSTER / ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
+            (
+                "ENVIRONMENT SIMPLICITY RULE: use only two to four large habitat-defining forms. The setting must read without the monster, "
+                "but decorative clutter, repeated masonry texture, rubble wallpaper, and tiny props are lower priority and should be omitted."
+            ),
+        ]
 
-    # Legacy page modify/preserve recipes apply only when editing an existing
-    # source image. Fresh text-to-image generation has nothing to preserve and
-    # must build directly from canonical monster/environment/page authority.
+        sections.extend([
+            critical_scene_lock(page),
+            "ACTION — SECOND PRIORITY:\n" + "\n".join(f"- {x}" for x in action_lines if x),
+            "ENVIRONMENT — THIRD PRIORITY:\n" + "\n".join(f"- {x}" for x in environment_lines if x),
+            _brief_items("MUST INCLUDE", page.get("must_include"), 10),
+            _brief_items("MUST AVOID", page.get("must_avoid"), 14),
+        ])
+
+        if candidate_no is not None:
+            escape_offset = int((review_notes or {}).get("composition_escape_offset") or 0)
+            variant_index = (candidate_no - 1 + escape_offset) % len(CANDIDATE_COMPOSITIONS)
+            composition = CANDIDATE_COMPOSITIONS[variant_index]
+            sections.append(
+                f"CANDIDATE {candidate_no} COMPOSITION LOCK: {composition}. "
+                "Make camera, subject placement, pose, landmark relationship, and story interaction materially distinct while preserving anatomy and canonical scale."
+            )
+
+        sections.extend([
+            (
+                "BLACK-INK COLORABILITY LOCK: This is uncolored professional fantasy coloring-book line art: pure black ink on white paper, "
+                "bold clean outer contour, lighter simpler interior lines, medium-low detail density, large uninterrupted white regions that are enjoyable to color. "
+                "NEVER fill a creature, shadow, liquid, fur, shell, ooze, clothing, or background region with solid black merely because it is dark. "
+                "No grayscale wash, painterly shading, dense crosshatching, text, logo, watermark, or large black masses."
+            ),
+            (
+                "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent on every side as completely blank white print margin. "
+                "Never draw a decorative rectangular border, inset artwork frame, comic panel box, picture-frame line, or enclosing rectangle. "
+                "Local architectural lines must not connect into a page-sized frame."
+            ),
+            (
+                "REFERENCE RULE: any reference image is for creature anatomy, silhouette, and identity only. "
+                "Do not copy its composition, rendering, colors, pose, or background."
+            ),
+            f"COMPOSITION: {page.get('composition', '')}",
+            (
+                "PAGE RECIPE LOCK — NON-NEGOTIABLE: "
+                f"environment={page['habitat']}; moment={page['moment']}; landmark={variant.get('landmark', '')}; "
+                f"interaction={variant.get('interaction', '')}; required elements={'; '.join(str(x) for x in page.get('must_include') or [])}."
+            ),
+            format_generation_self_check(False),
+        ])
 
     if review_notes:
-        tags = review_notes.get("quick_tags") or []
-        text = review_text
         failed_dimensions = review_notes.get("failed_dimensions") or []
         route = str(review_notes.get("routing_recommendation") or "").strip()
+        tags = review_notes.get("quick_tags") or []
         if failed_dimensions:
-            sections.append(_items("FAILED REVIEW REQUIREMENTS TO CORRECT", failed_dimensions))
+            sections.append(_brief_items("FAILED REVIEW REQUIREMENTS TO CORRECT", failed_dimensions))
         if route == "regenerate":
             sections.append(
-                "REGENERATION RULE: rebuild the failed composition from the canonical page recipe. "
-                "Do not preserve a bad layout or failed creature silhouette merely because parts of the previous attempt were attractive."
+                "REGENERATION RULE: rebuild the failed composition from canonical authority; do not preserve a bad layout or failed creature silhouette."
             )
         if review_notes.get("stagnation_escalation"):
             sections.append(
-                "STAGNATION ESCAPE RULE: the previous structural repair failed at the same review stage. "
-                "Use the alternate composition lock above to change camera/pose/landmark geometry materially while preserving canonical identity and required habitat/action."
+                "STAGNATION ESCAPE RULE: materially change camera/pose/landmark geometry while preserving canonical identity and required habitat/action."
             )
-        if text and review_stage not in {"identity", "environment", "action", "scene", "quality"}:
-            sections.append(f"LATEST REVIEW CORRECTION: {text}")
+        if review_text and review_stage not in {"identity", "environment", "action", "scene", "quality"}:
+            sections.append(f"LATEST REVIEW CORRECTION: {review_text}")
         if tags:
-            sections.append(_items("LATEST HUMAN QUICK CHANGES", tags))
-            sections.append(_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags)))
+            sections.append(_brief_items("LATEST HUMAN QUICK CHANGES", tags))
+            sections.append(_brief_items("REMEDIATION DIRECTIVES", expand_defect_tags(ROOT, tags), 8))
 
-    variant = page.get("environment_variant") or {}
-    required = "; ".join(str(item) for item in page.get("must_include") or [])
-    sections.append(
-        "PAGE RECIPE LOCK — NON-NEGOTIABLE: "
-        f"environment={page['habitat']}; "
-        f"moment={page['moment']}; "
-        f"landmark={variant.get('landmark', '')}; "
-        f"interaction={variant.get('interaction', '')}; "
-        f"required elements={required}. "
-        "Universal family/component libraries may enrich these requirements but may not replace them."
-    )
-    if _is_swarm(page, spec):
-        sections.append(
-            "SWARM COMPOSITION LOCK — NON-NEGOTIABLE: the collective swarm is the dominant subject, not one oversized leader. "
-            "Use a controlled population of similarly scaled individuals arranged in one readable directional flow with obvious origin, "
-            "broad negative-space gaps, and no wallpaper density. If canonical swarm identity gives an approximate visible population range, "
-            "treat that range as a hard composition limit: do not exceed it and do not replace it with an uncountable crowd. "
-            "Vary the group silhouette, not the anatomy or scale of a single member."
-        )
-        subject_test = (
-            "the collective swarm must dominate through one readable group shape and direction; no single oversized member may dominate; "
-            "individuals remain countable enough to read while broad white gaps preserve colorability"
-        )
-    else:
-        subject_test = "the monster must be the first-read focal subject through framing while preserving canonical size, body mass, and species proportions, and it must remain unmistakable at thumbnail size"
-
-    sections.append(
-        "Final test: COLORABILITY IS THE GOVERNING CONSTRAINT. The page must first be inviting and satisfying to color, "
-        "with broad open regions, clean line hierarchy, and no fiddly density. Under that constraint, " + subject_test + "; the environment "
-        "must be unmistakably the named habitat; and one simple story moment must read immediately. Monster and environment "
-        "must feel physically connected through perspective, scale, and interaction. If story or environment detail competes "
-        "with coloring usability, simplify the story/environment detail."
-    )
-    return "\n\n".join(part for part in sections if part)
+    return "\n\n".join(part for part in sections if str(part or "").strip())
 
 
 
