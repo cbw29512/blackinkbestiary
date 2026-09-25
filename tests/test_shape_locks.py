@@ -113,8 +113,12 @@ class ShapeLockTests(unittest.TestCase):
         self.assertIn("tight inner column and outer curved wall", spiral)
         self.assertIn("central newel, column, or open shaft", spiral)
         self.assertLess(
+            spiral.index("ACTION — SECOND PRIORITY:"),
             spiral.index("MODEL ENVIRONMENT PRIORITY CAPSULE"),
-            spiral.index("MOMENT:"),
+        )
+        self.assertLess(
+            spiral.index("MODEL ENVIRONMENT PRIORITY CAPSULE"),
+            spiral.index("BLACK-INK COLORABILITY LOCK:"),
         )
 
         self.assertIn("large coffin niche with one old bone", niche)
