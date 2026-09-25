@@ -444,6 +444,22 @@ class QualityHistoryTests(unittest.TestCase):
             self.assertEqual(report["semantic_accuracy"], 0.0)
             self.assertFalse(report["rows"][0]["visual_cleanliness_pass"])
 
+    def test_exact_image_readiness_rejects_unsafe_path(self):
+        state = {"results": [{
+            "page_id": "A",
+            "candidate": 1,
+            "status": "awaiting_exact_image_review",
+            "image_path": "../outside.png",
+            "assistant_review": {
+                "decision": "approve",
+                "review_id": "A-C01-Hdeadbeefdeadbeef",
+            },
+        }]}
+        report = canary_metrics(state, ["A"])
+        self.assertEqual(report["semantic_accuracy"], 0.0)
+        self.assertEqual(report["visual_cleanliness"], 0.0)
+
+
     def test_prompt_load_measures_fixed_canary_generation_and_review_payloads(self):
         report = prompt_load_report(ROOT, ["I-01", "I-04", "I-19"])
         self.assertEqual(report["pages_measured"], 3)
