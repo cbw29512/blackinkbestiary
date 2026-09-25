@@ -50,7 +50,7 @@ function Find-BlackInkComfyWorkspace(
 ) {
   $candidates = @()
   if ($env:LOCALAPPDATA) {
-    $candidates += Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary\ComfyUI"
+    $candidates += Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary"
   }
   if ($ConfiguredWorkspace) {
     $candidate = if ([IO.Path]::IsPathRooted($ConfiguredWorkspace)) {
@@ -62,24 +62,23 @@ function Find-BlackInkComfyWorkspace(
   }
 
   foreach ($candidate in $candidates | Select-Object -Unique) {
-    if (Test-Path (Join-Path $candidate "main.py") -PathType Leaf) {
+    if (Test-Path (Join-Path $candidate "ComfyUI\main.py") -PathType Leaf) {
       return $candidate
     }
-    $nested = Join-Path $candidate "ComfyUI"
-    if (Test-Path (Join-Path $nested "main.py") -PathType Leaf) {
-      return $nested
+    if ((Split-Path $candidate -Leaf) -eq "ComfyUI" -and
+        (Test-Path (Join-Path $candidate "main.py") -PathType Leaf)) {
+      return (Split-Path -Parent $candidate)
     }
   }
   return $null
 }
 
 function Find-BlackInkComfyPython([string]$Workspace) {
-  $parent = Split-Path -Parent $Workspace
   $candidates = @(
+    (Join-Path $Workspace "ComfyUI\.venv\Scripts\python.exe"),
     (Join-Path $Workspace ".venv\Scripts\python.exe"),
-    (Join-Path $Workspace "venv\Scripts\python.exe"),
-    (Join-Path $parent ".venv\Scripts\python.exe"),
-    (Join-Path $parent "python_embeded\python.exe")
+    (Join-Path $Workspace "ComfyUI\venv\Scripts\python.exe"),
+    (Join-Path $Workspace "python_embeded\python.exe")
   )
   foreach ($candidate in $candidates) {
     if (Test-Path $candidate -PathType Leaf) { return $candidate }
