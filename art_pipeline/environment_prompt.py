@@ -69,6 +69,42 @@ def _required_object_rules(page: dict) -> list[str]:
         )
     return rules
 
+def environment_priority_sections(page: dict, root: Path) -> list[str]:
+    """Concise environment identity proof shown before detailed scene prose."""
+    profile = load_environment_for_page(page)
+    variant = page.get("environment_variant") or {}
+    identity = profile.get("resolved_identity") or {}
+    envelope = resolve_spatial_envelope(profile)
+
+    must_show = [str(item).strip() for item in envelope.get("must_show") or [] if str(item).strip()]
+    markers = [str(item).strip() for item in identity.get("identity_markers") or [] if str(item).strip()]
+    proof = []
+    if markers:
+        proof.append("location markers=" + "; ".join(markers[:3]))
+    if must_show:
+        proof.append("spatial proof=" + "; ".join(must_show[:4]))
+    landmark = str(variant.get("landmark") or "").strip()
+    if landmark:
+        proof.append("unique landmark=" + landmark)
+
+    return [
+        (
+            "MODEL ENVIRONMENT PRIORITY CAPSULE — READ BEFORE DECORATIVE DETAIL: "
+            f"habitat={page.get('habitat', '')}; "
+            f"spatial type={identity.get('spatial_type', '')}; "
+            f"landmark={landmark}; "
+            f"framing={variant.get('framing', '')}. "
+            "These structural cues outrank generic fantasy scenery."
+        ),
+        (
+            "MODEL ENVIRONMENT PROOF LOCK — NON-NEGOTIABLE: "
+            + "; ".join(proof)
+            + ". If the monster were mentally removed, the location must still be identifiable from these large structural forms. "
+            "Do not replace them with generic cave, corridor, rubble, web, or dungeon texture."
+        ),
+    ]
+
+
 def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
     variant = page.get("environment_variant") or {}

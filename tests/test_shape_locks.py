@@ -92,6 +92,26 @@ class ShapeLockTests(unittest.TestCase):
         self.assertIn("one continuous ceiling-clinging cloak/cap body", text)
         self.assertNotIn("controlled natural flight, but flight capability", text)
 
+    def test_environment_priority_capsule_promotes_structural_landmarks(self):
+        spiral = build_prompt(self.pages["I-10"])
+        niche = build_prompt(self.pages["I-20"])
+        hall = build_prompt(self.pages["I-22"])
+
+        self.assertIn("MODEL ENVIRONMENT PRIORITY CAPSULE", spiral)
+        self.assertIn("tight inner column and outer curved wall", spiral)
+        self.assertIn("central newel, column, or open shaft", spiral)
+        self.assertLess(
+            spiral.index("MODEL ENVIRONMENT PRIORITY CAPSULE"),
+            spiral.index("MOMENT:"),
+        )
+
+        self.assertIn("large coffin niche with one old bone", niche)
+        self.assertIn("MODEL ENVIRONMENT PROOF LOCK", niche)
+
+        self.assertIn("one broad radial web spanning a large arch", hall)
+        self.assertIn("frontal hall arch used as the web frame", hall)
+        self.assertIn("MODEL ENVIRONMENT PROOF LOCK", hall)
+
     def test_spiral_stair_uses_dedicated_helical_envelope(self):
         text = build_prompt(self.pages["I-10"])
         self.assertIn("SPACE ENVELOPE: spiral_stair", text)

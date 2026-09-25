@@ -10,12 +10,12 @@ except ImportError:
     from page_contract import resolve_page_spec
 
 try:
-    from .environment_prompt import environment_checklist, environment_prompt_sections
+    from .environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections
     from .physicality_prompt import physicality_checklist, physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
     from .story_prompt import critical_scene_lock, story_checklist, story_sections
 except ImportError:
-    from environment_prompt import environment_checklist, environment_prompt_sections
+    from environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections
     from physicality_prompt import physicality_checklist, physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
     from story_prompt import critical_scene_lock, story_checklist, story_sections
@@ -219,6 +219,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         f"SUBJECT: {page['monster_name']}.",
         *_render_priority_sections(spec),
         *_body_plan_lock(page, spec),
+        *environment_priority_sections(page, ROOT),
         recovery_lock,
         critical_scene_lock(page),
         (
