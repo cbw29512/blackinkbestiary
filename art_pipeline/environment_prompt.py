@@ -132,6 +132,8 @@ def environment_compact_sections(page: dict, root: Path) -> list[str]:
         "PAGE ENVIRONMENT AUTHORITY — NON-NEGOTIABLE: named habitat/profile control scenery; creature lore cannot replace it.",
         f"ENVIRONMENT SPATIAL TYPE: {identity.get('spatial_type', '')}.",
         f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
+        f"UNIQUE BACKGROUND LANDMARK: {(page.get('environment_variant') or {}).get('landmark', '')}.",
+        f"UNIQUE BACKGROUND FRAMING: {(page.get('environment_variant') or {}).get('framing', '')}.",
         _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
         f"SPACE ENVELOPE: {envelope.get('envelope_id', '')}.",
         _items("SPACE MUST SHOW", envelope.get("must_show")),
