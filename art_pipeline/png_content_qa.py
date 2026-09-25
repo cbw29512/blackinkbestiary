@@ -118,7 +118,7 @@ def inspect_line_art(path: str | Path) -> dict:
 
     dark_ratio = dark / total if total else 0.0
     white_ratio = white / total if total else 0.0
-    reasons = []
+    midtone_ratio, chromatic_ratio, reasons = purity_reasons(midtone, chromatic, total)
     if dark_ratio < 0.001:
         reasons.append("near_blank_page")
     if dark_ratio > 0.55:
