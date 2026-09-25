@@ -74,6 +74,14 @@ def prompt_load_report(root: Path = ROOT, page_ids: list[str] | None = None) -> 
         except Exception as exc:
             errors.append({"page_id": page_id, "error": str(exc)})
 
+    standard = json.loads(
+        (root / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
+    )
+    budget = standard.get("generation_prompt_budget") or {}
+    target_max_chars = int(budget.get("target_max_chars") or 12000)
+    hard_max_chars = int(budget.get("hard_max_chars") or 14000)
+    hard_max_words = int(budget.get("hard_max_words") or 2000)
+
     generation_chars = [row["generation"]["chars"] for row in rows]
     generation_words = [row["generation"]["words"] for row in rows]
     checklist_items = [row["checklist_items"] for row in rows]
@@ -90,6 +98,20 @@ def prompt_load_report(root: Path = ROOT, page_ids: list[str] | None = None) -> 
         "generation_chars_max": max(generation_chars, default=0),
         "generation_words_avg": _avg(generation_words),
         "generation_words_max": max(generation_words, default=0),
+        "generation_prompt_budget": {
+            "target_max_chars": target_max_chars,
+            "hard_max_chars": hard_max_chars,
+            "hard_max_words": hard_max_words,
+            "within_hard_budget": all(
+                row["generation"]["chars"] <= hard_max_chars
+                and row["generation"]["words"] <= hard_max_words
+                for row in rows
+            ),
+            "within_target_budget": all(
+                row["generation"]["chars"] <= target_max_chars
+                for row in rows
+            ),
+        },
         "checklist_items_avg": _avg(checklist_items),
         "checklist_items_max": max(checklist_items, default=0),
         "review_chars_avg": {
