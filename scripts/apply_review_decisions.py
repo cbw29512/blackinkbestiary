@@ -120,6 +120,7 @@ def selection_eligible(item: dict) -> bool:
     # direct review, but it may not veto an approve/select decision for the
     # exact current image hash.
     return str(item.get("status") or "") in {
+        "awaiting_exact_image_review",
         "ready_for_review",
         "max_refinements_reached",
     }
