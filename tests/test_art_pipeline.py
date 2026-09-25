@@ -719,6 +719,47 @@ class QATests(unittest.TestCase):
         self.assertIn("gorilla, ape-man, or primate", text)
         self.assertIn("CORRECTION:", text)
 
+    def test_repeated_identity_failure_uses_reduced_identity_first_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "bodybuilder chest and oversized shoulders",
+                "stagnation_escalation": True,
+                "routing_recommendation": "regenerate",
+            },
+            candidate_no=1,
+        )
+
+        self.assertIn("IDENTITY-FIRST RECOVERY MODE", prompt)
+        self.assertIn("IDENTITY:", prompt)
+        self.assertIn("QUALITY:", prompt)
+        self.assertNotIn("ENVIRONMENT:", prompt)
+        self.assertNotIn("ACTION:", prompt)
+        self.assertNotIn("MOMENT:", prompt)
+        self.assertNotIn("SCENE ARCHETYPE:", prompt)
+        self.assertIn("HABITAT:", prompt)
+
+    def test_first_identity_retry_still_uses_full_scene_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "bodybuilder chest",
+                "stagnation_escalation": False,
+                "routing_recommendation": "regenerate",
+            },
+            candidate_no=1,
+        )
+        self.assertNotIn("IDENTITY-FIRST RECOVERY MODE", prompt)
+        self.assertIn("ENVIRONMENT:", prompt)
+        self.assertIn("ACTION:", prompt)
+        self.assertIn("MOMENT:", prompt)
+
     def test_generation_prompt_contains_same_mandatory_page_checklist(self):
         from prompt_builder import build_page_verification_checklist
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))

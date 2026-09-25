@@ -187,6 +187,10 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
     spec = load_monster_spec(page)
     review_stage = str((review_notes or {}).get("stage") or "").strip().lower()
     review_text = str((review_notes or {}).get("text") or "").strip()
+    identity_focus_mode = bool(
+        review_stage == "identity"
+        and (review_notes or {}).get("stagnation_escalation")
+    )
     recovery_lock = ""
     if review_stage == "identity" and review_text:
         recovery_lock = (
@@ -219,6 +223,26 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             + review_text
             + ". Broad white colorable regions and a clean silhouette are mandatory."
         )
+    identity_focus_directive = ""
+    if identity_focus_mode:
+        identity_focus_directive = (
+            "IDENTITY-FIRST RECOVERY MODE — TEMPORARY INTERMEDIATE PASS: solve the creature silhouette, exact limb topology, "
+            "canonical body mass, head/body proportions, and size evidence before solving the full narrative scene. Keep the background "
+            "deliberately simple: only the largest structural habitat cue and one human-scale reference needed to prove creature size. "
+            "Omit secondary props, decorative scenery, repeated texture, micro-detail, and optional story clutter. Do not sacrifice identity "
+            "to satisfy environment richness in this pass. Once identity passes, later environment/action repair stages may add the remaining scene detail."
+        )
+
+    environment_detail_sections = (
+        [] if identity_focus_mode else environment_prompt_sections(page, ROOT)
+    )
+    story_detail_sections = (
+        [] if identity_focus_mode else story_sections(page, ROOT)
+    )
+    physicality_detail_sections = (
+        [] if identity_focus_mode else physicality_sections(page)
+    )
+
     sections = [
         "Create ONE printable fantasy monster coloring-book page.",
         (
@@ -240,6 +264,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         *_swarm_priority_sections(page, spec),
         *environment_priority_sections(page, ROOT),
         recovery_lock,
+        identity_focus_directive,
         critical_scene_lock(page),
         (
             "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Treat every countable body structure in the canonical creature "
@@ -269,12 +294,12 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "and must never replace, broaden, or reinterpret this selected page environment."
         ),
         f"HABITAT: {page['habitat']}.",
-        *environment_prompt_sections(page, ROOT),
-        f"MOMENT: {page['moment']}.",
-        *story_sections(page, ROOT),
-        *physicality_sections(page),
-        f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}.",
-        f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}",
+        *environment_detail_sections,
+        ("" if identity_focus_mode else f"MOMENT: {page['moment']}."),
+        *story_detail_sections,
+        *physicality_detail_sections,
+        ("" if identity_focus_mode else f"SCENE ARCHETYPE: {page.get('archetype', 'default_scene')}."),
+        ("" if identity_focus_mode else f"ARCHETYPE COMPOSITION RULE: {archetype_directive(ROOT, page)}"),
         _items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules")),
         _items("MUST INCLUDE", page.get("must_include")),
         _items("MUST AVOID", page.get("must_avoid")),
@@ -287,7 +312,12 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
     ]
 
-    sections.append(format_page_verification_checklist(page))
+    sections.append(
+        format_page_verification_checklist(
+            page,
+            stages=("identity", "quality") if identity_focus_mode else None,
+        )
+    )
 
     if candidate_no is not None:
         escape_offset = int((review_notes or {}).get("composition_escape_offset") or 0)
@@ -447,10 +477,14 @@ def build_supervisor_checklist(page: dict) -> list[str]:
     ]
 
 
-def format_page_verification_checklist(page: dict) -> str:
+def format_page_verification_checklist(
+    page: dict,
+    stages: tuple[str, ...] | None = None,
+) -> str:
     checklist = build_page_verification_checklist(page)
+    selected_stages = stages or ("identity", "environment", "action", "quality")
     lines = ["MANDATORY PAGE VERIFICATION CHECKLIST — EVERY ITEM MUST PASS:"]
-    for stage in ("identity", "environment", "action", "quality"):
+    for stage in selected_stages:
         lines.append(stage.upper() + ":")
         lines.extend(f"- {item}" for item in checklist[stage])
     return "\n".join(lines)
