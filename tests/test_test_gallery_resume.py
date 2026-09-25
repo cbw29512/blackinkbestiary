@@ -262,10 +262,10 @@ class TestGalleryResumeTests(unittest.TestCase):
     def test_canary_force_reruns_existing_candidate(self):
         prior = {"status": "ready_for_review"}
         self.assertFalse(gallery.should_skip_candidate(prior, False, force_rerun=True))
-        self.assertEqual(
-            gallery.CANARY_PAGE_IDS,
-            ("I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22"),
-        )
+        configured = json.loads(
+            (ROOT / "config" / "quality_scorecard.json").read_text(encoding="utf-8")
+        )["canary_page_ids"]
+        self.assertEqual(gallery.CANARY_PAGE_IDS, tuple(configured))
 
     def test_canary_summary_reports_each_required_page(self):
         state = {"results": []}
