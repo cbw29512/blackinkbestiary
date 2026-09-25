@@ -164,9 +164,20 @@ def assemble_pdf(
     }
 
 
+def binding_side_for_page(page_number: int) -> str:
+    if page_number < 1:
+        raise ValueError("page_number must be at least 1")
+    # Odd interior pages are recto/right-hand pages; their binding edge is left.
+    return "left" if page_number % 2 == 1 else "right"
+
+
 def locked_page_paths(root: Path, manifest: dict, state: dict) -> list[Path]:
     ordered = []
-    for page in sorted(manifest.get("pages") or [], key=lambda item: int(item.get("order") or 0)):
+    pages = sorted(
+        manifest.get("pages") or [],
+        key=lambda item: int(item.get("order") or 0),
+    )
+    for page_number, page in enumerate(pages, start=1):
         page_id = str(page.get("page_id") or "")
         entry = (state.get("pages") or {}).get(page_id) or {}
         if entry.get("status") != "locked":
@@ -175,10 +186,12 @@ def locked_page_paths(root: Path, manifest: dict, state: dict) -> list[Path]:
         if not relative:
             raise RuntimeError(f"{page_id}: locked page has no approved_image_path")
         path = root / "web" / relative
-        report = inspect_kdp_export(path)
+        binding_side = binding_side_for_page(page_number)
+        report = inspect_kdp_export(path, binding_side=binding_side)
         if not report.get("pass"):
             raise RuntimeError(
-                f"{page_id}: approved page is not KDP-export ready: "
+                f"{page_id}: approved page is not KDP-export ready "
+                f"(binding={binding_side}): "
                 + ", ".join(report.get("reasons") or ["unknown"])
             )
         ordered.append(path)
