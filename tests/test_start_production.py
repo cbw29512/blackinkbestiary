@@ -17,8 +17,11 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("ensure_local_ai.ps1", text)
         self.assertIn("sync_engine_for_run.py", text)
         self.assertIn("canary_autopilot_status.py", text)
-        self.assertIn("Full 50-page gallery is blocked", text)
-        self.assertIn("9/9 exact-image approved", text)
+        self.assertIn("$pageCount-page gallery is blocked", text)
+        self.assertIn("$canaryCount/$canaryCount exact-image approved", text)
+        self.assertNotIn("Full 50-page gallery", text)
+        self.assertNotIn("9/9 exact-image approved", text)
+        self.assertNotIn("Starting/resuming Tome I", text)
         self.assertNotIn("function Test-Comfy", text)
         self.assertNotIn("/api/tags", text)
 
