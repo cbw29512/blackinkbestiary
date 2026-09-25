@@ -67,7 +67,7 @@ SCOPE_RULES = {
 def learning_observations(records: list[dict]) -> list[dict]:
     """Expand each candidate into distinct review observations without double-counting."""
     observations = []
-    for record in learning_observations(records):
+    for record in records:
         page_id = str(record.get("page_id") or "")
         candidate = int(record.get("candidate") or 0)
 
