@@ -1,7 +1,17 @@
 {
-  "schema_version": 1,
-  "contract_version": "black-ink-quality-scorecard-v1",
+  "schema_version": 2,
+  "contract_version": "black-ink-quality-scorecard-v2",
   "canary_page_ids": ["I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22"],
+  "required_categories": [
+    "foundation_readiness",
+    "technical_qa_pass_rate",
+    "visual_cleanliness",
+    "semantic_accuracy",
+    "completeness",
+    "print_package_readiness",
+    "locked_page_progress",
+    "replication_readiness"
+  ],
   "comparison_authority_paths": [
     "config/quality_scorecard.json",
     "config/quality_rules.json",
@@ -18,6 +28,19 @@
     "higher_is_better": true,
     "comparison_rule": "Only compare snapshots when quality_contract_fingerprint is unchanged.",
     "book_100_rule": "Every required category must equal 100 and known_blockers must be empty.",
+    "series_score_rule": "Series readiness equals the weakest registered book overall automated readiness; averages may not hide a weak book.",
     "series_100_rule": "Every registered book must individually satisfy the book_100_rule."
+  },
+  "replication_readiness_contract": {
+    "score_100_requires": [
+      "new tome created from declared theme and roster through generic manifests and contracts",
+      "page recipes generated and validated without engine code edits",
+      "monster family and environment story behavior supplied by reusable data rather than creature-name engine branches",
+      "technical QA semantic review scoring duplicate detection print safety preview locking and assembly use unchanged paths",
+      "CI covers scaffolded future books",
+      "synthetic next-tome test proves scaffold and manifest promotion through universal contracts"
+    ],
+    "creature_specific_data_allowed": true,
+    "creature_name_specific_engine_behavior_allowed": false
   }
 }
