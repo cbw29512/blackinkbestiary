@@ -7,6 +7,28 @@ from pathlib import Path
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 _CHANNELS = {0: 1, 2: 3, 4: 2, 6: 4}
+ROOT = Path(__file__).resolve().parents[1]
+_DEFAULT_LINE_ART_POLICY = {
+    "dark_below": 80,
+    "white_above": 245,
+    "max_midtone_ratio": 0.20,
+    "failure_reason": "excessive_midtone_shading",
+}
+
+
+def _line_art_policy(root: Path = ROOT) -> dict:
+    policy = dict(_DEFAULT_LINE_ART_POLICY)
+    path = root / "config" / "coloring_page_standard.json"
+    try:
+        config = json.loads(path.read_text(encoding="utf-8"))
+        configured = ((config.get("technical_qa") or {}).get("line_art_luma") or {})
+    except (OSError, json.JSONDecodeError):
+        configured = {}
+    for key in ("dark_below", "white_above", "max_midtone_ratio", "failure_reason"):
+        if key in configured:
+            policy[key] = configured[key]
+    return policy
+
 
 
 def _paeth(a: int, b: int, c: int) -> int:
