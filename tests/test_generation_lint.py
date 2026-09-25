@@ -6,9 +6,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from generation_lint import generation_lint_errors
+from generation_lint import edit_prompt_lint_errors, generation_lint_errors
 from page_contract import resolve_page_spec
 from prompt_builder import build_prompt
+from edit_prompt import build_edit_prompt
 
 
 class GenerationLintTests(unittest.TestCase):
@@ -81,6 +82,63 @@ class GenerationLintTests(unittest.TestCase):
             if len(prompt) > target:
                 oversized[page["page_id"]] = len(prompt)
         self.assertEqual(oversized, {})
+
+    def test_canary_edit_prompts_preserve_authority_and_budget(self):
+        standard = json.loads(
+            (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
+        )
+        target = int(standard["generation_prompt_budget"]["target_max_chars"])
+        scenarios = {
+            "I-04": ("action", "lantern must be visibly kicked"),
+            "I-10": ("environment", "central spiral column must be visible"),
+            "I-19": ("quality", "reduce swarm density"),
+            "I-20": ("identity", "restore one pair of legs per visible body segment"),
+            "I-22": ("environment", "stone dungeon hall must be unmistakable"),
+        }
+        failures = {}
+        oversized = {}
+        for page in self.pages:
+            scenario = scenarios.get(page["page_id"])
+            if not scenario:
+                continue
+            stage, note = scenario
+            prompt = build_edit_prompt(
+                page,
+                {
+                    "stage": stage,
+                    "text": note,
+                    "failed_dimensions": [note],
+                    "preserve_dimensions": ["successful unrelated structure"],
+                },
+                candidate_no=1,
+            )
+            errors = edit_prompt_lint_errors(page, prompt, ROOT)
+            if errors:
+                failures[page["page_id"]] = errors
+            if len(prompt) > target:
+                oversized[page["page_id"]] = len(prompt)
+            self.assertIn(note, prompt, page["page_id"])
+            self.assertIn("PAGE RECIPE LOCK — NON-NEGOTIABLE:", prompt, page["page_id"])
+            self.assertIn("MODEL ENVIRONMENT PRIORITY CAPSULE", prompt, page["page_id"])
+        self.assertEqual(failures, {})
+        self.assertEqual(oversized, {})
+
+    def test_action_and_environment_edits_use_rebuild_instructions(self):
+        pages = {page["page_id"]: page for page in self.pages}
+        action = build_edit_prompt(
+            pages["I-04"],
+            {"stage": "action", "text": "kick the lantern"},
+            candidate_no=1,
+        )
+        environment = build_edit_prompt(
+            pages["I-10"],
+            {"stage": "environment", "text": "show the spiral shaft"},
+            candidate_no=1,
+        )
+        self.assertIn("SCENE REBUILD MODE", action)
+        self.assertIn("moving the creature, props, or camera", action)
+        self.assertIn("ENVIRONMENT REBUILD MODE", environment)
+        self.assertIn("rebuilding architecture", environment)
 
     def test_generation_prompt_priority_order_is_identity_action_environment_style(self):
         for page in self.pages:
