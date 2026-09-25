@@ -39,6 +39,7 @@ from qa_recovery import (
 from studio_config import active_book_paths
 
 CONFIG_FILE = ROOT / "config" / "local_ai_stack.json"
+QUALITY_SCORECARD_FILE = ROOT / "config" / "quality_scorecard.json"
 MONSTER_DIR = ROOT / "data" / "monsters"
 WORKFLOW_DIR = ROOT / "art_pipeline" / "workflows" / "official"
 OUTPUT_DIR = ROOT / "web" / "test-gallery"
@@ -50,9 +51,21 @@ AUTHORITY_FILES = [
     ROOT / "config" / "coloring_page_standard.json",
 ]
 
-CANARY_PAGE_IDS = (
-    "I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22",
-)
+def configured_canary_page_ids() -> tuple[str, ...]:
+    config = read_json(QUALITY_SCORECARD_FILE)
+    page_ids = tuple(
+        str(page_id).strip()
+        for page_id in config.get("canary_page_ids") or []
+        if str(page_id).strip()
+    )
+    if not page_ids:
+        raise RuntimeError("quality scorecard must declare canary_page_ids")
+    if len(page_ids) != len(set(page_ids)):
+        raise RuntimeError("quality scorecard canary_page_ids must be unique")
+    return page_ids
+
+
+CANARY_PAGE_IDS = configured_canary_page_ids()
 
 
 def utc_now() -> str:
