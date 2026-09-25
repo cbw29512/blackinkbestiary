@@ -54,6 +54,24 @@ class ShapeLockTests(unittest.TestCase):
         self.assertIn("NON-FLIGHT POSE LOCK", text)
         self.assertIn("not airborne", text)
 
+    def test_nonhumanoid_priority_capsules_lock_body_topology(self):
+        darkmantle = build_prompt(self.pages["I-14"])
+        bat = build_prompt(self.pages["I-16"])
+
+        self.assertIn("ONE CONTINUOUS CEILING-CLINGING MANTLE BODY", darkmantle)
+        self.assertIn("NO dragon head, horns, humanoid face, torso, neck, arms, legs, tail", darkmantle)
+        self.assertLess(
+            darkmantle.index("MODEL PRIORITY CAPSULE"),
+            darkmantle.index("HABITAT:"),
+        )
+
+        self.assertIn("TRUE BAT BODY PLAN WITH EXACTLY FOUR LIMBS TOTAL", bat)
+        self.assertIn("NO separate humanoid arms or hands in addition to wings", bat)
+        self.assertLess(
+            bat.index("MODEL PRIORITY CAPSULE"),
+            bat.index("HABITAT:"),
+        )
+
     def test_bat_and_centipede_shape_locks_are_literal(self):
         bat = build_prompt(self.pages["I-16"])
         centipede = build_prompt(self.pages["I-20"])

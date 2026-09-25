@@ -39,7 +39,12 @@
       "upright humanoid torso"
     ],
     "shape_lock": "Draw one continuous ceiling-clinging cloak/cap body. The broad leathery mantle IS the creature, not wings attached to something else. Place a small underside mouth near the center and several short tentacles under the rim. There is no separate head silhouette, torso, neck, arms, legs, tail, or wing pair.",
-    "limb_structure": "No arms, legs, wings, or tail. The entire creature is one mantle body with several short underside tentacles hanging from the rim around the recessed underside mouth."
+    "limb_structure": "No arms, legs, wings, or tail. The entire creature is one mantle body with several short underside tentacles hanging from the rim around the recessed underside mouth.",
+    "render_priority": {
+      "positive": "ONE CONTINUOUS CEILING-CLINGING MANTLE BODY. The leathery cloak/cap IS the entire creature. A small recessed underside mouth and several short tentacles hang beneath the rim while the broad mantle presses against overhead support.",
+      "negative": "NO dragon head, horns, humanoid face, torso, neck, arms, legs, tail, separate wing pair, bat body, or upright posture. Do not draw a creature wearing wings; the mantle itself is the body.",
+      "silhouette_test": "At thumbnail size the first read must be a single living cloak/cap clinging overhead with short underside tentacles, never a dragon, demon, bat, or humanoid."
+    }
   },
   "default_habitats": [
     "caves",
@@ -101,5 +106,6 @@
       "symptom": "creature becomes a conventional bat with wing limbs and head",
       "correction": "remove bat head/limb topology; mantle itself is the full body"
     }
-  ]
+  ],
+  "identity_version": 2
 }
