@@ -83,6 +83,21 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("autopilot-heartbeat.json", publisher)
         self.assertIn('"autopilot": autopilot', publisher)
 
+    def test_review_publisher_uses_exact_image_authority_and_provenance(self):
+        publisher = (ROOT / "scripts" / "publish_review_previews.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('"awaiting_exact_image_review"', publisher)
+        self.assertIn("exact_assistant_approved", publisher)
+        self.assertIn('"snapshot_engine_commit"', publisher)
+        self.assertIn('"quality_contract_fingerprint"', publisher)
+        self.assertIn('"quality_contract_version"', publisher)
+        self.assertIn("generation_authority_current", publisher)
+        self.assertNotIn(
+            'and bool((item.get("visual_review") or {}).get("pass"))',
+            publisher,
+        )
+
     def test_runtime_failures_are_published_for_remote_diagnosis(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         canary = (ROOT / "RUN_ENGINE_CANARY.bat").read_text(encoding="utf-8")
