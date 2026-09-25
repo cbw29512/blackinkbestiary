@@ -9,10 +9,12 @@ from pathlib import Path
 try:
     from .defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from .production_audit import audit_active_book
+    from .replication_probe import run_replication_probe
     from .series_readiness import audit_series
 except ImportError:
     from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from production_audit import audit_active_book
+    from replication_probe import run_replication_probe
     from series_readiness import audit_series
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -279,6 +281,7 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "config/universal_environment_contract.json",
         "config/universal_story_contract.json",
     )
+    probe = run_replication_probe(root)
     components = {
         "universal_contracts": all((root / path).exists() for path in contracts),
         "generic_book_scaffolding": (root / "scripts" / "scaffold_book.py").exists() and (root / "art_pipeline" / "book_scaffold.py").exists(),
@@ -287,18 +290,24 @@ def replication_report(root: Path, series_report: dict) -> dict:
         "future_book_plans": bool(future) and all(bool(row.get("plan_exists")) for row in future),
         "generic_assembly_pipeline": _generic_assembly_exists(root),
         "synthetic_replication_test": (root / "tests" / "test_replication_readiness.py").exists(),
+        "synthetic_pipeline_probe": bool(probe.get("pass")),
     }
     weights = {
-        "universal_contracts": 20,
-        "generic_book_scaffolding": 15,
-        "series_audit_green": 15,
-        "eight_books_registered": 10,
-        "future_book_plans": 10,
+        "universal_contracts": 15,
+        "generic_book_scaffolding": 10,
+        "series_audit_green": 10,
+        "eight_books_registered": 5,
+        "future_book_plans": 5,
         "generic_assembly_pipeline": 15,
-        "synthetic_replication_test": 15,
+        "synthetic_replication_test": 5,
+        "synthetic_pipeline_probe": 35,
     }
     score = sum(weights[name] for name, passed in components.items() if passed)
-    return {"score": score, "components": components}
+    return {
+        "score": score,
+        "components": components,
+        "synthetic_pipeline_probe": probe,
+    }
 
 
 def _book_locked_progress(root: Path, row: dict) -> tuple[int, float]:

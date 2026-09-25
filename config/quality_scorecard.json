@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "contract_version": "black-ink-quality-scorecard-v3",
+  "schema_version": 4,
+  "contract_version": "black-ink-quality-scorecard-v4",
   "canary_page_ids": [
     "I-01",
     "I-04",
@@ -33,7 +33,8 @@
     "config/defect_taxonomy.json",
     "art_pipeline/png_content_qa.py",
     "art_pipeline/vision_review_prompts.py",
-    "art_pipeline/quality_history.py"
+    "art_pipeline/quality_history.py",
+    "art_pipeline/replication_probe.py"
   ],
   "metric_policy": {
     "higher_is_better": true,
@@ -50,7 +51,7 @@
       "monster family and environment story behavior supplied by reusable data rather than creature-name engine branches",
       "technical QA semantic review scoring duplicate detection print safety preview locking and assembly use unchanged paths",
       "CI covers scaffolded future books",
-      "synthetic next-tome test proves scaffold and manifest promotion through universal contracts"
+      "runtime synthetic next-tome probe proves scaffold promotion manifest validation prompt resolution and pre-GPU lint through universal contracts"
     ],
     "creature_specific_data_allowed": true,
     "creature_name_specific_engine_behavior_allowed": false
