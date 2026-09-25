@@ -55,17 +55,24 @@ $config = Get-Content $configPath -Raw | ConvertFrom-Json
 $comfyHealth = "$($config.comfy_url.TrimEnd('/'))/system_stats"
 Set-RuntimeStage "comfy-health" "Checking ComfyUI API." $comfyHealth
 if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
-  Set-RuntimeStage "comfy-discovery" "Locating ComfyUI Desktop."
-  $desktopExe = Find-BlackInkComfyDesktopExe
-  if (-not $desktopExe) {
-    throw "ComfyUI is not reachable and the installed ComfyUI Desktop executable could not be found."
+  Set-RuntimeStage "comfy-discovery" "Locating Black-Ink ComfyUI workspace."
+  $comfyCli = Join-Path $root ".blackink-tools\Scripts\comfy.exe"
+  if (-not (Test-Path $comfyCli -PathType Leaf)) {
+    throw "Pinned comfy-cli is missing: $comfyCli"
   }
 
-  Set-RuntimeStage "comfy-launch" "Starting ComfyUI Desktop." $desktopExe
-  $script:CurrentDetail = "Executable: $desktopExe"
-  $launchMethod = Start-BlackInkDetachedLocalProcess $desktopExe
+  $comfyWorkspace = Find-BlackInkComfyWorkspace $root ([string]$config.workspace)
+  if (-not $comfyWorkspace) {
+    throw "Black-Ink ComfyUI workspace with main.py could not be found."
+  }
 
-  Set-RuntimeStage "comfy-wait" "Waiting for ComfyUI API after $launchMethod." $comfyHealth
+  Set-RuntimeStage "comfy-launch" "Starting ComfyUI Desktop instance through pinned comfy-cli." "CLI: $comfyCli; workspace: $comfyWorkspace"
+  & $comfyCli "--workspace=$comfyWorkspace" launch --background -- --listen 127.0.0.1 --port 8188
+  if ($LASTEXITCODE -ne 0) {
+    throw "Pinned comfy-cli failed to launch the Black-Ink workspace (exit $LASTEXITCODE)."
+  }
+
+  Set-RuntimeStage "comfy-wait" "Waiting for Black-Ink ComfyUI API." $comfyHealth
   Wait-BlackInkEndpoint $comfyHealth $ComfyTimeoutSeconds "ComfyUI"
 }
 Write-Host "ComfyUI ready." -ForegroundColor Green
