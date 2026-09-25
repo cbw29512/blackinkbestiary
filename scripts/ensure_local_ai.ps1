@@ -53,9 +53,9 @@ if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
 
   Set-RuntimeStage "comfy-discovery" "Locating Black-Ink ComfyUI workspace."
   $comfyWorkspace = Find-BlackInkComfyWorkspace $root ([string]$config.workspace)
-  if (-not $comfyWorkspace) { throw "Black-Ink ComfyUI workspace root could not be found." }
+  if (-not $comfyWorkspace) { throw "Black-Ink ComfyUI code-root workspace could not be found." }
 
-  $comfyRoot = Join-Path $comfyWorkspace "ComfyUI"
+  $comfyRoot = $comfyWorkspace
   $mainPy = Join-Path $comfyRoot "main.py"
 
   Set-RuntimeStage "comfy-stop" "Clearing any stale comfy-cli background record." $comfyWorkspace
