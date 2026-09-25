@@ -81,14 +81,16 @@ class CreatureCatalogTests(unittest.TestCase):
             report["positive_geometry"]["resolved_specs"],
         )
 
-    def test_family_scene_dna_is_injected_into_prompt(self):
+    def test_family_scene_dna_remains_authority_without_bloating_generation(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
+        spec = resolve_monster_spec(page["monster_spec_id"])
         text = build_prompt(page)
+        scene = spec.get("scene_identity") or {}
+        self.assertTrue(scene.get("size_impression"))
+        self.assertTrue(scene.get("natural_posture"))
+        self.assertTrue(scene.get("behavior_style"))
         self.assertIn("CANONICAL LIMBS / EXTREMITIES", text)
-        self.assertIn("CANONICAL SIZE IMPRESSION", text)
-        self.assertIn("CANONICAL NATURAL POSTURE", text)
-        self.assertIn("CANONICAL BEHAVIOR STYLE", text)
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
         self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
 
@@ -142,7 +144,7 @@ class CreatureCatalogTests(unittest.TestCase):
             self.assertIn(shape_lock, identity_review, page["page_id"])
             self.assertIn(limb_structure, identity_review, page["page_id"])
 
-    def test_tome_i_failure_modes_reach_generation_and_identity_review(self):
+    def test_tome_i_failure_modes_are_exhaustive_in_review_and_bounded_in_generation(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         for page in tome["pages"]:
             spec = resolve_monster_spec(page["monster_spec_id"])
@@ -150,11 +152,14 @@ class CreatureCatalogTests(unittest.TestCase):
             identity_review = build_identity_review_prompt(page)
             failures = spec.get("known_failure_modes") or []
             self.assertTrue(failures, page["page_id"])
-            for failure in failures:
+            self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", generation, page["page_id"])
+            for failure in failures[:2]:
                 symptom = str(failure.get("symptom") or "").strip()
                 correction = str(failure.get("correction") or "").strip()
                 self.assertIn(symptom, generation, page["page_id"])
                 self.assertIn(correction, generation, page["page_id"])
+            for failure in failures:
+                symptom = str(failure.get("symptom") or "").strip()
                 self.assertIn(symptom, identity_review, page["page_id"])
 
     def test_kobold_family_identity_merges_with_variant(self):
