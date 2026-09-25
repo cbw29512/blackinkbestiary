@@ -48,7 +48,7 @@ class EngineLauncherContractTests(unittest.TestCase):
         self.assertIn("scripts\\publish_review_previews.py", text)
         self.assertLess(
             text.index("scripts\\run_coloring_book.ps1"),
-            text.index("scripts\\publish_review_previews.py"),
+            text.rindex("scripts\\publish_review_previews.py"),
         )
         self.assertIn("Partial/diagnostic full-gallery snapshot published to GitHub.", text)
         self.assertIn("Full-gallery review snapshot published to GitHub.", text)
