@@ -405,6 +405,32 @@ class VisionReviewerTests(unittest.TestCase):
                 with self.assertRaises(vr.VisionReviewError):
                     vr.review_image(page, image_path, self.config)
 
+    def test_negated_failure_is_not_mistaken_for_positive_gate_echo(self):
+        prompt = """IDENTITY GATES:
+- Identity check: tail is visible
+"""
+        verdict = {
+            "pass": False,
+            "score": 45,
+            "defects": ["tail not visible"],
+            "preserve": ["small wiry body"],
+        }
+        self.assertEqual(vr._positive_gate_echoes(verdict, prompt), [])
+
+    def test_negative_requirement_echo_is_still_caught_when_polarity_matches(self):
+        prompt = """IDENTITY GATES:
+- Identity check: no horns or tusks visible
+"""
+        verdict = {
+            "pass": False,
+            "score": 45,
+            "defects": ["no horns or tusks visible"],
+            "preserve": [],
+        }
+        issues = vr._positive_gate_echoes(verdict, prompt)
+        self.assertEqual(len(issues), 1)
+        self.assertEqual(issues[0]["kind"], "positive_gate_echo")
+
     def test_semantic_overlap_detects_close_positive_paraphrase(self):
         self.assertGreaterEqual(
             vr._semantic_overlap(
