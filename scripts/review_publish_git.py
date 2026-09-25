@@ -56,7 +56,7 @@ def sync_live_decisions(root: Path) -> str:
         "git",
         "fetch",
         "origin",
-        f"{REVIEW_BRANCH}:refs/remotes/origin/{REVIEW_BRANCH}",
+        f"+{REVIEW_BRANCH}:refs/remotes/origin/{REVIEW_BRANCH}",
     )
     remote_ref = f"origin/{REVIEW_BRANCH}"
     live_head = output(root, "git", "rev-parse", remote_ref)
