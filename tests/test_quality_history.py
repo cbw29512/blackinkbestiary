@@ -105,6 +105,80 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(efficiency["semantic_yield_percent"], 50.0)
         self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
 
+    def test_foundation_requires_current_autopilot_heartbeat_for_full_score(self):
+        from unittest.mock import patch
+        import quality_history as qh
+
+        fake_series = {
+            "pass": True,
+            "books_registered": 1,
+            "books": [{
+                "book_id": "TOME-I",
+                "title": "Test",
+                "target_pages": 1,
+                "recipe_ready": 1,
+                "plan_exists": True,
+            }],
+        }
+        fake_active = {"pass": True, "book_id": "TOME-I"}
+        fake_scorecard = {
+            "contract_version": "test",
+            "comparison_authority_paths": [],
+            "canary_page_ids": [],
+            "required_categories": [
+                "foundation_readiness",
+                "technical_qa_pass_rate",
+                "visual_cleanliness",
+                "semantic_accuracy",
+                "completeness",
+                "print_package_readiness",
+                "locked_page_progress",
+                "replication_readiness",
+            ],
+        }
+        with patch.object(qh, "load_scorecard", return_value=fake_scorecard), \
+             patch.object(qh, "audit_series", return_value=fake_series), \
+             patch.object(qh, "audit_active_book", return_value=fake_active), \
+             patch.object(qh, "prompt_load_report", return_value={}), \
+             patch.object(qh, "print_package_report", return_value={"score": 0}), \
+             patch.object(qh, "replication_report", return_value={"score": 0}):
+            without = qh.build_quality_snapshot(
+                ROOT,
+                {"results": []},
+                {"status": "ready"},
+                {"status": "passed"},
+                "abc123",
+                autopilot=None,
+            )
+            with_current = qh.build_quality_snapshot(
+                ROOT,
+                {"results": []},
+                {"status": "ready"},
+                {"status": "passed"},
+                "abc123",
+                autopilot={
+                    "status": "ready",
+                    "phase": "sleeping",
+                    "engine_commit": "abc123",
+                },
+            )
+            with_stale = qh.build_quality_snapshot(
+                ROOT,
+                {"results": []},
+                {"status": "ready"},
+                {"status": "passed"},
+                "abc123",
+                autopilot={
+                    "status": "ready",
+                    "phase": "sleeping",
+                    "engine_commit": "older",
+                },
+            )
+
+        self.assertEqual(without["metrics"]["foundation_readiness"], 80)
+        self.assertEqual(with_current["metrics"]["foundation_readiness"], 100)
+        self.assertEqual(with_stale["metrics"]["foundation_readiness"], 80)
+
     def test_readiness_gate_uses_named_required_categories_and_blockers(self):
         required = [
             "foundation_readiness",

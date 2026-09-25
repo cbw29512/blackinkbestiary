@@ -399,6 +399,7 @@ def main() -> int:
         runtime,
         engine_preflight,
         engine_commit(),
+        autopilot=autopilot,
     )
     QUALITY_CURRENT.write_text(
         json.dumps(quality_snapshot, indent=2) + "\n",

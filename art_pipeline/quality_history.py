@@ -340,6 +340,7 @@ def build_quality_snapshot(
     runtime: dict | None,
     engine_preflight: dict | None,
     engine_commit: str,
+    autopilot: dict | None = None,
 ) -> dict:
     scorecard = load_scorecard(root)
     series = audit_series(root)
@@ -354,13 +355,23 @@ def build_quality_snapshot(
 
     runtime_ready = str((runtime or {}).get("status") or "").lower() == "ready"
     preflight_ready = str((engine_preflight or {}).get("status") or "").lower() in {"passed", "pass", "success"}
+    heartbeat_status = str((autopilot or {}).get("status") or "").lower()
+    heartbeat_phase = str((autopilot or {}).get("phase") or "").lower()
+    heartbeat_commit = str((autopilot or {}).get("engine_commit") or "")
+    autopilot_ready = bool(
+        autopilot
+        and heartbeat_status in {"running", "ready"}
+        and heartbeat_phase not in {"failed", "blocked"}
+        and heartbeat_commit == engine_commit
+    )
     foundation_components = {
         "local_runtime_ready": runtime_ready,
         "engine_preflight_passed": preflight_ready,
         "series_audit_green": bool(series.get("pass")),
         "active_book_structure_valid": bool(active.get("pass")),
+        "autopilot_heartbeat_current": autopilot_ready,
     }
-    foundation = 25 * sum(1 for value in foundation_components.values() if value)
+    foundation = 20 * sum(1 for value in foundation_components.values() if value)
 
     required_categories = list(scorecard.get("required_categories") or [])
     books = []
