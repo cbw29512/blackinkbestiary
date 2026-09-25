@@ -25,6 +25,21 @@ class GenerationLintTests(unittest.TestCase):
                 failures[page["page_id"]] = errors
         self.assertEqual(failures, {})
 
+    def test_all_gpu_generation_entrypoints_invoke_pre_gpu_lint(self):
+        required = (
+            "scripts/generate_test_gallery.py",
+            "scripts/generate_current_page.py",
+            "scripts/generate_golden_page.py",
+            "scripts/smoke_test_i01.py",
+            "art_pipeline/worker.py",
+        )
+        missing = []
+        for relative in required:
+            text = (ROOT / relative).read_text(encoding="utf-8")
+            if "assert_generation_ready" not in text:
+                missing.append(relative)
+        self.assertEqual(missing, [])
+
     def test_missing_environment_landmark_is_rejected(self):
         page = dict(self.pages[0])
         page["environment_variant"] = dict(page["environment_variant"])
