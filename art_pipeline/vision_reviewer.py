@@ -172,6 +172,14 @@ def _semantic_overlap(left: str, right: str) -> float:
     return len(a & b) / min(len(a), len(b))
 
 
+def _negative_polarity(text: str) -> bool:
+    value = str(text or "").lower()
+    return bool(re.search(
+        r"\b(?:no|not|without|missing|absent|lack|lacks|lacking|never|cannot|can't|doesn't|does not|isn't|is not|aren't|are not)\b",
+        value,
+    ))
+
+
 def _positive_gate_echoes(verdict: dict, prompt: str) -> list[dict]:
     positive = sorted(_positive_gate_values(prompt))
     issues = []
@@ -186,7 +194,11 @@ def _positive_gate_echoes(verdict: dict, prompt: str) -> list[dict]:
             if score > best_score:
                 best_score = score
                 best_gate = gate
-        if best_gate and best_score >= 0.72:
+        if (
+            best_gate
+            and best_score >= 0.72
+            and _negative_polarity(defect_text) == _negative_polarity(best_gate)
+        ):
             issues.append({
                 "kind": "positive_gate_echo",
                 "defect": defect_text,
