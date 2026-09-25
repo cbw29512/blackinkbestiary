@@ -80,7 +80,7 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
         "web-filled dungeon",
     )
     action_terms = (
-        "kicking", "kick", "wedged", "drag", "defending", "defend",
+        "kicking", "kicked", "kick", "wedged", "drag", "defending", "defend",
         "feeding", "offering", "signaling", "signal", "interaction",
         "contact", "recoil", "crawling", "story",
     )
