@@ -85,6 +85,56 @@ class PngContentQATests(unittest.TestCase):
             self.assertNotIn("near_blank_page", result["reasons"])
             self.assertNotIn("safe_margin_too_busy", result["reasons"])
 
+    def test_heavy_midtone_shading_fails_line_art_contract(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "midtone-heavy.png"
+            _write_grayscale_png(
+                path,
+                lambda x, y: (
+                    0
+                    if (
+                        40 <= x < 728
+                        and 50 <= y < 974
+                        and (x % 96 in {0, 1} or y % 128 in {0, 1})
+                    )
+                    else 160
+                    if 80 <= x < 688 and 100 <= y < 924
+                    else 255
+                ),
+            )
+            result = inspect_candidate(path)
+            self.assertFalse(result["pass"])
+            self.assertIn("excessive_midtone_shading", result["reasons"])
+            self.assertGreater(
+                result["content_qa"]["midtone_ratio"],
+                result["content_qa"]["max_midtone_ratio"],
+            )
+            self.assertEqual(result["content_qa"]["max_midtone_ratio"], 0.20)
+
+    def test_small_midtone_area_remains_acceptable(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "midtone-small.png"
+            _write_grayscale_png(
+                path,
+                lambda x, y: (
+                    0
+                    if (
+                        40 <= x < 728
+                        and 50 <= y < 974
+                        and (x % 64 in {0, 1} or y % 96 in {0, 1})
+                    )
+                    else 180
+                    if 280 <= x < 488 and 410 <= y < 614
+                    else 255
+                ),
+            )
+            result = inspect_candidate(path)
+            self.assertLess(
+                result["content_qa"]["midtone_ratio"],
+                result["content_qa"]["max_midtone_ratio"],
+            )
+            self.assertNotIn("excessive_midtone_shading", result["reasons"])
+
     def test_colored_output_fails_monochrome_contract(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "colored.png"
