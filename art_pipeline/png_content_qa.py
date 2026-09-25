@@ -131,6 +131,8 @@ def inspect_line_art(path: str | Path) -> dict:
         "dark_ratio": round(dark_ratio, 4),
         "white_ratio": round(white_ratio, 4),
         "contrast_range": max_luma - min_luma,
+        "midtone_ratio": round(midtone_ratio, 4),
+        "chromatic_ratio": round(chromatic_ratio, 4),
         "pass": not reasons,
         "reasons": reasons,
     }
