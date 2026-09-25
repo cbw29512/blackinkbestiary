@@ -11,6 +11,7 @@ try:
     from .learning_feedback import build_learning_queue
     from .master_engine_guard import audit_master_engine_separation
     from .production_audit import audit_active_book
+    from .prompt_load import prompt_load_report
     from .replication_probe import run_replication_probe
     from .series_readiness import audit_series
 except ImportError:
@@ -18,6 +19,7 @@ except ImportError:
     from learning_feedback import build_learning_queue
     from master_engine_guard import audit_master_engine_separation
     from production_audit import audit_active_book
+    from prompt_load import prompt_load_report
     from replication_probe import run_replication_probe
     from series_readiness import audit_series
 
@@ -346,6 +348,7 @@ def build_quality_snapshot(
     canary_ids = list(scorecard.get("canary_page_ids") or [])
     canary = canary_metrics(state, canary_ids)
     efficiency = generation_efficiency(state, canary_ids, canary)
+    prompt_load = prompt_load_report(root, canary_ids)
     print_report = print_package_report(root)
     replication = replication_report(root, series)
 
@@ -437,6 +440,7 @@ def build_quality_snapshot(
         "series_automated_100": series_automated_100,
         "canary": canary,
         "generation_efficiency": efficiency,
+        "prompt_load": prompt_load,
         "books": books,
         "foundation_components": foundation_components,
         "print_package": print_report,

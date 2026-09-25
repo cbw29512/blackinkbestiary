@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from defect_taxonomy import classify_text, count_defects, load_taxonomy
 from learning_feedback import build_learning_queue
+from prompt_load import prompt_load_report
 from quality_history import canary_metrics, current_page_records, evaluate_readiness, generation_efficiency, quality_contract_fingerprint
 
 
@@ -162,6 +163,16 @@ class QualityHistoryTests(unittest.TestCase):
         self.assertEqual(report["visual_cleanliness"], 66.7)
         self.assertEqual(report["semantic_accuracy"], 33.3)
         self.assertEqual(report["all_automated_gates"], 33.3)
+
+    def test_prompt_load_measures_fixed_canary_generation_and_review_payloads(self):
+        report = prompt_load_report(ROOT, ["I-01", "I-04", "I-19"])
+        self.assertEqual(report["pages_measured"], 3)
+        self.assertEqual(report["errors"], [])
+        self.assertGreater(report["generation_chars_avg"], 0)
+        self.assertGreater(report["generation_words_avg"], 0)
+        self.assertGreater(report["checklist_items_avg"], 0)
+        for stage in ("identity", "environment", "action", "quality"):
+            self.assertGreater(report["review_chars_avg"][stage], 0)
 
     def test_quality_contract_fingerprint_changes_with_authority(self):
         with tempfile.TemporaryDirectory() as td:

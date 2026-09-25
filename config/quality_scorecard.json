@@ -1,6 +1,6 @@
 {
-  "schema_version": 5,
-  "contract_version": "black-ink-quality-scorecard-v5",
+  "schema_version": 6,
+  "contract_version": "black-ink-quality-scorecard-v6",
   "canary_page_ids": [
     "I-01",
     "I-04",
@@ -35,7 +35,8 @@
     "art_pipeline/vision_review_prompts.py",
     "art_pipeline/quality_history.py",
     "art_pipeline/replication_probe.py",
-    "art_pipeline/master_engine_guard.py"
+    "art_pipeline/master_engine_guard.py",
+    "art_pipeline/prompt_load.py"
   ],
   "metric_policy": {
     "higher_is_better": true,
@@ -43,7 +44,8 @@
     "book_100_rule": "Every required category must equal 100 and known_blockers must be empty.",
     "series_score_rule": "Series readiness equals the weakest registered book overall automated readiness; averages may not hide a weak book.",
     "series_100_rule": "Every registered book must individually satisfy the book_100_rule.",
-    "readiness_floor_rule": "A book readiness floor equals its weakest required category; it must be 100 before the book can be automated 100/100."
+    "readiness_floor_rule": "A book readiness floor equals its weakest required category; it must be 100 before the book can be automated 100/100.",
+    "prompt_load_rule": "Prompt-load telemetry is observational until a stable successful canary baseline establishes useful bounds; do not reward shorter prompts automatically."
   },
   "replication_readiness_contract": {
     "score_100_requires": [
