@@ -262,7 +262,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         (
             f"CANONICAL SCALE LOCK — NON-NEGOTIABLE: size category {size}. "
             f"{page.get('subject_scale_rule', '')} Canonical creature scale is immutable; use framing rather than enlarging the body. "
-            "The monster remains the first-read focal subject through framing at canonical scale and proportions."
+            "The monster remains the first-read focal subject through framing; it stays the first-read focal subject at canonical scale and proportions."
         ),
         f"SHAPE-FIRST RENDER LOCK — NON-NEGOTIABLE: {visual.get('shape_lock', '')}",
         f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}",
@@ -270,17 +270,16 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         f"CANONICAL LIMBS / EXTREMITIES: {visual.get('limb_structure', '')}",
         f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}",
         f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}",
-        _brief_items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style"), 6),
-        _brief_items("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", spec.get("physical_requirements"), 4),
-        _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 8),
-        _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 12),
-        _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 10),
+        _brief_items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style"), 4),
+        _brief_items("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", spec.get("physical_requirements"), 3),
+        _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 6),
+        _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 8),
+        _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 7),
         _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
     ]
     for key, label in (
         ("positive", "MODEL PRIORITY CAPSULE — READ BEFORE STYLE OR SCENERY"),
         ("negative", "MODEL PRIORITY NEGATIVE LOCK — NON-NEGOTIABLE"),
-        ("silhouette_test", "MODEL PRIORITY THUMBNAIL TEST — NON-NEGOTIABLE"),
     ):
         value = str(render_priority.get(key) or "").strip()
         if value:
@@ -326,7 +325,6 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
                 "and one scale reference. Omit secondary props, repeated texture, micro-detail, and optional story clutter."
             ),
             f"HABITAT: {page['habitat']}.",
-            *environment_priority_sections(page, ROOT),
             (
                 "BLACK-INK COLORABILITY LOCK: pure black contour lines on white paper; bold outer contour, lighter simple interior lines, "
                 "large uninterrupted white regions, no grayscale wash, no painterly shading, almost no crosshatching, and no large black masses."
@@ -350,10 +348,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             f"STORY/ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
             f"PHYSICAL SUPPORT / CONTACT: {physicality.get('support', '')}.",
             f"PHYSICAL MOTION / WEIGHT: {physicality.get('motion', '')}.",
-            mode_rule,
             *physicality_priority,
             *action_rules,
-            *object_rules,
             (
                 "STATIC STORY TEST: the page must read as one clear verb/action at thumbnail size, not as a character portrait "
                 "or a monster merely holding props."
@@ -372,11 +368,16 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ]
 
         sections.extend([
-            critical_scene_lock(page),
+            (
+                "CRITICAL SCENE LOCK — NON-NEGOTIABLE: "
+                f"exact visible action={page.get('moment', '')}; interaction={variant.get('interaction', '')}; "
+                f"support/contact={physicality.get('support', '')}; motion/weight={physicality.get('motion', '')}. "
+                "Do not substitute standing, holding, posing, or mere proximity."
+            ),
             "ACTION — SECOND PRIORITY:\n" + "\n".join(f"- {x}" for x in action_lines if x),
             "ENVIRONMENT — THIRD PRIORITY:\n" + "\n".join(f"- {x}" for x in environment_lines if x),
             _brief_items("MUST INCLUDE", page.get("must_include"), 10),
-            _brief_items("MUST AVOID", page.get("must_avoid"), 14),
+            _brief_items("MUST AVOID", page.get("must_avoid"), 8),
         ])
 
         if candidate_no is not None:
@@ -390,10 +391,10 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
 
         sections.extend([
             (
-                "BLACK-INK COLORABILITY LOCK: This is uncolored professional fantasy coloring-book line art: pure black ink on white paper, "
-                "bold clean outer contour, lighter simpler interior lines, medium-low detail density, large uninterrupted white regions that are enjoyable to color. "
-                "NEVER fill a creature, shadow, liquid, fur, shell, ooze, clothing, or background region with solid black merely because it is dark. "
-                "No grayscale wash, painterly shading, dense crosshatching, text, logo, watermark, or large black masses."
+                "BLACK-INK COLORABILITY LOCK: uncolored professional fantasy coloring-book line art, pure black ink on white paper, "
+                "bold outer contour, lighter simple interior lines, medium-low detail, large uninterrupted white regions, and predominantly white negative space. "
+                "NEVER fill a creature, shadow, liquid, fur, shell, ooze, clothing, or scenery with solid black merely because it is dark; no solid-black void. "
+                "No grayscale wash, painterly shading, dense crosshatching, text, logo, or watermark. No large black masses."
             ),
             (
                 "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent of the page on every side as completely blank white print margin; "
@@ -405,11 +406,13 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
                 "REFERENCE RULE: any reference image is for creature anatomy, silhouette, and identity only. "
                 "Do not copy its composition, rendering, colors, pose, or background."
             ),
-            f"COMPOSITION: {page.get('composition', '')}",
             (
-                "PAGE RECIPE LOCK — NON-NEGOTIABLE: "
-                f"environment={page['habitat']}; moment={page['moment']}; landmark={variant.get('landmark', '')}; "
-                f"interaction={variant.get('interaction', '')}; required elements={'; '.join(str(x) for x in page.get('must_include') or [])}."
+                "COMPOSITION: one first-read focal subject through framing, with the first-read focal subject at canonical scale and proportions; "
+                "full or nearly full silhouette, two to four large supporting habitat forms, broad white space, believable grounding, no heroic re-scaling."
+            ),
+            (
+                "PAGE RECIPE LOCK — NON-NEGOTIABLE: the identity, action, habitat, landmark, interaction, and required elements stated above are authoritative; "
+                "universal libraries may enrich them but may not replace them."
             ),
             format_generation_self_check(False),
         ])
