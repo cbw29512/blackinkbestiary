@@ -59,6 +59,11 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("Invoke-BlackInkCommand", launcher)
         self.assertIn("System.Diagnostics.ProcessStartInfo", helpers)
         self.assertIn("RedirectStandardError", helpers)
+        self.assertIn("Quote-BlackInkArgument", helpers)
+        self.assertIn("RedirectStandardOutput", helpers)
+        self.assertIn("Get-BlackInkLogTail", helpers)
+        self.assertIn("comfy-fallback.stderr.log", launcher)
+        self.assertIn("fallback_stderr=", launcher)
         self.assertIn("ShellExecute", helpers)
         self.assertIn("Start-Process failed", helpers)
 
