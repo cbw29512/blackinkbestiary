@@ -41,6 +41,30 @@ class ReviewDecisionTests(unittest.TestCase):
             if stage:
                 self.assertIn(stage, allowed, item.get("review_id"))
 
+    def test_creature_read_failure_routes_to_identity_not_environment(self):
+        item = {"monster_name": "Darkmantle", "visual_review": {"stage": "quality"}}
+        review_payload = {
+            "decision": "reject",
+            "notes": "Reject: does not read as Darkmantle; body is a humanoid winged demon.",
+        }
+        self.assertEqual(review.classify_rejection_stage(review_payload, item), "identity")
+
+    def test_environment_read_failure_stays_environment(self):
+        item = {"monster_name": "Ogre", "visual_review": {"stage": "quality"}}
+        review_payload = {
+            "decision": "reject",
+            "notes": "Reject: anatomy is correct, but the room does not read as a cramped spiral stair.",
+        }
+        self.assertEqual(review.classify_rejection_stage(review_payload, item), "environment")
+
+    def test_generic_does_not_read_as_phrase_is_not_environment_by_itself(self):
+        item = {"monster_name": "Kobold Warrior", "visual_review": {"stage": "identity"}}
+        review_payload = {
+            "decision": "reject",
+            "notes": "Reject: does not read as Kobold Warrior.",
+        }
+        self.assertEqual(review.classify_rejection_stage(review_payload, item), "identity")
+
     def test_review_id_binds_exact_image_bytes(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
