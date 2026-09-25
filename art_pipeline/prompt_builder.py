@@ -10,12 +10,12 @@ except ImportError:
     from page_contract import resolve_page_spec
 
 try:
-    from .environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections, required_object_rules
+    from .environment_prompt import environment_checklist, environment_compact_sections, environment_priority_sections, environment_prompt_sections, required_object_rules
     from .physicality_prompt import MODE_CONTACT_RULES, physicality_checklist, physicality_sections
     from .quality_system import archetype_directive, expand_defect_tags
     from .story_prompt import critical_scene_lock, interaction_proof_rules, story_checklist, story_sections
 except ImportError:
-    from environment_prompt import environment_checklist, environment_priority_sections, environment_prompt_sections, required_object_rules
+    from environment_prompt import environment_checklist, environment_compact_sections, environment_priority_sections, environment_prompt_sections, required_object_rules
     from physicality_prompt import MODE_CONTACT_RULES, physicality_checklist, physicality_sections
     from quality_system import archetype_directive, expand_defect_tags
     from story_prompt import critical_scene_lock, interaction_proof_rules, story_checklist, story_sections
@@ -262,17 +262,20 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         (
             f"CANONICAL SCALE LOCK — NON-NEGOTIABLE: size category {size}. "
             f"{page.get('subject_scale_rule', '')} Canonical creature scale is immutable; use framing rather than enlarging the body. "
-            "The monster remains the first-read focal subject at canonical scale and proportions."
+            "The monster remains the first-read focal subject through framing at canonical scale and proportions."
         ),
         f"SHAPE-FIRST RENDER LOCK — NON-NEGOTIABLE: {visual.get('shape_lock', '')}",
         f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}",
         f"CANONICAL BODY: {visual.get('body_shape', '')}",
         f"CANONICAL LIMBS / EXTREMITIES: {visual.get('limb_structure', '')}",
+        f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}",
         f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}",
+        _brief_items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style"), 6),
+        _brief_items("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", spec.get("physical_requirements"), 4),
         _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 8),
         _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 12),
         _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 10),
-        _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures, 5),
+        _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
     ]
     for key, label in (
         ("positive", "MODEL PRIORITY CAPSULE — READ BEFORE STYLE OR SCENERY"),
@@ -313,6 +316,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         "IDENTITY — HIGHEST PRIORITY:\n" + "\n".join(f"- {x}" for x in identity_lines if x and not x.endswith(":")),
     ]
 
+    sections.extend(environment_priority_sections(page, ROOT))
+
     if identity_focus_mode:
         sections.extend([
             (
@@ -337,6 +342,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         object_rules = list(required_object_rules(page))
         mode = str(physicality.get("mode") or "").strip().lower()
         mode_rule = str(MODE_CONTACT_RULES.get(mode) or "").strip()
+        physicality_priority = [x for x in physicality_sections(page)[3:5] if str(x or "").strip()]
 
         action_lines = [
             f"MOMENT: {page.get('moment', '')}.",
@@ -345,6 +351,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             f"PHYSICAL SUPPORT / CONTACT: {physicality.get('support', '')}.",
             f"PHYSICAL MOTION / WEIGHT: {physicality.get('motion', '')}.",
             mode_rule,
+            *physicality_priority,
             *action_rules,
             *object_rules,
             (
@@ -354,7 +361,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ]
         environment_lines = [
             f"HABITAT: {page['habitat']}.",
-            *environment_priority_sections(page, ROOT),
+            *environment_compact_sections(page, ROOT),
             f"UNIQUE BACKGROUND LANDMARK: {variant.get('landmark', '')}.",
             f"UNIQUE BACKGROUND FRAMING: {variant.get('framing', '')}.",
             f"MONSTER / ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
@@ -389,7 +396,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
                 "No grayscale wash, painterly shading, dense crosshatching, text, logo, watermark, or large black masses."
             ),
             (
-                "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent on every side as completely blank white print margin. "
+                "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent of the page on every side as completely blank white print margin; "
+                "no creature anatomy, weapons, tails, wings, webs, masonry, rails, grates, props, borders, or stray linework may enter that zone. "
                 "Never draw a decorative rectangular border, inset artwork frame, comic panel box, picture-frame line, or enclosing rectangle. "
                 "Local architectural lines must not connect into a page-sized frame."
             ),
