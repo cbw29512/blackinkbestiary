@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import subprocess
 from pathlib import Path
 
 REVIEW_BRANCH = "review-previews-live"
+DECISIONS_RELATIVE = "review-previews/decisions.json"
 
 
 def run(root: Path, *args: str) -> None:
@@ -32,15 +34,34 @@ def tracked_changes_outside_previews(root: Path) -> list[str]:
     return outside
 
 
-def stage_preview_snapshot(root: Path) -> None:
-    run(root, "git", "add", "-A", "review-previews")
-    # Decisions belong to the engine branch and are written by ChatGPT.
-    # The local publisher must never overwrite them with a stale copy.
-    subprocess.run(
-        ["git", "restore", "--staged", "review-previews/decisions.json"],
-        cwd=root,
-        check=False,
+def sync_live_decisions(root: Path) -> str:
+    """Copy the exact live decision ledger into the snapshot before publishing."""
+    run(
+        root,
+        "git",
+        "fetch",
+        "origin",
+        f"{REVIEW_BRANCH}:refs/remotes/origin/{REVIEW_BRANCH}",
     )
+    remote_ref = f"origin/{REVIEW_BRANCH}"
+    live_head = output(root, "git", "rev-parse", remote_ref)
+    payload = output(root, "git", "show", f"{remote_ref}:{DECISIONS_RELATIVE}")
+    parsed = json.loads(payload)
+    reviews = parsed.get("reviews") if isinstance(parsed, dict) else None
+    if not isinstance(reviews, list):
+        raise RuntimeError("Live review decisions are missing a reviews list.")
+
+    path = root / DECISIONS_RELATIVE
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(parsed, indent=2) + "\n", encoding="utf-8")
+    return live_head
+
+
+def stage_preview_snapshot(root: Path) -> None:
+    # sync_live_decisions() has already replaced the local decision ledger with
+    # the exact live copy. Stage it with the JPG/manifest snapshot so the
+    # snapshot commit preserves decisions rather than reverting them.
+    run(root, "git", "add", "-A", "review-previews")
 
 
 def publish_preview_snapshot(root: Path) -> str:
@@ -48,6 +69,7 @@ def publish_preview_snapshot(root: Path) -> str:
     if not engine_branch:
         raise RuntimeError("Review publishing requires a checked-out engine branch")
     safe_to_resync = not tracked_changes_outside_previews(root)
+    live_head = sync_live_decisions(root)
     stage_preview_snapshot(root)
 
     staged = subprocess.run(
@@ -68,7 +90,7 @@ def publish_preview_snapshot(root: Path) -> str:
             root,
             "git",
             "push",
-            "--force",
+            f"--force-with-lease=refs/heads/{REVIEW_BRANCH}:{live_head}",
             "origin",
             f"{publish_head}:refs/heads/{REVIEW_BRANCH}",
         )
@@ -76,7 +98,7 @@ def publish_preview_snapshot(root: Path) -> str:
         # Never repoint the live review branch at an engine commit merely
         # because the generated snapshot is unchanged. The prior live snapshot
         # remains the authoritative handoff until new preview bytes exist.
-        publish_head = output(root, "git", "rev-parse", f"origin/{REVIEW_BRANCH}")
+        publish_head = live_head
         print("Review snapshot unchanged; leaving review-previews-live untouched.")
 
     if safe_to_resync:
