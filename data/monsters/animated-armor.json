@@ -35,7 +35,7 @@
   "visual_overrides": {
     "core_identity": "An empty suit of medieval plate armor moving under magical force, with no visible wearer inside.",
     "silhouette": "Full humanoid armor silhouette in a deliberate stepping pose, rigid plates separated by dark empty gaps.",
-    "head_features": "Closed or partially open helmet with a clearly empty face opening shown by sparse inner contour and predominantly white negative space; no eyes, face, flesh, or solid-black void.",
+    "head_features": "Closed or partially open helmet with a clearly empty face opening shown by sparse inner contour and predominantly white negative space; no solid-black void; no eyes, face, or flesh.",
     "body_shape": "Articulated breastplate, pauldrons, gauntlets, greaves, and boots moving as a complete hollow suit.",
     "surface": "Broad simple metal plates with a few dents and edge lines, avoiding ornate engraving.",
     "signature_gear": [
