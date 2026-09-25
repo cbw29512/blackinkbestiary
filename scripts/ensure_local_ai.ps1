@@ -13,6 +13,15 @@ $runtimeStatusPath = Join-Path $root "data\local-runtime-status.json"
 $script:CurrentStage = "startup"
 $script:CurrentDetail = "Initializing local AI runtime checks."
 
+function Write-RuntimeStatus(
+  [string]$Status,
+  [string]$Stage,
+  [string]$Message,
+  [string]$Detail = ""
+) {
+  Write-RuntimeStatus $Status $Stage $Message $Detail
+}
+
 function Set-RuntimeStage(
   [string]$Stage,
   [string]$Message,
@@ -20,14 +29,14 @@ function Set-RuntimeStage(
 ) {
   $script:CurrentStage = $Stage
   $script:CurrentDetail = $Detail
-  Write-BlackInkRuntimeStatus $runtimeStatusPath "starting" $Stage $Message $Detail
+  Write-RuntimeStatus "starting" $Stage $Message $Detail
   Write-Host "$Stage - $Message"
 }
 
 trap {
   $message = [string]$_.Exception.Message
   try {
-    Write-BlackInkRuntimeStatus $runtimeStatusPath "failed" $script:CurrentStage $message $script:CurrentDetail
+    Write-RuntimeStatus "failed" $script:CurrentStage $message $script:CurrentDetail
   } catch {}
   Write-Host "Local AI runtime failed at '$($script:CurrentStage)': $message" -ForegroundColor Red
   if ($script:CurrentDetail) {
@@ -122,6 +131,6 @@ if ($verdict.pass -ne $true -or $null -eq $verdict.defects) {
 
 $script:CurrentStage = "complete"
 $script:CurrentDetail = ""
-Write-BlackInkRuntimeStatus $runtimeStatusPath "ready" "complete" "Local artist and semantic reviewer are ready."
+Write-RuntimeStatus "ready" "complete" "Local artist and semantic reviewer are ready."
 Write-Host "Local artist + semantic reviewer ready." -ForegroundColor Green
 exit 0
