@@ -34,7 +34,7 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("/system_stats", text)
         self.assertIn("/api/tags", text)
         self.assertIn("ollama.Source", text)
-        self.assertIn("Semantic vision smoke test", text)
+        self.assertIn("Testing advisory vision reviewer response", text)
         self.assertIn("Starting logged ComfyUI runtime", text)
         self.assertIn("local-runtime-status.json", text)
         self.assertIn('Write-RuntimeStatus "failed"', text)
