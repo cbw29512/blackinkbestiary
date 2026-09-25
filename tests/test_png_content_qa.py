@@ -8,7 +8,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from qa import inspect_candidate
+from qa import inspect_binding_gutter, inspect_candidate
 from png_content_qa import enforce_print_safe_margin, normalize_monochrome_line_art
 
 
@@ -206,6 +206,29 @@ class PngContentQATests(unittest.TestCase):
             self.assertIn("safe_margin_too_busy", result["reasons"])
             self.assertGreater(result["content_qa"]["safe_margin_dark_ratio"], 0.02)
 
+
+    def test_binding_gutter_rejects_ink_on_binding_side_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "binding-edge.png"
+            _write_grayscale_png(
+                path,
+                lambda x, _y: 0 if x < 8 else 255,
+            )
+            left = inspect_binding_gutter(
+                path,
+                "left",
+                gutter_px=16,
+                max_nonwhite_ratio=0.10,
+            )
+            right = inspect_binding_gutter(
+                path,
+                "right",
+                gutter_px=16,
+                max_nonwhite_ratio=0.10,
+            )
+            self.assertFalse(left["pass"])
+            self.assertIn("binding_gutter_too_busy", left["reasons"])
+            self.assertTrue(right["pass"])
 
     def test_margin_enforcement_clears_edge_frame_before_qa(self):
         with tempfile.TemporaryDirectory() as tmp:
