@@ -1,0 +1,293 @@
+from __future__ import annotations
+
+import hashlib
+import json
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+
+try:
+    from .defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
+    from .production_audit import audit_active_book
+    from .series_readiness import audit_series
+except ImportError:
+    from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
+    from production_audit import audit_active_book
+    from series_readiness import audit_series
+
+ROOT = Path(__file__).resolve().parents[1]
+
+TECHNICAL_FAILURE_STATUSES = {
+    "technical_qa_failed",
+    "technical_qa_stalled",
+    "vision_reviewer_failed",
+    "failed",
+}
+
+
+def _read(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _pct(numerator: int, denominator: int) -> float:
+    if denominator <= 0:
+        return 0.0
+    return round(100.0 * numerator / denominator, 1)
+
+
+def utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def load_scorecard(root: Path = ROOT) -> dict:
+    return _read(root / "config" / "quality_scorecard.json")
+
+
+def quality_contract_fingerprint(root: Path = ROOT, config: dict | None = None) -> str:
+    cfg = config or load_scorecard(root)
+    digest = hashlib.sha256()
+    for relative in cfg.get("comparison_authority_paths", []):
+        path = root / relative
+        digest.update(str(relative).encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes() if path.exists() else b"<missing>")
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def latest_records(state: dict) -> list[dict]:
+    latest = {}
+    for item in state.get("results", []):
+        page_id = str(item.get("page_id") or "")
+        candidate = int(item.get("candidate") or 0)
+        if not page_id or candidate < 1:
+            continue
+        latest[(page_id, candidate)] = item
+    return list(latest.values())
+
+
+def canary_metrics(state: dict, canary_page_ids: list[str]) -> dict:
+    latest = {
+        (str(item.get("page_id") or ""), int(item.get("candidate") or 0)): item
+        for item in latest_records(state)
+    }
+    rows = []
+    technical_passes = visual_passes = semantic_passes = all_passes = 0
+
+    for page_id in canary_page_ids:
+        item = latest.get((page_id, 1)) or {}
+        status = str(item.get("status") or "missing")
+        visual = item.get("visual_review") or {}
+        assistant = item.get("assistant_review") or {}
+
+        technical = bool(item) and status not in TECHNICAL_FAILURE_STATUSES
+        visual_clean = bool(visual.get("pass"))
+
+        decision = str(assistant.get("decision") or "").strip().lower()
+        if decision:
+            semantic = decision in {"approve", "select"}
+        else:
+            semantic = bool(visual) and str(visual.get("stage") or "").lower() == "quality"
+
+        passes_all = technical and visual_clean and semantic
+        technical_passes += int(technical)
+        visual_passes += int(visual_clean)
+        semantic_passes += int(semantic)
+        all_passes += int(passes_all)
+        rows.append({
+            "page_id": page_id,
+            "status": status,
+            "technical_pass": technical,
+            "visual_cleanliness_pass": visual_clean,
+            "semantic_accuracy_pass": semantic,
+            "all_automated_gates_pass": passes_all,
+            "visual_stage": visual.get("stage"),
+            "visual_score": visual.get("score"),
+            "assistant_decision": assistant.get("decision"),
+        })
+
+    total = len(canary_page_ids)
+    return {
+        "total": total,
+        "technical_passes": technical_passes,
+        "visual_passes": visual_passes,
+        "semantic_passes": semantic_passes,
+        "all_passes": all_passes,
+        "technical_qa": _pct(technical_passes, total),
+        "visual_cleanliness": _pct(visual_passes, total),
+        "semantic_accuracy": _pct(semantic_passes, total),
+        "all_automated_gates": _pct(all_passes, total),
+        "rows": rows,
+    }
+
+
+def _generic_assembly_exists(root: Path) -> bool:
+    candidates = (
+        "art_pipeline/book_assembly.py",
+        "scripts/assemble_book.py",
+        "scripts/export_kdp_interior.py",
+    )
+    return any((root / relative).exists() for relative in candidates)
+
+
+def print_package_report(root: Path = ROOT) -> dict:
+    qa_path = root / "art_pipeline" / "qa.py"
+    png_path = root / "art_pipeline" / "png_content_qa.py"
+    qa_text = qa_path.read_text(encoding="utf-8") if qa_path.exists() else ""
+    png_text = png_path.read_text(encoding="utf-8") if png_path.exists() else ""
+    proof_candidates = (
+        root / "build" / "final-interior.pdf",
+        root / "output" / "final-interior.pdf",
+        root / "web" / "final-interior.pdf",
+    )
+    components = {
+        "kdp_standard": (root / "config" / "kdp_print_standard.json").exists(),
+        "exact_export_qa": "def inspect_kdp_export" in qa_text,
+        "deterministic_safe_margin": "def enforce_print_safe_margin" in png_text,
+        "generic_assembly_pipeline": _generic_assembly_exists(root),
+        "reproducible_final_proof": any(path.exists() for path in proof_candidates),
+    }
+    weights = {
+        "kdp_standard": 20,
+        "exact_export_qa": 20,
+        "deterministic_safe_margin": 15,
+        "generic_assembly_pipeline": 25,
+        "reproducible_final_proof": 20,
+    }
+    score = sum(weights[name] for name, passed in components.items() if passed)
+    return {"score": score, "components": components}
+
+
+def replication_report(root: Path, series_report: dict) -> dict:
+    future = [row for row in series_report.get("books", []) if row.get("book_id") != "TOME-I"]
+    contracts = (
+        "config/universal_page_contract.json",
+        "config/universal_monster_contract.json",
+        "config/universal_environment_contract.json",
+        "config/universal_story_contract.json",
+    )
+    components = {
+        "universal_contracts": all((root / path).exists() for path in contracts),
+        "generic_book_scaffolding": (root / "scripts" / "scaffold_book.py").exists() and (root / "art_pipeline" / "book_scaffold.py").exists(),
+        "series_audit_green": bool(series_report.get("pass")),
+        "eight_books_registered": int(series_report.get("books_registered") or 0) >= 8,
+        "future_book_plans": bool(future) and all(bool(row.get("plan_exists")) for row in future),
+        "generic_assembly_pipeline": _generic_assembly_exists(root),
+        "synthetic_replication_test": (root / "tests" / "test_replication_readiness.py").exists(),
+    }
+    weights = {
+        "universal_contracts": 20,
+        "generic_book_scaffolding": 15,
+        "series_audit_green": 15,
+        "eight_books_registered": 10,
+        "future_book_plans": 10,
+        "generic_assembly_pipeline": 15,
+        "synthetic_replication_test": 15,
+    }
+    score = sum(weights[name] for name, passed in components.items() if passed)
+    return {"score": score, "components": components}
+
+
+def _book_locked_progress(root: Path, row: dict) -> tuple[int, float]:
+    series = _read(root / "data" / "series.json")
+    book = next((item for item in series.get("books", []) if item.get("book_id") == row.get("book_id")), None)
+    if not book:
+        return 0, 0.0
+    state_path = root / str(book.get("state_path") or "")
+    if not state_path.exists() or not state_path.is_file():
+        return 0, 0.0
+    state = _read(state_path)
+    locked = sum(1 for entry in (state.get("pages") or {}).values() if entry.get("status") == "locked")
+    target = int(row.get("target_pages") or 0)
+    return locked, _pct(locked, target)
+
+
+def build_quality_snapshot(
+    root: Path,
+    state: dict,
+    runtime: dict | None,
+    engine_preflight: dict | None,
+    engine_commit: str,
+) -> dict:
+    scorecard = load_scorecard(root)
+    series = audit_series(root)
+    active = audit_active_book(root)
+    active_book_id = str(active.get("book_id") or "")
+    canary = canary_metrics(state, list(scorecard.get("canary_page_ids") or []))
+    print_report = print_package_report(root)
+    replication = replication_report(root, series)
+
+    runtime_ready = str((runtime or {}).get("status") or "").lower() == "ready"
+    preflight_ready = str((engine_preflight or {}).get("status") or "").lower() in {"passed", "pass", "success"}
+    foundation_components = {
+        "local_runtime_ready": runtime_ready,
+        "engine_preflight_passed": preflight_ready,
+        "series_audit_green": bool(series.get("pass")),
+        "active_book_structure_valid": bool(active.get("pass")),
+    }
+    foundation = 25 * sum(1 for value in foundation_components.values() if value)
+
+    books = []
+    for row in series.get("books", []):
+        target = int(row.get("target_pages") or 0)
+        recipe_ready = int(row.get("recipe_ready") or 0)
+        completeness = _pct(recipe_ready, target)
+        locked_count, locked_progress = _book_locked_progress(root, row)
+        is_active = str(row.get("book_id") or "") == active_book_id
+        metrics = {
+            "foundation_readiness": float(foundation),
+            "technical_qa": canary["technical_qa"] if is_active else 0.0,
+            "visual_cleanliness": canary["visual_cleanliness"] if is_active else 0.0,
+            "semantic_accuracy": canary["semantic_accuracy"] if is_active else 0.0,
+            "completeness": completeness,
+            "print_package_readiness": float(print_report["score"]),
+            "locked_page_progress": locked_progress,
+            "replication_readiness": float(replication["score"]),
+        }
+        values = list(metrics.values())
+        overall = round(sum(values) / len(values), 1) if values else 0.0
+        books.append({
+            "book_id": row.get("book_id"),
+            "title": row.get("title"),
+            "active": is_active,
+            "target_pages": target,
+            "recipe_ready": recipe_ready,
+            "locked_pages": locked_count,
+            "metrics": metrics,
+            "overall_automated_readiness": overall,
+            "weakest_metric": min(metrics, key=metrics.get) if metrics else None,
+            "automated_100": bool(metrics) and all(value == 100 for value in values),
+        })
+
+    latest = latest_records(state)
+    taxonomy = load_taxonomy(root / "config" / "defect_taxonomy.json")
+    defects = count_defects(latest, taxonomy)
+    status_counts = Counter(str(item.get("status") or "unknown") for item in latest)
+    active_row = next((book for book in books if book["active"]), None)
+    active_metrics = dict((active_row or {}).get("metrics") or {})
+
+    snapshot = {
+        "schema_version": 1,
+        "quality_contract_version": scorecard.get("contract_version"),
+        "quality_contract_fingerprint": quality_contract_fingerprint(root, scorecard),
+        "measured_at": utc_now(),
+        "engine_commit": engine_commit,
+        "active_book_id": active_book_id,
+        "metrics": active_metrics,
+        "overall_automated_readiness": (active_row or {}).get("overall_automated_readiness", 0.0),
+        "canary": canary,
+        "books": books,
+        "foundation_components": foundation_components,
+        "print_package": print_report,
+        "replication": replication,
+        "defect_counts": defects,
+        "defect_labels": taxonomy_labels(taxonomy),
+        "status_counts": dict(sorted(status_counts.items())),
+        "known_blockers": [code for code, count in defects.items() if count > 0],
+    }
+    fingerprint_payload = dict(snapshot)
+    fingerprint_payload.pop("measured_at", None)
+    snapshot["measurement_fingerprint"] = hashlib.sha256(
+        json.dumps(fingerprint_payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    return snapshot

@@ -46,6 +46,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
+from quality_history import build_quality_snapshot
 from page_contract import resolve_page_spec
 from studio_config import active_book_paths
 
@@ -55,6 +56,7 @@ ENGINE_PREFLIGHT_STATUS = ROOT / "data" / "engine-preflight-status.json"
 SOURCE_DIR = ROOT / "web" / "test-gallery"
 PREVIEW_DIR = ROOT / "review-previews"
 MANIFEST = PREVIEW_DIR / "manifest.json"
+QUALITY_CURRENT = PREVIEW_DIR / "quality-current.json"
 CANDIDATE_RE = re.compile(r"^(?P<page>.+)-C(?P<candidate>\d+)\.png$", re.IGNORECASE)
 
 
@@ -366,11 +368,24 @@ def main() -> int:
             "visual_review": None,
         })
 
+    quality_snapshot = build_quality_snapshot(
+        ROOT,
+        state,
+        runtime,
+        engine_preflight,
+        engine_commit(),
+    )
+    QUALITY_CURRENT.write_text(
+        json.dumps(quality_snapshot, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
     MANIFEST.write_text(json.dumps({
         "schema_version": 5,
         "snapshot_engine_commit": engine_commit(),
         "candidate_count": len(published),
         "diagnostic_count": len(diagnostics),
+        "quality_snapshot": "review-previews/quality-current.json",
         "runtime": runtime,
         "engine_preflight": engine_preflight,
         "selections": effective_selections,

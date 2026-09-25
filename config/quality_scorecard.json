@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "contract_version": "black-ink-quality-scorecard-v1",
+  "canary_page_ids": ["I-01", "I-04", "I-08", "I-10", "I-14", "I-16", "I-19", "I-20", "I-22"],
+  "comparison_authority_paths": [
+    "config/quality_scorecard.json",
+    "config/quality_rules.json",
+    "config/coloring_page_standard.json",
+    "config/universal_page_contract.json",
+    "config/universal_monster_contract.json",
+    "config/universal_environment_contract.json",
+    "config/universal_story_contract.json",
+    "config/defect_taxonomy.json",
+    "art_pipeline/png_content_qa.py",
+    "art_pipeline/vision_review_prompts.py"
+  ],
+  "metric_policy": {
+    "higher_is_better": true,
+    "comparison_rule": "Only compare snapshots when quality_contract_fingerprint is unchanged.",
+    "book_100_rule": "Every required category must equal 100 and known_blockers must be empty.",
+    "series_100_rule": "Every registered book must individually satisfy the book_100_rule."
+  }
+}

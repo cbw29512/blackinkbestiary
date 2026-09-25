@@ -1,4 +1,5 @@
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -36,6 +37,12 @@ class ReviewPublishGitTests(unittest.TestCase):
                     "origin/review-previews-live:review-previews/decisions.json",
                 ):
                     return payload
+                if key == (
+                    "git",
+                    "show",
+                    "origin/review-previews-live:review-previews/quality-history.jsonl",
+                ):
+                    raise subprocess.CalledProcessError(128, key)
                 raise KeyError(key)
 
             with (
@@ -59,6 +66,61 @@ class ReviewPublishGitTests(unittest.TestCase):
                 ),
                 calls,
             )
+
+    def test_quality_history_records_signed_deltas_and_contract_baselines(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            preview = root / "review-previews"
+            preview.mkdir()
+            history = {
+                "quality_contract_version": "v1",
+                "quality_contract_fingerprint": "same",
+                "active_book_id": "TOME-I",
+                "engine_commit": "old",
+                "measurement_fingerprint": "old-measurement",
+                "metrics": {
+                    "visual_cleanliness": 70.0,
+                    "semantic_accuracy": 20.0,
+                    "replication_readiness": 80.0,
+                },
+                "defect_counts": {"IDENTITY_HEROIC_BULK": 5},
+            }
+            (preview / "quality-history.jsonl").write_text(
+                json.dumps(history) + "\n",
+                encoding="utf-8",
+            )
+            current = {
+                **history,
+                "engine_commit": "new",
+                "measurement_fingerprint": "new-measurement",
+                "metrics": {
+                    "visual_cleanliness": 60.0,
+                    "semantic_accuracy": 35.0,
+                    "replication_readiness": 85.0,
+                },
+                "defect_counts": {"IDENTITY_HEROIC_BULK": 2},
+            }
+            (preview / "quality-current.json").write_text(
+                json.dumps(current),
+                encoding="utf-8",
+            )
+
+            self.assertTrue(rpg.append_quality_snapshot(root))
+            trend = json.loads((preview / "quality-trend.json").read_text(encoding="utf-8"))
+            self.assertTrue(trend["comparable_to_previous"])
+            self.assertEqual(trend["comparisons"]["visual_cleanliness"]["signed_delta"], "-10.0")
+            self.assertEqual(trend["comparisons"]["semantic_accuracy"]["signed_delta"], "+15.0")
+            self.assertEqual(trend["comparisons"]["replication_readiness"]["signed_delta"], "+5.0")
+            self.assertEqual(trend["comparisons"]["visual_cleanliness"]["trend"], "regressing")
+
+            changed = dict(current)
+            changed["quality_contract_fingerprint"] = "new-contract"
+            changed["measurement_fingerprint"] = "contract-reset"
+            (preview / "quality-current.json").write_text(json.dumps(changed), encoding="utf-8")
+            self.assertTrue(rpg.append_quality_snapshot(root))
+            reset = json.loads((preview / "quality-trend.json").read_text(encoding="utf-8"))
+            self.assertFalse(reset["comparable_to_previous"])
+            self.assertIn("new baseline", reset["comparison_reason"])
 
     def test_publish_uses_dedicated_review_branch_and_resyncs_engine(self):
         root = Path("C:/fake")

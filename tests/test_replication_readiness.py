@@ -1,0 +1,38 @@
+import unittest
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from book_scaffold import build_book_plan, build_book_record
+from series_readiness import audit_series
+
+
+class ReplicationReadinessTests(unittest.TestCase):
+    def test_synthetic_tome_ix_scaffolds_from_generic_contracts(self):
+        book = build_book_record(
+            "TOME-IX-SYNTHETIC",
+            "Synthetic Replication Probe",
+            "A temporary theme used only to prove generic book scaffolding.",
+            5,
+            ["synthetic habitat"],
+        )
+        plan = build_book_plan(book, "IX")
+        self.assertEqual(plan["target_pages"], 5)
+        self.assertEqual([slot["page_id"] for slot in plan["slots"]], [
+            "IX-01", "IX-02", "IX-03", "IX-04", "IX-05"
+        ])
+        self.assertEqual(book["page_contract"], "config/universal_page_contract.json")
+        self.assertEqual(book["monster_contract"], "config/universal_monster_contract.json")
+        self.assertEqual(book["environment_contract"], "config/universal_environment_contract.json")
+        self.assertEqual(book["story_contract"], "config/universal_story_contract.json")
+
+    def test_existing_eight_book_series_still_passes_generic_audit(self):
+        report = audit_series(ROOT)
+        self.assertTrue(report["pass"])
+        self.assertEqual(report["books_registered"], 8)
+
+
+if __name__ == "__main__":
+    unittest.main()
