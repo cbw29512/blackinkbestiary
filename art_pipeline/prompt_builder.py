@@ -300,6 +300,10 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         for item in spec.get("known_failure_modes") or []
         if item.get("symptom") and item.get("correction")
     ]
+    if len(failures) > 2:
+        priority_failures = [failures[0], failures[-1]]
+    else:
+        priority_failures = failures
 
     identity_lines = [
         f"SUBJECT: {page['monster_name']}.",
@@ -314,7 +318,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 3),
         _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 4),
         _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 3),
-        _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures, 2),
+        _brief_items("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", spec.get("physical_requirements"), 2),
+        _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", priority_failures, 2),
     ]
     identity_lines.extend(_signature_geometry_lines(spec))
     creature_type = str(spec.get("creature_type") or "").lower()
