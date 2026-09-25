@@ -386,8 +386,8 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         mode_rule = str(MODE_CONTACT_RULES.get(mode) or "").strip()
 
         action_lines = [
-            f"REQUIRED VISIBLE ACTION: {page.get('moment', '')}.",
-            f"CAUSE / ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
+            f"STORY BEAT: {page.get('moment', '')}.",
+            f"STORY/ENVIRONMENT INTERACTION: {variant.get('interaction', '')}.",
             f"SUPPORT / CONTACT: {physicality.get('support', '')}.",
             f"MOTION / WEIGHT: {physicality.get('motion', '')}.",
             mode_rule,
@@ -410,6 +410,12 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ]
 
         sections.extend([
+            (
+                "CRITICAL SCENE LOCK — NON-NEGOTIABLE: "
+                f"action={page.get('moment', '')}; interaction={variant.get('interaction', '')}; "
+                f"support={physicality.get('support', '')}; motion={physicality.get('motion', '')}. "
+                "Build the pose/contact around this exact cause-and-effect; do not substitute a portrait or neutral pose."
+            ),
             "ACTION — SECOND PRIORITY:\n" + "\n".join(f"- {x}" for x in action_lines if x),
             "ENVIRONMENT — THIRD PRIORITY:\n" + "\n".join(f"- {x}" for x in environment_lines if x),
             _brief_items("MUST INCLUDE", page.get("must_include"), 6),
