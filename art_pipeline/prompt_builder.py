@@ -401,7 +401,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             mode_rule,
             flight_rule,
             *action_rules,
-            *object_rules,
+            _brief_items("REQUIRED OBJECT PHYSICAL RULES", object_rules),
             (
                 "STATIC STORY TEST: the required verb and cause-and-effect must read at thumbnail size, not as a character portrait. "
                 "Reject standing, posing, holding, or mere proximity when the page calls for a specific action."
