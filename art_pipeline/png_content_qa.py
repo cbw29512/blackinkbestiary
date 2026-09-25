@@ -103,10 +103,10 @@ def inspect_line_art(path: str | Path) -> dict:
         for x in range(0, width, x_step):
             i = x * channels
             if color_type in {0, 4}:
-                luma = row[i]
+                r = g = b = row[i]
             else:
                 r, g, b = row[i], row[i + 1], row[i + 2]
-                luma = (299 * r + 587 * g + 114 * b) // 1000
+            luma = (299 * r + 587 * g + 114 * b) // 1000
             dark += luma < 80
             white += luma > 245
             total += 1
