@@ -266,15 +266,14 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
         f"SHAPE-FIRST RENDER LOCK — NON-NEGOTIABLE: {visual.get('shape_lock', '')}",
         f"CANONICAL SILHOUETTE: {visual.get('silhouette', '')}",
-        f"CANONICAL BODY: {visual.get('body_shape', '')}",
         f"CANONICAL LIMBS / EXTREMITIES: {visual.get('limb_structure', '')}",
         f"CANONICAL SIZE IMPRESSION: {scene.get('size_impression', '')}",
         f"CANONICAL NATURAL POSTURE: {scene.get('natural_posture', '')}",
         _brief_items("CANONICAL BEHAVIOR STYLE", scene.get("behavior_style"), 4),
         _brief_items("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", spec.get("physical_requirements"), 3),
-        _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 6),
-        _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 8),
-        _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 7),
+        _brief_items("ANATOMY THAT MUST REMAIN", visual.get("must_keep"), 4),
+        _brief_items("ANATOMY THAT MUST NEVER APPEAR", visual.get("must_avoid"), 6),
+        _brief_items("PAGE-SPECIFIC MONSTER IDENTITY", page.get("identity_rules"), 5),
         _brief_items("KNOWN IDENTITY DRIFT TO PREVENT", failures),
     ]
     creature_type = str(spec.get("creature_type") or "").lower()
@@ -293,13 +292,13 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             identity_lines.append(f"{label}: {value}")
 
     identity_lines.append(
-        "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Never invent or duplicate heads, eyes, horns, antennae, arms, hands, "
-        "legs, feet, wings, tails, tentacles, mandibles, pincers, or other appendages. Limbs attach once at plausible joints and may not branch, "
-        "merge, or sprout from scenery. Exact canonical counts are hard limits. Candidate variation may change pose only; it may not change anatomy."
+        "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: Never invent or duplicate heads, eyes, horns, antennae, arms, legs, wings, tails, "
+        "tentacles, mandibles, or pincers. Limbs attach once and may not branch, merge, or sprout from scenery. Exact counts are hard limits. "
+        "Candidate variation may change pose only; it may not change anatomy."
     )
     identity_lines.append(
-        "CREATURE/SCENERY OWNERSHIP FIREWALL: scenery and props may touch the creature only where the recipe requires interaction; "
-        "they may never sprout from, merge into, replace, or duplicate limbs, tails, wings, horns, antennae, mandibles, or other anatomy."
+        "CREATURE/SCENERY OWNERSHIP FIREWALL: scenery may contact anatomy only where the recipe requires it and may never sprout from, "
+        "merge into, replace, or duplicate limbs or other anatomy."
     )
 
     if _is_swarm(page, spec):
@@ -384,7 +383,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             "ACTION — SECOND PRIORITY:\n" + "\n".join(f"- {x}" for x in action_lines if x),
             "ENVIRONMENT — THIRD PRIORITY:\n" + "\n".join(f"- {x}" for x in environment_lines if x),
             _brief_items("MUST INCLUDE", page.get("must_include"), 10),
-            _brief_items("MUST AVOID", page.get("must_avoid"), 8),
+            _brief_items("MUST AVOID", page.get("must_avoid"), 6),
         ])
 
         if candidate_no is not None:
@@ -404,10 +403,9 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
                 "No grayscale wash, painterly shading, dense crosshatching, text, logo, or watermark. No large black masses."
             ),
             (
-                "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent of the page on every side as completely blank white print margin; "
-                "no creature anatomy, weapons, tails, wings, webs, masonry, rails, grates, props, borders, or stray linework may enter that zone. "
-                "Never draw a decorative rectangular border, inset artwork frame, comic panel box, picture-frame line, or enclosing rectangle. "
-                "Local architectural lines must not connect into a page-sized frame."
+                "PAGE-EDGE LOCK — NON-NEGOTIABLE: reserve the outer eight percent of the page as completely blank white print margin; "
+                "no creature anatomy, props, scenery, borders, or stray linework may enter it. Never draw a decorative rectangular border or inset artwork frame; "
+                "local architectural lines must not connect into a page-sized frame."
             ),
             (
                 "REFERENCE RULE: any reference image is for creature anatomy, silhouette, and identity only. "
