@@ -6,7 +6,7 @@
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
   "comparable_to_previous": true,
   "comparison_reason": null,
-  "history_appended": true,
+  "history_appended": false,
   "history_entries": 52,
   "current_metrics": {
     "foundation_readiness": 100.0,
