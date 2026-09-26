@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "identity_version": 1,
+  "identity_version": 2,
   "profile_id": "hobgoblin",
   "display_name": "Hobgoblin",
   "taxonomy": {
@@ -32,9 +32,19 @@
       "feral crouch",
       "wild furry silhouette",
       "cute elf face",
-      "reptilian features"
+      "reptilian features",
+      "horns or horn nubs",
+      "tail",
+      "clawed animal feet",
+      "six-pack bodybuilder torso"
     ],
-    "limb_structure": "Balanced athletic humanoid arms and legs with controlled hand placement and stable booted or armored feet; no giant, animal, or exaggerated goblin limb proportions."
+    "limb_structure": "Balanced athletic humanoid arms and legs with controlled hand placement and stable booted or armored feet; no giant, animal, or exaggerated goblin limb proportions.",
+    "shape_lock": "Draw a medium lean military goblinoid with humanlike overall scale, angular stern face, pointed ears, broad flattened nose, and disciplined posture. Keep the torso athletic but not bodybuilder-bulky; no horns, tusks, tail, claws, animal feet, or orc-like jaw.",
+    "render_priority": {
+      "positive": "MEDIUM LEAN MILITARY GOBLINOID with an angular stern face, broad flattened nose, modest pointed ears, clean athletic limb lines, upright trained posture, and organized practical gear.",
+      "negative": "NO horns, tusks, tail, claws, boar muzzle, orc jaw, bodybuilder chest, six-pack torso, hulking shoulders, or tiny goblin proportions.",
+      "silhouette_test": "At thumbnail size the first read must be a disciplined lean soldierly goblinoid, not an orc, demon, or bodybuilder."
+    }
   },
   "accuracy_checks": [
     "reads as disciplined goblinoid soldier before generic fantasy brute",
@@ -42,7 +52,9 @@
     "no tusks or animal muzzle",
     "ears are pointed but proportionally smaller than a goblin's",
     "body remains medium athletic rather than hulking",
-    "posture and equipment communicate military discipline"
+    "posture and equipment communicate military discipline",
+    "head has no horns and no tusks",
+    "feet and hands remain humanoid rather than clawed"
   ],
   "known_failure_modes": [
     {
@@ -64,6 +76,11 @@
       "id": "elf_drift",
       "symptom": "face becomes handsome or elf-like",
       "correction": "restore broad flattened goblinoid nose, heavy brow, angular cheeks, and stern predatory eyes"
+    },
+    {
+      "id": "demon_drift",
+      "symptom": "horns, tail, claws, or devil-like facial anatomy appears",
+      "correction": "remove demonic features and restore a hornless stern goblinoid soldier with pointed ears, broad flattened nose, and humanoid hands/feet"
     }
   ],
   "scene_identity": {

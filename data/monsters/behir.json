@@ -5,7 +5,7 @@
   "size": "huge",
   "creature_type": "monstrosity",
   "visual_identity": {
-    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head, and a body built to coil through caverns.",
+    "core_identity": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head,..",
     "silhouette": "Very long snake-like torso wrapped in coils, numerous paired legs along the sides, horned head raised from the coil.",
     "head_features": "Long reptilian head with strong jaws, backward horns or spines, alert eyes, no wings.",
     "body_shape": "Serpentine segmented torso with many pairs of short legs spaced along its length and a tapering tail.",
@@ -22,7 +22,7 @@
       "long serpentine body",
       "horned reptilian head",
       "no wings",
-      "cavern-coiling posture"
+      "coiling serpentine posture"
     ],
     "must_avoid": [
       "dragon wings",
@@ -30,25 +30,65 @@
       "centipede insect head",
       "humanoid arms",
       "smooth legless snake",
-      "dense scales"
-    ]
+      "dense scales",
+      "only four legs",
+      "most visible torso segments lacking paired legs"
+    ],
+    "limb_structure": "Repeated paired short reptilian legs continue along much of the long serpentine torso; multiple distinct left/right leg pairs must remain visible in sequence. The legs stay small relative to body length; no wings, humanoid arms, insect head, four-limbed dragon body, or legless snake body.",
+    "shape_lock": "Draw one very long serpentine reptile whose torso visibly carries repeated paired short legs along most of its visible length, with multiple leg pairs clearly readable in sequence, ending in a tapering tail. Raise one horned reptilian head from the coils. Keep the silhouette snake-long and many-legged, never dragon-shaped, four-legged, or legless."
   },
   "default_habitats": [
-    "crystal caverns",
-    "deep caves",
-    "subterranean cliffs"
+    "caves",
+    "underground",
+    "rocky terrain"
   ],
   "accuracy_checks": [
     "many legs are obvious",
     "body reads serpentine not centipede",
     "head is reptilian",
     "no wings appear",
-    "crystal coil composition is readable",
-    "lightning remains secondary to anatomy"
+    "coiled body remains readable",
+    "lightning remains secondary to anatomy",
+    "multiple paired legs remain visibly repeated along the long torso"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A huge serpentine reptile with many pairs of short powerful legs, a horned predatory head,.. Serpentine segmented torso with many pairs of short legs spaced along its length and a tapering tail. Large simple scales or ridge plates with minimal texture.",
+  "behavior_traits": [
+    "climbing",
+    "coiling",
+    "predatory stalking",
+    "sudden striking"
+  ],
+  "scene_identity": {
+    "size_impression": "Huge, extremely long serpentine reptile whose scale comes from body length and repeated short legs rather than dragon bulk.",
+    "natural_posture": "Long body coils or braces against terrain while many paired short legs visibly contact support along the torso.",
+    "behavior_style": [
+      "climbing",
+      "coiling",
+      "predatory stalking",
+      "sudden striking"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "body becomes a four-limbed dragon or gains wings",
+      "correction": "remove wings and dragon torso proportions; restore snake-long body with repeated paired short legs"
+    },
+    {
+      "id": "leg_loss_drift",
+      "symptom": "many-legged body collapses into a smooth snake or only a few legs",
+      "correction": "restore repeated paired legs along much of the serpentine torso"
+    }
+  ]
 }

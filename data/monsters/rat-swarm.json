@@ -5,8 +5,8 @@
   "size": "swarm",
   "creature_type": "swarm of tiny beasts",
   "visual_identity": {
-    "core_identity": "A flowing mass of ordinary dungeon rats whose individual bodies remain readable while the group moves like a living tide.",
-    "silhouette": "Many low rat bodies overlapping in a directional stream, tails and pointed snouts creating motion without becoming a black mass.",
+    "core_identity": "A flowing mass of ordinary rats whose individual bodies remain readable while the group moves like a living tide.",
+    "silhouette": "A controlled directional stream of roughly 12–24 comparable small rat bodies with broad white gaps; no sea of repeated rats and no oversized leader.",
     "head_features": "Repeated simple rat heads with pointed snouts, rounded ears, whiskers, and visible incisors on a few foreground animals.",
     "body_shape": "Small four-legged rodent forms in varied running poses; no giant leader rat.",
     "surface": "Minimal fur lines and simple naked tails.",
@@ -30,28 +30,39 @@
       "mouse-cartoon faces",
       "insect swarm",
       "human features",
-      "excessive overlap"
-    ]
+      "excessive overlap",
+      "wallpaper density of rats",
+      "more than about two dozen visible rats",
+      "oversized foreground leader rat"
+    ],
+    "shape_lock": "Draw one directional stream of roughly 12–24 comparable rats with broad white gaps between clusters; no oversized leader, no wallpaper fill, and no decorative frame around the art."
   },
   "default_habitats": [
-    "floor grates",
+    "underground",
     "sewers",
-    "dungeon kitchens"
+    "settlements"
   ],
   "accuracy_checks": [
-    "rats clearly pour from the grate",
     "individual silhouettes remain readable",
-    "flow direction is obvious",
-    "background grate remains visible",
+    "group movement direction is obvious",
     "page preserves white space",
-    "no giant leader dominates"
+    "no giant leader dominates",
+    "visible population is controlled rather than wallpaper-dense",
+    "rats stay comparable in scale with no giant focal animal"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "rat"
+  "family_profile": "rat",
+  "description": "A flowing mass of ordinary rats whose individual bodies remain readable while the group moves like a living tide. Small four-legged rodent forms in varied running poses; no giant leader rat. Minimal fur lines and simple naked tails.",
+  "behavior_traits": [
+    "swarming",
+    "scavenging",
+    "squeezing through gaps",
+    "fleeing danger"
+  ]
 }

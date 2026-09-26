@@ -7,7 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from monster_catalog import resolve_monster_spec
-from prompt_builder import build_prompt
+from prompt_builder import _priority_failure_lines, build_prompt
+from vision_review_prompts import build_identity_review_prompt
 
 
 class CreatureCatalogTests(unittest.TestCase):
@@ -41,7 +42,7 @@ class CreatureCatalogTests(unittest.TestCase):
 
     def test_minimal_bugbear_recipe_inherits_complete_family_identity(self):
         raw = json.loads((ROOT / "data" / "monsters" / "bugbear-stalker.json").read_text(encoding="utf-8"))
-        self.assertEqual(raw["schema_version"], 3)
+        self.assertEqual(raw["schema_version"], 4)
         self.assertNotIn("visual_identity", raw)
         self.assertNotIn("accuracy_checks", raw)
         self.assertNotIn("size", raw)
@@ -70,17 +71,96 @@ class CreatureCatalogTests(unittest.TestCase):
         report = audit_monster_catalog(ROOT)
         self.assertEqual(report["errors"], [])
         self.assertTrue(report["pass"])
+        self.assertTrue(report["positive_geometry"]["complete"])
+        self.assertEqual(
+            report["positive_geometry"]["shape_locked"],
+            report["positive_geometry"]["resolved_specs"],
+        )
+        self.assertEqual(
+            report["positive_geometry"]["limb_structured"],
+            report["positive_geometry"]["resolved_specs"],
+        )
 
-    def test_family_scene_dna_is_injected_into_prompt(self):
+    def test_family_scene_dna_remains_authority_without_bloating_generation(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
+        spec = resolve_monster_spec(page["monster_spec_id"])
         text = build_prompt(page)
+        scene = spec.get("scene_identity") or {}
+        self.assertTrue(scene.get("size_impression"))
+        self.assertTrue(scene.get("natural_posture"))
+        self.assertTrue(scene.get("behavior_style"))
         self.assertIn("CANONICAL LIMBS / EXTREMITIES", text)
-        self.assertIn("CANONICAL SIZE IMPRESSION", text)
-        self.assertIn("CANONICAL NATURAL POSTURE", text)
-        self.assertIn("CANONICAL BEHAVIOR STYLE", text)
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
         self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
+
+    def test_canary_ordinary_variants_do_not_redeclare_family_anatomy(self):
+        for monster_id in ("kobold-warrior", "goblin-warrior", "ogre", "giant-bat"):
+            raw = json.loads(
+                (ROOT / "data" / "monsters" / f"{monster_id}.json").read_text(encoding="utf-8")
+            )
+            self.assertNotIn("visual_identity", raw, monster_id)
+            self.assertIn("family_profile", raw, monster_id)
+            self.assertTrue(raw.get("visual_overrides") is not None, monster_id)
+
+    def test_canary_variants_inherit_family_shape_locks(self):
+        expected = {
+            "kobold-warrior": "one-third to one-half",
+            "goblin-warrior": "small wiry goblin",
+            "ogre": "massive heavy-bellied giant",
+            "giant-bat": "exactly four limbs total",
+        }
+        for monster_id, phrase in expected.items():
+            spec = resolve_monster_spec(monster_id)
+            self.assertIn(phrase, spec["visual_identity"]["shape_lock"], monster_id)
+            self.assertTrue(spec["catalog"]["minimal_recipe"], monster_id)
+
+    def test_every_tome_i_monster_resolves_positive_shape_and_limb_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            spec = resolve_monster_spec(page["monster_spec_id"])
+            visual = spec.get("visual_identity") or {}
+            self.assertTrue(
+                str(visual.get("shape_lock") or "").strip(),
+                f"{page['page_id']}:{page['monster_spec_id']} missing shape_lock",
+            )
+            self.assertTrue(
+                str(visual.get("limb_structure") or "").strip(),
+                f"{page['page_id']}:{page['monster_spec_id']} missing limb_structure",
+            )
+
+    def test_tome_i_positive_geometry_reaches_generation_and_identity_review(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            spec = resolve_monster_spec(page["monster_spec_id"])
+            visual = spec["visual_identity"]
+            shape_lock = str(visual["shape_lock"]).strip()
+            limb_structure = str(visual["limb_structure"]).strip()
+            generation = build_prompt(page)
+            identity_review = build_identity_review_prompt(page)
+
+            self.assertIn(shape_lock, generation, page["page_id"])
+            self.assertIn(limb_structure, generation, page["page_id"])
+            self.assertIn(shape_lock, identity_review, page["page_id"])
+            self.assertIn(limb_structure, identity_review, page["page_id"])
+
+    def test_tome_i_failure_modes_are_exhaustive_in_review_and_bounded_in_generation(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page in tome["pages"]:
+            spec = resolve_monster_spec(page["monster_spec_id"])
+            generation = build_prompt(page)
+            identity_review = build_identity_review_prompt(page)
+            failures = spec.get("known_failure_modes") or []
+            self.assertTrue(failures, page["page_id"])
+            self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", generation, page["page_id"])
+            selected_lines = _priority_failure_lines(page, spec, None)
+            self.assertGreaterEqual(len(selected_lines), 1, page["page_id"])
+            self.assertLessEqual(len(selected_lines), 2, page["page_id"])
+            for line in selected_lines:
+                self.assertIn(line, generation, page["page_id"])
+            for failure in failures:
+                symptom = str(failure.get("symptom") or "").strip()
+                self.assertIn(symptom, identity_review, page["page_id"])
 
     def test_kobold_family_identity_merges_with_variant(self):
         spec = resolve_monster_spec("kobold-warrior")
@@ -88,7 +168,7 @@ class CreatureCatalogTests(unittest.TestCase):
         self.assertIn("long reptilian snout", keep)
         self.assertIn("visible tail", keep)
         self.assertEqual(spec["family_profile"], "kobold")
-        self.assertEqual(spec["schema_version"], 2)
+        self.assertEqual(spec["schema_version"], 4)
 
 
 if __name__ == "__main__":

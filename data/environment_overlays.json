@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "overlay_registry_id": "black-ink-environment-overlays-v1",
-  "purpose": "Cross-family environmental modifiers that deepen scenery without moving background detail into monster JSON.",
+  "purpose": "Cross-family environmental roles that let the environment engine create believable fantasy places independently of monster identity.",
   "overlays": {
     "lair": {
       "trigger_terms": [
@@ -240,6 +240,307 @@
         "secondary_features",
         "lighting_features",
         "structural_features"
+      ]
+    },
+    "laboratory": {
+      "trigger_terms": [
+        "laboratory",
+        "lab",
+        "alchemy",
+        "alchemical",
+        "experiment",
+        "workshop",
+        "research"
+      ],
+      "directives": [
+        "Make the space read as a working fantasy laboratory through two or three large functional stations, not decorative clutter.",
+        "Favor a broad workbench, large vessels or alembic-like apparatus, shelves with a few oversized containers, a basin, furnace, specimen vessel, or writing station.",
+        "Every fixture must sit on, hang from, or connect to a believable support surface; no floating apparatus.",
+        "Keep glassware sparse and large enough to color; avoid dozens of tiny bottles, labels, tubes, or modern scientific equipment."
+      ],
+      "component_bias": [
+        "landmarks",
+        "secondary_features",
+        "interaction_patterns"
+      ]
+    },
+    "inhabited": {
+      "trigger_terms": [
+        "inhabited",
+        "occupied",
+        "camp",
+        "living",
+        "quarters",
+        "den",
+        "nest",
+        "roost"
+      ],
+      "directives": [
+        "Show one or two large signs of repeated habitation such as bedding, a feeding area, storage, a fire site, nesting material, tracks, or a worn route.",
+        "Habitation evidence must fit the base environment and remain secondary to its spatial identity.",
+        "Avoid random prop piles; each object should imply sleeping, feeding, storing, guarding, crafting, or travel."
+      ],
+      "component_bias": [
+        "secondary_features",
+        "ground_planes",
+        "interaction_patterns"
+      ]
+    },
+    "open_terrain": {
+      "trigger_terms": [
+        "open field",
+        "grassland",
+        "plain",
+        "meadow",
+        "valley",
+        "open landscape",
+        "battlefield"
+      ],
+      "directives": [
+        "Build believable open terrain from a foreground ground plane, a middle-distance landmark, and a distant horizon or terrain break.",
+        "Choose only a few large natural or fantasy features: boulders, lone trees, standing stones, ruined wall sections, stream bends, low ridges, old road traces, or distant structures.",
+        "Preserve broad open coloring regions and visible sky; do not fill the field with repeated grass blades, flowers, rocks, or debris.",
+        "Any ruin, road, stream, tree, or standing stone must have a plausible relationship to the terrain rather than appearing as isolated decoration."
+      ],
+      "component_bias": [
+        "landmarks",
+        "depth_features",
+        "secondary_features"
+      ]
+    },
+    "forge": {
+      "trigger_terms": [
+        "forge",
+        "smithy",
+        "foundry"
+      ],
+      "directives": [
+        "Show a believable fantasy forge organized around one large hearth or furnace, an anvil/work block, and sparse tool storage.",
+        "The fire source needs a chimney, hood, vent, or open-air exhaust relationship appropriate to the base environment.",
+        "Tools rest in racks, on benches, or against walls; no floating tools and no carpet of tiny implements."
+      ],
+      "component_bias": [
+        "landmarks",
+        "lighting_features",
+        "secondary_features"
+      ]
+    },
+    "library": {
+      "trigger_terms": [
+        "library",
+        "archive",
+        "scriptorium",
+        "study"
+      ],
+      "directives": [
+        "Use a few large bookcases, scroll shelves, reading tables, lecterns, map tables, or document chests to establish a fantasy archive.",
+        "Shelving must stand against walls or form believable freestanding ranges with walking space.",
+        "Avoid hundreds of individually rendered books, loose papers, or modern office furniture."
+      ],
+      "component_bias": [
+        "landmarks",
+        "secondary_features",
+        "structural_features"
+      ]
+    },
+    "kitchen": {
+      "trigger_terms": [
+        "kitchen",
+        "cookhouse",
+        "pantry",
+        "feast"
+      ],
+      "directives": [
+        "Organize the space around a large hearth, oven, preparation table, storage shelves, hanging cookware, or food barrels appropriate to a fantasy setting.",
+        "Cooking fixtures connect physically to floor, wall, chimney, hooks, beams, or work surfaces.",
+        "Use a few large readable vessels and food-storage forms instead of utensil clutter."
+      ],
+      "component_bias": [
+        "landmarks",
+        "secondary_features",
+        "lighting_features"
+      ]
+    },
+    "prison": {
+      "trigger_terms": [
+        "prison",
+        "cell",
+        "dungeon cell",
+        "gaol",
+        "jail"
+      ],
+      "directives": [
+        "Make confinement unmistakable through bars, a heavy door, wall rings, a bench or pallet, guard threshold, or locked gate.",
+        "Bars, chains, rings, hinges, and doors must visibly anchor to masonry or timber structure.",
+        "Keep the cell sparse; confinement architecture matters more than prop clutter."
+      ],
+      "component_bias": [
+        "structural_features",
+        "landmarks",
+        "secondary_features"
+      ]
+    },
+    "mine": {
+      "trigger_terms": [
+        "mine",
+        "mineshaft",
+        "mine shaft",
+        "quarry"
+      ],
+      "directives": [
+        "Show excavation through rough-cut faces, timber bracing, a track or hauling route, a cart or ore pile, shaft opening, or tool station.",
+        "Supports must visibly bear against floor, wall, and overhead rock; tracks follow the ground plane.",
+        "Avoid loose pickaxes and random ore confetti; use a few large work forms."
+      ],
+      "component_bias": [
+        "structural_features",
+        "ground_planes",
+        "landmarks"
+      ]
+    },
+    "campsite": {
+      "trigger_terms": [
+        "camp",
+        "campsite",
+        "bivouac",
+        "encampment"
+      ],
+      "directives": [
+        "Show a believable temporary camp with a fire site, bedroll or shelter, supply bundle, tether point, cooking setup, or worn approach path.",
+        "Keep the camp small enough that the underlying forest, cave, field, ruin, or shoreline still reads first.",
+        "Camp objects must touch the ground or hang from visible supports."
+      ],
+      "component_bias": [
+        "secondary_features",
+        "lighting_features",
+        "interaction_patterns"
+      ]
+    },
+    "village": {
+      "trigger_terms": [
+        "village",
+        "hamlet",
+        "farmstead",
+        "settlement"
+      ],
+      "directives": [
+        "Use a small number of readable structures or edges: cottages, fences, well, lane, shed, field wall, bridge, market shelter, or distant roofline.",
+        "Buildings must sit on terrain with doors and paths that connect logically; fences enclose or guide something.",
+        "Do not create a dense cityscape when a village or farmstead is requested."
+      ],
+      "component_bias": [
+        "structural_features",
+        "depth_features",
+        "landmarks"
+      ]
+    },
+    "swamp": {
+      "trigger_terms": [
+        "swamp",
+        "marsh",
+        "bog",
+        "fen"
+      ],
+      "directives": [
+        "Build wetland space from broad water or mud shapes, raised roots or hummocks, sparse trunks, reeds in large clumps, and a readable dry/wet route.",
+        "Water edges, roots, and islands must connect physically; preserve open water and coloring space.",
+        "Avoid reed wallpaper, bubble clutter, and uniformly dense vegetation."
+      ],
+      "component_bias": [
+        "ground_planes",
+        "secondary_features",
+        "depth_features"
+      ]
+    },
+    "desert": {
+      "trigger_terms": [
+        "desert",
+        "dune",
+        "sand",
+        "arid"
+      ],
+      "directives": [
+        "Use broad dune or hardpan shapes, one rock formation or ruin, sparse hardy vegetation, and a strong horizon.",
+        "Wind-shaped terrain should flow coherently around rocks and structures.",
+        "Avoid pebble fields, cactus wallpaper, and excessive sand texture."
+      ],
+      "component_bias": [
+        "ground_planes",
+        "landmarks",
+        "depth_features"
+      ]
+    },
+    "mountain": {
+      "trigger_terms": [
+        "mountain",
+        "peak",
+        "alpine",
+        "cliff",
+        "highland"
+      ],
+      "directives": [
+        "Establish elevation with a clear slope, ledge, pass, cliff wall, distant peak, or drop rather than generic rocks.",
+        "Use a few massive rock forms, sparse vegetation, and open sky to preserve scale.",
+        "Paths, nests, ruins, and structures must sit on plausible shelves or slopes."
+      ],
+      "component_bias": [
+        "depth_features",
+        "landmarks",
+        "ground_planes"
+      ]
+    },
+    "coastal": {
+      "trigger_terms": [
+        "coast",
+        "coastal",
+        "shore",
+        "beach",
+        "sea cliff"
+      ],
+      "directives": [
+        "Make the land-water boundary unmistakable with beach, rock shelf, cliff, tide line, cove, or surf edge.",
+        "Use a few large shoreline forms such as driftwood, boulders, ruined pier, sea arch, dune, or cliff steps.",
+        "Keep water and sky as broad negative space; avoid shell, foam, gull, or pebble confetti."
+      ],
+      "component_bias": [
+        "ground_planes",
+        "depth_features",
+        "landmarks"
+      ]
+    },
+    "throne_room": {
+      "trigger_terms": [
+        "throne room",
+        "audience chamber",
+        "court hall"
+      ],
+      "directives": [
+        "Organize the room around one unmistakable raised seat, dais, audience platform, or ceremonial focal point with a clear approach axis.",
+        "Use columns, banners, braziers, guard positions, or side benches sparingly to reinforce hierarchy.",
+        "Do not turn the room into a generic ballroom or fill it with ornamental clutter."
+      ],
+      "component_bias": [
+        "landmarks",
+        "structural_features",
+        "lighting_features"
+      ]
+    },
+    "nest": {
+      "trigger_terms": [
+        "nest",
+        "rookery",
+        "hatchery",
+        "eggs"
+      ],
+      "directives": [
+        "Build one large nest, clutch area, roost shelf, burrow bowl, or protected nesting hollow appropriate to the base environment.",
+        "Nesting material must rest on and conform to the supporting ground, ledge, branches, roots, or architecture.",
+        "Keep eggs or nest objects few and large; avoid repeated tiny twigs or egg clutter."
+      ],
+      "component_bias": [
+        "landmarks",
+        "ground_planes",
+        "interaction_patterns"
       ]
     }
   }

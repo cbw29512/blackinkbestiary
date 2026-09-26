@@ -5,7 +5,7 @@ from pathlib import Path
 try:
     from .environment_catalog import load_environment_contract, resolve_environment_profile
     from .environment_components import assemble_environment_palette
-    from .environment_spatial import resolve_spatial_envelope
+    from .environment_spatial import resolve_spatial_envelope, spatial_envelope_prompt_rules
     from .quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -15,7 +15,7 @@ try:
 except ImportError:
     from environment_catalog import load_environment_contract, resolve_environment_profile
     from environment_components import assemble_environment_palette
-    from environment_spatial import resolve_spatial_envelope
+    from environment_spatial import resolve_spatial_envelope, spatial_envelope_prompt_rules
     from quality_system import (
         coloring_page_directives,
         coloring_page_failures,
@@ -59,9 +59,93 @@ def _required_object_rules(page: dict) -> list[str]:
         )
     if "pit" in text:
         rules.append(
-            "Required pit must have a clear structural rim/opening and readable interior hazard without excessive tiny spikes."
+            "PIT-TRAP GEOMETRY LOCK: the pit is an opening cut into and interrupting the walking floor plane, with its rim flush or nearly flush with surrounding flagstones/ground. "
+            "Its interior drops below floor level and any spikes rise from inside that recessed opening. Never draw a raised circular masonry well, basin, freestanding ring, planter, or above-floor container and call it a pit."
+        )
+    if "lantern" in text and ("kick" in text or "kicking" in text):
+        rules.append(
+            "KICKED LANTERN LOCK: the lantern is a floor-level impact target, not something held in the creature's hand. "
+            "Show the striking foot visibly contacting the lantern while the lantern tips, skids, or tumbles away from its prior position."
         )
     return rules
+
+
+def required_object_rules(page: dict) -> list[str]:
+    """Public compact-prompt access to page-specific object/contact geometry."""
+    return list(_required_object_rules(page))
+
+def environment_priority_sections(page: dict, root: Path) -> list[str]:
+    """Concise environment identity proof shown before detailed scene prose."""
+    profile = load_environment_for_page(page)
+    variant = page.get("environment_variant") or {}
+    identity = profile.get("resolved_identity") or {}
+    envelope = resolve_spatial_envelope(profile)
+
+    must_show = [str(item).strip() for item in envelope.get("must_show") or [] if str(item).strip()]
+    markers = [str(item).strip() for item in identity.get("identity_markers") or [] if str(item).strip()]
+    proof = []
+    if markers:
+        proof.append("location markers=" + "; ".join(markers[:3]))
+    if must_show:
+        proof.append("spatial proof=" + "; ".join(must_show[:4]))
+    landmark = str(variant.get("landmark") or "").strip()
+    if landmark:
+        proof.append("unique landmark=" + landmark)
+
+    return [
+        (
+            "MODEL ENVIRONMENT PRIORITY CAPSULE — READ BEFORE DECORATIVE DETAIL: "
+            f"habitat={page.get('habitat', '')}; "
+            f"spatial type={identity.get('spatial_type', '')}; "
+            f"landmark={landmark}; "
+            f"framing={variant.get('framing', '')}. "
+            "These structural cues outrank generic fantasy scenery."
+        ),
+        (
+            "MODEL ENVIRONMENT PROOF LOCK — NON-NEGOTIABLE: "
+            + "; ".join(proof)
+            + ". If the monster were mentally removed, the location must still be identifiable from these large structural forms. "
+            "Do not replace them with generic cave, corridor, rubble, web, or dungeon texture."
+        ),
+    ]
+
+
+
+def environment_compact_sections(page: dict, root: Path) -> list[str]:
+    """Compact model-facing environment authority without the full review prose."""
+    profile = load_environment_for_page(page)
+    identity = profile.get("resolved_identity") or {}
+    envelope = resolve_spatial_envelope(profile)
+    palette = assemble_environment_palette(page, root)
+    component_lines = [
+        f"SELECTED {group.replace('_', ' ').upper()}: {item.get('text', '')}."
+        for group, item in palette.get("components", {}).items()
+        if str(item.get("text") or "").strip()
+    ]
+    overlay_rules = [
+        str(rule).strip()
+        for overlay in palette.get("overlays") or []
+        for rule in overlay.get("directives") or []
+        if str(rule).strip()
+    ]
+    return [
+        "PAGE ENVIRONMENT AUTHORITY — NON-NEGOTIABLE: named habitat/profile control scenery; creature lore cannot replace it.",
+        f"ENVIRONMENT SPATIAL TYPE: {identity.get('spatial_type', '')}.",
+        f"ENVIRONMENT MATERIAL LANGUAGE: {identity.get('material_language', '')}.",
+        f"UNIQUE BACKGROUND LANDMARK: {(page.get('environment_variant') or {}).get('landmark', '')}.",
+        f"UNIQUE BACKGROUND FRAMING: {(page.get('environment_variant') or {}).get('framing', '')}.",
+        f"MONSTER / ENVIRONMENT INTERACTION: {(page.get('environment_variant') or {}).get('interaction', '')}.",
+        _items("ENVIRONMENT IDENTITY MARKERS", identity.get("identity_markers")),
+        f"SPACE ENVELOPE: {envelope.get('envelope_id', '')}.",
+        _items("SPACE MUST SHOW", envelope.get("must_show")),
+        _items("SPACE DRIFT FAILURES", envelope.get("must_not_drift")),
+        "UNIVERSAL ENVIRONMENT IDENTITY RULES: lock spatial envelope and unmistakable structural markers before decorative detail.",
+        _items("LARGE COLORABLE ENVIRONMENT FORMS", profile.get("colorable_forms")),
+        *component_lines,
+        _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules[:2]),
+        "ENVIRONMENT PALETTE RULE: selected components are a small palette; landmark, framing, and interaction remain authoritative.",
+        "GLOBAL ENVIRONMENT STANDARD: use two to four large readable cues; named habitat unmistakable; creature remains primary.",
+    ]
 
 def environment_prompt_sections(page: dict, root: Path) -> list[str]:
     profile = load_environment_for_page(page)
@@ -93,6 +177,7 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         f"SPACE CAMERA: {envelope.get('camera', '')}.",
         _items("SPACE MUST SHOW", envelope.get("must_show")),
         _items("SPACE DRIFT FAILURES", envelope.get("must_not_drift")),
+        _items("MANDATORY SPATIAL COMPOSITION RULES", spatial_envelope_prompt_rules(envelope)),
         _items("UNIVERSAL ENVIRONMENT IDENTITY RULES", load_environment_contract().get("prompt_rules")),
         f"ENVIRONMENT ACCURACY: {profile['description']}",
         _items("ENVIRONMENT VISUAL CUES", profile.get("visual_cues")),
@@ -101,6 +186,19 @@ def environment_prompt_sections(page: dict, root: Path) -> list[str]:
         _items("ENVIRONMENT ASSEMBLY CONTEXTS", palette.get("contexts")),
         *component_lines,
         _items("ACTIVE ENVIRONMENT OVERLAY RULES", overlay_rules),
+        (
+            "PHYSICAL BELIEVABILITY RULE: every environmental object must have a plausible support, attachment, "
+            "or terrain relationship. Wall fixtures attach to walls; hanging objects attach to beams, branches, "
+            "ceilings, hooks, or chains; furniture and containers rest on floors, shelves, ledges, or ground; "
+            "doors and gates occupy structural openings; traps integrate with the path/floor/wall that operates them; "
+            "vegetation grows from soil, rock cracks, water, roots, or other believable substrate. Reject floating, "
+            "unsupported, intersecting, or purposeless props."
+        ),
+        (
+            "FANTASY PLACE LOGIC: the environment must look used or formed for a reason. Choose only a few large "
+            "context-appropriate forms that explain travel, shelter, work, worship, burial, defense, feeding, nesting, "
+            "storage, water flow, erosion, or habitation. Do not add generic fantasy clutter merely to fill empty space."
+        ),
         _items("REQUIRED OBJECT PHYSICAL RULES", _required_object_rules(page)),
         _items("FAMILY ENVIRONMENT QUALITY RULES", palette.get("family_quality_rules")),
         (
@@ -135,11 +233,15 @@ def environment_checklist(page: dict, root: Path) -> list[str]:
         f"Framing differs from repeated generic backgrounds: {variant.get('framing', '')}",
         f"Monster/environment interaction reads clearly: {variant.get('interaction', '')}",
         "Environment geometry differs meaningfully from nearby pages before extra props are added",
-        "Monster is large, centered or near-centered, and the dominant focal shape",
+        "Monster is visually dominant through framing while preserving canonical creature scale and proportions",
         "Major environmental objects are large and comfortable to color but visually secondary to the monster",
         "Monster leaves enough surrounding page area for the habitat to read",
         "Background depth comes from a few large forms, not micro-detail",
     ]
+    checks.extend(
+        f"Required object geometry reads correctly: {item}"
+        for item in _required_object_rules(page)
+    )
     checks.extend(f"Environment check: {item}" for item in environment_approval_checks(root))
     checks.extend(f"Colorability failure to reject: {item}" for item in coloring_page_failures(root))
     return checks

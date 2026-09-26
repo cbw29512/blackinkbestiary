@@ -14,7 +14,7 @@ New monsters and books should require minimal JSON. Shared intelligence belongs 
 
 Every final page must:
 
-- feature one large, dominant, recognizable monster
+- feature one visually dominant, recognizable creature or creature group at canonical size and proportions
 - keep the monster in a stable, natural, readable pose
 - show an unmistakable environment/lair/territory
 - make the story moment readable at thumbnail size
@@ -40,7 +40,7 @@ Approval requires all three thumbnail pillars, but **colorability is the first p
 - silhouette
 - head/body/limb structure
 - surface treatment
-- normal size impression
+- canonical size impression and scale relationships
 - locomotion
 - must-keep identity
 - prohibited look-alikes
@@ -63,7 +63,7 @@ Page JSON supplies only unique landmark, framing, and interaction.
 ### Page/coloring engine owns
 
 - one dominant subject
-- monster scale and framing
+- framing and focal hierarchy without changing canonical monster scale
 - stable-pose rules
 - coloring density
 - line hierarchy
@@ -82,7 +82,7 @@ These are engine feedback, not isolated page problems.
 - goblin becomes mascot/cute
 - kobold becomes mini-dragon or generic lizard
 - non-flyer appears to hover
-- monster is too small or loses focal dominance
+- framing loses focal dominance, or layout pressure incorrectly inflates a tiny/small creature into heroic mass
 - environment becomes a generic room/cave/ocean
 - setting cannot be identified without caption
 - background repeats the same geometry across pages
@@ -90,6 +90,19 @@ These are engine feedback, not isolated page problems.
 - story moment requires a chaotic jump/fall pose that is poor for static coloring
 - repeated tiny textures turn coloring into homework
 - secondary creatures compete with the primary subject
+
+## 2026-09-24 Canonical Scale + Identity-First Review Lock
+
+The 87-page preview audit exposed two universal failures that are now engine rules:
+
+- **Canonical creature scale outranks composition.** Tiny/small creatures stay tiny/small relative to architecture, traps, furniture, and props. Visual prominence comes from framing, placement, and silhouette clarity—not enlarging the body.
+- **Canonical body plan is immutable.** Species silhouette, proportions, limb topology/counts, and explicit anti-drift traits are hard generation and refinement constraints.
+- **Four-stage review is fail-closed:** identity/anatomy → environment geometry → action/physicality → print/colorability quality.
+- Identity failure regenerates from fresh written authority rather than image-editing a fundamentally wrong body plan. Later-stage failures may use cumulative image editing.
+- Review-stage progress outranks local numeric score, so an older identity-failing image can never beat a structurally correct later-stage image.
+- The nine-page canary set is I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22. Full regeneration remains blocked until this cross-section proves the engine.
+
+This prevents the recurring kobold→dragonborn, goblin/hobgoblin→horned brute, darkmantle/stirge→dragon humanoid, bat→winged humanoid, swarm→wallpaper/giant leader, and centipede→sparse-legged hybrid failures from being treated as page-local accidents.
 
 ## Current Engine Status
 
@@ -114,7 +127,8 @@ These are engine feedback, not isolated page problems.
 2. family DNA audit across every repeated monster family — **implemented; all 14 reusable family profiles pass the expanded DNA contract and catalog audit**
 3. environment variation depth across every book family — **implemented; all 8 environment families now inherit geometry, landmark, prop, interaction, and anti-repetition pools**
 4. Modify/Regenerate routing based on passed vs failed quality dimensions — **implemented; review state records failed and preserved dimensions**
-5. Golden Five reference pages before mass regeneration — **calibration gate implemented; human-approved reference pages still required**
+5. Nine-page exact-image canary before full batch regeneration — **implemented; 9/9 current-hash approvals required by the launcher**
+6. Golden Five human reference calibration — **retained as a separate Studio calibration lane**
 
 ## Working Rule
 
@@ -176,7 +190,7 @@ The written rule is now being enforced in engine behavior, not just documentatio
 - environment and archetype rules no longer describe the three visual requirements as co-equal with coloring usability
 - new first-class colorability defects include cramped coloring spaces, excessive line density, story-overload, and fundamentally uncolorable composition
 
-**Next hardening priority:** family DNA coverage across every repeated monster family, followed by environment-variation depth and the Golden Five reference pages.
+**Next hardening priority:** direct review of the next published nine-page canary, then fix only observed engine/data failures before controlled full-gallery generation.
 
 
 ## 2026-09-22 Monster Family DNA Update
@@ -189,7 +203,7 @@ Variant monster JSON remains minimal. A variant may use `scene_overrides` only w
 
 **Validation:** the first complete 14-family state passed Studio checks on the branch.
 
-**Next hardening priority:** Golden Five reference pages, then controlled Tome I regeneration.
+**Next hardening priority:** exact-image canary validation, then controlled Tome I regeneration; Golden Five remains the separate human calibration lane.
 
 
 ## 2026-09-22 Environment Variation Depth Update
@@ -204,7 +218,7 @@ Environment variety is now a first-class universal engine layer rather than an i
 - series readiness now fails if an environment family has no valid variation definition
 - CI validates the registry and regression tests verify complete family coverage
 
-**Next hardening priority:** build the Golden Five reference pages and use them to calibrate the generation/review loop before mass rebuilding Tome I.
+**Next hardening priority:** complete the automated nine-page canary before mass rebuilding Tome I; use Golden Five separately to calibrate final human review quality.
 
 
 ## 2026-09-22 Golden Five Calibration Gate
@@ -292,3 +306,46 @@ Walls, floors, ceilings, torches, traps, gates, roots, coral, tombs, furniture, 
 Environment variety must come from stronger structure, material design, fixtures, depth, and composition—not tiny texture.
 
 See `docs/ENVIRONMENT_ENGINE_V3.md` for the persistent architecture specification.
+
+
+## 2026-09-23 Environment / Monster Separation Lock
+
+Research and production feedback confirmed a stricter ownership boundary:
+
+- monster/family data describes the creature: anatomy, silhouette, locomotion, identity, behavior tendencies, and true habitat compatibility
+- the page selects only the environment identity (for example cave, ocean, forest, field, laboratory, crypt, corridor) plus a tiny unique story interaction when needed
+- the universal environment engine renders the believable place: geometry, surfaces, overhead, lighting, structures, landmarks, hazards, depth, atmosphere, furnishings, signs of use, and fantasy dressing
+- environment component selection no longer uses monster identity as its randomization key
+- reusable role overlays now include laboratory, inhabited space, and open terrain in addition to lair, treasure, sacred, military, burial, ruin, trap, aquatic, fungal, weathered, and settlement roles
+- a lair is not automatically a treasure hoard; treasure dressing appears when the selected environment/page role calls for treasure or hoarding
+- random variation must remain context-compatible and physically plausible: fixtures attach to walls/floors/ceilings, furnishings have support, traps belong to traversable geometry, and open landscapes preserve terrain logic and horizon/depth
+- environment richness comes from rotating a few large believable forms, not clutter or monster-specific scenery
+
+This rule applies to every monster. New monster JSON must not accumulate reusable background descriptions.
+
+
+## 2026-09-23 Ownership / Composition Hardening
+
+- environment overlay selection no longer depends on registry insertion order; explicit page roles are authoritative and inferred roles are ranked by trigger specificity within the three-role page budget
+- creature-required physical relationships are now first-class monster data for cases such as a door mimic needing structural attachment or a darkmantle needing overhead support
+- physical requirements describe what the creature needs, never what reusable scenery looks like; the environment engine supplies the actual wall, ceiling, floor, terrain, water, or other compatible support
+- legacy monster recipes are being normalized to broad habitat compatibility and creature-only accuracy checks rather than corridor, room, stair, forge, or prop requirements
+- scenery ownership auditing distinguishes reusable environment dressing from legitimate creature support/identity relationships
+- Environment Engine V3 documentation now reflects the expanded 27-role library
+
+**Current gate:** exact-head Studio checks must be green before PR #60 can merge or Golden Five regeneration resumes.
+
+
+## 2026-09-23 Per-Page Instruction Reload Lock
+
+Mass generation must never carry a stale AI context from one coloring page into the next.
+
+Before **every individual page generation**, including every regeneration attempt, the worker must reload the authoritative universal monster contract, universal environment contract, universal page contract, coloring-page standard, current manifest/page recipe, current monster spec/family data, and current review corrections from disk. These instructions are not batch-cached.
+
+Required batch lifecycle:
+
+**finish page N -> discard page-specific generation context -> reload current contracts/data from disk -> resolve page N+1 fresh -> build a fresh prompt -> generate page N+1**
+
+If human review detects systematic drift, stop the batch, repair the highest reusable engine/data layer, add a regression test, and resume. Because the next page reloads the contracts from disk, the correction must take effect immediately rather than waiting for a new batch.
+
+This is a production invariant for every book and every monster.

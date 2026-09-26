@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "identity_version": 2,
+  "identity_version": 3,
   "profile_id": "bugbear",
   "display_name": "Bugbear",
   "taxonomy": {
@@ -33,9 +33,19 @@
       "knuckle-walking posture",
       "generic caveman face",
       "heroic bodybuilder stance",
-      "floating or unsupported pose"
+      "floating or unsupported pose",
+      "horns or horn nubs",
+      "tail",
+      "six-pack superhero torso",
+      "short arms ending above the hips"
     ],
-    "limb_structure": "Very long humanoid arms with large hands, stable bipedal legs, and large grounded feet; proportions are rangy goblinoid rather than knuckle-walking primate."
+    "limb_structure": "Very long humanoid arms with large hands, stable bipedal legs, and large grounded feet; proportions are rangy goblinoid rather than knuckle-walking primate.",
+    "shape_lock": "Draw a rangy long-armed goblinoid: narrow ribcage, arms hanging unusually low toward the knees, long forearms and hands, selective shaggy hair, and a goblinoid—not gorilla—face; no sculpted pectorals, six-pack, or bodybuilder shoulder mass.",
+    "render_priority": {
+      "positive": "TALL RANGY GOBLINOID AMBUSHER with a narrow ribcage, very long arms hanging below the hips toward the knees, large hands, pointed ears, projecting goblinoid nose, and selective shaggy hair only.",
+      "negative": "NO horns, tail, gorilla muzzle, ape skull, bear muzzle, barrel chest, superhero six-pack, bodybuilder shoulders, full-body fur mass, or short arms.",
+      "silhouette_test": "At thumbnail size the first read must be long arms + narrow torso + pointed-eared goblinoid face; never a furry superhero, gorilla, bear-man, or horned brute."
+    }
   },
   "accuracy_checks": [
     "face reads goblinoid before furry brute",
@@ -44,7 +54,10 @@
     "arms are visibly long without gorilla proportions",
     "torso stays humanoid and rangy rather than barrel-chested",
     "fur is selective and does not hide anatomy",
-    "pose is stably supported by the environment"
+    "pose is stably supported by the environment",
+    "no horns or tail",
+    "arms extend visibly below the hips",
+    "abdomen and chest are not sculpted like a superhero"
   ],
   "known_failure_modes": [
     {
@@ -64,8 +77,8 @@
     },
     {
       "id": "brute_drift",
-      "symptom": "body becomes a generic hulking bodybuilder",
-      "correction": "narrow the waist and chest, lengthen the arms, keep muscle simple, and restore stealthy goblinoid proportions"
+      "symptom": "body becomes horned, short-armed, six-pack muscular, or a generic hulking bodybuilder",
+      "correction": "remove horns and tail, narrow the torso, lengthen arms below the hips, keep muscle simple, and restore stealthy rangy goblinoid proportions"
     },
     {
       "id": "hover_drift",

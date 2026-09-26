@@ -4,8 +4,36 @@
   "family": "ooze",
   "size": "large",
   "creature_type": "ooze",
-  "visual_identity": {
-    "core_identity": "A viscous amoeboid dungeon ooze known for splitting into separate living masses when struck.",
+  "default_habitats": [
+    "underground",
+    "caves",
+    "ruins"
+  ],
+  "accuracy_checks": [
+    "two halves are clearly independent",
+    "both halves show coherent creeping motion",
+    "both split masses remain clearly readable",
+    "no facial features appear",
+    "ooze remains colorable",
+    "split behavior is obvious without caption"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  },
+  "schema_version": 4,
+  "identity_version": 1,
+  "family_profile": "ooze",
+  "description": "A viscous amoeboid ooze known for splitting into separate living masses when struck. Soft amorphous blobs with uneven edges, sagging folds, and no fixed limbs. Mostly open interiors with a few contour ripples and drip lines.",
+  "behavior_traits": [
+    "slow creeping",
+    "surface clinging",
+    "engulfing",
+    "opportunistic feeding"
+  ],
+  "visual_overrides": {
+    "core_identity": "A viscous amoeboid ooze known for splitting into separate living masses when struck.",
     "silhouette": "Two irregular low jelly masses with rounded lobes and stringy connective drips, both clearly moving.",
     "head_features": "No head, eyes, or face.",
     "body_shape": "Soft amorphous blobs with uneven edges, sagging folds, and no fixed limbs.",
@@ -33,25 +61,5 @@
       "dense internal texture"
     ]
   },
-  "default_habitats": [
-    "stone stairs",
-    "damp corridors",
-    "subterranean chambers"
-  ],
-  "accuracy_checks": [
-    "two halves are clearly independent",
-    "both halves move upward",
-    "stair geometry stays readable",
-    "no facial features appear",
-    "ooze remains colorable",
-    "split behavior is obvious without caption"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "ooze"
+  "anatomy_variant": true
 }

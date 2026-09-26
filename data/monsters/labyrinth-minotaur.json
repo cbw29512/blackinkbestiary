@@ -4,50 +4,17 @@
   "family": "minotaur",
   "size": "large",
   "creature_type": "monstrous humanoid",
-  "visual_identity": {
-    "core_identity": "A massive bull-headed humanoid built for charging through maze corridors, defined by sweeping horns, hooves, and a heavy axe.",
-    "silhouette": "Very broad shoulders, bull head with wide horns, thick humanoid torso, powerful legs ending in hooves, two-handed axe.",
-    "head_features": "Bull head with long muzzle, flared nostrils, heavy brow, bovine ears, large curved horns.",
-    "body_shape": "Large muscular humanoid torso and arms with powerful legs and hooved feet; animal head only, not full bull body.",
-    "surface": "Short sparse body hair with simple hide areas; no dense fur.",
-    "signature_gear": [
-      "large two-handed axe",
-      "simple belt or harness",
-      "minimal labyrinth-worn gear"
-    ],
-    "attitude": [
-      "aggressive",
-      "territorial",
-      "relentless",
-      "charging"
-    ],
-    "must_keep": [
-      "bull head",
-      "large curved horns",
-      "hooved feet",
-      "massive humanoid body",
-      "large axe"
-    ],
-    "must_avoid": [
-      "centaur body",
-      "human head",
-      "goat features",
-      "tiny horns",
-      "full plate armor",
-      "dense fur texture"
-    ]
-  },
   "default_habitats": [
-    "stone labyrinths",
-    "maze intersections",
-    "underground arenas"
+    "underground",
+    "ruins",
+    "wilderness"
   ],
   "accuracy_checks": [
     "bull head is unmistakable",
     "horns frame silhouette",
     "hooves are visible",
     "axe scale matches body",
-    "maze intersection remains readable",
+    "active posture remains stable and physically supported",
     "body is large and powerful"
   ],
   "reference": {
@@ -55,7 +22,30 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "minotaur"
+  "family_profile": "minotaur",
+  "description": "A massive bull-headed humanoid defined by sweeping horns, hooves, powerful movement, and a heavy axe. Large muscular humanoid torso and arms with powerful legs and hooved feet; animal head only, not full bull body. Short sparse body hair with simple hide areas; no dense fur. Very broad shoulders, bull head with wide horns, thick humanoid torso, powerful legs ending in hooves, two-handed axe.",
+  "behavior_traits": [
+    "relentless pursuit",
+    "charging",
+    "patrolling",
+    "weapon fighting"
+  ],
+  "visual_overrides": {
+    "signature_gear": [
+      "large two-handed axe",
+      "simple belt or harness",
+      "minimal practical gear"
+    ],
+    "attitude": [
+      "aggressive",
+      "territorial",
+      "relentless",
+      "charging"
+    ]
+  },
+  "variant_traits": [
+    "labyrinth minotaur"
+  ]
 }

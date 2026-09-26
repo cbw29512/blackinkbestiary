@@ -5,7 +5,7 @@
   "size": "medium",
   "creature_type": "regenerating severed giant limb",
   "visual_identity": {
-    "core_identity": "A severed troll arm still animated by supernatural regeneration, crawling like a grotesque hand-creature without graphic gore.",
+    "core_identity": "EXACTLY ONE severed troll arm and hand, still animated by supernatural regeneration, crawling on its fingers like a grotesque hand-creature without graphic gore. No head, torso, second arm, or legs may appear.",
     "silhouette": "Long muscular forearm ending in an oversized clawed hand, fingers acting like legs as the limb crawls.",
     "head_features": "No head; identity comes from troll skin, long proportions, and large clawed hand.",
     "body_shape": "Single elongated arm with large hand, bent wrist, and finger-walking posture.",
@@ -30,13 +30,20 @@
       "human hand proportions",
       "tentacle anatomy",
       "extra limbs",
-      "cartoon glove look"
-    ]
+      "cartoon glove look",
+      "torso",
+      "head",
+      "legs",
+      "second arm",
+      "complete humanoid body"
+    ],
+    "shape_lock": "Draw exactly one severed troll arm only: one elongated forearm ending in one oversized clawed hand. The fingers act as the walking supports. No head, torso, shoulder-body mass, second arm, legs, or complete troll may appear.",
+    "limb_structure": "Exactly one elongated arm ending in exactly one clawed hand; the fingers contact the floor as walking supports. No other limb or body segment exists."
   },
   "default_habitats": [
-    "bare dungeon floors",
-    "cave battle sites",
-    "stone corridors"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "clearly reads as a crawling severed troll arm",
@@ -44,14 +51,23 @@
     "claws are obvious",
     "movement is readable",
     "severed end is non-gory",
-    "simple scene supports the limb"
+    "finger-walking posture is physically supported",
+    "image contains exactly one arm ending in one clawed hand and nothing resembling a full troll body",
+    "no head, torso, legs, or second arm are present"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "troll"
+  "family_profile": "troll",
+  "description": "A severed troll arm still animated by supernatural regeneration, crawling like a grotesque hand-creature without graphic gore. Single elongated arm with large hand, bent wrist, and finger-walking posture. Tough troll skin with sparse bumps; severed end simplified and non-gory. Long muscular forearm ending in an oversized clawed hand, fingers acting like legs as the limb crawls.",
+  "behavior_traits": [
+    "crawling",
+    "grasping",
+    "regenerative movement",
+    "persistent pursuit"
+  ]
 }

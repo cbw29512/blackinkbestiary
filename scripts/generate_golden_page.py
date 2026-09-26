@@ -18,6 +18,7 @@ from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
 from generation_runtime import model_filename, read_json
+from generation_lint import assert_generation_ready
 from prompt_builder import build_prompt
 from qa import inspect_candidate
 
@@ -66,11 +67,13 @@ def _generate(page: dict, case: dict, page_state: dict) -> tuple[str, dict]:
     for retry in range(MAX_TECHNICAL_RETRIES + 1):
         seed = random.randint(1, 2**63 - 1)
         try:
+            prompt = _prompt(page, case, page_state)
+            assert_generation_ready(page, prompt, ROOT)
             meta = prepare_distilled_text_to_image(
                 cli,
                 config["templates"]["text_to_image"],
                 workflow,
-                prompt=_prompt(page, case, page_state),
+                prompt=prompt,
                 seed=seed,
                 model_filename=unet,
                 clip_filename=clip,

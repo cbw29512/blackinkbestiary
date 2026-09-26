@@ -5,10 +5,10 @@
   "size": "small",
   "creature_type": "cave aberration",
   "visual_identity": {
-    "core_identity": "A ceiling-dwelling ambush creature that resembles a leathery stalactite-clinging mantle until it peels away and drops.",
-    "silhouette": "Flattened manta-like leathery body with broad mantle edges and several short dangling tentacles beneath.",
-    "head_features": "Small central underside head or beak-like mouth largely hidden beneath the mantle, with simple predatory features.",
-    "body_shape": "Compact central body under a wide flexible mantle, short gripping tentacles, no humanoid limbs.",
+    "core_identity": "A small ceiling-clinging cave aberration whose entire body is one leathery cloak-like mantle that hugs a stalactite, then peels away to expose a hidden underside mouth and short tentacles.",
+    "silhouette": "One continuous cloak-like cap or inverted leathery cone with a broad rim; short tentacles hang from the underside. No separate torso, neck, head silhouette, arms, legs, tail, or wing pair.",
+    "head_features": "A small mouth and simple predatory features are recessed into the underside center of the mantle rather than forming a separate projecting head.",
+    "body_shape": "The mantle itself is the complete main body: one compact overhead cap/disc with a broad edge and short underside tentacles.",
     "surface": "Leathery membrane with sparse folds and simple underside texture.",
     "signature_gear": [],
     "attitude": [
@@ -19,7 +19,7 @@
     ],
     "must_keep": [
       "broad mantle shape",
-      "ceiling-clinging posture",
+      "overhead clinging posture",
       "dangling tentacles",
       "non-humanoid body",
       "stalactite camouflage"
@@ -30,21 +30,36 @@
       "octopus-only body",
       "humanoid face",
       "large dragon wings",
-      "dense membrane veins"
-    ]
+      "dense membrane veins",
+      "dragon head",
+      "horns",
+      "tail",
+      "true bat or dragon wings",
+      "arms or legs",
+      "upright humanoid torso"
+    ],
+    "shape_lock": "Draw one continuous ceiling-clinging cloak/cap body. The broad leathery mantle IS the creature, not wings attached to something else. Place a small underside mouth near the center and several short tentacles under the rim. There is no separate head silhouette, torso, neck, arms, legs, tail, or wing pair.",
+    "limb_structure": "No arms, legs, wings, or tail. The entire creature is one mantle body with several short underside tentacles hanging from the rim around the recessed underside mouth.",
+    "render_priority": {
+      "positive": "ONE CONTINUOUS CEILING-CLINGING MANTLE BODY. The leathery cloak/cap IS the entire creature. A small recessed underside mouth and several short tentacles hang beneath the rim while the broad mantle presses against overhead support.",
+      "negative": "NO dragon head, horns, humanoid face, torso, neck, arms, legs, tail, separate wing pair, bat body, or upright posture. Do not draw a creature wearing wings; the mantle itself is the body.",
+      "silhouette_test": "At thumbnail size the first read must be a single living cloak/cap clinging overhead with short underside tentacles, never a dragon, demon, bat, or humanoid."
+    }
   },
   "default_habitats": [
-    "limestone ceilings",
-    "stalactite caverns",
-    "dark dungeon vaults"
+    "caves",
+    "underground",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads as mantle-like cave predator",
-    "ceiling relationship is obvious",
+    "clinging ambush posture is obvious",
     "tentacles are visible",
-    "shape differs from a bat",
+    "shape reads as one cloak-like mantle body, not a bat, dragon, or humanoid",
     "body is compact",
-    "linework remains open"
+    "linework remains open",
+    "no dragon head, horns, tail, arms, legs, or separate wings",
+    "mantle itself is the broad leathery body rather than wings attached to a humanoid"
   ],
   "reference": {
     "image": null,
@@ -53,5 +68,44 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "physical_requirements": [
+    "overhead_attachment: ambush posture requires a believable overhead support; environment engine chooses the ceiling, rock, beam, branch, or other compatible support"
+  ],
+  "schema_version": 4,
+  "description": "Small ceiling ambusher formed from one continuous leathery mantle body with an underside mouth and short tentacles; it clings like a living cloak against overhead stone.",
+  "behavior_traits": [
+    "overhead ambush",
+    "clinging",
+    "dropping attack",
+    "mantle-body gliding"
+  ],
+  "scene_identity": {
+    "size_impression": "Small ceiling ambusher whose compact mantle body is much smaller than a humanoid and reads as a living cloak/cap rather than a person.",
+    "natural_posture": "One continuous mantle body presses against overhead support with short tentacles hanging beneath the rim.",
+    "behavior_style": [
+      "overhead ambush",
+      "clinging",
+      "dropping attack",
+      "mantle-body gliding"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_humanoid_drift",
+      "symptom": "image invents dragon/demon head, torso, arms, legs, tail, or separate wings",
+      "correction": "remove all separate humanoid/reptilian anatomy and restore one continuous mantle body with underside mouth and short tentacles"
+    },
+    {
+      "id": "bat_drift",
+      "symptom": "creature becomes a conventional bat with wing limbs and head",
+      "correction": "remove bat head/limb topology; mantle itself is the full body"
+    }
+  ],
+  "identity_version": 2
 }

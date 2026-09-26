@@ -4,49 +4,15 @@
   "family": "hobgoblin",
   "size": "medium",
   "creature_type": "goblinoid humanoid",
-  "visual_identity": {
-    "core_identity": "A veteran hobgoblin officer whose authority comes from disciplined posture, better equipment, and command presence.",
-    "silhouette": "Medium athletic goblinoid with upright stance, squared shoulders, one commanding arm or map-directed gesture.",
-    "head_features": "Angular mature goblinoid face, pointed ears, stern brows, controlled expression, visible scars kept sparse.",
-    "body_shape": "Athletic soldierly humanoid, slightly broader than a rank-and-file hobgoblin but never bulky.",
-    "surface": "Smooth skin with a few scars; simple armor planes suitable for coloring.",
-    "signature_gear": [
-      "better-fitted martial armor",
-      "officer sash or insignia",
-      "straight sword",
-      "dagger used as map marker"
-    ],
-    "attitude": [
-      "commanding",
-      "calculating",
-      "disciplined",
-      "unflinching"
-    ],
-    "must_keep": [
-      "hobgoblin facial identity",
-      "medium athletic proportions",
-      "visible rank marker",
-      "organized military gear",
-      "command posture"
-    ],
-    "must_avoid": [
-      "goblin-small proportions",
-      "orc tusks",
-      "barbaric fur overload",
-      "royal crown",
-      "full ornate plate",
-      "reptilian anatomy"
-    ]
-  },
   "default_habitats": [
-    "cave war rooms",
-    "underground command posts",
-    "fortified barracks"
+    "fortifications",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "reads as hobgoblin first and captain second",
     "rank is visible without ornate clutter",
-    "map interaction is believable",
+    "command gesture is believable",
     "medium scale is preserved",
     "military gear remains simple",
     "commanding posture is clear"
@@ -56,7 +22,31 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "hobgoblin"
+  "family_profile": "hobgoblin",
+  "description": "A veteran hobgoblin officer whose authority comes from disciplined posture, better equipment, and command presence. Athletic soldierly humanoid, slightly broader than a rank-and-file hobgoblin but never bulky. Smooth skin with a few scars; simple armor planes suitable for coloring.",
+  "behavior_traits": [
+    "commanding",
+    "disciplined fighting",
+    "formation leadership",
+    "guarding"
+  ],
+  "visual_overrides": {
+    "signature_gear": [
+      "better-fitted martial armor",
+      "officer sash or insignia",
+      "straight sword",
+      "practical dagger"
+    ],
+    "attitude": [
+      "commanding",
+      "calculating",
+      "disciplined",
+      "unflinching"
+    ]
+  },
+  "variant_traits": [
+    "hobgoblin captain"
+  ]
 }

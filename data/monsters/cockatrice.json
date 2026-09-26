@@ -31,12 +31,14 @@
       "feathered angel wings",
       "cute farm-bird look",
       "dense feathers"
-    ]
+    ],
+    "limb_structure": "Exactly two clawed birdlike legs support the body, with one pair of leathery wings and one long serpentine tail. The head is rooster-like with beak, comb, and wattles; no extra legs or dragon forelimbs.",
+    "shape_lock": "Draw one small compact hybrid with a rooster head and comb, one pair of leathery wings, exactly two clawed bird legs, and one long curling reptilian tail. Keep the torso birdlike and small; never turn it into a four-legged dragon or ordinary chicken."
   },
   "default_habitats": [
-    "improvised henhouses",
-    "dungeon pens",
-    "ruined underground farms"
+    "wilderness",
+    "ruins",
+    "farmland"
   ],
   "accuracy_checks": [
     "hybrid identity is obvious",
@@ -50,5 +52,40 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A small vicious rooster-reptile hybrid combining a cock's head and comb with leathery wings, clawed feet, and a serpentine tail. Small feathered torso transitioning into leathery wings and a scaled curling tail, with birdlike clawed legs. Sparse feathers on torso, smooth wing membranes, simple tail scales. Compact birdlike body, raised leathery wings, rooster head with comb, two clawed legs, long curling reptilian tail.",
+  "behavior_traits": [
+    "ground foraging",
+    "short powered flight",
+    "defensive pecking",
+    "territorial behavior"
+  ],
+  "scene_identity": {
+    "size_impression": "Small compact rooster-reptile hybrid whose body remains clearly smaller than human scale.",
+    "natural_posture": "Two clawed bird legs support the compact torso while leathery wings fold or spread from the sides and the serpentine tail trails behind.",
+    "behavior_style": [
+      "ground foraging",
+      "short powered flight",
+      "defensive pecking",
+      "territorial behavior"
+    ],
+    "environment_fit": [
+      "wilderness",
+      "ruins",
+      "farmland"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "chicken_drift",
+      "symptom": "hybrid becomes an ordinary chicken without leathery wings or reptilian tail",
+      "correction": "restore leathery wing pair, rooster head/comb, and long serpentine tail"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "creature becomes a four-legged dragon or drake",
+      "correction": "remove dragon forelegs/body; keep exactly two bird legs, one wing pair, rooster head, and tail"
+    }
+  ]
 }

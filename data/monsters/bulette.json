@@ -31,24 +31,61 @@
       "long snake body",
       "humanoid traits",
       "dense plate texture"
-    ]
+    ],
+    "limb_structure": "Exactly four powerful digging legs support the compact body, ending in heavy claws. One dorsal fin rises from the armored back; there are no wings, extra insect legs, or fish fins replacing limbs.",
+    "shape_lock": "Draw one low barrel-bodied quadruped with exactly four thick digging legs, a wedge-shaped predatory head, broad armored back, and one obvious shark-like dorsal fin. The creature stays land-bound and massive rather than fish-shaped, serpentine, or six-legged."
   },
   "default_habitats": [
-    "loose-earth caverns",
-    "subterranean fields",
-    "collapsed tunnels"
+    "underground",
+    "wilderness",
+    "rocky terrain"
   ],
   "accuracy_checks": [
     "reads as land predator not aquatic shark",
     "dorsal fin is obvious",
     "four legs are present",
-    "soil-cutting movement is clear",
+    "burrowing movement is clear",
     "armor remains colorable",
-    "body feels heavy and subterranean"
+    "body feels heavy and built for burrowing"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A massive land-shark-like burrowing beast with a plated body, prominent dorsal fin, four powerful legs, and a broad predatory head. Four-legged compact powerhouse with deep chest, short thick neck, plated back, and digging claws. Large overlapping armor plates with sparse seams and minimal texture.",
+  "behavior_traits": [
+    "burrowing",
+    "subsurface pursuit",
+    "powerful leaping",
+    "ambush hunting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large compact land-burrowing predator with massive low body, thick legs, and a prominent dorsal fin proving the land-shark silhouette.",
+    "natural_posture": "Four heavy legs brace low to the ground while the plated back and dorsal fin stay above the body mass.",
+    "behavior_style": [
+      "burrowing",
+      "subsurface pursuit",
+      "powerful leaping",
+      "ambush hunting"
+    ],
+    "environment_fit": [
+      "underground",
+      "wilderness",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "fish_drift",
+      "symptom": "creature becomes an aquatic shark or fish body",
+      "correction": "restore four weight-bearing digging legs, broad armored land body, and one dorsal fin"
+    },
+    {
+      "id": "extra_leg_drift",
+      "symptom": "creature gains insect-like extra legs",
+      "correction": "keep exactly four powerful legs and remove all additional limb pairs"
+    }
+  ]
 }

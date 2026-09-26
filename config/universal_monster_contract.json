@@ -1,7 +1,7 @@
 {
-  "schema_version": 3,
+  "schema_version": 8,
   "contract_id": "black-ink-monster-v2",
-  "purpose": "Keep monster JSON tiny. Family profiles carry anatomy and anti-drift intelligence; the universal engine derives complete generation identity.",
+  "purpose": "Monster JSON answers what the creature is and where it can plausibly exist. Family profiles carry shared anatomy and anti-drift intelligence; the universal environment and page engines turn broad habitat compatibility into unique scenery and story composition.",
   "minimal_recipe_required": [
     "monster_id",
     "monster_name",
@@ -12,12 +12,21 @@
     "locomotion",
     "visual_overrides",
     "default_habitats",
-    "scene_overrides"
+    "scene_overrides",
+    "physical_requirements",
+    "description",
+    "behavior_traits"
   ],
   "defaults": {
     "visual_identity": {
       "signature_gear": [],
-      "attitude": []
+      "attitude": [],
+      "shape_lock": "",
+      "render_priority": {
+        "positive": "",
+        "negative": "",
+        "silhouette_test": ""
+      }
     },
     "default_habitats": [],
     "locomotion": {
@@ -26,7 +35,10 @@
     "scene_identity": {
       "behavior_style": [],
       "environment_fit": []
-    }
+    },
+    "physical_requirements": [],
+    "description": "",
+    "behavior_traits": []
   },
   "resolution_order": [
     "universal monster defaults",
@@ -36,13 +48,24 @@
   ],
   "rules": [
     "Family profile owns species anatomy, silhouette, head, body, surface, must-keep, must-avoid, accuracy checks, and known failure modes.",
+    "visual_identity.shape_lock is required family-level positive geometry for the body plan. It states what to draw, not just what to avoid, and generation/review treat it as authoritative.",
+    "Optional visual_identity.render_priority is a concise model-facing capsule for failure-prone families. The universal prompt engine renders it immediately after SUBJECT and before scenery/style; it may prioritize existing family authority but may not contradict canonical anatomy.",
+    "Every resolved monster must expose non-empty visual_identity.limb_structure and visual_identity.shape_lock, whether inherited from a family or owned by a standalone full creature record.",
     "Monster recipes should only state what differs from the family.",
     "Known family failure modes must be injected into generation and review, not merely stored.",
-    "Page recipes own scene-specific props, habitat interaction, pose/support, and story moment.",
+    "Page recipes own scene-specific props, exact habitat interaction, exact pose, and story moment. Monster data may declare a creature-required physical relationship, but the environment engine supplies the actual supporting scenery.",
     "Family profile owns explicit limb/extremity structure, size impression, natural posture, visual behavior style, and environment fit in addition to anatomy and anti-drift rules.",
+    "Countable anatomy is exact: when family or monster identity defines a number of heads, arms, hands, legs, feet, wings, tails, antennae, horns, tentacles, pincers, or other appendages, generation may not add, duplicate, branch, merge, or omit those structures except where occlusion hides an otherwise intact limb.",
+    "Anatomy variation is never candidate variation. Camera angle, pose, and action may vary, but the creature's body plan and appendage counts remain locked.",
+    "Environment objects may never become creature anatomy: chains, rails, beams, roots, webs, grates, shelves, weapons, tools, and scenery remain visually separate unless a page recipe explicitly requires contact.",
     "Scene identity describes visual storytelling behavior, not combat mechanics; page recipes still own the exact action and interaction.",
     "Variant scene_overrides are allowed only when a monster variant truly differs from its family behavior or environment fit.",
-    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it."
+    "Reusable scenery must never be copied into monster recipes. If another creature could use the same wall, floor, light, trap, furnishing, terrain form, lair dressing, or depth cue, the environment engine owns it.",
+    "Legacy monster scenery words are planning-only and must never become generation authority. Generation prompts treat all monster data as creature-only.",
+    "Monster description is creature-only factual visual identity: size, proportions, anatomy, skin or surface, posture, movement, and persistent biological or cultural traits. It must not narrate a particular page.",
+    "default_habitats are broad compatibility tags such as forest, caves, underground, ruins, wilderness, ocean, swamp, desert, mountain, settlement, or fortification. They are inputs to environment selection, never finished scenery.",
+    "behavior_traits describe reusable creature behavior such as climbing, stalking, scavenging, guarding, burrowing, swimming, or ambushing. The page engine may turn one into a story moment; the monster must not prescribe the exact scene.",
+    "The environment engine fleshes broad habitat tags into spatial geometry, landmarks, surfaces, lighting, hazards, vegetation, water, architecture, depth, and supporting props. The page engine selects a unique combination and interaction."
   ],
   "family_profile_required": [
     "visual_identity.core_identity",
@@ -50,6 +73,7 @@
     "visual_identity.head_features",
     "visual_identity.body_shape",
     "visual_identity.limb_structure",
+    "visual_identity.shape_lock",
     "visual_identity.surface",
     "visual_identity.must_keep",
     "visual_identity.must_avoid",
@@ -63,9 +87,12 @@
   "scalability_rule": "Hundreds of monster recipes remain small. Creature files own identity, variant traits, behavior tendencies, locomotion, and habitat compatibility; reusable scenery belongs exclusively to the environment engine.",
   "environment_ownership": {
     "monster_may_define": [
-      "default_habitats",
-      "scene_identity.environment_fit",
-      "variant-specific environment preferences when truly unique"
+      "broad habitat compatibility through default_habitats",
+      "broad family habitat compatibility through scene_identity.environment_fit",
+      "variant-specific habitat compatibility when biologically necessary",
+      "creature-required physical relationships such as overhead attachment, structural attachment, rooted support, or water support",
+      "creature-only description covering stable visual identity, proportions, posture, movement, and persistent traits",
+      "reusable behavior traits that can inspire but do not dictate a page moment"
     ],
     "monster_must_not_define": [
       "wall systems",
@@ -79,8 +106,38 @@
       "reef dressing",
       "burial dressing",
       "lair dressing",
-      "environment depth cues"
+      "environment depth cues",
+      "specific room dressing",
+      "specific corridor dressing",
+      "specific cave dressing",
+      "treasure placement",
+      "laboratory fixtures",
+      "scene landmarks",
+      "background composition",
+      "environment camera framing"
     ],
-    "rule": "If a visual element could be reused by another creature in the same place, it belongs in the universal environment engine: family/profile/component/overlay system."
-  }
+    "rule": "Monster data may say where a creature can plausibly exist and may define a creature-required physical relationship. That requirement describes what the creature needs, never what the reusable scenery looks like; the universal environment engine supplies the actual support and all location dressing."
+  },
+  "anatomical_integrity": {
+    "governing_rule": "Canonical body-plan structure is a hard generation constraint, not descriptive flavor.",
+    "automatic_failures": [
+      "duplicate head or face",
+      "extra or duplicated arm, hand, leg, foot, wing, tail, antenna, horn, tentacle, mandible, pincer, or other appendage beyond canonical anatomy",
+      "missing required paired limb where the anatomy should be visible",
+      "branching, merged, fused, or detached extremity not supported by canonical anatomy",
+      "limb or tail sprouting from scenery, equipment, another limb, or an implausible attachment point",
+      "candidate composition that changes species anatomy in order to satisfy pose or framing"
+    ],
+    "occlusion_rule": "A limb may be partially or fully hidden by perspective or the creature's own body, but hidden anatomy does not authorize drawing an extra replacement limb.",
+    "exception_rule": "Creatures with variable, numerous, amorphous, swarm, or variant-specific appendages follow their family/monster contract instead of a generic fixed count."
+  },
+  "resolved_required": [
+    "visual_identity.shape_lock",
+    "visual_identity.limb_structure",
+    "scene_identity.size_impression",
+    "scene_identity.natural_posture",
+    "scene_identity.behavior_style",
+    "accuracy_checks",
+    "known_failure_modes"
+  ]
 }

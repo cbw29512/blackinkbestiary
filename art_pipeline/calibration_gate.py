@@ -114,6 +114,7 @@ def calibration_report(root: Path = ROOT) -> dict:
     return {
         "pass": not validate_calibration(root),
         "calibration_id": cfg.get("calibration_id"),
+        "source_manifest": cfg.get("source_manifest"),
         "approved": approved,
         "required": required_count,
         "production_calibrated": approved >= required_count,

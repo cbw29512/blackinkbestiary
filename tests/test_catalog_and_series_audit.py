@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
-from catalog_audit import audit_environment_variation_catalog, audit_monster_catalog
+from catalog_audit import _monster_scenery_warnings, audit_environment_variation_catalog, audit_monster_catalog
 from manifest_validation import validate_manifest
 from series_readiness import audit_series
 
@@ -17,7 +17,20 @@ class CatalogAndSeriesAuditTests(unittest.TestCase):
         report = audit_monster_catalog(ROOT)
         self.assertEqual(report["errors"], [])
         self.assertTrue(report["pass"])
+        self.assertEqual(report["ownership_warnings"], [])
         self.assertGreaterEqual(report["family_profiles"], 10)
+
+    def test_monster_ownership_audit_flags_scenery_but_not_support_relationships(self):
+        suspicious = {
+            "visual_identity": {
+                "core_identity": "creature with laboratory fixture background composition"
+            }
+        }
+        self.assertTrue(_monster_scenery_warnings(Path("synthetic.json"), suspicious))
+
+        mimic = json.loads((ROOT / "data" / "monsters" / "mimic-door.json").read_text(encoding="utf-8"))
+        warnings = _monster_scenery_warnings(Path("mimic-door.json"), mimic)
+        self.assertEqual(warnings, [])
 
     def test_environment_variation_registry_covers_every_family(self):
         report = audit_environment_variation_catalog(ROOT)

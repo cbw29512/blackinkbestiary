@@ -68,6 +68,10 @@ class ComfyCliContractTests(unittest.TestCase):
         self.assertIn("127.0.0.1", argv)
         self.assertIn("--port", argv)
         self.assertIn("8188", argv)
+        self.assertIn("--timeout", argv)
+        timeout_index = argv.index("--timeout")
+        self.assertEqual(argv[timeout_index + 1], "600")
+        self.assertEqual(run.call_args.kwargs["timeout"], 630.0)
 
     @patch("comfy_cli_runner.subprocess.run", return_value=_Result())
     def test_plain_commands_do_not_receive_json_flag(self, run):

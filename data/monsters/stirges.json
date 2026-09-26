@@ -30,21 +30,36 @@
       "feathered birds",
       "cute faces",
       "huge swarm clutter",
-      "humanoid features"
-    ]
+      "humanoid features",
+      "large humanoid centerpiece",
+      "dragon or demon head",
+      "horns",
+      "long reptilian tail",
+      "separate humanoid arms",
+      "single dominant giant creature",
+      "more than about nine visible stirges",
+      "wallpaper density of repeated stirges"
+    ],
+    "shape_lock": "Draw roughly 5–9 tiny compact flying pests, each built around one small animal-like body, one long straight needle proboscis projecting from the face, and one pair of membrane wings. Keep every individual tiny, comparable in scale, and separated by broad white gaps; no giant leader, wallpaper-density cloud, humanoid torso, dragon head, horns, or reptilian tail.",
+    "limb_structure": "Each stirge has one compact body, one long facial proboscis, one pair of membrane wings, and small grasping legs/feet; never add humanoid arms or a separate heroic torso."
   },
   "default_habitats": [
-    "dungeon cells",
-    "cave ceilings",
-    "abandoned underground rooms"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "proboscises are unmistakable",
     "wings remain visible",
     "multiple creatures read separately",
-    "sleeping target is not obscured",
+    "feeding or attack posture does not obscure creature identity",
     "swarm stays colorable",
-    "creatures are not mistaken for bats"
+    "creatures are not mistaken for bats",
+    "each stirge is a tiny compact flying animal, never humanoid",
+    "no single giant creature dominates the group",
+    "long straight proboscis is the defining face feature",
+    "visible stirge population stays controlled at roughly 5–9 individuals",
+    "broad white gaps separate the feeding group"
   ],
   "reference": {
     "image": null,
@@ -53,5 +68,40 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "schema_version": 4,
+  "description": "A small swarm of ugly flying blood-feeders combining batlike wings with long needle proboscises and grasping feet. Compact flying body with membranous wings, small legs or grasping feet, and narrow abdomen. Smooth membrane wings and sparse body texture; avoid dense insect detail. Several small airborne bodies with outspread membrane wings and long straight proboscises projecting from their faces.",
+  "behavior_traits": [
+    "swarming flight",
+    "blood feeding",
+    "clinging",
+    "ambush hunting"
+  ],
+  "scene_identity": {
+    "size_impression": "Tiny flying feeders that remain individually small and comparable in scale; the group never contains a human-sized focal creature.",
+    "natural_posture": "Small bodies fly, cling, or feed with membrane wings and grasping feet while long straight proboscises orient toward targets.",
+    "behavior_style": [
+      "swarming flight",
+      "blood feeding",
+      "clinging",
+      "ambush hunting"
+    ],
+    "environment_fit": [
+      "underground",
+      "caves",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_humanoid_drift",
+      "symptom": "one or more stirges become winged humanoid/dragon/demon figures",
+      "correction": "restore tiny compact non-humanoid bodies with one membrane wing pair, small grasping legs, and long facial proboscis"
+    },
+    {
+      "id": "giant_leader_drift",
+      "symptom": "one oversized stirge dominates the group",
+      "correction": "keep individuals similarly tiny with no giant focal leader"
+    }
+  ]
 }

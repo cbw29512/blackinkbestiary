@@ -1,0 +1,183 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
+from page_contract import resolve_page_spec
+from studio_config import active_book_paths
+STATE = ROOT / "data" / "test-gallery-state.json"
+QUALITY_SCORECARD = ROOT / "config" / "quality_scorecard.json"
+
+
+def configured_canary_page_ids(root: Path = ROOT) -> tuple[str, ...]:
+    config = json.loads((root / "config" / "quality_scorecard.json").read_text(encoding="utf-8"))
+    page_ids = tuple(
+        str(page_id).strip()
+        for page_id in config.get("canary_page_ids") or []
+        if str(page_id).strip()
+    )
+    if not page_ids:
+        raise RuntimeError("quality scorecard must declare canary_page_ids")
+    if len(page_ids) != len(set(page_ids)):
+        raise RuntimeError("quality scorecard canary_page_ids must be unique")
+    return page_ids
+
+
+CANARY_PAGE_IDS = configured_canary_page_ids()
+
+RETRYABLE = {
+    "failed",
+    "technical_qa_failed",
+    "vision_reviewer_failed",
+    "assistant_rejected",
+}
+
+
+def _current_image_path(item: dict, root: Path = ROOT) -> Path:
+    image_path = item.get("image_path")
+    if image_path:
+        return root / "web" / str(image_path)
+    return root / "web" / "test-gallery" / (
+        f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}.png"
+    )
+
+
+def _current_review_id(item: dict, root: Path = ROOT) -> str | None:
+    path = _current_image_path(item, root)
+    if not path.exists() or not path.is_file():
+        return None
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    return (
+        f"{item.get('page_id')}-C{int(item.get('candidate') or 0):02d}-"
+        f"H{digest[:16]}"
+    )
+
+
+def classify(
+    item: dict | None,
+    root: Path = ROOT,
+    current_generation_fingerprint: str | None = None,
+    current_review_fingerprint: str | None = None,
+) -> str:
+    if not item:
+        return "needs_generation"
+    assistant = item.get("assistant_review") or {}
+    decision = str(assistant.get("decision") or "").lower()
+    recorded_review_id = str(assistant.get("review_id") or "")
+    current_review_id = _current_review_id(item, root)
+    exact_review_is_current = bool(
+        recorded_review_id
+        and current_review_id
+        and recorded_review_id == current_review_id
+    )
+    recorded_fingerprint = str(item.get("generation_fingerprint") or "")
+    fingerprint_is_current = (
+        current_generation_fingerprint is None
+        or (
+            recorded_fingerprint
+            and recorded_fingerprint == current_generation_fingerprint
+        )
+    )
+    recorded_review_fingerprint = str(item.get("review_fingerprint") or "")
+    review_fingerprint_is_current = (
+        current_review_fingerprint is None
+        or (
+            recorded_review_fingerprint
+            and recorded_review_fingerprint == current_review_fingerprint
+        )
+    )
+
+    if (
+        decision in {"approve", "select"}
+        and exact_review_is_current
+        and fingerprint_is_current
+    ):
+        return "approved"
+    if decision == "reject" and exact_review_is_current:
+        return "needs_generation"
+
+    status = str(item.get("status") or "")
+    if status == "awaiting_exact_image_review":
+        if not fingerprint_is_current:
+            return "needs_generation"
+        return "awaiting_review"
+    if status in {"ready_for_review", "max_refinements_reached", "technical_qa_stalled"} and (
+        not fingerprint_is_current or not review_fingerprint_is_current
+    ):
+        return "needs_generation"
+    if status == "technical_qa_stalled":
+        return "awaiting_review"
+    if status in RETRYABLE:
+        return "needs_generation"
+    if status in {"awaiting_exact_image_review", "ready_for_review", "max_refinements_reached"}:
+        return "awaiting_review"
+    return "needs_generation"
+
+
+def load_canary_pages(root: Path = ROOT) -> dict[str, dict]:
+    canary_page_ids = configured_canary_page_ids(root)
+    manifest_path = active_book_paths(root)["manifest"]
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    return {
+        str(page.get("page_id")): resolve_page_spec(page, root)
+        for page in manifest.get("pages", [])
+        if page.get("page_id") in canary_page_ids
+    }
+
+
+def main() -> int:
+    if not STATE.exists():
+        print("AUTOPILOT STATUS: no gallery state yet; generation required.")
+        return 10
+
+    state = json.loads(STATE.read_text(encoding="utf-8"))
+    pages = load_canary_pages(ROOT)
+    results = {
+        (str(item.get("page_id")), int(item.get("candidate") or 0)): item
+        for item in state.get("results", [])
+    }
+
+    counts = {"approved": 0, "awaiting_review": 0, "needs_generation": 0}
+    rows = []
+    for page_id in CANARY_PAGE_IDS:
+        item = results.get((page_id, 1))
+        page = pages.get(page_id)
+        current_fingerprint = (
+            page_generation_fingerprint(page, ROOT) if page else None
+        )
+        current_review = (
+            page_review_fingerprint(page, ROOT) if page else None
+        )
+        state_name = classify(
+            item,
+            ROOT,
+            current_generation_fingerprint=current_fingerprint,
+            current_review_fingerprint=current_review,
+        )
+        counts[state_name] += 1
+        rows.append((page_id, state_name, str((item or {}).get("status") or "missing")))
+
+    print(
+        "AUTOPILOT STATUS: "
+        f"approved={counts['approved']}/{len(CANARY_PAGE_IDS)} "
+        f"awaiting_review={counts['awaiting_review']} "
+        f"needs_generation={counts['needs_generation']}"
+    )
+    for page_id, state_name, raw_status in rows:
+        print(f"  {page_id}: {state_name} ({raw_status})")
+
+    if counts["approved"] == len(CANARY_PAGE_IDS):
+        return 0
+    if counts["needs_generation"]:
+        return 10
+    return 20
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

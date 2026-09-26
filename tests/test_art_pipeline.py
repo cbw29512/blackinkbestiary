@@ -12,6 +12,7 @@ from prompt_builder import build_prompt, load_monster_spec
 from image_edit_profile import prepare_distilled_image_edit
 from workflow_adapter import PROMPT_TOKEN, SEED_TOKEN, prepare_workflow, validate_template
 from qa import inspect_png
+from physicality_prompt import MODE_CONTACT_RULES
 
 
 class PromptTests(unittest.TestCase):
@@ -72,6 +73,79 @@ class PromptTests(unittest.TestCase):
         self.assertIn("stolen ham", text)
 
 
+    def test_fresh_identity_regeneration_promotes_feedback_into_early_hard_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "Correct these visible defects: creature reads adult-human sized",
+                "failed_dimensions": ["creature reads adult-human sized"],
+                "routing_recommendation": "regenerate",
+            },
+            candidate_no=1,
+        )
+        self.assertIn("IDENTITY RECOVERY LOCK", text)
+        self.assertIn("previous image failed species/anatomy review", text)
+        self.assertIn("creature reads adult-human sized", text)
+        self.assertIn("FAILED REVIEW REQUIREMENTS TO CORRECT", text)
+        self.assertNotIn("LATEST HUMAN NOTE", text)
+        self.assertLess(text.index("IDENTITY RECOVERY LOCK"), text.index("CRITICAL SCENE LOCK"))
+
+    def test_identity_review_uses_structural_rebuild_not_preservation(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-14")
+        text = build_edit_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "dragon head and separate wings are visible",
+                "failed_dimensions": ["wrong body plan"],
+                "preserve_dimensions": ["stone ceiling"],
+            },
+            candidate_no=1,
+        )
+        self.assertIn("IDENTITY REBUILD MODE", text)
+        self.assertIn("Rebuild the creature silhouette, scale, proportions, limb topology", text)
+        self.assertIn("redrawing most or all of the creature", text)
+        self.assertNotIn("Preserve the existing framing, camera angle, pose", text)
+
+    def test_scene_review_can_rebuild_pose_and_environment_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-10")
+        text = build_edit_prompt(
+            page,
+            {
+                "stage": "scene",
+                "text": "spiral stair is not visible",
+                "failed_dimensions": ["missing stair geometry"],
+                "preserve_dimensions": ["ogre anatomy"],
+            },
+            candidate_no=1,
+        )
+        self.assertIn("SCENE REBUILD MODE", text)
+        self.assertIn("rebuild pose, prop placement, contact geometry, camera/framing", text)
+        self.assertIn("moving the creature, props, or camera", text)
+
+    def test_runtime_standards_do_not_reinflate_small_creatures(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(page).lower()
+        self.assertIn("canonical scale lock", text)
+        self.assertIn("canonical creature scale is immutable", text)
+        self.assertIn("first-read focal subject at canonical scale and proportions", text)
+        self.assertNotIn("one large centered unmistakable monster", text)
+        self.assertNotIn("normally occupying about 60–75% of page height", text)
+
+    def test_fresh_generation_ignores_legacy_modify_preserve_recipe(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        text = build_prompt(page)
+        self.assertNotIn("PRESERVE: kobold pose", text)
+        self.assertNotIn("This is a targeted refinement.", text)
+        self.assertIn("PAGE RECIPE LOCK", text)
+
     def test_story_contract_drives_generation_prompt(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
@@ -109,6 +183,365 @@ class PromptTests(unittest.TestCase):
         self.assertIn("REFERENCE RULE", text)
         self.assertIn("anatomy, silhouette, and identity only", text)
 
+    def test_generation_prompt_has_hard_anatomy_integrity_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        kobold = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        spider = next(page for page in tome["pages"] if page["page_id"] == "I-22")
+        kobold_text = build_prompt(kobold, candidate_no=1)
+        spider_text = build_prompt(spider, candidate_no=2)
+        for text in (kobold_text, spider_text):
+            self.assertIn("ANATOMICAL INTEGRITY LOCK", text)
+            self.assertIn("Never invent or duplicate heads", text)
+            self.assertIn("may not branch", text)
+            self.assertIn("Candidate variation may change pose only", text)
+        self.assertIn("visible balancing tail", kobold_text)
+        self.assertIn("Exactly eight jointed arachnid legs", spider_text)
+
+
+    def test_stirge_swarm_population_is_bounded_and_colorable(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-15")
+        text = build_prompt(page, candidate_no=1)
+        self.assertIn("roughly 5–9 tiny compact flying pests", text)
+        self.assertIn("broad white gaps", text)
+        self.assertIn("no giant leader", text)
+        self.assertIn("SWARM COMPOSITION LOCK", text)
+
+    def test_generation_prompt_has_top_level_no_frame_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        for page_id in ("I-19", "I-22"):
+            page = next(page for page in tome["pages"] if page["page_id"] == page_id)
+            text = build_prompt(page)
+            self.assertIn("PAGE-EDGE LOCK — NON-NEGOTIABLE", text)
+            self.assertIn("Never draw a decorative rectangular border", text)
+            self.assertIn("must not connect into a page-sized frame", text)
+
+    def test_swarm_population_range_is_a_hard_generation_limit(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+        for page_id in ("I-17", "I-19"):
+            text = build_prompt(pages[page_id], candidate_no=1)
+            self.assertIn("roughly 12–24", text)
+            self.assertIn("hard composition limit", text)
+            self.assertIn("do not exceed it", text)
+            self.assertIn("broad negative-space gaps", text)
+
+    def test_swarm_prompt_uses_collective_subject_not_giant_leader(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        bat_swarm = next(page for page in tome["pages"] if page["page_id"] == "I-17")
+        text = build_prompt(bat_swarm, candidate_no=1)
+        self.assertIn("SWARM COMPOSITION LOCK", text)
+        self.assertIn("no single oversized member may dominate", text)
+        self.assertIn("controlled population", text)
+        self.assertIn("broad white gaps", text)
+
+    def test_prompt_has_creature_scenery_ownership_firewall(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        text = build_prompt(tome["pages"][0])
+        self.assertIn("CREATURE/SCENERY OWNERSHIP FIREWALL", text)
+        self.assertIn("may never sprout from, merge into, replace, or duplicate limbs", text)
+
+    def test_centipede_prompt_requires_leg_pair_on_every_visible_segment(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-20")
+        text = build_prompt(page)
+        self.assertIn("ONE PAIR of slender walking legs attached to EVERY visible trunk segment", text)
+        self.assertIn("sparse legs only near the head", text)
+
+    def test_fire_beetle_prompt_requires_three_signature_glands(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-21")
+        text = build_prompt(page)
+        self.assertIn("three distinct luminous glands", text)
+        self.assertIn("two by the eyes and one near the rear abdomen", text)
+
+    def test_overhead_support_uses_only_canonical_anatomy(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        darkmantle = build_prompt(pages["I-14"])
+        self.assertIn("mantle body/rim itself remains visibly attached", darkmantle)
+        self.assertIn("no hands, feet, arms, or legs provide support", darkmantle)
+
+        bat = build_prompt(pages["I-16"])
+        self.assertIn("both canonical hind feet only visibly grip the cavern ceiling", bat)
+        self.assertIn("forelimbs remain membrane wings", bat)
+        self.assertIn("never become separate hands or arms", bat)
+
+    def test_giant_bat_prompt_forbids_separate_arms(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-16")
+        text = build_prompt(page)
+        self.assertIn("two forelimbs that ARE the membrane wings", text)
+        self.assertIn("Never add separate humanoid arms", text)
+
+    def test_goblin_boss_pointing_and_hobgoblin_formation_are_literal(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        boss = build_prompt(pages["I-05"])
+        self.assertIn("POINTING-DIRECTION PROOF", boss)
+        self.assertIn("directional line away from the body", boss)
+
+        drill = build_prompt(pages["I-06"])
+        self.assertIn("FORMATION-LEADERSHIP PROOF", drill)
+        self.assertIn("two or more subordinate overlapping shields", drill)
+
+    def test_early_tome_i_story_objects_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        shrine = build_prompt(pages["I-02"])
+        self.assertIn("SHRINE-OFFERING PROOF", shrine)
+        self.assertIn("coin is visibly held or raised", shrine)
+
+        ham = build_prompt(pages["I-03"])
+        self.assertIn("HAM-OBJECT PROOF", ham)
+        self.assertIn("one protruding bone end", ham)
+
+        captain = build_prompt(pages["I-07"])
+        self.assertIn("MAP-COMMAND PROOF", captain)
+        self.assertIn("open map lies on the table", captain)
+
+        stalker = build_prompt(pages["I-09"])
+        self.assertIn("SILENCE-GESTURE PROOF", stalker)
+        self.assertIn("DRAGGED-SACK PROOF", stalker)
+        self.assertIn("CROUCHED-DRAGGING LOCK", stalker)
+        self.assertIn("overhead boundary is visibly low enough to force a crouch", stalker)
+
+    def test_ogre_zombie_has_positive_undead_shape_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-11")
+        text = build_prompt(page)
+        self.assertIn("massive hornless ogre corpse", text.lower())
+        self.assertIn("sunken eyes", text.lower())
+        self.assertIn("chains visibly drag from shackles", text.lower())
+        self.assertIn("healthy living ogre wearing decorative chains", text.lower())
+
+    def test_remaining_tome_i_story_actions_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        zombie = build_prompt(pages["I-11"])
+        self.assertIn("CHAIN-DRAG PROOF", zombie)
+        self.assertIn("touch the floor or stair treads", zombie)
+
+        troll = build_prompt(pages["I-12"])
+        self.assertIn("REGENERATION PROOF", troll)
+        self.assertIn("FIRE-REACTION PROOF", troll)
+
+        limb = build_prompt(pages["I-13"])
+        self.assertIn("SEVERED-LIMB MOTION PROOF", limb)
+        self.assertIn("complete moving subject", limb)
+
+        stirges = build_prompt(pages["I-15"])
+        self.assertIn("FEEDING-CONTACT PROOF", stirges)
+        self.assertIn("proboscises visibly contacting", stirges)
+
+        bats = build_prompt(pages["I-17"])
+        self.assertIn("VERTICAL-ORIGIN PROOF", bats)
+        self.assertIn("well/shaft opening", bats)
+
+        rat = build_prompt(pages["I-18"])
+        self.assertIn("NEST-DEFENSE PROOF", rat)
+        self.assertIn("interpose itself", rat)
+
+        beetle = build_prompt(pages["I-21"])
+        self.assertIn("LINE-ART LIGHT PROOF", beetle)
+        self.assertIn("nearby rock/timber surface", beetle)
+
+    def test_second_half_story_interactions_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        cube = build_prompt(pages["I-24"])
+        self.assertIn("SUSPENDED-CONTENTS PROOF", cube)
+        self.assertIn("enclosed within the continuous transparent/translucent body volume", cube)
+
+        pudding = build_prompt(pages["I-25"])
+        self.assertIn("CORROSION-CONTACT PROOF", pudding)
+        self.assertIn("damage must begin exactly where the creature contacts the metal", pudding)
+
+        jelly = build_prompt(pages["I-26"])
+        self.assertIn("SPLIT-BODY PROOF", jelly)
+        self.assertIn("exactly the required separate body masses", jelly)
+
+        chest = build_prompt(pages["I-27"])
+        door = build_prompt(pages["I-28"])
+        self.assertIn("MIMIC-REVEAL PROOF", chest)
+        self.assertIn("MIMIC-REVEAL PROOF", door)
+
+        roper = build_prompt(pages["I-35"])
+        self.assertIn("CAMOUFLAGE-BREAK PROOF", roper)
+
+        basilisk = build_prompt(pages["I-43"])
+        cockatrice = build_prompt(pages["I-44"])
+        self.assertIn("PETRIFICATION PROOF", basilisk)
+        self.assertIn("PETRIFICATION PROOF", cockatrice)
+
+        behir = build_prompt(pages["I-47"])
+        self.assertIn("LIGHTNING-CONTACT PROOF", behir)
+
+        shrieker = build_prompt(pages["I-48"])
+        self.assertIn("ALARM-VIBRATION PROOF", shrieker)
+
+        lich = build_prompt(pages["I-50"])
+        self.assertIn("GUARDED-FOCUS PROOF", lich)
+
+    def test_new_shape_locks_cover_known_non_canary_failures(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        troll = build_prompt(pages["I-12"])
+        self.assertIn("very long arms hanging toward the knees", troll)
+        self.assertIn("no horns", troll.lower())
+
+        limb = build_prompt(pages["I-13"])
+        self.assertIn("exactly one severed troll arm only", limb.lower())
+
+        stirges = build_prompt(pages["I-15"])
+        self.assertIn("one long straight needle proboscis", stirges.lower())
+        self.assertIn("no giant leader", stirges.lower())
+
+        beetle = build_prompt(pages["I-21"])
+        self.assertIn("exactly six walking legs", beetle.lower())
+        self.assertIn("three unmistakable outlined luminous gland bulges", beetle.lower())
+
+    def test_every_tome_i_physicality_mode_has_universal_contact_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        modes = {
+            str((page.get("physicality") or {}).get("mode") or "").strip().lower()
+            for page in tome["pages"]
+        }
+        self.assertNotIn("", modes)
+        self.assertEqual(sorted(modes.difference(MODE_CONTACT_RULES)), [])
+
+    def test_stagnation_escalation_rotates_candidate_composition(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-10")
+
+        normal = build_prompt(page, candidate_no=1)
+        escaped = build_prompt(
+            page,
+            {
+                "stage": "environment",
+                "text": "spiral stair is not visible",
+                "failed_dimensions": ["spiral stair is not visible"],
+                "routing_recommendation": "regenerate",
+                "stagnation_escalation": True,
+                "composition_escape_offset": 2,
+            },
+            candidate_no=1,
+        )
+
+        self.assertIn("STAGNATION ESCAPE RULE", escaped)
+        self.assertNotEqual(
+            next(line for line in normal.splitlines() if line.startswith("CANDIDATE 1 COMPOSITION LOCK")),
+            next(line for line in escaped.splitlines() if line.startswith("CANDIDATE 1 COMPOSITION LOCK")),
+        )
+
+    def test_fresh_generation_promotes_stage_specific_review_recovery_locks(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        identity = build_prompt(
+            pages["I-14"],
+            {"stage": "identity", "text": "humanoid dragon body is visible", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("IDENTITY RECOVERY LOCK", identity)
+        self.assertIn("humanoid dragon body is visible", identity)
+
+        environment = build_prompt(
+            pages["I-10"],
+            {"stage": "environment", "text": "spiral stair does not read", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("ENVIRONMENT RECOVERY LOCK", environment)
+        self.assertIn("setting must read correctly even if the creature is mentally removed", environment)
+        self.assertIn("spiral stair does not read", environment)
+
+        action = build_prompt(
+            pages["I-04"],
+            {"stage": "action", "text": "lantern is not being kicked", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("ACTION RECOVERY LOCK", action)
+        self.assertIn("required verb must be visible without a caption", action)
+        self.assertIn("lantern is not being kicked", action)
+
+        quality = build_prompt(
+            pages["I-19"],
+            {"stage": "quality", "text": "wallpaper density and inset border", "routing_recommendation": "regenerate"},
+            candidate_no=1,
+        )
+        self.assertIn("QUALITY RECOVERY LOCK", quality)
+        self.assertIn("Broad white colorable regions", quality)
+        self.assertIn("wallpaper density and inset border", quality)
+
+        for text in (identity, environment, action, quality):
+            self.assertNotIn("LATEST REVIEW CORRECTION:", text)
+
+    def test_later_tome_i_relationships_have_literal_visual_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        sword = build_prompt(pages["I-30"])
+        self.assertIn("ORBIT PROOF", sword)
+        self.assertIn("anchor clearly inside the implied orbit", sword)
+
+        rug = build_prompt(pages["I-31"])
+        self.assertIn("WRAP-CONTACT PROOF", rug)
+        self.assertIn("contact and curve around the target", rug)
+
+        gargoyle = build_prompt(pages["I-32"])
+        self.assertIn("STATUE-AWAKENING PROOF", gargoyle)
+        self.assertIn("one statue coming alive", gargoyle)
+
+        fungus = build_prompt(pages["I-49"])
+        self.assertIn("REACH-TARGET PROOF", fungus)
+        self.assertIn("main body remains supported", fungus)
+
+    def test_later_monster_soft_copy_does_not_conflict_with_hard_anatomy_or_colorability(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        armor = build_prompt(pages["I-29"])
+        self.assertIn("predominantly white negative space", armor)
+        self.assertIn("no solid-black void", armor.lower())
+        self.assertNotIn("empty darkness where a face would be", armor.lower())
+
+        fungus = build_prompt(pages["I-49"])
+        self.assertIn("exactly four long flexible tendrils", fungus.lower())
+        self.assertNotIn("four or more flexible tendrils", fungus.lower())
+
+    def test_minotaur_intersection_uses_passage_fill_scale_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-33")
+        text = build_prompt(page)
+        self.assertIn("PASSAGE-FILL PROOF", text)
+        self.assertIn("route, intersection, or crossing", text)
+
+    def test_late_tome_i_relationships_have_literal_story_proof(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        pages = {page["page_id"]: page for page in tome["pages"]}
+
+        watcher = build_prompt(pages["I-23"])
+        self.assertIn("GAZE-TARGET PROOF", watcher)
+        self.assertIn("readable sightline", watcher)
+
+        mouther = build_prompt(pages["I-42"])
+        self.assertIn("WATER-CONTACT PROOF", mouther)
+        self.assertIn("ripple arcs must originate", mouther)
+
+        worm = build_prompt(pages["I-45"])
+        self.assertIn("PASSAGE-FILL PROOF", worm)
+        self.assertIn("use the passage boundaries as scale evidence", worm)
+
+        drider = build_prompt(pages["I-46"])
+        self.assertIn("AIM-DIRECTION PROOF", drider)
+        self.assertIn("share the named direction", drider)
+
     def test_modify_notes_enter_prompt(self):
         page = {
             "page_id": "X-03",
@@ -132,6 +565,23 @@ class PromptTests(unittest.TestCase):
         self.assertIn("simplify walls", text)
         self.assertIn("more white space", text)
 
+
+    def test_every_tome_i_physicality_mode_is_owned_by_universal_engine(self):
+        from physicality_prompt import MODE_CONTACT_RULES, POWERED_AIR_MODES, locomotion_errors
+
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        supported = set(MODE_CONTACT_RULES) | set(POWERED_AIR_MODES)
+        modes = {
+            str((page.get("physicality") or {}).get("mode") or "").strip().lower()
+            for page in tome["pages"]
+        }
+        self.assertTrue(modes.issubset(supported), sorted(modes.difference(supported)))
+
+        bogus = dict(tome["pages"][0])
+        bogus["physicality"] = dict(bogus["physicality"])
+        bogus["physicality"]["mode"] = "dramatic-mystery-pose"
+        errors = locomotion_errors(bogus)
+        self.assertTrue(any("has no universal contact/airborne rule" in item for item in errors))
 
 class WorkflowTests(unittest.TestCase):
     def test_template_tokens_replace(self):
@@ -261,9 +711,6 @@ class QATests(unittest.TestCase):
             self.assertIn("missing_file", result["reasons"])
 
 
-if __name__ == "__main__":
-    unittest.main()
-
     def test_prompt_injects_family_failure_modes_for_minimal_monster(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-09")
@@ -272,3 +719,128 @@ if __name__ == "__main__":
         self.assertIn("gorilla, ape-man, or primate", text)
         self.assertIn("CORRECTION:", text)
 
+    def test_review_history_prioritizes_kobold_dragonborn_drift_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        prompt = build_prompt(page)
+
+        self.assertIn("body becomes adult-human sized, broad-chested, muscular, dragonborn-like", prompt)
+        self.assertIn("shrink to obvious 2–3-foot scale", prompt)
+
+    def test_review_history_prioritizes_goblin_heroic_bulk_and_demon_locks(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(page)
+
+        self.assertIn("body becomes upright, broad-chested, bodybuilder-like", prompt)
+        self.assertIn("horns, tail, claws, or imp-like demonic anatomy appears", prompt)
+
+    def test_historical_action_failure_reemphasizes_ogre_wedged_scene(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-10")
+        prompt = build_prompt(page)
+
+        self.assertIn("HISTORICAL SCENE FAILURE LOCK", prompt)
+        self.assertIn("ACTION PROOF FAILED BEFORE", prompt)
+        self.assertIn("action=", prompt)
+        self.assertIn("no standing, posing, holding, or proximity", prompt)
+
+    def test_historical_environment_failure_reemphasizes_spider_hall_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-22")
+        prompt = build_prompt(page)
+
+        self.assertIn("HISTORICAL SCENE FAILURE LOCK", prompt)
+        self.assertIn("ENVIRONMENT PROOF FAILED BEFORE", prompt)
+        self.assertIn("Large geometry must prove the named place", prompt)
+
+    def test_scene_failure_taxonomy_catches_generic_pose_and_environment_notes(self):
+        from defect_taxonomy import classify_text
+
+        action_codes = classify_text(
+            "Reject: ogre is merely standing on ordinary stairs and must visibly be physically wedged."
+        )
+        environment_codes = classify_text(
+            "Reject: page does not read as a stone dungeon hall/arch and the architecture is not readable."
+        )
+
+        self.assertIn("ACTION_UNCLEAR", action_codes)
+        self.assertIn("ENVIRONMENT_GENERIC", environment_codes)
+
+    def test_repeated_identity_failure_uses_reduced_identity_first_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "bodybuilder chest and oversized shoulders",
+                "stagnation_escalation": True,
+                "routing_recommendation": "regenerate",
+            },
+            candidate_no=1,
+        )
+
+        self.assertIn("IDENTITY-FIRST RECOVERY MODE", prompt)
+        self.assertIn("GENERATION SELF-CHECK — IDENTITY RECOVERY", prompt)
+        self.assertIn("exact species silhouette", prompt)
+        self.assertIn("simple open line art", prompt)
+        self.assertNotIn("MANDATORY PAGE VERIFICATION CHECKLIST", prompt)
+        self.assertNotIn("ENVIRONMENT:", prompt)
+        self.assertNotIn("ACTION:", prompt)
+        self.assertNotIn("MOMENT:", prompt)
+        self.assertNotIn("SCENE ARCHETYPE:", prompt)
+        self.assertIn("HABITAT:", prompt)
+
+    def test_first_identity_retry_still_uses_full_scene_prompt(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(
+            page,
+            {
+                "stage": "identity",
+                "text": "bodybuilder chest",
+                "stagnation_escalation": False,
+                "routing_recommendation": "regenerate",
+            },
+            candidate_no=1,
+        )
+        self.assertNotIn("IDENTITY-FIRST RECOVERY MODE", prompt)
+        self.assertIn("ENVIRONMENT:", prompt)
+        self.assertIn("ACTION:", prompt)
+        self.assertIn("STORY BEAT:", prompt)
+
+    def test_generation_uses_compact_self_check_while_review_keeps_full_checklist(self):
+        from prompt_builder import build_page_verification_checklist
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(page)
+        checklist = build_page_verification_checklist(page)
+
+        self.assertIn("GENERATION SELF-CHECK", prompt)
+        self.assertIn("IDENTITY:", prompt)
+        self.assertIn("ENVIRONMENT:", prompt)
+        self.assertIn("ACTION:", prompt)
+        self.assertIn("QUALITY:", prompt)
+        self.assertNotIn("MANDATORY PAGE VERIFICATION CHECKLIST", prompt)
+
+        # The detailed checklist still exists as reviewer authority rather than
+        # being duplicated into the image-generation prompt.
+        self.assertGreater(sum(len(items) for items in checklist.values()), 20)
+
+    def test_candidate_prompts_are_materially_distinct_and_colorable(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-24")
+        prompts = [build_prompt(page, candidate_no=n) for n in range(1, 5)]
+        self.assertEqual(len(set(prompts)), 4)
+        for n, text in enumerate(prompts, 1):
+            self.assertIn(f"CANDIDATE {n} COMPOSITION LOCK", text)
+            self.assertIn("NEVER fill a creature", text)
+            self.assertIn("No large black masses", text)
+            self.assertIn("cube with straight readable edges", text)
+            self.assertIn("humanoid torso", text)
+            self.assertIn("no head, no face, no limbs", text)
+
+
+if __name__ == "__main__":
+    unittest.main()

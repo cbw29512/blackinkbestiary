@@ -5,7 +5,7 @@
   "size": "medium",
   "creature_type": "monstrosity",
   "visual_identity": {
-    "core_identity": "A low insectoid dungeon scavenger that seeks metal, recognized by its long sensory antennae, armored body, and metal-corroding feeding behavior.",
+    "core_identity": "A low insectoid scavenger that seeks metal, recognized by its long sensory antennae, armored body, and metal-corroding feeding behavior.",
     "silhouette": "Low four-legged arthropod-like body, arched armored back, extremely long feeler antennae sweeping forward, tapered tail.",
     "head_features": "Small blunt head with simple mandibles and very long feathery or segmented antennae.",
     "body_shape": "Compact low body on four sturdy legs with plated back and flexible tail, more alien than mammalian.",
@@ -31,17 +31,19 @@
       "giant horns",
       "humanoid face",
       "dense antenna detail"
-    ]
+    ],
+    "limb_structure": "Exactly four sturdy walking legs support the low armored body. A paired set of extremely long sensory antennae projects forward from the small head, with one flexible tail behind; no wings, humanoid limbs, or extra insect leg pairs.",
+    "shape_lock": "Draw one low armored four-legged scavenger with exactly four legs, a small blunt head, two extremely long forward-sweeping antennae, arched plated back, and one flexible tail. Keep it alien and low to the ground, not doglike, dragonlike, or six-legged."
   },
   "default_habitats": [
-    "armories",
-    "weapon caches",
-    "old forge rooms"
+    "underground",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "antennae dominate silhouette",
     "creature interacts directly with metal",
-    "ruined weapons show corrosion",
+    "contact with metal clearly communicates corrosive feeding",
     "body remains low and armored",
     "not mistaken for ordinary insect",
     "page preserves white space"
@@ -50,5 +52,40 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A low insectoid scavenger that seeks metal, recognized by its long sensory antennae, armored body, and metal-corroding feeding behavior. Compact low body on four sturdy legs with plated back and flexible tail, more alien than mammalian. Broad armor plates with restrained seam lines; antennae kept clean and readable. Low four-legged arthropod-like body, arched armored back, extremely long feeler antennae sweeping forward, tapered tail.",
+  "behavior_traits": [
+    "metal seeking",
+    "scavenging",
+    "antenna probing",
+    "quick pursuit"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium low armored scavenger whose long antennae make the silhouette distinctive without becoming a dog or dragon.",
+    "natural_posture": "Exactly four legs support the arched low body while two very long antennae sweep forward toward metal.",
+    "behavior_style": [
+      "metal seeking",
+      "scavenging",
+      "antenna probing",
+      "quick pursuit"
+    ],
+    "environment_fit": [
+      "underground",
+      "ruins",
+      "settlements"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dog_dragon_drift",
+      "symptom": "body/head becomes mammalian or reptilian predator",
+      "correction": "restore small blunt alien head, low plated body, four legs, long antennae, and flexible tail"
+    },
+    {
+      "id": "extra_leg_drift",
+      "symptom": "creature gains six or more insect walking legs",
+      "correction": "restore exactly four sturdy walking legs under the low armored body"
+    }
+  ]
 }

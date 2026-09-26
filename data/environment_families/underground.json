@@ -21,7 +21,8 @@
         "basalt tube texture",
         "dense tiny cave popcorn",
         "generic square dungeon"
-      ]
+      ],
+      "spatial_envelope": "natural_cavern"
     },
     "underground.basalt-lava-tube": {
       "name": "Basalt Lava Tube",
@@ -96,7 +97,8 @@
       "must_avoid": [
         "tiny pebble fields",
         "square corridor"
-      ]
+      ],
+      "spatial_envelope": "natural_cavern"
     },
     "underground.crystal-cavern": {
       "name": "Crystal Cavern",
@@ -114,7 +116,8 @@
       "must_avoid": [
         "hundreds of tiny crystals",
         "gem wallpaper"
-      ]
+      ],
+      "spatial_envelope": "natural_cavern"
     },
     "underground.fungal-cavern": {
       "name": "Fungal Cavern",
@@ -133,7 +136,8 @@
       "must_avoid": [
         "hundreds of tiny mushrooms",
         "garden-like neat rows"
-      ]
+      ],
+      "spatial_envelope": "natural_cavern"
     },
     "underground.mine-tunnel": {
       "name": "Abandoned Mine Tunnel",
@@ -152,7 +156,8 @@
       "must_avoid": [
         "modern machinery",
         "perfect castle masonry"
-      ]
+      ],
+      "spatial_envelope": "natural_tunnel"
     },
     "underground.dressed-stone-corridor": {
       "name": "Dressed-Stone Corridor",
@@ -171,7 +176,8 @@
       "must_avoid": [
         "natural cave stalactites",
         "modern hallway"
-      ]
+      ],
+      "spatial_envelope": "narrow_built_corridor"
     },
     "underground.trapped-stone-corridor": {
       "name": "Trapped Stone Corridor",
@@ -190,7 +196,8 @@
       "must_avoid": [
         "invisible trap logic",
         "tiny mechanical clutter"
-      ]
+      ],
+      "spatial_envelope": "narrow_built_corridor"
     },
     "underground.barracks-passage": {
       "name": "Underground Barracks Passage",
@@ -209,7 +216,8 @@
       "must_avoid": [
         "domestic bedroom look",
         "empty generic hall"
-      ]
+      ],
+      "spatial_envelope": "narrow_built_corridor"
     },
     "underground.catacomb-niches": {
       "name": "Catacomb Niche Hall",
@@ -228,7 +236,8 @@
       "must_avoid": [
         "tiny skull wallpaper",
         "ornate church nave"
-      ]
+      ],
+      "spatial_envelope": "narrow_built_corridor"
     },
     "underground.cistern": {
       "name": "Dungeon Cistern",
@@ -247,7 +256,8 @@
       "must_avoid": [
         "modern plumbing",
         "dense pipework"
-      ]
+      ],
+      "spatial_envelope": "circular_built_chamber"
     },
     "underground.rotunda": {
       "name": "Dungeon Rotunda",
@@ -266,7 +276,8 @@
       "must_avoid": [
         "busy mosaic detail",
         "square hallway composition"
-      ]
+      ],
+      "spatial_envelope": "circular_built_chamber"
     },
     "underground.crypt": {
       "name": "Stone Crypt",
@@ -285,7 +296,8 @@
       "must_avoid": [
         "dozens of tiny skulls",
         "modern cemetery props"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.armory": {
       "name": "Abandoned Armory",
@@ -304,7 +316,8 @@
       "must_avoid": [
         "dense pile of tiny weapons",
         "modern firearms"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.refuse-pit": {
       "name": "Refuse Pit",
@@ -323,7 +336,8 @@
       "must_avoid": [
         "tiny trash confetti",
         "graphic filth"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.webbed-chapel": {
       "name": "Webbed Underground Chapel",
@@ -342,7 +356,8 @@
       "must_avoid": [
         "cathedral-scale clutter",
         "dense lace-like webbing"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.rough-stone-pantry": {
       "name": "Rough Stone Pantry",
@@ -363,7 +378,8 @@
         "modern cabinets",
         "appliances",
         "tiny food clutter"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.throne-grotto": {
       "name": "Improvised Throne Grotto",
@@ -382,7 +398,8 @@
       "must_avoid": [
         "royal palace symmetry",
         "ornate throne detail"
-      ]
+      ],
+      "spatial_envelope": "natural_cavern"
     },
     "underground.war-room": {
       "name": "Cave War Room",
@@ -401,16 +418,17 @@
       "must_avoid": [
         "modern office",
         "tiny tactical clutter"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.spiral-stair": {
       "name": "Cramped Spiral Stair",
-      "description": "Tight masonry stair curling around a central newel or shaft, emphasizing vertical confinement.",
+      "description": "Extremely tight masonry spiral stair curling around a central newel, column, or shaft; wedge-shaped treads and a curved outer wall make the helical geometry unmistakable.",
       "visual_cues": [
-        "curving stone steps",
-        "central column or open shaft",
-        "tight wall radius",
-        "small landing"
+        "wedge-shaped stone treads visibly curving around a central newel or shaft",
+        "central column or open shaft visible through multiple stair turns",
+        "tight curved outer masonry wall",
+        "small landing connected directly to the helix"
       ],
       "colorable_forms": [
         "large step bands",
@@ -418,9 +436,13 @@
         "simple railing if any"
       ],
       "must_avoid": [
+        "straight staircase",
         "grand staircase",
-        "open ballroom"
-      ]
+        "ordinary broad stair flight",
+        "open ballroom",
+        "flat corridor with isolated steps"
+      ],
+      "spatial_envelope": "spiral_stair"
     },
     "underground.prison-cell": {
       "name": "Dungeon Prison Cell",
@@ -439,7 +461,8 @@
       "must_avoid": [
         "modern jail furniture",
         "dense chain detail"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.well-shaft": {
       "name": "Vertical Well Shaft",
@@ -457,7 +480,8 @@
       ],
       "must_avoid": [
         "flat floor grate composition"
-      ]
+      ],
+      "spatial_envelope": "vertical_shaft"
     },
     "underground.floor-grate": {
       "name": "Floor-Grate Passage",
@@ -476,7 +500,8 @@
       "must_avoid": [
         "tiny vent",
         "modern sewer pipework"
-      ]
+      ],
+      "spatial_envelope": "narrow_built_corridor"
     },
     "underground.webbed-hall": {
       "name": "Webbed Dungeon Hall",
@@ -495,7 +520,8 @@
       "must_avoid": [
         "lace-like micro-webbing",
         "wall-to-wall tiny strands"
-      ]
+      ],
+      "spatial_envelope": "built_hall_gallery"
     },
     "underground.treasure-vault": {
       "name": "Treasure Vault",
@@ -514,7 +540,8 @@
       "must_avoid": [
         "thousands of individual coins",
         "jewelry confetti"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.display-gallery": {
       "name": "Dungeon Display Gallery",
@@ -533,7 +560,8 @@
       "must_avoid": [
         "museum clutter",
         "many tiny objects"
-      ]
+      ],
+      "spatial_envelope": "built_hall_gallery"
     },
     "underground.labyrinth": {
       "name": "Stone Labyrinth",
@@ -550,8 +578,10 @@
       ],
       "must_avoid": [
         "ornate wall carving",
-        "same straight corridor framing on every page"
-      ]
+        "single straight corridor with no visible turn or branch",
+        "broad open chamber"
+      ],
+      "spatial_envelope": "labyrinth_branch"
     },
     "underground.antechamber": {
       "name": "Dungeon Antechamber",
@@ -569,7 +599,8 @@
       ],
       "must_avoid": [
         "empty box room"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.collapsed-tunnel": {
       "name": "Collapsed Tunnel",
@@ -587,7 +618,8 @@
       ],
       "must_avoid": [
         "hundreds of tiny rubble stones"
-      ]
+      ],
+      "spatial_envelope": "collapsed_built_space"
     },
     "underground.earthen-burrow": {
       "name": "Earthen Burrow",
@@ -606,7 +638,8 @@
       "must_avoid": [
         "masonry blocks",
         "tiny dirt texture"
-      ]
+      ],
+      "spatial_envelope": "natural_tunnel"
     },
     "underground.loose-earth-cavern": {
       "name": "Loose-Earth Cavern",
@@ -625,7 +658,8 @@
       "must_avoid": [
         "flagstone floor",
         "tiny gravel"
-      ]
+      ],
+      "spatial_envelope": "natural_cavern"
     },
     "underground.stone-gallery": {
       "name": "Underground Stone Gallery",
@@ -644,7 +678,8 @@
       "must_avoid": [
         "dozens of statues",
         "tiny ornaments"
-      ]
+      ],
+      "spatial_envelope": "built_hall_gallery"
     },
     "underground.crude-henhouse": {
       "name": "Improvised Dungeon Henhouse",
@@ -663,7 +698,8 @@
       "must_avoid": [
         "modern chicken wire",
         "farmhouse exterior"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.phylactery-vault": {
       "name": "Deep Phylactery Vault",
@@ -682,7 +718,8 @@
       "must_avoid": [
         "tiny rune wallpaper",
         "treasure clutter"
-      ]
+      ],
+      "spatial_envelope": "compact_built_room"
     },
     "underground.mushroom-hall": {
       "name": "Underground Mushroom Hall",
@@ -699,17 +736,20 @@
         "broad floor"
       ],
       "must_avoid": [
-        "hundreds of tiny mushrooms"
-      ]
+        "hundreds of tiny mushrooms",
+        "built masonry gallery",
+        "cathedral arches"
+      ],
+      "spatial_envelope": "natural_fungal_hall"
     },
     "underground.mine-shaft": {
       "name": "Deep Mine Shaft",
-      "description": "Large excavated vertical or sloping mine passage reinforced by timber and dominated by depth.",
+      "description": "Large excavated mine route where a timber-braced tunnel opens directly into a much deeper shaft, preserving both horizontal confinement and dramatic depth.",
       "visual_cues": [
-        "large timber supports",
-        "deep shaft opening",
-        "ore cart rail",
-        "rough-cut rock wall"
+        "timber-braced tunnel approach",
+        "deep shaft opening at the end or side of the route",
+        "ore cart rail or rail platform crossing the transition",
+        "rough-cut rock walls continuing from tunnel into shaft"
       ],
       "colorable_forms": [
         "large beams",
@@ -717,8 +757,11 @@
         "simple shaft opening"
       ],
       "must_avoid": [
-        "modern elevator machinery"
-      ]
+        "modern elevator machinery",
+        "pure vertical shaft with no tunnel approach",
+        "generic open cavern"
+      ],
+      "spatial_envelope": "mine_tunnel_to_shaft"
     },
     "underground.service-crawlway": {
       "name": "Low Dungeon Service Crawlway",
@@ -752,7 +795,8 @@
         "grand hall scale",
         "dense decorative masonry",
         "generic empty box room"
-      ]
+      ],
+      "spatial_envelope": "low_crawlway"
     },
     "underground.stone-stair": {
       "name": "Dungeon Stone Stair",
@@ -771,7 +815,8 @@
       "must_avoid": [
         "ornate palace staircase",
         "tiny repetitive step detail"
-      ]
+      ],
+      "spatial_envelope": "stair_space"
     },
     "underground.fortified-gate": {
       "name": "Fortified Dungeon Gate",
@@ -790,7 +835,8 @@
       "must_avoid": [
         "delicate palace doorway",
         "modern security door"
-      ]
+      ],
+      "spatial_envelope": "fortified_threshold"
     },
     "underground.collapsed-ceiling-hall": {
       "name": "Collapsed-Ceiling Hall",
@@ -810,7 +856,8 @@
         "hundreds of tiny rubble stones",
         "perfect intact ceiling",
         "generic cave walls"
-      ]
+      ],
+      "spatial_envelope": "collapsed_built_space"
     }
   }
 }

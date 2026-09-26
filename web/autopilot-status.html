@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Ink Bestiary — Autopilot Monitor</title>
+<style>:root{font-family:system-ui,sans-serif;color:#181818;background:#f5f3ee}body{margin:0;padding:24px}.wrap{max-width:1200px;margin:auto}h1{margin:0 0 6px}.muted{color:#666}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.card{background:white;border:1px solid #d8d4cb;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0000000d}.big{font-size:1.5rem;font-weight:700}.ok{color:#176b3a}.bad{color:#a32b24}.warn{color:#9a6700}.canaries{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}.canary img{width:100%;aspect-ratio:3/4;object-fit:contain;background:#fafafa;border:1px solid #ddd}code{word-break:break-all}.bar{height:12px;background:#e6e2d8;border-radius:99px;overflow:hidden}.fill{height:100%;background:#333}pre{white-space:pre-wrap;font-size:.8rem;max-height:180px;overflow:auto}a{color:inherit}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}</style>
+</head><body><div class="wrap">
+<div class="top"><div><h1>Black Ink Bestiary — Autopilot Monitor</h1><div class="muted">Live local view. Refreshes every 5 seconds.</div></div><a href="/">Studio</a></div>
+<div id="summary" class="grid" style="margin-top:18px"></div>
+<div class="card" style="margin-top:12px"><div class="big">Canary progress</div><div id="progressText"></div><div class="bar"><div id="progressFill" class="fill"></div></div></div>
+<h2>Canary Nine</h2><div id="canaries" class="canaries"></div>
+<h2>Latest failures</h2><div id="failures" class="grid"></div>
+</div><script src="/autopilot-status.js"></script></body></html>

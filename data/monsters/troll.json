@@ -4,12 +4,38 @@
   "family": "troll",
   "size": "large",
   "creature_type": "giant humanoid",
-  "visual_identity": {
-    "core_identity": "A tall predatory cave giant with a narrow torso, very long clawed arms, powerful regeneration, and a wary hatred of fire.",
-    "silhouette": "Lanky tall body, long arms reaching near the knees, hunched shoulders, large clawed hands and feet.",
-    "head_features": "Long coarse face, pronounced nose and brow, wide predatory mouth with sharp teeth, deep-set eyes.",
-    "body_shape": "Lean but powerful giant with elongated limbs, broad hands, and slightly stooped posture.",
-    "surface": "Tough uneven skin with sparse wart-like marks; avoid dense scales or fur.",
+  "default_habitats": [
+    "forest",
+    "caves"
+  ],
+  "accuracy_checks": [
+    "body reads lanky rather than ogre-bulky",
+    "arms are distinctly long",
+    "claws are clear",
+    "face is predatory",
+    "fire-wary behavior may read when the page story calls for it",
+    "silhouette remains simple",
+    "head is hornless",
+    "arms hang unusually low toward the knees or ground",
+    "torso is narrow and lanky, never superhero-built"
+  ],
+  "reference": {
+    "image": null,
+    "purpose": "identity_and_anatomy_only",
+    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
+  },
+  "schema_version": 4,
+  "identity_version": 1,
+  "family_profile": "troll",
+  "description": "A large upright humanoid with a deceptively lean but powerful frame, long ungainly legs, a severe hunch, extremely long hanging arms, massive claws, thick bumpy rubbery hide, and coarse messy hair. Its awkward proportions conceal surprising agility and climbing ability.",
+  "behavior_traits": [
+    "predatory stalking",
+    "agile climbing",
+    "hunched upright movement",
+    "persistent pursuit",
+    "wariness around fire"
+  ],
+  "visual_overrides": {
     "signature_gear": [
       "minimal ragged loincloth",
       "simple scavenged belt"
@@ -19,42 +45,9 @@
       "suspicious",
       "feral",
       "fire-wary"
-    ],
-    "must_keep": [
-      "very long arms",
-      "lanky giant proportions",
-      "large claws",
-      "predatory face",
-      "regeneration-friendly tough body"
-    ],
-    "must_avoid": [
-      "ogre belly",
-      "orc armor",
-      "reptilian scales",
-      "cute features",
-      "short arms",
-      "dense skin texture"
     ]
   },
-  "default_habitats": [
-    "cave fire pits",
-    "underground ravines",
-    "damp dungeon chambers"
-  ],
-  "accuracy_checks": [
-    "body reads lanky rather than ogre-bulky",
-    "arms are distinctly long",
-    "claws are clear",
-    "face is predatory",
-    "fire relationship can read visually",
-    "silhouette remains simple"
-  ],
-  "reference": {
-    "image": null,
-    "purpose": "identity_and_anatomy_only",
-    "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  },
-  "schema_version": 2,
-  "identity_version": 1,
-  "family_profile": "troll"
+  "variant_traits": [
+    "troll"
+  ]
 }

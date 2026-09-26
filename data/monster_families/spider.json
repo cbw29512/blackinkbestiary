@@ -29,7 +29,8 @@
       "cartoon smile",
       "dense fur overload"
     ],
-    "limb_structure": "Exactly eight jointed arachnid legs attach to the cephalothorax; no antennae, wings, humanoid arms, mammal paws, or extra limbs."
+    "limb_structure": "Exactly eight jointed arachnid legs attach to the cephalothorax; no antennae, wings, humanoid arms, mammal paws, or extra limbs.",
+    "shape_lock": "Draw one true spider with exactly two main body sections: cephalothorax and abdomen. Exactly eight jointed legs attach only to the cephalothorax, four per side, with fangs and simple spider eyes on the front section. Add no antennae, wings, humanoid arms, mammal muzzle, ears, paws, or ninth limb."
   },
   "accuracy_checks": [
     "eight legs are countable",

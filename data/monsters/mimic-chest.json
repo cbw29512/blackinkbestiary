@@ -5,7 +5,7 @@
   "size": "medium",
   "creature_type": "shapechanging monstrosity",
   "visual_identity": {
-    "core_identity": "A predatory shapechanger disguised as a treasure chest, revealing itself through a toothed lid-mouth, tongue, and organic seams.",
+    "core_identity": "A predatory shapechanger disguised as a wooden chest, revealing itself through a toothed lid-mouth, tongue, and organic seams.",
     "silhouette": "Recognizable chest shape with lid lifted as an upper jaw, box body as lower jaw, and one or two subtle pseudopod forms.",
     "head_features": "The chest itself becomes the head: lid-mouth with irregular teeth and a long tongue, no separate animal skull.",
     "body_shape": "Wooden chest form distorted by flexible organic joints while retaining hinges, boards, and treasure-box proportions.",
@@ -25,8 +25,7 @@
       "recognizable treasure chest",
       "lid as toothed mouth",
       "long tongue",
-      "organic disguise reveal",
-      "vault context"
+      "organic disguise reveal"
     ],
     "must_avoid": [
       "separate monster head",
@@ -35,27 +34,34 @@
       "dense treasure clutter",
       "ornate carving overload",
       "text labels"
-    ]
+    ],
+    "shape_lock": "Draw one complete rectangular treasure chest as the entire creature silhouette. The hinged lid itself forms the upper jaw and the box body forms the lower jaw; tongue and any pseudopod emerge from chest seams only. No separate head, torso, animal legs, or creature body may appear behind or beneath the chest.",
+    "limb_structure": "No separate biological limbs. The chest body remains one object; tongue/pseudopod forms may emerge only from lid, seam, hinge, or panel structure."
   },
   "default_habitats": [
-    "treasure vaults",
-    "dungeon storerooms",
-    "ruined chambers"
+    "underground",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "reads as chest before monster details",
     "mouth transformation is clear",
     "tongue is visible",
-    "reaching hand is near danger zone",
-    "wooden structure remains recognizable",
-    "scene is not cluttered"
+    "wooden structure remains recognizable"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "mimic"
+  "family_profile": "mimic",
+  "description": "A predatory shapechanger disguised as a wooden chest, revealing itself through a toothed lid-mouth, tongue, and organic seams. Wooden chest form distorted by flexible organic joints while retaining hinges, boards, and treasure-box proportions. Wood grain kept minimal; fleshy mouth interior outlined simply without heavy shading.",
+  "behavior_traits": [
+    "object mimicry",
+    "motionless ambush",
+    "adhesive grappling",
+    "sudden biting"
+  ]
 }

@@ -1,0 +1,72 @@
+{
+  "schema_version": 10,
+  "contract_version": "black-ink-quality-scorecard-v10",
+  "canary_page_ids": [
+    "I-01",
+    "I-04",
+    "I-08",
+    "I-10",
+    "I-14",
+    "I-16",
+    "I-19",
+    "I-20",
+    "I-22"
+  ],
+  "required_categories": [
+    "foundation_readiness",
+    "technical_qa_pass_rate",
+    "visual_cleanliness",
+    "semantic_accuracy",
+    "completeness",
+    "print_package_readiness",
+    "locked_page_progress",
+    "replication_readiness"
+  ],
+  "comparison_authority_paths": [
+    "config/quality_scorecard.json",
+    "config/quality_rules.json",
+    "config/coloring_page_standard.json",
+    "config/universal_page_contract.json",
+    "config/universal_monster_contract.json",
+    "config/universal_environment_contract.json",
+    "config/universal_story_contract.json",
+    "config/defect_taxonomy.json",
+    "art_pipeline/png_content_qa.py",
+    "art_pipeline/vision_review_prompts.py",
+    "art_pipeline/quality_history.py",
+    "art_pipeline/replication_probe.py",
+    "art_pipeline/master_engine_guard.py",
+    "art_pipeline/prompt_load.py",
+    "config/kdp_print_standard.json",
+    "config/source_attribution.json",
+    "art_pipeline/qa.py",
+    "art_pipeline/book_assembly.py"
+  ],
+  "metric_policy": {
+    "higher_is_better": true,
+    "comparison_rule": "Only compare snapshots when quality_contract_fingerprint is unchanged.",
+    "book_100_rule": "Every required category must equal 100 and known_blockers must be empty.",
+    "series_score_rule": "Series readiness equals the weakest registered book overall automated readiness; averages may not hide a weak book.",
+    "series_100_rule": "Every registered book must individually satisfy the book_100_rule.",
+    "readiness_floor_rule": "A book readiness floor equals its weakest required category; it must be 100 before the book can be automated 100/100.",
+    "prompt_load_rule": "Prompt-load telemetry is observational until a stable successful canary baseline establishes useful bounds; do not reward shorter prompts automatically.",
+    "foundation_rule": "Foundation Readiness reaches 100 only when runtime, preflight, series audit, active-book structure, and a current same-engine autopilot heartbeat are all healthy.",
+    "review_pipeline_rule": "Image technical QA measures PNG/print technical checks only. Vision-reviewer software failures are reported separately as review_pipeline_health and must not masquerade as image QA regression.",
+    "exact_image_authority_rule": "Local vision-review scores are advisory telemetry only. Visual Cleanliness and Semantic Accuracy pass only from a current exact-image approve/select decision; local pass/score/stage may never satisfy a required readiness metric.",
+    "print_package_rule": "Print Package Readiness requires exact export QA, deterministic safe margin, alternating binding-gutter validation, a configured source-attribution page, generic deterministic assembly, and a reproducible final proof for 100/100."
+  },
+  "replication_readiness_contract": {
+    "score_100_requires": [
+      "new tome created from declared theme and roster through generic manifests and contracts",
+      "page recipes generated and validated without engine code edits",
+      "monster family and environment story behavior supplied by reusable data rather than creature-name engine branches",
+      "technical QA semantic review scoring duplicate detection print safety preview locking and assembly use unchanged paths",
+      "CI covers scaffolded future books",
+      "synthetic next-tome test uses a runtime probe that proves scaffold promotion manifest validation prompt resolution and pre-GPU lint through universal contracts",
+      "master engine separation audit proves core art_pipeline code contains no literal monster IDs, monster names, or production page IDs",
+      "replication-critical generation and canary launch scripts resolve active book, canary set, page counts, and manifest paths from configuration without production book/page literals"
+    ],
+    "creature_specific_data_allowed": true,
+    "creature_name_specific_engine_behavior_allowed": false
+  }
+}

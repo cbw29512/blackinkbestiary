@@ -63,6 +63,14 @@ class PlatformQualityTests(unittest.TestCase):
         self.assertTrue(any("rectangular artwork frame" in item for item in directives))
         self.assertTrue(any("chainmail" in item for item in directives))
 
+    def test_scale_remediation_never_reinflates_small_creatures(self):
+        directives = expand_defect_tags(ROOT, ["monster too small", "monster too large", "composition wrong"])
+        combined = " ".join(directives).lower()
+        self.assertIn("preserve canonical creature size", combined)
+        self.assertIn("never enlarge a tiny/small creature", combined)
+        self.assertNotIn("60–75%", combined)
+        self.assertNotIn("keep one large readable monster", combined)
+
     def test_composition_failure_recommends_regenerate(self):
         self.assertEqual(recommended_action(ROOT, ["composition wrong"]), "regenerate")
         self.assertEqual(recommended_action(ROOT, ["wrong monster identity"]), "regenerate")

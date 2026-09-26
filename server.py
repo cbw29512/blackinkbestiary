@@ -31,6 +31,7 @@ from art_pipeline.monster_catalog import load_monster_for_page
 from art_pipeline.quality_system import expand_defect_tags, review_diagnosis
 from art_pipeline.studio_config import active_book_paths
 from art_pipeline.state_validation import ACTIVE_STATES, assert_valid_state
+from art_pipeline.autopilot_status import public_autopilot_status
 
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
@@ -43,6 +44,7 @@ APPROVED_ROOT = WEB_DIR / "approved"
 MONSTER_DIR = DATA_DIR / "monsters"
 GENERATOR_SCRIPT = ROOT / "scripts" / "generate_current_page.py"
 GENERATOR_LOG = DATA_DIR / "generation-worker.log"
+TEST_GALLERY_STATE = DATA_DIR / "test-gallery-state.json"
 _GENERATION_LOCK = threading.Lock()
 _GENERATION_PROCESS = None
 
@@ -450,6 +452,12 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/generation-status":
                 self.send_json(generation_worker_status())
                 return
+            if path == "/api/autopilot-status":
+                self.send_json(public_autopilot_status())
+                return
+            if path == "/api/test-gallery":
+                self.send_json(read_json(TEST_GALLERY_STATE) if TEST_GALLERY_STATE.exists() else {"results": []})
+                return
             if path == "/api/golden-five":
                 self.send_json(public_calibration_state(ROOT))
                 return
@@ -471,6 +479,25 @@ class Handler(BaseHTTPRequestHandler):
                 if decision in VALID_DECISIONS and result["current_state"]["status"] in GENERATABLE_STATES:
                     result["generation_worker"] = start_generation_worker()
                 self.send_json(result)
+                return
+            if path == "/api/test-gallery/select":
+                if not TEST_GALLERY_STATE.exists():
+                    raise ValueError("Test gallery has not been generated")
+                gallery = read_json(TEST_GALLERY_STATE)
+                page_id = str(payload.get("page_id") or "").strip()
+                candidate = int(payload.get("candidate") or 0)
+                match = next((item for item in gallery.get("results", []) if item.get("page_id") == page_id and int(item.get("candidate") or 0) == candidate and item.get("status") == "ready_for_review"), None)
+                if not match:
+                    raise ValueError("Selected test candidate was not found or did not pass technical QA")
+                gallery.setdefault("selections", {})[page_id] = {
+                    "candidate": candidate,
+                    "image_path": match.get("image_path"),
+                    "seed": match.get("seed"),
+                    "selected_at": utc_now(),
+                }
+                gallery["updated_at"] = utc_now()
+                write_json(TEST_GALLERY_STATE, gallery)
+                self.send_json(gallery)
                 return
             if path == "/api/generate":
                 worker = start_generation_worker()

@@ -35,18 +35,20 @@
       "ornate door clutter",
       "cartoon expression",
       "excess slime"
-    ]
+    ],
+    "shape_lock": "Draw one full rectangular door slab integrated into a doorway as the entire creature body. Keep hinges, frame alignment, and door panels readable; one hidden eye and tongue-handle emerge from existing hardware/panel seams only. No separate monster head, torso, arms, legs, chest body, or freestanding creature silhouette.",
+    "limb_structure": "No separate biological limbs. Eye, tongue, mouth seam, or pseudopod detail must remain integrated into the door slab or its existing hardware while the door stays structurally attached in the opening."
   },
   "default_habitats": [
-    "torch-lit halls",
-    "sealed dungeon rooms",
-    "corridor junctions"
+    "underground",
+    "ruins",
+    "settlements"
   ],
   "accuracy_checks": [
     "door disguise remains convincing",
     "eye is discoverable but clear",
     "tongue handle is obvious",
-    "architecture remains readable",
+    "door form and structural attachment remain readable",
     "mimic does not become unrelated monster",
     "line art stays clean"
   ],
@@ -55,7 +57,17 @@
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "mimic"
+  "family_profile": "mimic",
+  "physical_requirements": [
+    "structural_attachment: disguised door body must occupy a believable supported opening; environment engine chooses the wall, frame, materials, and surrounding room"
+  ],
+  "description": "A predatory shapechanger disguised as a dungeon door, betrayed by a hidden eye, tongue-like handle, and organic warping in the wood. Door slab and frame retain architectural structure while selected panels flex like living tissue. Simple wood panels and iron fittings with sparse organic seams.",
+  "behavior_traits": [
+    "object mimicry",
+    "motionless ambush",
+    "adhesive grappling",
+    "sudden biting"
+  ]
 }

@@ -8,6 +8,7 @@ from pathlib import Path
 
 from comfy_client import ComfyClient, ComfyError
 from prompt_builder import build_prompt, build_supervisor_checklist
+from generation_lint import generation_lint_errors, assert_generation_ready
 from workflow_adapter import load_workflow, prepare_workflow, validate_template
 try:
     from .manifest_validation import validate_manifest
@@ -43,12 +44,17 @@ def current_context():
 
 
 def readiness(comfy_url: str):
+    instruction_snapshot = generation_instruction_snapshot()
     page, page_state = current_context()
     prompt = build_prompt(page, page_state.get("review_notes"))
+    lint_errors = generation_lint_errors(page, prompt, ROOT)
+    if not instruction_snapshot:
+        raise RuntimeError("Universal generation instructions were not reloaded")
     report = {
         "current_page": page["page_id"],
         "monster": page["monster_name"],
-        "prompt_ready": bool(prompt),
+        "prompt_ready": bool(prompt) and not lint_errors,
+        "generation_lint_errors": lint_errors,
         "workflow_file": str(WORKFLOW_FILE),
         "workflow_ready": False,
         "comfy_url": comfy_url,
@@ -81,7 +87,30 @@ def show_prompt():
         print(f"- {item}")
 
 
+def generation_instruction_snapshot() -> dict:
+    """Reload production authority from disk before every page generation."""
+    paths = [
+        ROOT / "config" / "universal_monster_contract.json",
+        ROOT / "config" / "universal_environment_contract.json",
+        ROOT / "config" / "universal_page_contract.json",
+        ROOT / "config" / "coloring_page_standard.json",
+    ]
+    snapshot = {}
+    for path in paths:
+        snapshot[path.name] = {
+            "mtime_ns": path.stat().st_mtime_ns,
+            "content": read_json(path),
+        }
+    return snapshot
+
+
 def submit_one(comfy_url: str, seed: int | None):
+    # Deliberately re-read all universal instructions for every page. Do not
+    # cache these contracts across a batch: edits made after drift is detected
+    # must govern the very next generated page.
+    instruction_snapshot = generation_instruction_snapshot()
+    if not instruction_snapshot:
+        raise RuntimeError("Universal generation instructions were not reloaded")
     page, page_state = current_context()
     if not WORKFLOW_FILE.exists():
         raise SystemExit(
@@ -93,6 +122,7 @@ def submit_one(comfy_url: str, seed: int | None):
         raise SystemExit("Workflow template invalid: " + "; ".join(problems))
 
     prompt = build_prompt(page, page_state.get("review_notes"))
+    assert_generation_ready(page, prompt, ROOT)
     seed = seed if seed is not None else random.randint(1, 2**63 - 1)
     workflow = prepare_workflow(template, prompt=prompt, seed=seed)
 

@@ -65,9 +65,10 @@ No page after the current page enters production until the current page is appro
 
 - **Current page:** I-01
 - **Status:** QUEUED / clean rebuild start
-- **Calibration gate:** Golden Five must pass before mass generation beyond the first production page.
-- **Golden Five:** I-01, I-24, I-27, I-38, I-40.
-- **Isolation rule:** calibration attempts do not advance or lock normal Tome I production state.
+- **Automated batch gate:** the nine-page exact-image canary must reach 9/9 current-hash approvals before the 50-page × 4-candidate gallery can run.
+- **Engine canary:** I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, I-22.
+- **Human calibration lane:** Golden Five remains I-01, I-24, I-27, I-38, I-40 and is isolated from normal Tome I production state.
+- **Isolation rule:** canary/review snapshots and Golden Five calibration attempts do not advance or lock normal Tome I production pages.
 
 ## Existing Reference Art from the Earlier Prototype
 

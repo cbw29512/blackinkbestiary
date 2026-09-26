@@ -31,18 +31,20 @@
       "tentacle octopus form",
       "solid black shading",
       "too many tiny mouths causing clutter"
-    ]
+    ],
+    "limb_structure": "No fixed arms, legs, hands, feet, or single head. The body is one low amorphous crawling mass with soft pseudopod-like lower edges only; mouths and eyes are embedded across the same continuous body.",
+    "shape_lock": "Draw one low irregular mound with no head or skeleton, several distinct mouths and scattered eyes embedded across the same continuous surface, and only soft crawling pseudopod edges at the base. Never organize the features into one face, humanoid torso, octopus, or tentacled head."
   },
   "default_habitats": [
-    "flooded cells",
-    "caverns",
-    "dungeon drains"
+    "underground",
+    "wetlands",
+    "ruins"
   ],
   "accuracy_checks": [
     "multiple mouths are clearly separate",
     "eyes are scattered rather than forming one face",
     "body remains amorphous",
-    "water ripples support movement",
+    "crawling motion remains physically readable",
     "gore stays restrained",
     "negative space remains usable"
   ],
@@ -50,5 +52,40 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "An amorphous crawling aberration formed from a lumpy mass of fleshlike material covered in many unrelated eyes and mouths. Soft shapeless crawling mound with pseudopod-like lower edges, never resolving into humanoid anatomy. Smooth folds with sparse bumps; mouths and eyes provide identity without dense gore.",
+  "behavior_traits": [
+    "slow crawling",
+    "engulfing",
+    "chaotic vocalization",
+    "opportunistic feeding"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium low spreading amorphous mass whose footprint is broader than tall and never resolves into a humanoid body.",
+    "natural_posture": "One continuous body deforms broadly against the ground with mouths and eyes distributed across the same crawling mass.",
+    "behavior_style": [
+      "slow crawling",
+      "engulfing",
+      "chaotic vocalization",
+      "opportunistic feeding"
+    ],
+    "environment_fit": [
+      "underground",
+      "wetlands",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "single_face_drift",
+      "symptom": "eyes and mouths organize into one giant face/head",
+      "correction": "redistribute multiple independent mouths and eyes across the continuous amorphous body"
+    },
+    {
+      "id": "octopus_drift",
+      "symptom": "body becomes a central head with long tentacles",
+      "correction": "remove octopus topology; keep one low shapeless mound with only soft pseudopod-like lower edges"
+    }
+  ]
 }

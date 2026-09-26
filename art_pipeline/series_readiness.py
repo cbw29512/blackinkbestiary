@@ -112,8 +112,14 @@ def audit_series(root: Path) -> dict:
         )
 
     calibration = calibration_report(root)
+    calibration_manifest = str(calibration.get("source_manifest") or "").strip()
+    series_by_id = {book["book_id"]: book for book in series["books"]}
     for row in rows:
-        row["calibration_required"] = row["book_id"] == "TOME-I"
+        book = series_by_id[row["book_id"]]
+        row["calibration_required"] = bool(
+            calibration_manifest
+            and str(book.get("manifest_path") or "").strip() == calibration_manifest
+        )
         row["calibration_complete"] = (
             calibration["production_calibrated"]
             if row["calibration_required"]
