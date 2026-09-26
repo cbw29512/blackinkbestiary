@@ -3,8 +3,8 @@
   "snapshot_engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
-  "candidate_count": 6,
-  "diagnostic_count": 81,
+  "candidate_count": 9,
+  "diagnostic_count": 78,
   "quality_snapshot": "review-previews/quality-current.json",
   "reviewer_disagreement_snapshot": "review-previews/reviewer-disagreement.json",
   "reviewer_disagreement": {
@@ -32,11 +32,11 @@
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "generating",
-    "status": "running",
-    "message": "Pre-GPU snapshot published before canary generation",
+    "phase": "sleeping",
+    "status": "ready",
+    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
     "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
-    "updated_at": "2026-09-26T13:10:33.558478+00:00"
+    "updated_at": "2026-09-26T14:03:59.356888+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
@@ -432,37 +432,137 @@
   "selections": {},
   "candidates": [
     {
-      "review_id": "I-10-C01-H70161a0cd849fc2f",
+      "review_id": "I-01-C01-Hd23c4173d1013bd7",
+      "page_id": "I-01",
+      "monster_name": "Kobold Warrior",
+      "candidate": 1,
+      "selected": false,
+      "seed": 4711314435282367243,
+      "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+      "generation_fingerprint": "f198108d581766ec0aadc01e25ac3ce8a408c8c7dcf013fff7820d00b407f43c",
+      "review_fingerprint": "3c397eff4ba5e3570d82031d11dafbc1a7781384cb53934a79776b5031887b79",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-01-C01.jpg",
+      "source_image": "test-gallery/I-01-C01.png",
+      "source_sha256": "d23c4173d1013bd7ad516d3dd511994aff1acb2805fec506970459ac46d324cf",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "body reads furry/mammalian",
+          "head becomes round and goblin-like",
+          "creature reads adult-human sized"
+        ],
+        "preserve": [
+          "long balancing tail",
+          "lizard-like snout",
+          "narrow shoulders"
+        ],
+        "stage": "identity"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-26T13:27:25.274165+00:00"
+    },
+    {
+      "review_id": "I-04-C01-H92e2ffc7a5705aab",
+      "page_id": "I-04",
+      "monster_name": "Goblin Warrior",
+      "candidate": 1,
+      "selected": false,
+      "seed": 5661930685138766848,
+      "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+      "generation_fingerprint": "0d5d54dddb8e3c140fd6b4c5b030c6a534233361a969369f1577357f920bb93c",
+      "review_fingerprint": "7cf12beccd656e058df160321e5c08bd5ef2675445e05c9e752fe539d2784279",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-04-C01.jpg",
+      "source_image": "test-gallery/I-04-C01.png",
+      "source_sha256": "92e2ffc7a5705aab2c53674ba99212ad5211b6f2160179472ee40b50ca704a6b",
+      "visual_review": null,
+      "advisory_review_status": "unavailable",
+      "advisory_review_error": "Identity reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'no tail or claws', 'gate': 'Canonical body plan reads as: Small narrow torso, thin limbs, oversized pointed ears, slightly hunched or darting posture, large quick hands and feet, sparse hair only.; limbs: Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure.', 'overlap': 1.0}]",
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-26T13:35:20.848064+00:00"
+    },
+    {
+      "review_id": "I-08-C01-Ha85e1b0431244ba4",
+      "page_id": "I-08",
+      "monster_name": "Bugbear Warrior",
+      "candidate": 1,
+      "selected": false,
+      "seed": 5962689561161201162,
+      "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+      "generation_fingerprint": "714ed15c860d511ab34ccb9603da5d014694ab49114f982d2ccc8063aeaecea3",
+      "review_fingerprint": "f5d15941ae7bce6fae5c6df41c9712505985d3dc2d5d6cdb8d7d82e68ea80b92",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-08-C01.jpg",
+      "source_image": "test-gallery/I-08-C01.png",
+      "source_sha256": "a85e1b0431244ba44e81bbf9b3365533672887edfb695af811db61d5976c6bf2",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "face reads primate rather than goblinoid",
+          "torso sculpted like superhero",
+          "arms not visibly below hips",
+          "fur hides anatomy"
+        ],
+        "preserve": [
+          "pointed ears",
+          "bipedal stance",
+          "no horns or tail"
+        ],
+        "stage": "identity"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-26T13:43:05.422261+00:00"
+    },
+    {
+      "review_id": "I-10-C01-H05d49067c5c93abf",
       "page_id": "I-10",
       "monster_name": "Ogre",
       "candidate": 1,
       "selected": false,
-      "seed": 6689952856033404683,
-      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
-      "generation_fingerprint": "d8ee37493a0db27fb83368713de35a7bba2a590371b397ece676ab8bfbbe449c",
-      "review_fingerprint": "5efbb0e220713025a66013950d773317cbd450eb3e28cc57605ff85208ece623",
-      "generation_authority_current": false,
-      "review_authority_current": false,
+      "seed": 6335988782867440294,
+      "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+      "generation_fingerprint": "e9b2fb1655d0ac1c4bbaf49f97ac15744b11893267cc24de1135e1369c9b2287",
+      "review_fingerprint": "250d6046249be02eb03945d893d9c6a97f45b4c1a32dcea6cfab18663ebbda2d",
+      "generation_authority_current": true,
+      "review_authority_current": true,
       "review_checked_at": null,
       "preview": "review-previews/I-10-C01.jpg",
       "source_image": "test-gallery/I-10-C01.png",
-      "source_sha256": "70161a0cd849fc2f04ff4e28e1853251585caf3c33139e8081a7842246f7c8ea",
+      "source_sha256": "05d49067c5c93abf77702f03a29241c128540e81d4c2f74c4e401470f513f0c8",
       "visual_review": {
-        "pass": true,
-        "score": 100,
-        "defects": [],
-        "preserve": [
-          "monster dominates foreground",
-          "stone archway framing",
-          "no decorative frames"
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "no central column or shaft visible"
         ],
-        "stage": "quality"
+        "preserve": [
+          "wedge-shaped treads curving around central axis",
+          "tight curved outer masonry wall",
+          "vertical spiral framing exaggerates cramped radius"
+        ],
+        "stage": "environment"
       },
-      "advisory_review_status": "pass",
+      "advisory_review_status": "needs_work",
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-25T23:13:38.437259+00:00"
+      "finished_at": "2026-09-26T13:50:12.602657+00:00"
     },
     {
       "review_id": "I-14-C01-H208effbf5888f0d1",
@@ -558,54 +658,31 @@
       "finished_at": "2026-09-25T22:03:44.782117+00:00"
     },
     {
-      "review_id": "I-20-C01-Hfab10d3fbb9cbed8",
+      "review_id": "I-20-C01-H796d8ae0886bad94",
       "page_id": "I-20",
       "monster_name": "Giant Centipede",
       "candidate": 1,
       "selected": false,
-      "seed": 5915007285489336901,
-      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
-      "generation_fingerprint": "97e8fd0757bd481f2b643d2f8fec0a2532c7e065c79fc168d61c3672a222f810",
-      "review_fingerprint": "b0803bdc9abea8f90f3018182006533690fd09a08d37b9204148c12f73414c6b",
-      "generation_authority_current": false,
-      "review_authority_current": false,
+      "seed": 4377064124014998179,
+      "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+      "generation_fingerprint": "eea5c1630f1c3cdaa4e30b6fc48174a96ae032220d603cc38127f0c36f582c46",
+      "review_fingerprint": "1e015dd91e55b5b1ff94e51a32aad3a97bc303f0493188c784db999252abb751",
+      "generation_authority_current": true,
+      "review_authority_current": true,
       "review_checked_at": null,
       "preview": "review-previews/I-20-C01.jpg",
       "source_image": "test-gallery/I-20-C01.png",
-      "source_sha256": "fab10d3fbb9cbed837ac4b0994c9473e1f572120df77174241444ead4f336d51",
-      "visual_review": null,
-      "advisory_review_status": "unavailable",
-      "advisory_review_error": "Environment reviewer remained self-contradictory after consistency retry: [{'kind': 'defect_preserve_conflict', 'defect': 'arched burial niches not visible', 'preserve': 'arched burial niches', 'overlap': 1.0}]",
-      "assistant_review": null,
-      "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-26T01:13:16.390134+00:00"
-    },
-    {
-      "review_id": "I-22-C01-H5f66847bb69b5c2b",
-      "page_id": "I-22",
-      "monster_name": "Giant Spider",
-      "candidate": 1,
-      "selected": false,
-      "seed": 3990374931792528782,
-      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
-      "generation_fingerprint": "4e829646dd8f0671177a0865df6f2928614efd055576fbf7efcaf440a957438c",
-      "review_fingerprint": "5e7d1ed26b8ee4bfe2a26f2a1284c730d19013a0f73ce767bb0db12fb15a2023",
-      "generation_authority_current": false,
-      "review_authority_current": false,
-      "review_checked_at": null,
-      "preview": "review-previews/I-22-C01.jpg",
-      "source_image": "test-gallery/I-22-C01.png",
-      "source_sha256": "5f66847bb69b5c2bcede5a1de5919c3b2116d9e425158aa5e98aa59be43e3c45",
+      "source_sha256": "796d8ae0886bad94639a213e5fa06111e538876a95a71ed37dcb8c10a9d0f92f",
       "visual_review": {
         "pass": false,
         "score": 49,
         "defects": [
-          "Webbed Dungeon Hall not visible; no arches or masonry"
+          "arched burial niches not visible"
         ],
         "preserve": [
-          "giant spider center",
-          "open floor lane",
-          "radial web spans"
+          "stone walls",
+          "arched passageway",
+          "centipede uncoiling around niche"
         ],
         "stage": "environment"
       },
@@ -613,7 +690,42 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-25T23:04:46.317112+00:00"
+      "finished_at": "2026-09-26T14:00:43.764107+00:00"
+    },
+    {
+      "review_id": "I-22-C01-Hfe3224f4e7897816",
+      "page_id": "I-22",
+      "monster_name": "Giant Spider",
+      "candidate": 1,
+      "selected": false,
+      "seed": 6514565452223536913,
+      "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+      "generation_fingerprint": "4f10aace196ee6d046813ca7164e9e17d91a8bf88dc871a576d310f67c710e31",
+      "review_fingerprint": "fe9f98f4ae0078bf04f931a105e2bb0a0c50f7e9cdd56ccc67d591a20bbb26c4",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-22-C01.jpg",
+      "source_image": "test-gallery/I-22-C01.png",
+      "source_sha256": "fe3224f4e78978164af3773efca98a74bd29fdf03e1004fe9e646fd4e1f85557",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "no masonry arches visible"
+        ],
+        "preserve": [
+          "web spans form radial pattern",
+          "spider centered on web",
+          "open floor area beneath web"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-26T14:03:59.235164+00:00"
     }
   ],
   "diagnostics": [
@@ -2794,51 +2906,6 @@
         "decision": "reject",
         "notes": "Reject: spider anatomy is close, but the page does not clearly read as a web-filled dungeon hall; keep exactly eight legs while making the stone hall/arch unmistakable and the spider visibly supported at the web center."
       }
-    },
-    {
-      "page_id": "I-01",
-      "monster_name": "Kobold Warrior",
-      "candidate": 1,
-      "status": "failed",
-      "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
-      "generation_fingerprint": "f198108d581766ec0aadc01e25ac3ce8a408c8c7dcf013fff7820d00b407f43c",
-      "review_fingerprint": "3c397eff4ba5e3570d82031d11dafbc1a7781384cb53934a79776b5031887b79",
-      "review_checked_at": null,
-      "error": "Command failed (1): C:\\Users\\divcl\\Desktop\\blackinkbestiary\\.blackink-tools\\Scripts\\comfy.exe --json --where local run --workflow C:\\Users\\divcl\\Desktop\\blackinkbestiary\\art_pipeline\\workflows\\official\\test_i-01_c01.json --wait --host 127.0.0.1 --port 8188\n{\"schema\": \"envelope/1\", \"type\": \"envelope\", \"ok\": false, \"command\": \"run\", \"version\": \"1.20.0\", \"where\": \"local\", \"data\": null, \"error\": {\"code\": \"ws_timeout\", \"message\": \"WebSocket timed out after 120s waiting for server response.\", \"hint\": \"re-run with a larger --timeout (e.g. --timeout 300)\", \"details\": {\"timeout\": 120, \"prompt_id\": \"b83c8d99-08cd-4763-b558-638857efd439\"}}}",
-      "started_at": "2026-09-26T12:53:14.950053+00:00",
-      "finished_at": "2026-09-26T12:57:04.486490+00:00",
-      "visual_review": null,
-      "assistant_review": null
-    },
-    {
-      "page_id": "I-04",
-      "monster_name": "Goblin Warrior",
-      "candidate": 1,
-      "status": "failed",
-      "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
-      "generation_fingerprint": "e04d37112d7d33ba2844421aa004b5cfc372784e0302bf615d2723abc0eec61c",
-      "review_fingerprint": "193548ff8de636ca24e150e757df54bf4df80757d9969228ef8546bc58aba4ae",
-      "review_checked_at": null,
-      "error": "Command failed (1): C:\\Users\\divcl\\Desktop\\blackinkbestiary\\.blackink-tools\\Scripts\\comfy.exe --json --where local run --workflow C:\\Users\\divcl\\Desktop\\blackinkbestiary\\art_pipeline\\workflows\\official\\test_i-04_c01.json --wait --host 127.0.0.1 --port 8188\n{\"schema\": \"envelope/1\", \"type\": \"envelope\", \"ok\": false, \"command\": \"run\", \"version\": \"1.20.0\", \"where\": \"local\", \"data\": null, \"error\": {\"code\": \"ws_timeout\", \"message\": \"WebSocket timed out after 120s waiting for server response.\", \"hint\": \"re-run with a larger --timeout (e.g. --timeout 300)\", \"details\": {\"timeout\": 120, \"prompt_id\": \"0d1206eb-77a6-4f2d-8efb-799f2f796392\"}}}",
-      "started_at": "2026-09-26T12:57:04.635659+00:00",
-      "finished_at": "2026-09-26T13:02:31.279418+00:00",
-      "visual_review": null,
-      "assistant_review": null
-    },
-    {
-      "page_id": "I-08",
-      "monster_name": "Bugbear Warrior",
-      "candidate": 1,
-      "status": "failed",
-      "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
-      "generation_fingerprint": "714ed15c860d511ab34ccb9603da5d014694ab49114f982d2ccc8063aeaecea3",
-      "review_fingerprint": "f5d15941ae7bce6fae5c6df41c9712505985d3dc2d5d6cdb8d7d82e68ea80b92",
-      "review_checked_at": null,
-      "error": "Command failed (1): C:\\Users\\divcl\\Desktop\\blackinkbestiary\\.blackink-tools\\Scripts\\comfy.exe --json --where local run --workflow C:\\Users\\divcl\\Desktop\\blackinkbestiary\\art_pipeline\\workflows\\official\\test_i-08_c01.json --wait --host 127.0.0.1 --port 8188\n{\"schema\": \"envelope/1\", \"type\": \"envelope\", \"ok\": false, \"command\": \"run\", \"version\": \"1.20.0\", \"where\": \"local\", \"data\": null, \"error\": {\"code\": \"ws_timeout\", \"message\": \"WebSocket timed out after 120s waiting for server response.\", \"hint\": \"re-run with a larger --timeout (e.g. --timeout 300)\", \"details\": {\"timeout\": 120, \"prompt_id\": \"8ffc44cb-169b-4b48-be75-51c99928e15f\"}}}",
-      "started_at": "2026-09-26T13:02:31.450073+00:00",
-      "finished_at": "2026-09-26T13:04:41.205694+00:00",
-      "visual_review": null,
-      "assistant_review": null
     }
   ]
 }
