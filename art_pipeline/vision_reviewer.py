@@ -268,6 +268,74 @@ def _normalize_gate_echoes(verdict: dict, prompt: str) -> dict:
     return verdict
 
 
+def _stage_required_evidence(page: dict, stage: str) -> list[str]:
+    variant = page.get("environment_variant") or {}
+    physicality = page.get("physicality") or {}
+    if stage == "environment":
+        return [
+            value for value in (
+                str(page.get("habitat") or "").strip(),
+                str(variant.get("landmark") or "").strip(),
+                str(variant.get("framing") or "").strip(),
+            )
+            if value
+        ]
+    if stage == "action":
+        return [
+            value for value in (
+                str(page.get("moment") or "").strip(),
+                str(variant.get("interaction") or "").strip(),
+                str(physicality.get("support") or "").strip(),
+                str(physicality.get("motion") or "").strip(),
+            )
+            if value
+        ]
+    return []
+
+
+def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[str]:
+    if not verdict.get("pass"):
+        return []
+    required = _stage_required_evidence(page, stage)
+    if len(required) < 2:
+        return []
+
+    preserve = [str(item).strip() for item in verdict.get("preserve") or [] if str(item).strip()]
+    matched = []
+    for requirement in required:
+        if any(_semantic_overlap(requirement, evidence) >= 0.25 for evidence in preserve):
+            matched.append(requirement)
+
+    if len(matched) >= 2:
+        return []
+    missing = [item for item in required if item not in matched]
+    return missing[:2]
+
+
+def _evidence_retry_prompt(prompt: str, stage: str, missing: list[str]) -> str:
+    return (
+        prompt
+        + "\n\nPASS EVIDENCE RETRY — REINSPECT THE IMAGE.\n"
+        + f"Your prior {stage} PASS did not provide concrete visible evidence for enough page-specific gates. "
+          "Do not assume the requested recipe is present. Either name literal visible proof in preserve or FAIL with a visible defect.\n"
+        + "Unverified required facts:\n- "
+        + "\n- ".join(missing)
+    )
+
+
+def _fail_unverified_pass(verdict: dict, stage: str, missing: list[str]) -> dict:
+    failed = dict(verdict)
+    failed["pass"] = False
+    failed["score"] = min(int(failed.get("score") or 49), 49)
+    failed["stage"] = stage
+    label = stage.capitalize()
+    failed["defects"] = [
+        f"{label} proof not explicitly verified: {item}"[:80]
+        for item in missing[:2]
+    ]
+    return failed
+
+
 def _run_gate(url: str, settings: dict, encoded: str, prompt: str, stage: str) -> dict:
     verdict = _parse_verdict(_request(url, _payload(settings, prompt, encoded)), stage)
     issues = _verdict_consistency_issues(verdict, prompt)
@@ -311,6 +379,19 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
     )
     for stage, prompt in gates:
         verdict = _run_gate(url, settings, encoded, prompt, stage)
+        stage_id = stage.lower()
+        missing = _stage_pass_evidence_issues(page, stage_id, verdict)
+        if missing:
+            verdict = _run_gate(
+                url,
+                settings,
+                encoded,
+                _evidence_retry_prompt(prompt, stage_id, missing),
+                stage,
+            )
+            missing = _stage_pass_evidence_issues(page, stage_id, verdict)
+            if missing:
+                verdict = _fail_unverified_pass(verdict, stage_id, missing)
         if not verdict["pass"]:
             return verdict
     return verdict
