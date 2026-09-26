@@ -5,9 +5,11 @@ import re
 from pathlib import Path
 
 try:
+    from .defect_taxonomy import classify_text
     from .monster_catalog import load_monster_for_page
     from .page_contract import resolve_page_spec
 except ImportError:
+    from defect_taxonomy import classify_text
     from monster_catalog import load_monster_for_page
     from page_contract import resolve_page_spec
 
@@ -308,6 +310,56 @@ def _historical_rejection_text(page_id: str) -> str:
         return ""
 
 
+def _historical_rejection_codes(page_id: str) -> set[str]:
+    try:
+        path = ROOT / "review-previews" / "decisions.json"
+        if not path.exists() or not page_id:
+            return set()
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        codes: set[str] = set()
+        for row in payload.get("reviews", []):
+            if (
+                str(row.get("page_id") or "") != page_id
+                or str(row.get("decision") or "").lower() != "reject"
+            ):
+                continue
+            codes.update(classify_text(str(row.get("notes") or "")))
+        codes.discard("UNCLASSIFIED")
+        return codes
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return set()
+
+
+def _historical_scene_failure_lock(page: dict) -> str:
+    """Re-emphasize authoritative page facts after repeated scene-proof failures."""
+    codes = _historical_rejection_codes(str(page.get("page_id") or ""))
+    if not codes.intersection({"ENVIRONMENT_GENERIC", "ACTION_UNCLEAR"}):
+        return ""
+
+    variant = page.get("environment_variant") or {}
+    physicality = page.get("physicality") or {}
+    parts = []
+    if "ACTION_UNCLEAR" in codes:
+        parts.append(
+            "ACTION PROOF HAS FAILED BEFORE — preserve the existing recipe exactly: "
+            f"visible action={page.get('moment', '')}; "
+            f"interaction={variant.get('interaction', '')}; "
+            f"support/contact={physicality.get('support', '')}; "
+            f"motion/weight={physicality.get('motion', '')}. "
+            "The required verb/contact must read at thumbnail size; do not substitute standing, posing, holding, or proximity."
+        )
+    if "ENVIRONMENT_GENERIC" in codes:
+        parts.append(
+            "ENVIRONMENT PROOF HAS FAILED BEFORE — preserve the existing environment authority exactly: "
+            f"habitat={page.get('habitat', '')}; "
+            f"landmark={variant.get('landmark', '')}; "
+            f"framing={variant.get('framing', '')}; "
+            f"interaction={variant.get('interaction', '')}. "
+            "Large structural geometry must prove the named place before decorative detail."
+        )
+    return "HISTORICAL SCENE FAILURE LOCK — NON-NEGOTIABLE: " + " ".join(parts)
+
+
 def _priority_failure_lines(page: dict, spec: dict, review_notes: dict | None) -> list[str]:
     """Rank known failure modes by current/historical evidence without promoting raw notes to authority."""
     modes = [
@@ -440,6 +492,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         ),
         recovery_lock,
         "IDENTITY — HIGHEST PRIORITY:\n" + "\n".join(f"- {x}" for x in identity_lines if x and not x.endswith(":")),
+        _historical_scene_failure_lock(page),
     ]
 
     if identity_focus_mode:
