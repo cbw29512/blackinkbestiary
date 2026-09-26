@@ -577,6 +577,9 @@ def main() -> int:
                             "status": "advisory_review_unavailable",
                             "error": str(exc),
                         }))
+                        refreshed_review = None
+                    if refreshed_review is None:
+                        continue
                     prior["visual_review"] = refreshed_review
                     prior["review_fingerprint"] = current_review_fingerprint
                     prior["review_checked_at"] = utc_now()
