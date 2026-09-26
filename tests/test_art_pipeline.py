@@ -719,6 +719,22 @@ class QATests(unittest.TestCase):
         self.assertIn("gorilla, ape-man, or primate", text)
         self.assertIn("CORRECTION:", text)
 
+    def test_review_history_prioritizes_kobold_dragonborn_drift_lock(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-01")
+        prompt = build_prompt(page)
+
+        self.assertIn("body becomes adult-human sized, broad-chested, muscular, dragonborn-like", prompt)
+        self.assertIn("shrink to obvious 2–3-foot scale", prompt)
+
+    def test_review_history_prioritizes_goblin_heroic_bulk_and_demon_locks(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
+        prompt = build_prompt(page)
+
+        self.assertIn("body becomes upright, broad-chested, bodybuilder-like", prompt)
+        self.assertIn("horns, tail, claws, or imp-like demonic anatomy appears", prompt)
+
     def test_repeated_identity_failure_uses_reduced_identity_first_prompt(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
