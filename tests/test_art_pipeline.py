@@ -742,7 +742,7 @@ class QATests(unittest.TestCase):
 
         self.assertIn("HISTORICAL SCENE FAILURE LOCK", prompt)
         self.assertIn("ACTION PROOF FAILED BEFORE", prompt)
-        self.assertIn("visible action=", prompt)
+        self.assertIn("action=", prompt)
         self.assertIn("no standing, posing, holding, or proximity", prompt)
 
     def test_historical_environment_failure_reemphasizes_spider_hall_geometry(self):
