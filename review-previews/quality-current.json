@@ -2,13 +2,13 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
-  "measured_at": "2026-09-26T13:02:42.182414+00:00",
-  "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
+  "measured_at": "2026-09-26T13:04:51.372815+00:00",
+  "engine_commit": "8c03deaf81ff228f0e1e8f53767ed3a63cdd070d",
   "active_book_id": "TOME-I",
   "metrics": {
-    "foundation_readiness": 80.0,
-    "technical_qa_pass_rate": 77.8,
-    "review_pipeline_health": 77.8,
+    "foundation_readiness": 100.0,
+    "technical_qa_pass_rate": 66.7,
+    "review_pipeline_health": 66.7,
     "visual_cleanliness": 0.0,
     "semantic_accuracy": 0.0,
     "completeness": 100.0,
@@ -16,20 +16,20 @@
     "locked_page_progress": 0.0,
     "replication_readiness": 100.0
   },
-  "overall_automated_readiness": 54.7,
+  "overall_automated_readiness": 55.8,
   "readiness_floor": 0.0,
-  "series_score": 32.5,
+  "series_score": 35.0,
   "series_readiness_floor": 0.0,
   "series_automated_100": false,
   "canary": {
     "total": 9,
-    "technical_passes": 7,
-    "review_pipeline_passes": 7,
+    "technical_passes": 6,
+    "review_pipeline_passes": 6,
     "visual_passes": 0,
     "semantic_passes": 0,
     "all_passes": 0,
-    "technical_qa": 77.8,
-    "review_pipeline_health": 77.8,
+    "technical_qa": 66.7,
+    "review_pipeline_health": 66.7,
     "visual_cleanliness": 0.0,
     "semantic_accuracy": 0.0,
     "all_automated_gates": 0.0,
@@ -62,14 +62,14 @@
       },
       {
         "page_id": "I-08",
-        "status": "awaiting_exact_image_review",
-        "technical_pass": true,
-        "review_pipeline_pass": true,
+        "status": "failed",
+        "technical_pass": false,
+        "review_pipeline_pass": false,
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "identity",
-        "visual_score": 49,
+        "visual_stage": null,
+        "visual_score": null,
         "local_visual_advisory_pass": false,
         "assistant_decision": null
       },
@@ -155,11 +155,11 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 28,
-    "refinement_passes": 19,
+    "gpu_attempts": 24,
+    "refinement_passes": 15,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 3.11,
+    "avg_gpu_attempts_per_page": 2.67,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -168,10 +168,10 @@
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 10766.7,
-    "generation_chars_max": 11475,
-    "generation_words_avg": 1522.2,
-    "generation_words_max": 1610,
+    "generation_chars_avg": 10577.1,
+    "generation_chars_max": 11332,
+    "generation_words_avg": 1497.6,
+    "generation_words_max": 1597,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
       "hard_max_chars": 14000,
@@ -197,8 +197,8 @@
       {
         "page_id": "I-01",
         "generation": {
-          "chars": 11475,
-          "words": 1610,
+          "chars": 11332,
+          "words": 1597,
           "nonempty_lines": 64,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -244,8 +244,8 @@
       {
         "page_id": "I-04",
         "generation": {
-          "chars": 10949,
-          "words": 1541,
+          "chars": 10824,
+          "words": 1529,
           "nonempty_lines": 64,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -291,8 +291,8 @@
       {
         "page_id": "I-08",
         "generation": {
-          "chars": 10874,
-          "words": 1530,
+          "chars": 10804,
+          "words": 1524,
           "nonempty_lines": 63,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -338,9 +338,9 @@
       {
         "page_id": "I-10",
         "generation": {
-          "chars": 10725,
-          "words": 1510,
-          "nonempty_lines": 60,
+          "chars": 9991,
+          "words": 1411,
+          "nonempty_lines": 59,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -526,8 +526,8 @@
       {
         "page_id": "I-20",
         "generation": {
-          "chars": 10192,
-          "words": 1448,
+          "chars": 10250,
+          "words": 1456,
           "nonempty_lines": 64,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -573,9 +573,9 @@
       {
         "page_id": "I-22",
         "generation": {
-          "chars": 10459,
-          "words": 1495,
-          "nonempty_lines": 65,
+          "chars": 9767,
+          "words": 1395,
+          "nonempty_lines": 64,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -628,9 +628,9 @@
       "recipe_ready": 50,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
-        "technical_qa_pass_rate": 77.8,
-        "review_pipeline_health": 77.8,
+        "foundation_readiness": 100.0,
+        "technical_qa_pass_rate": 66.7,
+        "review_pipeline_health": 66.7,
         "visual_cleanliness": 0.0,
         "semantic_accuracy": 0.0,
         "completeness": 100.0,
@@ -638,13 +638,12 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 54.7,
+      "overall_automated_readiness": 55.8,
       "readiness_floor": 0.0,
       "weakest_metric": "visual_cleanliness",
       "missing_required_categories": [],
       "known_blockers": [
-        "UNCLASSIFIED",
-        "ACTION_UNCLEAR"
+        "UNCLASSIFIED"
       ],
       "automated_100": false
     },
@@ -656,7 +655,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
+        "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -666,7 +665,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 32.5,
+      "overall_automated_readiness": 35.0,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -681,7 +680,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
+        "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -691,7 +690,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 32.5,
+      "overall_automated_readiness": 35.0,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -706,7 +705,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
+        "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -716,7 +715,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 32.5,
+      "overall_automated_readiness": 35.0,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -731,7 +730,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
+        "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -741,7 +740,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 32.5,
+      "overall_automated_readiness": 35.0,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -756,7 +755,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
+        "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -766,7 +765,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 32.5,
+      "overall_automated_readiness": 35.0,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -781,7 +780,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
+        "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -791,7 +790,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 32.5,
+      "overall_automated_readiness": 35.0,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -806,7 +805,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 80.0,
+        "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -816,7 +815,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 32.5,
+      "overall_automated_readiness": 35.0,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -829,7 +828,7 @@
     "engine_preflight_passed": true,
     "series_audit_green": true,
     "active_book_structure_valid": true,
-    "autopilot_heartbeat_current": false
+    "autopilot_heartbeat_current": true
   },
   "print_package": {
     "score": 80,
@@ -893,8 +892,7 @@
     }
   },
   "defect_counts": {
-    "UNCLASSIFIED": 8,
-    "ACTION_UNCLEAR": 1
+    "UNCLASSIFIED": 9
   },
   "historical_defect_counts": {
     "IDENTITY_HEROIC_BULK": 33,
@@ -902,9 +900,9 @@
     "IDENTITY_WRONG_CREATURE": 26,
     "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
-    "UNCLASSIFIED": 11,
-    "ACTION_UNCLEAR": 7,
+    "UNCLASSIFIED": 12,
     "SWARM_WALLPAPER": 7,
+    "ACTION_UNCLEAR": 6,
     "ENVIRONMENT_GENERIC": 6,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
@@ -1205,55 +1203,6 @@
       ]
     },
     {
-      "defect_code": "ACTION_UNCLEAR",
-      "label": "Action/story beat unclear",
-      "evidence_count": 11,
-      "distinct_pages": 3,
-      "distinct_families": 3,
-      "scope": [
-        "master_engine",
-        "page_recipe"
-      ],
-      "master_engine_lesson": "Require visible verb/contact/cause-and-effect proof rather than proximity.",
-      "monster_family_lesson": null,
-      "page_recipe_lesson": "Clarify the unique action relationship in the page recipe.",
-      "priority": "high",
-      "auto_apply": false,
-      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
-      "examples": [
-        {
-          "page_id": "I-18",
-          "candidate": 1,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
-          ]
-        },
-        {
-          "page_id": "I-18",
-          "candidate": 2,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
-          ]
-        },
-        {
-          "page_id": "I-18",
-          "candidate": 3,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
-          ]
-        }
-      ]
-    },
-    {
       "defect_code": "SWARM_WALLPAPER",
       "label": "Swarm wallpaper density",
       "evidence_count": 7,
@@ -1298,6 +1247,55 @@
           "stage": null,
           "evidence_text": [
             "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
+          ]
+        }
+      ]
+    },
+    {
+      "defect_code": "ACTION_UNCLEAR",
+      "label": "Action/story beat unclear",
+      "evidence_count": 6,
+      "distinct_pages": 2,
+      "distinct_families": 2,
+      "scope": [
+        "master_engine",
+        "page_recipe"
+      ],
+      "master_engine_lesson": "Require visible verb/contact/cause-and-effect proof rather than proximity.",
+      "monster_family_lesson": null,
+      "page_recipe_lesson": "Clarify the unique action relationship in the page recipe.",
+      "priority": "high",
+      "auto_apply": false,
+      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
+      "examples": [
+        {
+          "page_id": "I-18",
+          "candidate": 1,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        },
+        {
+          "page_id": "I-18",
+          "candidate": 2,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        },
+        {
+          "page_id": "I-18",
+          "candidate": 3,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
           ]
         }
       ]
@@ -1463,17 +1461,16 @@
     }
   },
   "status_counts": {
-    "awaiting_exact_image_review": 7,
-    "failed": 2
+    "awaiting_exact_image_review": 6,
+    "failed": 3
   },
   "historical_status_counts": {
     "assistant_rejected": 78,
-    "awaiting_exact_image_review": 7,
-    "failed": 2
+    "awaiting_exact_image_review": 6,
+    "failed": 3
   },
   "known_blockers": [
-    "UNCLASSIFIED",
-    "ACTION_UNCLEAR"
+    "UNCLASSIFIED"
   ],
-  "measurement_fingerprint": "93c4f4c2cc7a0ab0ec94cee3a98058d364953c134407f523d73b3cb1cd13e90b"
+  "measurement_fingerprint": "6fcc5fc277ec59d746e0bbcbedf34db0267bfd4b7a3c5b2c4b7ec1bb68aa3714"
 }

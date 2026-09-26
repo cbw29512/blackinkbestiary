@@ -1,10 +1,10 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
+  "snapshot_engine_commit": "8c03deaf81ff228f0e1e8f53767ed3a63cdd070d",
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
-  "candidate_count": 7,
-  "diagnostic_count": 80,
+  "candidate_count": 6,
+  "diagnostic_count": 81,
   "quality_snapshot": "review-previews/quality-current.json",
   "reviewer_disagreement_snapshot": "review-previews/reviewer-disagreement.json",
   "reviewer_disagreement": {
@@ -33,10 +33,10 @@
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
     "phase": "sleeping",
-    "status": "degraded",
-    "message": "Generation reported an error; diagnostics published before retry",
-    "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
-    "updated_at": "2026-09-26T13:02:31.400012+00:00"
+    "status": "ready",
+    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
+    "engine_commit": "8c03deaf81ff228f0e1e8f53767ed3a63cdd070d",
+    "updated_at": "2026-09-26T13:04:41.840161+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
@@ -432,44 +432,6 @@
   "selections": {},
   "candidates": [
     {
-      "review_id": "I-08-C01-H9e77ed4c7471b250",
-      "page_id": "I-08",
-      "monster_name": "Bugbear Warrior",
-      "candidate": 1,
-      "selected": false,
-      "seed": 1408709477773409154,
-      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
-      "generation_fingerprint": "efc611781f01d66ae69c112ed00bd8dcf5ac52a5c5f66bd08294c5829b42a874",
-      "review_fingerprint": "e6592c461b1b37d3c571a00893f3dfae8e15910348ab5c67bbc81cd9223ce215",
-      "generation_authority_current": false,
-      "review_authority_current": false,
-      "review_checked_at": null,
-      "preview": "review-previews/I-08-C01.jpg",
-      "source_image": "test-gallery/I-08-C01.png",
-      "source_sha256": "9e77ed4c7471b250973434ac4670a2ebdb2be155d3c8643cad22448cdbae5418",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "face reads primate rather than goblinoid",
-          "torso sculpted like superhero",
-          "arms not visibly below hips",
-          "fur hides anatomy"
-        ],
-        "preserve": [
-          "pointed ears",
-          "bipedal stance",
-          "no horns or tail"
-        ],
-        "stage": "identity"
-      },
-      "advisory_review_status": "needs_work",
-      "advisory_review_error": null,
-      "assistant_review": null,
-      "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-25T21:37:18.103013+00:00"
-    },
-    {
       "review_id": "I-10-C01-H70161a0cd849fc2f",
       "page_id": "I-10",
       "monster_name": "Ogre",
@@ -479,7 +441,7 @@
       "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
       "generation_fingerprint": "d8ee37493a0db27fb83368713de35a7bba2a590371b397ece676ab8bfbbe449c",
       "review_fingerprint": "5efbb0e220713025a66013950d773317cbd450eb3e28cc57605ff85208ece623",
-      "generation_authority_current": false,
+      "generation_authority_current": true,
       "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-10-C01.jpg",
@@ -605,7 +567,7 @@
       "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
       "generation_fingerprint": "97e8fd0757bd481f2b643d2f8fec0a2532c7e065c79fc168d61c3672a222f810",
       "review_fingerprint": "b0803bdc9abea8f90f3018182006533690fd09a08d37b9204148c12f73414c6b",
-      "generation_authority_current": false,
+      "generation_authority_current": true,
       "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-20-C01.jpg",
@@ -628,7 +590,7 @@
       "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
       "generation_fingerprint": "4e829646dd8f0671177a0865df6f2928614efd055576fbf7efcaf440a957438c",
       "review_fingerprint": "5e7d1ed26b8ee4bfe2a26f2a1284c730d19013a0f73ce767bb0db12fb15a2023",
-      "generation_authority_current": false,
+      "generation_authority_current": true,
       "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-22-C01.jpg",
@@ -2860,6 +2822,21 @@
       "error": "Command failed (1): C:\\Users\\divcl\\Desktop\\blackinkbestiary\\.blackink-tools\\Scripts\\comfy.exe --json --where local run --workflow C:\\Users\\divcl\\Desktop\\blackinkbestiary\\art_pipeline\\workflows\\official\\test_i-04_c01.json --wait --host 127.0.0.1 --port 8188\n{\"schema\": \"envelope/1\", \"type\": \"envelope\", \"ok\": false, \"command\": \"run\", \"version\": \"1.20.0\", \"where\": \"local\", \"data\": null, \"error\": {\"code\": \"ws_timeout\", \"message\": \"WebSocket timed out after 120s waiting for server response.\", \"hint\": \"re-run with a larger --timeout (e.g. --timeout 300)\", \"details\": {\"timeout\": 120, \"prompt_id\": \"0d1206eb-77a6-4f2d-8efb-799f2f796392\"}}}",
       "started_at": "2026-09-26T12:57:04.635659+00:00",
       "finished_at": "2026-09-26T13:02:31.279418+00:00",
+      "visual_review": null,
+      "assistant_review": null
+    },
+    {
+      "page_id": "I-08",
+      "monster_name": "Bugbear Warrior",
+      "candidate": 1,
+      "status": "failed",
+      "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
+      "generation_fingerprint": "714ed15c860d511ab34ccb9603da5d014694ab49114f982d2ccc8063aeaecea3",
+      "review_fingerprint": "f5d15941ae7bce6fae5c6df41c9712505985d3dc2d5d6cdb8d7d82e68ea80b92",
+      "review_checked_at": null,
+      "error": "Command failed (1): C:\\Users\\divcl\\Desktop\\blackinkbestiary\\.blackink-tools\\Scripts\\comfy.exe --json --where local run --workflow C:\\Users\\divcl\\Desktop\\blackinkbestiary\\art_pipeline\\workflows\\official\\test_i-08_c01.json --wait --host 127.0.0.1 --port 8188\n{\"schema\": \"envelope/1\", \"type\": \"envelope\", \"ok\": false, \"command\": \"run\", \"version\": \"1.20.0\", \"where\": \"local\", \"data\": null, \"error\": {\"code\": \"ws_timeout\", \"message\": \"WebSocket timed out after 120s waiting for server response.\", \"hint\": \"re-run with a larger --timeout (e.g. --timeout 300)\", \"details\": {\"timeout\": 120, \"prompt_id\": \"8ffc44cb-169b-4b48-be75-51c99928e15f\"}}}",
+      "started_at": "2026-09-26T13:02:31.450073+00:00",
+      "finished_at": "2026-09-26T13:04:41.205694+00:00",
       "visual_review": null,
       "assistant_review": null
     }
