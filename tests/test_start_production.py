@@ -38,6 +38,8 @@ class StartProductionContractTests(unittest.TestCase):
         remover = (ROOT / "DISABLE_AUTOPILOT_STARTUP.bat").read_text(encoding="utf-8")
 
         self.assertIn("Get-CimInstance Win32_Process", starter)
+        self.assertIn(" | Where-Object ", starter)
+        self.assertNotIn(" ^| Where-Object ", starter)
         self.assertIn("RUN_ENGINE_AUTOPILOT", starter)
         self.assertIn("start \"Black Ink Bestiary Autopilot\"", starter)
         self.assertIn("Microsoft\\Windows\\Start Menu\\Programs\\Startup", installer)
