@@ -303,8 +303,13 @@ def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[s
     preserve = [str(item).strip() for item in verdict.get("preserve") or [] if str(item).strip()]
     matched = []
     for requirement in required:
-        if any(_semantic_overlap(requirement, evidence) >= 0.25 for evidence in preserve):
-            matched.append(requirement)
+        requirement_tokens = _semantic_tokens(requirement)
+        for evidence in preserve:
+            evidence_tokens = _semantic_tokens(evidence)
+            shared = requirement_tokens & evidence_tokens
+            if len(shared) >= 2 and _semantic_overlap(requirement, evidence) >= 0.25:
+                matched.append(requirement)
+                break
 
     if len(matched) >= 2:
         return []
