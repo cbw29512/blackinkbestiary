@@ -32,6 +32,18 @@ class StartProductionContractTests(unittest.TestCase):
             self.assertIn("ensure_local_ai.ps1", text)
             self.assertIn("powershell -NoProfile -ExecutionPolicy Bypass", text)
 
+    def test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates(self):
+        starter = (ROOT / "START_AUTOPILOT_IF_NEEDED.bat").read_text(encoding="utf-8")
+        installer = (ROOT / "ENABLE_AUTOPILOT_STARTUP.bat").read_text(encoding="utf-8")
+        remover = (ROOT / "DISABLE_AUTOPILOT_STARTUP.bat").read_text(encoding="utf-8")
+
+        self.assertIn("Get-CimInstance Win32_Process", starter)
+        self.assertIn("RUN_ENGINE_AUTOPILOT", starter)
+        self.assertIn("start \"Black Ink Bestiary Autopilot\"", starter)
+        self.assertIn("Microsoft\\Windows\\Start Menu\\Programs\\Startup", installer)
+        self.assertIn("START_AUTOPILOT_IF_NEEDED.bat", installer)
+        self.assertIn("BlackInkBestiaryAutopilot.cmd", remover)
+
     def test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight(self):
         text = (ROOT / "scripts" / "ensure_local_ai.ps1").read_text(encoding="utf-8")
         self.assertIn("/system_stats", text)
