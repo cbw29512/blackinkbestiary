@@ -2,7 +2,7 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
-  "measured_at": "2026-09-26T14:04:09.430375+00:00",
+  "measured_at": "2026-09-26T14:04:24.155495+00:00",
   "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
   "active_book_id": "TOME-I",
   "metrics": {
@@ -55,8 +55,8 @@
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": null,
-        "visual_score": null,
+        "visual_stage": "environment",
+        "visual_score": 49,
         "local_visual_advisory_pass": false,
         "assistant_decision": null
       },
@@ -155,11 +155,11 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 37,
-    "refinement_passes": 28,
+    "gpu_attempts": 41,
+    "refinement_passes": 32,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 4.11,
+    "avg_gpu_attempts_per_page": 4.56,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -644,8 +644,8 @@
       "missing_required_categories": [],
       "known_blockers": [
         "UNCLASSIFIED",
-        "ENVIRONMENT_GENERIC",
         "ACTION_UNCLEAR",
+        "ENVIRONMENT_GENERIC",
         "IDENTITY_HEROIC_BULK"
       ],
       "automated_100": false
@@ -896,8 +896,8 @@
   },
   "defect_counts": {
     "UNCLASSIFIED": 4,
-    "ENVIRONMENT_GENERIC": 3,
-    "ACTION_UNCLEAR": 1,
+    "ACTION_UNCLEAR": 2,
+    "ENVIRONMENT_GENERIC": 2,
     "IDENTITY_HEROIC_BULK": 1
   },
   "historical_defect_counts": {
@@ -906,8 +906,8 @@
     "IDENTITY_WRONG_CREATURE": 26,
     "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
-    "ENVIRONMENT_GENERIC": 9,
-    "ACTION_UNCLEAR": 7,
+    "ACTION_UNCLEAR": 8,
+    "ENVIRONMENT_GENERIC": 8,
     "SWARM_WALLPAPER": 7,
     "UNCLASSIFIED": 7,
     "SWARM_OVERSIZED_LEADER": 4,
@@ -917,9 +917,9 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 38,
-      "distinct_pages": 9,
-      "distinct_families": 5,
+      "evidence_count": 40,
+      "distinct_pages": 10,
+      "distinct_families": 6,
       "scope": [
         "monster_family",
         "master_engine"
@@ -1064,9 +1064,9 @@
     {
       "defect_code": "ENVIRONMENT_GENERIC",
       "label": "Generic/wrong environment",
-      "evidence_count": 22,
-      "distinct_pages": 5,
-      "distinct_families": 5,
+      "evidence_count": 20,
+      "distinct_pages": 4,
+      "distinct_families": 4,
       "scope": [
         "master_engine",
         "page_recipe"
@@ -1160,6 +1160,55 @@
       ]
     },
     {
+      "defect_code": "ACTION_UNCLEAR",
+      "label": "Action/story beat unclear",
+      "evidence_count": 13,
+      "distinct_pages": 4,
+      "distinct_families": 4,
+      "scope": [
+        "master_engine",
+        "page_recipe"
+      ],
+      "master_engine_lesson": "Require visible verb/contact/cause-and-effect proof rather than proximity.",
+      "monster_family_lesson": null,
+      "page_recipe_lesson": "Clarify the unique action relationship in the page recipe.",
+      "priority": "high",
+      "auto_apply": false,
+      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
+      "examples": [
+        {
+          "page_id": "I-18",
+          "candidate": 1,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        },
+        {
+          "page_id": "I-18",
+          "candidate": 2,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        },
+        {
+          "page_id": "I-18",
+          "candidate": 3,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        }
+      ]
+    },
+    {
       "defect_code": "IDENTITY_LIMB_COUNT",
       "label": "Limb/body topology error",
       "evidence_count": 12,
@@ -1204,55 +1253,6 @@
           "stage": null,
           "evidence_text": [
             "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
-          ]
-        }
-      ]
-    },
-    {
-      "defect_code": "ACTION_UNCLEAR",
-      "label": "Action/story beat unclear",
-      "evidence_count": 10,
-      "distinct_pages": 3,
-      "distinct_families": 3,
-      "scope": [
-        "master_engine",
-        "page_recipe"
-      ],
-      "master_engine_lesson": "Require visible verb/contact/cause-and-effect proof rather than proximity.",
-      "monster_family_lesson": null,
-      "page_recipe_lesson": "Clarify the unique action relationship in the page recipe.",
-      "priority": "high",
-      "auto_apply": false,
-      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
-      "examples": [
-        {
-          "page_id": "I-18",
-          "candidate": 1,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
-          ]
-        },
-        {
-          "page_id": "I-18",
-          "candidate": 2,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
-          ]
-        },
-        {
-          "page_id": "I-18",
-          "candidate": 3,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
           ]
         }
       ]
@@ -1475,9 +1475,9 @@
   },
   "known_blockers": [
     "UNCLASSIFIED",
-    "ENVIRONMENT_GENERIC",
     "ACTION_UNCLEAR",
+    "ENVIRONMENT_GENERIC",
     "IDENTITY_HEROIC_BULK"
   ],
-  "measurement_fingerprint": "94f30f4de43a423f524e6545c73e9948b722753dea40b40498197fba1a125f90"
+  "measurement_fingerprint": "e690a55ea82080eb5454205347555afe34ae35abfef4d646ed2f4a6a9d55d49d"
 }

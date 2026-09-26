@@ -36,7 +36,7 @@
     "status": "ready",
     "message": "Cycle complete; waiting five minutes for reviews or engine updates",
     "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
-    "updated_at": "2026-09-26T14:03:59.356888+00:00"
+    "updated_at": "2026-09-26T14:04:14.191106+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
@@ -437,7 +437,7 @@
       "monster_name": "Kobold Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 4711314435282367243,
+      "seed": 3263012903943472833,
       "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
       "generation_fingerprint": "f198108d581766ec0aadc01e25ac3ce8a408c8c7dcf013fff7820d00b407f43c",
       "review_fingerprint": "3c397eff4ba5e3570d82031d11dafbc1a7781384cb53934a79776b5031887b79",
@@ -456,9 +456,9 @@
           "creature reads adult-human sized"
         ],
         "preserve": [
-          "long balancing tail",
-          "lizard-like snout",
-          "narrow shoulders"
+          "long narrow lizard-like snout",
+          "tail is visible",
+          "tiny low-profile head spines"
         ],
         "stage": "identity"
       },
@@ -466,7 +466,7 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-26T13:27:25.274165+00:00"
+      "finished_at": "2026-09-26T13:22:10.544436+00:00"
     },
     {
       "review_id": "I-04-C01-H92e2ffc7a5705aab",
@@ -474,7 +474,7 @@
       "monster_name": "Goblin Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 5661930685138766848,
+      "seed": 1096338416851327764,
       "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
       "generation_fingerprint": "0d5d54dddb8e3c140fd6b4c5b030c6a534233361a969369f1577357f920bb93c",
       "review_fingerprint": "7cf12beccd656e058df160321e5c08bd5ef2675445e05c9e752fe539d2784279",
@@ -484,12 +484,24 @@
       "preview": "review-previews/I-04-C01.jpg",
       "source_image": "test-gallery/I-04-C01.png",
       "source_sha256": "92e2ffc7a5705aab2c53674ba99212ad5211b6f2160179472ee40b50ca704a6b",
-      "visual_review": null,
-      "advisory_review_status": "unavailable",
-      "advisory_review_error": "Identity reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'no tail or claws', 'gate': 'Canonical body plan reads as: Small narrow torso, thin limbs, oversized pointed ears, slightly hunched or darting posture, large quick hands and feet, sparse hair only.; limbs: Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure.', 'overlap': 1.0}]",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "lantern not visibly kicked or skidded; foot contact not shown"
+        ],
+        "preserve": [
+          "fitted block walls",
+          "flagstone floor",
+          "wall lantern niche beside narrow turn"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-26T13:35:20.848064+00:00"
+      "finished_at": "2026-09-26T13:37:35.514991+00:00"
     },
     {
       "review_id": "I-08-C01-Ha85e1b0431244ba4",
@@ -497,7 +509,7 @@
       "monster_name": "Bugbear Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 5962689561161201162,
+      "seed": 7811473906401526316,
       "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
       "generation_fingerprint": "714ed15c860d511ab34ccb9603da5d014694ab49114f982d2ccc8063aeaecea3",
       "review_fingerprint": "f5d15941ae7bce6fae5c6df41c9712505985d3dc2d5d6cdb8d7d82e68ea80b92",
@@ -527,7 +539,7 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-26T13:43:05.422261+00:00"
+      "finished_at": "2026-09-26T13:43:08.000091+00:00"
     },
     {
       "review_id": "I-10-C01-H05d49067c5c93abf",
@@ -535,7 +547,7 @@
       "monster_name": "Ogre",
       "candidate": 1,
       "selected": false,
-      "seed": 6335988782867440294,
+      "seed": 2933570685197687179,
       "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
       "generation_fingerprint": "e9b2fb1655d0ac1c4bbaf49f97ac15744b11893267cc24de1135e1369c9b2287",
       "review_fingerprint": "250d6046249be02eb03945d893d9c6a97f45b4c1a32dcea6cfab18663ebbda2d",
@@ -552,9 +564,9 @@
           "no central column or shaft visible"
         ],
         "preserve": [
-          "wedge-shaped treads curving around central axis",
-          "tight curved outer masonry wall",
-          "vertical spiral framing exaggerates cramped radius"
+          "arched stone doorway",
+          "wedge-shaped treads",
+          "monster wedged between wall and column"
         ],
         "stage": "environment"
       },
@@ -562,7 +574,7 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-26T13:50:12.602657+00:00"
+      "finished_at": "2026-09-26T13:50:15.674758+00:00"
     },
     {
       "review_id": "I-14-C01-H208effbf5888f0d1",
@@ -663,7 +675,7 @@
       "monster_name": "Giant Centipede",
       "candidate": 1,
       "selected": false,
-      "seed": 4377064124014998179,
+      "seed": 6401762652036245458,
       "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
       "generation_fingerprint": "eea5c1630f1c3cdaa4e30b6fc48174a96ae032220d603cc38127f0c36f582c46",
       "review_fingerprint": "1e015dd91e55b5b1ff94e51a32aad3a97bc303f0493188c784db999252abb751",
@@ -681,8 +693,8 @@
         ],
         "preserve": [
           "stone walls",
-          "arched passageway",
-          "centipede uncoiling around niche"
+          "arched doorway",
+          "centipede uncoiling"
         ],
         "stage": "environment"
       },
@@ -690,7 +702,7 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-26T14:00:43.764107+00:00"
+      "finished_at": "2026-09-26T14:00:46.856085+00:00"
     },
     {
       "review_id": "I-22-C01-Hfe3224f4e7897816",
@@ -698,7 +710,7 @@
       "monster_name": "Giant Spider",
       "candidate": 1,
       "selected": false,
-      "seed": 6514565452223536913,
+      "seed": 444216128150727635,
       "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
       "generation_fingerprint": "4f10aace196ee6d046813ca7164e9e17d91a8bf88dc871a576d310f67c710e31",
       "review_fingerprint": "fe9f98f4ae0078bf04f931a105e2bb0a0c50f7e9cdd56ccc67d591a20bbb26c4",
@@ -712,12 +724,12 @@
         "pass": false,
         "score": 49,
         "defects": [
-          "no masonry arches visible"
+          "no arches or masonry visible"
         ],
         "preserve": [
-          "web spans form radial pattern",
+          "web spans radial from center",
           "spider centered on web",
-          "open floor area beneath web"
+          "open floor area below web"
         ],
         "stage": "environment"
       },
@@ -725,7 +737,7 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-26T14:03:59.235164+00:00"
+      "finished_at": "2026-09-26T14:04:14.101868+00:00"
     }
   ],
   "diagnostics": [
