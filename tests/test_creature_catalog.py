@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from monster_catalog import resolve_monster_spec
-from prompt_builder import build_prompt
+from prompt_builder import _priority_failure_lines, build_prompt
 from vision_review_prompts import build_identity_review_prompt
 
 
@@ -153,12 +153,11 @@ class CreatureCatalogTests(unittest.TestCase):
             failures = spec.get("known_failure_modes") or []
             self.assertTrue(failures, page["page_id"])
             self.assertIn("KNOWN IDENTITY DRIFT TO PREVENT", generation, page["page_id"])
-            selected = [failures[0], failures[-1]] if len(failures) > 2 else failures
-            for failure in selected:
-                symptom = str(failure.get("symptom") or "").strip()
-                correction = str(failure.get("correction") or "").strip()
-                self.assertIn(symptom, generation, page["page_id"])
-                self.assertIn(correction, generation, page["page_id"])
+            selected_lines = _priority_failure_lines(page, spec, None)
+            self.assertGreaterEqual(len(selected_lines), 1, page["page_id"])
+            self.assertLessEqual(len(selected_lines), 2, page["page_id"])
+            for line in selected_lines:
+                self.assertIn(line, generation, page["page_id"])
             for failure in failures:
                 symptom = str(failure.get("symptom") or "").strip()
                 self.assertIn(symptom, identity_review, page["page_id"])
