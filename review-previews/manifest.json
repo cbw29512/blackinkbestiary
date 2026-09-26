@@ -27,7 +27,7 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-26T15:36:31.6683182Z"
+    "updated_at": "2026-09-26T15:36:51.0098861Z"
   },
   "autopilot": {
     "schema_version": 1,
@@ -36,14 +36,14 @@
     "status": "running",
     "message": "Pre-GPU snapshot published before canary generation",
     "engine_commit": "ce4669411c95d48d4bcbfa18fa2e79e139c49953",
-    "updated_at": "2026-09-26T15:36:32.551356+00:00"
+    "updated_at": "2026-09-26T15:36:51.897148+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-26T15:35:47.189367+00:00",
-    "updated_at": "2026-09-26T15:36:27.724386+00:00",
+    "started_at": "2026-09-26T15:36:07.415283+00:00",
+    "updated_at": "2026-09-26T15:36:49.999494+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -179,7 +179,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 390 tests in 36.822s",
+          "Ran 390 tests in 38.874s",
           "",
           "OK"
         ]
