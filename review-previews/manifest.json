@@ -1,84 +1,1596 @@
 {
-  "schema_version": 2,
-  "candidate_count": 9,
+  "schema_version": 6,
+  "snapshot_engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
+  "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
+  "quality_contract_version": "black-ink-quality-scorecard-v10",
+  "candidate_count": 7,
+  "diagnostic_count": 80,
+  "quality_snapshot": "review-previews/quality-current.json",
+  "reviewer_disagreement_snapshot": "review-previews/reviewer-disagreement.json",
+  "reviewer_disagreement": {
+    "schema_version": 1,
+    "exact_image_matches": 0,
+    "agreements": 0,
+    "local_false_positives": 0,
+    "local_false_negatives": 0,
+    "agreement_rate": null,
+    "false_positive_rate": null,
+    "false_negative_rate": null,
+    "false_positive_rows": [],
+    "false_negative_rows": [],
+    "matched_rows": [],
+    "rule": "Reviewer disagreement is measured only for identical review_id/image hashes; same page or candidate numbers across different generations do not count."
+  },
+  "runtime": {
+    "schema_version": 2,
+    "status": "ready",
+    "stage": "complete",
+    "message": "Local artist ready; local vision reviewer is advisory.",
+    "detail": "authority=advisory",
+    "updated_at": "2026-09-26T12:52:55.9951508Z"
+  },
+  "autopilot": {
+    "schema_version": 1,
+    "source": "RUN_ENGINE_AUTOPILOT.bat",
+    "phase": "sleeping",
+    "status": "degraded",
+    "message": "Generation reported an error; diagnostics published before retry",
+    "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
+    "updated_at": "2026-09-26T13:02:31.400012+00:00"
+  },
+  "engine_preflight": {
+    "schema_version": 2,
+    "status": "passed",
+    "stage": "complete",
+    "started_at": "2026-09-26T12:52:33.460632+00:00",
+    "updated_at": "2026-09-26T12:52:55.411908+00:00",
+    "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "checks": [
+      {
+        "stage": "unit-tests",
+        "status": "passed",
+        "returncode": 0,
+        "command": [
+          "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "output_tail": [
+          "test_kicking_scene_requires_visible_impact_contact (test_shape_locks.ShapeLockTests.test_kicking_scene_requires_visible_impact_contact) ... ok",
+          "test_kobold_shape_lock_proves_miniature_scale (test_shape_locks.ShapeLockTests.test_kobold_shape_lock_proves_miniature_scale) ... ok",
+          "test_nonhumanoid_priority_capsules_lock_body_topology (test_shape_locks.ShapeLockTests.test_nonhumanoid_priority_capsules_lock_body_topology) ... ok",
+          "test_priority_identity_capsules_precede_scene_detail (test_shape_locks.ShapeLockTests.test_priority_identity_capsules_precede_scene_detail) ... ok",
+          "test_prompt_reserves_blank_outer_print_margin (test_shape_locks.ShapeLockTests.test_prompt_reserves_blank_outer_print_margin) ... ok",
+          "test_shape_lock_is_an_identity_review_gate (test_shape_locks.ShapeLockTests.test_shape_lock_is_an_identity_review_gate) ... ok",
+          "test_small_humanoid_prompt_uses_literal_architecture_ratio (test_shape_locks.ShapeLockTests.test_small_humanoid_prompt_uses_literal_architecture_ratio) ... ok",
+          "test_spiral_stair_uses_dedicated_helical_envelope (test_shape_locks.ShapeLockTests.test_spiral_stair_uses_dedicated_helical_envelope) ... ok",
+          "test_supported_darkmantle_prompt_suppresses_flight_cues (test_shape_locks.ShapeLockTests.test_supported_darkmantle_prompt_suppresses_flight_cues) ... ok",
+          "test_swarm_priority_capsule_prevents_wallpaper_composition (test_shape_locks.ShapeLockTests.test_swarm_priority_capsule_prevents_wallpaper_composition) ... ok",
+          "test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates (test_start_production.StartProductionContractTests.test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates) ... ok",
+          "test_autopilot_publishes_phase_heartbeat_before_gpu_work (test_start_production.StartProductionContractTests.test_autopilot_publishes_phase_heartbeat_before_gpu_work) ... ok",
+          "test_canary_launchers_self_start_local_ai_runtime (test_start_production.StartProductionContractTests.test_canary_launchers_self_start_local_ai_runtime) ... ok",
+          "test_engine_preflight_is_fail_closed_and_autopilot_steps_are_consistent (test_start_production.StartProductionContractTests.test_engine_preflight_is_fail_closed_and_autopilot_steps_are_consistent) ... ok",
+          "test_full_gallery_requires_exact_image_canary_approval (test_start_production.StartProductionContractTests.test_full_gallery_requires_exact_image_canary_approval) ... ok",
+          "test_full_gallery_validates_engine_before_starting_local_ai_or_generating (test_start_production.StartProductionContractTests.test_full_gallery_validates_engine_before_starting_local_ai_or_generating) ... ok",
+          "test_generation_entry_points_run_publishable_engine_preflight (test_start_production.StartProductionContractTests.test_generation_entry_points_run_publishable_engine_preflight) ... ok",
+          "test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight (test_start_production.StartProductionContractTests.test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight) ... ok",
+          "test_local_runtime_diagnostics_are_stage_specific_and_modular (test_start_production.StartProductionContractTests.test_local_runtime_diagnostics_are_stage_specific_and_modular) ... ok",
+          "test_one_click_launcher_exists_and_preserves_order_gate (test_start_production.StartProductionContractTests.test_one_click_launcher_exists_and_preserves_order_gate) ... ok",
+          "test_review_publisher_uses_exact_image_authority_and_provenance (test_start_production.StartProductionContractTests.test_review_publisher_uses_exact_image_authority_and_provenance) ... ok",
+          "test_runtime_failures_are_published_for_remote_diagnosis (test_start_production.StartProductionContractTests.test_runtime_failures_are_published_for_remote_diagnosis) ... ok",
+          "test_start_doc_names_single_entry_point (test_start_production.StartProductionContractTests.test_start_doc_names_single_entry_point) ... ok",
+          "test_approve_activates_ordered_rebuild_source (test_state.StateTests.test_approve_activates_ordered_rebuild_source) ... ok",
+          "test_approve_refuses_to_overwrite_different_locked_art_file (test_state.StateTests.test_approve_refuses_to_overwrite_different_locked_art_file) ... ok",
+          "test_cannot_approve_without_candidate (test_state.StateTests.test_cannot_approve_without_candidate) ... ok",
+          "test_generation_worker_refuses_page_without_canonical_spec (test_state.StateTests.test_generation_worker_refuses_page_without_canonical_spec) ... ok",
+          "test_generation_worker_refuses_when_local_preflight_fails (test_state.StateTests.test_generation_worker_refuses_when_local_preflight_fails) ... ok",
+          "test_generation_worker_starts_once_for_current_spec_page (test_state.StateTests.test_generation_worker_starts_once_for_current_spec_page) ... ok",
+          "test_modify_never_advances (test_state.StateTests.test_modify_never_advances) ... ok",
+          "test_register_candidate_then_approve_archives_and_advances_one_page (test_state.StateTests.test_register_candidate_then_approve_archives_and_advances_one_page) ... ok",
+          "test_reject_candidate_for_future_page (test_state.StateTests.test_reject_candidate_for_future_page) ... ok",
+          "test_local_preview_only_commit_is_removed_and_remote_head_restored (test_sync_engine_for_run.SyncEngineForRunTests.test_local_preview_only_commit_is_removed_and_remote_head_restored) ... ok",
+          "test_local_source_commit_blocks_automatic_reset (test_sync_engine_for_run.SyncEngineForRunTests.test_local_source_commit_blocks_automatic_reset) ... ok",
+          "test_preview_only_path_classifier_is_strict (test_sync_engine_for_run.SyncEngineForRunTests.test_preview_only_path_classifier_is_strict) ... ok",
+          "test_review_decision_sync_fails_closed_on_invalid_schema (test_sync_engine_for_run.SyncEngineForRunTests.test_review_decision_sync_fails_closed_on_invalid_schema) ... ok",
+          "test_review_decisions_are_imported_from_dedicated_review_branch (test_sync_engine_for_run.SyncEngineForRunTests.test_review_decisions_are_imported_from_dedicated_review_branch) ... ok",
+          "test_assistant_rejected_candidate_can_be_retried (test_test_gallery_resume.TestGalleryResumeTests.test_assistant_rejected_candidate_can_be_retried) ... ok",
+          "test_assistant_rejection_stage_is_forwarded_to_fresh_generation (test_test_gallery_resume.TestGalleryResumeTests.test_assistant_rejection_stage_is_forwarded_to_fresh_generation) ... ok",
+          "test_canary_force_reruns_existing_candidate (test_test_gallery_resume.TestGalleryResumeTests.test_canary_force_reruns_existing_candidate) ... ok",
+          "test_canary_summary_reports_each_required_page (test_test_gallery_resume.TestGalleryResumeTests.test_canary_summary_reports_each_required_page) ... ok",
+          "test_clear_selection_for_candidate_removes_only_matching_candidate (test_test_gallery_resume.TestGalleryResumeTests.test_clear_selection_for_candidate_removes_only_matching_candidate) ... ok",
+          "test_current_exact_assistant_approval_is_terminal_even_if_local_review_failed (test_test_gallery_resume.TestGalleryResumeTests.test_current_exact_assistant_approval_is_terminal_even_if_local_review_failed) ... ok",
+          "test_current_generation_authority_keeps_reviewable_candidate_skipped (test_test_gallery_resume.TestGalleryResumeTests.test_current_generation_authority_keeps_reviewable_candidate_skipped) ... ok",
+          "test_exhausted_candidate_retries_when_current_reviewer_just_failed_it (test_test_gallery_resume.TestGalleryResumeTests.test_exhausted_candidate_retries_when_current_reviewer_just_failed_it) ... ok",
+          "test_existing_candidate_path_requires_real_current_png (test_test_gallery_resume.TestGalleryResumeTests.test_existing_candidate_path_requires_real_current_png) ... ok",
+          "test_existing_success_is_skipped (test_test_gallery_resume.TestGalleryResumeTests.test_existing_success_is_skipped) ... ok",
+          "test_expanding_canary_state_to_multi_candidate_clears_auto_selection (test_test_gallery_resume.TestGalleryResumeTests.test_expanding_canary_state_to_multi_candidate_clears_auto_selection) ... ok",
+          "test_expanding_to_multi_candidate_preserves_explicit_selection (test_test_gallery_resume.TestGalleryResumeTests.test_expanding_to_multi_candidate_preserves_explicit_selection) ... ok",
+          "test_failed_candidate_can_be_retried (test_test_gallery_resume.TestGalleryResumeTests.test_failed_candidate_can_be_retried) ... ok",
+          "test_identity_assistant_rejection_never_reuses_bad_source (test_test_gallery_resume.TestGalleryResumeTests.test_identity_assistant_rejection_never_reuses_bad_source) ... ok",
+          "test_identity_failure_regenerates_from_text_instead_of_editing_bad_image (test_test_gallery_resume.TestGalleryResumeTests.test_identity_failure_regenerates_from_text_instead_of_editing_bad_image) ... ok",
+          "test_non_identity_assistant_rejection_reuses_exact_image_for_targeted_edit (test_test_gallery_resume.TestGalleryResumeTests.test_non_identity_assistant_rejection_reuses_exact_image_for_targeted_edit) ... ok",
+          "test_refinement_uses_latest_image_even_when_score_does_not_improve (test_test_gallery_resume.TestGalleryResumeTests.test_refinement_uses_latest_image_even_when_score_does_not_improve) ... ok",
+          "test_repeated_action_failure_escalates_from_edit_to_fresh_regeneration (test_test_gallery_resume.TestGalleryResumeTests.test_repeated_action_failure_escalates_from_edit_to_fresh_regeneration) ... ok",
+          "test_repeated_identity_failure_rotates_composition_on_fresh_regeneration (test_test_gallery_resume.TestGalleryResumeTests.test_repeated_identity_failure_rotates_composition_on_fresh_regeneration) ... ok",
+          "test_resume_preserves_results_and_selections (test_test_gallery_resume.TestGalleryResumeTests.test_resume_preserves_results_and_selections) ... ok",
+          "test_review_authority_staleness_is_independent_from_generation (test_test_gallery_resume.TestGalleryResumeTests.test_review_authority_staleness_is_independent_from_generation) ... ok",
+          "test_review_gate_progress_beats_higher_score_from_earlier_failure (test_test_gallery_resume.TestGalleryResumeTests.test_review_gate_progress_beats_higher_score_from_earlier_failure) ... ok",
+          "test_reviewer_only_recheck_reuses_pixels_except_identity_failure (test_test_gallery_resume.TestGalleryResumeTests.test_reviewer_only_recheck_reuses_pixels_except_identity_failure) ... ok",
+          "test_same_fingerprint_semantic_stall_blocks_repeat_gpu_cycle (test_test_gallery_resume.TestGalleryResumeTests.test_same_fingerprint_semantic_stall_blocks_repeat_gpu_cycle) ... ok",
+          "test_scene_failure_still_uses_image_edit (test_test_gallery_resume.TestGalleryResumeTests.test_scene_failure_still_uses_image_edit) ... ok",
+          "test_semantic_stall_reopens_after_authority_change (test_test_gallery_resume.TestGalleryResumeTests.test_semantic_stall_reopens_after_authority_change) ... ok",
+          "test_stale_generation_authority_forces_canary_rerun (test_test_gallery_resume.TestGalleryResumeTests.test_stale_generation_authority_forces_canary_rerun) ... ok",
+          "test_every_page_has_complete_canonical_spec (test_tome_i_specs.TomeISpecTests.test_every_page_has_complete_canonical_spec) ... ok",
+          "test_every_page_has_explicit_physicality (test_tome_i_specs.TomeISpecTests.test_every_page_has_explicit_physicality) ... ok",
+          "test_every_page_has_nonempty_four_stage_review_contract (test_tome_i_specs.TomeISpecTests.test_every_page_has_nonempty_four_stage_review_contract) ... ok",
+          "test_every_page_preserves_canonical_scale_in_visual_hierarchy (test_tome_i_specs.TomeISpecTests.test_every_page_preserves_canonical_scale_in_visual_hierarchy) ... ok",
+          "test_page_recipes_do_not_override_canonical_identity_with_generic_boilerplate (test_tome_i_specs.TomeISpecTests.test_page_recipes_do_not_override_canonical_identity_with_generic_boilerplate) ... ok",
+          "test_page_requirements_are_concrete (test_tome_i_specs.TomeISpecTests.test_page_requirements_are_concrete) ... ok",
+          "test_all_registered_books_share_universal_contracts (test_universal_page_contract.UniversalPageContractTests.test_all_registered_books_share_universal_contracts) ... ok",
+          "test_book_scaffold_supports_non_fifty_page_books (test_universal_page_contract.UniversalPageContractTests.test_book_scaffold_supports_non_fifty_page_books) ... ok",
+          "test_canonical_catalog_names_override_stale_page_display_fields (test_universal_page_contract.UniversalPageContractTests.test_canonical_catalog_names_override_stale_page_display_fields) ... ok",
+          "test_completed_plan_promotes_to_minimal_manifest (test_universal_page_contract.UniversalPageContractTests.test_completed_plan_promotes_to_minimal_manifest) ... ok",
+          "test_flying_family_can_use_powered_flight (test_universal_page_contract.UniversalPageContractTests.test_flying_family_can_use_powered_flight) ... ok",
+          "test_i08_is_now_stably_grounded (test_universal_page_contract.UniversalPageContractTests.test_i08_is_now_stably_grounded) ... ok",
+          "test_minimal_manifest_passes_validation (test_universal_page_contract.UniversalPageContractTests.test_minimal_manifest_passes_validation) ... ok",
+          "test_minimal_recipe_generates_complete_prompt (test_universal_page_contract.UniversalPageContractTests.test_minimal_recipe_generates_complete_prompt) ... ok",
+          "test_minimal_recipe_resolves_derived_fields (test_universal_page_contract.UniversalPageContractTests.test_minimal_recipe_resolves_derived_fields) ... ok",
+          "test_nonflyer_cannot_use_powered_flight (test_universal_page_contract.UniversalPageContractTests.test_nonflyer_cannot_use_powered_flight) ... ok",
+          "test_unstable_jump_or_fall_pose_is_rejected (test_universal_page_contract.UniversalPageContractTests.test_unstable_jump_or_fall_pose_is_rejected) ... ok",
+          "test_action_failure_stops_before_quality_gate (test_vision_reviewer.VisionReviewerTests.test_action_failure_stops_before_quality_gate) ... ok",
+          "test_action_pass_requires_contact_and_motion_evidence (test_vision_reviewer.VisionReviewerTests.test_action_pass_requires_contact_and_motion_evidence) ... ok",
+          "test_all_four_gates_must_pass (test_vision_reviewer.VisionReviewerTests.test_all_four_gates_must_pass) ... ok",
+          "test_all_tome_i_pages_have_nonempty_shared_checklist_buckets (test_vision_reviewer.VisionReviewerTests.test_all_tome_i_pages_have_nonempty_shared_checklist_buckets) ... ok",
+          "test_canonical_scale_and_body_plan_are_hard_gates (test_vision_reviewer.VisionReviewerTests.test_canonical_scale_and_body_plan_are_hard_gates) ... ok",
+          "test_empty_gate_fails_closed (test_vision_reviewer.VisionReviewerTests.test_empty_gate_fails_closed) ... ok",
+          "test_environment_and_action_prompts_require_pass_evidence (test_vision_reviewer.VisionReviewerTests.test_environment_and_action_prompts_require_pass_evidence) ... ok",
+          "test_environment_failure_stops_before_action_gate (test_vision_reviewer.VisionReviewerTests.test_environment_failure_stops_before_action_gate) ... ok",
+          "test_environment_gate_uses_concrete_geometry_not_generic_question_dump (test_vision_reviewer.VisionReviewerTests.test_environment_gate_uses_concrete_geometry_not_generic_question_dump) ... ok",
+          "test_every_tome_i_page_populates_all_four_review_gates (test_vision_reviewer.VisionReviewerTests.test_every_tome_i_page_populates_all_four_review_gates) ... ok",
+          "test_final_quality_gate_explicitly_rejects_decorative_artwork_frames (test_vision_reviewer.VisionReviewerTests.test_final_quality_gate_explicitly_rejects_decorative_artwork_frames) ... ok",
+          "test_goblin_bodybuilder_drift_is_a_hard_identity_gate (test_vision_reviewer.VisionReviewerTests.test_goblin_bodybuilder_drift_is_a_hard_identity_gate) ... ok",
+          "test_habitat_story_and_physicality_are_hard_gates (test_vision_reviewer.VisionReviewerTests.test_habitat_story_and_physicality_are_hard_gates) ... ok",
+          "test_identity_failure_stops_before_quality_review (test_vision_reviewer.VisionReviewerTests.test_identity_failure_stops_before_quality_review) ... ok",
+          "test_identity_gate_requires_literal_topology_and_swarm_count_audits (test_vision_reviewer.VisionReviewerTests.test_identity_gate_requires_literal_topology_and_swarm_count_audits) ... ok",
+          "test_identity_prompt_has_one_defect_wording_rule (test_vision_reviewer.VisionReviewerTests.test_identity_prompt_has_one_defect_wording_rule) ... ok",
+          "test_identity_prompt_is_fail_closed_and_scale_focused (test_vision_reviewer.VisionReviewerTests.test_identity_prompt_is_fail_closed_and_scale_focused) ... ok",
+          "test_invalid_verdict_fails_closed (test_vision_reviewer.VisionReviewerTests.test_invalid_verdict_fails_closed) ... ok",
+          "test_negated_failure_is_not_mistaken_for_positive_gate_echo (test_vision_reviewer.VisionReviewerTests.test_negated_failure_is_not_mistaken_for_positive_gate_echo) ... ok",
+          "test_negative_requirement_echo_is_still_caught_when_polarity_matches (test_vision_reviewer.VisionReviewerTests.test_negative_requirement_echo_is_still_caught_when_polarity_matches) ... ok",
+          "test_paraphrased_positive_gate_echo_gets_one_consistency_retry (test_vision_reviewer.VisionReviewerTests.test_paraphrased_positive_gate_echo_gets_one_consistency_retry) ... ok",
+          "test_pass_with_defects_is_forced_to_fail (test_vision_reviewer.VisionReviewerTests.test_pass_with_defects_is_forced_to_fail) ... ok",
+          "test_positive_identity_gate_echo_becomes_failure_statement (test_vision_reviewer.VisionReviewerTests.test_positive_identity_gate_echo_becomes_failure_statement) ... ok",
+          "test_positive_interaction_gate_echo_becomes_failure_statement (test_vision_reviewer.VisionReviewerTests.test_positive_interaction_gate_echo_becomes_failure_statement) ... ok",
+          "test_positive_scene_gate_echo_becomes_failure_statement (test_vision_reviewer.VisionReviewerTests.test_positive_scene_gate_echo_becomes_failure_statement) ... ok",
+          "test_prompt_bounds_verdict_size (test_vision_reviewer.VisionReviewerTests.test_prompt_bounds_verdict_size) ... ok",
+          "test_quality_gate_rejects_page_wide_micro_pattern_load (test_vision_reviewer.VisionReviewerTests.test_quality_gate_rejects_page_wide_micro_pattern_load) ... ok",
+          "test_review_stages_do_not_leak_into_final_quality_gate (test_vision_reviewer.VisionReviewerTests.test_review_stages_do_not_leak_into_final_quality_gate) ... ok",
+          "test_reviewer_consistency_retry_fails_closed_if_still_self_contradictory (test_vision_reviewer.VisionReviewerTests.test_reviewer_consistency_retry_fails_closed_if_still_self_contradictory) ... ok",
+          "test_scene_pass_requires_concrete_page_specific_evidence (test_vision_reviewer.VisionReviewerTests.test_scene_pass_requires_concrete_page_specific_evidence) ... ok",
+          "test_semantic_overlap_detects_close_positive_paraphrase (test_vision_reviewer.VisionReviewerTests.test_semantic_overlap_detects_close_positive_paraphrase) ... ok",
+          "test_truncated_non_json_reports_ollama_diagnostics (test_vision_reviewer.VisionReviewerTests.test_truncated_non_json_reports_ollama_diagnostics) ... ok",
+          "test_snapshot_reads_all_authorities_every_time (test_worker_instruction_reload.WorkerInstructionReloadTests.test_snapshot_reads_all_authorities_every_time) ... ok",
+          "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
+          "",
+          "----------------------------------------------------------------------",
+          "Ran 391 tests in 18.606s",
+          "",
+          "OK"
+        ]
+      },
+      {
+        "stage": "active-book-audit",
+        "status": "passed",
+        "returncode": 0,
+        "command": [
+          "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "scripts/audit_active_book.py"
+        ],
+        "output_tail": [
+          "{",
+          "  \"pass\": true,",
+          "  \"book_id\": \"TOME-I\",",
+          "  \"title\": \"Caves & Dungeons\",",
+          "  \"total_pages\": 50,",
+          "  \"approved_pages\": 0,",
+          "  \"current_page_id\": \"I-01\",",
+          "  \"checks\": [",
+          "    {",
+          "      \"check\": \"manifest_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\data\\\\tome-I.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"state_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\data\\\\production-state.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"quality_rules_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\quality_rules.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"page_archetypes_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\page_archetypes.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"environment_standard_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\environment_standard.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"coloring_page_standard_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\coloring_page_standard.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"universal_page_contract_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\universal_page_contract.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"universal_monster_contract_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\universal_monster_contract.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"universal_environment_contract_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\universal_environment_contract.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"universal_story_contract_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\universal_story_contract.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"kdp_print_standard_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\kdp_print_standard.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"content_scope_exists\",",
+          "      \"pass\": true,",
+          "      \"path\": \"C:\\\\Users\\\\divcl\\\\Desktop\\\\blackinkbestiary\\\\config\\\\content_scope.json\"",
+          "    },",
+          "    {",
+          "      \"check\": \"manifest_valid\",",
+          "      \"pass\": true,",
+          "      \"details\": []",
+          "    },",
+          "    {",
+          "      \"check\": \"state_valid\",",
+          "      \"pass\": true,",
+          "      \"details\": []",
+          "    }",
+          "  ],",
+          "  \"errors\": []",
+          "}"
+        ]
+      },
+      {
+        "stage": "series-audit",
+        "status": "passed",
+        "returncode": 0,
+        "command": [
+          "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "scripts/audit_series.py"
+        ],
+        "output_tail": [
+          "            \"page_id\": \"VIII-04\",",
+          "            \"missing\": [",
+          "              \"archetype\",",
+          "              \"environment_profile_id\",",
+          "              \"environment_variant.framing\",",
+          "              \"environment_variant.interaction\",",
+          "              \"environment_variant.landmark\",",
+          "              \"moment\",",
+          "              \"monster_spec_id\",",
+          "              \"physicality.mode\",",
+          "              \"physicality.motion\",",
+          "              \"physicality.support\",",
+          "              \"planning_status\"",
+          "            ]",
+          "          },",
+          "          {",
+          "            \"page_id\": \"VIII-05\",",
+          "            \"missing\": [",
+          "              \"archetype\",",
+          "              \"environment_profile_id\",",
+          "              \"environment_variant.framing\",",
+          "              \"environment_variant.interaction\",",
+          "              \"environment_variant.landmark\",",
+          "              \"moment\",",
+          "              \"monster_spec_id\",",
+          "              \"physicality.mode\",",
+          "              \"physicality.motion\",",
+          "              \"physicality.support\",",
+          "              \"planning_status\"",
+          "            ]",
+          "          },",
+          "          {",
+          "            \"page_id\": \"VIII-06\",",
+          "            \"missing\": [",
+          "              \"archetype\",",
+          "              \"environment_profile_id\",",
+          "              \"environment_variant.framing\",",
+          "              \"environment_variant.interaction\",",
+          "              \"environment_variant.landmark\",",
+          "              \"moment\",",
+          "              \"monster_spec_id\",",
+          "              \"physicality.mode\",",
+          "              \"physicality.motion\",",
+          "              \"physicality.support\",",
+          "              \"planning_status\"",
+          "            ]",
+          "          },",
+          "          {",
+          "            \"page_id\": \"VIII-07\",",
+          "            \"missing\": [",
+          "              \"archetype\",",
+          "              \"environment_profile_id\",",
+          "              \"environment_variant.framing\",",
+          "              \"environment_variant.interaction\",",
+          "              \"environment_variant.landmark\",",
+          "              \"moment\",",
+          "              \"monster_spec_id\",",
+          "              \"physicality.mode\",",
+          "              \"physicality.motion\",",
+          "              \"physicality.support\",",
+          "              \"planning_status\"",
+          "            ]",
+          "          },",
+          "          {",
+          "            \"page_id\": \"VIII-08\",",
+          "            \"missing\": [",
+          "              \"archetype\",",
+          "              \"environment_profile_id\",",
+          "              \"environment_variant.framing\",",
+          "              \"environment_variant.interaction\",",
+          "              \"environment_variant.landmark\",",
+          "              \"moment\",",
+          "              \"monster_spec_id\",",
+          "              \"physicality.mode\",",
+          "              \"physicality.motion\",",
+          "              \"physicality.support\",",
+          "              \"planning_status\"",
+          "            ]",
+          "          },",
+          "          {",
+          "            \"page_id\": \"VIII-09\",",
+          "            \"missing\": [",
+          "              \"archetype\",",
+          "              \"environment_profile_id\",",
+          "              \"environment_variant.framing\",",
+          "              \"environment_variant.interaction\",",
+          "              \"environment_variant.landmark\",",
+          "              \"moment\",",
+          "              \"monster_spec_id\",",
+          "              \"physicality.mode\",",
+          "              \"physicality.motion\",",
+          "              \"physicality.support\",",
+          "              \"planning_status\"",
+          "            ]",
+          "          },",
+          "          {",
+          "            \"page_id\": \"VIII-10\",",
+          "            \"missing\": [",
+          "              \"archetype\",",
+          "              \"environment_profile_id\",",
+          "              \"environment_variant.framing\",",
+          "              \"environment_variant.interaction\",",
+          "              \"environment_variant.landmark\",",
+          "              \"moment\",",
+          "              \"monster_spec_id\",",
+          "              \"physicality.mode\",",
+          "              \"physicality.motion\",",
+          "              \"physicality.support\",",
+          "              \"planning_status\"",
+          "            ]",
+          "          }",
+          "        ],",
+          "        \"calibration_required\": false,",
+          "        \"calibration_complete\": true,",
+          "        \"mass_generation_ready\": false",
+          "      }",
+          "    ],",
+          "    \"errors\": []",
+          "  }",
+          "}"
+        ]
+      },
+      {
+        "stage": "python-compile",
+        "status": "passed",
+        "returncode": 0,
+        "command": [
+          "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-m",
+          "compileall",
+          "-q",
+          "art_pipeline",
+          "scripts",
+          "server.py"
+        ],
+        "output_tail": []
+      }
+    ],
+    "returncode": 0,
+    "command": null,
+    "output_tail": [
+      "All local non-GPU engine checks passed."
+    ]
+  },
+  "selections": {},
   "candidates": [
     {
-      "review_id": "I-01-C01-H9b8795fad043d2ea",
-      "page_id": "I-01",
-      "monster_name": "Kobold Warrior",
+      "review_id": "I-08-C01-H9e77ed4c7471b250",
+      "page_id": "I-08",
+      "monster_name": "Bugbear Warrior",
       "candidate": 1,
-      "seed": 7567955539378186440,
-      "preview": "review-previews/I-01-C01.jpg",
-      "source_image": "test-gallery/I-01-C01.png",
-      "source_sha256": "9b8795fad043d2ea07fc26117e19c19ce97068474080ce44b7081aaf685cd3b9",
+      "selected": false,
+      "seed": 1408709477773409154,
+      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
+      "generation_fingerprint": "efc611781f01d66ae69c112ed00bd8dcf5ac52a5c5f66bd08294c5829b42a874",
+      "review_fingerprint": "e6592c461b1b37d3c571a00893f3dfae8e15910348ab5c67bbc81cd9223ce215",
+      "generation_authority_current": false,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-08-C01.jpg",
+      "source_image": "test-gallery/I-08-C01.png",
+      "source_sha256": "9e77ed4c7471b250973434ac4670a2ebdb2be155d3c8643cad22448cdbae5418",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "face reads primate rather than goblinoid",
+          "torso sculpted like superhero",
+          "arms not visibly below hips",
+          "fur hides anatomy"
+        ],
+        "preserve": [
+          "pointed ears",
+          "bipedal stance",
+          "no horns or tail"
+        ],
+        "stage": "identity"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-25T21:37:18.103013+00:00"
+    },
+    {
+      "review_id": "I-10-C01-H70161a0cd849fc2f",
+      "page_id": "I-10",
+      "monster_name": "Ogre",
+      "candidate": 1,
+      "selected": false,
+      "seed": 6689952856033404683,
+      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
+      "generation_fingerprint": "d8ee37493a0db27fb83368713de35a7bba2a590371b397ece676ab8bfbbe449c",
+      "review_fingerprint": "5efbb0e220713025a66013950d773317cbd450eb3e28cc57605ff85208ece623",
+      "generation_authority_current": false,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-10-C01.jpg",
+      "source_image": "test-gallery/I-10-C01.png",
+      "source_sha256": "70161a0cd849fc2f04ff4e28e1853251585caf3c33139e8081a7842246f7c8ea",
+      "visual_review": {
+        "pass": true,
+        "score": 100,
+        "defects": [],
+        "preserve": [
+          "monster dominates foreground",
+          "stone archway framing",
+          "no decorative frames"
+        ],
+        "stage": "quality"
+      },
+      "advisory_review_status": "pass",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-25T23:13:38.437259+00:00"
+    },
+    {
+      "review_id": "I-14-C01-H208effbf5888f0d1",
+      "page_id": "I-14",
+      "monster_name": "Darkmantle",
+      "candidate": 1,
+      "selected": false,
+      "seed": 1587215254621388754,
+      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
+      "generation_fingerprint": "c9809d3dd7b9b1d46d677f3eb2aaff7e1a23ce16d066864199cbc8b789c60fe8",
+      "review_fingerprint": "34922f68b6336f03d753c7d0eaaea778356d94f8b82f3bfa0af599cfc3718924",
+      "generation_authority_current": true,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-14-C01.jpg",
+      "source_image": "test-gallery/I-14-C01.png",
+      "source_sha256": "208effbf5888f0d1942a19b1791a2410b25019fc13f50442338bb2e542b8b92f",
+      "visual_review": null,
+      "advisory_review_status": "unavailable",
+      "advisory_review_error": "Identity reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'body reads as bat/dragon with wings, not mantle', 'gate': 'Identity check: shape reads as one cloak-like mantle body, not a bat, dragon, or humanoid', 'overlap': 0.833}]",
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-25T23:24:10.973600+00:00"
+    },
+    {
+      "review_id": "I-16-C01-Haeff3ab30fbd45bb",
+      "page_id": "I-16",
+      "monster_name": "Giant Bat",
+      "candidate": 1,
+      "selected": false,
+      "seed": 3106530149390149605,
+      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
+      "generation_fingerprint": "298b9d340e27e00e9b2a5c1a95c29d3eb50369be24c807ade14407e599e4eb58",
+      "review_fingerprint": "8d335b415a69adc55ab03c6dda6bd8b5f2192848cb295f9270d98a3948c3d737",
+      "generation_authority_current": true,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-16-C01.jpg",
+      "source_image": "test-gallery/I-16-C01.png",
+      "source_sha256": "aeff3ab30fbd45bb89373f0e8f55ec483f386eb6a703136f242d1a2fe297397d",
       "visual_review": {
         "pass": false,
         "score": 45,
         "defects": [
-          "body is adult-human sized, broad-chested, muscular, dragonborn-like, or heroically proportioned"
+          "no visible river channel beneath roost ledge"
         ],
         "preserve": [
-          "long draconic snout is obvious",
-          "tail is visible",
-          "body reads reptilian rather than furry"
-        ]
+          "rocky ceiling",
+          "asymmetric rock boundaries",
+          "giant bat hanging from ceiling"
+        ],
+        "stage": "environment"
       },
-      "status": "max_refinements_reached",
-      "finished_at": "2026-09-24T14:39:38.971912+00:00"
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-25T21:59:41.672790+00:00"
     },
     {
-      "review_id": "I-04-C01-Hccf7a35191d2d05d",
+      "review_id": "I-19-C01-H34608cba8c01a808",
+      "page_id": "I-19",
+      "monster_name": "Rat Swarm",
+      "candidate": 1,
+      "selected": false,
+      "seed": 7150888341942835815,
+      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
+      "generation_fingerprint": "53af9ab116d54d20200fd04723b0e7e16c127795e66458b6f36d957327470e16",
+      "review_fingerprint": "73a82de3881bda1f5ebef5236800a5f8fcc8572c54acbb7edae7fe831b569f29",
+      "generation_authority_current": true,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-19-C01.jpg",
+      "source_image": "test-gallery/I-19-C01.png",
+      "source_sha256": "34608cba8c01a8084698c4708ffe0a663c0056fb644ec789dae99e9132ff5750",
+      "visual_review": {
+        "pass": false,
+        "score": 45,
+        "defects": [
+          "Excessive rat swarm density"
+        ],
+        "preserve": [
+          "Stone architecture",
+          "Gridded floor",
+          "Open gate entrance"
+        ],
+        "stage": "quality"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-25T22:03:44.782117+00:00"
+    },
+    {
+      "review_id": "I-20-C01-Hfab10d3fbb9cbed8",
+      "page_id": "I-20",
+      "monster_name": "Giant Centipede",
+      "candidate": 1,
+      "selected": false,
+      "seed": 5915007285489336901,
+      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
+      "generation_fingerprint": "97e8fd0757bd481f2b643d2f8fec0a2532c7e065c79fc168d61c3672a222f810",
+      "review_fingerprint": "b0803bdc9abea8f90f3018182006533690fd09a08d37b9204148c12f73414c6b",
+      "generation_authority_current": false,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-20-C01.jpg",
+      "source_image": "test-gallery/I-20-C01.png",
+      "source_sha256": "fab10d3fbb9cbed837ac4b0994c9473e1f572120df77174241444ead4f336d51",
+      "visual_review": null,
+      "advisory_review_status": "unavailable",
+      "advisory_review_error": "Environment reviewer remained self-contradictory after consistency retry: [{'kind': 'defect_preserve_conflict', 'defect': 'arched burial niches not visible', 'preserve': 'arched burial niches', 'overlap': 1.0}]",
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-26T01:13:16.390134+00:00"
+    },
+    {
+      "review_id": "I-22-C01-H5f66847bb69b5c2b",
+      "page_id": "I-22",
+      "monster_name": "Giant Spider",
+      "candidate": 1,
+      "selected": false,
+      "seed": 3990374931792528782,
+      "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
+      "generation_fingerprint": "4e829646dd8f0671177a0865df6f2928614efd055576fbf7efcaf440a957438c",
+      "review_fingerprint": "5e7d1ed26b8ee4bfe2a26f2a1284c730d19013a0f73ce767bb0db12fb15a2023",
+      "generation_authority_current": false,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-22-C01.jpg",
+      "source_image": "test-gallery/I-22-C01.png",
+      "source_sha256": "5f66847bb69b5c2bcede5a1de5919c3b2116d9e425158aa5e98aa59be43e3c45",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "Webbed Dungeon Hall not visible; no arches or masonry"
+        ],
+        "preserve": [
+          "giant spider center",
+          "open floor lane",
+          "radial web spans"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-25T23:04:46.317112+00:00"
+    }
+  ],
+  "diagnostics": [
+    {
+      "page_id": "I-01",
+      "monster_name": "Kobold Warrior",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:41:51.337436+00:00",
+      "finished_at": "2026-09-24T11:42:07.687282+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "kobold warrior",
+          "tripwire triggered",
+          "punji pit"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-01-C02-Ha1ccd133cab22441",
+        "decision": "reject",
+        "notes": "Reject: reads as a large muscular dragonborn/lizard warrior, not a small wiry kobold; shrink frame, narrow shoulders/torso, simplify scales, keep trap interaction obvious."
+      }
+    },
+    {
+      "page_id": "I-01",
+      "monster_name": "Kobold Warrior",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:42:07.687801+00:00",
+      "finished_at": "2026-09-24T11:42:24.284543+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "tight dressed-stone corridor",
+          "kobold is physically beside the visible tripwire and triggered pit",
+          "cackling trap-maker expression"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-01-C03-Hdcc41e9ce5b32d1e",
+        "decision": "reject",
+        "notes": "Reject: reads as a large muscular dragonborn/lizard warrior, not a small wiry kobold; shrink frame, narrow shoulders/torso, simplify scales, keep trap interaction obvious."
+      }
+    },
+    {
+      "page_id": "I-01",
+      "monster_name": "Kobold Warrior",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:42:24.285566+00:00",
+      "finished_at": "2026-09-24T11:42:40.704736+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "tight dressed-stone corridor",
+          "wall torch",
+          "cackling trap-maker expression"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-01-C04-Hf0ad6e03bbe4ed4d",
+        "decision": "reject",
+        "notes": "Reject: reads as a large muscular dragonborn/lizard warrior, not a small wiry kobold; shrink frame, narrow shoulders/torso, simplify scales, keep trap interaction obvious."
+      }
+    },
+    {
+      "page_id": "I-02",
+      "monster_name": "Kobold Shrine-Keeper",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:42:40.705735+00:00",
+      "finished_at": "2026-09-24T11:42:57.281150+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "kobold shrine-keeper",
+          "copper coin as offering",
+          "low flowstone altar with skull"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-02-C01-H070fed2799ed308d",
+        "decision": "reject",
+        "notes": "Reject: shrine-keeper reads as a full-size muscular dragon-person; restore small lean kobold scale, reverent caretaker posture, simple ritual gear, and stronger shrine interaction."
+      }
+    },
+    {
+      "page_id": "I-02",
+      "monster_name": "Kobold Shrine-Keeper",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:42:57.282179+00:00",
+      "finished_at": "2026-09-24T11:43:13.801076+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "kobold shrine-keeper",
+          "copper coin as offering",
+          "low flowstone altar with dragon skull"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-02-C02-H62ca374c156b3ee6",
+        "decision": "reject",
+        "notes": "Reject: shrine-keeper reads as a full-size muscular dragon-person; restore small lean kobold scale, reverent caretaker posture, simple ritual gear, and stronger shrine interaction."
+      }
+    },
+    {
+      "page_id": "I-02",
+      "monster_name": "Kobold Shrine-Keeper",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:43:13.805565+00:00",
+      "finished_at": "2026-09-24T11:43:30.065229+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "kobold shrine-keeper",
+          "copper coin as offering",
+          "dragon skull shrine prop"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-02-C03-Hd92976d14affc1a0",
+        "decision": "reject",
+        "notes": "Reject: shrine-keeper reads as a full-size muscular dragon-person; restore small lean kobold scale, reverent caretaker posture, simple ritual gear, and stronger shrine interaction."
+      }
+    },
+    {
+      "page_id": "I-02",
+      "monster_name": "Kobold Shrine-Keeper",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:43:30.066232+00:00",
+      "finished_at": "2026-09-24T11:43:46.679063+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "lean kobold shrine-keeper",
+          "copper coin held up as an offering",
+          "low cave shrine"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-02-C04-H14a532170865b9ec",
+        "decision": "reject",
+        "notes": "Reject: shrine-keeper reads as a full-size muscular dragon-person; restore small lean kobold scale, reverent caretaker posture, simple ritual gear, and stronger shrine interaction."
+      }
+    },
+    {
+      "page_id": "I-03",
+      "monster_name": "Goblin Minion",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:43:46.682702+00:00",
+      "finished_at": "2026-09-24T11:44:03.861494+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Goblin Minion",
+          "Rough Stone Pantry",
+          "Running away with a stolen ham"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-03-C01-H83d4088263b4838d",
+        "decision": "reject",
+        "notes": "Reject: goblin minion is too muscular/upright and the stolen object does not consistently read as a ham; remove heroic physique and any horn/demon cues, make the ham unmistakable."
+      }
+    },
+    {
+      "page_id": "I-03",
+      "monster_name": "Goblin Minion",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:44:03.862516+00:00",
+      "finished_at": "2026-09-24T11:44:22.594962+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Goblin minion with oversized ears and broad nose",
+          "Running away with stolen ham",
+          "Rough stone pantry shelves with crocks and sacks"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-03-C02-H648b88188e252bb3",
+        "decision": "reject",
+        "notes": "Reject: goblin minion is too muscular/upright and the stolen object does not consistently read as a ham; remove heroic physique and any horn/demon cues, make the ham unmistakable."
+      }
+    },
+    {
+      "page_id": "I-03",
+      "monster_name": "Goblin Minion",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:44:22.596516+00:00",
+      "finished_at": "2026-09-24T11:44:40.191957+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Goblin minion running away with stolen ham",
+          "Rough stone pantry shelves with crocks",
+          "Monster dominates center frame"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-03-C03-Hcda680dd1ab1f904",
+        "decision": "reject",
+        "notes": "Reject: goblin minion is too muscular/upright and the stolen object does not consistently read as a ham; remove heroic physique and any horn/demon cues, make the ham unmistakable."
+      }
+    },
+    {
+      "page_id": "I-03",
+      "monster_name": "Goblin Minion",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:44:40.194781+00:00",
+      "finished_at": "2026-09-24T11:44:57.595668+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Goblin Minion",
+          "Rough Stone Pantry",
+          "Running away with a stolen ham"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-03-C04-H15ce3a25e0b325b8",
+        "decision": "reject",
+        "notes": "Reject: goblin minion is too muscular/upright and the stolen object does not consistently read as a ham; remove heroic physique and any horn/demon cues, make the ham unmistakable."
+      }
+    },
+    {
       "page_id": "I-04",
       "monster_name": "Goblin Warrior",
-      "candidate": 1,
-      "seed": 6125469128827572585,
-      "preview": "review-previews/I-04-C01.jpg",
-      "source_image": "test-gallery/I-04-C01.png",
-      "source_sha256": "ccf7a35191d2d05de4e1671d918a913095f34ad1d264d6acc76d2ccf94eb9c03",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:45:14.215957+00:00",
+      "finished_at": "2026-09-24T11:45:32.476190+00:00",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
-          "Goblin Warrior identity",
-          "Dressed-Stone Corridor habitat",
-          "Kicking over lantern story beat"
+          "goblin warrior",
+          "dungeon corridor",
+          "kicking lantern action"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T14:39:59.508429+00:00"
+      "assistant_review": {
+        "review_id": "I-04-C02-H52360451477d0df5",
+        "decision": "reject",
+        "notes": "Reject: goblin warrior drifts into a muscular heroic/demonic goblinoid; no horns, no bodybuilder torso, keep small wiry goblin proportions and practical scavenged gear."
+      }
     },
     {
-      "review_id": "I-08-C01-H2021cb200860ef32",
-      "page_id": "I-08",
-      "monster_name": "Bugbear Warrior",
-      "candidate": 1,
-      "seed": 1921310463933763656,
-      "preview": "review-previews/I-08-C01.jpg",
-      "source_image": "test-gallery/I-08-C01.png",
-      "source_sha256": "2021cb200860ef32e8022a51901c28e7608c974049fd3ff426556a1e53f500bf",
+      "page_id": "I-04",
+      "monster_name": "Goblin Warrior",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:45:32.477224+00:00",
+      "finished_at": "2026-09-24T11:45:49.460655+00:00",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
-          "large ceiling breach overhead",
+          "goblin warrior",
+          "narrow dungeon crawlway",
+          "darkening-hall story beat"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-04-C03-H5aaf11f458042140",
+        "decision": "reject",
+        "notes": "Reject: goblin warrior drifts into a muscular heroic/demonic goblinoid; no horns, no bodybuilder torso, keep small wiry goblin proportions and practical scavenged gear."
+      }
+    },
+    {
+      "page_id": "I-04",
+      "monster_name": "Goblin Warrior",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:45:49.462906+00:00",
+      "finished_at": "2026-09-24T11:46:05.769031+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "goblin warrior",
+          "narrow dungeon crawlway",
+          "darkening-hall story beat"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-04-C04-Hce1503c7bb876d97",
+        "decision": "reject",
+        "notes": "Reject: goblin warrior drifts into a muscular heroic/demonic goblinoid; no horns, no bodybuilder torso, keep small wiry goblin proportions and practical scavenged gear."
+      }
+    },
+    {
+      "page_id": "I-05",
+      "monster_name": "Goblin Boss",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:46:05.770375+00:00",
+      "finished_at": "2026-09-24T11:46:22.448517+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "goblin boss stands atop chest",
+          "improvised throne grotto",
+          "bent sword pointing outward"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-05-C01-Hf26a3afa10a95408",
+        "decision": "reject",
+        "notes": "Reject: goblin boss is a bodybuilder/imp-like brute; remove horns, tail/clawed-animal feet and six-pack bulk, keep small wiry goblin anatomy, scavenged rank gear, and improvised throne context."
+      }
+    },
+    {
+      "page_id": "I-05",
+      "monster_name": "Goblin Boss",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:46:22.450079+00:00",
+      "finished_at": "2026-09-24T11:46:39.394081+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "goblin boss stands atop chest",
+          "improvised throne grotto",
+          "bent sword pointing outward"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-05-C02-H6b0a46d9485c5390",
+        "decision": "reject",
+        "notes": "Reject: goblin boss is a bodybuilder/imp-like brute; remove horns, tail/clawed-animal feet and six-pack bulk, keep small wiry goblin anatomy, scavenged rank gear, and improvised throne context."
+      }
+    },
+    {
+      "page_id": "I-05",
+      "monster_name": "Goblin Boss",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:46:39.395107+00:00",
+      "finished_at": "2026-09-24T11:46:56.452162+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "goblin boss stands atop chest",
+          "improvised throne grotto",
+          "bent sword pointing outward"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-05-C03-H93a65d5c2fe06c76",
+        "decision": "reject",
+        "notes": "Reject: goblin boss is a bodybuilder/imp-like brute; remove horns, tail/clawed-animal feet and six-pack bulk, keep small wiry goblin anatomy, scavenged rank gear, and improvised throne context."
+      }
+    },
+    {
+      "page_id": "I-05",
+      "monster_name": "Goblin Boss",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:46:56.459173+00:00",
+      "finished_at": "2026-09-24T11:47:13.449978+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "goblin boss standing atop chest",
+          "improvised throne grotto",
+          "bent sword pointing outward"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-05-C04-Hb39aa99cf1c20e23",
+        "decision": "reject",
+        "notes": "Reject: goblin boss is a bodybuilder/imp-like brute; remove horns, tail/clawed-animal feet and six-pack bulk, keep small wiry goblin anatomy, scavenged rank gear, and improvised throne context."
+      }
+    },
+    {
+      "page_id": "I-06",
+      "monster_name": "Hobgoblin Warrior",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:47:13.450980+00:00",
+      "finished_at": "2026-09-24T11:47:30.085056+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "disciplined hobgoblin warrior",
+          "underground barracks tunnel",
+          "military posture"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-06-C01-H6f1fa66991a23cc8",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin warrior has horned/orc-like brute drift; no horns or tusks, reduce bulk, restore medium lean disciplined goblinoid soldier proportions and controlled military bearing."
+      }
+    },
+    {
+      "page_id": "I-06",
+      "monster_name": "Hobgoblin Warrior",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:47:30.093458+00:00",
+      "finished_at": "2026-09-24T11:47:46.896137+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "disciplined hobgoblin warrior",
+          "underground barracks tunnel",
+          "military posture"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-06-C02-H74190e44a3c5ccf9",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin warrior has horned/orc-like brute drift; no horns or tusks, reduce bulk, restore medium lean disciplined goblinoid soldier proportions and controlled military bearing."
+      }
+    },
+    {
+      "page_id": "I-06",
+      "monster_name": "Hobgoblin Warrior",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:47:46.897484+00:00",
+      "finished_at": "2026-09-24T11:48:03.009577+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "disciplined hobgoblin warrior",
+          "underground barracks tunnel",
+          "military posture"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-06-C03-H9bcceb10fdbd9c18",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin warrior has horned/orc-like brute drift; no horns or tusks, reduce bulk, restore medium lean disciplined goblinoid soldier proportions and controlled military bearing."
+      }
+    },
+    {
+      "page_id": "I-06",
+      "monster_name": "Hobgoblin Warrior",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:48:03.010602+00:00",
+      "finished_at": "2026-09-24T11:48:19.827935+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "disciplined hobgoblin warrior",
+          "underground barracks tunnel",
+          "military posture"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-06-C04-H3baa246995ee7a80",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin warrior has horned/orc-like brute drift; no horns or tusks, reduce bulk, restore medium lean disciplined goblinoid soldier proportions and controlled military bearing."
+      }
+    },
+    {
+      "page_id": "I-07",
+      "monster_name": "Hobgoblin Captain",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:48:19.829473+00:00",
+      "finished_at": "2026-09-24T11:48:36.182222+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "hobgoblin captain",
+          "dagger pinning a tunnel map",
+          "cave war-room table"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-07-C01-H2131478eb8553fbe",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin captain is horned and ogre/orc-like; restore stern hornless goblinoid face, lean athletic officer proportions, disciplined gear, and map-table command scene."
+      }
+    },
+    {
+      "page_id": "I-07",
+      "monster_name": "Hobgoblin Captain",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:48:36.189043+00:00",
+      "finished_at": "2026-09-24T11:48:52.689584+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Hobgoblin Captain",
+          "Dagger pinning map",
+          "Cave War Room table"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-07-C02-H15ad2ad81fa4d614",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin captain is horned and ogre/orc-like; restore stern hornless goblinoid face, lean athletic officer proportions, disciplined gear, and map-table command scene."
+      }
+    },
+    {
+      "page_id": "I-07",
+      "monster_name": "Hobgoblin Captain",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:48:52.692519+00:00",
+      "finished_at": "2026-09-24T11:49:09.243848+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "hobgoblin captain",
+          "dagger pinning a tunnel map",
+          "cave war-room table"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-07-C03-H31795bd6ac0cd31b",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin captain is horned and ogre/orc-like; restore stern hornless goblinoid face, lean athletic officer proportions, disciplined gear, and map-table command scene."
+      }
+    },
+    {
+      "page_id": "I-07",
+      "monster_name": "Hobgoblin Captain",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:49:09.250578+00:00",
+      "finished_at": "2026-09-24T11:49:25.698962+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "hobgoblin captain",
+          "dagger pinning a tunnel map",
+          "cave war-room table"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-07-C04-He664ae6a8f2af69b",
+        "decision": "reject",
+        "notes": "Reject: hobgoblin captain is horned and ogre/orc-like; restore stern hornless goblinoid face, lean athletic officer proportions, disciplined gear, and map-table command scene."
+      }
+    },
+    {
+      "page_id": "I-08",
+      "monster_name": "Bugbear Warrior",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:49:42.180149+00:00",
+      "finished_at": "2026-09-24T11:49:58.535334+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "large broken ceiling breach",
           "fallen masonry used as cover",
           "dungeon hall perspective"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T14:40:41.393265+00:00"
+      "assistant_review": {
+        "review_id": "I-08-C02-Ha9aeb6f61d696efd",
+        "decision": "reject",
+        "notes": "Reject: bugbear reads as a horned/bodybuilder furry brute; no horns, narrow torso, lengthen arms, keep selective shaggy hair and unmistakable goblinoid face."
+      }
     },
     {
-      "review_id": "I-10-C01-Hfcbc36f35644e9b4",
+      "page_id": "I-08",
+      "monster_name": "Bugbear Warrior",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:49:58.536971+00:00",
+      "finished_at": "2026-09-24T11:50:14.880472+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "large ceiling breach",
+          "fallen masonry as cover",
+          "dungeon hall perspective"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-08-C03-Hd4faae6b00d7137b",
+        "decision": "reject",
+        "notes": "Reject: bugbear reads as a horned/bodybuilder furry brute; no horns, narrow torso, lengthen arms, keep selective shaggy hair and unmistakable goblinoid face."
+      }
+    },
+    {
+      "page_id": "I-08",
+      "monster_name": "Bugbear Warrior",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:50:14.882521+00:00",
+      "finished_at": "2026-09-24T11:50:31.172376+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "large broken ceiling breach overhead",
+          "fallen masonry used as cover",
+          "dungeon hall perspective"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-08-C04-Hf2aa71690c9513a4",
+        "decision": "reject",
+        "notes": "Reject: bugbear reads as a horned/bodybuilder furry brute; no horns, narrow torso, lengthen arms, keep selective shaggy hair and unmistakable goblinoid face."
+      }
+    },
+    {
+      "page_id": "I-09",
+      "monster_name": "Bugbear Stalker",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:50:31.177379+00:00",
+      "finished_at": "2026-09-24T11:50:48.143414+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Bugbear Stalker",
+          "Low Dungeon Service Crawlway",
+          "Dragged sack and silence signal"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-09-C01-Hdea2d0c0e18b5130",
+        "decision": "reject",
+        "notes": "Reject: bugbear stalker is upright/bodybuilder-like in a normal-height hall; enforce low crawlway crouch, long arms, no horns/tusks, one dragged sack, and clear finger-to-mouth silence signal."
+      }
+    },
+    {
+      "page_id": "I-09",
+      "monster_name": "Bugbear Stalker",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:50:48.145008+00:00",
+      "finished_at": "2026-09-24T11:51:04.971003+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Bugbear Stalker",
+          "Low Dungeon Service Crawlway",
+          "Dragging a sack and signaling for silence"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-09-C02-H3f46cf6160d4680b",
+        "decision": "reject",
+        "notes": "Reject: bugbear stalker is upright/bodybuilder-like in a normal-height hall; enforce low crawlway crouch, long arms, no horns/tusks, one dragged sack, and clear finger-to-mouth silence signal."
+      }
+    },
+    {
+      "page_id": "I-09",
+      "monster_name": "Bugbear Stalker",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:51:04.972706+00:00",
+      "finished_at": "2026-09-24T11:51:22.210054+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Bugbear Stalker",
+          "Low Dungeon Service Crawlway",
+          "Dragged sack and silence signal"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-09-C03-Hb260f0b1ca884553",
+        "decision": "reject",
+        "notes": "Reject: bugbear stalker is upright/bodybuilder-like in a normal-height hall; enforce low crawlway crouch, long arms, no horns/tusks, one dragged sack, and clear finger-to-mouth silence signal."
+      }
+    },
+    {
+      "page_id": "I-09",
+      "monster_name": "Bugbear Stalker",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:51:22.215597+00:00",
+      "finished_at": "2026-09-24T11:51:39.441570+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Bugbear Stalker",
+          "Low Dungeon Service Crawlway",
+          "Dragging a sack and signaling for silence"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-09-C04-H8fc96df5330edc4c",
+        "decision": "reject",
+        "notes": "Reject: bugbear stalker is upright/bodybuilder-like in a normal-height hall; enforce low crawlway crouch, long arms, no horns/tusks, one dragged sack, and clear finger-to-mouth silence signal."
+      }
+    },
+    {
       "page_id": "I-10",
       "monster_name": "Ogre",
-      "candidate": 1,
-      "seed": 4998718374930566784,
-      "preview": "review-previews/I-10-C01.jpg",
-      "source_image": "test-gallery/I-10-C01.png",
-      "source_sha256": "fcbc36f35644e9b40ba20be3da94cd2c6c22e7f2ca7b935206862a32888784be",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:52:00.607734+00:00",
+      "finished_at": "2026-09-24T11:52:17.469688+00:00",
       "visual_review": {
         "pass": true,
         "score": 95,
@@ -89,84 +1601,1002 @@
           "wedged awkwardly on the stairs"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T14:40:59.731311+00:00"
+      "assistant_review": {
+        "review_id": "I-10-C02-Hceb19956e2ad1f90",
+        "decision": "reject",
+        "notes": "Reject: ogre is posing on stairs rather than visibly wedged in a too-small spiral stair; remove unnecessary horns and compress torso/limbs against the wall/inner column so the stuck moment reads instantly."
+      }
     },
     {
-      "review_id": "I-14-C01-H783d0553e82b51b5",
-      "page_id": "I-14",
-      "monster_name": "Darkmantle",
-      "candidate": 1,
-      "seed": 2351234977131057554,
-      "preview": "review-previews/I-14-C01.jpg",
-      "source_image": "test-gallery/I-14-C01.png",
-      "source_sha256": "783d0553e82b51b5336643f43ccc382510e7aff16321c8124f80084d06f9df79",
+      "page_id": "I-10",
+      "monster_name": "Ogre",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:52:17.471244+00:00",
+      "finished_at": "2026-09-24T11:52:33.864066+00:00",
       "visual_review": {
-        "pass": false,
-        "score": 20,
-        "defects": [
-          "dragon head, horns, tail, arms, legs, or separate wings visible"
-        ],
+        "pass": true,
+        "score": 95,
+        "defects": [],
         "preserve": [
-          "body is compact"
+          "massive ogre",
+          "cramped spiral stair",
+          "wedged awkwardly on the stairs"
         ]
       },
-      "status": "max_refinements_reached",
-      "finished_at": "2026-09-24T14:42:17.305775+00:00"
+      "assistant_review": {
+        "review_id": "I-10-C03-H9cb057e9c4a3d7a6",
+        "decision": "reject",
+        "notes": "Reject: ogre is posing on stairs rather than visibly wedged in a too-small spiral stair; remove unnecessary horns and compress torso/limbs against the wall/inner column so the stuck moment reads instantly."
+      }
     },
     {
-      "review_id": "I-16-C01-H50f1672455941847",
+      "page_id": "I-10",
+      "monster_name": "Ogre",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:52:33.865601+00:00",
+      "finished_at": "2026-09-24T11:52:51.317844+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "massive ogre",
+          "cramped spiral stair",
+          "wedged awkwardly on the stairs"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-10-C04-Hd1314e9c61639166",
+        "decision": "reject",
+        "notes": "Reject: ogre is posing on stairs rather than visibly wedged in a too-small spiral stair; remove unnecessary horns and compress torso/limbs against the wall/inner column so the stuck moment reads instantly."
+      }
+    },
+    {
+      "page_id": "I-11",
+      "monster_name": "Ogre Zombie",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:52:51.319844+00:00",
+      "finished_at": "2026-09-24T11:53:08.039568+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "cramped dark stair"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-11-C01-H37a359c16ef378c9",
+        "decision": "reject",
+        "notes": "Reject: reads as a living ogre with chains, not an ogre zombie; add clear restrained undead damage/decay, shambling downward motion, chain contact with steps, and no decorative horn drift."
+      }
+    },
+    {
+      "page_id": "I-11",
+      "monster_name": "Ogre Zombie",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:53:08.041098+00:00",
+      "finished_at": "2026-09-24T11:53:25.012157+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "cramped dark stair"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-11-C02-H8a601061f6710086",
+        "decision": "reject",
+        "notes": "Reject: reads as a living ogre with chains, not an ogre zombie; add clear restrained undead damage/decay, shambling downward motion, chain contact with steps, and no decorative horn drift."
+      }
+    },
+    {
+      "page_id": "I-11",
+      "monster_name": "Ogre Zombie",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:53:25.013681+00:00",
+      "finished_at": "2026-09-24T11:53:41.488738+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "large ogre zombie",
+          "dragging chains",
+          "cramped dark stair"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-11-C03-Hca86f80bb1786b5a",
+        "decision": "reject",
+        "notes": "Reject: reads as a living ogre with chains, not an ogre zombie; add clear restrained undead damage/decay, shambling downward motion, chain contact with steps, and no decorative horn drift."
+      }
+    },
+    {
+      "page_id": "I-11",
+      "monster_name": "Ogre Zombie",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:53:41.491100+00:00",
+      "finished_at": "2026-09-24T11:53:57.887696+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "cramped dark stair"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-11-C04-H70f2a5946ae45d67",
+        "decision": "reject",
+        "notes": "Reject: reads as a living ogre with chains, not an ogre zombie; add clear restrained undead damage/decay, shambling downward motion, chain contact with steps, and no decorative horn drift."
+      }
+    },
+    {
+      "page_id": "I-12",
+      "monster_name": "Troll",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:53:57.888696+00:00",
+      "finished_at": "2026-09-24T11:55:23.485252+00:00",
+      "visual_review": {
+        "pass": false,
+        "score": 60,
+        "defects": [
+          "No stalactites or stalagmites visible"
+        ],
+        "preserve": [
+          "Cave chamber with arched ceiling"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-12-C01-H340fc9d780082fad",
+        "decision": "reject",
+        "notes": "Reject: troll is too stocky/horned/furry and lacks the regeneration story; make it lanky with very long clawed arms, no horns, show a wound visibly closing, and a clear hostile recoil/glare toward the fire pit."
+      }
+    },
+    {
+      "page_id": "I-12",
+      "monster_name": "Troll",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:55:23.486796+00:00",
+      "finished_at": "2026-09-24T11:55:39.600761+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "lanky troll",
+          "cave fire pit",
+          "visible closing wound"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-12-C02-H7d59f1a4c7f2a7d1",
+        "decision": "reject",
+        "notes": "Reject: troll is too stocky/horned/furry and lacks the regeneration story; make it lanky with very long clawed arms, no horns, show a wound visibly closing, and a clear hostile recoil/glare toward the fire pit."
+      }
+    },
+    {
+      "page_id": "I-12",
+      "monster_name": "Troll",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:55:39.608881+00:00",
+      "finished_at": "2026-09-24T11:55:56.537398+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "lanky troll",
+          "cave fire pit",
+          "hostile glare toward fire"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-12-C03-Hccd596694603dcf2",
+        "decision": "reject",
+        "notes": "Reject: troll is too stocky/horned/furry and lacks the regeneration story; make it lanky with very long clawed arms, no horns, show a wound visibly closing, and a clear hostile recoil/glare toward the fire pit."
+      }
+    },
+    {
+      "page_id": "I-12",
+      "monster_name": "Troll",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:55:56.539458+00:00",
+      "finished_at": "2026-09-24T11:57:20.076378+00:00",
+      "visual_review": {
+        "pass": false,
+        "score": 70,
+        "defects": [
+          "No stalactites or stalagmites visible"
+        ],
+        "preserve": [
+          "Arched limestone passage"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-12-C04-H6f7d629d01c42af1",
+        "decision": "reject",
+        "notes": "Reject: troll is too stocky/horned/furry and lacks the regeneration story; make it lanky with very long clawed arms, no horns, show a wound visibly closing, and a clear hostile recoil/glare toward the fire pit."
+      }
+    },
+    {
+      "page_id": "I-13",
+      "monster_name": "Troll Limb",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:57:20.078425+00:00",
+      "finished_at": "2026-09-24T11:57:56.146562+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "severed troll arm crawling toward a dropped axe",
+          "Dressed-Stone Corridor",
+          "large open white coloring regions"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-13-C01-H05195baae57598e0",
+        "decision": "reject",
+        "notes": "Reject: page shows a full troll; this page must center the troll limb concept/story, not another complete troll body. Rebuild around the required severed/regenerating limb interaction."
+      }
+    },
+    {
+      "page_id": "I-13",
+      "monster_name": "Troll Limb",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:57:56.148564+00:00",
+      "finished_at": "2026-09-24T11:58:12.848911+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "severed troll arm crawling toward a dropped axe",
+          "dressed-stone corridor with torch brackets",
+          "monster dominates center with clear anatomy"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-13-C02-Hcf5c1a50694e12fe",
+        "decision": "reject",
+        "notes": "Reject: page shows a full troll; this page must center the troll limb concept/story, not another complete troll body. Rebuild around the required severed/regenerating limb interaction."
+      }
+    },
+    {
+      "page_id": "I-13",
+      "monster_name": "Troll Limb",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:58:12.851098+00:00",
+      "finished_at": "2026-09-24T11:58:29.228384+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "severed troll arm crawling toward a dropped axe",
+          "dressed-stone corridor environment",
+          "large open coloring regions"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-13-C03-H8285620148503e35",
+        "decision": "reject",
+        "notes": "Reject: page shows a full troll; this page must center the troll limb concept/story, not another complete troll body. Rebuild around the required severed/regenerating limb interaction."
+      }
+    },
+    {
+      "page_id": "I-13",
+      "monster_name": "Troll Limb",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:58:29.229956+00:00",
+      "finished_at": "2026-09-24T11:58:45.956195+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "severed troll arm crawling toward a dropped axe",
+          "dressed-stone corridor environment",
+          "large open coloring regions"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-13-C04-Hc88d55dc2b45d068",
+        "decision": "reject",
+        "notes": "Reject: page shows a full troll; this page must center the troll limb concept/story, not another complete troll body. Rebuild around the required severed/regenerating limb interaction."
+      }
+    },
+    {
+      "page_id": "I-14",
+      "monster_name": "Darkmantle",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:59:01.183496+00:00",
+      "finished_at": "2026-09-24T11:59:17.251439+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Darkmantle clinging to stalactite",
+          "Limestone Drip Cave environment",
+          "Peeling action visible without caption"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-14-C02-Hd2d6eefea41652b2",
+        "decision": "reject",
+        "notes": "Reject: darkmantle has become a dragon/demon humanoid with wings and tail; rebuild from canonical darkmantle anatomy with the correct body plan and ceiling/cave ambush identity."
+      }
+    },
+    {
+      "page_id": "I-14",
+      "monster_name": "Darkmantle",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:59:17.253947+00:00",
+      "finished_at": "2026-09-24T11:59:32.272514+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Darkmantle",
+          "Limestone Drip Cave",
+          "Peeling away from stalactite above lantern"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-14-C03-H7390e2683fdd7730",
+        "decision": "reject",
+        "notes": "Reject: darkmantle has become a dragon/demon humanoid with wings and tail; rebuild from canonical darkmantle anatomy with the correct body plan and ceiling/cave ambush identity."
+      }
+    },
+    {
+      "page_id": "I-14",
+      "monster_name": "Darkmantle",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:59:32.274053+00:00",
+      "finished_at": "2026-09-24T11:59:48.294973+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Darkmantle peeling from stalactite",
+          "Limestone Drip Cave environment",
+          "Lantern hanging below"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-14-C04-H94936d064fd6f781",
+        "decision": "reject",
+        "notes": "Reject: darkmantle has become a dragon/demon humanoid with wings and tail; rebuild from canonical darkmantle anatomy with the correct body plan and ceiling/cave ambush identity."
+      }
+    },
+    {
+      "page_id": "I-15",
+      "monster_name": "Stirges",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T11:59:48.297042+00:00",
+      "finished_at": "2026-09-24T12:00:03.937760+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [
+          "monster is large, centered, dominant"
+        ],
+        "preserve": [
+          "dungeon prison cell",
+          "feeding stirges",
+          "stone barred doors"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-15-C01-Hf21c730bd1a10531",
+        "decision": "reject",
+        "notes": "Reject: stirges are rendered as a large winged dragon humanoid; use multiple small stirges with compact bat/insect bodies and long piercing proboscises, never a humanoid dragon centerpiece."
+      }
+    },
+    {
+      "page_id": "I-15",
+      "monster_name": "Stirges",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:00:03.939800+00:00",
+      "finished_at": "2026-09-24T12:00:39.838970+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [
+          "monster is large, centered, and visually dominant"
+        ],
+        "preserve": [
+          "dungeon prison cell environment",
+          "feeding stirges swarm",
+          "stone masonry walls and barred doors"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-15-C02-H56385eecdf1f1b08",
+        "decision": "reject",
+        "notes": "Reject: stirges are rendered as a large winged dragon humanoid; use multiple small stirges with compact bat/insect bodies and long piercing proboscises, never a humanoid dragon centerpiece."
+      }
+    },
+    {
+      "page_id": "I-15",
+      "monster_name": "Stirges",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:00:39.845247+00:00",
+      "finished_at": "2026-09-24T12:00:54.964043+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Stirges feeding around prisoner",
+          "Dungeon prison cell with barred doors",
+          "Monster dominates center"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-15-C03-Hde9ea8b2eaccca1b",
+        "decision": "reject",
+        "notes": "Reject: stirges are rendered as a large winged dragon humanoid; use multiple small stirges with compact bat/insect bodies and long piercing proboscises, never a humanoid dragon centerpiece."
+      }
+    },
+    {
+      "page_id": "I-15",
+      "monster_name": "Stirges",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:00:54.966300+00:00",
+      "finished_at": "2026-09-24T12:01:11.345252+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [
+          "proboscises are not clearly visible"
+        ],
+        "preserve": [
+          "monster is dominant focal subject"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-15-C04-Hfd3cbd5cec45930b",
+        "decision": "reject",
+        "notes": "Reject: stirges are rendered as a large winged dragon humanoid; use multiple small stirges with compact bat/insect bodies and long piercing proboscises, never a humanoid dragon centerpiece."
+      }
+    },
+    {
       "page_id": "I-16",
       "monster_name": "Giant Bat",
-      "candidate": 1,
-      "seed": 5159307407140067306,
-      "preview": "review-previews/I-16-C01.jpg",
-      "source_image": "test-gallery/I-16-C01.png",
-      "source_sha256": "50f1672455941847bd1eb5094ce29b1cd118a0cff19290669c97f3ee02329ef8",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:01:27.271552+00:00",
+      "finished_at": "2026-09-24T12:01:43.605724+00:00",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
           "giant bat hangs from ceiling",
-          "underground river below",
+          "underground river cavern",
           "partly wrapped wings"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T14:42:36.003026+00:00"
+      "assistant_review": {
+        "review_id": "I-16-C02-Hb4eb971980760f43",
+        "decision": "reject",
+        "notes": "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
+      }
     },
     {
-      "review_id": "I-19-C01-H20e83be840e2a5e7",
+      "page_id": "I-16",
+      "monster_name": "Giant Bat",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:01:43.614232+00:00",
+      "finished_at": "2026-09-24T12:01:59.534412+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant bat hanging from ceiling",
+          "underground river cavern environment",
+          "partly wrapped wings"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-16-C03-H011634365813f051",
+        "decision": "reject",
+        "notes": "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
+      }
+    },
+    {
+      "page_id": "I-16",
+      "monster_name": "Giant Bat",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:01:59.537040+00:00",
+      "finished_at": "2026-09-24T12:02:15.603455+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant bat hanging with wings partly wrapped",
+          "underground river cavern environment",
+          "natural cavern ceiling and river channel visible"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-16-C04-H874cf92fa86c3c46",
+        "decision": "reject",
+        "notes": "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
+      }
+    },
+    {
+      "page_id": "I-17",
+      "monster_name": "Bat Swarm",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:02:15.606500+00:00",
+      "finished_at": "2026-09-24T12:02:31.009623+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 100,
+        "defects": [],
+        "preserve": [
+          "bat swarm erupting upward",
+          "vertical well shaft rim",
+          "clear spiral movement"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-17-C01-H438160d9171471ea",
+        "decision": "reject",
+        "notes": "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
+      }
+    },
+    {
+      "page_id": "I-17",
+      "monster_name": "Bat Swarm",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:02:31.011855+00:00",
+      "finished_at": "2026-09-24T12:02:46.770930+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "vertical well shaft",
+          "swarm erupting upward",
+          "centered dominant bat"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-17-C02-H4ed61fb967f68f82",
+        "decision": "reject",
+        "notes": "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
+      }
+    },
+    {
+      "page_id": "I-17",
+      "monster_name": "Bat Swarm",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:02:46.772980+00:00",
+      "finished_at": "2026-09-24T12:03:02.258786+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 100,
+        "defects": [],
+        "preserve": [
+          "bat swarm erupting upward",
+          "vertical well shaft",
+          "open center for readability"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-17-C03-Hb19025c248df0e76",
+        "decision": "reject",
+        "notes": "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
+      }
+    },
+    {
+      "page_id": "I-17",
+      "monster_name": "Bat Swarm",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:03:02.271672+00:00",
+      "finished_at": "2026-09-24T12:03:17.903827+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "vertical well shaft",
+          "swarm erupting upward",
+          "centered dominant bat"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-17-C04-Hc993eda7f72c916e",
+        "decision": "reject",
+        "notes": "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
+      }
+    },
+    {
+      "page_id": "I-18",
+      "monster_name": "Giant Rat",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:03:17.905880+00:00",
+      "finished_at": "2026-09-24T12:03:35.201313+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant rat",
+          "defensive nest posture",
+          "burst grain sacks"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-18-C01-H4ca347c4ac5354f4",
+        "decision": "reject",
+        "notes": "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+      }
+    },
+    {
+      "page_id": "I-18",
+      "monster_name": "Giant Rat",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:03:35.203821+00:00",
+      "finished_at": "2026-09-24T12:03:54.079124+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant rat",
+          "defensive nest posture",
+          "burst grain sacks"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-18-C02-H6dbb1534901e261e",
+        "decision": "reject",
+        "notes": "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+      }
+    },
+    {
+      "page_id": "I-18",
+      "monster_name": "Giant Rat",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:03:54.081714+00:00",
+      "finished_at": "2026-09-24T12:04:10.920657+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant rat",
+          "defensive nest posture",
+          "burst grain sacks"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-18-C03-Hf180719c52ab5308",
+        "decision": "reject",
+        "notes": "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+      }
+    },
+    {
+      "page_id": "I-18",
+      "monster_name": "Giant Rat",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:04:10.923712+00:00",
+      "finished_at": "2026-09-24T12:04:30.222738+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant rat",
+          "defensive nest posture",
+          "burst grain sacks"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-18-C04-H00d8ae0706f1c53b",
+        "decision": "reject",
+        "notes": "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+      }
+    },
+    {
       "page_id": "I-19",
       "monster_name": "Rat Swarm",
-      "candidate": 1,
-      "seed": 7728729289538678443,
-      "preview": "review-previews/I-19-C01.jpg",
-      "source_image": "test-gallery/I-19-C01.png",
-      "source_sha256": "20e83be840e2a5e7bcd880a44e06074e1ac9dd88753253daf07173873c9ab719",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:04:46.621326+00:00",
+      "finished_at": "2026-09-24T12:05:03.632567+00:00",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
           "rat swarm pouring through grate",
-          "dungeon flagstones",
-          "clear grate opening"
+          "stone gutter and flagstones",
+          "top-down angled floor composition"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T14:42:55.638020+00:00"
+      "assistant_review": {
+        "review_id": "I-19-C02-H828b97bd808fc5bc",
+        "decision": "reject",
+        "notes": "Reject: rat swarm is wallpaper-dense and includes oversized focal rats; use a controlled group of comparable rats with directional flow and readable negative space, not a sea of repeated bodies."
+      }
     },
     {
-      "review_id": "I-20-C01-Hfcbab3eb8071c29d",
+      "page_id": "I-19",
+      "monster_name": "Rat Swarm",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:05:03.637364+00:00",
+      "finished_at": "2026-09-24T12:05:20.210666+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "large floor grate",
+          "stone gutter",
+          "rat swarm pouring through grate"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-19-C03-H878fade8c5e61153",
+        "decision": "reject",
+        "notes": "Reject: rat swarm is wallpaper-dense and includes oversized focal rats; use a controlled group of comparable rats with directional flow and readable negative space, not a sea of repeated bodies."
+      }
+    },
+    {
+      "page_id": "I-19",
+      "monster_name": "Rat Swarm",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:05:20.213668+00:00",
+      "finished_at": "2026-09-24T12:05:36.590863+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "rat swarm pouring through grate",
+          "stone gutter corridor",
+          "large central rat"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-19-C04-H1aa4fbde50614646",
+        "decision": "reject",
+        "notes": "Reject: rat swarm is wallpaper-dense and includes oversized focal rats; use a controlled group of comparable rats with directional flow and readable negative space, not a sea of repeated bodies."
+      }
+    },
+    {
       "page_id": "I-20",
       "monster_name": "Giant Centipede",
-      "candidate": 1,
-      "seed": 7219337370054324039,
-      "preview": "review-previews/I-20-C01.jpg",
-      "source_image": "test-gallery/I-20-C01.png",
-      "source_sha256": "fcbab3eb8071c29da13cd97390c872e7fa70504655950afddc08fdb57d631b86",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:05:52.752859+00:00",
+      "finished_at": "2026-09-24T12:06:08.090604+00:00",
       "visual_review": {
         "pass": true,
         "score": 95,
@@ -177,30 +2607,261 @@
           "Uncoiling around an old bone"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T14:43:13.958132+00:00"
+      "assistant_review": {
+        "review_id": "I-20-C02-H7ce2ce60aee86a4d",
+        "decision": "reject",
+        "notes": "Reject: giant centipede has too few legs and drifts into worm/scorpion anatomy; use many repeating body segments with one pair of legs per segment, clear antennae/mandibles, and no claws or sparse spiderlike limbs."
+      }
     },
     {
-      "review_id": "I-22-C01-H6b56a538a7d9edc7",
-      "page_id": "I-22",
-      "monster_name": "Giant Spider",
-      "candidate": 1,
-      "seed": 4371653112846069511,
-      "preview": "review-previews/I-22-C01.jpg",
-      "source_image": "test-gallery/I-22-C01.png",
-      "source_sha256": "6b56a538a7d9edc7632f763f65c18e7e8f97b1cb503bfdf94d58c61ab27ecdeb",
+      "page_id": "I-20",
+      "monster_name": "Giant Centipede",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:06:08.093188+00:00",
+      "finished_at": "2026-09-24T12:06:24.062163+00:00",
       "visual_review": {
         "pass": true,
         "score": 95,
         "defects": [],
         "preserve": [
-          "eight-legged silhouette",
-          "web-filled dungeon hall",
-          "giant spider waits at web center"
+          "Giant Centipede",
+          "Catacomb Niche Hall",
+          "Uncoiling around an old bone"
         ]
       },
-      "status": "ready_for_review",
-      "finished_at": "2026-09-24T14:43:32.705532+00:00"
+      "assistant_review": {
+        "review_id": "I-20-C03-H61a077a0906a9e08",
+        "decision": "reject",
+        "notes": "Reject: giant centipede has too few legs and drifts into worm/scorpion anatomy; use many repeating body segments with one pair of legs per segment, clear antennae/mandibles, and no claws or sparse spiderlike limbs."
+      }
+    },
+    {
+      "page_id": "I-20",
+      "monster_name": "Giant Centipede",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:06:24.065222+00:00",
+      "finished_at": "2026-09-24T12:06:40.626721+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "Giant Centipede",
+          "Catacomb Niche Hall",
+          "Uncoiling around an old bone"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-20-C04-H3018b90a9089ea15",
+        "decision": "reject",
+        "notes": "Reject: giant centipede has too few legs and drifts into worm/scorpion anatomy; use many repeating body segments with one pair of legs per segment, clear antennae/mandibles, and no claws or sparse spiderlike limbs."
+      }
+    },
+    {
+      "page_id": "I-21",
+      "monster_name": "Giant Fire Beetle",
+      "candidate": 1,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:06:40.629543+00:00",
+      "finished_at": "2026-09-24T12:06:56.718882+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant fire beetle",
+          "abandoned mine tunnel",
+          "luminous gland light illuminating nearby rock"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-21-C01-H130b46d526eae970",
+        "decision": "reject",
+        "notes": "Reject: generic beetle; luminous gland shapes are missing and no gland-light interaction reads in the mine. Keep exactly six insect legs and make the signature glands unmistakable."
+      }
+    },
+    {
+      "page_id": "I-21",
+      "monster_name": "Giant Fire Beetle",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:06:56.720898+00:00",
+      "finished_at": "2026-09-24T12:07:12.440982+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant fire beetle",
+          "abandoned mine tunnel",
+          "gland light illuminating nearby rock"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-21-C02-Hf0c3d24a74a0a9d3",
+        "decision": "reject",
+        "notes": "Reject: generic beetle; luminous gland shapes are missing and no gland-light interaction reads in the mine. Keep exactly six insect legs and make the signature glands unmistakable."
+      }
+    },
+    {
+      "page_id": "I-21",
+      "monster_name": "Giant Fire Beetle",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:07:12.470254+00:00",
+      "finished_at": "2026-09-24T12:07:29.406399+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant fire beetle",
+          "abandoned mine tunnel",
+          "gland light illuminating nearby rock"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-21-C03-He64caacdb05a4754",
+        "decision": "reject",
+        "notes": "Reject: generic beetle; luminous gland shapes are missing and no gland-light interaction reads in the mine. Keep exactly six insect legs and make the signature glands unmistakable."
+      }
+    },
+    {
+      "page_id": "I-21",
+      "monster_name": "Giant Fire Beetle",
+      "candidate": 4,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:07:29.409088+00:00",
+      "finished_at": "2026-09-24T12:07:46.155353+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "giant fire beetle",
+          "abandoned mine tunnel",
+          "luminous gland light"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-21-C04-Hf5cafc2d796085e0",
+        "decision": "reject",
+        "notes": "Reject: generic beetle; luminous gland shapes are missing and no gland-light interaction reads in the mine. Keep exactly six insect legs and make the signature glands unmistakable."
+      }
+    },
+    {
+      "page_id": "I-22",
+      "monster_name": "Giant Spider",
+      "candidate": 2,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:08:02.729961+00:00",
+      "finished_at": "2026-09-24T12:08:19.192860+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "spider at web center"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-22-C02-Hf6bd589dcc832c31",
+        "decision": "reject",
+        "notes": "Reject: spider anatomy is close, but the page does not clearly read as a web-filled dungeon hall; keep exactly eight legs while making the stone hall/arch unmistakable and the spider visibly supported at the web center."
+      }
+    },
+    {
+      "page_id": "I-22",
+      "monster_name": "Giant Spider",
+      "candidate": 3,
+      "status": "assistant_rejected",
+      "engine_commit": "unknown",
+      "generation_fingerprint": "unknown",
+      "review_fingerprint": "unknown",
+      "review_checked_at": null,
+      "error": null,
+      "started_at": "2026-09-24T12:08:19.202918+00:00",
+      "finished_at": "2026-09-24T12:08:35.009087+00:00",
+      "visual_review": {
+        "pass": true,
+        "score": 95,
+        "defects": [],
+        "preserve": [
+          "spider at web center"
+        ]
+      },
+      "assistant_review": {
+        "review_id": "I-22-C03-H17769e93c6d286ee",
+        "decision": "reject",
+        "notes": "Reject: spider anatomy is close, but the page does not clearly read as a web-filled dungeon hall; keep exactly eight legs while making the stone hall/arch unmistakable and the spider visibly supported at the web center."
+      }
+    },
+    {
+      "page_id": "I-01",
+      "monster_name": "Kobold Warrior",
+      "candidate": 1,
+      "status": "failed",
+      "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
+      "generation_fingerprint": "f198108d581766ec0aadc01e25ac3ce8a408c8c7dcf013fff7820d00b407f43c",
+      "review_fingerprint": "3c397eff4ba5e3570d82031d11dafbc1a7781384cb53934a79776b5031887b79",
+      "review_checked_at": null,
+      "error": "Command failed (1): C:\\Users\\divcl\\Desktop\\blackinkbestiary\\.blackink-tools\\Scripts\\comfy.exe --json --where local run --workflow C:\\Users\\divcl\\Desktop\\blackinkbestiary\\art_pipeline\\workflows\\official\\test_i-01_c01.json --wait --host 127.0.0.1 --port 8188\n{\"schema\": \"envelope/1\", \"type\": \"envelope\", \"ok\": false, \"command\": \"run\", \"version\": \"1.20.0\", \"where\": \"local\", \"data\": null, \"error\": {\"code\": \"ws_timeout\", \"message\": \"WebSocket timed out after 120s waiting for server response.\", \"hint\": \"re-run with a larger --timeout (e.g. --timeout 300)\", \"details\": {\"timeout\": 120, \"prompt_id\": \"b83c8d99-08cd-4763-b558-638857efd439\"}}}",
+      "started_at": "2026-09-26T12:53:14.950053+00:00",
+      "finished_at": "2026-09-26T12:57:04.486490+00:00",
+      "visual_review": null,
+      "assistant_review": null
+    },
+    {
+      "page_id": "I-04",
+      "monster_name": "Goblin Warrior",
+      "candidate": 1,
+      "status": "failed",
+      "engine_commit": "3b1e6360158b712a172b3eeba840c37713167c96",
+      "generation_fingerprint": "e04d37112d7d33ba2844421aa004b5cfc372784e0302bf615d2723abc0eec61c",
+      "review_fingerprint": "193548ff8de636ca24e150e757df54bf4df80757d9969228ef8546bc58aba4ae",
+      "review_checked_at": null,
+      "error": "Command failed (1): C:\\Users\\divcl\\Desktop\\blackinkbestiary\\.blackink-tools\\Scripts\\comfy.exe --json --where local run --workflow C:\\Users\\divcl\\Desktop\\blackinkbestiary\\art_pipeline\\workflows\\official\\test_i-04_c01.json --wait --host 127.0.0.1 --port 8188\n{\"schema\": \"envelope/1\", \"type\": \"envelope\", \"ok\": false, \"command\": \"run\", \"version\": \"1.20.0\", \"where\": \"local\", \"data\": null, \"error\": {\"code\": \"ws_timeout\", \"message\": \"WebSocket timed out after 120s waiting for server response.\", \"hint\": \"re-run with a larger --timeout (e.g. --timeout 300)\", \"details\": {\"timeout\": 120, \"prompt_id\": \"0d1206eb-77a6-4f2d-8efb-799f2f796392\"}}}",
+      "started_at": "2026-09-26T12:57:04.635659+00:00",
+      "finished_at": "2026-09-26T13:02:31.279418+00:00",
+      "visual_review": null,
+      "assistant_review": null
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "exact_image_matches": 0,
+  "agreements": 0,
+  "local_false_positives": 0,
+  "local_false_negatives": 0,
+  "agreement_rate": null,
+  "false_positive_rate": null,
+  "false_negative_rate": null,
+  "false_positive_rows": [],
+  "false_negative_rows": [],
+  "matched_rows": [],
+  "rule": "Reviewer disagreement is measured only for identical review_id/image hashes; same page or candidate numbers across different generations do not count."
+}

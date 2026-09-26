@@ -615,7 +615,7 @@
       "page_id": "I-01",
       "candidate": 1,
       "decision": "reject",
-      "notes": "Reject: still a full-size muscular dragonborn-like warrior. Preserve reptilian head/tail, but make the kobold unmistakably 2–3 feet tall with narrow shoulders, thin limbs, small gear, and human-scale corridor/trap elements proving its scale.",
+      "notes": "Reject: still a full-size muscular dragonborn-like warrior. Preserve reptilian head/tail, but make the kobold unmistakably 2\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\u01533 feet tall with narrow shoulders, thin limbs, small gear, and human-scale corridor/trap elements proving its scale.",
       "stage": "identity"
     },
     {
@@ -663,7 +663,7 @@
       "page_id": "I-19",
       "candidate": 1,
       "decision": "reject",
-      "notes": "Reject: swarm is wallpaper-dense with far more than the controlled 12–24 rats and includes an inset rectangular frame. Use a smaller directional stream of comparable rats with broad white gaps and no decorative frame.",
+      "notes": "Reject: swarm is wallpaper-dense with far more than the controlled 12\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\u015324 rats and includes an inset rectangular frame. Use a smaller directional stream of comparable rats with broad white gaps and no decorative frame.",
       "stage": "quality"
     },
     {
@@ -681,6 +681,46 @@
       "decision": "reject",
       "notes": "Reject: spider anatomy is usable, but the page is mostly a dense web field with an inset border and does not read as a stone dungeon hall/arch. Keep eight legs, simplify web density, remove border, and make the stone hall unmistakable.",
       "stage": "environment"
+    },
+    {
+      "review_id": "I-04-C01-H1567528e5da39030",
+      "page_id": "I-04",
+      "candidate": 1,
+      "decision": "reject",
+      "stage": "action",
+      "notes": "Reject: goblin identity is substantially improved and should be preserved, but the required action is still wrong. The lantern is held in the hand instead of being kicked. Keep the small wiry goblin, narrow corridor, and clean line art; put the lantern at floor level and show one planted support foot plus the striking foot visibly contacting and tipping/skidding the lantern."
+    },
+    {
+      "review_id": "I-10-C01-H1ace22343f43f6ab",
+      "page_id": "I-10",
+      "candidate": 1,
+      "decision": "reject",
+      "stage": "environment",
+      "notes": "Reject: preserve the large heavy ogre and clean line art, but this still reads as an ordinary broad stair, not a cramped spiral stair. Show wedge-shaped treads curving around a visible central column/shaft and compress the ogre between that inner structure and the outer wall so the wedged condition is unmistakable."
+    },
+    {
+      "review_id": "I-19-C01-He6336ed274c97a14",
+      "page_id": "I-19",
+      "candidate": 1,
+      "decision": "reject",
+      "stage": "quality",
+      "notes": "Reject: the dungeon/grate direction is clearer, but the rat population is still far too dense and reads as wallpaper. Preserve the grate, masonry, and directional flow; reduce to a controlled comparable-scale group with broad white gaps and make the rats visibly pour through/from the grate rather than carpeting the floor."
+    },
+    {
+      "review_id": "I-20-C01-H1e5af321117b4298",
+      "page_id": "I-20",
+      "candidate": 1,
+      "decision": "reject",
+      "stage": "identity",
+      "notes": "Reject: regenerate from written identity authority. The centipede still has sparse spiderlike legs instead of a continuous one-pair-per-visible-segment rhythm and the body branches/reads incorrectly. Restore one continuous segmented centipede body with repeating legs, antennae/mandibles, then stage it uncoiling around the old bone in a readable catacomb niche hall."
+    },
+    {
+      "review_id": "I-22-C01-H3422430375aab353",
+      "page_id": "I-22",
+      "candidate": 1,
+      "decision": "reject",
+      "stage": "environment",
+      "notes": "Reject: preserve the usable eight-legged spider and central web support, but the setting still reads as an abstract web tunnel rather than a web-filled stone dungeon hall. Add unmistakable masonry/arches and a readable hall envelope behind the web while keeping broad colorable space and the spider supported at the web center."
     }
   ]
 }
