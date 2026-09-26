@@ -17,6 +17,19 @@ Never use the engine branch as the generated-image handoff.
 If a local run fails before every page completes, publish whatever completed plus diagnostic state. A failure trapped only in the Windows terminal is an automation defect.
 
 
+
+## Windows restart resilience
+
+The unattended canary loop is expected to survive routine workstation reboots without requiring the operator to remember to restart it.
+
+- Run `ENABLE_AUTOPILOT_STARTUP.bat` once on the local workstation.
+- It registers a per-user Windows Startup launcher and starts the autopilot immediately when it is not already running.
+- `START_AUTOPILOT_IF_NEEDED.bat` checks for an existing `RUN_ENGINE_AUTOPILOT.bat` process before launching, preventing duplicate GPU workers.
+- Future Windows sign-ins relaunch the autopilot automatically.
+- Run `DISABLE_AUTOPILOT_STARTUP.bat` to remove the sign-in launcher.
+
+This startup registration changes only workstation process persistence. It does not weaken the engine sync, preflight, canary, exact-image review, or full-gallery gates.
+
 ## Automated loop
 
 1. The local launcher reads exact-image decisions from the engine branch.
