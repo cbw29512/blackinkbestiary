@@ -84,6 +84,17 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("ShellExecute", helpers)
         self.assertIn("Start-Process failed", helpers)
 
+    def test_autopilot_startup_also_starts_live_monitor(self):
+        starter = (ROOT / "START_AUTOPILOT_IF_NEEDED.bat").read_text(encoding="utf-8")
+        dashboard = (ROOT / "START_STATUS_DASHBOARD_IF_NEEDED.bat").read_text(encoding="utf-8")
+        opener = (ROOT / "OPEN_AUTOPILOT_DASHBOARD.bat").read_text(encoding="utf-8")
+        server = (ROOT / "server.py").read_text(encoding="utf-8")
+
+        self.assertIn("START_STATUS_DASHBOARD_IF_NEEDED.bat", starter)
+        self.assertIn("server.py", dashboard)
+        self.assertIn("autopilot-status.html", opener)
+        self.assertIn("/api/autopilot-status", server)
+
     def test_autopilot_publishes_phase_heartbeat_before_gpu_work(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         heartbeat = (ROOT / "scripts" / "autopilot_heartbeat.py").read_text(encoding="utf-8")

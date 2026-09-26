@@ -31,6 +31,7 @@ from art_pipeline.monster_catalog import load_monster_for_page
 from art_pipeline.quality_system import expand_defect_tags, review_diagnosis
 from art_pipeline.studio_config import active_book_paths
 from art_pipeline.state_validation import ACTIVE_STATES, assert_valid_state
+from art_pipeline.autopilot_status import public_autopilot_status
 
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
@@ -450,6 +451,9 @@ class Handler(BaseHTTPRequestHandler):
                 return
             if path == "/api/generation-status":
                 self.send_json(generation_worker_status())
+                return
+            if path == "/api/autopilot-status":
+                self.send_json(public_autopilot_status())
                 return
             if path == "/api/test-gallery":
                 self.send_json(read_json(TEST_GALLERY_STATE) if TEST_GALLERY_STATE.exists() else {"results": []})
