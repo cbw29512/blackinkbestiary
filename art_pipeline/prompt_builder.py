@@ -341,21 +341,20 @@ def _historical_scene_failure_lock(page: dict) -> str:
     parts = []
     if "ACTION_UNCLEAR" in codes:
         parts.append(
-            "ACTION PROOF HAS FAILED BEFORE — preserve the existing recipe exactly: "
-            f"visible action={page.get('moment', '')}; "
+            "ACTION PROOF FAILED BEFORE — LOCK EXISTING RECIPE: "
+            f"action={page.get('moment', '')}; "
             f"interaction={variant.get('interaction', '')}; "
-            f"support/contact={physicality.get('support', '')}; "
-            f"motion/weight={physicality.get('motion', '')}. "
-            "The required verb/contact must read at thumbnail size; do not substitute standing, posing, holding, or proximity."
+            f"support={physicality.get('support', '')}; "
+            f"motion={physicality.get('motion', '')}. "
+            "Verb/contact must read at thumbnail; no standing, posing, holding, or proximity."
         )
     if "ENVIRONMENT_GENERIC" in codes:
         parts.append(
-            "ENVIRONMENT PROOF HAS FAILED BEFORE — preserve the existing environment authority exactly: "
+            "ENVIRONMENT PROOF FAILED BEFORE — LOCK EXISTING RECIPE: "
             f"habitat={page.get('habitat', '')}; "
             f"landmark={variant.get('landmark', '')}; "
-            f"framing={variant.get('framing', '')}; "
-            f"interaction={variant.get('interaction', '')}. "
-            "Large structural geometry must prove the named place before decorative detail."
+            f"framing={variant.get('framing', '')}. "
+            "Large geometry must prove the named place before decoration."
         )
     return "HISTORICAL SCENE FAILURE LOCK — NON-NEGOTIABLE: " + " ".join(parts)
 
