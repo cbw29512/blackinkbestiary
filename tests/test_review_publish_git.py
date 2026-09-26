@@ -150,176 +150,55 @@ class ReviewPublishGitTests(unittest.TestCase):
             self.assertFalse(reset["comparable_to_previous"])
             self.assertIn("new baseline", reset["comparison_reason"])
 
-    def test_publish_uses_dedicated_review_branch_and_resyncs_engine(self):
+    def test_publish_uses_isolated_worktree_without_mutating_engine_checkout(self):
         root = Path("C:/fake")
-        outputs = {
-            ("git", "branch", "--show-current"): "feat/environment-spatial-hardening",
-            ("git", "rev-parse", "HEAD"): "abc123",
-        }
-
-        def fake_output(_root, *args):
-            return outputs[tuple(args)]
-
-        calls = []
         with (
-            patch.object(rpg, "output", side_effect=fake_output),
-            patch.object(rpg, "tracked_changes_outside_previews", return_value=[]),
+            patch.object(rpg, "output", return_value="feat/environment-spatial-hardening"),
             patch.object(rpg, "sync_live_decisions", return_value="live-before"),
-            patch.object(rpg, "stage_preview_snapshot"),
-            patch.object(rpg, "run", side_effect=lambda root_arg, *args: calls.append((root_arg, args))),
-            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=1)),
+            patch.object(rpg, "append_quality_snapshot"),
+            patch.object(rpg, "publish_snapshot_once", return_value="preview123") as publish_once,
+            patch.object(rpg, "run") as engine_run,
         ):
             result = rpg.publish_preview_snapshot(root)
 
-        self.assertEqual(result, "abc123")
-        self.assertIn(
-            (
-                root,
-                (
-                    "git",
-                    "push",
-                    "--force-with-lease=refs/heads/review-previews-live:live-before",
-                    "origin",
-                    "abc123:refs/heads/review-previews-live",
-                ),
-            ),
-            calls,
+        self.assertEqual(result, "preview123")
+        publish_once.assert_called_once_with(
+            root,
+            root / "review-previews",
+            "live-before",
+            "review-previews-live",
         )
-        self.assertIn(
-            (root, ("git", "fetch", "origin", "feat/environment-spatial-hardening")),
-            calls,
-        )
-        self.assertIn(
-            (
-                root,
-                (
-                    "git",
-                    "reset",
-                    "--hard",
-                    "origin/feat/environment-spatial-hardening",
-                ),
-            ),
-            calls,
-        )
+        engine_run.assert_not_called()
 
-    def test_publish_push_retries_once_after_refreshing_live_review_state(self):
+    def test_publish_retries_once_after_review_branch_race(self):
         root = Path("C:/fake")
-        heads = iter(["base123", "preview456", "retry789"])
         sync_heads = iter(["live-before", "live-after"])
-        calls = []
-        push_count = {"value": 0}
-
-        def fake_output(_root, *args):
-            key = tuple(args)
-            if key == ("git", "branch", "--show-current"):
-                return "feat/environment-spatial-hardening"
-            if key == ("git", "rev-parse", "HEAD"):
-                return next(heads)
-            raise KeyError(key)
-
-        def fake_run(root_arg, *args):
-            calls.append((root_arg, args))
-            if args[:2] == ("git", "push"):
-                push_count["value"] += 1
-                if push_count["value"] == 1:
-                    raise subprocess.CalledProcessError(1, args)
-
+        failure = subprocess.CalledProcessError(1, ["git", "push"])
         with (
-            patch.object(rpg, "output", side_effect=fake_output),
-            patch.object(rpg, "tracked_changes_outside_previews", return_value=[]),
+            patch.object(rpg, "output", return_value="feat/environment-spatial-hardening"),
             patch.object(rpg, "sync_live_decisions", side_effect=lambda _root: next(sync_heads)),
             patch.object(rpg, "append_quality_snapshot"),
-            patch.object(rpg, "stage_preview_snapshot"),
-            patch.object(rpg, "run", side_effect=fake_run),
-            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=1)),
+            patch.object(
+                rpg,
+                "publish_snapshot_once",
+                side_effect=[failure, "retry789"],
+            ) as publish_once,
         ):
             result = rpg.publish_preview_snapshot(root)
 
         self.assertEqual(result, "retry789")
-        self.assertEqual(push_count["value"], 2)
-        self.assertIn((root, ("git", "commit", "--amend", "--no-edit")), calls)
-        self.assertIn(
-            (
-                root,
-                (
-                    "git",
-                    "push",
-                    "--force-with-lease=refs/heads/review-previews-live:live-after",
-                    "origin",
-                    "retry789:refs/heads/review-previews-live",
-                ),
-            ),
-            calls,
+        self.assertEqual(publish_once.call_count, 2)
+        self.assertEqual(publish_once.call_args_list[0].args[2], "live-before")
+        self.assertEqual(publish_once.call_args_list[1].args[2], "live-after")
+
+    def test_worktree_publisher_force_adds_ignored_preview_state(self):
+        helper = (ROOT / "scripts" / "review_publish_worktree.py").read_text(
+            encoding="utf-8"
         )
-
-    def test_unchanged_snapshot_does_not_repoint_live_branch(self):
-        root = Path("C:/fake")
-        outputs = {
-            ("git", "branch", "--show-current"): "feat/environment-spatial-hardening",
-        }
-
-        def fake_output(_root, *args):
-            return outputs[tuple(args)]
-
-        calls = []
-        with (
-            patch.object(rpg, "output", side_effect=fake_output),
-            patch.object(rpg, "tracked_changes_outside_previews", return_value=[]),
-            patch.object(rpg, "sync_live_decisions", return_value="live-before"),
-            patch.object(rpg, "stage_preview_snapshot"),
-            patch.object(rpg, "run", side_effect=lambda root_arg, *args: calls.append((root_arg, args))),
-            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
-        ):
-            result = rpg.publish_preview_snapshot(root)
-
-        self.assertEqual(result, "live-before")
-        self.assertFalse(any(args[:2] == ("git", "push") for _, args in calls))
-        self.assertIn(
-            (root, ("git", "fetch", "origin", "feat/environment-spatial-hardening")),
-            calls,
-        )
-
-    def test_publish_preserves_local_edits_but_removes_temporary_preview_commit(self):
-        root = Path("C:/fake")
-        heads = iter(["base123", "preview456"])
-
-        def fake_output(_root, *args):
-            if tuple(args) == ("git", "branch", "--show-current"):
-                return "feat/environment-spatial-hardening"
-            if tuple(args) == ("git", "rev-parse", "HEAD"):
-                return next(heads)
-            raise KeyError(tuple(args))
-
-        calls = []
-        with (
-            patch.object(rpg, "output", side_effect=fake_output),
-            patch.object(rpg, "tracked_changes_outside_previews", return_value=[" M scripts/local.py"]),
-            patch.object(rpg, "sync_live_decisions", return_value="live-before"),
-            patch.object(rpg, "stage_preview_snapshot"),
-            patch.object(rpg, "run", side_effect=lambda root_arg, *args: calls.append((root_arg, args))),
-            patch.object(rpg.subprocess, "run", return_value=SimpleNamespace(returncode=1)),
-        ):
-            result = rpg.publish_preview_snapshot(root)
-
-        self.assertEqual(result, "preview456")
-        self.assertIn(
-            (
-                root,
-                (
-                    "git",
-                    "push",
-                    "--force-with-lease=refs/heads/review-previews-live:live-before",
-                    "origin",
-                    "preview456:refs/heads/review-previews-live",
-                ),
-            ),
-            calls,
-        )
-        self.assertIn((root, ("git", "reset", "--mixed", "base123")), calls)
-        self.assertFalse(any(args[:2] == ("git", "fetch") for _, args in calls))
-        self.assertFalse(
-            any(args[:3] == ("git", "reset", "--hard") for _, args in calls)
-        )
+        self.assertIn('"worktree", "add", "--detach"', helper)
+        self.assertIn('"git", "add", "-f", "-A"', helper)
+        self.assertIn("--force-with-lease=refs/heads/", helper)
+        self.assertIn('"worktree", "remove", "--force"', helper)
 
 
 if __name__ == "__main__":

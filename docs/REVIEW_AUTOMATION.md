@@ -12,7 +12,7 @@ Never use the engine branch as the generated-image handoff.
 
 ## Operator handoff rule
 
-**GitHub is the handoff. Terminal output is not.** The operator must not be required to copy/paste generation logs, reviewer JSON, image paths, or failure output back into ChatGPT. Local launchers must publish reviewable images, partial results, runtime failures, and diagnostics to `review-previews-live`; ChatGPT reads that branch directly and writes exact-image decisions/fixes back to the engine branch.
+**GitHub is the handoff. Terminal output is not.** The operator must not be required to copy/paste generation logs, reviewer JSON, image paths, or failure output back into ChatGPT. Local launchers must publish reviewable images, partial results, runtime failures, and diagnostics to `review-previews-live`; ChatGPT reads that branch directly, writes exact-image decisions to the review-handoff branch, and writes engine/data fixes to the engine branch.
 
 If a local run fails before every page completes, publish whatever completed plus diagnostic state. A failure trapped only in the Windows terminal is an automation defect.
 
@@ -72,7 +72,7 @@ For four-candidate production pages, exactly one acceptable candidate should rec
 
 ## Safety rules
 
-- `review-previews/decisions.json` is engine-owned. The local preview publisher must never overwrite it from stale workstation state.
+- `review-previews/decisions.json` is owned by the dedicated review-handoff branch. The local engine imports it for execution; stale workstation state must never overwrite it.\n- `review-previews/` is ignored and untracked on the engine branch. The publisher uses a detached temporary Git worktree so publishing cannot create temporary commits, resets, or pull conflicts in the engine checkout.
 - Generated `web/test-gallery/*.png` and `data/test-gallery-state.json` stay local/untracked.
 - Engine code can advance while ComfyUI is generating; review publication must remain independent of engine branch fast-forward state.
 - After publishing, tracked workstation code may resync to the latest engine branch only when no unrelated tracked local edits exist.

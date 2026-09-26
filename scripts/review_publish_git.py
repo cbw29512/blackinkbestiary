@@ -4,6 +4,8 @@ import json
 import subprocess
 from pathlib import Path
 
+from review_publish_worktree import publish_snapshot_once
+
 REVIEW_BRANCH = "review-previews-live"
 DECISIONS_RELATIVE = "review-previews/decisions.json"
 QUALITY_CURRENT_RELATIVE = "review-previews/quality-current.json"
@@ -218,95 +220,47 @@ def append_quality_snapshot(root: Path) -> bool:
     return appended
 
 
-def stage_preview_snapshot(root: Path) -> None:
-    run(root, "git", "add", "-A", "review-previews")
-
-
-def push_review_snapshot_with_retry(
-    root: Path,
-    publish_head: str,
-    live_head: str,
-) -> str:
-    """Push once, then safely rebase review data and retry one transient/race failure."""
-    try:
-        run(
-            root,
-            "git",
-            "push",
-            f"--force-with-lease=refs/heads/{REVIEW_BRANCH}:{live_head}",
-            "origin",
-            f"{publish_head}:refs/heads/{REVIEW_BRANCH}",
-        )
-        return publish_head
-    except subprocess.CalledProcessError as first_error:
-        print(
-            "Review snapshot push failed once; refreshing live review decisions/history "
-            "and retrying safely."
-        )
-        latest_live_head = sync_live_decisions(root)
-        append_quality_snapshot(root)
-        stage_preview_snapshot(root)
-        run(root, "git", "commit", "--amend", "--no-edit")
-        retry_head = output(root, "git", "rev-parse", "HEAD")
-        try:
-            run(
-                root,
-                "git",
-                "push",
-                f"--force-with-lease=refs/heads/{REVIEW_BRANCH}:{latest_live_head}",
-                "origin",
-                f"{retry_head}:refs/heads/{REVIEW_BRANCH}",
-            )
-        except subprocess.CalledProcessError as second_error:
-            raise RuntimeError(
-                "Review snapshot push failed twice; leaving local snapshot intact "
-                "for the next autopilot retry."
-            ) from second_error
-        return retry_head
-
-
 def publish_preview_snapshot(root: Path) -> str:
     engine_branch = output(root, "git", "branch", "--show-current")
     if not engine_branch:
         raise RuntimeError("Review publishing requires a checked-out engine branch")
-    safe_to_resync = not tracked_changes_outside_previews(root)
+
     live_head = sync_live_decisions(root)
     append_quality_snapshot(root)
-    stage_preview_snapshot(root)
+    source_dir = root / "review-previews"
 
-    staged = subprocess.run(
-        ["git", "diff", "--cached", "--quiet"],
-        cwd=root,
-    ).returncode != 0
-    pre_publish_head = (
-        output(root, "git", "rev-parse", "HEAD")
-        if staged
-        else ""
-    )
-
-    publish_head = ""
-    if staged:
-        run(root, "git", "commit", "-m", "Publish coloring book review previews")
-        publish_head = output(root, "git", "rev-parse", "HEAD")
-        publish_head = push_review_snapshot_with_retry(
+    try:
+        publish_head = publish_snapshot_once(
             root,
-            publish_head,
+            source_dir,
             live_head,
+            REVIEW_BRANCH,
         )
-    else:
-        publish_head = live_head
-        print("Review snapshot unchanged; leaving review-previews-live untouched.")
-
-    if safe_to_resync:
-        run(root, "git", "fetch", "origin", engine_branch)
-        run(root, "git", "reset", "--hard", f"origin/{engine_branch}")
-        print(f"Local code resynced to origin/{engine_branch}.")
-    else:
-        if staged:
-            run(root, "git", "reset", "--mixed", pre_publish_head)
+    except subprocess.CalledProcessError:
         print(
-            "Preview snapshot published; unrelated tracked working-tree edits "
-            "were preserved, and the temporary preview commit was removed locally."
+            "Review snapshot push failed once; refreshing live review state "
+            "and retrying safely."
         )
+        latest_live_head = sync_live_decisions(root)
+        append_quality_snapshot(root)
+        try:
+            publish_head = publish_snapshot_once(
+                root,
+                source_dir,
+                latest_live_head,
+                REVIEW_BRANCH,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Review snapshot publication failed twice; local snapshot "
+                "remains intact for the next autopilot retry."
+            ) from exc
 
+    if publish_head == live_head:
+        print("Review snapshot unchanged; leaving review-previews-live untouched.")
+    else:
+        print(
+            "Review snapshot published from an isolated worktree; "
+            "engine checkout and branch history were not mutated."
+        )
     return publish_head
