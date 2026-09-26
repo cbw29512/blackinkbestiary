@@ -126,7 +126,10 @@ class VisionReviewerTests(unittest.TestCase):
             "pass": True,
             "score": 95,
             "defects": [],
-            "preserve": ["foot visibly contacts lantern", "lantern tips away as torso counterbalances"],
+            "preserve": [
+                "kicking foot visibly contacts the lantern",
+                "planted foot supports torso while the lantern tips away",
+            ],
         }
 
         self.assertTrue(vr._stage_pass_evidence_issues(page, "action", weak_action))
