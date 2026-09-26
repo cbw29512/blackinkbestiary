@@ -92,6 +92,58 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("Support/contact is visible and believable:", action)
         self.assertIn("Motion/weight reads correctly:", action)
 
+    def test_scene_pass_requires_concrete_page_specific_evidence(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
+
+        weak_environment = {
+            "pass": True,
+            "score": 100,
+            "defects": [],
+            "preserve": ["monster dominates foreground", "stone archway framing", "no decorative frames"],
+        }
+        strong_environment = {
+            "pass": True,
+            "score": 96,
+            "defects": [],
+            "preserve": ["tight spiral dungeon stair", "inner column and curved outer wall"],
+        }
+
+        self.assertTrue(vr._stage_pass_evidence_issues(page, "environment", weak_environment))
+        self.assertEqual(vr._stage_pass_evidence_issues(page, "environment", strong_environment), [])
+
+    def test_action_pass_requires_contact_and_motion_evidence(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-04")
+
+        weak_action = {
+            "pass": True,
+            "score": 95,
+            "defects": [],
+            "preserve": ["small goblin", "narrow corridor"],
+        }
+        strong_action = {
+            "pass": True,
+            "score": 95,
+            "defects": [],
+            "preserve": ["foot visibly contacts lantern", "lantern tips away as torso counterbalances"],
+        }
+
+        self.assertTrue(vr._stage_pass_evidence_issues(page, "action", weak_action))
+        self.assertEqual(vr._stage_pass_evidence_issues(page, "action", strong_action), [])
+
+    def test_environment_and_action_prompts_require_pass_evidence(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
+
+        environment = vr.build_environment_review_prompt(page)
+        action = vr.build_action_review_prompt(page)
+
+        self.assertIn("PASS EVIDENCE RULE", environment)
+        self.assertIn("at least two concrete visible page-specific environment proofs", environment)
+        self.assertIn("PASS EVIDENCE RULE", action)
+        self.assertIn("at least two concrete visible page-specific action proofs", action)
+
     def test_review_stages_do_not_leak_into_final_quality_gate(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(item for item in tome["pages"] if item["page_id"] == "I-10")
