@@ -741,9 +741,9 @@ class QATests(unittest.TestCase):
         prompt = build_prompt(page)
 
         self.assertIn("HISTORICAL SCENE FAILURE LOCK", prompt)
-        self.assertIn("ACTION PROOF HAS FAILED BEFORE", prompt)
+        self.assertIn("ACTION PROOF FAILED BEFORE", prompt)
         self.assertIn("visible action=", prompt)
-        self.assertIn("do not substitute standing, posing, holding, or proximity", prompt)
+        self.assertIn("no standing, posing, holding, or proximity", prompt)
 
     def test_historical_environment_failure_reemphasizes_spider_hall_geometry(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
@@ -751,8 +751,8 @@ class QATests(unittest.TestCase):
         prompt = build_prompt(page)
 
         self.assertIn("HISTORICAL SCENE FAILURE LOCK", prompt)
-        self.assertIn("ENVIRONMENT PROOF HAS FAILED BEFORE", prompt)
-        self.assertIn("Large structural geometry must prove the named place", prompt)
+        self.assertIn("ENVIRONMENT PROOF FAILED BEFORE", prompt)
+        self.assertIn("Large geometry must prove the named place", prompt)
 
     def test_scene_failure_taxonomy_catches_generic_pose_and_environment_notes(self):
         from defect_taxonomy import classify_text
