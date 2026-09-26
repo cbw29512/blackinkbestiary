@@ -285,6 +285,8 @@ def main() -> int:
             "source_image": source.relative_to(ROOT / "web").as_posix(),
             "source_sha256": digest,
             "visual_review": item.get("visual_review"),
+            "advisory_review_status": item.get("advisory_review_status"),
+            "advisory_review_error": item.get("advisory_review_error"),
             "assistant_review": item.get("assistant_review"),
             "status": item.get("status"),
             "finished_at": item.get("finished_at"),
