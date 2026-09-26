@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import re
 from pathlib import Path
 
 try:
@@ -272,6 +274,87 @@ def _review_recovery_lock(review_notes: dict | None) -> str:
     return f"LATEST REVIEW CORRECTION: {text}"
 
 
+_FEEDBACK_STOPWORDS = {
+    "about", "after", "again", "against", "around", "being", "clear", "drift",
+    "from", "keep", "make", "must", "page", "reads", "restore", "still", "that",
+    "this", "with", "without",
+}
+
+
+def _feedback_tokens(text: str) -> set[str]:
+    return {
+        token
+        for token in re.findall(r"[a-z0-9]+", str(text or "").lower())
+        if len(token) >= 4 and token not in _FEEDBACK_STOPWORDS
+    }
+
+
+def _historical_rejection_text(page_id: str) -> str:
+    """Load exact-image rejection evidence for ranking existing authoritative locks only."""
+    try:
+        path = ROOT / "review-previews" / "decisions.json"
+        if not path.exists() or not page_id:
+            return ""
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        notes = [
+            str(row.get("notes") or "").strip()
+            for row in payload.get("reviews", [])
+            if str(row.get("page_id") or "") == page_id
+            and str(row.get("decision") or "").lower() == "reject"
+            and str(row.get("notes") or "").strip()
+        ]
+        return " ".join(notes[-8:])
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return ""
+
+
+def _priority_failure_lines(page: dict, spec: dict, review_notes: dict | None) -> list[str]:
+    """Rank known failure modes by current/historical evidence without promoting raw notes to authority."""
+    modes = [
+        item for item in (spec.get("known_failure_modes") or [])
+        if item.get("symptom") and item.get("correction")
+    ]
+    if len(modes) <= 2:
+        return [
+            f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
+            for item in modes
+        ]
+
+    evidence = " ".join(filter(None, [
+        str((review_notes or {}).get("text") or "").strip(),
+        _historical_rejection_text(str(page.get("page_id") or "")),
+    ]))
+    evidence_tokens = _feedback_tokens(evidence)
+
+    ranked = []
+    for index, item in enumerate(modes):
+        authoritative = f"{item.get('symptom', '')} {item.get('correction', '')}"
+        mode_tokens = _feedback_tokens(authoritative)
+        overlap = len(evidence_tokens & mode_tokens)
+        phrase_bonus = sum(
+            2 for phrase in (
+                "bodybuilder", "muscular", "dragonborn", "horn", "tail", "wing",
+                "gorilla", "ape", "humanoid", "swarm", "wallpaper", "limb",
+            )
+            if phrase in evidence.lower() and phrase in authoritative.lower()
+        )
+        ranked.append((overlap + phrase_bonus, -index, item))
+
+    ranked.sort(reverse=True, key=lambda row: (row[0], row[1]))
+    selected = [row[2] for row in ranked[:2] if row[0] > 0]
+    if not selected:
+        selected = [modes[0], modes[-1]]
+    elif len(selected) == 1:
+        fallback = next((item for item in modes if item is not selected[0]), None)
+        if fallback is not None:
+            selected.append(fallback)
+
+    return [
+        f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
+        for item in selected
+    ]
+
+
 def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int | None = None) -> str:
     """Compile full page authority into a short, priority-ordered FLUX brief.
 
@@ -295,15 +378,7 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
     )
 
     size = str(spec.get("size") or "").strip().lower() or "unspecified"
-    failures = [
-        f"{item.get('symptom', '')} CORRECTION: {item.get('correction', '')}"
-        for item in spec.get("known_failure_modes") or []
-        if item.get("symptom") and item.get("correction")
-    ]
-    if len(failures) > 2:
-        priority_failures = [failures[0], failures[-1]]
-    else:
-        priority_failures = failures
+    priority_failures = _priority_failure_lines(page, spec, review_notes)
 
     identity_lines = [
         f"SUBJECT: {page['monster_name']}.",
