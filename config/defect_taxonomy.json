@@ -169,7 +169,12 @@
         "masonry.*missing",
         "arch.*not visible",
         "burial niche",
-        "coffin niche"
+        "coffin niche",
+        "ordinary stairs",
+        "normal-height hall",
+        "does not read as.*(?:hall|corridor|cave|stair|room|catacomb|mine|arch)",
+        "environment.*not readable",
+        "architecture.*not readable"
       ]
     },
     {
@@ -184,7 +189,14 @@
         "interaction.*missing",
         "neutral pose",
         "does not clearly read",
-        "action.*unclear"
+        "action.*unclear",
+        "merely standing",
+        "posing rather than",
+        "not visibly .*",
+        "must visibly .*",
+        "physically wedged",
+        "not clearly .*interaction",
+        "required action.*missing"
       ]
     },
     {
