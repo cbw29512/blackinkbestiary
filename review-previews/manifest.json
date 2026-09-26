@@ -1,6 +1,6 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "8c03deaf81ff228f0e1e8f53767ed3a63cdd070d",
+  "snapshot_engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "candidate_count": 6,
@@ -27,23 +27,23 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-26T12:52:55.9951508Z"
+    "updated_at": "2026-09-26T13:08:27.0804656Z"
   },
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "sleeping",
-    "status": "ready",
-    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
-    "engine_commit": "8c03deaf81ff228f0e1e8f53767ed3a63cdd070d",
-    "updated_at": "2026-09-26T13:04:41.840161+00:00"
+    "phase": "generating",
+    "status": "running",
+    "message": "Pre-GPU snapshot published before canary generation",
+    "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+    "updated_at": "2026-09-26T13:08:27.875649+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-26T12:52:33.460632+00:00",
-    "updated_at": "2026-09-26T12:52:55.411908+00:00",
+    "started_at": "2026-09-26T13:07:48.001176+00:00",
+    "updated_at": "2026-09-26T13:08:24.280067+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -179,7 +179,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 391 tests in 18.606s",
+          "Ran 388 tests in 33.027s",
           "",
           "OK"
         ]
@@ -441,7 +441,7 @@
       "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
       "generation_fingerprint": "d8ee37493a0db27fb83368713de35a7bba2a590371b397ece676ab8bfbbe449c",
       "review_fingerprint": "5efbb0e220713025a66013950d773317cbd450eb3e28cc57605ff85208ece623",
-      "generation_authority_current": true,
+      "generation_authority_current": false,
       "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-10-C01.jpg",
@@ -567,7 +567,7 @@
       "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
       "generation_fingerprint": "97e8fd0757bd481f2b643d2f8fec0a2532c7e065c79fc168d61c3672a222f810",
       "review_fingerprint": "b0803bdc9abea8f90f3018182006533690fd09a08d37b9204148c12f73414c6b",
-      "generation_authority_current": true,
+      "generation_authority_current": false,
       "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-20-C01.jpg",
@@ -590,7 +590,7 @@
       "engine_commit": "654a4f3edf91fffe43dd2b1ec91224bd673ff7be",
       "generation_fingerprint": "4e829646dd8f0671177a0865df6f2928614efd055576fbf7efcaf440a957438c",
       "review_fingerprint": "5e7d1ed26b8ee4bfe2a26f2a1284c730d19013a0f73ce767bb0db12fb15a2023",
-      "generation_authority_current": true,
+      "generation_authority_current": false,
       "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-22-C01.jpg",

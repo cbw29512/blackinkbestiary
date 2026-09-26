@@ -2,8 +2,8 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
-  "measured_at": "2026-09-26T13:04:51.372815+00:00",
-  "engine_commit": "8c03deaf81ff228f0e1e8f53767ed3a63cdd070d",
+  "measured_at": "2026-09-26T13:08:38.078054+00:00",
+  "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 100.0,
@@ -168,10 +168,10 @@
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 10577.1,
-    "generation_chars_max": 11332,
-    "generation_words_avg": 1497.6,
-    "generation_words_max": 1597,
+    "generation_chars_avg": 10817.4,
+    "generation_chars_max": 11475,
+    "generation_words_avg": 1529.4,
+    "generation_words_max": 1610,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
       "hard_max_chars": 14000,
@@ -197,8 +197,8 @@
       {
         "page_id": "I-01",
         "generation": {
-          "chars": 11332,
-          "words": 1597,
+          "chars": 11475,
+          "words": 1610,
           "nonempty_lines": 64,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -244,9 +244,9 @@
       {
         "page_id": "I-04",
         "generation": {
-          "chars": 10824,
-          "words": 1529,
-          "nonempty_lines": 64,
+          "chars": 11406,
+          "words": 1606,
+          "nonempty_lines": 65,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -291,8 +291,8 @@
       {
         "page_id": "I-08",
         "generation": {
-          "chars": 10804,
-          "words": 1524,
+          "chars": 10874,
+          "words": 1530,
           "nonempty_lines": 63,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -338,9 +338,9 @@
       {
         "page_id": "I-10",
         "generation": {
-          "chars": 9991,
-          "words": 1411,
-          "nonempty_lines": 59,
+          "chars": 10725,
+          "words": 1510,
+          "nonempty_lines": 60,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -526,8 +526,8 @@
       {
         "page_id": "I-20",
         "generation": {
-          "chars": 10250,
-          "words": 1456,
+          "chars": 10192,
+          "words": 1448,
           "nonempty_lines": 64,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -573,9 +573,9 @@
       {
         "page_id": "I-22",
         "generation": {
-          "chars": 9767,
-          "words": 1395,
-          "nonempty_lines": 64,
+          "chars": 10459,
+          "words": 1495,
+          "nonempty_lines": 65,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -1472,5 +1472,5 @@
   "known_blockers": [
     "UNCLASSIFIED"
   ],
-  "measurement_fingerprint": "6fcc5fc277ec59d746e0bbcbedf34db0267bfd4b7a3c5b2c4b7ec1bb68aa3714"
+  "measurement_fingerprint": "3e861f50b46d5da1cf0346a0d0dbea72b892746dd2194b32fd3675ddc7fd99cb"
 }
