@@ -27,23 +27,23 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-26T15:30:35.1268310Z"
+    "updated_at": "2026-09-26T15:36:31.6683182Z"
   },
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "sleeping",
-    "status": "ready",
-    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
+    "phase": "generating",
+    "status": "running",
+    "message": "Pre-GPU snapshot published before canary generation",
     "engine_commit": "ce4669411c95d48d4bcbfa18fa2e79e139c49953",
-    "updated_at": "2026-09-26T15:30:52.673434+00:00"
+    "updated_at": "2026-09-26T15:36:32.551356+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-26T15:29:54.210348+00:00",
-    "updated_at": "2026-09-26T15:30:34.357351+00:00",
+    "started_at": "2026-09-26T15:35:47.189367+00:00",
+    "updated_at": "2026-09-26T15:36:27.724386+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -179,7 +179,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 390 tests in 36.517s",
+          "Ran 390 tests in 36.822s",
           "",
           "OK"
         ]
