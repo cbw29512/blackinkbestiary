@@ -37,6 +37,7 @@ def public_autopilot_status() -> dict:
     runtime = _read_json(DATA / "local-runtime-status.json", {})
     preflight = _read_json(DATA / "engine-preflight-status.json", {})
     quality = _read_json(ROOT / "review-previews" / "quality-current.json", {})
+    progress = _read_json(DATA / "generation-progress.json", {})
     latest_by_page, active, failures = {}, None, []
     for item in gallery.get("results") or []:
         page_id = str(item.get("page_id") or "")
@@ -73,6 +74,7 @@ def public_autopilot_status() -> dict:
     return {
         "engine_commit": _git_head(), "heartbeat": heartbeat, "runtime": runtime,
         "preflight": preflight, "quality": quality, "active_candidate": active,
+        "generation_progress": progress,
         "canary_counts": counts, "canary_total": len(rows), "canaries": rows,
         "latest_failures": [{
             "page_id": item.get("page_id"), "status": item.get("status"),

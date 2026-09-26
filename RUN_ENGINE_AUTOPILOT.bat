@@ -1,6 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 cd /d "%~dp0"
+call "%~dp0START_STATUS_DASHBOARD_IF_NEEDED.bat"
 
 echo.
 echo Black-Ink Bestiary - Unattended Canary Autopilot

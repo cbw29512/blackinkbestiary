@@ -5,8 +5,8 @@ function age(ts){if(!ts)return 'unknown';const n=(Date.now()-Date.parse(ts))/100
 async function load(){
  try{
   const r=await fetch('/api/autopilot-status',{cache:'no-store'});const d=await r.json();
-  const h=d.heartbeat||{},rt=d.runtime||{},pf=d.preflight||{},c=d.canary_counts||{};
-  const cards=[['Engine',short(d.engine_commit),esc(d.engine_commit)],['Autopilot',esc(h.phase||'unknown')+' / '+esc(h.status||'unknown'),age(h.updated_at)],['ComfyUI',esc(rt.status||'unknown'),esc(rt.stage||'')],['Preflight',esc(pf.status||'unknown'),age(pf.updated_at)],['Approved',c.approved||0,'of '+(d.canary_total||0)],['Awaiting review',c.review||0,'fresh candidates']];
+  const h=d.heartbeat||{},rt=d.runtime||{},pf=d.preflight||{},c=d.canary_counts||{},gp=d.generation_progress||{};
+  const current=(gp.page_id?gp.page_id+' '+(gp.monster_name||''):'idle');const cards=[['Engine',short(d.engine_commit),esc(d.engine_commit)],['Autopilot',esc(h.phase||'unknown')+' / '+esc(h.status||'unknown'),age(h.updated_at)],['Current work',esc(current),esc(gp.phase||'idle')+(gp.message?' — '+esc(gp.message):'')],['ComfyUI',esc(rt.status||'unknown'),esc(rt.stage||'')],['Preflight',esc(pf.status||'unknown'),age(pf.updated_at)],['Approved',c.approved||0,'of '+(d.canary_total||0)],['Awaiting review',c.review||0,'fresh candidates']];
   byId('summary').innerHTML=cards.map((x)=>'<div class="card"><div class="muted">'+x[0]+'</div><div class="big">'+x[1]+'</div><div class="muted">'+x[2]+'</div></div>').join('');
   const pct=d.canary_total?Math.round(((c.approved||0)/d.canary_total)*100):0;
   byId('progressText').textContent=(c.approved||0)+' approved • '+(c.review||0)+' awaiting review • '+(c.failed||0)+' failed • '+(c.other||0)+' generating/other';

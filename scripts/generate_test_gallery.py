@@ -20,6 +20,7 @@ from image_edit_profile import prepare_distilled_image_edit
 from edit_prompt import build_edit_prompt
 from vision_reviewer import VisionReviewError, review_image, review_notes
 from generation_runtime import model_filename, read_json
+from generation_progress import write_generation_progress
 from generation_lint import assert_generation_ready
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from manifest_validation import validate_manifest
@@ -647,6 +648,10 @@ def main() -> int:
                 "review_fingerprint": current_review_fingerprint,
                 "started_at": utc_now(),
             }
+            write_generation_progress(
+                page["page_id"], page["monster_name"], candidate_no,
+                "preparing", message="Preparing workflow and current review authority",
+            )
             try:
                 review_feedback = reviewer_recheck_feedback
                 if prior and prior.get("status") == "technical_qa_failed":
@@ -680,6 +685,10 @@ def main() -> int:
                         assistant_repair_verdict,
                         1,
                     )
+                    write_generation_progress(
+                        page["page_id"], page["monster_name"], candidate_no,
+                        "repairing", message="Rendering targeted repair candidate",
+                    )
                     relative = execute_candidate(
                         cli,
                         client,
@@ -697,10 +706,18 @@ def main() -> int:
                     source = reviewer_recheck_source
                 else:
                     workflow = prepare(cli, config, page, seed, candidate_no, review_feedback)
+                    write_generation_progress(
+                        page["page_id"], page["monster_name"], candidate_no,
+                        "rendering", message="ComfyUI is rendering the candidate",
+                    )
                     relative = execute_candidate(
                         cli, client, workflow, page["page_id"], candidate_no, inspect_candidate
                     )
                     source = ROOT / "web" / relative
+                write_generation_progress(
+                    page["page_id"], page["monster_name"], candidate_no,
+                    "reviewing", message="Running semantic review and refinement",
+                )
                 best, visual_verdict, pass_history = refine_candidate(
                     cli, client, config, page, candidate_no, seed, source
                 )
@@ -745,12 +762,22 @@ def main() -> int:
             except Exception as exc:
                 record.update({"status": "failed", "error": str(exc)})
             record["finished_at"] = utc_now()
+            write_generation_progress(
+                page["page_id"], page["monster_name"], candidate_no,
+                "finished", message="Candidate cycle finished",
+                status=str(record.get("status") or "unknown"),
+            )
             state["results"].append(record)
             existing[(page["page_id"], candidate_no)] = record
             state["updated_at"] = utc_now()
             write_state(state)
             print(json.dumps(record))
 
+    write_generation_progress(
+        None, None, None, "idle",
+        message="Current gallery generation pass is complete",
+        status="ready",
+    )
     state["completed_at"] = utc_now()
     state["updated_at"] = utc_now()
     write_state(state)

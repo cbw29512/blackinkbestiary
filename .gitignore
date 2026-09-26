@@ -27,3 +27,4 @@ data/comfy-runtime.stderr.log
 
 # Generated GitHub review handoff lives only on review-previews-live.
 review-previews/
+data/generation-progress.json
