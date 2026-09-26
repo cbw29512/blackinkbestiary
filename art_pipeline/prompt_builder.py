@@ -26,6 +26,8 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 MONSTER_DIR = ROOT / "data" / "monsters"
+FAILURE_MEMORY = ROOT / "data" / "review_failure_memory.json"
+LIVE_REVIEW_DECISIONS = ROOT / "review-previews" / "decisions.json"
 
 try:
     from .style_rules import STYLE_RULES
@@ -291,43 +293,64 @@ def _feedback_tokens(text: str) -> set[str]:
     }
 
 
-def _historical_rejection_text(page_id: str) -> str:
-    """Load exact-image rejection evidence for ranking existing authoritative locks only."""
+def _historical_rejection_rows(page_id: str) -> list[dict]:
+    """Combine curated recurring failure memory with the current local review ledger."""
+    if not page_id:
+        return []
+
+    rows: list[dict] = []
     try:
-        path = ROOT / "review-previews" / "decisions.json"
-        if not path.exists() or not page_id:
-            return ""
-        payload = json.loads(path.read_text(encoding="utf-8"))
-        notes = [
-            str(row.get("notes") or "").strip()
-            for row in payload.get("reviews", [])
-            if str(row.get("page_id") or "") == page_id
-            and str(row.get("decision") or "").lower() == "reject"
-            and str(row.get("notes") or "").strip()
-        ]
-        return " ".join(notes[-8:])
+        if FAILURE_MEMORY.exists():
+            payload = json.loads(FAILURE_MEMORY.read_text(encoding="utf-8"))
+            page_rows = (payload.get("pages") or {}).get(page_id) or []
+            if isinstance(page_rows, list):
+                rows.extend(item for item in page_rows if isinstance(item, dict))
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
-        return ""
+        pass
+
+    try:
+        if LIVE_REVIEW_DECISIONS.exists():
+            payload = json.loads(LIVE_REVIEW_DECISIONS.read_text(encoding="utf-8"))
+            rows.extend(
+                row
+                for row in payload.get("reviews", [])
+                if isinstance(row, dict)
+                and str(row.get("page_id") or "") == page_id
+                and str(row.get("decision") or "").lower() == "reject"
+            )
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        pass
+
+    return rows
+
+
+def _historical_rejection_text(page_id: str) -> str:
+    """Load rejection evidence for ranking existing authoritative locks only."""
+    notes = [
+        str(row.get("notes") or "").strip()
+        for row in _historical_rejection_rows(page_id)
+        if str(row.get("notes") or "").strip()
+    ]
+    return " ".join(notes[-12:])
 
 
 def _historical_rejection_codes(page_id: str) -> set[str]:
-    try:
-        path = ROOT / "review-previews" / "decisions.json"
-        if not path.exists() or not page_id:
-            return set()
-        payload = json.loads(path.read_text(encoding="utf-8"))
-        codes: set[str] = set()
-        for row in payload.get("reviews", []):
-            if (
-                str(row.get("page_id") or "") != page_id
-                or str(row.get("decision") or "").lower() != "reject"
-            ):
-                continue
-            codes.update(classify_text(str(row.get("notes") or "")))
-        codes.discard("UNCLASSIFIED")
-        return codes
-    except (OSError, ValueError, TypeError, json.JSONDecodeError):
-        return set()
+    codes: set[str] = set()
+    stage_codes = {
+        "identity": "IDENTITY_WRONG_CREATURE",
+        "environment": "ENVIRONMENT_GENERIC",
+        "action": "ACTION_UNCLEAR",
+        "scene": "ACTION_UNCLEAR",
+        "quality": "QUALITY_DENSITY",
+    }
+    for row in _historical_rejection_rows(page_id):
+        notes = str(row.get("notes") or "")
+        codes.update(classify_text(notes))
+        explicit = stage_codes.get(str(row.get("stage") or "").strip().lower())
+        if explicit:
+            codes.add(explicit)
+    codes.discard("UNCLASSIFIED")
+    return codes
 
 
 def _historical_scene_failure_lock(page: dict) -> str:

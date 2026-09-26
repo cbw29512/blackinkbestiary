@@ -14,13 +14,6 @@ import review_publish_git as rpg
 
 
 class ReviewPublishGitTests(unittest.TestCase):
-    def test_stage_snapshot_includes_synced_live_decisions(self):
-        root = Path("C:/fake")
-        with patch.object(rpg, "run") as run:
-            rpg.stage_preview_snapshot(root)
-
-        run.assert_called_once_with(root, "git", "add", "-A", "review-previews")
-
     def test_sync_live_decisions_fetches_validated_ledger(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

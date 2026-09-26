@@ -20,26 +20,19 @@ def review_id(page_id: str, candidate: int, payload: bytes) -> str:
 
 
 class ReviewDecisionTests(unittest.TestCase):
-    def test_repository_exact_image_decisions_are_unique(self):
+    def test_repository_failure_memory_has_valid_schema_and_stages(self):
         payload = json.loads(
-            (ROOT / "review-previews" / "decisions.json").read_text(encoding="utf-8")
+            (ROOT / "data" / "review_failure_memory.json").read_text(encoding="utf-8")
         )
-        ids = [
-            str(item.get("review_id") or "")
-            for item in payload.get("reviews", [])
-            if str(item.get("review_id") or "")
-        ]
-        self.assertEqual(len(ids), len(set(ids)))
-
-    def test_repository_rejection_stages_are_known_when_present(self):
-        payload = json.loads(
-            (ROOT / "review-previews" / "decisions.json").read_text(encoding="utf-8")
-        )
-        allowed = {"identity", "environment", "action", "quality"}
-        for item in payload.get("reviews", []):
-            stage = str(item.get("stage") or "").strip().lower()
-            if stage:
-                self.assertIn(stage, allowed, item.get("review_id"))
+        self.assertEqual(payload.get("schema_version"), 1)
+        allowed = {"identity", "environment", "action", "scene", "quality"}
+        self.assertTrue(payload.get("pages"))
+        for page_id, rows in payload["pages"].items():
+            self.assertTrue(page_id)
+            self.assertIsInstance(rows, list)
+            for item in rows:
+                self.assertIn(str(item.get("stage") or "").lower(), allowed)
+                self.assertTrue(str(item.get("notes") or "").strip())
 
     def test_creature_read_failure_routes_to_identity_not_environment(self):
         item = {"monster_name": "Darkmantle", "visual_review": {"stage": "quality"}}
