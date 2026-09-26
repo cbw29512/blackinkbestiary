@@ -52,6 +52,7 @@ Fail closed. PASS only if the named habitat, material language, spatial envelope
 Do not accept a generic approximation of the named place: required spatial envelope, boundaries, depth, materials, and landmark relationships must be visibly demonstrated.
 If the environment could be mistaken for one of the page-specific forbidden drift spaces, fail.
 If the creature is correct but the place is generic or spatially wrong, fail.
+PASS EVIDENCE RULE: a PASS must use preserve items to name at least two concrete visible page-specific environment proofs (for example the required spatial form, landmark, framing, or material structure). Generic praise such as "stone walls," "good background," or "monster dominates" is not sufficient evidence.
 
 DEFECT WORDING RULE: describe the visible environmental failure in negative language. Never copy a positive gate verbatim into defects.
 Return exactly one compact JSON object and nothing else:
@@ -71,6 +72,7 @@ Inspect the visible action, contact, support, and cause-and-effect. The environm
 Fail closed. PASS only if the required verb/action, prop relationship, support/contact, motion/weight, and story interaction are visibly present.
 Proximity is not action. The image must visibly demonstrate the page-specific verb through body pose, contact geometry, direction, support, prop response, or cause-and-effect as required.
 If contact, direction, support, or cause-and-effect is ambiguous or merely implied, fail.
+PASS EVIDENCE RULE: a PASS must use preserve items to name at least two concrete visible page-specific action proofs (for example the required verb, contact, support, motion, or prop response). Generic praise such as "dynamic pose" or "clear creature" is not sufficient evidence.
 
 DEFECT WORDING RULE: defects must describe the visible action/physicality failure, not copy a required gate.
 Return exactly one compact JSON object and nothing else:
