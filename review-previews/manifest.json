@@ -1,6 +1,6 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
+  "snapshot_engine_commit": "ce4669411c95d48d4bcbfa18fa2e79e139c49953",
   "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "candidate_count": 9,
@@ -27,23 +27,23 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-26T13:10:32.7237427Z"
+    "updated_at": "2026-09-26T14:09:55.2963239Z"
   },
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "sleeping",
-    "status": "ready",
-    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
-    "engine_commit": "57daa3dcba5d90db733769f9306627532caf0cef",
-    "updated_at": "2026-09-26T14:04:14.191106+00:00"
+    "phase": "generating",
+    "status": "running",
+    "message": "Pre-GPU snapshot published before canary generation",
+    "engine_commit": "ce4669411c95d48d4bcbfa18fa2e79e139c49953",
+    "updated_at": "2026-09-26T14:09:56.102417+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-26T13:09:55.301641+00:00",
-    "updated_at": "2026-09-26T13:10:31.707232+00:00",
+    "started_at": "2026-09-26T14:09:16.178547+00:00",
+    "updated_at": "2026-09-26T14:09:51.530551+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -62,7 +62,6 @@
           "-v"
         ],
         "output_tail": [
-          "test_kicking_scene_requires_visible_impact_contact (test_shape_locks.ShapeLockTests.test_kicking_scene_requires_visible_impact_contact) ... ok",
           "test_kobold_shape_lock_proves_miniature_scale (test_shape_locks.ShapeLockTests.test_kobold_shape_lock_proves_miniature_scale) ... ok",
           "test_nonhumanoid_priority_capsules_lock_body_topology (test_shape_locks.ShapeLockTests.test_nonhumanoid_priority_capsules_lock_body_topology) ... ok",
           "test_priority_identity_capsules_precede_scene_detail (test_shape_locks.ShapeLockTests.test_priority_identity_capsules_precede_scene_detail) ... ok",
@@ -74,6 +73,7 @@
           "test_swarm_priority_capsule_prevents_wallpaper_composition (test_shape_locks.ShapeLockTests.test_swarm_priority_capsule_prevents_wallpaper_composition) ... ok",
           "test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates (test_start_production.StartProductionContractTests.test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates) ... ok",
           "test_autopilot_publishes_phase_heartbeat_before_gpu_work (test_start_production.StartProductionContractTests.test_autopilot_publishes_phase_heartbeat_before_gpu_work) ... ok",
+          "test_autopilot_startup_also_starts_live_monitor (test_start_production.StartProductionContractTests.test_autopilot_startup_also_starts_live_monitor) ... ok",
           "test_canary_launchers_self_start_local_ai_runtime (test_start_production.StartProductionContractTests.test_canary_launchers_self_start_local_ai_runtime) ... ok",
           "test_engine_preflight_is_fail_closed_and_autopilot_steps_are_consistent (test_start_production.StartProductionContractTests.test_engine_preflight_is_fail_closed_and_autopilot_steps_are_consistent) ... ok",
           "test_full_gallery_requires_exact_image_canary_approval (test_start_production.StartProductionContractTests.test_full_gallery_requires_exact_image_canary_approval) ... ok",
@@ -179,7 +179,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 388 tests in 33.081s",
+          "Ran 390 tests in 32.021s",
           "",
           "OK"
         ]
