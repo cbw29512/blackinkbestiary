@@ -2,7 +2,7 @@
 setlocal EnableExtensions
 cd /d "%~dp0"
 
-powershell -NoProfile -Command "$running = Get-CimInstance Win32_Process -ErrorAction SilentlyContinue ^| Where-Object { $_.Name -eq 'cmd.exe' -and $_.CommandLine -match 'RUN_ENGINE_AUTOPILOT\\.bat' }; if ($running) { exit 0 } else { exit 1 }"
+powershell -NoProfile -Command "$running = Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq 'cmd.exe' -and $_.CommandLine -match 'RUN_ENGINE_AUTOPILOT\\.bat' }; if ($running) { exit 0 } else { exit 1 }"
 if not errorlevel 1 (
   echo Black-Ink Bestiary autopilot is already running.
   exit /b 0
