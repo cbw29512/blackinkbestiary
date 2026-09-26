@@ -735,6 +735,38 @@ class QATests(unittest.TestCase):
         self.assertIn("body becomes upright, broad-chested, bodybuilder-like", prompt)
         self.assertIn("horns, tail, claws, or imp-like demonic anatomy appears", prompt)
 
+    def test_historical_action_failure_reemphasizes_ogre_wedged_scene(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-10")
+        prompt = build_prompt(page)
+
+        self.assertIn("HISTORICAL SCENE FAILURE LOCK", prompt)
+        self.assertIn("ACTION PROOF HAS FAILED BEFORE", prompt)
+        self.assertIn("visible action=", prompt)
+        self.assertIn("do not substitute standing, posing, holding, or proximity", prompt)
+
+    def test_historical_environment_failure_reemphasizes_spider_hall_geometry(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(page for page in tome["pages"] if page["page_id"] == "I-22")
+        prompt = build_prompt(page)
+
+        self.assertIn("HISTORICAL SCENE FAILURE LOCK", prompt)
+        self.assertIn("ENVIRONMENT PROOF HAS FAILED BEFORE", prompt)
+        self.assertIn("Large structural geometry must prove the named place", prompt)
+
+    def test_scene_failure_taxonomy_catches_generic_pose_and_environment_notes(self):
+        from defect_taxonomy import classify_text
+
+        action_codes = classify_text(
+            "Reject: ogre is merely standing on ordinary stairs and must visibly be physically wedged."
+        )
+        environment_codes = classify_text(
+            "Reject: page does not read as a stone dungeon hall/arch and the architecture is not readable."
+        )
+
+        self.assertIn("ACTION_UNCLEAR", action_codes)
+        self.assertIn("ENVIRONMENT_GENERIC", environment_codes)
+
     def test_repeated_identity_failure_uses_reduced_identity_first_prompt(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         page = next(page for page in tome["pages"] if page["page_id"] == "I-04")
