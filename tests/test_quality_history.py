@@ -235,12 +235,17 @@ class QualityHistoryTests(unittest.TestCase):
             self.assertEqual(efficiency["semantic_yield_percent"], 25.0)
             self.assertEqual(efficiency["all_gate_yield_percent"], 25.0)
 
-    def test_print_package_requires_gutter_attribution_and_final_proof(self):
+    def test_print_package_requires_gutter_attribution_and_verified_final_proof(self):
+        from unittest.mock import patch
+        import hashlib
+        import quality_history as qh
+
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             (root / "config").mkdir()
             (root / "art_pipeline").mkdir()
             (root / "scripts").mkdir()
+            (root / "data").mkdir()
             (root / "config" / "kdp_print_standard.json").write_text(
                 "{}", encoding="utf-8"
             )
@@ -266,18 +271,80 @@ class QualityHistoryTests(unittest.TestCase):
             (root / "scripts" / "assemble_book.py").write_text(
                 "# generic assembly entry point\n", encoding="utf-8"
             )
+            manifest = root / "data" / "tome.json"
+            state = root / "data" / "state.json"
+            manifest.write_text(
+                json.dumps({"tome_id": "TOME-X", "total_pages": 1}),
+                encoding="utf-8",
+            )
+            state.write_text(
+                json.dumps({"pages": {"X-01": {"status": "locked"}}}),
+                encoding="utf-8",
+            )
 
-            report = print_package_report(root)
-            self.assertEqual(report["score"], 80)
-            self.assertTrue(report["components"]["binding_gutter_validation"])
-            self.assertTrue(report["components"]["license_attribution_page"])
-            self.assertFalse(report["components"]["reproducible_final_proof"])
+            with patch.object(
+                qh,
+                "active_book_paths",
+                return_value={"manifest": manifest, "state": state},
+            ):
+                report = qh.print_package_report(root)
+                self.assertEqual(report["score"], 80)
+                self.assertFalse(report["components"]["reproducible_final_proof"])
 
-            (root / "build").mkdir()
-            (root / "build" / "final-interior.pdf").write_bytes(b"%PDF-test")
-            complete = print_package_report(root)
+                (root / "build").mkdir()
+                pdf = root / "build" / "final-interior.pdf"
+                proof = b"%PDF-test"
+                pdf.write_bytes(proof)
+                (root / "build" / "final-interior.json").write_text(
+                    json.dumps({
+                        "book_id": "TOME-X",
+                        "art_pages": 1,
+                        "credits_page": True,
+                        "sha256": hashlib.sha256(proof).hexdigest(),
+                    }),
+                    encoding="utf-8",
+                )
+                complete = qh.print_package_report(root)
+
             self.assertEqual(complete["score"], 100)
             self.assertTrue(complete["components"]["reproducible_final_proof"])
+
+    def test_print_package_rejects_stale_or_mismatched_final_proof(self):
+        from unittest.mock import patch
+        import hashlib
+        import quality_history as qh
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "data").mkdir()
+            (root / "build").mkdir()
+            manifest = root / "data" / "tome.json"
+            state = root / "data" / "state.json"
+            manifest.write_text(
+                json.dumps({"tome_id": "TOME-X", "total_pages": 1}),
+                encoding="utf-8",
+            )
+            state.write_text(
+                json.dumps({"pages": {"X-01": {"status": "locked"}}}),
+                encoding="utf-8",
+            )
+            pdf = root / "build" / "final-interior.pdf"
+            pdf.write_bytes(b"%PDF-current")
+            (root / "build" / "final-interior.json").write_text(
+                json.dumps({
+                    "book_id": "WRONG-BOOK",
+                    "art_pages": 1,
+                    "credits_page": True,
+                    "sha256": hashlib.sha256(b"%PDF-current").hexdigest(),
+                }),
+                encoding="utf-8",
+            )
+            with patch.object(
+                qh,
+                "active_book_paths",
+                return_value={"manifest": manifest, "state": state},
+            ):
+                self.assertFalse(qh._verified_final_proof(root))
 
     def test_foundation_requires_current_autopilot_heartbeat_for_full_score(self):
         from unittest.mock import patch

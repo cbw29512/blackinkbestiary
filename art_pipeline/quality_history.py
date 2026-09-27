@@ -14,6 +14,7 @@ try:
     from .prompt_load import prompt_load_report
     from .replication_probe import run_replication_probe
     from .series_readiness import audit_series
+    from .studio_config import active_book_paths
 except ImportError:
     from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from learning_feedback import build_learning_queue
@@ -22,6 +23,7 @@ except ImportError:
     from prompt_load import prompt_load_report
     from replication_probe import run_replication_probe
     from series_readiness import audit_series
+    from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -286,6 +288,48 @@ def _generic_assembly_exists(root: Path) -> bool:
     return any((root / relative).exists() for relative in candidates)
 
 
+def _verified_final_proof(root: Path) -> bool:
+    proof_pairs = (
+        (root / "build" / "final-interior.pdf", root / "build" / "final-interior.json"),
+        (root / "output" / "final-interior.pdf", root / "output" / "final-interior.json"),
+        (root / "web" / "final-interior.pdf", root / "web" / "final-interior.json"),
+    )
+    try:
+        active_paths = active_book_paths(root)
+        manifest = _read(active_paths["manifest"])
+        state = _read(active_paths["state"])
+    except (OSError, KeyError, ValueError, json.JSONDecodeError):
+        return False
+
+    expected_book = str(manifest.get("tome_id") or manifest.get("book_id") or "")
+    expected_art_pages = int(manifest.get("total_pages") or 0)
+    if expected_art_pages < 1:
+        return False
+    locked_pages = sum(
+        1 for page in (state.get("pages") or {}).values()
+        if page.get("status") == "locked"
+    )
+    if locked_pages != expected_art_pages:
+        return False
+
+    for pdf_path, report_path in proof_pairs:
+        if not pdf_path.is_file() or not report_path.is_file():
+            continue
+        try:
+            report = _read(report_path)
+            digest = hashlib.sha256(pdf_path.read_bytes()).hexdigest()
+        except (OSError, ValueError, json.JSONDecodeError):
+            continue
+        if (
+            report.get("sha256") == digest
+            and str(report.get("book_id") or "") == expected_book
+            and int(report.get("art_pages") or 0) == expected_art_pages
+            and bool(report.get("credits_page"))
+        ):
+            return True
+    return False
+
+
 def print_package_report(root: Path = ROOT) -> dict:
     qa_path = root / "art_pipeline" / "qa.py"
     png_path = root / "art_pipeline" / "png_content_qa.py"
@@ -294,11 +338,6 @@ def print_package_report(root: Path = ROOT) -> dict:
     png_text = png_path.read_text(encoding="utf-8") if png_path.exists() else ""
     assembly_text = (
         assembly_path.read_text(encoding="utf-8") if assembly_path.exists() else ""
-    )
-    proof_candidates = (
-        root / "build" / "final-interior.pdf",
-        root / "output" / "final-interior.pdf",
-        root / "web" / "final-interior.pdf",
     )
     components = {
         "kdp_standard": (root / "config" / "kdp_print_standard.json").exists(),
@@ -314,7 +353,7 @@ def print_package_report(root: Path = ROOT) -> dict:
             and "credits_lines=credits" in assembly_text
         ),
         "generic_assembly_pipeline": _generic_assembly_exists(root),
-        "reproducible_final_proof": any(path.exists() for path in proof_candidates),
+        "reproducible_final_proof": _verified_final_proof(root),
     }
     weights = {
         "kdp_standard": 15,
