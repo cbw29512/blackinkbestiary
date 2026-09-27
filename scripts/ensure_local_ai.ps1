@@ -46,9 +46,18 @@ if (-not (Test-Path $configPath -PathType Leaf)) { throw "Missing local AI confi
 $config = Get-Content $configPath -Raw | ConvertFrom-Json
 
 $comfyHealth = "$($config.comfy_url.TrimEnd('/'))/system_stats"
-$expectedComfyMain = [IO.Path]::GetFullPath(
-  (Join-Path (Join-Path $root ([string]$config.workspace)) "ComfyUI\main.py")
+$configuredWorkspace = if ([IO.Path]::IsPathRooted([string]$config.workspace)) {
+  [IO.Path]::GetFullPath([string]$config.workspace)
+} else {
+  [IO.Path]::GetFullPath((Join-Path $root ([string]$config.workspace))
 )
+}
+$resolvedComfyRoot = Find-BlackInkComfyRoot $root ([string]$config.workspace)
+$expectedComfyMain = if ($resolvedComfyRoot) {
+  [IO.Path]::GetFullPath((Join-Path $resolvedComfyRoot "main.py"))
+} else {
+  [IO.Path]::GetFullPath((Join-Path $configuredWorkspace "main.py"))
+}
 
 function Assert-BlackInkComfyWorkspace {
   Set-RuntimeStage "comfy-identity" "Verifying pinned Black-Ink ComfyUI workspace." $expectedComfyMain
@@ -76,13 +85,12 @@ $comfyStderr = Join-Path $root "data\comfy-runtime.stderr.log"
 
 Set-RuntimeStage "comfy-health" "Checking ComfyUI API." $comfyHealth
 if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
-  Set-RuntimeStage "comfy-discovery" "Locating Black-Ink ComfyUI workspace."
-  $comfyWorkspace = Find-BlackInkComfyWorkspace $root ([string]$config.workspace)
-  if (-not $comfyWorkspace) { throw "Black-Ink ComfyUI workspace root could not be found." }
+  Set-RuntimeStage "comfy-discovery" "Locating Black-Ink ComfyUI root."
+  $comfyRoot = Find-BlackInkComfyRoot $root ([string]$config.workspace)
+  if (-not $comfyRoot) { throw "Black-Ink ComfyUI root could not be found." }
 
-  $comfyRoot = Join-Path $comfyWorkspace "ComfyUI"
   $mainPy = Join-Path $comfyRoot "main.py"
-  $comfyPython = Find-BlackInkComfyPython $comfyWorkspace
+  $comfyPython = Find-BlackInkComfyPython $comfyRoot
   if (-not $comfyPython) {
     throw "No valid ComfyUI workspace Python was found for persistent logged launch."
   }
@@ -92,7 +100,7 @@ if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
   $comfyCli = Join-Path $root ".blackink-tools\Scripts\comfy.exe"
   if (Test-Path $comfyCli -PathType Leaf) {
     Set-RuntimeStage "comfy-stop" "Clearing any stale comfy-cli background record." $comfyWorkspace
-    $null = Invoke-BlackInkCommand $comfyCli @("--workspace=$comfyWorkspace", "stop")
+    $null = Invoke-BlackInkCommand $comfyCli @("--workspace=$configuredWorkspace", "stop")
   }
 
   if ($launchMode -ne "managed_direct_python") {
