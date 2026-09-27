@@ -6,7 +6,7 @@
   "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
   "comparable_to_previous": true,
   "comparison_reason": null,
-  "history_appended": true,
+  "history_appended": false,
   "history_entries": 57,
   "current_metrics": {
     "foundation_readiness": 100.0,
@@ -105,14 +105,6 @@
     }
   },
   "defect_comparisons": {
-    "ACTION_UNCLEAR": {
-      "previous": 2,
-      "current": 0,
-      "delta": -2,
-      "signed_delta": "-2",
-      "trend": "improving",
-      "lower_is_better": true
-    },
     "ENVIRONMENT_GENERIC": {
       "previous": 3,
       "current": 3,
@@ -122,35 +114,19 @@
       "lower_is_better": true
     },
     "IDENTITY_HEROIC_BULK": {
-      "previous": 2,
-      "current": 1,
-      "delta": -1,
-      "signed_delta": "-1",
-      "trend": "improving",
-      "lower_is_better": true
-    },
-    "IDENTITY_LIMB_COUNT": {
-      "previous": 2,
-      "current": 0,
-      "delta": -2,
-      "signed_delta": "-2",
-      "trend": "improving",
-      "lower_is_better": true
-    },
-    "SWARM_WALLPAPER": {
       "previous": 1,
-      "current": 0,
-      "delta": -1,
-      "signed_delta": "-1",
-      "trend": "improving",
+      "current": 1,
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     },
     "UNCLASSIFIED": {
-      "previous": 2,
+      "previous": 5,
       "current": 5,
-      "delta": 3,
-      "signed_delta": "+3",
-      "trend": "regressing",
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     }
   },
@@ -253,12 +229,9 @@
     "QUALITY_DENSITY": 3
   },
   "previous_defect_counts": {
-    "ACTION_UNCLEAR": 2,
     "ENVIRONMENT_GENERIC": 3,
-    "IDENTITY_HEROIC_BULK": 2,
-    "IDENTITY_LIMB_COUNT": 2,
-    "SWARM_WALLPAPER": 1,
-    "UNCLASSIFIED": 2
+    "IDENTITY_HEROIC_BULK": 1,
+    "UNCLASSIFIED": 5
   },
   "replication": {
     "score": 100,
