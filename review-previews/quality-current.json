@@ -2,8 +2,8 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
-  "measured_at": "2026-09-27T17:59:37.793880+00:00",
-  "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
+  "measured_at": "2026-09-27T18:05:11.724899+00:00",
+  "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 100.0,
@@ -36,7 +36,7 @@
     "rows": [
       {
         "page_id": "I-01",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -45,11 +45,11 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-04",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -58,11 +58,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-08",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -71,11 +71,11 @@
         "visual_stage": null,
         "visual_score": null,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-10",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -84,11 +84,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-14",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -97,11 +97,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-16",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -110,11 +110,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-19",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -123,11 +123,11 @@
         "visual_stage": "action",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-20",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -136,11 +136,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-22",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -149,7 +149,7 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       }
     ]
   },
@@ -168,9 +168,9 @@
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 10840.4,
+    "generation_chars_avg": 10947.3,
     "generation_chars_max": 11659,
-    "generation_words_avg": 1532.4,
+    "generation_words_avg": 1546.6,
     "generation_words_max": 1639,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
@@ -385,9 +385,9 @@
       {
         "page_id": "I-14",
         "generation": {
-          "chars": 10968,
-          "words": 1542,
-          "nonempty_lines": 62,
+          "chars": 11279,
+          "words": 1582,
+          "nonempty_lines": 63,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -526,9 +526,9 @@
       {
         "page_id": "I-20",
         "generation": {
-          "chars": 10192,
-          "words": 1448,
-          "nonempty_lines": 64,
+          "chars": 10843,
+          "words": 1535,
+          "nonempty_lines": 65,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -643,9 +643,11 @@
       "weakest_metric": "visual_cleanliness",
       "missing_required_categories": [],
       "known_blockers": [
-        "UNCLASSIFIED",
         "ENVIRONMENT_GENERIC",
-        "IDENTITY_HEROIC_BULK"
+        "UNCLASSIFIED",
+        "IDENTITY_HEROIC_BULK",
+        "ACTION_UNCLEAR",
+        "SWARM_WALLPAPER"
       ],
       "automated_100": false
     },
@@ -894,20 +896,22 @@
     }
   },
   "defect_counts": {
-    "UNCLASSIFIED": 5,
     "ENVIRONMENT_GENERIC": 3,
-    "IDENTITY_HEROIC_BULK": 1
+    "UNCLASSIFIED": 3,
+    "IDENTITY_HEROIC_BULK": 2,
+    "ACTION_UNCLEAR": 1,
+    "SWARM_WALLPAPER": 1
   },
   "historical_defect_counts": {
-    "IDENTITY_HEROIC_BULK": 34,
+    "IDENTITY_HEROIC_BULK": 35,
     "IDENTITY_HORNS_TUSKS": 33,
     "IDENTITY_WRONG_CREATURE": 26,
     "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
     "ENVIRONMENT_GENERIC": 9,
-    "UNCLASSIFIED": 8,
-    "SWARM_WALLPAPER": 7,
-    "ACTION_UNCLEAR": 6,
+    "SWARM_WALLPAPER": 8,
+    "ACTION_UNCLEAR": 7,
+    "UNCLASSIFIED": 6,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
   },
@@ -915,7 +919,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 41,
+      "evidence_count": 42,
       "distinct_pages": 10,
       "distinct_families": 6,
       "scope": [
@@ -1062,7 +1066,7 @@
     {
       "defect_code": "ENVIRONMENT_GENERIC",
       "label": "Generic/wrong environment",
-      "evidence_count": 23,
+      "evidence_count": 25,
       "distinct_pages": 5,
       "distinct_families": 5,
       "scope": [
@@ -1209,7 +1213,7 @@
     {
       "defect_code": "SWARM_WALLPAPER",
       "label": "Swarm wallpaper density",
-      "evidence_count": 7,
+      "evidence_count": 8,
       "distinct_pages": 2,
       "distinct_families": 2,
       "scope": [
@@ -1258,9 +1262,9 @@
     {
       "defect_code": "ACTION_UNCLEAR",
       "label": "Action/story beat unclear",
-      "evidence_count": 6,
-      "distinct_pages": 2,
-      "distinct_families": 2,
+      "evidence_count": 7,
+      "distinct_pages": 3,
+      "distinct_families": 3,
       "scope": [
         "master_engine",
         "page_recipe"
@@ -1465,16 +1469,17 @@
     }
   },
   "status_counts": {
-    "awaiting_exact_image_review": 9
+    "assistant_rejected": 9
   },
   "historical_status_counts": {
-    "assistant_rejected": 78,
-    "awaiting_exact_image_review": 9
+    "assistant_rejected": 87
   },
   "known_blockers": [
-    "UNCLASSIFIED",
     "ENVIRONMENT_GENERIC",
-    "IDENTITY_HEROIC_BULK"
+    "UNCLASSIFIED",
+    "IDENTITY_HEROIC_BULK",
+    "ACTION_UNCLEAR",
+    "SWARM_WALLPAPER"
   ],
-  "measurement_fingerprint": "05f4e39a201df944121a0575109c6c44ee2457a87b651f94c032d1fc5c0d36bc"
+  "measurement_fingerprint": "1685a3c0e8daeb53019efa3b9f2124e093743aa4dc2d179558fa0cfd73836e41"
 }

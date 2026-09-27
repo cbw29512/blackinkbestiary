@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "active_book_id": "TOME-I",
-  "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
+  "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
   "comparable_to_previous": true,
   "comparison_reason": null,
-  "history_appended": false,
-  "history_entries": 57,
+  "history_appended": true,
+  "history_entries": 58,
   "current_metrics": {
     "foundation_readiness": 100.0,
     "technical_qa_pass_rate": 100.0,
@@ -105,6 +105,14 @@
     }
   },
   "defect_comparisons": {
+    "ACTION_UNCLEAR": {
+      "previous": 0,
+      "current": 1,
+      "delta": 1,
+      "signed_delta": "+1",
+      "trend": "regressing",
+      "lower_is_better": true
+    },
     "ENVIRONMENT_GENERIC": {
       "previous": 3,
       "current": 3,
@@ -115,18 +123,26 @@
     },
     "IDENTITY_HEROIC_BULK": {
       "previous": 1,
+      "current": 2,
+      "delta": 1,
+      "signed_delta": "+1",
+      "trend": "regressing",
+      "lower_is_better": true
+    },
+    "SWARM_WALLPAPER": {
+      "previous": 0,
       "current": 1,
-      "delta": 0,
-      "signed_delta": "+0",
-      "trend": "flat",
+      "delta": 1,
+      "signed_delta": "+1",
+      "trend": "regressing",
       "lower_is_better": true
     },
     "UNCLASSIFIED": {
       "previous": 5,
-      "current": 5,
-      "delta": 0,
-      "signed_delta": "+0",
-      "trend": "flat",
+      "current": 3,
+      "delta": -2,
+      "signed_delta": "-2",
+      "trend": "improving",
       "lower_is_better": true
     }
   },
@@ -211,20 +227,22 @@
     "semantic_yield_percent": 0.0
   },
   "current_defect_counts": {
-    "UNCLASSIFIED": 5,
     "ENVIRONMENT_GENERIC": 3,
-    "IDENTITY_HEROIC_BULK": 1
+    "UNCLASSIFIED": 3,
+    "IDENTITY_HEROIC_BULK": 2,
+    "ACTION_UNCLEAR": 1,
+    "SWARM_WALLPAPER": 1
   },
   "current_historical_defect_counts": {
-    "IDENTITY_HEROIC_BULK": 34,
+    "IDENTITY_HEROIC_BULK": 35,
     "IDENTITY_HORNS_TUSKS": 33,
     "IDENTITY_WRONG_CREATURE": 26,
     "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
     "ENVIRONMENT_GENERIC": 9,
-    "UNCLASSIFIED": 8,
-    "SWARM_WALLPAPER": 7,
-    "ACTION_UNCLEAR": 6,
+    "SWARM_WALLPAPER": 8,
+    "ACTION_UNCLEAR": 7,
+    "UNCLASSIFIED": 6,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
   },
