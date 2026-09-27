@@ -93,5 +93,13 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host ""
+Write-Host "Recording verified local-stack fingerprint..." -ForegroundColor Cyan
+& $Python scripts\local_stack_marker.py --write
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Could not record the verified local-stack fingerprint." -ForegroundColor Red
+    exit $LASTEXITCODE
+}
+
+Write-Host ""
 Write-Host "BLACK-INK LOCAL AI STACK IS READY." -ForegroundColor Green
-Write-Host "Next: open the Studio and generate the Golden Five calibration pages."
+Write-Host "The production launcher can now start the self-healing Canary Nine autopilot."
