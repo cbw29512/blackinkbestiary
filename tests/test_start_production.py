@@ -141,6 +141,17 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("autopilot-status.html", opener)
         self.assertIn("/api/autopilot-status", server)
 
+    def test_canary_gallery_has_one_click_opener_and_full_size_images(self):
+        opener = (ROOT / "OPEN_CANARY_GALLERY.bat").read_text(encoding="utf-8")
+        monitor = (ROOT / "web" / "autopilot-status.html").read_text(encoding="utf-8")
+        script = (ROOT / "web" / "autopilot-status.js").read_text(encoding="utf-8")
+        self.assertIn("START_STATUS_DASHBOARD_IF_NEEDED.bat", opener)
+        self.assertIn("autopilot-status.html#canaries", opener)
+        self.assertIn("imageDialog", monitor)
+        self.assertIn("Click any picture to view it full-size", monitor)
+        self.assertIn("canary-preview", script)
+        self.assertIn("showModal()", script)
+
     def test_autopilot_publishes_phase_heartbeat_before_gpu_work(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         heartbeat = (ROOT / "scripts" / "autopilot_heartbeat.py").read_text(encoding="utf-8")
