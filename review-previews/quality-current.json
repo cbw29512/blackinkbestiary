@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
-  "quality_contract_fingerprint": "723230cc659380cddfc777b7b77c0efcc973c9012066f6ba3090a9424e63c0f6",
-  "measured_at": "2026-09-26T18:40:59.291491+00:00",
-  "engine_commit": "ce4669411c95d48d4bcbfa18fa2e79e139c49953",
+  "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
+  "measured_at": "2026-09-27T16:57:31.370966+00:00",
+  "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 100.0,
@@ -36,7 +36,7 @@
     "rows": [
       {
         "page_id": "I-01",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -45,11 +45,11 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-04",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -58,11 +58,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-08",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -71,11 +71,11 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-10",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -84,11 +84,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-14",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -97,11 +97,11 @@
         "visual_stage": null,
         "visual_score": null,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-16",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -110,11 +110,11 @@
         "visual_stage": "environment",
         "visual_score": 45,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-19",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -123,11 +123,11 @@
         "visual_stage": "quality",
         "visual_score": 45,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-20",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -136,11 +136,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-22",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -149,7 +149,7 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       }
     ]
   },
@@ -168,10 +168,10 @@
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 10817.4,
-    "generation_chars_max": 11475,
-    "generation_words_avg": 1529.4,
-    "generation_words_max": 1610,
+    "generation_chars_avg": 10840.4,
+    "generation_chars_max": 11659,
+    "generation_words_avg": 1532.4,
+    "generation_words_max": 1639,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
       "hard_max_chars": 14000,
@@ -244,8 +244,8 @@
       {
         "page_id": "I-04",
         "generation": {
-          "chars": 11406,
-          "words": 1606,
+          "chars": 11659,
+          "words": 1639,
           "nonempty_lines": 65,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -291,8 +291,8 @@
       {
         "page_id": "I-08",
         "generation": {
-          "chars": 10874,
-          "words": 1530,
+          "chars": 10828,
+          "words": 1524,
           "nonempty_lines": 63,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -643,10 +643,12 @@
       "weakest_metric": "visual_cleanliness",
       "missing_required_categories": [],
       "known_blockers": [
-        "UNCLASSIFIED",
-        "ACTION_UNCLEAR",
         "ENVIRONMENT_GENERIC",
-        "IDENTITY_HEROIC_BULK"
+        "ACTION_UNCLEAR",
+        "IDENTITY_HEROIC_BULK",
+        "IDENTITY_LIMB_COUNT",
+        "UNCLASSIFIED",
+        "SWARM_WALLPAPER"
       ],
       "automated_100": false
     },
@@ -895,21 +897,23 @@
     }
   },
   "defect_counts": {
-    "UNCLASSIFIED": 4,
+    "ENVIRONMENT_GENERIC": 3,
     "ACTION_UNCLEAR": 2,
-    "ENVIRONMENT_GENERIC": 2,
-    "IDENTITY_HEROIC_BULK": 1
+    "IDENTITY_HEROIC_BULK": 2,
+    "IDENTITY_LIMB_COUNT": 2,
+    "UNCLASSIFIED": 2,
+    "SWARM_WALLPAPER": 1
   },
   "historical_defect_counts": {
-    "IDENTITY_HEROIC_BULK": 34,
+    "IDENTITY_HEROIC_BULK": 35,
     "IDENTITY_HORNS_TUSKS": 33,
     "IDENTITY_WRONG_CREATURE": 26,
-    "IDENTITY_LIMB_COUNT": 12,
+    "IDENTITY_LIMB_COUNT": 14,
     "SIGNATURE_FEATURE_MISSING": 12,
+    "ENVIRONMENT_GENERIC": 9,
     "ACTION_UNCLEAR": 8,
-    "ENVIRONMENT_GENERIC": 8,
-    "SWARM_WALLPAPER": 7,
-    "UNCLASSIFIED": 7,
+    "SWARM_WALLPAPER": 8,
+    "UNCLASSIFIED": 5,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
   },
@@ -917,7 +921,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 40,
+      "evidence_count": 41,
       "distinct_pages": 10,
       "distinct_families": 6,
       "scope": [
@@ -1064,9 +1068,9 @@
     {
       "defect_code": "ENVIRONMENT_GENERIC",
       "label": "Generic/wrong environment",
-      "evidence_count": 20,
-      "distinct_pages": 4,
-      "distinct_families": 4,
+      "evidence_count": 21,
+      "distinct_pages": 5,
+      "distinct_families": 5,
       "scope": [
         "master_engine",
         "page_recipe"
@@ -1106,6 +1110,55 @@
           "stage": null,
           "evidence_text": [
             "Reject: bugbear stalker is upright/bodybuilder-like in a normal-height hall; enforce low crawlway crouch, long arms, no horns/tusks, one dragged sack, and clear finger-to-mouth silence signal."
+          ]
+        }
+      ]
+    },
+    {
+      "defect_code": "IDENTITY_LIMB_COUNT",
+      "label": "Limb/body topology error",
+      "evidence_count": 14,
+      "distinct_pages": 4,
+      "distinct_families": 4,
+      "scope": [
+        "master_engine",
+        "monster_family"
+      ],
+      "master_engine_lesson": "Strengthen universal exact topology/count checks and reject extra, missing, duplicated, merged, or branched appendages.",
+      "monster_family_lesson": "Record this family-specific appendage drift as a known failure mode with the canonical limb/body count.",
+      "page_recipe_lesson": null,
+      "priority": "high",
+      "auto_apply": false,
+      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
+      "examples": [
+        {
+          "page_id": "I-16",
+          "candidate": 2,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
+          ]
+        },
+        {
+          "page_id": "I-16",
+          "candidate": 3,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
+          ]
+        },
+        {
+          "page_id": "I-16",
+          "candidate": 4,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
           ]
         }
       ]
@@ -1209,58 +1262,9 @@
       ]
     },
     {
-      "defect_code": "IDENTITY_LIMB_COUNT",
-      "label": "Limb/body topology error",
-      "evidence_count": 12,
-      "distinct_pages": 4,
-      "distinct_families": 4,
-      "scope": [
-        "master_engine",
-        "monster_family"
-      ],
-      "master_engine_lesson": "Strengthen universal exact topology/count checks and reject extra, missing, duplicated, merged, or branched appendages.",
-      "monster_family_lesson": "Record this family-specific appendage drift as a known failure mode with the canonical limb/body count.",
-      "page_recipe_lesson": null,
-      "priority": "high",
-      "auto_apply": false,
-      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
-      "examples": [
-        {
-          "page_id": "I-16",
-          "candidate": 2,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
-          ]
-        },
-        {
-          "page_id": "I-16",
-          "candidate": 3,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
-          ]
-        },
-        {
-          "page_id": "I-16",
-          "candidate": 4,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant bat has separate humanoid arms plus wings and catlike body; bat forelimbs must be the wings, with true bat anatomy, hind feet, membrane-supported body, and no extra arms."
-          ]
-        }
-      ]
-    },
-    {
       "defect_code": "SWARM_WALLPAPER",
       "label": "Swarm wallpaper density",
-      "evidence_count": 7,
+      "evidence_count": 8,
       "distinct_pages": 2,
       "distinct_families": 2,
       "scope": [
@@ -1467,17 +1471,18 @@
     }
   },
   "status_counts": {
-    "awaiting_exact_image_review": 9
+    "assistant_rejected": 9
   },
   "historical_status_counts": {
-    "assistant_rejected": 78,
-    "awaiting_exact_image_review": 9
+    "assistant_rejected": 87
   },
   "known_blockers": [
-    "UNCLASSIFIED",
-    "ACTION_UNCLEAR",
     "ENVIRONMENT_GENERIC",
-    "IDENTITY_HEROIC_BULK"
+    "ACTION_UNCLEAR",
+    "IDENTITY_HEROIC_BULK",
+    "IDENTITY_LIMB_COUNT",
+    "UNCLASSIFIED",
+    "SWARM_WALLPAPER"
   ],
-  "measurement_fingerprint": "7af68b9cbd981b895aff46beed4a825624228077b2e106b47e36a7a677c94314"
+  "measurement_fingerprint": "16395369e5aa71faaec76504f9b5ed19090e39b01d069c85228f5b63a9de4d22"
 }
