@@ -64,6 +64,7 @@ A failed setup, sync, preflight, generation, review, publish, or candidate regis
 
 The project does not silently:
 
+- reuse or terminate an unrelated ComfyUI server on port 8188; the server must identify the configured Black-Ink workspace,
 - change model families,
 - install random custom nodes,
 - lower review gates,
