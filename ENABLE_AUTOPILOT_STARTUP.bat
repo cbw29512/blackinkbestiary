@@ -19,7 +19,7 @@ if errorlevel 1 (
   exit /b 1
 )
 
-echo Registered autopilot startup:
+echo Registered self-healing autopilot startup:
 echo   %LAUNCHER%
 call "%~dp0START_AUTOPILOT_IF_NEEDED.bat"
 exit /b %ERRORLEVEL%
