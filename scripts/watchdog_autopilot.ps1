@@ -43,7 +43,11 @@ $now = Get-Date
 $youngestAgeMinutes = $null
 foreach ($proc in $running) {
     if ($proc.CreationDate) {
-        $created = [Management.ManagementDateTimeConverter]::ToDateTime($proc.CreationDate)
+        if ($proc.CreationDate -is [datetime]) {
+            $created = [datetime]$proc.CreationDate
+        } else {
+            $created = [Management.ManagementDateTimeConverter]::ToDateTime([string]$proc.CreationDate)
+        }
         $age = ($now - $created).TotalMinutes
         if ($youngestAgeMinutes -eq $null -or $age -lt $youngestAgeMinutes) {
             $youngestAgeMinutes = $age
