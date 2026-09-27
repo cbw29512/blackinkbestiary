@@ -28,3 +28,6 @@ data/comfy-runtime.stderr.log
 # Generated GitHub review handoff lives only on review-previews-live.
 review-previews/
 data/generation-progress.json
+data/local-ai-install-marker.json
+data/autopilot-watchdog-status.json
+data/autopilot-watchdog.log
