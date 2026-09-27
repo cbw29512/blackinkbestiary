@@ -130,5 +130,59 @@ class SyncEngineForRunTests(unittest.TestCase):
         )
 
 
+    def test_fully_merged_feature_branch_migrates_to_main(self):
+        calls = []
+        head_reads = iter(["merged-feature-head", "local-main-head"])
+
+        def fake_output(*args):
+            key = tuple(args)
+            if key == ("git", "branch", "--show-current"):
+                return "feat/already-merged"
+            if key == ("git", "rev-parse", "HEAD"):
+                return next(head_reads)
+            if key == ("git", "rev-parse", f"origin/{sync.ENGINE_BRANCH}"):
+                return "remote-main-head"
+            if key == ("git", "rev-parse", "--short", "HEAD"):
+                return "remote123"
+            raise KeyError(key)
+
+        with (
+            patch.object(sync, "output", side_effect=fake_output),
+            patch.object(sync, "tracked_changes_outside_previews", return_value=[]),
+            patch.object(sync, "git_returncode", side_effect=[0, 0]),
+            patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
+            patch.object(sync, "sync_review_decisions", return_value=True),
+            patch.object(sync.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
+        ):
+            self.assertEqual(sync.main(), 0)
+
+        self.assertIn(("git", "switch", sync.ENGINE_BRANCH), calls)
+        self.assertIn(("git", "merge", "--ff-only", f"origin/{sync.ENGINE_BRANCH}"), calls)
+
+    def test_unmerged_feature_branch_refuses_automatic_migration(self):
+        calls = []
+
+        def fake_output(*args):
+            key = tuple(args)
+            if key == ("git", "branch", "--show-current"):
+                return "feat/unmerged-work"
+            if key == ("git", "rev-parse", "HEAD"):
+                return "unmerged-head"
+            if key == ("git", "rev-parse", f"origin/{sync.ENGINE_BRANCH}"):
+                return "remote-main-head"
+            raise KeyError(key)
+
+        with (
+            patch.object(sync, "output", side_effect=fake_output),
+            patch.object(sync, "tracked_changes_outside_previews", return_value=[]),
+            patch.object(sync, "git_returncode", return_value=1),
+            patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
+            patch.object(sync.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
+        ):
+            self.assertEqual(sync.main(), 1)
+
+        self.assertNotIn(("git", "switch", sync.ENGINE_BRANCH), calls)
+
+
 if __name__ == "__main__":
     unittest.main()

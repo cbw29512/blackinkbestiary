@@ -5,7 +5,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ENGINE_BRANCH = "feat/environment-spatial-hardening"
+ENGINE_BRANCH = "main"
 REVIEW_BRANCH = "review-previews-live"
 DECISIONS_RELATIVE = "review-previews/decisions.json"
 DECISIONS_PATH = ROOT / DECISIONS_RELATIVE
@@ -90,13 +90,6 @@ def tracked_changes_outside_previews() -> list[str]:
 
 def main() -> int:
     current = output("git", "branch", "--show-current")
-    if current != ENGINE_BRANCH:
-        print(
-            f"Engine sync requires branch {ENGINE_BRANCH!r}; "
-            f"current branch is {current!r}."
-        )
-        return 1
-
     outside = tracked_changes_outside_previews()
     if outside:
         print("Refusing automatic engine sync because tracked non-preview edits exist:")
@@ -120,6 +113,17 @@ def main() -> int:
     remote_ref = f"origin/{ENGINE_BRANCH}"
     local_head = output("git", "rev-parse", "HEAD")
     remote_head = output("git", "rev-parse", remote_ref)
+
+    if current != ENGINE_BRANCH:
+        if git_returncode("git", "merge-base", "--is-ancestor", local_head, remote_head) != 0:
+            print(
+                f"Refusing automatic branch migration from {current!r}: "
+                f"its source history is not fully contained in {remote_ref}."
+            )
+            return 1
+        print(f"Migrating fully merged engine branch {current!r} to {ENGINE_BRANCH!r}...")
+        run("git", "switch", ENGINE_BRANCH)
+        local_head = output("git", "rev-parse", "HEAD")
 
     if local_head == remote_head:
         print(f"Engine already synchronized at {output('git', 'rev-parse', '--short', 'HEAD')}.")
