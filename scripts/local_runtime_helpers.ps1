@@ -49,9 +49,6 @@ function Find-BlackInkComfyWorkspace(
   [string]$ConfiguredWorkspace
 ) {
   $candidates = @()
-  if ($env:LOCALAPPDATA) {
-    $candidates += Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary"
-  }
   if ($ConfiguredWorkspace) {
     $candidate = if ([IO.Path]::IsPathRooted($ConfiguredWorkspace)) {
       $ConfiguredWorkspace
@@ -59,6 +56,9 @@ function Find-BlackInkComfyWorkspace(
       Join-Path $Root $ConfiguredWorkspace
     }
     $candidates += $candidate
+  }
+  if ($env:LOCALAPPDATA) {
+    $candidates += Join-Path $env:LOCALAPPDATA "Comfy-Desktop\ComfyUI-Installs\Black-Ink Bestiary"
   }
 
   foreach ($candidate in $candidates | Select-Object -Unique) {
