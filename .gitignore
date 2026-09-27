@@ -31,3 +31,7 @@ data/generation-progress.json
 data/local-ai-install-marker.json
 data/autopilot-watchdog-status.json
 data/autopilot-watchdog.log
+
+data/dashboard-runtime-status.json
+data/dashboard-runtime.stdout.log
+data/dashboard-runtime.stderr.log
