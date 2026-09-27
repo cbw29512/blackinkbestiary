@@ -14,8 +14,12 @@ async function load(){
   const pct=d.canary_total?Math.round(((c.approved||0)/d.canary_total)*100):0;
   byId('progressText').textContent=(c.approved||0)+' approved • '+(c.review||0)+' awaiting review • '+(c.failed||0)+' failed • '+(c.other||0)+' generating/other';
   byId('progressFill').style.width=pct+'%';
-  byId('canaries').innerHTML=(d.canaries||[]).map((x)=>{const img=x.image_path?'<img src="/'+esc(x.image_path)+'?t='+Date.now()+'" alt="'+esc(x.page_id)+'">':'<div class="muted">No current image</div>';const err=x.error?'<pre class="bad">'+esc(x.error)+'</pre>':'';return '<div class="card canary">'+img+'<div class="big">'+esc(x.page_id)+' — '+esc(x.monster_name||'')+'</div><div>'+esc(x.status)+'</div><div class="muted">engine '+short(x.engine_commit)+' • '+esc(x.review_stage||'no review')+(x.review_score!=null?' • score '+x.review_score:'')+'</div>'+err+'</div>';}).join('');
+  byId('canaries').innerHTML=(d.canaries||[]).map((x)=>{const src=x.image_path?'/'+esc(x.image_path)+'?t='+Date.now():'';const img=src?'<img class="canary-preview" data-full="'+src+'" src="'+src+'" alt="'+esc(x.page_id)+' '+esc(x.monster_name||'')+'">':'<div class="muted">No current image yet</div>';const err=x.error?'<pre class="bad">'+esc(x.error)+'</pre>':'';return '<div class="card canary">'+img+'<div class="big">'+esc(x.page_id)+' — '+esc(x.monster_name||'')+'</div><span class="status-pill">'+esc(x.status)+'</span><div class="muted">engine '+short(x.engine_commit)+' • '+esc(x.review_stage||'no review')+(x.review_score!=null?' • local score '+x.review_score:'')+'</div>'+err+'</div>';}).join('');
+  document.querySelectorAll('.canary-preview').forEach((img)=>img.onclick=()=>{byId('fullImage').src=img.dataset.full;byId('fullImage').alt=img.alt;byId('imageDialog').showModal();});
   byId('failures').innerHTML=(d.latest_failures||[]).length?(d.latest_failures||[]).map((x)=>'<div class="card"><b>'+esc(x.page_id||'system')+'</b><div class="bad">'+esc(x.status)+'</div><div class="muted">'+age(x.finished_at)+'</div><pre>'+esc(x.error||'')+'</pre></div>').join(''):'<div class="card ok">No current recorded failures.</div>';
  }catch(e){byId('summary').innerHTML='<div class="card bad">Monitor API unavailable: '+esc(e.message)+'</div>';}
 }
 load();setInterval(load,5000);
+
+byId('closeImage').addEventListener('click',()=>byId('imageDialog').close());
+byId('imageDialog').addEventListener('click',(e)=>{if(e.target===byId('imageDialog'))byId('imageDialog').close();});
