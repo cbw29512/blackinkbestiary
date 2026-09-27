@@ -2,8 +2,8 @@
 
 ## Branch ownership
 
-- `feat/environment-spatial-hardening` is the engine-authority branch.
-  - Generator code, contracts, monster/family data, environment data, tests, and AI review decisions live here.
+- `main` is the engine-authority branch.
+  - Generator code, contracts, monster/family data, environment data, and tests live here after exact-head CI passes.
 - `review-previews-live` is the generated-review snapshot branch.
   - Local ComfyUI publishes `review-previews/manifest.json` and preview JPGs here.
   - This branch is disposable snapshot state and may be force-updated by the local publisher.
@@ -32,12 +32,12 @@ This startup registration changes only workstation process persistence. It does 
 
 ## Automated loop
 
-1. The local launcher reads exact-image decisions from the engine branch.
+1. The local launcher synchronizes production engine code from `main` and imports exact-image decisions from `review-previews-live`.
 2. `apply_review_decisions.py` marks matching local candidates approved/rejected by content hash.
 3. `generate_test_gallery.py --canary-failed --copies 1` reconciles generation/review fingerprints, rechecks existing PNGs when only review authority changed, and renders only missing, failed, assistant-rejected, or generation-stale canary pages.
 4. `publish_review_previews.py` builds lightweight JPG previews and a content-hashed manifest.
 5. `review_publish_git.py` force-publishes that snapshot to `review-previews-live`.
-6. ChatGPT reads the live branch, inspects the actual images, and writes exact-image decisions back to the engine branch.
+6. ChatGPT reads the live branch, inspects the actual images, and appends exact-image decisions to `review-previews-live`.
 7. Repeat until the canary genuinely passes direct image inspection.
 8. After 9/9 exact-image canary approval, the full-gallery launcher generates/resumes the 50-page candidate set and always publishes completed/diagnostic state back to GitHub.
 
