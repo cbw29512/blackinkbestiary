@@ -1,50 +1,52 @@
 @echo off
-setlocal
+setlocal EnableExtensions
 cd /d "%~dp0"
 
 echo.
 echo ======================================================
-echo   BLACK-INK BESTIARY - START PRODUCTION
+echo   BLACK-INK BESTIARY - START / RESUME PRODUCTION
 echo ======================================================
 echo.
-echo This first run may download about 12.5 GB of model files.
-echo Later runs reuse the verified local files.
-echo.
-
-powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\install_blackink_ai.ps1"
-if errorlevel 1 (
-  echo.
-  echo Setup did not complete. The messages above identify the blocker.
-  pause
-  exit /b 1
-)
 
 set "PY=.blackink-tools\Scripts\python.exe"
-if not exist "%PY%" (
-  echo Project Python environment is missing.
+set "STACK_READY=0"
+
+if exist "%PY%" (
+  "%PY%" "scripts\local_stack_marker.py" --check >nul 2>&1
+  if not errorlevel 1 set "STACK_READY=1"
+)
+
+if "%STACK_READY%"=="0" (
+  echo Verified local AI stack is missing, incomplete, or outdated.
+  echo Running the pinned installer/repair path...
+  echo First-time setup may download about 12.5 GB of model files.
+  echo.
+  powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\install_blackink_ai.ps1"
+  if errorlevel 1 (
+    echo.
+    echo Setup/repair did not complete. Nothing will generate until this is fixed.
+    pause
+    exit /b 1
+  )
+) else (
+  echo Verified local AI stack found. Heavy installation checks are skipped.
+)
+
+echo.
+echo Starting the self-healing Canary Nine production loop...
+call "%~dp0ENABLE_AUTOPILOT_STARTUP.bat"
+if errorlevel 1 (
+  echo.
+  echo Could not start/register the production watchdog.
   pause
   exit /b 2
 )
 
 echo.
-echo Running I-01 calibration page...
+echo Black-Ink Bestiary is running in self-healing mode.
+echo - engine/review authority syncs automatically
+echo - non-GPU preflight runs before generation
+echo - failed/stale canary pages regenerate without advancing the book
+echo - full production remains blocked until the Canary Nine are exact-image approved
 echo.
-set "PYTHONPATH=%CD%\art_pipeline"
-"%PY%" "scripts\smoke_test_i01.py"
-if errorlevel 1 (
-  echo.
-  echo I-01 calibration did not complete. Nothing advanced to I-02.
-  pause
-  exit /b 3
-)
-
-echo.
-echo Opening the Black-Ink Bestiary Studio...
-start "" "http://127.0.0.1:8765"
-
-echo.
-echo Review I-01 in the Studio.
-echo APPROVE ^& LOCK, MODIFY, or REGENERATE.
-echo The system will not move to I-02 without your approval.
-echo.
-pause
+exit /b 0

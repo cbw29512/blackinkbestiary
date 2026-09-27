@@ -5,11 +5,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class StartProductionContractTests(unittest.TestCase):
-    def test_one_click_launcher_exists_and_preserves_order_gate(self):
+    def test_one_click_launcher_installs_or_resumes_self_healing_production(self):
         text = (ROOT / "START_BLACKINK.bat").read_text(encoding="utf-8")
+        self.assertIn("local_stack_marker.py", text)
         self.assertIn("install_blackink_ai.ps1", text)
-        self.assertIn("smoke_test_i01.py", text)
-        self.assertIn("http://127.0.0.1:8765", text)
+        self.assertIn("ENABLE_AUTOPILOT_STARTUP.bat", text)
+        self.assertIn("Canary Nine", text)
+        self.assertNotIn("smoke_test_i01.py", text)
         self.assertNotIn("production-state.json", text)
 
     def test_full_gallery_requires_exact_image_canary_approval(self):
@@ -65,6 +67,12 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("StartupGraceMinutes", powershell)
         self.assertIn("START_AUTOPILOT_IF_NEEDED.bat", installer)
         self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP\\.bat", remover)
+
+    def test_installer_records_verified_stack_and_reuses_existing_server(self):
+        installer = (ROOT / "scripts" / "install_blackink_ai.ps1").read_text(encoding="utf-8")
+        self.assertIn("local_stack_marker.py --write", installer)
+        self.assertIn("Existing local ComfyUI server is already reachable", installer)
+        self.assertIn("Invoke-RestMethod -Uri \"http://127.0.0.1:8188/system_stats\"", installer)
 
     def test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight(self):
         text = (ROOT / "scripts" / "ensure_local_ai.ps1").read_text(encoding="utf-8")
@@ -190,10 +198,13 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertLess(preflight_at, ai_at)
         self.assertLess(ai_at, generate_at)
 
-    def test_start_doc_names_single_entry_point(self):
+    def test_start_doc_names_single_entry_point_and_current_canary_gate(self):
         text = (ROOT / "docs" / "START_PRODUCTION.md").read_text(encoding="utf-8")
         self.assertIn("START_BLACKINK.bat", text)
-        self.assertIn("APPROVE & LOCK", text)
+        self.assertIn("Canary Nine", text)
+        self.assertIn("self-healing", text)
+        self.assertIn("full-book generation remains blocked", text.lower())
+        self.assertNotIn("I-02 remains locked until I-01", text)
 
 
 if __name__ == "__main__":
