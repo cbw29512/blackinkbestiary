@@ -13,13 +13,13 @@ $HealthUrl = "http://127.0.0.1:$Port/api/health"
 
 New-Item -ItemType Directory -Force -Path $DataDir | Out-Null
 
-function Write-DashboardStatus([string]$Status, [string]$Message, [string]$Python = "", [int]$Pid = 0) {
+function Write-DashboardStatus([string]$Status, [string]$Message, [string]$Python = "", [int]$ProcessId = 0) {
   $payload = [ordered]@{
     schema_version = 1
     status = $Status
     message = $Message
     python = $Python
-    pid = if ($Pid -gt 0) { $Pid } else { $null }
+    pid = if ($ProcessId -gt 0) { $ProcessId } else { $null }
     health_url = $HealthUrl
     stdout_log = "data/dashboard-runtime.stdout.log"
     stderr_log = "data/dashboard-runtime.stderr.log"
