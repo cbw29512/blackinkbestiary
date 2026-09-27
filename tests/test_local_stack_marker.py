@@ -95,7 +95,7 @@ class LocalStackMarkerTests(unittest.TestCase):
             self.make_stack(root)
             marker = root / "data" / "local-ai-install-marker.json"
             write_marker(root, marker)
-            model = root / ".blackink-comfy" / "ComfyUI" / "models" / "diffusion_models" / "model.safetensors"
+            model = root / ".blackink-comfy" / "models" / "diffusion_models" / "model.safetensors"
             model.write_bytes(b"different-size-payload")
             ok, reason = verify_marker(root, marker)
         self.assertFalse(ok)
@@ -105,7 +105,7 @@ class LocalStackMarkerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             self.make_stack(root)
-            (root / ".blackink-comfy" / "ComfyUI" / "main.py").unlink()
+            (root / ".blackink-comfy" / "main.py").unlink()
             with self.assertRaises(RuntimeError):
                 build_marker(root)
 
