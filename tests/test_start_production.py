@@ -56,7 +56,7 @@ class StartProductionContractTests(unittest.TestCase):
 
         self.assertIn("WATCHDOG_AUTOPILOT.bat", starter)
         self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP.bat", starter)
-        self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP", loop)
+        self.assertIn("WATCHDOG_AUTOPILOT.bat", loop)
         self.assertIn("timeout /t 300", loop)
         self.assertIn("watchdog_autopilot.ps1", watchdog)
         self.assertIn("RUN_ENGINE_AUTOPILOT\\.bat", powershell)
