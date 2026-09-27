@@ -115,13 +115,23 @@ def main() -> int:
     remote_head = output("git", "rev-parse", remote_ref)
 
     if current != ENGINE_BRANCH:
-        if git_returncode("git", "merge-base", "--is-ancestor", local_head, remote_head) != 0:
+        contained_in_main = (
+            git_returncode("git", "merge-base", "--is-ancestor", local_head, remote_head) == 0
+        )
+        tree_matches_main = (
+            git_returncode("git", "diff", "--quiet", local_head, remote_head) == 0
+        )
+        if not contained_in_main and not tree_matches_main:
             print(
                 f"Refusing automatic branch migration from {current!r}: "
-                f"its source history is not fully contained in {remote_ref}."
+                f"its source tree differs from {remote_ref}."
             )
             return 1
-        print(f"Migrating fully merged engine branch {current!r} to {ENGINE_BRANCH!r}...")
+        reason = "fully merged" if contained_in_main else "tree-identical bridge"
+        print(
+            f"Migrating {reason} engine branch {current!r} "
+            f"to {ENGINE_BRANCH!r}..."
+        )
         run("git", "switch", ENGINE_BRANCH)
         local_head = output("git", "rev-parse", "HEAD")
 
