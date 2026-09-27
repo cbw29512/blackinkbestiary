@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import json
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 CANARY_CONFIG = ROOT / "config" / "quality_scorecard.json"
+STALE_AFTER_SECONDS = 20 * 60
 
 
 def _read_json(path: Path, default):
@@ -31,6 +33,55 @@ def _canary_ids() -> list[str]:
     return [str(x) for x in payload.get("canary_page_ids") or [] if str(x)]
 
 
+def _parse_time(value: object) -> datetime | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def activity_health(
+    heartbeat: dict,
+    progress: dict,
+    gallery: dict,
+    runtime: dict,
+    preflight: dict,
+    engine_commit: str,
+    *,
+    now: datetime | None = None,
+) -> dict:
+    now = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
+    sources = {
+        "heartbeat": heartbeat.get("updated_at"),
+        "generation_progress": progress.get("updated_at"),
+        "gallery": gallery.get("updated_at"),
+        "runtime": runtime.get("updated_at"),
+        "preflight": preflight.get("updated_at"),
+    }
+    parsed = [(name, _parse_time(value)) for name, value in sources.items()]
+    parsed = [(name, value) for name, value in parsed if value is not None]
+    freshest_source, freshest_at = max(parsed, key=lambda pair: pair[1]) if parsed else (None, None)
+    age_seconds = None if freshest_at is None else max(0, int((now - freshest_at).total_seconds()))
+    stale = age_seconds is None or age_seconds > STALE_AFTER_SECONDS
+    heartbeat_engine = str(heartbeat.get("engine_commit") or "")
+    return {
+        "status": "stale" if stale else str(heartbeat.get("status") or "unknown"),
+        "stale": stale,
+        "stale_after_seconds": STALE_AFTER_SECONDS,
+        "last_activity_at": freshest_at.isoformat() if freshest_at else None,
+        "last_activity_source": freshest_source,
+        "age_seconds": age_seconds,
+        "engine_current": bool(heartbeat_engine and heartbeat_engine == engine_commit),
+        "heartbeat_engine_commit": heartbeat_engine or None,
+    }
+
+
 def public_autopilot_status() -> dict:
     heartbeat = _read_json(DATA / "autopilot-heartbeat.json", {})
     gallery = _read_json(DATA / "test-gallery-state.json", {"results": []})
@@ -38,6 +89,15 @@ def public_autopilot_status() -> dict:
     preflight = _read_json(DATA / "engine-preflight-status.json", {})
     quality = _read_json(ROOT / "review-previews" / "quality-current.json", {})
     progress = _read_json(DATA / "generation-progress.json", {})
+    engine_commit = _git_head()
+    worker_health = activity_health(
+        heartbeat,
+        progress,
+        gallery,
+        runtime,
+        preflight,
+        engine_commit,
+    )
     latest_by_page, active, failures = {}, None, []
     for item in gallery.get("results") or []:
         page_id = str(item.get("page_id") or "")
@@ -72,7 +132,8 @@ def public_autopilot_status() -> dict:
             "review_score": (item.get("visual_review") or {}).get("score"),
         })
     return {
-        "engine_commit": _git_head(), "heartbeat": heartbeat, "runtime": runtime,
+        "engine_commit": engine_commit, "heartbeat": heartbeat, "worker_health": worker_health,
+        "runtime": runtime,
         "preflight": preflight, "quality": quality, "active_candidate": active,
         "generation_progress": progress,
         "canary_counts": counts, "canary_total": len(rows), "canaries": rows,
