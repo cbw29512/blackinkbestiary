@@ -27,15 +27,20 @@
       "orc tusks",
       "reptilian scales",
       "cute features",
-      "dense skin texture"
+      "dense skin texture",
+      "horns or horn nubs",
+      "dense furry body",
+      "broad superhero/bodybuilder torso"
     ],
-    "limb_structure": "Very long humanoid arms ending in large clawed hands, long powerful legs, and large clawed feet; limbs are lanky giant anatomy rather than ogre thickness or animal posture."
+    "limb_structure": "Very long humanoid arms ending in large clawed hands, long powerful legs, and large clawed feet; limbs are lanky giant anatomy rather than ogre thickness or animal posture.",
+    "shape_lock": "Draw a tall lanky giant with a narrow torso, severe hunch, very long arms hanging toward the knees, large clawed hands, long legs, and a coarse predatory face. Scale comes from height and reach, not chest width; no horns, fur coat, ogre belly, or sculpted bodybuilder torso."
   },
   "accuracy_checks": [
     "troll reads lanky rather than ogre-heavy",
     "arms are distinctly elongated",
     "large claws are visible",
-    "face reads predatory rather than goofy"
+    "face reads predatory rather than goofy",
+    "head is hornless and body is not fur-covered"
   ],
   "known_failure_modes": [
     {
@@ -47,6 +52,11 @@
       "id": "orc_drift",
       "symptom": "troll gains tusks or orc armor",
       "correction": "remove tusks and military gear; restore predatory cave-giant anatomy"
+    },
+    {
+      "id": "horn_fur_drift",
+      "symptom": "troll becomes horned, heavily furry, or superhero-muscular",
+      "correction": "remove horns and fur mass, narrow the torso, lengthen the arms, and restore sparse tough skin"
     }
   ],
   "scene_identity": {

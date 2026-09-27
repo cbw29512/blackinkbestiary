@@ -62,6 +62,13 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
 
     resolved["monster_name"] = monster.get("monster_name")
     resolved["habitat"] = environment.get("name")
+    monster_size = str(monster.get("size") or "").strip().lower()
+    subject_scale_rules = contract.get("subject_scale_rules") or {}
+    resolved["subject_scale_rule"] = (
+        subject_scale_rules.get(monster_size)
+        or subject_scale_rules.get("default")
+        or ""
+    )
     resolved["identity_rules"] = _merge_unique(
         monster.get("accuracy_checks"),
         page.get("identity_rules"),
@@ -88,6 +95,7 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
     resolved["_resolved"] = {
         "contract_id": contract.get("contract_id"),
         "monster_identity_version": monster.get("identity_version"),
+        "monster_size": monster_size,
         "monster_family_profile": (monster.get("catalog") or {}).get("family_profile"),
         "environment_profile": environment.get("environment_id"),
         "environment_family": environment.get("environment_family"),

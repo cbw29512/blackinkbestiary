@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "identity_version": 1,
+  "identity_version": 2,
   "profile_id": "goblin",
   "display_name": "Goblin",
   "taxonomy": {
@@ -29,16 +29,30 @@
       "heroic human proportions",
       "orc-like bulk",
       "reptilian snout",
-      "tail"
+      "tail",
+      "bodybuilder chest, six-pack abs, or oversized heroic shoulders",
+      "horns or horn nubs",
+      "clawed animal feet",
+      "reptilian claws",
+      "demonic tail"
     ],
-    "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure."
+    "limb_structure": "Thin humanoid arms and legs with quick long-fingered hands and proportionally large feet; no claws, paws, tail, or animal limb structure.",
+    "shape_lock": "Draw a small wiry goblin with narrow torso, thin forearms/calves, oversized pointed ears, no tail, and no heroic chest/ab definition; nearby human-scale masonry, door hardware, furniture, or props must prove the goblin is much smaller than an adult human.",
+    "render_priority": {
+      "positive": "SMALL WIRY GOBLINOID with a narrow torso, thin arms and legs, oversized pointed ears, broad flattened nose, angular face, humanoid hands/feet, and a slightly crouched scavenger posture. Human-scale architecture must prove it is much smaller than an adult human.",
+      "negative": "NO horns, horn nubs, tail, claws, animal feet, reptilian snout, broad heroic chest, six-pack abs, oversized shoulders, or muscular warrior proportions.",
+      "silhouette_test": "At thumbnail size the first read must be a small narrow goblin with huge ears and thin limbs, never a demonic or heroic brute."
+    }
   },
   "accuracy_checks": [
     "goblin reads ugly-cunning rather than cute",
     "ears and broad nose establish goblinoid identity",
     "body remains small and wiry",
     "surface is not furry",
-    "posture is quick, hunched, or opportunistic"
+    "posture is quick, hunched, or opportunistic",
+    "torso stays narrow and wiry with no bodybuilder chest, six-pack abs, or oversized shoulders",
+    "no horns, tail, claws, or animal feet",
+    "hands and feet remain humanoid despite exaggerated goblin proportions"
   ],
   "known_failure_modes": [
     {
@@ -58,8 +72,13 @@
     },
     {
       "id": "heroic_humanoid_drift",
-      "symptom": "upright muscular heroic body",
-      "correction": "reduce muscle mass and use a smaller crouched scavenger posture"
+      "symptom": "body becomes upright, broad-chested, bodybuilder-like, six-pack muscular, or heroically proportioned",
+      "correction": "shrink the frame, narrow the chest and shoulders, remove bodybuilder muscle definition, and restore thin wiry limbs with a crouched scavenger posture"
+    },
+    {
+      "id": "demon_drift",
+      "symptom": "horns, tail, claws, or imp-like demonic anatomy appears",
+      "correction": "remove horns, tail, claws, and animal feet; restore bare goblinoid head, humanoid hands/feet, broad nose, and oversized pointed ears"
     }
   ],
   "scene_identity": {

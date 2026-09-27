@@ -34,12 +34,14 @@
       "graphic gore",
       "tiny human skeleton proportions",
       "ornate armor"
-    ]
+    ],
+    "shape_lock": "Draw one large bipedal minotaur skeleton: exactly one broad bull skull with long bovine muzzle and two sweeping horns, one exposed humanoid rib cage/spine, exactly two skeletal arms, and exactly two long skeletal legs ending in hoof-like skeletal feet. No flesh torso, human skull, goat skull, quadruped hindquarters, extra horns, or extra limbs.",
+    "limb_structure": "Exactly two skeletal humanoid arms and two bipedal skeletal legs beneath one horned bull skull; exposed ribs and spine connect the frame, with no centaur body, extra limbs, or fleshy replacement anatomy."
   },
   "default_habitats": [
-    "dark labyrinths",
-    "crypt mazes",
-    "underground passages"
+    "underground",
+    "ruins",
+    "burial sites"
   ],
   "accuracy_checks": [
     "reads as minotaur skeleton immediately",
@@ -47,14 +49,21 @@
     "large skeleton scale is clear",
     "horns are intact",
     "no flesh obscures bones",
-    "corridor turn supports reveal"
+    "skeletal posture remains stable and readable"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
   },
-  "schema_version": 2,
+  "schema_version": 4,
   "identity_version": 1,
-  "family_profile": "minotaur"
+  "family_profile": "minotaur",
+  "description": "The animated skeleton of a minotaur, preserving the horned bull skull and massive humanoid bone structure without flesh. Heavy humanoid skeleton with broad rib cage and large limb bones, clearly larger than a human skeleton. Clean bone shapes with sparse cracks, no gore or hanging flesh.",
+  "behavior_traits": [
+    "relentless pursuit",
+    "charging",
+    "weapon fighting",
+    "guarding"
+  ]
 }

@@ -1,11 +1,34 @@
 from __future__ import annotations
 
+import json
 import struct
 import zlib
 from pathlib import Path
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 _CHANNELS = {0: 1, 2: 3, 4: 2, 6: 4}
+ROOT = Path(__file__).resolve().parents[1]
+_DEFAULT_LINE_ART_POLICY = {
+    "dark_below": 80,
+    "white_above": 245,
+    "max_midtone_ratio": 0.20,
+    "failure_reason": "excessive_midtone_shading",
+}
+
+
+def _line_art_policy(root: Path = ROOT) -> dict:
+    policy = dict(_DEFAULT_LINE_ART_POLICY)
+    path = root / "config" / "coloring_page_standard.json"
+    try:
+        config = json.loads(path.read_text(encoding="utf-8"))
+        configured = ((config.get("technical_qa") or {}).get("line_art_luma") or {})
+    except (OSError, json.JSONDecodeError):
+        configured = {}
+    for key in ("dark_below", "white_above", "max_midtone_ratio", "failure_reason"):
+        if key in configured:
+            policy[key] = configured[key]
+    return policy
+
 
 
 def _paeth(a: int, b: int, c: int) -> int:
@@ -80,7 +103,134 @@ def _decode_rows(raw: bytes) -> tuple[int, int, int, list[bytes]]:
     return width, height, color_type, rows
 
 
+
+def _png_chunk(kind: bytes, data: bytes) -> bytes:
+    crc = zlib.crc32(kind + data) & 0xFFFFFFFF
+    return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", crc)
+
+
+def normalize_monochrome_line_art(path: str | Path) -> dict:
+    """Remove accidental RGB color deterministically before production QA."""
+    path = Path(path)
+    raw = path.read_bytes()
+    if not raw.startswith(PNG_SIGNATURE):
+        raise ValueError("not_png")
+
+    width, height, color_type, rows = _decode_rows(raw)
+    if color_type == 0:
+        return {
+            "path": str(path),
+            "width": width,
+            "height": height,
+            "source_color_type": color_type,
+            "changed": False,
+        }
+
+    grayscale_rows: list[bytes] = []
+    for source in rows:
+        out = bytearray()
+        if color_type == 2:
+            for i in range(0, len(source), 3):
+                r, g, b = source[i:i + 3]
+                out.append((299 * r + 587 * g + 114 * b) // 1000)
+        elif color_type == 4:
+            for i in range(0, len(source), 2):
+                gray, alpha = source[i:i + 2]
+                out.append((gray * alpha + 255 * (255 - alpha)) // 255)
+        elif color_type == 6:
+            for i in range(0, len(source), 4):
+                r, g, b, alpha = source[i:i + 4]
+                luma = (299 * r + 587 * g + 114 * b) // 1000
+                out.append((luma * alpha + 255 * (255 - alpha)) // 255)
+        else:
+            raise ValueError("unsupported_png_pixel_format")
+        grayscale_rows.append(bytes(out))
+
+    scanlines = bytearray()
+    for row in grayscale_rows:
+        scanlines.append(0)
+        scanlines.extend(row)
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0)
+    path.write_bytes(
+        PNG_SIGNATURE
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"IDAT", zlib.compress(bytes(scanlines), 6))
+        + _png_chunk(b"IEND", b"")
+    )
+    return {
+        "path": str(path),
+        "width": width,
+        "height": height,
+        "source_color_type": color_type,
+        "changed": True,
+    }
+
+
+def enforce_print_safe_margin(
+    path: str | Path,
+    margin_ratio: float = 0.045,
+) -> dict:
+    """Whiten the outer print-safe band deterministically before QA."""
+    path = Path(path)
+    raw = path.read_bytes()
+    if not raw.startswith(PNG_SIGNATURE):
+        raise ValueError("not_png")
+
+    width, height, color_type, rows = _decode_rows(raw)
+    channels = _CHANNELS[color_type]
+    margin_x = max(1, int(round(width * margin_ratio)))
+    margin_y = max(1, int(round(height * margin_ratio)))
+    updated_rows: list[bytes] = []
+
+    for y, source in enumerate(rows):
+        row = bytearray(source)
+        for x in range(width):
+            if (
+                x < margin_x
+                or x >= width - margin_x
+                or y < margin_y
+                or y >= height - margin_y
+            ):
+                i = x * channels
+                if color_type == 0:
+                    row[i] = 255
+                elif color_type == 2:
+                    row[i:i + 3] = b"\xff\xff\xff"
+                elif color_type == 4:
+                    row[i:i + 2] = b"\xff\xff"
+                elif color_type == 6:
+                    row[i:i + 4] = b"\xff\xff\xff\xff"
+        updated_rows.append(bytes(row))
+
+    scanlines = bytearray()
+    for row in updated_rows:
+        scanlines.append(0)
+        scanlines.extend(row)
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, color_type, 0, 0, 0)
+    path.write_bytes(
+        PNG_SIGNATURE
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"IDAT", zlib.compress(bytes(scanlines), 6))
+        + _png_chunk(b"IEND", b"")
+    )
+    return {
+        "path": str(path),
+        "width": width,
+        "height": height,
+        "margin_ratio": margin_ratio,
+        "margin_x": margin_x,
+        "margin_y": margin_y,
+    }
+
+
 def inspect_line_art(path: str | Path) -> dict:
+    policy = _line_art_policy()
+    dark_below = int(policy["dark_below"])
+    white_above = int(policy["white_above"])
+    max_midtone_ratio = float(policy["max_midtone_ratio"])
+    midtone_failure_reason = str(policy["failure_reason"])
     raw = Path(path).read_bytes()
     if not raw.startswith(PNG_SIGNATURE):
         return {"supported": False, "reasons": ["not_png"]}
@@ -94,7 +244,11 @@ def inspect_line_art(path: str | Path) -> dict:
     x_step = max(1, width // 256)
     y_step = max(1, height // 256)
     dark = white = total = 0
+    chromatic = 0
+    safe_margin_dark = safe_margin_total = 0
     min_luma, max_luma = 255, 0
+    margin_x = max(1, int(width * 0.04))
+    margin_y = max(1, int(height * 0.04))
 
     for y in range(0, height, y_step):
         row = rows[y]
@@ -105,14 +259,31 @@ def inspect_line_art(path: str | Path) -> dict:
             else:
                 r, g, b = row[i], row[i + 1], row[i + 2]
                 luma = (299 * r + 587 * g + 114 * b) // 1000
-            dark += luma < 80
-            white += luma > 245
+                if max(r, g, b) - min(r, g, b) > 12:
+                    chromatic += 1
+            is_dark = luma < dark_below
+            dark += is_dark
+            white += luma > white_above
             total += 1
+            if (
+                x < margin_x
+                or x >= width - margin_x
+                or y < margin_y
+                or y >= height - margin_y
+            ):
+                safe_margin_total += 1
+                safe_margin_dark += is_dark
             min_luma = min(min_luma, luma)
             max_luma = max(max_luma, luma)
 
     dark_ratio = dark / total if total else 0.0
     white_ratio = white / total if total else 0.0
+    chromatic_ratio = chromatic / total if total else 0.0
+    midtone = max(0, total - dark - white)
+    midtone_ratio = midtone / total if total else 0.0
+    safe_margin_dark_ratio = (
+        safe_margin_dark / safe_margin_total if safe_margin_total else 0.0
+    )
     reasons = []
     if dark_ratio < 0.001:
         reasons.append("near_blank_page")
@@ -120,11 +291,21 @@ def inspect_line_art(path: str | Path) -> dict:
         reasons.append("overly_dark_page")
     if max_luma - min_luma < 35:
         reasons.append("insufficient_contrast")
+    if chromatic_ratio > 0.01:
+        reasons.append("unexpected_color_content")
+    if midtone_ratio > max_midtone_ratio:
+        reasons.append(midtone_failure_reason)
+    if safe_margin_dark_ratio > 0.02:
+        reasons.append("safe_margin_too_busy")
 
     return {
         "supported": True,
         "dark_ratio": round(dark_ratio, 4),
         "white_ratio": round(white_ratio, 4),
+        "chromatic_ratio": round(chromatic_ratio, 4),
+        "midtone_ratio": round(midtone_ratio, 4),
+        "max_midtone_ratio": max_midtone_ratio,
+        "safe_margin_dark_ratio": round(safe_margin_dark_ratio, 4),
         "contrast_range": max_luma - min_luma,
         "pass": not reasons,
         "reasons": reasons,

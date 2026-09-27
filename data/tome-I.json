@@ -11,13 +11,16 @@
       "habitat": "Tight trapped stone corridor",
       "moment": "Cackling as a tripwire is triggered",
       "identity_rules": [
-        "small reptilian humanoid",
-        "long snout",
-        "small horn nubs",
+        "small reptilian humanoid only 2–3 feet tall",
+        "long narrow lizard snout",
+        "small horn nubs or short head spines",
+        "visible balancing tail",
         "needle teeth",
-        "ragged leather gear",
-        "oversized spear",
-        "devious trap-maker; not cute"
+        "narrow shoulders and thin limbs with almost no heroic muscle definition",
+        "ragged light leather gear scaled to a tiny creature",
+        "oversized spear relative to the kobold but still small beside human-scale corridor architecture",
+        "human-scale corridor height visibly proves the kobold is much smaller than an adult human",
+        "devious trap-maker; never dragonborn-sized, bodybuilder-built, or cute"
       ],
       "must_include": [
         "small wiry kobold",
@@ -35,7 +38,10 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "adult-human or dragonborn-sized kobold",
+        "broad muscular chest or heroic shoulders",
+        "human-sized hands, feet, or gear"
       ],
       "coloring_rules": {
         "outer_contour": "bold",
@@ -91,10 +97,6 @@
       "monster_name": "Kobold Shrine-Keeper",
       "habitat": "Low cave shrine with coins and dragon skull prop",
       "moment": "Raising a copper coin as an offering",
-      "identity_rules": [
-        "Must be immediately recognizable as Kobold Shrine-Keeper",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "lean kobold shrine-keeper",
         "copper coin held up as an offering",
@@ -195,10 +197,6 @@
       "monster_name": "Goblin Warrior",
       "habitat": "Narrow dungeon crawlway",
       "moment": "Kicking over a lantern to darken the hall",
-      "identity_rules": [
-        "Must be immediately recognizable as Goblin Warrior",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "small goblin warrior",
         "crude blade and small shield",
@@ -243,10 +241,6 @@
       "monster_name": "Goblin Boss",
       "habitat": "Cave hall with improvised throne",
       "moment": "Pointing a bent sword from atop a chest",
-      "identity_rules": [
-        "Must be immediately recognizable as Goblin Boss",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "small goblin boss",
         "bent sword pointing outward",
@@ -458,10 +452,6 @@
       "monster_name": "Ogre",
       "habitat": "Too-small spiral dungeon stair",
       "moment": "Wedged awkwardly on the stairs",
-      "identity_rules": [
-        "Must be immediately recognizable as Ogre",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "massive ogre",
         "too-small spiral stair",
@@ -506,10 +496,6 @@
       "monster_name": "Ogre Zombie",
       "habitat": "Dark cramped dungeon stair",
       "moment": "Shuffling downward with chains dragging",
-      "identity_rules": [
-        "Must be immediately recognizable as Ogre Zombie",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "large ogre zombie",
         "dragging chains",
@@ -554,10 +540,6 @@
       "monster_name": "Troll",
       "habitat": "Cave fire pit",
       "moment": "Watching a wound close while glaring at fire",
-      "identity_rules": [
-        "Must be immediately recognizable as Troll",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "lanky troll",
         "cave fire pit",
@@ -602,10 +584,6 @@
       "monster_name": "Troll Limb",
       "habitat": "Bare dungeon flagstones",
       "moment": "Severed arm crawling toward a dropped axe",
-      "identity_rules": [
-        "Must be immediately recognizable as Troll Limb",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "severed troll arm",
         "clawed hand crawling under its own power",
@@ -651,8 +629,12 @@
       "habitat": "Limestone cave ceiling",
       "moment": "Peeling away from a stalactite above a lantern",
       "identity_rules": [
-        "Must be immediately recognizable as Darkmantle",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
+        "one continuous non-humanoid leathery mantle/cap body",
+        "the mantle itself is the whole main body, not wings attached to a torso",
+        "small recessed underside mouth centered beneath the mantle",
+        "short dangling underside tentacles",
+        "no separate head silhouette, neck, torso, arms, legs, tail, or wing pair",
+        "part of the mantle body remains physically attached to the stalactite while peeling away"
       ],
       "must_include": [
         "darkmantle disguised against a stalactite",
@@ -668,7 +650,11 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "generic fantasy humanoid anatomy",
+        "dragon or demon head",
+        "separate wings attached to a torso",
+        "arms, legs, or tail"
       ],
       "coloring_rules": {
         "outer_contour": "bold",
@@ -688,8 +674,8 @@
       },
       "physicality": {
         "mode": "attached-peeling",
-        "support": "part of the darkmantle remains visibly attached to the stalactite",
-        "motion": "body peels downward from the attachment point toward the lantern"
+        "support": "the leathery mantle body/rim itself remains visibly attached to the stalactite; no hands, feet, arms, or legs provide support",
+        "motion": "the continuous mantle body peels downward from that body-surface attachment while short underside tentacles hang free toward the lantern"
       }
     },
     {
@@ -698,10 +684,6 @@
       "monster_name": "Stirges",
       "habitat": "Dungeon cell",
       "moment": "Feeding around a sleeping prisoner",
-      "identity_rules": [
-        "Must be immediately recognizable as Stirges",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "several stirges",
         "long needle proboscises",
@@ -746,10 +728,6 @@
       "monster_name": "Giant Bat",
       "habitat": "Cavern above underground river",
       "moment": "Hanging with wings partly wrapped",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Bat",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "single giant bat",
         "partly wrapped hanging wings",
@@ -784,8 +762,8 @@
       },
       "physicality": {
         "mode": "hanging",
-        "support": "claws or feet visibly grip the cavern ceiling",
-        "motion": "body hangs inverted with wings partly wrapped and gravity clearly downward"
+        "support": "both canonical hind feet only visibly grip the cavern ceiling; the two forelimbs remain membrane wings and never become separate hands or arms",
+        "motion": "body hangs inverted from the hind feet while the forelimb-wings wrap partly around the body and gravity reads clearly downward"
       }
     },
     {
@@ -794,10 +772,6 @@
       "monster_name": "Bat Swarm",
       "habitat": "Vertical dungeon well shaft",
       "moment": "Exploding upward from the well",
-      "identity_rules": [
-        "Must be immediately recognizable as Bat Swarm",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "swarm of bats",
         "bats erupting upward",
@@ -842,10 +816,6 @@
       "monster_name": "Giant Rat",
       "habitat": "Collapsed dungeon pantry",
       "moment": "Defending a nest among burst sacks",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Rat",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "giant rat",
         "defensive nest posture",
@@ -890,10 +860,6 @@
       "monster_name": "Rat Swarm",
       "habitat": "Dungeon floor grate",
       "moment": "Pouring through the grate like water",
-      "identity_rules": [
-        "Must be immediately recognizable as Rat Swarm",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "many rats",
         "rats pouring through a floor grate",
@@ -938,10 +904,6 @@
       "monster_name": "Giant Centipede",
       "habitat": "Catacomb coffin niche",
       "moment": "Uncoiling around an old bone",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Centipede",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "giant centipede",
         "many segmented legs",
@@ -986,10 +948,6 @@
       "monster_name": "Giant Fire Beetle",
       "habitat": "Abandoned mine tunnel",
       "moment": "Lighting the tunnel with body glands",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Fire Beetle",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "giant fire beetle",
         "large beetle shell",
@@ -1034,10 +992,6 @@
       "monster_name": "Giant Spider",
       "habitat": "Web-filled dungeon hall",
       "moment": "Waiting at the center of a large web",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Spider",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "giant spider",
         "large radial web",
@@ -1082,10 +1036,6 @@
       "monster_name": "Giant Wolf Spider",
       "habitat": "Ceiling above a treasure chest",
       "moment": "Flattened overhead watching the chest",
-      "identity_rules": [
-        "Must be immediately recognizable as Giant Wolf Spider",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "giant wolf spider",
         "stocky hairy hunting-spider body",
@@ -1130,10 +1080,6 @@
       "monster_name": "Gelatinous Cube",
       "habitat": "Ten-foot dressed-stone corridor",
       "moment": "Sliding forward with bones and a key suspended inside",
-      "identity_rules": [
-        "Must be immediately recognizable as Gelatinous Cube",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "translucent gelatinous cube",
         "square cube edges filling corridor",
@@ -1178,10 +1124,6 @@
       "monster_name": "Black Pudding",
       "habitat": "Dungeon cistern / floor grate",
       "moment": "Corroding bars while climbing through",
-      "identity_rules": [
-        "Must be immediately recognizable as Black Pudding",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "irregular black-pudding ooze",
         "corroding metal bars",
@@ -1226,10 +1168,6 @@
       "monster_name": "Ochre Jelly",
       "habitat": "Dungeon stair",
       "moment": "Two split halves continuing upward",
-      "identity_rules": [
-        "Must be immediately recognizable as Ochre Jelly",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "two ochre-jelly halves",
         "both split halves moving independently",
@@ -1274,10 +1212,6 @@
       "monster_name": "Mimic — Chest",
       "habitat": "Treasure vault",
       "moment": "Chest mouth opening around a reaching hand",
-      "identity_rules": [
-        "Must be immediately recognizable as Mimic — Chest",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "treasure-chest mimic",
         "chest lid transformed into toothed mouth",
@@ -1322,10 +1256,6 @@
       "monster_name": "Mimic — Door",
       "habitat": "Torch-lit dungeon hall",
       "moment": "Door revealing tongue-handle and hidden eye",
-      "identity_rules": [
-        "Must be immediately recognizable as Mimic — Door",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "door mimic",
         "door surface still recognizable",
@@ -1370,10 +1300,6 @@
       "monster_name": "Animated Armor",
       "habitat": "Pedestal-lined dungeon hall",
       "moment": "Stepping down from its display pedestal",
-      "identity_rules": [
-        "Must be immediately recognizable as Animated Armor",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "empty animated suit of armor",
         "no visible wearer",
@@ -1418,10 +1344,6 @@
       "monster_name": "Flying Sword",
       "habitat": "Dungeon rotunda",
       "moment": "Orbiting a cracked pillar at throat height",
-      "identity_rules": [
-        "Must be immediately recognizable as Flying Sword",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "single flying sword",
         "no hand holding it",
@@ -1466,10 +1388,6 @@
       "monster_name": "Rug of Smothering",
       "habitat": "Noble crypt",
       "moment": "Rearing up from the floor to wrap a victim",
-      "identity_rules": [
-        "Must be immediately recognizable as Rug of Smothering",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "living rug rearing from the floor",
         "rug curling around a victim",
@@ -1514,10 +1432,6 @@
       "monster_name": "Gargoyle",
       "habitat": "Stone dungeon gate",
       "moment": "One statue beginning to move",
-      "identity_rules": [
-        "Must be immediately recognizable as Gargoyle",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "stone gargoyle",
         "horned winged humanoid silhouette",
@@ -1562,10 +1476,6 @@
       "monster_name": "Labyrinth Minotaur",
       "habitat": "Identical stone maze corridors",
       "moment": "Filling an intersection with axe ready",
-      "identity_rules": [
-        "Must be immediately recognizable as Labyrinth Minotaur",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "bull-headed minotaur",
         "large curved horns",
@@ -1610,10 +1520,6 @@
       "monster_name": "Minotaur Skeleton",
       "habitat": "Dark labyrinth corridor",
       "moment": "Turning the corner with empty eye sockets",
-      "identity_rules": [
-        "Must be immediately recognizable as Minotaur Skeleton",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "minotaur skeleton",
         "horned bull skull",
@@ -1658,10 +1564,6 @@
       "monster_name": "Roper",
       "habitat": "Stalagmite cavern",
       "moment": "Sticky tendrils striking from camouflage",
-      "identity_rules": [
-        "Must be immediately recognizable as Roper",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "stalagmite-shaped roper",
         "single central eye",
@@ -1706,10 +1608,6 @@
       "monster_name": "Cloaker",
       "habitat": "Dungeon antechamber",
       "moment": "Peeling off a wall hook like a living cloak",
-      "identity_rules": [
-        "Must be immediately recognizable as Cloaker",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "living cloaker",
         "manta-like cloak silhouette",
@@ -1755,10 +1653,6 @@
       "monster_name": "Grick",
       "habitat": "Collapsed tunnel rubble",
       "moment": "Tentacles emerging around a central beak",
-      "identity_rules": [
-        "Must be immediately recognizable as Grick",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "grick",
         "thick wormlike body",
@@ -1803,10 +1697,6 @@
       "monster_name": "Ankheg",
       "habitat": "Earthen tunnel / burrow",
       "moment": "Bursting upward through the floor",
-      "identity_rules": [
-        "Must be immediately recognizable as Ankheg",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "ankheg",
         "large burrowing insect body",
@@ -1852,10 +1742,6 @@
       "monster_name": "Bulette",
       "habitat": "Loose-earth cavern",
       "moment": "Dorsal fin cutting through soil before surfacing",
-      "identity_rules": [
-        "Must be immediately recognizable as Bulette",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "bulette",
         "armored land-shark body",
@@ -1901,10 +1787,6 @@
       "monster_name": "Rust Monster",
       "habitat": "Abandoned armory alcove",
       "moment": "Feeding on a pile of ruined metal weapons",
-      "identity_rules": [
-        "Must be immediately recognizable as Rust Monster",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "rust monster",
         "low armored insectoid body",
@@ -1950,10 +1832,6 @@
       "monster_name": "Otyugh",
       "habitat": "Refuse pit beneath dungeon privies",
       "moment": "Rising from garbage with eyestalks searching",
-      "identity_rules": [
-        "Must be immediately recognizable as Otyugh",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "otyugh",
         "three thick legs",
@@ -1999,10 +1877,6 @@
       "monster_name": "Gibbering Mouther",
       "habitat": "Flooded dungeon cell",
       "moment": "Many mouths churning above rippling water",
-      "identity_rules": [
-        "Must be immediately recognizable as Gibbering Mouther",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "gibbering mouther",
         "amorphous crawling mass",
@@ -2048,10 +1922,6 @@
       "monster_name": "Basilisk",
       "habitat": "Statue-filled underground gallery",
       "moment": "Staring forward as a small creature petrifies",
-      "identity_rules": [
-        "Must be immediately recognizable as Basilisk",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "eight-legged basilisk",
         "heavy lizardlike body",
@@ -2096,10 +1966,6 @@
       "monster_name": "Cockatrice",
       "habitat": "Improvised dungeon henhouse",
       "moment": "Wings raised beside a petrified mouse",
-      "identity_rules": [
-        "Must be immediately recognizable as Cockatrice",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "cockatrice",
         "rooster-like head and comb",
@@ -2145,10 +2011,6 @@
       "monster_name": "Purple Worm",
       "habitat": "Mine shaft / deep tunnel",
       "moment": "Circular maw filling the tunnel",
-      "identity_rules": [
-        "Must be immediately recognizable as Purple Worm",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "colossal purple worm",
         "circular ringed maw",
@@ -2193,10 +2055,6 @@
       "monster_name": "Drider",
       "habitat": "Webbed underground chapel",
       "moment": "Hanging overhead and aiming downward",
-      "identity_rules": [
-        "Must be immediately recognizable as Drider",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "drider",
         "humanoid upper torso",
@@ -2242,10 +2100,6 @@
       "monster_name": "Behir",
       "habitat": "Crystal cavern",
       "moment": "Coiled around a crystal column with lightning arcing",
-      "identity_rules": [
-        "Must be immediately recognizable as Behir",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "behir",
         "long serpentine reptile",
@@ -2291,10 +2145,6 @@
       "monster_name": "Shrieker Fungus",
       "habitat": "Underground mushroom hall",
       "moment": "Gill-mouth opened in a piercing shriek",
-      "identity_rules": [
-        "Must be immediately recognizable as Shrieker Fungus",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "shrieker fungus",
         "large mushroom body",
@@ -2340,10 +2190,6 @@
       "monster_name": "Violet Fungus",
       "habitat": "Damp fungal cavern with shelf fungus wall and shallow pool",
       "moment": "Tendrils reaching toward a dropped torch",
-      "identity_rules": [
-        "Must be immediately recognizable as Violet Fungus",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "violet fungus",
         "large fungus body",
@@ -2389,10 +2235,6 @@
       "monster_name": "Lich",
       "habitat": "Deep underground phylactery vault",
       "moment": "Guarding the phylactery while casting",
-      "identity_rules": [
-        "Must be immediately recognizable as Lich",
-        "Use clear fantasy-monster anatomy and a strong silhouette"
-      ],
       "must_include": [
         "lich",
         "skeletal undead spellcaster",

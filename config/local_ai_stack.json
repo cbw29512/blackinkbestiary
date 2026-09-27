@@ -41,8 +41,20 @@
     "custom_nodes": false,
     "auto_update_comfyui": false,
     "ordered_pages": true,
-    "current_page_only": true
+    "current_page_only": true,
+    "comfy_launch_mode": "managed_direct_python",
+    "comfy_launch_args": [
+      "--disable-dynamic-vram"
+    ]
   },
   "comfyui_version": "0.36.0",
-  "workspace": ".blackink-comfy"
+  "workspace": ".blackink-comfy",
+  "vision_reviewer": {
+    "provider": "ollama",
+    "base_url": "http://127.0.0.1:11434",
+    "model": "qwen3-vl:4b-instruct",
+    "required": false,
+    "max_refinement_passes": 4,
+    "authority": "advisory"
+  }
 }

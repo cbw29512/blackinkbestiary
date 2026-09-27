@@ -13,6 +13,7 @@ from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
 from edit_prompt import build_edit_prompt
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
+from generation_lint import assert_generation_ready
 from generation_runtime import (
     current_context,
     current_source,
@@ -54,11 +55,13 @@ def prepare_workflow(cli, client, config, page, page_state, status, seed):
         return path, "image_edit", meta
 
     path = WORKFLOW_DIR / f"blackink_{page['page_id'].lower()}_text_to_image.json"
+    prompt = build_prompt(page, page_state.get("review_notes"))
+    assert_generation_ready(page, prompt, ROOT)
     meta = prepare_distilled_text_to_image(
         cli,
         config["templates"]["text_to_image"],
         path,
-        prompt=build_prompt(page, page_state.get("review_notes")),
+        prompt=prompt,
         seed=seed,
         model_filename=unet,
         clip_filename=clip,

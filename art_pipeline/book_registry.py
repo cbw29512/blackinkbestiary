@@ -44,7 +44,7 @@ def book_setup_status(book: dict, root: Path = ROOT) -> dict:
         "book_id": book["book_id"],
         "title": book["title"],
         "registry_status": book["status"],
-        "plan_exists": plan.exists() if book["book_id"] != "TOME-I" else True,
+        "plan_exists": plan.exists() if book.get("status") != "production" else True,
         "manifest_exists": manifest.exists(),
         "state_exists": state.exists(),
         "reviews_exists": reviews.exists(),

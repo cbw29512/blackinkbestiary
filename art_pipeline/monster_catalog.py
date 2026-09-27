@@ -140,6 +140,10 @@ def minimal_recipe_errors(
     raw = _read_json(path)
     if int(raw.get("schema_version") or 1) < 3:
         return []
+    # Full creature records own their anatomy directly and do not require a
+    # family profile. Only intentionally minimal variants inherit family DNA.
+    if raw.get("visual_identity"):
+        return []
     contract = load_monster_contract(ROOT / "config" / "universal_monster_contract.json")
     errors = []
     for field in contract.get("minimal_recipe_required") or []:

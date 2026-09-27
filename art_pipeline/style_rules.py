@@ -2,7 +2,7 @@ STYLE_RULES = [
     "professional fantasy coloring-book line art",
     "pure black ink on a clean white background",
     "portrait page composition",
-    "one large centered unmistakable monster as the dominant focal subject inside an intentional readable environment",
+    "one unmistakable creature or creature group as the first-read focal subject at canonical scale and proportions; use framing rather than enlarging the body",
     "bold clean outer contour",
     "lighter simpler interior lines",
     "large uninterrupted white regions that are enjoyable to color",

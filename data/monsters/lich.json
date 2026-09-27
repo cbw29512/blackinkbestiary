@@ -35,12 +35,14 @@
       "vampire fangs",
       "graphic gore",
       "ornate clutter hiding bones"
-    ]
+    ],
+    "limb_structure": "One normal skeletal humanoid body with exactly two arms/hands and two legs beneath the robes, though lower legs may be partly hidden by fabric. The skull is one humanlike skeletal head; no extra limbs, wings, horns, or animal anatomy.",
+    "shape_lock": "Draw one tall narrow skeletal humanoid with one skull, two bony arms/hands, and two legs concealed partly by simple vertical robes. Keep the frame dry and skeletal rather than armored, fleshy, or monstrous; spellcasting gesture comes from normal humanoid anatomy."
   },
   "default_habitats": [
-    "phylactery vaults",
-    "ancient crypts",
-    "deep arcane chambers"
+    "ruins",
+    "burial sites",
+    "underground"
   ],
   "accuracy_checks": [
     "reads as intelligent undead caster",
@@ -54,5 +56,40 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "An ancient skeletal spellcaster preserved by forbidden magic, combining unmistakable undead anatomy with deliberate arcane intelligence and a guarded phylactery. Dry skeletal humanoid frame under decayed layered robes, bony hands visible, upright commanding posture. Clean bone planes and torn fabric edges; no gore, slime, or dense decay. Tall robed skeletal humanoid with narrow shoulders, exposed skull and hands, one spellcasting arm raised, robes falling in simple vertical shapes.",
+  "behavior_traits": [
+    "arcane casting",
+    "ritual preparation",
+    "commanding undead",
+    "guarding"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium tall narrow skeletal humanoid whose authority comes from posture, robes, and spell gesture rather than oversized body mass.",
+    "natural_posture": "Upright skeletal stance with normal humanoid balance; bony hands emerge clearly from simple robes for deliberate spellcasting or guarding gestures.",
+    "behavior_style": [
+      "arcane casting",
+      "ritual preparation",
+      "commanding undead",
+      "guarding"
+    ],
+    "environment_fit": [
+      "ruins",
+      "burial sites",
+      "underground"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "zombie_drift",
+      "symptom": "body gains fleshy corpse mass or wet decay",
+      "correction": "strip back to dry skeletal skull/hands and narrow bone frame under decayed robes"
+    },
+    {
+      "id": "armored_knight_drift",
+      "symptom": "heavy armor hides the skeletal caster identity",
+      "correction": "remove full knight armor and restore exposed skull, bony hands, simple robes, and arcane gesture"
+    }
+  ]
 }

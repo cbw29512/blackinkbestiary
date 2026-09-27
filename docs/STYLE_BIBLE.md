@@ -15,7 +15,7 @@ Every page should feel like it belongs in the same book:
 - Lighter interior lines.
 - Large uninterrupted white areas.
 - Medium-low detail density.
-- Colorability is the governing product constraint. Environment identity is mandatory, but it must support the large centered monster without creating fiddly coloring density.
+- Colorability is the governing product constraint. Environment identity is mandatory, but it must support the creature at canonical scale without creating fiddly coloring density.
 - Habitat must be specific, immediately readable, and worth coloring.
 - Use two to four large environmental cues rather than generic backdrop filler.
 - At least one environmental feature should interact with the creature or story moment.
@@ -37,7 +37,7 @@ These are guidance targets, not rigid scoring rules.
 
 ## Composition Rules
 
-1. Monster is the large centered or near-centered dominant focal subject and its identity is immediately readable.
+1. Creature or creature group is the first-read focal subject while canonical size, body mass, and species proportions remain unchanged.
 2. Environment identity is immediately readable and specific to the named habitat.
 3. One clear action/moment connects monster and environment.
 4. Monster, environment, and story moment must all survive at thumbnail size.
@@ -45,6 +45,16 @@ These are guidance targets, not rigid scoring rules.
 6. Leave breathing room around the silhouette and major environmental shapes.
 7. Do not fill every blank region with stones, grass, cracks, debris, scales, fur strokes, or decorative marks.
 8. Important scene objects and habitat cues must be readable at thumbnail size.
+
+## Canonical Scale and Body-Plan Lock
+
+- Canonical size and proportions outrank composition.
+- Never turn a tiny/small creature into an adult-human-sized heroic body to make it more prominent.
+- Camera distance and framing may change; anatomy and body mass may not.
+- Countable limbs/extremities remain exact.
+- Unusual non-humanoid creatures must keep their real body plan rather than being forced onto a humanoid torso.
+- Swarms dominate as a group; no oversized leader or mascot creature.
+- Automatic review evaluates identity/anatomy first. Failure blocks general quality approval.
 
 ## Monster Identity
 
@@ -94,7 +104,7 @@ Black-Ink is a coloring-book system, not an action freeze-frame system.
 
 Black-Ink follows a bold-and-easy readability target without becoming preschool-simple.
 
-- Monster should be large, centered or near-centered, and the dominant visual shape; target roughly 60–75% of page height in ordinary scenes while leaving enough page area for the habitat to read.
+- Creature should be visually dominant through framing, placement, and silhouette clarity while preserving canonical scale. Tiny/small creatures may occupy less page height and should use nearby architecture/props to prove their size rather than being enlarged.
 - Use 2–4 major environmental forms arranged around and behind the monster.
 - Favor medium-to-large contiguous coloring regions over tiny enclosed cells.
 - Story-critical props must be large enough to identify and color comfortably.
@@ -198,9 +208,11 @@ Use REGENERATE when:
 - page is stylistically unusable
 - targeted editing would cost more effort than a fresh attempt
 
-## Golden Five
+## Golden Five Human Calibration
 
-Before scaling Tome I, approve five reference pages that demonstrate the style across different creature types.
+Golden Five is the separate human calibration/reference lane used to prove final Studio judgment across different creature types. It is not the automated engine-canary gate.
+
+Before treating the finished book workflow as human-calibrated, approve five reference pages that demonstrate the style across different creature types.
 
 Suggested categories:
 1. Humanoid — Kobold Warrior
@@ -210,6 +222,8 @@ Suggested categories:
 5. Unusual anatomy — Roper
 
 These become style references, not composition templates.
+
+The automated preflight is the separate nine-page exact-image canary: I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22. All nine require current content-hash-valid approval before the 50-page × 4-candidate gallery launcher is allowed to run.
 
 ## Reviewer Test
 

@@ -159,8 +159,9 @@
         "underground"
       ],
       "terms": [
-        "spiral stair",
-        "stone stair"
+        "stone stair",
+        "stairway",
+        "staircase"
       ],
       "plan_shape": "vertical circulation space",
       "proportions": "stairs dominate the composition and create unmistakable rise/descent",
@@ -712,6 +713,123 @@
       "must_not_drift": [
         "ordinary room",
         "tiny cluttered den"
+      ]
+    },
+    "spiral_stair": {
+      "priority": 130,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "spiral stair",
+        "spiral staircase"
+      ],
+      "plan_shape": "tight helical stair wrapping continuously around a central newel, column, or open shaft",
+      "proportions": "narrow wedge-shaped treads curve around the center; outer wall radius stays visibly tight; vertical rise is obvious",
+      "ceiling": "tight vertical stair enclosure or shaft edge remains visible above/below the helical run",
+      "openings": "small landings connect directly into the spiral; no broad straight landing may dominate",
+      "focal_zone": "the creature occupies the curved tread run between the central newel/shaft and outer wall",
+      "camera": "high or low diagonal view that simultaneously shows curved tread progression, central axis, and outer wall",
+      "must_show": [
+        "central newel, column, or open shaft",
+        "wedge-shaped steps visibly curving around the center",
+        "outer curved wall or circular enclosure",
+        "clear vertical rise/fall through the helix"
+      ],
+      "must_not_drift": [
+        "straight staircase",
+        "ordinary broad stair flight",
+        "flat corridor with a few steps",
+        "grand palace staircase",
+        "random steps with no central axis"
+      ]
+    },
+    "mine_tunnel_to_shaft": {
+      "priority": 140,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "mine shaft / deep tunnel",
+        "deep timber-braced shaft",
+        "tunnel-to-shaft"
+      ],
+      "plan_shape": "long excavated mine tunnel terminating at or opening directly into a much deeper shaft",
+      "proportions": "the near travel lane is tunnel-like and longer than wide, while the far opening drops or rises dramatically to prove deep shaft scale",
+      "ceiling": "timber-braced or rough-cut mine ceiling remains visible over the tunnel approach; the shaft opening interrupts that enclosure at the destination",
+      "openings": "one primary tunnel route feeds directly into one large shaft opening; side branches remain absent or subordinate",
+      "focal_zone": "the creature occupies and constricts the tunnel approach while the shaft opening and support beams provide scale immediately beyond or around it",
+      "camera": "straight or mild diagonal tunnel perspective that shows both side boundaries, overhead bracing, and the deep shaft opening in one composition",
+      "must_show": [
+        "both tunnel side boundaries around the creature",
+        "timber or rough-cut overhead mine structure",
+        "one unmistakable deep shaft opening connected to the tunnel route",
+        "support beams, rail platform, or other large mine-scale reference"
+      ],
+      "must_not_drift": [
+        "pure vertical shaft with no readable tunnel approach",
+        "generic cave opening",
+        "wide room with freestanding creature",
+        "flat corridor with no deep shaft transition"
+      ]
+    },
+    "natural_fungal_hall": {
+      "priority": 135,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "mushroom hall",
+        "fungal aisle",
+        "oversized mushroom canopy"
+      ],
+      "plan_shape": "elongated natural cavern aisle defined by oversized fungal growth rather than built walls",
+      "proportions": "length exceeds width enough to read as a hall-like aisle, while irregular rock/fungal boundaries keep the space natural",
+      "ceiling": "natural cavern roof and/or overlapping giant mushroom caps form the visible overhead canopy",
+      "openings": "one primary open ground lane continues through the fungal chamber with only minor side gaps",
+      "focal_zone": "one dominant rooted fungus occupies the aisle while two or three larger cap/stalk forms frame the route without becoming a dense forest",
+      "camera": "wide low-angle or eye-level aisle view showing open ground, flanking stalks/caps, and a natural rear rock boundary",
+      "must_show": [
+        "open natural floor lane",
+        "oversized mushroom caps or stalks defining both sides of the aisle",
+        "natural rock boundary or cavern roof",
+        "broad white gaps between fungal forms"
+      ],
+      "must_not_drift": [
+        "built masonry gallery",
+        "cathedral arches",
+        "dense mushroom forest",
+        "generic empty cavern"
+      ]
+    },
+    "labyrinth_branch": {
+      "priority": 145,
+      "families": [
+        "underground"
+      ],
+      "terms": [
+        "labyrinth",
+        "maze intersection",
+        "blind corner",
+        "hard ninety-degree turn"
+      ],
+      "plan_shape": "tight branching masonry maze passage with a readable turn, T-junction, or four-way intersection",
+      "proportions": "corridor widths remain narrow, but at least one branch or hard turn visibly breaks the single straight travel axis",
+      "ceiling": "continuous built stone ceiling or arch system remains close enough to preserve confinement",
+      "openings": "two or more route options, or one unmistakable blind corner with a side passage, must be visible in the composition",
+      "focal_zone": "the creature occupies the branch/turn decision point rather than a generic straight hallway",
+      "camera": "three-quarter or corner-reveal perspective showing at least two route directions without opening into a chamber",
+      "must_show": [
+        "at least two distinct maze directions or one unmistakable ninety-degree corner reveal",
+        "high or close stone walls preserving corridor confinement",
+        "clear floor lanes continuing into separate routes",
+        "one simple corner/intersection landmark"
+      ],
+      "must_not_drift": [
+        "single straight corridor with no branch",
+        "broad open room",
+        "grand hall",
+        "natural cavern"
       ]
     }
   }

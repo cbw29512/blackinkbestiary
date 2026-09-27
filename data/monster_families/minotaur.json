@@ -28,7 +28,8 @@
       "full bull quadruped body",
       "dense fur"
     ],
-    "limb_structure": "Powerful humanoid arms, two bipedal legs, and hooved feet beneath a bull-headed humanoid frame; never four-legged or centaur-shaped."
+    "limb_structure": "Powerful humanoid arms, two bipedal legs, and hooved feet beneath a bull-headed humanoid frame; never four-legged or centaur-shaped.",
+    "shape_lock": "Draw one large bipedal humanoid body with exactly two arms and two powerful legs ending in hooves, topped by one unmistakable bull head with long bovine muzzle, ears, and two sweeping horns. The body remains humanoid below the neck; never add a four-legged bull body, centaur hindquarters, goat head, or extra horns."
   },
   "accuracy_checks": [
     "bull head and horns dominate identity",

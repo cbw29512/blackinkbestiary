@@ -3,9 +3,9 @@
   "monster_name": "Cloaker",
   "family": "cloaker",
   "size": "large",
-  "creature_type": "cave aberration",
+  "creature_type": "aberration",
   "visual_identity": {
-    "core_identity": "A living cave predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature.",
+    "core_identity": "A living predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature.",
     "silhouette": "Wide triangular mantle body with winglike sides, narrow trailing tail, and a compact underside head near the front edge.",
     "head_features": "Small predatory underside face with round eyes and a wide mouth, integrated into the mantle rather than on a neck.",
     "body_shape": "Flat flexible ray-like body with broad leathery wings and one long whip-like tail; no humanoid limbs.",
@@ -22,7 +22,7 @@
       "broad leathery wings",
       "integrated underside face",
       "long tail",
-      "wall-hanging disguise"
+      "convincing folded-cloak disguise"
     ],
     "must_avoid": [
       "ordinary bat anatomy",
@@ -31,16 +31,18 @@
       "dragon head",
       "multiple tentacles",
       "dense membrane veins"
-    ]
+    ],
+    "limb_structure": "The creature has no humanoid arms or legs. Its broad left and right mantle sides form the continuous winglike body, with one long trailing tail and an integrated underside face.",
+    "shape_lock": "Draw one continuous flat cloak/manta body with two broad lateral mantle wings that are part of the same body, one compact underside face near the front edge, and one long trailing tail. No separate torso, bat limbs, humanoid arms, legs, feathers, or dragon head."
   },
   "default_habitats": [
-    "antechambers",
-    "cave walls",
-    "vaulted dungeon ceilings"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads as a living cloak rather than bat",
-    "wall-hook disguise is believable",
+    "folded-cloak disguise is believable",
     "broad mantle shape is clear",
     "tail is visible",
     "face remains secondary to body silhouette",
@@ -53,5 +55,43 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "physical_requirements": [
+    "overhead_attachment: folded disguise or roosting posture requires believable overhead support; environment engine chooses the ceiling, rock, beam, branch, wall projection, or other compatible support"
+  ],
+  "schema_version": 4,
+  "description": "A living predator whose broad leathery body resembles a hanging cloak until it unfolds into a manta-like creature. Flat flexible ray-like body with broad leathery wings and one long whip-like tail; no humanoid limbs. Smooth leathery membrane with sparse folds and rib lines. Wide triangular mantle body with winglike sides, narrow trailing tail, and a compact underside head near the front edge.",
+  "behavior_traits": [
+    "overhead clinging",
+    "motionless camouflage",
+    "gliding attack",
+    "wrapping prey"
+  ],
+  "scene_identity": {
+    "size_impression": "Large broad mantle creature whose width comes from one continuous cloak-like body rather than a bat torso with separate wings.",
+    "natural_posture": "Body lies, hangs, or peels as one flexible mantle surface; support comes from the mantle/body itself, never invented hands or feet.",
+    "behavior_style": [
+      "overhead clinging",
+      "motionless camouflage",
+      "gliding attack",
+      "wrapping prey"
+    ],
+    "environment_fit": [
+      "underground",
+      "caves",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "bat_drift",
+      "symptom": "creature becomes a giant bat with a separate torso and limb-based wings",
+      "correction": "merge the silhouette back into one continuous cloak/manta body with integrated underside face and one tail"
+    },
+    {
+      "id": "humanoid_drift",
+      "symptom": "arms, legs, shoulders, or humanoid torso appear",
+      "correction": "remove humanoid anatomy completely; preserve only mantle body, integrated face, and trailing tail"
+    }
+  ]
 }

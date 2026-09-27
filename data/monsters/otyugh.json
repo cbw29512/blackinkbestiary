@@ -31,12 +31,14 @@
       "dragon anatomy",
       "graphic filth detail",
       "dense skin texture"
-    ]
+    ],
+    "limb_structure": "Exactly three stout weight-bearing legs support the central body. Exactly two long grasping tentacles extend outward, and exactly one separate eyestalk rises above the central mouth.",
+    "shape_lock": "Draw one low bulky central body with exactly three thick legs, exactly two long grasping tentacles, exactly one elevated eyestalk, and one large mouth embedded in the body. No separate head, humanoid torso, extra eyestalks, or octopus-style tentacle count."
   },
   "default_habitats": [
-    "refuse pits",
     "sewers",
-    "dungeon privies"
+    "underground",
+    "ruins"
   ],
   "accuracy_checks": [
     "three-leg anatomy is readable",
@@ -50,5 +52,40 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A filthy refuse-dwelling aberration with three stout legs, two long grasping tentacles, one elevated eyestalk, and a broad central mouth. Round heavy torso with three thick legs and two flexible grasping tentacles. Tough hide with sparse folds, warts, and garbage residue kept simple. Low bulky central body supported by three legs, two long tentacles reaching outward, single eye stalk rising above.",
+  "behavior_traits": [
+    "scavenging",
+    "refuse feeding",
+    "tentacle grappling",
+    "territorial ambush"
+  ],
+  "scene_identity": {
+    "size_impression": "Large low bulky aberration whose unusual scale is defined by a heavy central body, three legs, two long tentacles, and one eyestalk.",
+    "natural_posture": "Three stout legs bear the central mass while two grasping tentacles reach independently and the single eyestalk rises above the mouth.",
+    "behavior_style": [
+      "scavenging",
+      "refuse feeding",
+      "tentacle grappling",
+      "territorial ambush"
+    ],
+    "environment_fit": [
+      "sewers",
+      "underground",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "octopus_drift",
+      "symptom": "body gains many tentacles and loses three-legged support",
+      "correction": "restore exactly three weight-bearing legs and exactly two long grasping tentacles"
+    },
+    {
+      "id": "eyestalk_count_drift",
+      "symptom": "multiple eyestalks appear",
+      "correction": "restore exactly one elevated eyestalk above the central mouth"
+    }
+  ]
 }

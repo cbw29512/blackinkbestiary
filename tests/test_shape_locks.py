@@ -1,0 +1,180 @@
+import json
+import sys
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from prompt_builder import build_prompt, build_supervisor_checklist
+from monster_catalog import resolve_monster_spec
+
+
+class ShapeLockTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        cls.pages = {page["page_id"]: page for page in tome["pages"]}
+
+    def test_prompt_reserves_blank_outer_print_margin(self):
+        text = build_prompt(self.pages["I-01"])
+        self.assertIn("outer eight percent of the page", text)
+        self.assertIn("completely blank white print margin", text)
+        self.assertIn("no creature anatomy", text)
+
+    def test_kobold_shape_lock_proves_miniature_scale(self):
+        text = build_prompt(self.pages["I-01"])
+        self.assertIn("SHAPE-FIRST RENDER LOCK", text)
+        self.assertIn("normal doorway/corridor opening", text)
+        self.assertIn("one-third to one-half", text)
+
+    def test_priority_identity_capsules_precede_scene_detail(self):
+        kobold = build_prompt(self.pages["I-01"])
+        goblin = build_prompt(self.pages["I-04"])
+        bugbear = build_prompt(self.pages["I-08"])
+
+        self.assertIn("MODEL PRIORITY CAPSULE", kobold)
+        self.assertIn("MINIATURE 2–3-foot reptilian trap-maker", kobold)
+        self.assertIn("never large demonic horns", kobold)
+        self.assertLess(kobold.index("MODEL PRIORITY CAPSULE"), kobold.index("HABITAT:"))
+
+        self.assertIn("SMALL WIRY GOBLINOID", goblin)
+        self.assertIn("NO horns, horn nubs, tail, claws", goblin)
+        self.assertLess(goblin.index("MODEL PRIORITY CAPSULE"), goblin.index("HABITAT:"))
+
+        self.assertIn("TALL RANGY GOBLINOID AMBUSHER", bugbear)
+        self.assertIn("very long arms hanging below the hips toward the knees", bugbear)
+        self.assertIn("NO horns, tail, gorilla muzzle", bugbear)
+        self.assertLess(bugbear.index("MODEL PRIORITY CAPSULE"), bugbear.index("HABITAT:"))
+
+    def test_darkmantle_shape_lock_forbids_humanoid_topology(self):
+        text = build_prompt(self.pages["I-14"])
+        self.assertIn("one continuous ceiling-clinging cloak/cap body", text)
+        self.assertIn("no separate head silhouette, torso", text.lower())
+        self.assertIn("NON-FLIGHT POSE LOCK", text)
+        self.assertIn("not airborne", text)
+
+    def test_swarm_priority_capsule_prevents_wallpaper_composition(self):
+        swarm = build_prompt(self.pages["I-19"])
+        self.assertIn("MODEL SWARM PRIORITY CAPSULE", swarm)
+        self.assertIn("few separated clusters", swarm)
+        self.assertIn("broad contiguous white gaps", swarm)
+        self.assertIn("no edge-to-edge carpet of repeated bodies", swarm)
+        self.assertIn("no giant foreground leader", swarm)
+        self.assertLess(
+            swarm.index("MODEL SWARM PRIORITY CAPSULE"),
+            swarm.index("HABITAT:"),
+        )
+
+    def test_nonhumanoid_priority_capsules_lock_body_topology(self):
+        darkmantle = build_prompt(self.pages["I-14"])
+        bat = build_prompt(self.pages["I-16"])
+
+        self.assertIn("ONE CONTINUOUS CEILING-CLINGING MANTLE BODY", darkmantle)
+        self.assertIn("NO dragon head, horns, humanoid face, torso, neck, arms, legs, tail", darkmantle)
+        self.assertLess(
+            darkmantle.index("MODEL PRIORITY CAPSULE"),
+            darkmantle.index("HABITAT:"),
+        )
+
+        self.assertIn("TRUE BAT BODY PLAN WITH EXACTLY FOUR LIMBS TOTAL", bat)
+        self.assertIn("NO separate humanoid arms or hands in addition to wings", bat)
+        self.assertLess(
+            bat.index("MODEL PRIORITY CAPSULE"),
+            bat.index("HABITAT:"),
+        )
+
+    def test_bat_and_centipede_shape_locks_are_literal(self):
+        bat = build_prompt(self.pages["I-16"])
+        centipede = build_prompt(self.pages["I-20"])
+        self.assertIn("exactly four limbs total", bat)
+        self.assertIn("two forelimbs that ARE the membrane wings", bat)
+        self.assertIn("every visible trunk segment carries exactly one pair", centipede)
+
+    def test_small_humanoid_prompt_uses_literal_architecture_ratio(self):
+        text = build_prompt(self.pages["I-01"])
+        self.assertIn("SMALL-HUMANOID SCALE EVIDENCE", text)
+        self.assertIn("one-third to one-half", text)
+        self.assertIn("normal doorway/corridor opening", text)
+
+    def test_supported_darkmantle_prompt_suppresses_flight_cues(self):
+        text = build_prompt(self.pages["I-14"])
+        self.assertIn("NON-FLIGHT POSE LOCK", text)
+        self.assertIn("not airborne", text)
+        self.assertIn("one continuous ceiling-clinging cloak/cap body", text)
+        self.assertNotIn("controlled natural flight, but flight capability", text)
+
+    def test_environment_priority_capsule_promotes_structural_landmarks(self):
+        spiral = build_prompt(self.pages["I-10"])
+        niche = build_prompt(self.pages["I-20"])
+        hall = build_prompt(self.pages["I-22"])
+
+        self.assertIn("MODEL ENVIRONMENT PRIORITY CAPSULE", spiral)
+        self.assertIn("tight inner column and outer curved wall", spiral)
+        self.assertIn("central newel, column, or open shaft", spiral)
+        self.assertLess(
+            spiral.index("ACTION — SECOND PRIORITY:"),
+            spiral.index("MODEL ENVIRONMENT PRIORITY CAPSULE"),
+        )
+        self.assertLess(
+            spiral.index("MODEL ENVIRONMENT PRIORITY CAPSULE"),
+            spiral.index("BLACK-INK COLORABILITY LOCK:"),
+        )
+
+        self.assertIn("large coffin niche with one old bone", niche)
+        self.assertIn("MODEL ENVIRONMENT PROOF LOCK", niche)
+
+        self.assertIn("one broad radial web spanning a large arch", hall)
+        self.assertIn("frontal hall arch used as the web frame", hall)
+        self.assertIn("MODEL ENVIRONMENT PROOF LOCK", hall)
+
+    def test_spiral_stair_uses_dedicated_helical_envelope(self):
+        text = build_prompt(self.pages["I-10"])
+        self.assertIn("SPACE ENVELOPE: spiral_stair", text)
+        self.assertIn("wedge-shaped steps visibly curving around the center", text)
+        self.assertIn("central newel, column, or open shaft", text)
+        self.assertIn("straight staircase", text)
+
+    def test_kicking_scene_requires_visible_impact_contact(self):
+        text = build_prompt(self.pages["I-04"])
+        self.assertIn("KICKING CONTACT LOCK", text)
+        self.assertIn("striking foot visibly contacts the target", text)
+        self.assertIn("KICKED LANTERN LOCK", text)
+        self.assertIn("lantern tips, skids, or tumbles", text)
+
+    def test_every_monster_family_has_required_positive_shape_lock(self):
+        contract = json.loads(
+            (ROOT / "config" / "universal_monster_contract.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("visual_identity.shape_lock", contract["family_profile_required"])
+
+        missing = []
+        for path in sorted((ROOT / "data" / "monster_families").glob("*.json")):
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            shape_lock = str((payload.get("visual_identity") or {}).get("shape_lock") or "").strip()
+            if not shape_lock:
+                missing.append(path.name)
+        self.assertEqual(missing, [])
+
+    def test_every_tome_i_monster_resolves_complete_positive_anatomy_contract(self):
+        missing = []
+        for path in sorted((ROOT / "data" / "monsters").glob("*.json")):
+            spec_id = path.stem
+            resolved = resolve_monster_spec(spec_id)
+            visual = resolved.get("visual_identity") or {}
+            absent = [
+                key
+                for key in ("shape_lock", "limb_structure", "silhouette", "body_shape")
+                if not str(visual.get(key) or "").strip()
+            ]
+            if absent:
+                missing.append((spec_id, absent))
+        self.assertEqual(missing, [])
+
+    def test_shape_lock_is_an_identity_review_gate(self):
+        checks = build_supervisor_checklist(self.pages["I-14"])
+        self.assertTrue(any(item.startswith("Shape-first body geometry reads as:") for item in checks))
+
+
+if __name__ == "__main__":
+    unittest.main()

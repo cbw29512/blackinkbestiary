@@ -5,7 +5,7 @@
   "size": "large",
   "creature_type": "cave aberration",
   "visual_identity": {
-    "core_identity": "A stationary cave predator resembling a stalagmite, revealed by one central eye, a toothed mouth, and multiple long adhesive tendrils.",
+    "core_identity": "A stationary ambush predator resembling a stalagmite, revealed by one central eye, a toothed mouth, and multiple long adhesive tendrils.",
     "silhouette": "Tall tapering cone like a stalagmite, rooted broad base, several long rope-like tendrils radiating outward.",
     "head_features": "No separate head; a single eye and horizontal toothed mouth are embedded in the upper stone-like body.",
     "body_shape": "Conical flexible central trunk with six or fewer long simple tendrils emerging from its sides.",
@@ -22,7 +22,7 @@
       "single central eye",
       "toothed mouth",
       "multiple long tendrils",
-      "anchored cave posture"
+      "anchored rooted posture"
     ],
     "must_avoid": [
       "humanoid torso",
@@ -31,12 +31,14 @@
       "walking legs",
       "dense rock texture",
       "tree-like branches"
-    ]
+    ],
+    "limb_structure": "No walking legs or humanoid arms. The broad base remains anchored to the ground while several long simple rope-like tendrils emerge from the conical body; one eye and one mouth are embedded in the trunk itself.",
+    "shape_lock": "Draw one rooted stalagmite-shaped cone with a broad anchored base, one embedded central eye, one horizontal toothed mouth, and a limited set of long rope-like tendrils extending from the sides. Add no legs, humanoid torso, octopus head, branches, or extra eyes."
   },
   "default_habitats": [
-    "stalagmite caverns",
-    "deep caves",
-    "rocky dungeon chambers"
+    "caves",
+    "underground",
+    "rocky terrain"
   ],
   "accuracy_checks": [
     "could plausibly resemble a stalagmite at rest",
@@ -44,11 +46,49 @@
     "mouth is visible",
     "tendrils are long and distinct",
     "body remains rooted",
-    "cave camouflage reads clearly"
+    "rocklike camouflage reads clearly"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "physical_requirements": [
+    "ground_support: stationary ambush posture requires a believable rocklike supporting surface; environment engine chooses the compatible ground or terrain"
+  ],
+  "schema_version": 4,
+  "description": "A stationary ambush predator resembling a stalagmite, revealed by one central eye, a toothed mouth, and multiple long adhesive tendrils. Conical flexible central trunk with six or fewer long simple tendrils emerging from its sides. Rocklike folds and ridges kept sparse enough to preserve the camouflage silhouette.",
+  "behavior_traits": [
+    "motionless camouflage",
+    "tentacle ambush",
+    "grappling",
+    "anchored hunting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large vertical cave ambusher whose height comes from a rooted stalagmite-like trunk and long tendrils, not a walking giant body.",
+    "natural_posture": "Broad base remains visibly planted while the conical trunk stays upright and tendrils extend from it.",
+    "behavior_style": [
+      "motionless camouflage",
+      "tentacle ambush",
+      "grappling",
+      "anchored hunting"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "tree_octopus_drift",
+      "symptom": "body becomes branching tree or octopus head",
+      "correction": "restore one conical stalagmite trunk with embedded eye/mouth and limited rope-like side tendrils"
+    },
+    {
+      "id": "walking_drift",
+      "symptom": "creature gains legs or detaches from its base",
+      "correction": "remove walking limbs and restore broad anchored base in continuous ground contact"
+    }
+  ]
 }

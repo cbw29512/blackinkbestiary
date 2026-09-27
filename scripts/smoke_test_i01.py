@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 from comfy_cli_runner import ComfyCli, ComfyCliError
 from comfy_client import ComfyClient
 from prompt_builder import build_prompt
+from generation_lint import assert_generation_ready
 from qa import inspect_candidate
 from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
 
@@ -124,6 +125,7 @@ def main():
 
     template_name = config["templates"]["text_to_image"]
     prompt = build_prompt(page, page_state.get("review_notes"))
+    assert_generation_ready(page, prompt, ROOT)
     seed = random.randint(1, 2**63 - 1)
     workflow_path = WORKFLOW_DIR / "blackink_i01_text_to_image.json"
 

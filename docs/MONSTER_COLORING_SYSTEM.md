@@ -19,7 +19,7 @@ The system is complete when it can:
 3. Read that page's structured JSON specification.
 4. Generate multiple local image candidates.
 5. Reject obvious technical failures.
-6. Run a supervisor pass against the page spec and style rules.
+6. Run a fail-closed identity/anatomy supervisor pass, then the general quality supervisor against the page spec and style rules.
 7. Show one best candidate in a review screen.
 8. Accept **Approve & Lock**, **Modify**, or **Regenerate**.
 9. Keep the same page active until it is approved.
@@ -123,6 +123,10 @@ Automatic QA is a garbage filter, not an art critic.
 
 ### 6. Supervisor
 
+The supervisor is two-stage. Stage 1 is an identity/anatomy gate; Stage 2 is general page quality. Stage 2 never runs when Stage 1 fails.
+
+Stage 1 checks canonical species identity, size/proportion relationships, body plan, exact limb/extremity structure, known drift failures, and swarm member scale. Canonical scale outranks composition: camera/framing may make a creature prominent, but body mass and species proportions may not change.
+
 The supervisory layer compares a candidate against:
 - page JSON
 - Style Bible
@@ -162,7 +166,9 @@ LOCAL IMAGE MODEL
        ↓
 AUTOMATIC QA
        ↓
-SUPERVISOR
+IDENTITY / ANATOMY GATE
+       ↓
+GENERAL QUALITY SUPERVISOR
        ↓
 (optional targeted pass 2)
        ↓

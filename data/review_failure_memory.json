@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "purpose": "Distilled recurring rejection evidence used to prioritize existing authoritative locks. Exact-image decisions remain on review-previews-live.",
+  "pages": {
+    "I-01": [
+      {
+        "stage": "identity",
+        "notes": "body becomes adult-human sized, broad-chested, muscular, dragonborn-like instead of a tiny wiry kobold"
+      }
+    ],
+    "I-04": [
+      {
+        "stage": "identity",
+        "notes": "body becomes upright, broad-chested, bodybuilder-like instead of a thin wiry goblin"
+      },
+      {
+        "stage": "identity",
+        "notes": "horns, tail, claws, or imp-like demonic anatomy appears"
+      }
+    ],
+    "I-10": [
+      {
+        "stage": "action",
+        "notes": "ogre is merely standing or posing on ordinary stairs instead of visibly wedged between the spiral stair boundaries"
+      }
+    ],
+    "I-22": [
+      {
+        "stage": "environment",
+        "notes": "page does not read as a webbed stone dungeon hall or arch; large architecture geometry is not readable"
+      }
+    ]
+  }
+}

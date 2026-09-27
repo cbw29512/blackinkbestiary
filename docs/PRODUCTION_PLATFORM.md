@@ -65,7 +65,7 @@ The production audit rejects missing fields, duplicate IDs/orders, missing canon
 
 `config/environment_standard.json` is global across all books. Colorability is the governing constraint; beneath it, every page must independently satisfy three visual requirements:
 
-- unmistakable monster identity — visually dominant, large, and centered or near-centered
+- unmistakable monster identity — first-read dominant through framing and silhouette clarity while preserving canonical creature scale and proportions
 - unmistakable environment identity — supportive framing around the monster
 - unmistakable story moment
 
@@ -75,7 +75,7 @@ Simplification removes clutter, not habitat identity.
 
 ### Coloring-page scale standard
 
-`config/coloring_page_standard.json` keeps pages easy to color: a large centered monster as the dominant focal form, 2–4 major supporting environmental forms, sparse secondary objects, and broad open white regions. The system explicitly rejects micro-texture, tiny enclosed coloring islands, and monster scaling that erases the environment.
+`config/coloring_page_standard.json` keeps pages easy to color: one first-read monster or creature group emphasized through framing at canonical scale, 2–4 major supporting environmental forms, sparse secondary objects, and broad open white regions. The system explicitly rejects micro-texture, tiny enclosed coloring islands, and any scaling that changes canonical creature size/proportions.
 
 ### Defect remediation
 
@@ -99,6 +99,34 @@ Generated PNGs must satisfy:
 - no overwhelmingly dark/solid output
 
 A technical QA failure is retried automatically with a fresh seed before stopping the page.
+
+## Iterative AI Art-Director Gate
+
+Every independent composition candidate follows the same authority-first loop:
+
+`reread written authority → generate → inspect the rendered image → compare image to authority → refine the existing image → reread authority → reinspect`
+
+The written monster family, monster JSON, environment contract, page recipe, anatomy rules, and coloring-page standard are reloaded before every generation or refinement pass. The previous image is never treated as authority.
+
+Refinement is stage-aware. Identity/anatomy failures regenerate from written canonical authority because a fundamentally wrong body plan is a bad image-edit source. Environment, action/physicality, and print-quality failures use cumulative image editing so successful creature identity and already-correct work can be preserved. Each candidate retains its pass history, and best-so-far selection ranks review-stage progress before local numeric score so an older identity-failing image cannot beat a structurally correct later-stage image.
+
+The four candidates remain compositionally independent. Refinement may repair anatomy, identity, environment, story readability, colorability, clutter, or malformed structures, but it may not collapse all candidates into the same composition.
+
+The automated loop is bounded: one initial render plus up to four refinement passes per candidate. It may stop early only when the visual quality gate passes. Semantic inspection uses the non-thinking `qwen3-vl:4b-instruct` Ollama model; the generic `qwen3-vl:4b` tag resolves to the thinking variant and is not accepted because it can spend the generation budget on reasoning without emitting the required JSON verdict. If the configured runtime cannot perform semantic image inspection, it must fail closed and require human review; it must never label technical pixel checks as semantic AI review.
+
+## GitHub Assistant Review Loop
+
+Large local galleries do not need to be uploaded into chat. The local machine keeps the production PNGs; the publisher creates smaller JPEG review copies in `review-previews/`, writes an exact-image manifest, and publishes the snapshot to the dedicated `review-previews-live` branch. Current gallery state is authoritative for eligibility: historical/orphan PNGs left on disk are ignored unless the current state marks that exact page/candidate reviewable. Non-image generation failures are published as diagnostics when possible.
+
+Every published candidate receives a `review_id` containing page, candidate number, and a SHA-256 fingerprint of the actual finalized PNG. Assistant decisions in `review-previews/decisions.json` must target that exact `review_id`. This prevents an old rejection from accidentally rejecting a newly regenerated image that reused the same page/candidate slot, even if state metadata is stale.
+
+A rejection records the assistant notes/stage and marks only that exact candidate `assistant_rejected`. Identity rejection deletes the unsafe local source and rebuilds fresh from canonical text authority. Environment, action, and quality rejection preserve the exact rejected PNG as a targeted image-edit source so correct creature identity and successful pixels are not needlessly thrown away. `RERUN_NEXT_REJECTED.bat` applies current GitHub decisions, reruns only the first rejected candidate, and republishes the new preview. Stale JPEG review previews are removed on the next publish.
+
+The intended loop is:
+
+`sync engine → apply exact-image decisions → generate/retry only actionable pages → publish lightweight snapshot → assistant inspects exact image → approve/reject exact review_id → pull decisions → repeat`
+
+The nine-page engine canary is a preflight gate for automated batch generation. It requires current content-hash-valid exact-image approvals for I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22. The older Golden Five remains a separate human production-calibration concept in the Studio; it is not the same state machine as the automated canary. Human `Approve & Lock` remains the final admission gate for finished book pages.
 
 ## Human Quality Gate
 

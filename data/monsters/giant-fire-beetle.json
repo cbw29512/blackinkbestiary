@@ -7,7 +7,7 @@
   "visual_identity": {
     "core_identity": "An oversized beetle with a heavy oval shell and prominent luminous gland structures that make it recognizable even in black-and-white line art.",
     "silhouette": "Low oval beetle body, domed wing cases, six stout legs, short antennae, broad head.",
-    "head_features": "Compact insect head with mandibles, short antennae, and distinct rounded gland bulges near the head.",
+    "head_features": "Compact insect head with mandibles, short antennae, and TWO distinct rounded luminous gland bulges above/near the eyes.",
     "body_shape": "Three-part insect body with hard domed elytra, six legs, and a compact abdomen.",
     "surface": "Large smooth armor plates with restrained segment lines; gland areas outlined clearly rather than shaded.",
     "signature_gear": [],
@@ -22,7 +22,8 @@
       "domed beetle shell",
       "visible luminous gland shapes",
       "mandibles",
-      "low beetle posture"
+      "low beetle posture",
+      "three distinct luminous glands: two near the eyes and one at the rear abdomen"
     ],
     "must_avoid": [
       "spider anatomy",
@@ -30,13 +31,17 @@
       "dragon features",
       "glowing text effects",
       "dense shell texture",
-      "cute ladybug styling"
-    ]
+      "cute ladybug styling",
+      "generic beetle with no visible gland structures",
+      "more or fewer than six legs"
+    ],
+    "shape_lock": "Draw one true beetle with exactly six walking legs, two antennae, domed wing cases, and three unmistakable outlined luminous gland bulges: two by the eyes and one at the rear abdomen. No spider legs, fantasy horns, or extra limbs.",
+    "limb_structure": "Exactly six insect walking legs attached to the thorax, plus two antennae and mandibles; no extra legs or spiderlike appendages."
   },
   "default_habitats": [
-    "abandoned mines",
-    "dark tunnels",
-    "ore chambers"
+    "underground",
+    "caves",
+    "ruins"
   ],
   "accuracy_checks": [
     "reads immediately as giant beetle",
@@ -44,11 +49,48 @@
     "gland structures are visible",
     "mine setting benefits from implied glow",
     "shell remains colorable",
-    "no extra fantasy anatomy obscures beetle identity"
+    "no extra fantasy anatomy obscures beetle identity",
+    "exactly three outlined luminous gland shapes are visible: two by the eyes and one near the rear abdomen",
+    "exactly six walking legs are visible or unambiguously implied"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "An oversized beetle with a heavy oval shell and prominent luminous gland structures that make it recognizable even in black-and-white line art. Three-part insect body with hard domed elytra, six legs, and a compact abdomen. Large smooth armor plates with restrained segment lines; gland areas outlined clearly rather than shaded. Low oval beetle body, domed wing cases, six stout legs, short antennae, broad head.",
+  "behavior_traits": [
+    "crawling",
+    "burrowing through debris",
+    "foraging",
+    "defensive biting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large true beetle with low domed shell, exactly six legs, and three signature gland forms large enough to read clearly.",
+    "natural_posture": "All six walking legs support the low beetle body while antennae and mandibles orient toward its route or target.",
+    "behavior_style": [
+      "crawling",
+      "burrowing through debris",
+      "foraging",
+      "defensive biting"
+    ],
+    "environment_fit": [
+      "underground",
+      "caves",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "generic_beetle_drift",
+      "symptom": "signature luminous gland structures disappear",
+      "correction": "restore three distinct gland bulges: two beside the eyes and one at the rear abdomen"
+    },
+    {
+      "id": "leg_count_drift",
+      "symptom": "beetle gains spider legs or loses the six-leg insect plan",
+      "correction": "restore exactly six thoracic walking legs"
+    }
+  ]
 }

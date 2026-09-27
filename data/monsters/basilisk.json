@@ -31,18 +31,20 @@
       "humanoid face",
       "horned dragon head",
       "dense tiny scales"
-    ]
+    ],
+    "limb_structure": "Exactly eight short reptilian walking legs support one low heavy body, with one thick tapering tail. No wings, arms, or additional limb pairs.",
+    "shape_lock": "Draw one squat heavy reptile with one broad head, one low trunk, exactly eight short sturdy legs distributed under the body, and one thick tail. The belly stays close to the ground; do not collapse the anatomy into a four-legged lizard, snake, or dragon."
   },
   "default_habitats": [
-    "statue galleries",
-    "underground ruins",
-    "rocky lairs"
+    "caves",
+    "ruins",
+    "rocky terrain"
   ],
   "accuracy_checks": [
     "eight legs are countable or strongly readable",
-    "stare is central to composition",
+    "predatory stare is visually clear",
     "body is squat not serpentine",
-    "petrified creature or statues reinforce threat",
+    "petrifying gaze identity remains visually readable from the creature itself",
     "no wings appear",
     "scale texture stays simple"
   ],
@@ -50,5 +52,38 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A squat heavy reptilian monster with eight sturdy legs and a fixed predatory stare associated with petrification. Stocky scaled reptile with exactly eight legs, low belly, and thick tapering tail. Large simple scales or armored skin plates used sparingly.",
+  "behavior_traits": [
+    "predatory watching",
+    "low stalking movement",
+    "territorial ambush"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium, squat eight-legged reptilian monster whose low belly and thick body read heavier and stranger than an ordinary lizard.",
+    "natural_posture": "Belly low with all eight short legs distributed beneath the trunk; head held forward in a fixed predatory stare.",
+    "behavior_style": [
+      "predatory watching",
+      "low stalking movement",
+      "territorial ambush"
+    ],
+    "environment_fit": [
+      "caves",
+      "ruins",
+      "rocky terrain"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "four_leg_lizard_drift",
+      "symptom": "creature collapses into an ordinary four-legged lizard",
+      "correction": "restore exactly eight short sturdy legs distributed along the low heavy trunk"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "creature gains wings, horns, or heroic dragon proportions",
+      "correction": "remove wings and dragon ornament; keep squat wingless eight-legged reptile anatomy"
+    }
+  ]
 }

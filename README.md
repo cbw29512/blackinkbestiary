@@ -40,7 +40,7 @@ Black-Ink Bestiary is an eight-book line of approximately 50-page, 2024-SRD-mons
 
 Every finished page must have:
 
-- one large, accurate, dominant monster
+- one accurate first-read monster or creature group at canonical size, body mass, and species proportions
 - a distinctive believable habitat, lair, or territory
 - a clear story moment readable at thumbnail size
 - a stable natural pose appropriate for a static coloring page
@@ -120,7 +120,7 @@ See [Production Platform](docs/PRODUCTION_PLATFORM.md) for the data contract and
 - One current page at a time.
 - Pages stay in strict book order.
 - Pure black line art on white.
-- Large, bold, simple coloring regions with a substantial monster and 2–4 major environment forms.
+- Large, bold, simple coloring regions with a clearly framed canonical-scale monster or creature group and 2–4 major environment forms.
 - Monster shown in an accurate natural habitat or believable lair selected from a specific environment profile.
 - Backgrounds must vary by landmark, framing, depth structure, or monster/environment interaction; broad labels like "cave" or "ocean" are not enough.
 - No grayscale wash, painterly shading, decorative border, or text in the artwork.
@@ -143,9 +143,9 @@ The brand should not use D&D logos, Wizards of the Coast trade dress, or imply a
 
 ## Current Phase
 
-**Engine V2 is structurally green; mass Tome I generation is intentionally gated on Golden Five calibration.**
+**Engine V2 is structurally green; full Tome I batch generation is intentionally gated on the nine-page exact-image canary.**
 
-Before the 50-page rebuild is allowed to run at scale, I-01, I-24, I-27, I-38, and I-40 must each pass human review across colorability, monster identity, environment identity, story moment, physical grounding, and print layout.
+Before the 50-page × 4-candidate rebuild is allowed to run at scale, I-01, I-04, I-08, I-10, I-14, I-16, I-19, I-20, and I-22 must each have a current content-hash-valid exact-image approval. The Golden Five lane remains a separate human calibration/reference workflow for final Studio quality discipline; it is not the automated canary state machine.
 
 Every Tome I page now has:
 - a canonical monster identity spec
@@ -153,7 +153,7 @@ Every Tome I page now has:
 - strict ordered generation/review state
 - technical PNG QA including line-art content checks
 
-After Golden Five reaches 5/5, production still requires human approval for every final page:
+After the automated canary unlocks controlled batch generation, production still requires human approval for every final page:
 
 ```
 spec → generation → technical QA → human review → edit/regenerate as needed → approve & lock → next page

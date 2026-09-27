@@ -17,3 +17,14 @@ art_pipeline/workflows/official/*.json
 data/generation-worker.log
 discard/
 data/rebuild-backups/
+data/local-runtime-status.json
+data/test-gallery-state.json
+data/test-gallery-state.json.tmp
+web/test-gallery/*
+data/engine-preflight-status.json
+data/comfy-runtime.stdout.log
+data/comfy-runtime.stderr.log
+
+# Generated GitHub review handoff lives only on review-previews-live.
+review-previews/
+data/generation-progress.json

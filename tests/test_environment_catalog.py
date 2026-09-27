@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from environment_catalog import environment_fingerprint, resolve_environment_profile
 from environment_components import assembly_fingerprint, assemble_environment_palette
+from environment_assembly import infer_overlays
 from environment_engine_audit import audit_environment_engine
 from environment_spatial import resolve_spatial_envelope
 from environment_variation import load_variation_registry
@@ -109,6 +110,84 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("raises a coin toward the natural rock shrine", text)
         self.assertNotIn("CANONICAL ENVIRONMENT FIT", text)
 
+    def test_limestone_cave_palette_rejects_foreign_subtype_components(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-14")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertIn("natural", palette["contexts"])
+        self.assertIn("cave", palette["contexts"])
+        self.assertIn("limestone", palette["contexts"])
+        selected = " ".join(
+            str(item.get("text") or "").lower()
+            for item in palette["components"].values()
+        )
+        self.assertIn("limestone", selected)
+        self.assertNotIn("basalt", selected)
+        self.assertNotIn("packed soil", selected)
+        self.assertNotIn("fungal", selected)
+        self.assertNotIn("improvised throne", selected)
+
+    def test_spiral_stair_palette_promotes_stair_context(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-10")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertIn("stair", palette["contexts"])
+        self.assertEqual(
+            resolve_spatial_envelope(
+                resolve_environment_profile(page["environment_profile_id"])
+            )["envelope_id"],
+            "spiral_stair",
+        )
+        ground = (palette["components"].get("ground_planes") or {}).get("text", "").lower()
+        self.assertIn("stair", ground)
+
+    def test_labyrinth_pages_use_branching_maze_envelope(self):
+        for page_id in ("I-33", "I-34"):
+            page = next(page for page in self.tome["pages"] if page["page_id"] == page_id)
+            profile = resolve_environment_profile(page["environment_profile_id"])
+            envelope = resolve_spatial_envelope(profile)
+            text = build_prompt(page)
+
+            self.assertEqual(envelope["envelope_id"], "labyrinth_branch")
+            self.assertIn("branch", envelope["plan_shape"].lower())
+            self.assertIn("single straight corridor", " ".join(envelope["must_not_drift"]).lower())
+            self.assertIn("maze directions", text)
+
+    def test_i48_mushroom_hall_is_natural_not_masonry_gallery(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-48")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        envelope = resolve_spatial_envelope(profile)
+        text = build_prompt(page)
+
+        self.assertEqual(envelope["envelope_id"], "natural_fungal_hall")
+        self.assertIn("natural cavern aisle", envelope["plan_shape"].lower())
+        self.assertIn("built masonry gallery", " ".join(envelope["must_not_drift"]).lower())
+        self.assertIn("oversized mushroom caps", text)
+
+    def test_i45_resolves_tunnel_to_shaft_transition(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-45")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        envelope = resolve_spatial_envelope(profile)
+        text = build_prompt(page)
+
+        self.assertEqual(envelope["envelope_id"], "mine_tunnel_to_shaft")
+        self.assertIn("tunnel", envelope["plan_shape"].lower())
+        self.assertIn("shaft", envelope["plan_shape"].lower())
+        self.assertIn("both tunnel side boundaries", text)
+        self.assertIn("deep shaft opening", text)
+        self.assertIn("PASSAGE-FILL PROOF", text)
+
+    def test_explicit_page_authority_suppresses_duplicate_palette_roles(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-14")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertNotIn("landmarks", palette["components"])
+        self.assertNotIn("interaction_patterns", palette["components"])
+        self.assertNotIn("lighting_features", palette["components"])
+
+    def test_kicked_lantern_page_does_not_add_second_random_light(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-04")
+        palette = assemble_environment_palette(page, ROOT)
+        self.assertNotIn("lighting_features", palette["components"])
+        self.assertNotIn("interaction_patterns", palette["components"])
+
     def test_tome_i_background_fingerprints_are_unique(self):
         fingerprints = [environment_fingerprint(page) for page in self.tome["pages"]]
         self.assertEqual(len(fingerprints), len(set(fingerprints)))
@@ -171,7 +250,7 @@ class EnvironmentCatalogTests(unittest.TestCase):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         palette = assemble_environment_palette(page, ROOT)
         self.assertIn("hazards", palette["components"])
-        self.assertIn("lighting_features", palette["components"])
+        self.assertNotIn("lighting_features", palette["components"])
         self.assertIn("ground_planes", palette["components"])
         self.assertIn("trap", palette["contexts"])
         self.assertTrue(any(item["overlay_id"] == "trap_zone" for item in palette["overlays"]))
@@ -190,13 +269,14 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("UNIQUE BACKGROUND LANDMARK", text)
         self.assertIn("MONSTER / ENVIRONMENT INTERACTION", text)
 
-    def test_reference_composition_keeps_monster_large_and_centered(self):
+    def test_reference_composition_preserves_canonical_scale(self):
         standard = json.loads(
             (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
         )
         ref = standard["reference_composition"]
-        self.assertEqual(ref["monster_page_height_target"], [0.6, 0.75])
-        self.assertIn("centered", ref["placement"])
+        self.assertIsNone(ref["monster_page_height_target"])
+        self.assertIsNone(ref["monster_hard_max_page_height"])
+        self.assertIn("canonical size and proportions preserved", ref["placement"])
         self.assertIn("full or nearly full silhouette", ref["placement"])
         self.assertEqual(ref["environment_major_forms"], [2, 4])
 
@@ -205,6 +285,33 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("large", directives)
         self.assertIn("tiny", directives)
         self.assertIn("broad", directives)
+
+    def test_explicit_environment_roles_are_authoritative(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        sample = dict(page)
+        sample["environment_roles"] = ["laboratory", "trap_zone"]
+        overlays = infer_overlays(sample, profile, ROOT)
+        self.assertEqual([item["overlay_id"] for item in overlays[:2]], ["laboratory", "trap_zone"])
+
+    def test_specific_inferred_role_beats_broad_registry_order(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
+        profile = resolve_environment_profile(page["environment_profile_id"])
+        sample = dict(page)
+        sample["moment"] = "A creature guards a working alchemical laboratory workshop."
+        overlays = infer_overlays(sample, profile, ROOT)
+        ids = [item["overlay_id"] for item in overlays]
+        self.assertIn("laboratory", ids)
+        self.assertLess(ids.index("laboratory"), len(ids))
+
+
+    def test_creature_support_requirement_does_not_own_environment_scenery(self):
+        page = next(page for page in self.tome["pages"] if page["page_id"] == "I-28")
+        text = build_prompt(page)
+        self.assertIn("CREATURE-REQUIRED PHYSICAL RELATIONSHIPS", text)
+        self.assertIn("structural_attachment", text)
+        self.assertIn("environment engine chooses the wall, frame, materials, and surrounding room", text)
+        self.assertIn("PAGE ENVIRONMENT AUTHORITY", text)
 
 
 if __name__ == "__main__":

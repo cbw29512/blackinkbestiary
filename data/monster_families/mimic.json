@@ -27,7 +27,8 @@
       "full transformation that destroys object identity",
       "excess slime"
     ],
-    "limb_structure": "No separate biological limbs by default. Tongue, pseudopods, hinges, panels, seams, and hardware emerge from or remain integrated with the disguised object's structure."
+    "limb_structure": "No separate biological limbs by default. Tongue, pseudopods, hinges, panels, seams, and hardware emerge from or remain integrated with the disguised object's structure.",
+    "shape_lock": "Draw the disguised object as the dominant complete silhouette. Any mouth, tongue, eye, pseudopod, or organic seam must emerge directly from an existing lid, panel, seam, hinge, or surface of that same object. Never place a separate beast, head, torso, or four-legged body behind or inside the disguise."
   },
   "accuracy_checks": [
     "object reads before monster details",

@@ -1,0 +1,130 @@
+from __future__ import annotations
+
+from prompt_builder import build_page_verification_checklist
+
+
+def _checks(page: dict, stage: str) -> list[str]:
+    checklist = build_page_verification_checklist(page)
+    return list(checklist.get(stage) or [])
+
+
+def _require_checks(page: dict, stage: str) -> list[str]:
+    selected = _checks(page, stage)
+    if not selected:
+        raise RuntimeError(
+            f"{page.get('page_id')}: {stage} vision gate has no concrete review checks"
+        )
+    return selected
+
+
+def build_identity_review_prompt(page: dict) -> str:
+    selected = _require_checks(page, "identity")
+    return """You are the Black-Ink Bestiary IDENTITY AND ANATOMY GATE.
+Inspect only what is visibly present in the image. Do not trust the requested creature name as evidence.
+
+Fail closed. PASS only if every listed identity gate is visibly satisfied.
+If the creature could reasonably be mistaken for a forbidden look-alike, fail.
+If canonical small/tiny scale is not proved by nearby human-scale architecture/props, fail.
+If a small creature has adult-human heroic mass, broad chest, six-pack, thick shoulders, or oversized limbs, fail.
+If any page-specific prohibited look-alike or known drift is visibly present, fail.
+If any required limb/body structure is extra, missing, duplicated, merged, branched, or replaced by scenery, fail.
+COUNTABLE TOPOLOGY AUDIT: when a gate specifies an exact limb count, repeated appendage pattern, or one-pair-per-segment relationship, literally trace/count the visible structures. Do not assume hidden anatomy fixes a visible violation. If several visible segments lack required appendages, fail.
+SWARM COUNT AUDIT: when a gate gives an approximate visible population range, treat the upper bound as a hard visual limit. Estimate/count the visible members; if the image is clearly over the limit, has wallpaper density, or creates one giant leader, fail identity.
+If a collective/swarm page violates its page-specific scale/population rule, fail.
+
+DEFECT WORDING RULE: defects must describe what is visibly wrong or absent. Never copy a positive requirement verbatim into defects. For example, do NOT write "body reads reptilian rather than furry" as a defect; write "body does not read clearly reptilian" or "body reads furry/mammalian". Do NOT write "Canonical scale reads as: small" as a defect; write "creature reads adult-human sized". Negative drift phrases may be reported directly when visibly true.
+Do not use the requested label as a preserve item. Preserve items must describe literal visible morphology.
+Return exactly one compact JSON object and nothing else:
+{"pass": true|false, "score": 0-100, "defects": ["specific visible identity defect"], "preserve": ["specific visible morphology"]}
+At most 4 defects and 3 preserve items; each under 80 characters.
+Any identity failure must be pass=false and score 49 or lower.
+
+IDENTITY GATES:
+- """ + "\n- ".join(selected)
+
+
+def build_environment_review_prompt(page: dict) -> str:
+    selected = _require_checks(page, "environment")
+    return """You are the Black-Ink Bestiary ENVIRONMENT GEOMETRY GATE.
+Inspect only the visible setting. Ignore creature beauty and action quality except where creature scale proves the space.
+
+Fail closed. PASS only if the named habitat, material language, spatial envelope, required architecture/terrain, and unique landmark are visibly readable in the image.
+Do not accept a generic approximation of the named place: required spatial envelope, boundaries, depth, materials, and landmark relationships must be visibly demonstrated.
+If the environment could be mistaken for one of the page-specific forbidden drift spaces, fail.
+If the creature is correct but the place is generic or spatially wrong, fail.
+PASS EVIDENCE RULE: a PASS must use preserve items to name at least two concrete visible page-specific environment proofs (for example the required spatial form, landmark, framing, or material structure). Generic praise such as "stone walls," "good background," or "monster dominates" is not sufficient evidence.
+
+DEFECT WORDING RULE: describe the visible environmental failure in negative language. Never copy a positive gate verbatim into defects.
+Return exactly one compact JSON object and nothing else:
+{"pass": true|false, "score": 0-100, "defects": ["specific visible environment defect"], "preserve": ["specific visible environment success"]}
+At most 4 defects and 3 preserve items; each under 80 characters.
+Any environment failure must be pass=false and score 49 or lower.
+
+ENVIRONMENT GATES:
+- """ + "\n- ".join(selected)
+
+
+def build_action_review_prompt(page: dict) -> str:
+    selected = _require_checks(page, "action")
+    return """You are the Black-Ink Bestiary ACTION AND PHYSICALITY GATE.
+Inspect the visible action, contact, support, and cause-and-effect. The environment has already been checked separately.
+
+Fail closed. PASS only if the required verb/action, prop relationship, support/contact, motion/weight, and story interaction are visibly present.
+Proximity is not action. The image must visibly demonstrate the page-specific verb through body pose, contact geometry, direction, support, prop response, or cause-and-effect as required.
+If contact, direction, support, or cause-and-effect is ambiguous or merely implied, fail.
+PASS EVIDENCE RULE: a PASS must use preserve items to name at least two concrete visible page-specific action proofs (for example the required verb, contact, support, motion, or prop response). Generic praise such as "dynamic pose" or "clear creature" is not sufficient evidence.
+
+DEFECT WORDING RULE: defects must describe the visible action/physicality failure, not copy a required gate.
+Return exactly one compact JSON object and nothing else:
+{"pass": true|false, "score": 0-100, "defects": ["specific visible action defect"], "preserve": ["specific visible action success"]}
+At most 4 defects and 3 preserve items; each under 80 characters.
+Any action failure must be pass=false and score 49 or lower.
+
+ACTION / PHYSICALITY GATES:
+- """ + "\n- ".join(selected)
+
+
+def build_scene_review_prompt(page: dict) -> str:
+    """Compatibility helper for callers/tests that still want one scene prompt."""
+    return build_environment_review_prompt(page) + "\n\n" + build_action_review_prompt(page)
+
+
+def build_review_prompt(page: dict) -> str:
+    selected = _require_checks(page, "quality")
+    return """You are the Black-Ink Bestiary FINAL COLORING-PAGE GATE.
+The candidate has already been checked for species identity, environment geometry, and action/physicality requirements.
+Now red-team the actual image for any remaining production failure.
+
+Fail closed for: decorative/inset rectangular frames, wallpaper-density swarms, excessive repeated web/rat/detail patterns, clutter, tiny coloring cells, unreadable silhouette, malformed leftover anatomy, large black fills, grayscale/shading, weak negative space, or print-layout problems.
+Do not reward an attractive illustration if it would be tedious to color.
+For swarm pages, broad white gaps and controlled population are mandatory; clearly excessive visible members are an automatic fail even if each individual is recognizable.
+For web pages, webs must not become dense wallpaper that erases the environment.
+COLORING LOAD AUDIT: judge the whole page, not isolated objects. If repeated grids, webs, bricks, scales, fur marks, or many small creatures create tiny enclosed coloring cells across much of the page, fail for excessive line density even when the line art is technically clean.
+Pass only when there is no meaningful visible defect worth another edit.
+DEFECT WORDING RULE: describe the visible production failure in plain negative language. Never copy a positive quality requirement verbatim into defects.
+
+Return exactly one compact JSON object and nothing else:
+{"pass": true|false, "score": 0-100, "defects": ["specific visible production defect"], "preserve": ["specific visible production success"]}
+At most 4 defects and 3 preserve items; each under 80 characters.
+Any production failure must be pass=false and score 49 or lower.
+
+FINAL QUALITY GATES:
+- """ + "\n- ".join(selected)
+
+
+def review_stage_errors(page: dict) -> list[str]:
+    errors = []
+    builders = (
+        ("identity", build_identity_review_prompt),
+        ("environment", build_environment_review_prompt),
+        ("action", build_action_review_prompt),
+        ("quality", build_review_prompt),
+    )
+    for stage, builder in builders:
+        try:
+            builder(page)
+        except RuntimeError as exc:
+            errors.append(
+                f"{page.get('page_id')}: {stage} review gate invalid: {exc}"
+            )
+    return errors

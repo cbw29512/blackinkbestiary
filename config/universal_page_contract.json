@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "contract_id": "black-ink-page-v1",
   "purpose": "Resolve every Black-Ink Bestiary page from one universal coloring-book contract plus reusable monster/environment catalogs and a small set of page-unique facts.",
   "applies_to": "all books in data/series.json",
@@ -35,7 +35,7 @@
     "must_avoid": "global_must_avoid + monster must_avoid + environment must_avoid + page must_avoid"
   },
   "defaults": {
-    "composition": "Portrait coloring page; the monster is the large centered or near-centered dominant focal subject, normally occupying about 60–75% of page height. Keep the full or nearly full silhouette readable. The environment must remain unmistakable using two to four large supporting forms arranged around, behind, or beneath the monster. At least one environmental feature must participate in the story moment. Preserve broad colorable regions, clear silhouette separation, believable grounding, and generous white space.",
+    "composition": "Portrait coloring page; the monster, object-creature, or creature group is the visually dominant focal subject through framing, placement, silhouette clarity, and contrast while preserving canonical creature scale and proportions. Tiny and small creatures may occupy less page height and must remain visibly small relative to human-scale architecture, props, traps, furniture, and openings; never enlarge them into medium/large heroic bodies merely to dominate the page. Large creatures may fill more of the frame when their canonical size supports it. Keep the full or nearly full silhouette readable. The environment must remain unmistakable using two to four large supporting forms arranged around, behind, or beneath the subject. At least one environmental feature must participate in the story moment. Preserve broad colorable regions, clear silhouette separation, believable grounding, and generous white space.",
     "coloring_rules": {
       "outer_contour": "bold",
       "interior_lines": "light_to_medium",
@@ -117,5 +117,15 @@
     "monster_identity",
     "environment_identity",
     "story_moment"
-  ]
+  ],
+  "subject_scale_rules": {
+    "tiny": "Preserve unmistakably tiny creature scale. Use closer framing, grouping, or nearby scale references for visual importance; never give the creature adult-humanoid mass or heroic proportions.",
+    "small": "Preserve unmistakably small creature scale. Human-scale doors, corridors, furniture, traps, tools, and masonry should make the creature read small; use camera/framing for emphasis rather than enlarging its body.",
+    "medium": "Preserve normal medium creature scale and species-specific proportions; do not inflate the body into giant or bodybuilder mass unless canonical anatomy explicitly requires it.",
+    "large": "Preserve clearly large creature scale using architecture, terrain, furniture, or other scale references; size must come from canonical mass/proportions rather than heroic bodybuilding.",
+    "huge": "Preserve huge scale with strong environmental scale references and enough surrounding geometry to prove the size.",
+    "gargantuan": "Preserve gargantuan scale with unmistakable environmental comparison; avoid shrinking the creature into a normal room-sized subject.",
+    "swarm": "The swarm is visually dominant as a collective group, while each member retains its canonical individual scale. No oversized leader or mascot creature.",
+    "default": "Preserve the creature's canonical size and proportions. Achieve visual dominance through framing and placement, never by changing species scale."
+  }
 }

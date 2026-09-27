@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source_id": "dnd-srd-5.2.1",
+  "heading": "Legal Attribution",
+  "work_title": "System Reference Document 5.2.1",
+  "attribution_party": "Wizards of the Coast LLC",
+  "source_url": "https://www.dndbeyond.com/srd",
+  "license_name": "Creative Commons Attribution 4.0 International",
+  "license_short_name": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+  "placement": "append_final_page",
+  "additional_wizards_attribution": false
+}

@@ -5,41 +5,75 @@ on:
     branches: [main, "feat/**", "fix/**"]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  checks:
+    name: ${{ matrix.check }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        check:
+          - json-and-catalog
+          - unit-tests
+          - active-book-audit
+          - series-audit
+          - compile-and-js
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate JSON and run state-machine tests
+
+      - name: Run check
+        shell: bash
         run: |
-          python -m json.tool data/tome-I.json > /dev/null
-          python -m json.tool data/production-state.json > /dev/null
-          python -m json.tool config/studio.json > /dev/null
-          python -m json.tool config/quality_rules.json > /dev/null
-          python -m json.tool config/page_archetypes.json > /dev/null
-          python -m json.tool config/environment_standard.json > /dev/null
-          python -m json.tool config/coloring_page_standard.json > /dev/null
-          python -m json.tool config/universal_page_contract.json > /dev/null
-          python -m json.tool config/universal_monster_contract.json > /dev/null
-          python -m json.tool config/universal_environment_contract.json > /dev/null
-          python -m json.tool config/universal_story_contract.json > /dev/null
-          python -m json.tool config/golden_five_calibration.json > /dev/null
-          python -m json.tool data/golden-five-state.json > /dev/null
-          python -m json.tool config/kdp_print_standard.json > /dev/null
-          python -m json.tool config/content_scope.json > /dev/null
-          python -m json.tool data/monster_source_registry.json > /dev/null
-          python -m json.tool data/environment_variation_families.json > /dev/null
-          python -m json.tool data/environment_overlays.json > /dev/null
-          python -m json.tool data/environment_spatial_envelopes.json > /dev/null
-          for file in data/environment_components/*.json; do python -m json.tool "$file" > /dev/null; done
-          python -m json.tool data/series.json > /dev/null
-          python -m unittest discover -s tests -v
-          python scripts/audit_active_book.py
-          python scripts/audit_series.py
-          python -m compileall -q art_pipeline scripts server.py
-          node --check web/app.js
-          node --check web/golden-five-view.js
-          node --check web/golden-five.js
+          set -euo pipefail
+          case "${{ matrix.check }}" in
+            json-and-catalog)
+              python -m json.tool data/tome-I.json > /dev/null
+              python -m json.tool data/production-state.json > /dev/null
+              python -m json.tool config/studio.json > /dev/null
+              python -m json.tool config/quality_rules.json > /dev/null
+              python -m json.tool config/page_archetypes.json > /dev/null
+              python -m json.tool config/environment_standard.json > /dev/null
+              python -m json.tool config/coloring_page_standard.json > /dev/null
+              python -m json.tool config/universal_page_contract.json > /dev/null
+              python -m json.tool config/universal_monster_contract.json > /dev/null
+              python -m json.tool config/universal_environment_contract.json > /dev/null
+              python -m json.tool config/universal_story_contract.json > /dev/null
+              python -m json.tool config/golden_five_calibration.json > /dev/null
+              python -m json.tool data/golden-five-state.json > /dev/null
+              python -m json.tool config/kdp_print_standard.json > /dev/null
+              python -m json.tool config/content_scope.json > /dev/null
+              python -m json.tool data/monster_source_registry.json > /dev/null
+              python -m json.tool data/environment_variation_families.json > /dev/null
+              python -m json.tool data/environment_overlays.json > /dev/null
+              python -m json.tool data/environment_spatial_envelopes.json > /dev/null
+              for file in data/environment_components/*.json; do python -m json.tool "$file" > /dev/null; done
+              python -m json.tool data/series.json > /dev/null
+              python -c "from pathlib import Path; import sys; sys.path.insert(0, 'art_pipeline'); from catalog_audit import audit_monster_catalog; report=audit_monster_catalog(Path('.').resolve()); print('CATALOG_ERRORS=', report['errors']); print('OWNERSHIP_WARNINGS=', report['ownership_warnings']); raise_code=0 if report['pass'] else 1; raise SystemExit(raise_code)"
+              ;;
+            unit-tests)
+              python -m unittest discover -s tests -v
+              ;;
+            active-book-audit)
+              python scripts/audit_active_book.py
+              ;;
+            series-audit)
+              python scripts/audit_series.py
+              ;;
+            compile-and-js)
+              python -m compileall -q art_pipeline scripts server.py
+              node --check web/app.js
+              node --check web/golden-five-view.js
+              node --check web/golden-five.js
+              node --check web/test-gallery.js
+              ;;
+          esac

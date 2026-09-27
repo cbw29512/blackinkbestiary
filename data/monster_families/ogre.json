@@ -28,7 +28,8 @@
       "bodybuilder definition",
       "ape-like posture"
     ],
-    "limb_structure": "Thick heavy humanoid arms and legs with oversized hands and feet; limb length is blunt and massive rather than troll-long or ape-like."
+    "limb_structure": "Thick heavy humanoid arms and legs with oversized hands and feet; limb length is blunt and massive rather than troll-long or ape-like.",
+    "shape_lock": "Draw a massive heavy-bellied giant with blunt thick limbs and awkward proportions, not a sculpted bodybuilder; when architecture is present, its large scale must be proved by the surrounding human-sized structure."
   },
   "accuracy_checks": [
     "reads as ogre before generic brute",

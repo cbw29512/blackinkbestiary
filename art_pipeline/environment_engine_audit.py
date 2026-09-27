@@ -72,8 +72,22 @@ def audit_environment_engine(root: Path) -> dict:
     except RuntimeError as exc:
         errors.append(str(exc))
         overlays = {}
-    if len(overlays) < 8:
-        errors.append("environment overlay registry requires at least 8 reusable overlays")
+    required_roles = {
+        "lair", "trap_zone", "ruin", "sacred", "military", "burial", "treasure",
+        "fungal", "aquatic", "weathered", "settlement", "laboratory", "inhabited",
+        "open_terrain", "forge", "library", "kitchen", "prison", "mine", "campsite",
+        "village", "swamp", "desert", "mountain", "coastal", "throne_room", "nest",
+    }
+    missing_roles = sorted(required_roles - set(overlays))
+    if missing_roles:
+        errors.append("environment overlay registry missing required roles: " + ", ".join(missing_roles))
+    for overlay_id, overlay in overlays.items():
+        if not overlay.get("trigger_terms"):
+            errors.append(f"environment overlay {overlay_id!r} requires trigger_terms")
+        if len(overlay.get("directives") or []) < 2:
+            errors.append(f"environment overlay {overlay_id!r} requires at least two directives")
+        if not overlay.get("component_bias"):
+            errors.append(f"environment overlay {overlay_id!r} requires component_bias")
 
     return {
         "pass": not errors,

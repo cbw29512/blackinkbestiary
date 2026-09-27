@@ -3,10 +3,10 @@
   "monster_name": "Grick",
   "family": "grick",
   "size": "medium",
-  "creature_type": "cave aberration",
+  "creature_type": "aberration",
   "visual_identity": {
-    "core_identity": "A wormlike subterranean ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak.",
-    "silhouette": "Thick serpentine body rising from rubble, front end opening into four evenly spaced tentacles around the mouth.",
+    "core_identity": "A wormlike ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak.",
+    "silhouette": "Thick serpentine body coiled or rising, front end opening into four evenly spaced tentacles around the mouth.",
     "head_features": "No normal head; four muscular facial tentacles frame a small hard beak at the exact center.",
     "body_shape": "Long heavy worm body with subtle segmented folds and no legs.",
     "surface": "Rubbery ringed skin with restrained segment lines.",
@@ -22,7 +22,7 @@
       "central beak",
       "wormlike body",
       "no legs",
-      "rubble ambush posture"
+      "coiled ambush posture"
     ],
     "must_avoid": [
       "octopus body",
@@ -31,24 +31,61 @@
       "humanoid eyes",
       "insect legs",
       "dense ring texture"
-    ]
+    ],
+    "limb_structure": "No walking legs or arms. Exactly four fleshy facial tentacles open symmetrically around one small central beak at the front of the long wormlike body.",
+    "shape_lock": "Draw one thick legless worm body with a single front end that opens into exactly four muscular tentacles around one central beak. Keep the rest of the body continuous, heavy, and serpentine; add no snake head, octopus body, insect legs, or extra facial tentacles."
   },
   "default_habitats": [
-    "collapsed tunnels",
-    "rubble piles",
-    "deep caves"
+    "caves",
+    "underground",
+    "ruins"
   ],
   "accuracy_checks": [
     "four tentacles are countable",
     "beak sits at center",
     "body reads wormlike",
     "no legs appear",
-    "rubble concealment is clear",
+    "ambush posture is clear",
     "silhouette remains simple"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A wormlike ambush predator with a thick segmented body and four fleshy tentacles opening around a hard central beak. Long heavy worm body with subtle segmented folds and no legs. Rubbery ringed skin with restrained segment lines.",
+  "behavior_traits": [
+    "ambush hunting",
+    "coiling",
+    "concealment",
+    "sudden striking"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium thick wormlike aberration whose long body and four-tentacle facial opening read larger and heavier than a normal snake.",
+    "natural_posture": "Legless body coils or crawls in continuous ground contact while the four facial tentacles open around the central beak.",
+    "behavior_style": [
+      "ambush hunting",
+      "coiling",
+      "concealment",
+      "sudden striking"
+    ],
+    "environment_fit": [
+      "caves",
+      "underground",
+      "ruins"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "snake_drift",
+      "symptom": "front becomes a normal snake head or jaw",
+      "correction": "remove snake skull and restore exactly four facial tentacles surrounding one central beak"
+    },
+    {
+      "id": "tentacle_count_drift",
+      "symptom": "face has more or fewer than four primary tentacles",
+      "correction": "restore exactly four evenly arranged muscular facial tentacles"
+    }
+  ]
 }

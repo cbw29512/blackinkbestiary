@@ -22,7 +22,7 @@
       "folded wings",
       "horned grotesque head",
       "clawed limbs",
-      "architectural perch"
+      "stone-sculpture disguise"
     ],
     "must_avoid": [
       "dragon body",
@@ -31,20 +31,22 @@
       "living flesh texture",
       "huge wings hiding body",
       "ornate cathedral clutter"
-    ]
+    ],
+    "limb_structure": "Exactly two clawed arms and two clawed bipedal legs form the humanoid stone body, plus one pair of folded batlike wings attached to the back. No extra arms, dragon quadruped limbs, or feathered wings.",
+    "shape_lock": "Draw one squat stone humanoid with exactly two arms, two bent legs, one horned grotesque head, and one pair of folded batlike wings attached behind the shoulders/back. Keep the body compact and crouched like architectural sculpture, not a four-legged dragon."
   },
   "default_habitats": [
-    "stone gates",
-    "crypt entrances",
-    "underground arches"
+    "ruins",
+    "fortifications",
+    "settlements"
   ],
   "accuracy_checks": [
     "reads as stone sculpture becoming alive",
     "wings remain visible",
-    "one foot or hand leaves perch",
+    "transition from still sculpture to movement is readable",
     "stone texture is sparse",
     "humanoid gargoyle silhouette is clear",
-    "gate remains secondary"
+    "environment remains secondary to the gargoyle"
   ],
   "reference": {
     "image": null,
@@ -53,5 +55,43 @@
   },
   "locomotion": {
     "can_fly": true
-  }
+  },
+  "physical_requirements": [
+    "ground_support: resting sculpture disguise requires a believable load-bearing support; environment engine chooses the ledge, plinth, roof, gate, wall projection, rock, or other compatible structure"
+  ],
+  "schema_version": 4,
+  "description": "A squat winged stone predator disguised as architectural sculpture until it begins to move. Compact muscular humanoid carved from stone, thick forearms, bent legs, folded wings. Stone planes with a few cracks and chipped edges, not dense masonry texture.",
+  "behavior_traits": [
+    "motionless camouflage",
+    "sudden attack",
+    "perching",
+    "powered flight"
+  ],
+  "scene_identity": {
+    "size_impression": "Medium squat stone humanoid predator whose mass reads architectural and heavy, not dragon-sized.",
+    "natural_posture": "Clawed feet and hands brace against stone support; folded wings stay attached to the back without hiding the humanoid stone body.",
+    "behavior_style": [
+      "motionless camouflage",
+      "sudden attack",
+      "perching",
+      "powered flight"
+    ],
+    "environment_fit": [
+      "ruins",
+      "fortifications",
+      "settlements"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "dragon_drift",
+      "symptom": "stone creature becomes quadrupedal or dragon-bodied",
+      "correction": "restore two arms, two bipedal legs, one humanoid torso, horned grotesque head, and one folded wing pair"
+    },
+    {
+      "id": "angel_drift",
+      "symptom": "face/body becomes smooth human or feather-winged angelic",
+      "correction": "restore grotesque stone face, claws, batlike wings, and chipped stone planes"
+    }
+  ]
 }

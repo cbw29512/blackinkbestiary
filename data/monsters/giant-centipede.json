@@ -8,7 +8,7 @@
     "core_identity": "An oversized predatory centipede defined by its long segmented body, one pair of legs per visible segment, and large front poison claws.",
     "silhouette": "Long flexible segmented body forming an S-curve or coil, with many evenly spaced legs creating a saw-tooth edge.",
     "head_features": "Small armored head with simple antennae and strong curved forcipule-like poison claws near the mouth.",
-    "body_shape": "Many repeated trunk segments, each bearing one visible pair of legs, tapering toward the rear.",
+    "body_shape": "Long chain of many repeated trunk segments, with ONE PAIR of slender walking legs attached to EVERY visible trunk segment; legs form a continuous saw-tooth rhythm from immediately behind the head nearly to the tail.",
     "surface": "Simple armored segment plates with minimal texture.",
     "signature_gear": [],
     "attitude": [
@@ -30,13 +30,20 @@
       "spider abdomen",
       "dragon head",
       "too many tiny textures",
-      "human features"
-    ]
+      "human features",
+      "sparse legs only near the head",
+      "scorpion claws",
+      "lobster pincers",
+      "worm body with only a few legs",
+      "spider-style long legs"
+    ],
+    "shape_lock": "Draw a long chain of many trunk segments where every visible trunk segment carries exactly one pair of short walking legs, forming a continuous saw-tooth rhythm nearly the whole body length; front mouth claws stay small and mouth-adjacent, never spiderlike or lobsterlike; the rear tapers to a plain terminal body segment with no scorpion bulb, barb, telson, or raised stinger.",
+    "limb_structure": "Every visible trunk segment carries exactly one pair of short walking legs, producing a continuous paired-leg rhythm from behind the head toward the tail. The head has antennae and small mouth-adjacent poison claws only. The rear ends as a simple tapering terminal segment with no tail weapon, stinger, bulb, barb, telson, giant pincers, or spider legs."
   },
   "default_habitats": [
-    "catacomb niches",
-    "damp cellars",
-    "bone-strewn tunnels"
+    "underground",
+    "ruins",
+    "sewers"
   ],
   "accuracy_checks": [
     "centipede segmentation is obvious",
@@ -44,11 +51,55 @@
     "front claws are visible",
     "old bone interaction reads clearly",
     "body is not mistaken for snake",
-    "line density remains manageable"
+    "line density remains manageable",
+    "every visible trunk segment carries one pair of legs",
+    "continuous repeating leg rhythm runs along nearly the entire body",
+    "front poison claws stay small mouth-adjacent forcipules, not giant pincers",
+    "rear body ends in a plain taper with no scorpion-style stinger or tail weapon"
   ],
   "reference": {
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "An oversized predatory centipede defined by its long segmented body, one pair of legs per visible segment, and large front poison claws. Many repeated trunk segments, each bearing one visible pair of legs, tapering toward the rear. Simple armored segment plates with minimal texture. Long flexible segmented body forming an S-curve or coil, with many evenly spaced legs creating a saw-tooth edge.",
+  "behavior_traits": [
+    "wall crawling",
+    "crevice hiding",
+    "scavenging",
+    "sudden biting"
+  ],
+  "scene_identity": {
+    "size_impression": "Large elongated arthropod whose length comes from many repeating trunk segments rather than a thick worm or spider body.",
+    "natural_posture": "Body stays close to the support surface with one pair of slender walking legs attached to every visible trunk segment.",
+    "behavior_style": [
+      "wall crawling",
+      "crevice hiding",
+      "scavenging",
+      "sudden biting"
+    ],
+    "environment_fit": [
+      "underground",
+      "ruins",
+      "sewers"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "worm_drift",
+      "symptom": "legs disappear and body becomes a legless worm",
+      "correction": "restore one visible leg pair on every visible trunk segment"
+    },
+    {
+      "id": "spider_drift",
+      "symptom": "legs become a few oversized spiderlike limbs",
+      "correction": "replace sparse large limbs with many small repeated centipede leg pairs"
+    },
+    {
+      "id": "scorpion_tail_drift",
+      "symptom": "rear body grows a raised scorpion-like tail, bulb, barb, telson, or stinger",
+      "correction": "continue ordinary centipede segmentation to a simple tapering terminal segment with no tail weapon"
+    }
+  ]
 }

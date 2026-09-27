@@ -76,6 +76,30 @@ def resolve_spatial_envelope(
     return {"envelope_id": envelope_id, **envelope}
 
 
+def spatial_envelope_prompt_rules(envelope: dict) -> list[str]:
+    """Translate envelope geometry into explicit image-model composition constraints."""
+    envelope_id = str(envelope.get("envelope_id") or "unknown")
+    must_show = [str(item).strip() for item in envelope.get("must_show") or [] if str(item).strip()]
+    must_not = [str(item).strip() for item in envelope.get("must_not_drift") or [] if str(item).strip()]
+    rules = [
+        f"Lock the scene to the {envelope_id} spatial envelope before adding props or texture.",
+        f"Preserve this plan shape: {envelope.get('plan_shape', '')}.",
+        f"Preserve these proportions: {envelope.get('proportions', '')}.",
+        f"Preserve this overhead condition: {envelope.get('ceiling', '')}.",
+        f"Preserve this opening logic: {envelope.get('openings', '')}.",
+        f"Keep the focal zone organized like this: {envelope.get('focal_zone', '')}.",
+        f"Use this camera logic: {envelope.get('camera', '')}.",
+    ]
+    if must_show:
+        rules.append("The composition visibly proves the space with: " + "; ".join(must_show) + ".")
+    if must_not:
+        rules.append("Reject any composition that drifts into: " + "; ".join(must_not) + ".")
+    rules.append(
+        "Large scenery forms must define the space before torches, traps, furniture, debris, plants, or texture are added."
+    )
+    return rules
+
+
 def spatial_envelope_errors(profile: dict) -> list[str]:
     try:
         envelope = resolve_spatial_envelope(profile)

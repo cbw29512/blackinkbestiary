@@ -29,7 +29,8 @@
       "dense fur hatching",
       "oversized saber fangs"
     ],
-    "limb_structure": "Four true rodent legs with small forepaws, stronger hind legs, and a long tapering mostly hairless tail; never humanoid hands or canine paws."
+    "limb_structure": "Four true rodent legs with small forepaws, stronger hind legs, and a long tapering mostly hairless tail; never humanoid hands or canine paws.",
+    "shape_lock": "Draw unmistakable rat anatomy: low four-legged rodent body, pointed snout, rounded ears, small forepaws, stronger hind legs, long mostly hairless tail, and no canine or humanoid limb proportions."
   },
   "accuracy_checks": [
     "reads as rat rather than generic furry beast",

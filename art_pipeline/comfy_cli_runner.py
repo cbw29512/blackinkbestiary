@@ -70,14 +70,20 @@ class ComfyCli:
         if where:
             command.extend(["--where", where])
         command.extend(args)
-        result = subprocess.run(
-            command,
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-            check=False,
-        )
+        try:
+            result = subprocess.run(
+                command,
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                check=False,
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise ComfyCliError(
+                f"Command exceeded local process timeout after {timeout:.0f}s: "
+                f"{' '.join(command)}"
+            ) from exc
         if result.returncode != 0:
             raise ComfyCliError(
                 f"Command failed ({result.returncode}): {' '.join(command)}\n"
@@ -119,13 +125,27 @@ class ComfyCli:
             args.append(f"{address}={json.dumps(value, ensure_ascii=False)}")
         return self.run(*args, expect_json=True, where="local")
 
-    def run_workflow(self, workflow: Path, *, timeout: float = 600.0):
+    def run_workflow(
+        self,
+        workflow: Path,
+        *,
+        timeout: float = 600.0,
+        event_timeout: int = 600,
+    ):
+        # comfy-cli's --timeout is a per-event silence deadline, not a total
+        # workflow deadline. Diffusion steps can legitimately emit no websocket
+        # event for more than the CLI's 120-second default, especially on local
+        # GPU workloads. Keep the outer subprocess timeout slightly longer so
+        # the CLI can report its own structured timeout first.
+        event_timeout = max(120, int(event_timeout))
+        process_timeout = max(float(timeout), float(event_timeout + 30))
         return self.run(
             "run", "--workflow", str(workflow), "--wait",
             "--host", "127.0.0.1", "--port", "8188",
+            "--timeout", str(event_timeout),
             expect_json=True,
             where="local",
-            timeout=timeout,
+            timeout=process_timeout,
         )
 
     def template_check(self):

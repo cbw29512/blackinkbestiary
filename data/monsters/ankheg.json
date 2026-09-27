@@ -31,17 +31,19 @@
       "humanoid face",
       "wings",
       "dense shell pattern"
-    ]
+    ],
+    "limb_structure": "Exactly six insect legs attach to the thorax/body: one pair of reinforced digging forelegs plus two additional walking pairs. The head carries paired mandibles and short antennae; no wings, spider legs, humanoid limbs, or scorpion tail.",
+    "shape_lock": "Draw one long low armored insect with a broad thorax, segmented tapered abdomen, exactly six legs, and two oversized mandibles. Keep the body horizontal and burrowing-built; forelegs are heavy digging limbs while the remaining legs stay insectlike and lower to the ground."
   },
   "default_habitats": [
-    "earthen tunnels",
-    "burrows",
-    "loose dungeon floors"
+    "underground",
+    "wilderness",
+    "farmland"
   ],
   "accuracy_checks": [
     "six legs are visible or clearly implied",
     "mandibles dominate head identity",
-    "earth burst reads clearly",
+    "burrowing action reads clearly",
     "body remains insectoid",
     "armor plates are broad and colorable",
     "no dragon features appear"
@@ -50,5 +52,40 @@
     "image": null,
     "purpose": "identity_and_anatomy_only",
     "notes": "Reference material controls creature identity, anatomy, and silhouette only; Black-Ink controls the final coloring-book rendering style."
-  }
+  },
+  "schema_version": 4,
+  "description": "A massive burrowing insect predator with a heavily armored segmented body, powerful mandibles, and digging legs. Three-part insect anatomy with six legs, plated thorax, segmented abdomen, and reinforced forelegs for digging. Large chitin plates with simple seams; avoid tiny shell texture.",
+  "behavior_traits": [
+    "burrowing",
+    "ambush hunting",
+    "tunneling",
+    "sudden emergence"
+  ],
+  "scene_identity": {
+    "size_impression": "Large, low-slung burrowing insect whose armored body and heavy digging forelegs make it clearly larger than a person without becoming dragonlike.",
+    "natural_posture": "Body held close to the ground with six legs supporting the thorax and abdomen; reinforced forelegs brace, dig, or emerge through soil.",
+    "behavior_style": [
+      "burrowing",
+      "ambush hunting",
+      "tunneling",
+      "sudden emergence"
+    ],
+    "environment_fit": [
+      "underground",
+      "wilderness",
+      "farmland"
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "spider_drift",
+      "symptom": "body gains eight spiderlike legs or loses insect three-part structure",
+      "correction": "restore exactly six legs, reinforced digging forelegs, broad thorax, segmented abdomen, mandibles, and short antennae"
+    },
+    {
+      "id": "dragon_drift",
+      "symptom": "head/body becomes reptilian or dragonlike",
+      "correction": "remove dragon skull, horns, wings, and reptilian torso; restore armored insect head, mandibles, and low six-legged body"
+    }
+  ]
 }
