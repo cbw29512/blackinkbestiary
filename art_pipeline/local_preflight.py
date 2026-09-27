@@ -57,9 +57,10 @@ def local_generation_preflight(root: Path, fetch_json=_get_json, cli_finder=find
     server_ok = isinstance(stats, dict)
     devices = list((stats or {}).get("devices") or [])
     system = dict((stats or {}).get("system") or {})
-    expected_comfy_main = (
-        root / str(config.get("workspace") or ".blackink-comfy") / "ComfyUI" / "main.py"
-    )
+    workspace = root / str(config.get("workspace") or ".blackink-comfy")
+    direct_main = workspace / "main.py"
+    nested_main = workspace / "ComfyUI" / "main.py"
+    expected_comfy_main = direct_main if direct_main.is_file() or not nested_main.is_file() else nested_main
     reported_comfy_main = _reported_comfy_main(stats or {})
     workspace_ok = bool(
         server_ok
