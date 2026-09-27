@@ -52,11 +52,11 @@ class LocalStackMarkerTests(unittest.TestCase):
             root = Path(td)
             self.make_stack(root)
             direct_main = root / ".blackink-comfy" / "main.py"
-            nested_main = root / ".blackink-comfy" / "ComfyUI" / "main.py"
+            nested_main = root / ".blackink-comfy" / "main.py"
             nested_main.parent.mkdir(parents=True, exist_ok=True)
             direct_main.replace(nested_main)
             direct_model = root / ".blackink-comfy" / "models" / "diffusion_models" / "model.safetensors"
-            nested_model = root / ".blackink-comfy" / "ComfyUI" / "models" / "diffusion_models" / "model.safetensors"
+            nested_model = root / ".blackink-comfy" / "models" / "diffusion_models" / "model.safetensors"
             nested_model.parent.mkdir(parents=True, exist_ok=True)
             direct_model.replace(nested_model)
             marker_path = root / "data" / "local-ai-install-marker.json"
