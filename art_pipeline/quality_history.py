@@ -427,6 +427,39 @@ def _book_locked_progress(root: Path, row: dict) -> tuple[int, float]:
     return locked, _pct(locked, target)
 
 
+AUTOPILOT_HEARTBEAT_MAX_AGE_SECONDS = 20 * 60
+
+
+def _autopilot_heartbeat_ready(
+    autopilot: dict | None,
+    engine_commit: str,
+    *,
+    now: datetime | None = None,
+) -> bool:
+    if not autopilot:
+        return False
+    heartbeat_status = str(autopilot.get("status") or "").lower()
+    heartbeat_phase = str(autopilot.get("phase") or "").lower()
+    heartbeat_commit = str(autopilot.get("engine_commit") or "")
+    updated_text = str(autopilot.get("updated_at") or "").strip()
+    if (
+        heartbeat_status not in {"running", "ready"}
+        or heartbeat_phase in {"failed", "blocked"}
+        or heartbeat_commit != engine_commit
+        or not updated_text
+    ):
+        return False
+    try:
+        updated = datetime.fromisoformat(updated_text.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if updated.tzinfo is None:
+        updated = updated.replace(tzinfo=timezone.utc)
+    now = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
+    age_seconds = max(0.0, (now - updated.astimezone(timezone.utc)).total_seconds())
+    return age_seconds <= AUTOPILOT_HEARTBEAT_MAX_AGE_SECONDS
+
+
 def build_quality_snapshot(
     root: Path,
     state: dict,
@@ -448,15 +481,7 @@ def build_quality_snapshot(
 
     runtime_ready = str((runtime or {}).get("status") or "").lower() == "ready"
     preflight_ready = str((engine_preflight or {}).get("status") or "").lower() in {"passed", "pass", "success"}
-    heartbeat_status = str((autopilot or {}).get("status") or "").lower()
-    heartbeat_phase = str((autopilot or {}).get("phase") or "").lower()
-    heartbeat_commit = str((autopilot or {}).get("engine_commit") or "")
-    autopilot_ready = bool(
-        autopilot
-        and heartbeat_status in {"running", "ready"}
-        and heartbeat_phase not in {"failed", "blocked"}
-        and heartbeat_commit == engine_commit
-    )
+    autopilot_ready = _autopilot_heartbeat_ready(autopilot, engine_commit)
     foundation_components = {
         "local_runtime_ready": runtime_ready,
         "engine_preflight_passed": preflight_ready,
