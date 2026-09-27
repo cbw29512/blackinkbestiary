@@ -142,6 +142,8 @@ class SyncEngineForRunTests(unittest.TestCase):
                 return next(head_reads)
             if key == ("git", "rev-parse", f"origin/{sync.ENGINE_BRANCH}"):
                 return "remote-main-head"
+            if key == ("git", "merge-base", "merged-feature-head", "remote-main-head"):
+                return "merged-feature-head"
             if key == ("git", "rev-parse", "--short", "HEAD"):
                 return "remote123"
             raise KeyError(key)
@@ -149,7 +151,8 @@ class SyncEngineForRunTests(unittest.TestCase):
         with (
             patch.object(sync, "output", side_effect=fake_output),
             patch.object(sync, "tracked_changes_outside_previews", return_value=[]),
-            patch.object(sync, "git_returncode", side_effect=[0, 1, 0]),
+            patch.object(sync, "git_returncode", side_effect=[0, 0]),
+            patch.object(sync, "changed_paths", return_value=[]),
             patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
             patch.object(sync, "sync_review_decisions", return_value=True),
             patch.object(sync.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
@@ -159,7 +162,7 @@ class SyncEngineForRunTests(unittest.TestCase):
         self.assertIn(("git", "switch", sync.ENGINE_BRANCH), calls)
         self.assertIn(("git", "merge", "--ff-only", f"origin/{sync.ENGINE_BRANCH}"), calls)
 
-    def test_tree_identical_bridge_branch_migrates_to_main(self):
+    def test_content_neutral_bridge_migrates_after_main_advances(self):
         calls = []
         head_reads = iter(["bridge-head", "local-main-head"])
 
@@ -171,6 +174,8 @@ class SyncEngineForRunTests(unittest.TestCase):
                 return next(head_reads)
             if key == ("git", "rev-parse", f"origin/{sync.ENGINE_BRANCH}"):
                 return "remote-main-head"
+            if key == ("git", "merge-base", "bridge-head", "remote-main-head"):
+                return "prior-main-head"
             if key == ("git", "rev-parse", "--short", "HEAD"):
                 return "remote123"
             raise KeyError(key)
@@ -178,7 +183,8 @@ class SyncEngineForRunTests(unittest.TestCase):
         with (
             patch.object(sync, "output", side_effect=fake_output),
             patch.object(sync, "tracked_changes_outside_previews", return_value=[]),
-            patch.object(sync, "git_returncode", side_effect=[1, 0, 0]),
+            patch.object(sync, "git_returncode", side_effect=[1, 0]),
+            patch.object(sync, "changed_paths", return_value=[]),
             patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
             patch.object(sync, "sync_review_decisions", return_value=True),
             patch.object(sync.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
@@ -199,12 +205,15 @@ class SyncEngineForRunTests(unittest.TestCase):
                 return "unmerged-head"
             if key == ("git", "rev-parse", f"origin/{sync.ENGINE_BRANCH}"):
                 return "remote-main-head"
+            if key == ("git", "merge-base", "unmerged-head", "remote-main-head"):
+                return "shared-base"
             raise KeyError(key)
 
         with (
             patch.object(sync, "output", side_effect=fake_output),
             patch.object(sync, "tracked_changes_outside_previews", return_value=[]),
             patch.object(sync, "git_returncode", return_value=1),
+            patch.object(sync, "changed_paths", return_value=["art_pipeline/prompt_builder.py"]),
             patch.object(sync, "run", side_effect=lambda *args: calls.append(args)),
             patch.object(sync.subprocess, "run", return_value=SimpleNamespace(returncode=0)),
         ):

@@ -118,16 +118,18 @@ def main() -> int:
         contained_in_main = (
             git_returncode("git", "merge-base", "--is-ancestor", local_head, remote_head) == 0
         )
-        tree_matches_main = (
-            git_returncode("git", "diff", "--quiet", local_head, remote_head) == 0
-        )
-        if not contained_in_main and not tree_matches_main:
+        merge_base = output("git", "merge-base", local_head, remote_head)
+        local_only = changed_paths(merge_base, local_head)
+        content_neutral_bridge = not local_only or preview_only_paths(local_only)
+        if not contained_in_main and not content_neutral_bridge:
             print(
                 f"Refusing automatic branch migration from {current!r}: "
-                f"its source tree differs from {remote_ref}."
+                f"it contains source changes not present in {remote_ref}."
             )
+            for path in local_only:
+                print("  " + path)
             return 1
-        reason = "fully merged" if contained_in_main else "tree-identical bridge"
+        reason = "fully merged" if contained_in_main else "content-neutral bridge"
         print(
             f"Migrating {reason} engine branch {current!r} "
             f"to {ENGINE_BRANCH!r}..."
