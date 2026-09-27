@@ -2,7 +2,7 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
-  "measured_at": "2026-09-27T23:30:30.122975+00:00",
+  "measured_at": "2026-09-27T23:30:41.102703+00:00",
   "engine_commit": "bb3adef2fe56e5b3379ae1a0ad465a24855270cd",
   "active_book_id": "TOME-I",
   "metrics": {
