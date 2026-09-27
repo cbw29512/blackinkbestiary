@@ -39,7 +39,13 @@ $configPath = Join-Path $root "config\local_ai_stack.json"
 try {
     $config = Get-Content $configPath -Raw | ConvertFrom-Json
     $workspace = Join-Path $root $config.workspace
-    $comfyRoot = Join-Path $workspace "ComfyUI"
+    $comfyRoot = if (Test-Path (Join-Path $workspace "main.py") -PathType Leaf) {
+        $workspace
+    } elseif (Test-Path (Join-Path $workspace "ComfyUI\main.py") -PathType Leaf) {
+        Join-Path $workspace "ComfyUI"
+    } else {
+        $workspace
+    }
     $mainPy = Join-Path $comfyRoot "main.py"
     if (Test-Path $mainPy) {
         Write-Host "  OK - project-local ComfyUI workspace found" -ForegroundColor Green
