@@ -127,11 +127,17 @@ class StartProductionContractTests(unittest.TestCase):
     def test_autopilot_startup_also_starts_live_monitor(self):
         starter = (ROOT / "START_AUTOPILOT_IF_NEEDED.bat").read_text(encoding="utf-8")
         dashboard = (ROOT / "START_STATUS_DASHBOARD_IF_NEEDED.bat").read_text(encoding="utf-8")
+        dashboard_runtime = (ROOT / "scripts" / "ensure_status_dashboard.ps1").read_text(encoding="utf-8")
+        loop = (ROOT / "RUN_AUTOPILOT_WATCHDOG_LOOP.bat").read_text(encoding="utf-8")
         opener = (ROOT / "OPEN_AUTOPILOT_DASHBOARD.bat").read_text(encoding="utf-8")
         server = (ROOT / "server.py").read_text(encoding="utf-8")
 
         self.assertIn("START_STATUS_DASHBOARD_IF_NEEDED.bat", starter)
-        self.assertIn("server.py", dashboard)
+        self.assertIn("ensure_status_dashboard.ps1", dashboard)
+        self.assertIn("/api/health", dashboard_runtime)
+        self.assertIn("engine-preflight-status.json", dashboard_runtime)
+        self.assertIn("dashboard-runtime.stderr.log", dashboard_runtime)
+        self.assertIn("START_STATUS_DASHBOARD_IF_NEEDED.bat", loop)
         self.assertIn("autopilot-status.html", opener)
         self.assertIn("/api/autopilot-status", server)
 
