@@ -19,10 +19,20 @@ def _config_hash(root: Path) -> str:
     return hashlib.sha256((root / "config" / "local_ai_stack.json").read_bytes()).hexdigest()
 
 
-def required_files(root: Path) -> list[Path]:
+def _comfy_root(root: Path) -> Path:
     config = _config(root)
     workspace = root / str(config["workspace"])
-    comfy_root = workspace / "ComfyUI"
+    if (workspace / "main.py").is_file():
+        return workspace
+    nested = workspace / "ComfyUI"
+    if (nested / "main.py").is_file():
+        return nested
+    return workspace
+
+
+def required_files(root: Path) -> list[Path]:
+    config = _config(root)
+    comfy_root = _comfy_root(root)
     files = [
         root / ".blackink-tools" / "Scripts" / "python.exe",
         root / ".blackink-tools" / "Scripts" / "comfy.exe",
