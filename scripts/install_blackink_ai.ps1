@@ -48,69 +48,14 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
-# Step 4: reuse only the pinned server or launch the pinned workspace
+# Step 4: start/verify the pinned runtime through the shared production launcher
 Write-Host ""
-$ExpectedMain = [IO.Path]::GetFullPath((Join-Path $ComfyRoot "main.py"))
-$Ready = $false
-$Stats = $null
-try {
-    $Stats = Invoke-RestMethod -Uri "http://127.0.0.1:8188/system_stats" -TimeoutSec 2
-    $Ready = $true
-} catch {
-    $Ready = $false
-}
-
-if ($Ready) {
-    $Argv = @($Stats.system.argv)
-    if ($Argv.Count -lt 1 -or [string]::IsNullOrWhiteSpace([string]$Argv[0])) {
-        Write-Host "A ComfyUI server is using port 8188 but did not identify its workspace. Refusing to reuse it." -ForegroundColor Red
-        exit 4
-    }
-    $ReportedMain = [IO.Path]::GetFullPath([string]$Argv[0])
-    if (-not [string]::Equals($ReportedMain, $ExpectedMain, [StringComparison]::OrdinalIgnoreCase)) {
-        Write-Host "Port 8188 is owned by a different ComfyUI workspace." -ForegroundColor Red
-        Write-Host "Expected: $ExpectedMain"
-        Write-Host "Reported: $ReportedMain"
-        Write-Host "Close the unrelated server; Black-Ink will not stop or reuse it automatically."
-        exit 4
-    }
-    Write-Host "Existing pinned Black-Ink ComfyUI server is already reachable; reusing it." -ForegroundColor Green
-} else {
-    Write-Host "Launching Black-Ink ComfyUI on 127.0.0.1:8188..." -ForegroundColor Cyan
-    & $Comfy "--workspace=$Workspace" launch --background -- --listen 127.0.0.1 --port 8188
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "ComfyUI launch command failed." -ForegroundColor Red
-        exit $LASTEXITCODE
-    }
-}
-
-# Step 5: bounded wait for server
-for ($i = 0; -not $Ready -and $i -lt 90; $i++) {
-    try {
-        $Stats = Invoke-RestMethod -Uri "http://127.0.0.1:8188/system_stats" -TimeoutSec 2
-        $Ready = $true
-        break
-    } catch {
-        Start-Sleep -Seconds 1
-    }
-}
-if (-not $Ready) {
-    Write-Host "ComfyUI did not become ready within 90 seconds." -ForegroundColor Red
-    Write-Host "Run the doctor or inspect the ComfyUI background log before changing anything."
-    exit 3
-}
-
-$Argv = @($Stats.system.argv)
-if ($Argv.Count -lt 1 -or [string]::IsNullOrWhiteSpace([string]$Argv[0])) {
-    Write-Host "ComfyUI became reachable but did not report argv[0]; refusing unidentified production runtime." -ForegroundColor Red
-    exit 4
-}
-$ReportedMain = [IO.Path]::GetFullPath([string]$Argv[0])
-if (-not [string]::Equals($ReportedMain, $ExpectedMain, [StringComparison]::OrdinalIgnoreCase)) {
-    Write-Host "ComfyUI became reachable from the wrong workspace." -ForegroundColor Red
-    Write-Host "Expected: $ExpectedMain"
-    Write-Host "Reported: $ReportedMain"
-    exit 4
+Write-Host "Starting/verifying the pinned Black-Ink local runtime..." -ForegroundColor Cyan
+& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Root "scripts\ensure_local_ai.ps1")
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Pinned Black-Ink runtime did not become ready." -ForegroundColor Red
+    Write-Host "Inspect data\local-runtime-status.json and the ComfyUI runtime logs for the exact blocker."
+    exit $LASTEXITCODE
 }
 
 # Step 6: validate exact official templates against this live install

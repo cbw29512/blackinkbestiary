@@ -68,13 +68,19 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("START_AUTOPILOT_IF_NEEDED.bat", installer)
         self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP\\.bat", remover)
 
-    def test_installer_records_verified_stack_and_reuses_existing_server(self):
+    def test_installer_records_verified_stack_and_uses_shared_direct_runtime(self):
         installer = (ROOT / "scripts" / "install_blackink_ai.ps1").read_text(encoding="utf-8")
         self.assertIn("local_stack_marker.py --write", installer)
-        self.assertIn("Existing pinned Black-Ink ComfyUI server is already reachable", installer)
-        self.assertIn("Port 8188 is owned by a different ComfyUI workspace", installer)
-        self.assertIn("[StringComparison]::OrdinalIgnoreCase", installer)
-        self.assertIn("Invoke-RestMethod -Uri \"http://127.0.0.1:8188/system_stats\"", installer)
+        self.assertIn("ensure_local_ai.ps1", installer)
+        self.assertIn("Starting/verifying the pinned Black-Ink local runtime", installer)
+        self.assertNotIn("launch --background", installer)
+        self.assertNotIn("Existing pinned Black-Ink ComfyUI server is already reachable", installer)
+
+    def test_runtime_workspace_discovery_prefers_repo_config_before_desktop_fallback(self):
+        helpers = (ROOT / "scripts" / "local_runtime_helpers.ps1").read_text(encoding="utf-8")
+        configured = helpers.index("if ($ConfiguredWorkspace)")
+        desktop = helpers.index("if ($env:LOCALAPPDATA)")
+        self.assertLess(configured, desktop)
 
     def test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight(self):
         text = (ROOT / "scripts" / "ensure_local_ai.ps1").read_text(encoding="utf-8")
