@@ -46,6 +46,23 @@ if (-not (Test-Path $configPath -PathType Leaf)) { throw "Missing local AI confi
 $config = Get-Content $configPath -Raw | ConvertFrom-Json
 
 $comfyHealth = "$($config.comfy_url.TrimEnd('/'))/system_stats"
+$expectedComfyMain = [IO.Path]::GetFullPath(
+  (Join-Path (Join-Path $root ([string]$config.workspace)) "ComfyUI\main.py")
+)
+
+function Assert-BlackInkComfyWorkspace {
+  Set-RuntimeStage "comfy-identity" "Verifying pinned Black-Ink ComfyUI workspace." $expectedComfyMain
+  $stats = Invoke-RestMethod -Uri $comfyHealth -TimeoutSec 5
+  $argv = @($stats.system.argv)
+  if ($argv.Count -lt 1 -or [string]::IsNullOrWhiteSpace([string]$argv[0])) {
+    throw "ComfyUI did not report argv[0]; refusing an unidentified server on the production port."
+  }
+  $reportedMain = [IO.Path]::GetFullPath([string]$argv[0])
+  if (-not [string]::Equals($reportedMain, $expectedComfyMain, [StringComparison]::OrdinalIgnoreCase)) {
+    throw "Port 8188 belongs to a different ComfyUI workspace. Expected '$expectedComfyMain' but server reported '$reportedMain'."
+  }
+}
+
 $launchArgs = @(
   @($config.production_policy.comfy_launch_args) |
     Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
@@ -102,7 +119,8 @@ if (-not (Test-BlackInkJsonEndpoint $comfyHealth 2)) {
     throw
   }
 }
-Write-Host "ComfyUI ready. Runtime logs: data/comfy-runtime.stdout.log + data/comfy-runtime.stderr.log" -ForegroundColor Green
+Assert-BlackInkComfyWorkspace
+Write-Host "ComfyUI ready and pinned workspace identity verified. Runtime logs: data/comfy-runtime.stdout.log + data/comfy-runtime.stderr.log" -ForegroundColor Green
 
 $vision = $config.vision_reviewer
 $reviewerRequired = $false
