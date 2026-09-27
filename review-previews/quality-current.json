@@ -2,7 +2,7 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
-  "measured_at": "2026-09-27T18:05:11.724899+00:00",
+  "measured_at": "2026-09-27T18:43:36.786914+00:00",
   "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
   "active_book_id": "TOME-I",
   "metrics": {
@@ -36,7 +36,7 @@
     "rows": [
       {
         "page_id": "I-01",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -45,11 +45,11 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-04",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -58,11 +58,37 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-08",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
+        "technical_pass": true,
+        "review_pipeline_pass": true,
+        "visual_cleanliness_pass": false,
+        "semantic_accuracy_pass": false,
+        "all_automated_gates_pass": false,
+        "visual_stage": "identity",
+        "visual_score": 49,
+        "local_visual_advisory_pass": false,
+        "assistant_decision": null
+      },
+      {
+        "page_id": "I-10",
+        "status": "awaiting_exact_image_review",
+        "technical_pass": true,
+        "review_pipeline_pass": true,
+        "visual_cleanliness_pass": false,
+        "semantic_accuracy_pass": false,
+        "all_automated_gates_pass": false,
+        "visual_stage": "environment",
+        "visual_score": 49,
+        "local_visual_advisory_pass": false,
+        "assistant_decision": null
+      },
+      {
+        "page_id": "I-14",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -71,63 +97,37 @@
         "visual_stage": null,
         "visual_score": null,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
-      },
-      {
-        "page_id": "I-10",
-        "status": "assistant_rejected",
-        "technical_pass": true,
-        "review_pipeline_pass": true,
-        "visual_cleanliness_pass": false,
-        "semantic_accuracy_pass": false,
-        "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
-        "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
-      },
-      {
-        "page_id": "I-14",
-        "status": "assistant_rejected",
-        "technical_pass": true,
-        "review_pipeline_pass": true,
-        "visual_cleanliness_pass": false,
-        "semantic_accuracy_pass": false,
-        "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
-        "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-16",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
+        "visual_stage": null,
+        "visual_score": null,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-19",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "action",
-        "visual_score": 49,
+        "visual_stage": "quality",
+        "visual_score": 45,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-20",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -136,11 +136,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-22",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -149,17 +149,17 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       }
     ]
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 41,
-    "refinement_passes": 32,
+    "gpu_attempts": 37,
+    "refinement_passes": 28,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 4.56,
+    "avg_gpu_attempts_per_page": 4.11,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -643,11 +643,10 @@
       "weakest_metric": "visual_cleanliness",
       "missing_required_categories": [],
       "known_blockers": [
-        "ENVIRONMENT_GENERIC",
         "UNCLASSIFIED",
-        "IDENTITY_HEROIC_BULK",
+        "ENVIRONMENT_GENERIC",
         "ACTION_UNCLEAR",
-        "SWARM_WALLPAPER"
+        "IDENTITY_HEROIC_BULK"
       ],
       "automated_100": false
     },
@@ -896,22 +895,21 @@
     }
   },
   "defect_counts": {
+    "UNCLASSIFIED": 4,
     "ENVIRONMENT_GENERIC": 3,
-    "UNCLASSIFIED": 3,
-    "IDENTITY_HEROIC_BULK": 2,
     "ACTION_UNCLEAR": 1,
-    "SWARM_WALLPAPER": 1
+    "IDENTITY_HEROIC_BULK": 1
   },
   "historical_defect_counts": {
-    "IDENTITY_HEROIC_BULK": 35,
+    "IDENTITY_HEROIC_BULK": 34,
     "IDENTITY_HORNS_TUSKS": 33,
     "IDENTITY_WRONG_CREATURE": 26,
     "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
     "ENVIRONMENT_GENERIC": 9,
-    "SWARM_WALLPAPER": 8,
     "ACTION_UNCLEAR": 7,
-    "UNCLASSIFIED": 6,
+    "SWARM_WALLPAPER": 7,
+    "UNCLASSIFIED": 7,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
   },
@@ -920,8 +918,8 @@
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
       "evidence_count": 42,
-      "distinct_pages": 10,
-      "distinct_families": 6,
+      "distinct_pages": 9,
+      "distinct_families": 5,
       "scope": [
         "monster_family",
         "master_engine"
@@ -1066,7 +1064,7 @@
     {
       "defect_code": "ENVIRONMENT_GENERIC",
       "label": "Generic/wrong environment",
-      "evidence_count": 25,
+      "evidence_count": 24,
       "distinct_pages": 5,
       "distinct_families": 5,
       "scope": [
@@ -1211,58 +1209,9 @@
       ]
     },
     {
-      "defect_code": "SWARM_WALLPAPER",
-      "label": "Swarm wallpaper density",
-      "evidence_count": 8,
-      "distinct_pages": 2,
-      "distinct_families": 2,
-      "scope": [
-        "master_engine",
-        "monster_family"
-      ],
-      "master_engine_lesson": "Enforce universal swarm negative-space and controlled-population checks.",
-      "monster_family_lesson": "Preserve family member scale/count and forbid wallpaper-density repetition.",
-      "page_recipe_lesson": null,
-      "priority": "high",
-      "auto_apply": false,
-      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
-      "examples": [
-        {
-          "page_id": "I-17",
-          "candidate": 1,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
-          ]
-        },
-        {
-          "page_id": "I-17",
-          "candidate": 2,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
-          ]
-        },
-        {
-          "page_id": "I-17",
-          "candidate": 3,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
-          ]
-        }
-      ]
-    },
-    {
       "defect_code": "ACTION_UNCLEAR",
       "label": "Action/story beat unclear",
-      "evidence_count": 7,
+      "evidence_count": 11,
       "distinct_pages": 3,
       "distinct_families": 3,
       "scope": [
@@ -1304,6 +1253,55 @@
           "stage": null,
           "evidence_text": [
             "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        }
+      ]
+    },
+    {
+      "defect_code": "SWARM_WALLPAPER",
+      "label": "Swarm wallpaper density",
+      "evidence_count": 7,
+      "distinct_pages": 2,
+      "distinct_families": 2,
+      "scope": [
+        "master_engine",
+        "monster_family"
+      ],
+      "master_engine_lesson": "Enforce universal swarm negative-space and controlled-population checks.",
+      "monster_family_lesson": "Preserve family member scale/count and forbid wallpaper-density repetition.",
+      "page_recipe_lesson": null,
+      "priority": "high",
+      "auto_apply": false,
+      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
+      "examples": [
+        {
+          "page_id": "I-17",
+          "candidate": 1,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
+          ]
+        },
+        {
+          "page_id": "I-17",
+          "candidate": 2,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
+          ]
+        },
+        {
+          "page_id": "I-17",
+          "candidate": 3,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
           ]
         }
       ]
@@ -1469,17 +1467,17 @@
     }
   },
   "status_counts": {
-    "assistant_rejected": 9
+    "awaiting_exact_image_review": 9
   },
   "historical_status_counts": {
-    "assistant_rejected": 87
+    "assistant_rejected": 78,
+    "awaiting_exact_image_review": 9
   },
   "known_blockers": [
-    "ENVIRONMENT_GENERIC",
     "UNCLASSIFIED",
-    "IDENTITY_HEROIC_BULK",
+    "ENVIRONMENT_GENERIC",
     "ACTION_UNCLEAR",
-    "SWARM_WALLPAPER"
+    "IDENTITY_HEROIC_BULK"
   ],
-  "measurement_fingerprint": "1685a3c0e8daeb53019efa3b9f2124e093743aa4dc2d179558fa0cfd73836e41"
+  "measurement_fingerprint": "e7330bbb1930b65bf9be23c468962968b9e05689fc81bc7ea774ebd2da2f1a46"
 }

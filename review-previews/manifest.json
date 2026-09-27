@@ -3,8 +3,8 @@
   "snapshot_engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
   "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
-  "candidate_count": 0,
-  "diagnostic_count": 87,
+  "candidate_count": 9,
+  "diagnostic_count": 78,
   "quality_snapshot": "review-previews/quality-current.json",
   "reviewer_disagreement_snapshot": "review-previews/reviewer-disagreement.json",
   "reviewer_disagreement": {
@@ -32,11 +32,11 @@
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "generating",
-    "status": "running",
-    "message": "Pre-GPU snapshot published before canary generation",
+    "phase": "sleeping",
+    "status": "ready",
+    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
     "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
-    "updated_at": "2026-09-27T18:05:05.650221+00:00"
+    "updated_at": "2026-09-27T18:43:30.421301+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
@@ -430,7 +430,304 @@
     ]
   },
   "selections": {},
-  "candidates": [],
+  "candidates": [
+    {
+      "review_id": "I-01-C01-H84de41287efd80cf",
+      "page_id": "I-01",
+      "monster_name": "Kobold Warrior",
+      "candidate": 1,
+      "selected": false,
+      "seed": 7820194948749543357,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "f198108d581766ec0aadc01e25ac3ce8a408c8c7dcf013fff7820d00b407f43c",
+      "review_fingerprint": "3c397eff4ba5e3570d82031d11dafbc1a7781384cb53934a79776b5031887b79",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-01-C01.jpg",
+      "source_image": "test-gallery/I-01-C01.png",
+      "source_sha256": "84de41287efd80cfa36cb4ddb481034a8fb9a545c2abc99e29fe84a4bb213fc6",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "body reads adult-human sized",
+          "head becomes round and goblin-like",
+          "bodybuilder definition visible"
+        ],
+        "preserve": [
+          "long balancing tail",
+          "lizard-like snout",
+          "reptilian scale texture"
+        ],
+        "stage": "identity"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:07:01.374731+00:00"
+    },
+    {
+      "review_id": "I-04-C01-H087f6eb969813b6f",
+      "page_id": "I-04",
+      "monster_name": "Goblin Warrior",
+      "candidate": 1,
+      "selected": false,
+      "seed": 85710226276502013,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "8c7a573011417dd59bb8bf33a40bc54db29835bba70cea4d5b22b803a9e5cd16",
+      "review_fingerprint": "8834b6ff54426e422629cadcba87c5d055373fb98a38c0a7eefde6c2ec213ea5",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-04-C01.jpg",
+      "source_image": "test-gallery/I-04-C01.png",
+      "source_sha256": "087f6eb969813b6f6a87de24b64348bc1a3516f3952fa034a4b93e61e2989285",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "lantern not kicked, held in hand"
+        ],
+        "preserve": [
+          "fitted block walls",
+          "flagstone floor",
+          "wall lantern niche beside narrow turn"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:11:37.825192+00:00"
+    },
+    {
+      "review_id": "I-08-C01-H190def55ebee42fa",
+      "page_id": "I-08",
+      "monster_name": "Bugbear Warrior",
+      "candidate": 1,
+      "selected": false,
+      "seed": 2681131820001948276,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "3da8f4e71712ff95f729c482b4f64fee3eddaeaae37e5695afec24af552aab87",
+      "review_fingerprint": "bdc438e0a8d30b895c90683a7adb857da8a26ac987e0abc06c0a9fad14b2d0a3",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-08-C01.jpg",
+      "source_image": "test-gallery/I-08-C01.png",
+      "source_sha256": "190def55ebee42fa1e5951427d647408f9aad51da042b839ff1435dbbf9d5dc5",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "face reads primate rather than goblinoid",
+          "torso sculpted like superhero",
+          "arms not visibly below hips",
+          "fur hides anatomy"
+        ],
+        "preserve": [
+          "pointed ears",
+          "bipedal stance",
+          "no horns or tail"
+        ],
+        "stage": "identity"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:13:15.603196+00:00"
+    },
+    {
+      "review_id": "I-10-C01-H9c2ffabb77e7e072",
+      "page_id": "I-10",
+      "monster_name": "Ogre",
+      "candidate": 1,
+      "selected": false,
+      "seed": 4224414293617076448,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "e9b2fb1655d0ac1c4bbaf49f97ac15744b11893267cc24de1135e1369c9b2287",
+      "review_fingerprint": "250d6046249be02eb03945d893d9c6a97f45b4c1a32dcea6cfab18663ebbda2d",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-10-C01.jpg",
+      "source_image": "test-gallery/I-10-C01.png",
+      "source_sha256": "9c2ffabb77e7e072c03b253340dcde9eacf2c91a8a4c74e0c13a6947431b8a01",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "no central column or shaft visible"
+        ],
+        "preserve": [
+          "wedge-shaped treads curving around central axis",
+          "tight curved outer masonry wall",
+          "ogre wedged between wall and central structure"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:19:20.045830+00:00"
+    },
+    {
+      "review_id": "I-14-C01-Hae4787a5e3a2003e",
+      "page_id": "I-14",
+      "monster_name": "Darkmantle",
+      "candidate": 1,
+      "selected": false,
+      "seed": 3503111191285367265,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "8ab45df3dd26898045529f843c5701cef28f4c71f215e9a4ce8e968b30b2b8c4",
+      "review_fingerprint": "180811b7808d1210950c6fe830399177d1481022e23162b7307d1197a57b3783",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-14-C01.jpg",
+      "source_image": "test-gallery/I-14-C01.png",
+      "source_sha256": "ae4787a5e3a2003e2357b74bc5afbc61e7d2d8e7f53f0f02744119d28c6f00ea",
+      "visual_review": null,
+      "advisory_review_status": "unavailable",
+      "advisory_review_error": "Identity reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'no visible mouth', 'gate': 'Canonical body plan reads as: One continuous cloak-like cap or inverted leathery cone with a broad rim; short tentacles hang from the underside. No separate torso, neck, head silhouette, arms, legs, tail, or wing pair.; limbs: No arms, legs, wings, or tail. The entire creature is one mantle body with several short underside tentacles hanging from the rim around the recessed underside mouth.', 'overlap': 1.0}]",
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:26:42.589703+00:00"
+    },
+    {
+      "review_id": "I-16-C01-Hab618c7ca9a41b28",
+      "page_id": "I-16",
+      "monster_name": "Giant Bat",
+      "candidate": 1,
+      "selected": false,
+      "seed": 6342923616709423046,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "298b9d340e27e00e9b2a5c1a95c29d3eb50369be24c807ade14407e599e4eb58",
+      "review_fingerprint": "59e62e14b68b1f1f5f8b0bba8f37116a77da8a0944203f188c50db601bbafa87",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-16-C01.jpg",
+      "source_image": "test-gallery/I-16-C01.png",
+      "source_sha256": "ab618c7ca9a41b28944babb52a04d17d2c9288ca5c02eb741f094d57ea19f035",
+      "visual_review": null,
+      "advisory_review_status": "unavailable",
+      "advisory_review_error": "Environment reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'ceiling not visible or implied', 'gate': 'Space overhead/ceiling reads correctly: natural roof line visible or strongly implied; not a flat built ceiling', 'overlap': 1.0}]",
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:27:05.222898+00:00"
+    },
+    {
+      "review_id": "I-19-C01-H71c86b592abfcd39",
+      "page_id": "I-19",
+      "monster_name": "Rat Swarm",
+      "candidate": 1,
+      "selected": false,
+      "seed": 1814959962839860107,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "53af9ab116d54d20200fd04723b0e7e16c127795e66458b6f36d957327470e16",
+      "review_fingerprint": "6fba48d869b2e43b287e7dafc891b5291dcd7cb0d908b574728bf62e5ddf2572",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-19-C01.jpg",
+      "source_image": "test-gallery/I-19-C01.png",
+      "source_sha256": "71c86b592abfcd3916d3cff1068a05ce28e6e1c7241f0e91dac4c2acdde9ee81",
+      "visual_review": {
+        "pass": false,
+        "score": 45,
+        "defects": [
+          "Excessive rat swarm density"
+        ],
+        "preserve": [
+          "Stone architecture",
+          "Clear outer contours",
+          "No grayscale wash"
+        ],
+        "stage": "quality"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:33:11.868676+00:00"
+    },
+    {
+      "review_id": "I-20-C01-H047f520d520ff25c",
+      "page_id": "I-20",
+      "monster_name": "Giant Centipede",
+      "candidate": 1,
+      "selected": false,
+      "seed": 7213958568518685495,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "4e32f3b7ce4b83a4f496ec32542851e3323ff10675ee16d800301786b87cbd5e",
+      "review_fingerprint": "f79513118936e8d988ca6b54b9b444437279a6e5758fffa7b4aef94216fa86d5",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-20-C01.jpg",
+      "source_image": "test-gallery/I-20-C01.png",
+      "source_sha256": "047f520d520ff25c97e2ff995cbde40e92ac6e91500174c454564848eff86543",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "arched burial niches not visible as niches but as window frames"
+        ],
+        "preserve": [
+          "stone floor tiles",
+          "bone ossuary shelf",
+          "centipede uncoiling around niche"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:37:17.156452+00:00"
+    },
+    {
+      "review_id": "I-22-C01-Hcbc8c5d40b8f43a8",
+      "page_id": "I-22",
+      "monster_name": "Giant Spider",
+      "candidate": 1,
+      "selected": false,
+      "seed": 6367955263883335359,
+      "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+      "generation_fingerprint": "4f10aace196ee6d046813ca7164e9e17d91a8bf88dc871a576d310f67c710e31",
+      "review_fingerprint": "fe9f98f4ae0078bf04f931a105e2bb0a0c50f7e9cdd56ccc67d591a20bbb26c4",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-22-C01.jpg",
+      "source_image": "test-gallery/I-22-C01.png",
+      "source_sha256": "cbc8c5d40b8f43a8827367f29134e436f13d8af84978dfc9ee6368be9818d02e",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "no masonry or arches visible"
+        ],
+        "preserve": [
+          "web spans radial from center",
+          "spider dominates center",
+          "open floor lane visible"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-27T18:43:30.343614+00:00"
+    }
+  ],
   "diagnostics": [
     {
       "page_id": "I-01",
@@ -2608,284 +2905,6 @@
         "review_id": "I-22-C03-H17769e93c6d286ee",
         "decision": "reject",
         "notes": "Reject: spider anatomy is close, but the page does not clearly read as a web-filled dungeon hall; keep exactly eight legs while making the stone hall/arch unmistakable and the spider visibly supported at the web center."
-      }
-    },
-    {
-      "page_id": "I-01",
-      "monster_name": "Kobold Warrior",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "f198108d581766ec0aadc01e25ac3ce8a408c8c7dcf013fff7820d00b407f43c",
-      "review_fingerprint": "3c397eff4ba5e3570d82031d11dafbc1a7781384cb53934a79776b5031887b79",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T16:57:35.576573+00:00",
-      "finished_at": "2026-09-27T17:00:13.704676+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "body reads adult-human sized",
-          "head becomes round and goblin-like",
-          "body reads furry/mammalian"
-        ],
-        "preserve": [
-          "long balancing tail",
-          "lizard-like snout",
-          "clawed hands and feet"
-        ],
-        "stage": "identity"
-      },
-      "assistant_review": {
-        "review_id": "I-01-C01-H17eedaac5ee01347",
-        "decision": "reject",
-        "notes": "Reject: reptilian identity is improved, but the kobold still reads much too large for a 2\u00e2\u20ac\u201c3 foot creature; its head, feet, torso, and spear scale nearly fill a human-sized corridor. Preserve the lizard snout, tail, trap, and clean masonry; shrink the entire body and gear relative to the doors/torch brackets, narrow the limbs/torso, and make the human-scale architecture unmistakably prove tiny kobold scale.",
-        "stage": "identity"
-      }
-    },
-    {
-      "page_id": "I-04",
-      "monster_name": "Goblin Warrior",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "8c7a573011417dd59bb8bf33a40bc54db29835bba70cea4d5b22b803a9e5cd16",
-      "review_fingerprint": "8834b6ff54426e422629cadcba87c5d055373fb98a38c0a7eefde6c2ec213ea5",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:00:13.894271+00:00",
-      "finished_at": "2026-09-27T17:03:13.294119+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "lantern not kicked, held in hand"
-        ],
-        "preserve": [
-          "fitted block walls",
-          "flagstone floor",
-          "wall lantern niche beside narrow turn"
-        ],
-        "stage": "environment"
-      },
-      "assistant_review": {
-        "review_id": "I-04-C01-H2acb299d8093a4eb",
-        "decision": "reject",
-        "notes": "Reject: preserve the improved small goblin and narrow stone corridor, but the required action is still wrong. The goblin is holding/carrying the lantern by hand. Put the lantern at floor level, keep one support foot planted, and show the other foot visibly contacting and tipping/skidding the lantern; also retain the crude blade and small shield required by the page.",
-        "stage": "action"
-      }
-    },
-    {
-      "page_id": "I-08",
-      "monster_name": "Bugbear Warrior",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "3da8f4e71712ff95f729c482b4f64fee3eddaeaae37e5695afec24af552aab87",
-      "review_fingerprint": "bdc438e0a8d30b895c90683a7adb857da8a26ac987e0abc06c0a9fad14b2d0a3",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:03:13.416035+00:00",
-      "finished_at": "2026-09-27T17:03:59.745480+00:00",
-      "visual_review": null,
-      "assistant_review": {
-        "review_id": "I-08-C01-Hb82657a7b4a0cfd1",
-        "decision": "reject",
-        "notes": "Reject: the bugbear is still an ape/bodybuilder silhouette\u00e2\u20ac\u201dvery broad chest, sculpted heroic musculature, thick primate-like mass, and arms that do not read distinctly rangy. Preserve the broken-ceiling/rubble setting and hornless face direction; narrow the torso, reduce muscle definition, lengthen the arms clearly below the hips, and use selective shaggy hair over unmistakably rangy goblinoid anatomy.",
-        "stage": "identity"
-      }
-    },
-    {
-      "page_id": "I-10",
-      "monster_name": "Ogre",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "e9b2fb1655d0ac1c4bbaf49f97ac15744b11893267cc24de1135e1369c9b2287",
-      "review_fingerprint": "250d6046249be02eb03945d893d9c6a97f45b4c1a32dcea6cfab18663ebbda2d",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:03:59.901834+00:00",
-      "finished_at": "2026-09-27T17:10:28.624896+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "no central column or shaft visible"
-        ],
-        "preserve": [
-          "arched stone doorway",
-          "wedge-shaped treads",
-          "curved outer wall"
-        ],
-        "stage": "environment"
-      },
-      "assistant_review": {
-        "review_id": "I-10-C01-H18a2740be708a5bb",
-        "decision": "reject",
-        "notes": "Reject: preserve the massive ogre and clean stone architecture, but this is still a normal broad curved stair. The page requires a cramped spiral stair with a visible central column/shaft and wedge-shaped treads wrapping around it. Compress the ogre physically between that inner column and the outer wall so shoulders/torso visibly contact the architecture and the wedged condition reads instantly.",
-        "stage": "environment"
-      }
-    },
-    {
-      "page_id": "I-14",
-      "monster_name": "Darkmantle",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "c9809d3dd7b9b1d46d677f3eb2aaff7e1a23ce16d066864199cbc8b789c60fe8",
-      "review_fingerprint": "b05b3450940654e9af3c5aebc63796fc04dc5b3fa59c28c6f41ca962a603c8a4",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:10:28.798789+00:00",
-      "finished_at": "2026-09-27T17:17:04.460759+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "no stalactites or stalagmites visible"
-        ],
-        "preserve": [
-          "hanging lantern",
-          "arched ceiling",
-          "rocky walls"
-        ],
-        "stage": "environment"
-      },
-      "assistant_review": {
-        "review_id": "I-14-C01-Hf5b93e8d7d93497c",
-        "decision": "reject",
-        "notes": "Reject: the silhouette is closer to a mantle, but it still reads like a hanging cloak/hood with a separate head or stalk above it. Darkmantle must be one continuous non-humanoid leathery mantle/cap body with no separate head, neck, torso, wings, arms, legs, or tail. Keep the lantern and simple cave framing; attach part of the mantle body itself to the stalactite and show the underside mouth plus short dangling tentacles peeling downward.",
-        "stage": "identity"
-      }
-    },
-    {
-      "page_id": "I-16",
-      "monster_name": "Giant Bat",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "298b9d340e27e00e9b2a5c1a95c29d3eb50369be24c807ade14407e599e4eb58",
-      "review_fingerprint": "59e62e14b68b1f1f5f8b0bba8f37116a77da8a0944203f188c50db601bbafa87",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:17:04.588924+00:00",
-      "finished_at": "2026-09-27T17:22:52.721422+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "no broad river channel visible"
-        ],
-        "preserve": [
-          "rock shelf above river",
-          "natural roof line visible",
-          "vertical cavern composition"
-        ],
-        "stage": "environment"
-      },
-      "assistant_review": {
-        "review_id": "I-16-C01-He9ced648781f695d",
-        "decision": "reject",
-        "notes": "Reject: bat anatomy is still wrong. The giant bat is hanging by clawed wing/forelimb hands, and the lower body reads like a second duplicated bat/extra anatomy. Use one single giant bat only: two hind feet grip the ceiling, the two forelimbs ARE the membrane wings and do not act as separate support hands, and the wings wrap partly around the inverted body above the underground river.",
-        "stage": "identity"
-      }
-    },
-    {
-      "page_id": "I-19",
-      "monster_name": "Rat Swarm",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "53af9ab116d54d20200fd04723b0e7e16c127795e66458b6f36d957327470e16",
-      "review_fingerprint": "6fba48d869b2e43b287e7dafc891b5291dcd7cb0d908b574728bf62e5ddf2572",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:22:52.865030+00:00",
-      "finished_at": "2026-09-27T17:25:26.456185+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "no visible pouring action through grate"
-        ],
-        "preserve": [
-          "rats on flagstones",
-          "grate opening",
-          "rat swarm density"
-        ],
-        "stage": "action"
-      },
-      "assistant_review": {
-        "review_id": "I-19-C01-H65c7c01fabff662d",
-        "decision": "reject",
-        "notes": "Reject: the grate and dungeon floor are readable, but the swarm remains wallpaper-dense with dozens of repeated rats covering most of the page. Preserve the grate, masonry, and directional flow; reduce the population sharply, leave broad white coloring gaps, keep comparable rat scale, and show a clear stream visibly pouring through/from the grate rather than carpeting the entire floor.",
-        "stage": "quality"
-      }
-    },
-    {
-      "page_id": "I-20",
-      "monster_name": "Giant Centipede",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "eea5c1630f1c3cdaa4e30b6fc48174a96ae032220d603cc38127f0c36f582c46",
-      "review_fingerprint": "1e015dd91e55b5b1ff94e51a32aad3a97bc303f0493188c784db999252abb751",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:25:26.602761+00:00",
-      "finished_at": "2026-09-27T17:30:28.742591+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "arched burial niches not visible as niches but as framed archways"
-        ],
-        "preserve": [
-          "stone floor tiles",
-          "bone ossuary shelf",
-          "arched wall framing"
-        ],
-        "stage": "environment"
-      },
-      "assistant_review": {
-        "review_id": "I-20-C01-H16c633705d32db3c",
-        "decision": "reject",
-        "notes": "Reject: centipede anatomy and repeating legs are substantially improved and should be preserved, and the catacomb niches are readable. The required story interaction is missing: the old bone is isolated in a separate niche while the centipede crawls elsewhere. Keep the continuous segmented body, many leg pairs, antennae/mandibles, and masonry; place the centipede physically uncoiling around/contacting the old bone inside the coffin niche.",
-        "stage": "action"
-      }
-    },
-    {
-      "page_id": "I-22",
-      "monster_name": "Giant Spider",
-      "candidate": 1,
-      "status": "assistant_rejected",
-      "engine_commit": "171c404465e74e06cca140a7aae138fd64057f5f",
-      "generation_fingerprint": "4f10aace196ee6d046813ca7164e9e17d91a8bf88dc871a576d310f67c710e31",
-      "review_fingerprint": "fe9f98f4ae0078bf04f931a105e2bb0a0c50f7e9cdd56ccc67d591a20bbb26c4",
-      "review_checked_at": null,
-      "error": null,
-      "started_at": "2026-09-27T17:30:28.891602+00:00",
-      "finished_at": "2026-09-27T17:36:26.401253+00:00",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "no arches or masonry visible"
-        ],
-        "preserve": [
-          "web spans radial from center",
-          "spider dominates center",
-          "open floor area visible"
-        ],
-        "stage": "environment"
-      },
-      "assistant_review": {
-        "review_id": "I-22-C01-H10a783164628cde6",
-        "decision": "reject",
-        "notes": "Reject: preserve the usable eight-legged spider and centered web position, but the scene is still dominated by dense tunnel-like web lines rather than a broad radial web spanning a clearly readable stone dungeon hall arch. Make the masonry hall/large arch unmistakable, simplify the web to one broad radial structure, keep floor/depth readable and open, and retain the spider visibly supported at the web center.",
-        "stage": "environment"
       }
     }
   ]
