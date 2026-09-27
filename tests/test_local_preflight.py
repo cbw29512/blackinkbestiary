@@ -20,6 +20,7 @@ class LocalPreflightTests(unittest.TestCase):
         (root / "scripts" / "generate_golden_page.py").write_text("# test\n", encoding="utf-8")
         config = {
             "comfy_url": "http://127.0.0.1:8188",
+            "workspace": ".blackink-comfy",
             "templates": {"text_to_image": "text", "modify": "edit"},
             "models": [
                 {"folder": "diffusion_models", "filename": "diffusion.safetensors"},
@@ -39,7 +40,10 @@ class LocalPreflightTests(unittest.TestCase):
         def fetch(url):
             if url.endswith("/system_stats"):
                 return {
-                    "system": {"comfyui_version": "test"},
+                    "system": {
+                        "comfyui_version": "test",
+                        "argv": [str(root / ".blackink-comfy" / "ComfyUI" / "main.py")],
+                    },
                     "devices": [{"name": "Test GPU"}],
                 }
             if "/models/diffusion_models" in url:
@@ -65,7 +69,12 @@ class LocalPreflightTests(unittest.TestCase):
 
         def fetch(url):
             if url.endswith("/system_stats"):
-                return {"system": {}, "devices": []}
+                return {
+                    "system": {
+                        "argv": [str(root / ".blackink-comfy" / "ComfyUI" / "main.py")]
+                    },
+                    "devices": [],
+                }
             if "/models/vae" in url:
                 return []
             if "/models/" in url:
@@ -82,6 +91,36 @@ class LocalPreflightTests(unittest.TestCase):
         self.assertFalse(report["ready_for_generation"])
         self.assertFalse(report["checks"]["required_models"])
         self.assertEqual(report["required_models_missing"], ["vae.safetensors"])
+
+    def test_wrong_comfy_workspace_blocks_generation(self):
+        temp, root = self._root()
+        self.addCleanup(temp.cleanup)
+
+        def fetch(url):
+            if url.endswith("/system_stats"):
+                return {
+                    "system": {
+                        "argv": [str(root / "other-comfy" / "ComfyUI" / "main.py")]
+                    },
+                    "devices": [{"name": "Test GPU"}],
+                }
+            if "/models/" in url:
+                if "diffusion_models" in url:
+                    return ["diffusion.safetensors"]
+                if "text_encoders" in url:
+                    return ["encoder.safetensors"]
+                return ["vae.safetensors"]
+            return None
+
+        report = local_generation_preflight(
+            root,
+            fetch_json=fetch,
+            cli_finder=lambda: "comfy",
+        )
+        self.assertFalse(report["ready_for_generation"])
+        self.assertFalse(report["checks"]["comfyui_workspace"])
+        self.assertIn("other-comfy", report["comfyui_reported_main"])
+        self.assertIn(".blackink-comfy", report["comfyui_expected_main"])
 
     def test_setup_check_uses_project_workspace_not_legacy_desktop(self):
         text = (ROOT / "scripts" / "check_local_setup.ps1").read_text(encoding="utf-8")
