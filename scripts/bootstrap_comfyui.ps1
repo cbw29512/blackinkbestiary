@@ -2,7 +2,10 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $config = Get-Content (Join-Path $root "config\local_ai_stack.json") -Raw | ConvertFrom-Json
 $workspace = Join-Path $root $config.workspace
-$comfyRoot = Join-Path $workspace "ComfyUI"
+$directMain = Join-Path $workspace "main.py"
+$nestedRoot = Join-Path $workspace "ComfyUI"
+$nestedMain = Join-Path $nestedRoot "main.py"
+$comfyRoot = if (Test-Path $directMain -PathType Leaf) { $workspace } elseif (Test-Path $nestedMain -PathType Leaf) { $nestedRoot } else { $workspace }
 $mainPy = Join-Path $comfyRoot "main.py"
 
 if (Test-Path $mainPy) {
@@ -17,14 +20,14 @@ if (-not $python) { $python = Get-Command py -ErrorAction SilentlyContinue }
 if (-not $python) { throw "Python is required to install ComfyUI." }
 
 New-Item -ItemType Directory -Force -Path $workspace | Out-Null
-Write-Host "Cloning ComfyUI into $comfyRoot ..." -ForegroundColor Yellow
-& $git.Source clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git $comfyRoot
+Write-Host "Cloning ComfyUI into $workspace ..." -ForegroundColor Yellow
+& $git.Source clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git $workspace
 if ($LASTEXITCODE -ne 0) { throw "ComfyUI clone failed." }
 
 Write-Host "Installing ComfyUI Python requirements..." -ForegroundColor Yellow
 & $python.Source -m pip install --upgrade pip
 if ($LASTEXITCODE -ne 0) { throw "pip upgrade failed." }
-& $python.Source -m pip install -r (Join-Path $comfyRoot "requirements.txt")
+& $python.Source -m pip install -r (Join-Path $workspace "requirements.txt")
 if ($LASTEXITCODE -ne 0) { throw "ComfyUI requirements installation failed." }
 
 Write-Host "ComfyUI workspace installed." -ForegroundColor Green
