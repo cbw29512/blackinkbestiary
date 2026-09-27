@@ -68,6 +68,12 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("START_AUTOPILOT_IF_NEEDED.bat", installer)
         self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP\\.bat", remover)
 
+    def test_installer_records_verified_stack_and_reuses_existing_server(self):
+        installer = (ROOT / "scripts" / "install_blackink_ai.ps1").read_text(encoding="utf-8")
+        self.assertIn("local_stack_marker.py --write", installer)
+        self.assertIn("Existing local ComfyUI server is already reachable", installer)
+        self.assertIn("Invoke-RestMethod -Uri \"http://127.0.0.1:8188/system_stats\"", installer)
+
     def test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight(self):
         text = (ROOT / "scripts" / "ensure_local_ai.ps1").read_text(encoding="utf-8")
         self.assertIn("/system_stats", text)
