@@ -21,7 +21,7 @@ function Get-AutopilotProcesses {
     @(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
         Where-Object {
             $_.Name -eq "cmd.exe" -and
-            $_.CommandLine -match "RUN_ENGINE_AUTOPILOT\\.bat"
+            $_.CommandLine -match "RUN_ENGINE_AUTOPILOT\.bat"
         })
 }
 
