@@ -22,13 +22,14 @@ If a local run fails before every page completes, publish whatever completed plu
 
 The unattended canary loop is expected to survive routine workstation reboots without requiring the operator to remember to restart it.
 
-- Run `ENABLE_AUTOPILOT_STARTUP.bat` once on the local workstation.
-- It registers a per-user Windows Startup launcher and starts the autopilot immediately when it is not already running.
-- `START_AUTOPILOT_IF_NEEDED.bat` checks for an existing `RUN_ENGINE_AUTOPILOT.bat` process before launching, preventing duplicate GPU workers.
-- Future Windows sign-ins relaunch the autopilot automatically.
-- Run `DISABLE_AUTOPILOT_STARTUP.bat` to remove the sign-in launcher.
+- `START_BLACKINK.bat` is the normal start/resume entry point.
+- It verifies or repairs the pinned local AI stack, then calls the Windows startup-registration path.
+- `START_AUTOPILOT_IF_NEEDED.bat` runs a watchdog health check and starts one persistent `RUN_AUTOPILOT_WATCHDOG_LOOP.bat` process if needed.
+- The watchdog checks every five minutes, restarts a missing worker immediately, and restarts a stuck worker only when all tracked local activity has been stale past the configured threshold.
+- Future Windows sign-ins relaunch the watchdog automatically through the per-user Startup launcher.
+- `DISABLE_AUTOPILOT_STARTUP.bat` removes the sign-in launcher and stops the watchdog loop.
 
-This startup registration changes only workstation process persistence. It does not weaken the engine sync, preflight, canary, exact-image review, or full-gallery gates.
+This persistence layer changes only workstation process availability. It does not weaken engine sync, non-GPU preflight, canary, exact-image review, or full-gallery gates.
 
 ## Automated loop
 
@@ -72,7 +73,8 @@ For four-candidate production pages, exactly one acceptable candidate should rec
 
 ## Safety rules
 
-- `review-previews/decisions.json` is owned by the dedicated review-handoff branch. The local engine imports it for execution; stale workstation state must never overwrite it.\n- `review-previews/` is ignored and untracked on the engine branch. The publisher uses a detached temporary Git worktree so publishing cannot create temporary commits, resets, or pull conflicts in the engine checkout.
+- `review-previews/decisions.json` is owned by the dedicated review-handoff branch. The local engine imports it for execution; stale workstation state must never overwrite it.
+- `review-previews/` is ignored and untracked on the engine branch. The publisher uses a detached temporary Git worktree so publishing cannot create temporary commits, resets, or pull conflicts in the engine checkout.
 - Generated `web/test-gallery/*.png` and `data/test-gallery-state.json` stay local/untracked.
 - Engine code can advance while ComfyUI is generating; review publication must remain independent of engine branch fast-forward state.
 - After publishing, tracked workstation code may resync to the latest engine branch only when no unrelated tracked local edits exist.

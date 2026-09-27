@@ -333,7 +333,7 @@ This rule applies to every monster. New monster JSON must not accumulate reusabl
 - scenery ownership auditing distinguishes reusable environment dressing from legitimate creature support/identity relationships
 - Environment Engine V3 documentation now reflects the expanded 27-role library
 
-**Current gate:** exact-head Studio checks must be green before PR #60 can merge or Golden Five regeneration resumes.
+**Historical gate cleared:** PR #60 merged after exact-head Studio checks passed. The current production gate is fresh Canary Nine regeneration on the current `main` engine, followed by exact-image approval before full Tome I batch generation.
 
 
 ## 2026-09-23 Per-Page Instruction Reload Lock
@@ -349,3 +349,16 @@ Required batch lifecycle:
 If human review detects systematic drift, stop the batch, repair the highest reusable engine/data layer, add a regression test, and resume. Because the next page reloads the contracts from disk, the correction must take effect immediately rather than waiting for a new batch.
 
 This is a production invariant for every book and every monster.
+
+## 2026-09-27 Production Entry-Point Hardening
+
+- spatial-composition hardening is merged into `main`
+- `START_BLACKINK.bat` is the single Windows start/resume entry point
+- successful local installation records a fast verified-stack fingerprint; missing/changed files force the pinned repair path
+- the Windows watchdog checks local production health every five minutes and restarts missing or truly stale workers
+- stale heartbeats no longer earn Foundation Readiness credit
+- the retired spatial-hardening branch is bridged byte-for-byte to current production `main` so older workstations can fast-forward safely
+- the current nine exact canary images all have hash-matched review decisions waiting for the next local generation cycle
+
+**Current gate:** run the local Canary Nine on current `main`; do not alter generation prompts again until fresh post-hardening pixels provide new evidence.
+

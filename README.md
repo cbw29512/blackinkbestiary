@@ -34,6 +34,16 @@ web/approved/Tome-I/I-02.png
 
 Candidate attempts remain under `web/candidates/`; only human-approved pages enter the ordered book folder.
 
+## Start / Resume Production
+
+On Windows, use one entry point:
+
+`START_BLACKINK.bat`
+
+The launcher repairs or verifies the pinned local AI stack when needed, then starts the self-healing Canary Nine autopilot and registers it for Windows sign-in. Normal production does **not** use the legacy manual I-01 smoke-test flow.
+
+Full Tome I generation remains blocked until the nine configured canary pages have current exact-image approval under the current engine/review authority.
+
 ## Product North Star
 
 Black-Ink Bestiary is an eight-book line of approximately 50-page, 2024-SRD-monster coloring books. Books are primarily organized by environment/location while retaining monster-family variety.
