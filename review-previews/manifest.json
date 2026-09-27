@@ -1,6 +1,6 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
+  "snapshot_engine_commit": "bb3adef2fe56e5b3379ae1a0ad465a24855270cd",
   "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "candidate_count": 9,
@@ -27,23 +27,23 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-27T18:05:04.8347563Z"
+    "updated_at": "2026-09-27T18:49:06.6974182Z"
   },
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "sleeping",
-    "status": "ready",
-    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
-    "engine_commit": "e40fdf47f08d45fc50e4ef80e4e900855c50ca0e",
-    "updated_at": "2026-09-27T18:43:30.421301+00:00"
+    "phase": "generating",
+    "status": "running",
+    "message": "Pre-GPU snapshot published before canary generation",
+    "engine_commit": "bb3adef2fe56e5b3379ae1a0ad465a24855270cd",
+    "updated_at": "2026-09-27T18:49:07.529971+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-27T18:04:41.965342+00:00",
-    "updated_at": "2026-09-27T18:05:01.957737+00:00",
+    "started_at": "2026-09-27T18:48:41.584119+00:00",
+    "updated_at": "2026-09-27T18:49:02.953804+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -62,12 +62,12 @@
           "-v"
         ],
         "output_tail": [
-          "test_spiral_stair_uses_dedicated_helical_envelope (test_shape_locks.ShapeLockTests.test_spiral_stair_uses_dedicated_helical_envelope) ... ok",
           "test_supported_darkmantle_prompt_suppresses_flight_cues (test_shape_locks.ShapeLockTests.test_supported_darkmantle_prompt_suppresses_flight_cues) ... ok",
           "test_swarm_priority_capsule_prevents_wallpaper_composition (test_shape_locks.ShapeLockTests.test_swarm_priority_capsule_prevents_wallpaper_composition) ... ok",
           "test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates (test_start_production.StartProductionContractTests.test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates) ... ok",
           "test_autopilot_publishes_phase_heartbeat_before_gpu_work (test_start_production.StartProductionContractTests.test_autopilot_publishes_phase_heartbeat_before_gpu_work) ... ok",
           "test_autopilot_startup_also_starts_live_monitor (test_start_production.StartProductionContractTests.test_autopilot_startup_also_starts_live_monitor) ... ok",
+          "test_canary_gallery_has_one_click_opener_and_full_size_images (test_start_production.StartProductionContractTests.test_canary_gallery_has_one_click_opener_and_full_size_images) ... ok",
           "test_canary_launchers_self_start_local_ai_runtime (test_start_production.StartProductionContractTests.test_canary_launchers_self_start_local_ai_runtime) ... ok",
           "test_engine_preflight_is_fail_closed_and_autopilot_steps_are_consistent (test_start_production.StartProductionContractTests.test_engine_preflight_is_fail_closed_and_autopilot_steps_are_consistent) ... ok",
           "test_full_gallery_requires_exact_image_canary_approval (test_start_production.StartProductionContractTests.test_full_gallery_requires_exact_image_canary_approval) ... ok",
@@ -179,7 +179,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 412 tests in 16.779s",
+          "Ran 413 tests in 18.024s",
           "",
           "OK"
         ]
