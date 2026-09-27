@@ -87,6 +87,11 @@ def print_report(report: dict) -> None:
     status_line("ComfyUI local server", report["checks"]["comfyui_server"], report["comfy_url"])
     if report["checks"]["comfyui_server"]:
         status_line("ComfyUI version", True, str(report.get("comfyui_version") or "unknown"))
+        status_line(
+            "Pinned Black-Ink ComfyUI workspace",
+            report["checks"]["comfyui_workspace"],
+            str(report.get("comfyui_reported_main") or "server did not report argv[0]"),
+        )
         device = (report.get("devices") or [{}])[0]
         status_line("GPU", bool(device), str(device.get("name") or "unknown"))
 

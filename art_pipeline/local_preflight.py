@@ -34,6 +34,18 @@ def _config(root: Path) -> dict:
         raise RuntimeError(f"Could not load local AI config: {exc}") from exc
 
 
+def _normalized_path(path: Path) -> str:
+    return str(path.expanduser().resolve(strict=False)).replace("\\", "/").rstrip("/").casefold()
+
+
+def _reported_comfy_main(stats: dict) -> Path | None:
+    argv = [str(item) for item in ((stats.get("system") or {}).get("argv") or [])]
+    if not argv:
+        return None
+    main = Path(argv[0]).expanduser()
+    return main if main.is_absolute() else None
+
+
 def local_generation_preflight(root: Path, fetch_json=_get_json, cli_finder=find_comfy_cli) -> dict:
     config = _config(root)
     base_url = str(config.get("comfy_url") or "http://127.0.0.1:8188").rstrip("/")
@@ -45,6 +57,15 @@ def local_generation_preflight(root: Path, fetch_json=_get_json, cli_finder=find
     server_ok = isinstance(stats, dict)
     devices = list((stats or {}).get("devices") or [])
     system = dict((stats or {}).get("system") or {})
+    expected_comfy_main = (
+        root / str(config.get("workspace") or ".blackink-comfy") / "ComfyUI" / "main.py"
+    )
+    reported_comfy_main = _reported_comfy_main(stats or {})
+    workspace_ok = bool(
+        server_ok
+        and reported_comfy_main is not None
+        and _normalized_path(reported_comfy_main) == _normalized_path(expected_comfy_main)
+    )
 
     model_checks = []
     missing_models = []
@@ -78,6 +99,7 @@ def local_generation_preflight(root: Path, fetch_json=_get_json, cli_finder=find
         "python": python_ok,
         "comfy_cli": cli_ok,
         "comfyui_server": server_ok,
+        "comfyui_workspace": workspace_ok,
         "required_models": not missing_models,
         "templates_configured": templates_configured,
         "golden_generator": generator_present,
@@ -92,6 +114,8 @@ def local_generation_preflight(root: Path, fetch_json=_get_json, cli_finder=find
         "comfy_cli_path": cli_path,
         "comfy_url": base_url,
         "comfyui_version": system.get("comfyui_version"),
+        "comfyui_expected_main": str(expected_comfy_main),
+        "comfyui_reported_main": str(reported_comfy_main) if reported_comfy_main else None,
         "devices": devices,
         "models": model_checks,
         "required_models_missing": missing_models,
