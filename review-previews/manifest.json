@@ -32,11 +32,11 @@
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "generating",
-    "status": "running",
-    "message": "Pre-GPU snapshot published before canary generation",
+    "phase": "sleeping",
+    "status": "ready",
+    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
     "engine_commit": "bb3adef2fe56e5b3379ae1a0ad465a24855270cd",
-    "updated_at": "2026-09-27T19:35:04.867876+00:00"
+    "updated_at": "2026-09-27T19:35:15.663622+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
