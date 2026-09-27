@@ -71,7 +71,9 @@ class StartProductionContractTests(unittest.TestCase):
     def test_installer_records_verified_stack_and_reuses_existing_server(self):
         installer = (ROOT / "scripts" / "install_blackink_ai.ps1").read_text(encoding="utf-8")
         self.assertIn("local_stack_marker.py --write", installer)
-        self.assertIn("Existing local ComfyUI server is already reachable", installer)
+        self.assertIn("Existing pinned Black-Ink ComfyUI server is already reachable", installer)
+        self.assertIn("Port 8188 is owned by a different ComfyUI workspace", installer)
+        self.assertIn("[StringComparison]::OrdinalIgnoreCase", installer)
         self.assertIn("Invoke-RestMethod -Uri \"http://127.0.0.1:8188/system_stats\"", installer)
 
     def test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight(self):
@@ -90,6 +92,8 @@ class StartProductionContractTests(unittest.TestCase):
         helpers = (ROOT / "scripts" / "local_runtime_helpers.ps1").read_text(encoding="utf-8")
         self.assertIn("Write-BlackInkRuntimeStatus", launcher)
         self.assertIn('Set-RuntimeStage "comfy-launch"', launcher)
+        self.assertIn('Set-RuntimeStage "comfy-identity"', launcher)
+        self.assertIn("Port 8188 belongs to a different ComfyUI workspace", launcher)
         self.assertIn('Set-RuntimeStage "ollama-launch"', launcher)
         self.assertIn('Set-RuntimeStage "reviewer-smoke-test"', launcher)
         self.assertIn("Start-BlackInkDetachedLocalProcess", launcher)
