@@ -391,6 +391,8 @@ class QualityHistoryTests(unittest.TestCase):
                 "abc123",
                 autopilot=None,
             )
+            from datetime import datetime, timedelta, timezone
+            now = datetime.now(timezone.utc)
             with_current = qh.build_quality_snapshot(
                 ROOT,
                 {"results": []},
@@ -401,6 +403,20 @@ class QualityHistoryTests(unittest.TestCase):
                     "status": "ready",
                     "phase": "sleeping",
                     "engine_commit": "abc123",
+                    "updated_at": (now - timedelta(minutes=2)).isoformat(),
+                },
+            )
+            with_wrong_engine = qh.build_quality_snapshot(
+                ROOT,
+                {"results": []},
+                {"status": "ready"},
+                {"status": "passed"},
+                "abc123",
+                autopilot={
+                    "status": "ready",
+                    "phase": "sleeping",
+                    "engine_commit": "older",
+                    "updated_at": now.isoformat(),
                 },
             )
             with_stale = qh.build_quality_snapshot(
@@ -412,13 +428,27 @@ class QualityHistoryTests(unittest.TestCase):
                 autopilot={
                     "status": "ready",
                     "phase": "sleeping",
-                    "engine_commit": "older",
+                    "engine_commit": "abc123",
+                    "updated_at": (now - timedelta(hours=1)).isoformat(),
                 },
             )
 
         self.assertEqual(without["metrics"]["foundation_readiness"], 80)
         self.assertEqual(with_current["metrics"]["foundation_readiness"], 100)
+        self.assertEqual(with_wrong_engine["metrics"]["foundation_readiness"], 80)
         self.assertEqual(with_stale["metrics"]["foundation_readiness"], 80)
+
+    def test_heartbeat_freshness_fails_closed_on_missing_or_invalid_timestamp(self):
+        import quality_history as qh
+
+        base = {
+            "status": "ready",
+            "phase": "sleeping",
+            "engine_commit": "abc123",
+        }
+        self.assertFalse(qh._autopilot_heartbeat_ready(base, "abc123"))
+        invalid = dict(base, updated_at="not-a-date")
+        self.assertFalse(qh._autopilot_heartbeat_ready(invalid, "abc123"))
 
     def test_readiness_gate_uses_named_required_categories_and_blockers(self):
         required = [
