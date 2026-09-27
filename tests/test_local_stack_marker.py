@@ -29,8 +29,8 @@ class LocalStackMarkerTests(unittest.TestCase):
         for relative, payload in {
             ".blackink-tools/Scripts/python.exe": b"python",
             ".blackink-tools/Scripts/comfy.exe": b"comfy",
-            ".blackink-comfy/ComfyUI/main.py": b"main",
-            ".blackink-comfy/ComfyUI/models/diffusion_models/model.safetensors": b"model-bytes",
+            ".blackink-comfy/main.py": b"main",
+            ".blackink-comfy/models/diffusion_models/model.safetensors": b"model-bytes",
         }.items():
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -46,6 +46,23 @@ class LocalStackMarkerTests(unittest.TestCase):
         self.assertTrue(ok, reason)
         self.assertEqual(payload["schema_version"], 1)
         self.assertEqual(len(payload["files"]), 4)
+
+    def test_legacy_nested_layout_remains_readable(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.make_stack(root)
+            direct_main = root / ".blackink-comfy" / "main.py"
+            nested_main = root / ".blackink-comfy" / "ComfyUI" / "main.py"
+            nested_main.parent.mkdir(parents=True, exist_ok=True)
+            direct_main.replace(nested_main)
+            direct_model = root / ".blackink-comfy" / "models" / "diffusion_models" / "model.safetensors"
+            nested_model = root / ".blackink-comfy" / "ComfyUI" / "models" / "diffusion_models" / "model.safetensors"
+            nested_model.parent.mkdir(parents=True, exist_ok=True)
+            direct_model.replace(nested_model)
+            marker_path = root / "data" / "local-ai-install-marker.json"
+            write_marker(root, marker_path)
+            ok, reason = verify_marker(root, marker_path)
+        self.assertTrue(ok, reason)
 
     def test_config_change_invalidates_marker(self):
         with tempfile.TemporaryDirectory() as td:
