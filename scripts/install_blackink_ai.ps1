@@ -48,18 +48,24 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
-# Step 4: launch locally, core-only
+# Step 4: reuse a healthy local server or launch the pinned workspace
 Write-Host ""
-Write-Host "Launching Black-Ink ComfyUI on 127.0.0.1:8188..." -ForegroundColor Cyan
-& $Comfy "--workspace=$Workspace" launch --background -- --listen 127.0.0.1 --port 8188
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "ComfyUI launch command failed." -ForegroundColor Red
-    exit $LASTEXITCODE
+$Ready = $false
+try {
+    $null = Invoke-RestMethod -Uri "http://127.0.0.1:8188/system_stats" -TimeoutSec 2
+    $Ready = $true
+    Write-Host "Existing local ComfyUI server is already reachable; reusing it." -ForegroundColor Green
+} catch {
+    Write-Host "Launching Black-Ink ComfyUI on 127.0.0.1:8188..." -ForegroundColor Cyan
+    & $Comfy "--workspace=$Workspace" launch --background -- --listen 127.0.0.1 --port 8188
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "ComfyUI launch command failed." -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
 }
 
 # Step 5: bounded wait for server
-$Ready = $false
-for ($i = 0; $i -lt 90; $i++) {
+for ($i = 0; -not $Ready -and $i -lt 90; $i++) {
     try {
         $null = Invoke-RestMethod -Uri "http://127.0.0.1:8188/system_stats" -TimeoutSec 2
         $Ready = $true
