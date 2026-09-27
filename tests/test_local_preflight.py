@@ -42,7 +42,7 @@ class LocalPreflightTests(unittest.TestCase):
                 return {
                     "system": {
                         "comfyui_version": "test",
-                        "argv": [str(root / ".blackink-comfy" / "ComfyUI" / "main.py")],
+                        "argv": [str(root / ".blackink-comfy" / "main.py")],
                     },
                     "devices": [{"name": "Test GPU"}],
                 }
@@ -71,7 +71,7 @@ class LocalPreflightTests(unittest.TestCase):
             if url.endswith("/system_stats"):
                 return {
                     "system": {
-                        "argv": [str(root / ".blackink-comfy" / "ComfyUI" / "main.py")]
+                        "argv": [str(root / ".blackink-comfy" / "main.py")]
                     },
                     "devices": [],
                 }

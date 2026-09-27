@@ -1,6 +1,7 @@
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
+. (Join-Path $PSScriptRoot "local_runtime_helpers.ps1")
 
 Write-Host ""
 Write-Host "Black-Ink Bestiary - One-Click Local AI Install" -ForegroundColor Cyan
@@ -16,9 +17,12 @@ if ($LASTEXITCODE -ne 0) {
 $Config = Get-Content (Join-Path $Root "config\local_ai_stack.json") -Raw | ConvertFrom-Json
 $Comfy = Join-Path $Root ".blackink-tools\Scripts\comfy.exe"
 $Python = Join-Path $Root ".blackink-tools\Scripts\python.exe"
-$Workspace = Join-Path $Root $Config.workspace
-$ComfyRoot = Join-Path $Workspace "ComfyUI"
-$ModelsRoot = Join-Path $ComfyRoot "models"
+$Workspace = if ([IO.Path]::IsPathRooted([string]$Config.workspace)) {
+    [IO.Path]::GetFullPath([string]$Config.workspace)
+} else {
+    [IO.Path]::GetFullPath((Join-Path $Root ([string]$Config.workspace)))
+}
+$ComfyRoot = Find-BlackInkComfyRoot $Root ([string]$Config.workspace)
 
 if (-not (Test-Path $Comfy)) {
     Write-Host "Pinned comfy-cli executable was not created." -ForegroundColor Red
@@ -26,7 +30,7 @@ if (-not (Test-Path $Comfy)) {
 }
 
 # Step 2: install one pinned core-only ComfyUI workspace
-if (-not (Test-Path (Join-Path $ComfyRoot "main.py"))) {
+if (-not $ComfyRoot) {
     Write-Host ""
     Write-Host "Installing pinned ComfyUI $($Config.comfyui_version)..." -ForegroundColor Cyan
     & $Comfy "--workspace=$Workspace" install --skip-manager --fast-deps --version $Config.comfyui_version
@@ -34,9 +38,32 @@ if (-not (Test-Path (Join-Path $ComfyRoot "main.py"))) {
         Write-Host "ComfyUI installation failed." -ForegroundColor Red
         exit $LASTEXITCODE
     }
+    $ComfyRoot = Find-BlackInkComfyRoot $Root ([string]$Config.workspace)
+    if (-not $ComfyRoot) {
+        Write-Host "ComfyUI install completed but its main.py could not be located." -ForegroundColor Red
+        exit 3
+    }
 } else {
     Write-Host ""
-    Write-Host "Existing Black-Ink ComfyUI workspace found. It will not be auto-updated." -ForegroundColor Green
+    Write-Host "Existing Black-Ink ComfyUI root found: $ComfyRoot" -ForegroundColor Green
+    Write-Host "It will not be auto-updated."
+}
+
+$ModelsRoot = Join-Path $ComfyRoot "models"
+
+# Recover model files downloaded by the older nested-layout assumption.
+$LegacyModelsRoot = Join-Path (Join-Path $Workspace "ComfyUI") "models"
+if (([IO.Path]::GetFullPath($LegacyModelsRoot) -ne [IO.Path]::GetFullPath($ModelsRoot)) -and
+    (Test-Path $LegacyModelsRoot -PathType Container)) {
+    foreach ($Spec in @($Config.models)) {
+        $Source = Join-Path (Join-Path $LegacyModelsRoot ([string]$Spec.folder)) ([string]$Spec.filename)
+        $Destination = Join-Path (Join-Path $ModelsRoot ([string]$Spec.folder)) ([string]$Spec.filename)
+        if ((Test-Path $Source -PathType Leaf) -and -not (Test-Path $Destination -PathType Leaf)) {
+            New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Destination) | Out-Null
+            Write-Host "Moving existing verified model into the actual ComfyUI root: $($Spec.filename)" -ForegroundColor Cyan
+            Move-Item -LiteralPath $Source -Destination $Destination
+        }
+    }
 }
 
 # Step 3: exact hash-verified model payload
