@@ -40,11 +40,31 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("Get-CimInstance Win32_Process", starter)
         self.assertIn(" | Where-Object ", starter)
         self.assertNotIn(" ^| Where-Object ", starter)
-        self.assertIn("RUN_ENGINE_AUTOPILOT", starter)
-        self.assertIn("start \"Black Ink Bestiary Autopilot\"", starter)
+        self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP", starter)
+        self.assertIn("start \"Black Ink Bestiary Watchdog\"", starter)
         self.assertIn("Microsoft\\Windows\\Start Menu\\Programs\\Startup", installer)
         self.assertIn("START_AUTOPILOT_IF_NEEDED.bat", installer)
         self.assertIn("BlackInkBestiaryAutopilot.cmd", remover)
+
+    def test_startup_uses_persistent_self_healing_watchdog(self):
+        starter = (ROOT / "START_AUTOPILOT_IF_NEEDED.bat").read_text(encoding="utf-8")
+        watchdog = (ROOT / "WATCHDOG_AUTOPILOT.bat").read_text(encoding="utf-8")
+        loop = (ROOT / "RUN_AUTOPILOT_WATCHDOG_LOOP.bat").read_text(encoding="utf-8")
+        powershell = (ROOT / "scripts" / "watchdog_autopilot.ps1").read_text(encoding="utf-8")
+        installer = (ROOT / "ENABLE_AUTOPILOT_STARTUP.bat").read_text(encoding="utf-8")
+        remover = (ROOT / "DISABLE_AUTOPILOT_STARTUP.bat").read_text(encoding="utf-8")
+
+        self.assertIn("WATCHDOG_AUTOPILOT.bat", starter)
+        self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP.bat", starter)
+        self.assertIn("WATCHDOG_AUTOPILOT.bat", loop)
+        self.assertIn("timeout /t 300", loop)
+        self.assertIn("watchdog_autopilot.ps1", watchdog)
+        self.assertIn("RUN_ENGINE_AUTOPILOT\\.bat", powershell)
+        self.assertIn("autopilot_watchdog.py", powershell)
+        self.assertIn("taskkill.exe", powershell)
+        self.assertIn("StartupGraceMinutes", powershell)
+        self.assertIn("START_AUTOPILOT_IF_NEEDED.bat", installer)
+        self.assertIn("RUN_AUTOPILOT_WATCHDOG_LOOP\\.bat", remover)
 
     def test_local_ai_runtime_helper_owns_comfy_and_ollama_preflight(self):
         text = (ROOT / "scripts" / "ensure_local_ai.ps1").read_text(encoding="utf-8")
