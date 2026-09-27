@@ -14,6 +14,7 @@ try:
     from .prompt_load import prompt_load_report
     from .replication_probe import run_replication_probe
     from .series_readiness import audit_series
+    from .studio_config import active_book_paths
 except ImportError:
     from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
     from learning_feedback import build_learning_queue
@@ -22,6 +23,7 @@ except ImportError:
     from prompt_load import prompt_load_report
     from replication_probe import run_replication_probe
     from series_readiness import audit_series
+    from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 
