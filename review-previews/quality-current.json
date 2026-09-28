@@ -2,8 +2,8 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
-  "measured_at": "2026-09-28T22:34:08.857921+00:00",
-  "engine_commit": "3c6b28b76956c026db6d4fd17b190c2484b9d62c",
+  "measured_at": "2026-09-28T23:08:08.321844+00:00",
+  "engine_commit": "f1c099c63dd96e95d9fe3c7111ce402be1eeac70",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 80.0,
@@ -177,10 +177,10 @@
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 11395.4,
-    "generation_chars_max": 12154,
-    "generation_words_avg": 1607.7,
-    "generation_words_max": 1701,
+    "generation_chars_avg": 11417.8,
+    "generation_chars_max": 12177,
+    "generation_words_avg": 1612.3,
+    "generation_words_max": 1728,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
       "hard_max_chars": 14000,
@@ -188,28 +188,28 @@
       "within_hard_budget": true,
       "within_target_budget": false
     },
-    "checklist_items_avg": 78.8,
-    "checklist_items_max": 85,
+    "checklist_items_avg": 78.9,
+    "checklist_items_max": 86,
     "review_chars_avg": {
       "identity": 4000.4,
-      "environment": 3240.7,
+      "environment": 3270.4,
       "action": 2810.2,
-      "completeness": 1861.0,
+      "completeness": 1858.3,
       "quality": 5004.0
     },
     "review_chars_max": {
       "identity": 4475,
-      "environment": 3889,
+      "environment": 4157,
       "action": 3148,
-      "completeness": 2050,
+      "completeness": 2026,
       "quality": 5004
     },
     "rows": [
       {
         "page_id": "I-01",
         "generation": {
-          "chars": 11976,
-          "words": 1686,
+          "chars": 12177,
+          "words": 1728,
           "nonempty_lines": 75,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -223,9 +223,9 @@
             "duplicate_line_percent": 0.0
           },
           "environment": {
-            "chars": 3889,
-            "words": 565,
-            "nonempty_lines": 34,
+            "chars": 4157,
+            "words": 620,
+            "nonempty_lines": 35,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -237,8 +237,8 @@
             "duplicate_line_percent": 0.0
           },
           "completeness": {
-            "chars": 2050,
-            "words": 316,
+            "chars": 2026,
+            "words": 309,
             "nonempty_lines": 24,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
@@ -251,10 +251,10 @@
             "duplicate_line_percent": 0.0
           }
         },
-        "checklist_items": 85,
+        "checklist_items": 86,
         "checklist_by_stage": {
           "identity": 15,
-          "environment": 21,
+          "environment": 22,
           "action": 17,
           "completeness": 10,
           "quality": 22
@@ -1571,5 +1571,5 @@
     "ACTION_UNCLEAR",
     "IDENTITY_HEROIC_BULK"
   ],
-  "measurement_fingerprint": "6ace1e2d1a01601707d6f45a6fd47703eaed527eb55e6aa377c29d253ac74886"
+  "measurement_fingerprint": "1772993e3976495d25d68caa1df7ef5157aa42b760cd80e1725a32c73e641a46"
 }
