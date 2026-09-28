@@ -35,3 +35,9 @@ data/autopilot-watchdog.log
 data/dashboard-runtime-status.json
 data/dashboard-runtime.stdout.log
 data/dashboard-runtime.stderr.log
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+data/review-studio-runtime-status.json
+data/review-studio-runtime.stdout.log
+data/review-studio-runtime.stderr.log

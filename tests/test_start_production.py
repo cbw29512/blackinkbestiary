@@ -156,6 +156,23 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("canary-preview", script)
         self.assertIn("showModal()", script)
 
+    def test_safe_workspace_cleanup_preserves_production_state(self):
+        cleanup = (ROOT / "scripts" / "clean_local_workspace.ps1").read_text(encoding="utf-8")
+        launcher = (ROOT / "CLEAN_LOCAL_WORKSPACE.bat").read_text(encoding="utf-8")
+
+        self.assertIn(".blackink-tools", cleanup)
+        self.assertIn(".blackink-comfy", cleanup)
+        self.assertIn("web\\test-gallery", cleanup)
+        self.assertIn("web\\approved", cleanup)
+        self.assertIn("review-previews", cleanup)
+        self.assertIn("data\\test-gallery-state.json", cleanup)
+        self.assertIn("review-studio-runtime.stderr.log", cleanup)
+        self.assertIn("art_pipeline\\workflows\\official", cleanup)
+        self.assertIn("DryRun", cleanup)
+        self.assertIn("clean_local_workspace.ps1", launcher)
+        self.assertNotIn("git clean", cleanup.lower())
+        self.assertNotIn("git reset", cleanup.lower())
+
     def test_local_web_review_studio_is_one_click_and_local_only(self):
         opener = (ROOT / "OPEN_REVIEW_STUDIO.bat").read_text(encoding="utf-8")
         launcher = (ROOT / "scripts" / "ensure_review_studio.ps1").read_text(encoding="utf-8")
