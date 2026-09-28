@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "purpose": "Keep every Black-Ink page easy and satisfying to color: the creature is the first-read focal subject at its canonical scale and proportions, while an accurate varied environment frames and supports the story.",
   "benchmark_notes": [
     "Comparable bold-and-easy coloring books emphasize large, bold, simple designs and easy-to-color spaces.",
@@ -126,5 +126,28 @@
     "hard_max_chars": 14000,
     "hard_max_words": 2000,
     "rule": "The full authority remains in data and review checklists; the image-model prompt must stay compact enough that anatomy, action, environment, and style priorities remain legible."
+  },
+  "premium_release_gate": {
+    "rule": "A page may be locked for publication only when it looks intentionally authored and commercially finished, not merely technically valid. Premium status requires all criteria below to be visibly satisfied at once.",
+    "requires": [
+      "canonical monster anatomy, scale, silhouette, and species identity are unmistakably correct",
+      "environment is specific to the assigned habitat and includes several large recognizable setting cues without becoming cluttered",
+      "monster and environment form one coherent scene with a clearly readable story interaction rather than a posed subject pasted onto a backdrop",
+      "large and medium coloring regions dominate; tiny enclosed cells and repeated micro-patterns are rare and nonessential",
+      "outer contour is strong, interior detail is controlled, and there are broad white regions suitable for pencils and markers",
+      "composition feels balanced and deliberate with a clear focal hierarchy, useful depth, and no awkward tangencies or accidental-looking empty zones",
+      "no malformed anatomy, duplicated structures, fused props, impossible contact geometry, stray lines, AI-looking repetitions, or decorative artifacts",
+      "the page remains satisfying and readable when viewed at normal printed-page distance, not only when zoomed in",
+      "the page would not feel out of place beside a professionally edited premium retail coloring book"
+    ],
+    "automatic_rejects": [
+      "technically clean but generic or template-like scene",
+      "monster or environment is merely approximate instead of canonically convincing",
+      "busy detail density that makes coloring tedious",
+      "oversimplified background that makes the page feel cheap or unfinished",
+      "repeated AI motifs or duplicated forms that expose generation artifacts",
+      "composition that looks like a draft, concept sketch, or character portrait instead of a finished coloring-book page"
+    ],
+    "release_policy": "No page is approved to locked art on technical cleanliness alone. Exact-image approval must confirm both semantic correctness and premium retail finish."
   }
 }
