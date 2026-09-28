@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import binascii
+import math
+import struct
+import zlib
 from pathlib import Path
 from typing import Iterable
 
@@ -25,51 +29,124 @@ def _bbox(box, width: int, height: int) -> tuple[int, int, int, int]:
     return x0, y0, x1, y1
 
 
-def _arch(draw, box, width: int, height: int, line_width: int, depth: bool = False) -> None:
+def _set_black(canvas: bytearray, width: int, height: int, x: int, y: int, line_width: int = 1) -> None:
+    radius = max(0, int(line_width) // 2)
+    for yy in range(y - radius, y + radius + 1):
+        if yy < 0 or yy >= height:
+            continue
+        row = yy * width
+        for xx in range(x - radius, x + radius + 1):
+            if 0 <= xx < width:
+                canvas[row + xx] = 0
+
+
+def _line(canvas: bytearray, width: int, height: int, start, end, line_width: int = 1) -> None:
+    x0, y0 = map(int, start)
+    x1, y1 = map(int, end)
+    dx = abs(x1 - x0)
+    sx = 1 if x0 < x1 else -1
+    dy = -abs(y1 - y0)
+    sy = 1 if y0 < y1 else -1
+    err = dx + dy
+    while True:
+        _set_black(canvas, width, height, x0, y0, line_width)
+        if x0 == x1 and y0 == y1:
+            break
+        e2 = 2 * err
+        if e2 >= dy:
+            err += dy
+            x0 += sx
+        if e2 <= dx:
+            err += dx
+            y0 += sy
+
+
+def _polyline(canvas: bytearray, width: int, height: int, points: list[tuple[int, int]], line_width: int) -> None:
+    for left, right in zip(points, points[1:]):
+        _line(canvas, width, height, left, right, line_width)
+
+
+def _rectangle(canvas: bytearray, width: int, height: int, box, line_width: int) -> None:
+    x0, y0, x1, y1 = map(int, box)
+    _polyline(
+        canvas,
+        width,
+        height,
+        [(x0, y0), (x1, y0), (x1, y1), (x0, y1), (x0, y0)],
+        line_width,
+    )
+
+
+def _arc_points(box, start_degrees: float, end_degrees: float, steps: int = 48) -> list[tuple[int, int]]:
+    x0, y0, x1, y1 = map(float, box)
+    cx = (x0 + x1) / 2.0
+    cy = (y0 + y1) / 2.0
+    rx = abs(x1 - x0) / 2.0
+    ry = abs(y1 - y0) / 2.0
+    result = []
+    for index in range(steps + 1):
+        angle = math.radians(start_degrees + (end_degrees - start_degrees) * index / steps)
+        result.append((int(round(cx + rx * math.cos(angle))), int(round(cy + ry * math.sin(angle)))))
+    return result
+
+
+def _circle(canvas: bytearray, width: int, height: int, center, radius: int, line_width: int) -> None:
+    cx, cy = center
+    points = []
+    for index in range(32):
+        angle = 2.0 * math.pi * index / 32.0
+        points.append((int(round(cx + radius * math.cos(angle))), int(round(cy + radius * math.sin(angle)))))
+    points.append(points[0])
+    _polyline(canvas, width, height, points, line_width)
+
+
+def _arch(canvas: bytearray, box, width: int, height: int, line_width: int, depth: bool = False) -> None:
     x0, y0, x1, y1 = _bbox(box, width, height)
     radius = max(8, (x1 - x0) // 2)
     spring = y0 + radius
-    draw.line((x0, spring, x0, y1), fill="black", width=line_width)
-    draw.line((x1, spring, x1, y1), fill="black", width=line_width)
-    draw.arc((x0, y0, x1, y0 + 2 * radius), 180, 360, fill="black", width=line_width)
-    draw.line((x0, y1, x1, y1), fill="black", width=line_width)
+    _line(canvas, width, height, (x0, spring), (x0, y1), line_width)
+    _line(canvas, width, height, (x1, spring), (x1, y1), line_width)
+    _polyline(canvas, width, height, _arc_points((x0, y0, x1, y0 + 2 * radius), 180, 360), line_width)
+    _line(canvas, width, height, (x0, y1), (x1, y1), line_width)
+
     if depth:
         inset = max(line_width * 3, int((x1 - x0) * 0.08))
         ix0, iy0, ix1, iy1 = x0 + inset, y0 + inset, x1 - inset, y1 - inset
         iradius = max(8, (ix1 - ix0) // 2)
         ispring = iy0 + iradius
-        draw.line((ix0, ispring, ix0, iy1), fill="black", width=max(2, line_width - 1))
-        draw.line((ix1, ispring, ix1, iy1), fill="black", width=max(2, line_width - 1))
-        draw.arc((ix0, iy0, ix1, iy0 + 2 * iradius), 180, 360, fill="black", width=max(2, line_width - 1))
-        # Perspective continuation lines inside the opening keep it from becoming a blank void.
+        inner_width = max(2, line_width - 1)
+        _line(canvas, width, height, (ix0, ispring), (ix0, iy1), inner_width)
+        _line(canvas, width, height, (ix1, ispring), (ix1, iy1), inner_width)
+        _polyline(canvas, width, height, _arc_points((ix0, iy0, ix1, iy0 + 2 * iradius), 180, 360), inner_width)
+
         cx = (ix0 + ix1) // 2
         vanish_y = int(iy0 + (iy1 - iy0) * 0.58)
-        draw.line((ix0, iy1, cx, vanish_y), fill="black", width=max(2, line_width - 1))
-        draw.line((ix1, iy1, cx, vanish_y), fill="black", width=max(2, line_width - 1))
+        _line(canvas, width, height, (ix0, iy1), (cx, vanish_y), inner_width)
+        _line(canvas, width, height, (ix1, iy1), (cx, vanish_y), inner_width)
         for frac in (0.72, 0.82, 0.91):
             y = int(vanish_y + (iy1 - vanish_y) * frac)
             half = int((ix1 - ix0) * (frac - 0.58) * 0.42)
-            draw.line((cx - half, y, cx + half, y), fill="black", width=max(2, line_width - 1))
+            _line(canvas, width, height, (cx - half, y), (cx + half, y), inner_width)
 
 
-def _door(draw, box, width: int, height: int, line_width: int, arched: bool = False) -> None:
+def _door(canvas: bytearray, box, width: int, height: int, line_width: int, arched: bool = False) -> None:
     x0, y0, x1, y1 = _bbox(box, width, height)
     if arched:
-        _arch(draw, box, width, height, line_width, depth=False)
+        _arch(canvas, box, width, height, line_width, depth=False)
     else:
-        draw.rectangle((x0, y0, x1, y1), outline="black", width=line_width)
+        _rectangle(canvas, width, height, (x0, y0, x1, y1), line_width)
     inset = max(line_width * 3, int((x1 - x0) * 0.08))
-    draw.rectangle((x0 + inset, y0 + inset, x1 - inset, y1 - inset), outline="black", width=max(2, line_width - 1))
+    _rectangle(canvas, width, height, (x0 + inset, y0 + inset, x1 - inset, y1 - inset), max(2, line_width - 1))
     knob_x = int(x1 - inset * 1.7)
     knob_y = int((y0 + y1) / 2)
-    r = max(3, line_width)
-    draw.ellipse((knob_x - r, knob_y - r, knob_x + r, knob_y + r), outline="black", width=max(2, line_width - 1))
+    _circle(canvas, width, height, (knob_x, knob_y), max(3, line_width), max(2, line_width - 1))
 
 
-def _pit(draw, points: Iterable, width: int, height: int, line_width: int, spikes: bool = True) -> None:
+def _pit(canvas: bytearray, points: Iterable, width: int, height: int, line_width: int, spikes: bool = True) -> None:
     poly = [_xy(p, width, height) for p in points]
-    draw.polygon(poly, outline="black")
-    draw.line(poly + [poly[0]], fill="black", width=line_width, joint="curve")
+    if len(poly) < 3:
+        return
+    _polyline(canvas, width, height, poly + [poly[0]], line_width)
     if not spikes or len(poly) < 4:
         return
     xs = [p[0] for p in poly]
@@ -80,20 +157,40 @@ def _pit(draw, points: Iterable, width: int, height: int, line_width: int, spike
     count = max(4, min(9, span // 45))
     base_y = int(top + (bottom - top) * 0.72)
     tip_y = int(top + (bottom - top) * 0.30)
-    for i in range(count):
-        x = int(left + (i + 0.5) * span / count)
+    for index in range(count):
+        x = int(left + (index + 0.5) * span / count)
         half = max(5, span // (count * 5))
-        draw.line((x - half, base_y, x, tip_y, x + half, base_y), fill="black", width=max(2, line_width - 1))
+        _polyline(canvas, width, height, [(x - half, base_y), (x, tip_y), (x + half, base_y)], max(2, line_width - 1))
 
 
-def _connector(draw, primitive: dict, width: int, height: int, line_width: int) -> None:
+def _connector(canvas: bytearray, primitive: dict, width: int, height: int, line_width: int) -> None:
     start = _xy(primitive["from"], width, height)
     end = _xy(primitive["to"], width, height)
     connector_width = max(2, int(primitive.get("line_width") or line_width - 1))
-    draw.line((start, end), fill="black", width=connector_width)
-    r = max(4, connector_width * 2)
-    for x, y in (start, end):
-        draw.ellipse((x - r, y - r, x + r, y + r), outline="black", width=max(2, connector_width))
+    _line(canvas, width, height, start, end, connector_width)
+    radius = max(4, connector_width * 2)
+    _circle(canvas, width, height, start, radius, max(2, connector_width))
+    _circle(canvas, width, height, end, radius, max(2, connector_width))
+
+
+def _png_chunk(chunk_type: bytes, payload: bytes) -> bytes:
+    crc = binascii.crc32(chunk_type + payload) & 0xFFFFFFFF
+    return struct.pack(">I", len(payload)) + chunk_type + payload + struct.pack(">I", crc)
+
+
+def _write_grayscale_png(path: Path, canvas: bytearray, width: int, height: int) -> None:
+    rows = bytearray()
+    for y in range(height):
+        rows.append(0)
+        start = y * width
+        rows.extend(canvas[start:start + width])
+    payload = (
+        b"\x89PNG\r\n\x1a\n"
+        + _png_chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0))
+        + _png_chunk(b"IDAT", zlib.compress(bytes(rows), level=9))
+        + _png_chunk(b"IEND", b"")
+    )
+    path.write_bytes(payload)
 
 
 def render_scene_scaffold(
@@ -106,68 +203,39 @@ def render_scene_scaffold(
     cfg = scaffold_config(page)
     if not scaffold_enabled(page):
         return None
+    if width < 32 or height < 32:
+        raise ValueError("Structural scaffold dimensions are too small.")
 
-    try:
-        from PIL import Image, ImageDraw
-    except ImportError as exc:
-        raise RuntimeError("Structural scaffold generation requires Pillow.") from exc
-
-    image = Image.new("RGB", (width, height), "white")
-    draw = ImageDraw.Draw(image)
+    canvas = bytearray([255]) * (width * height)
     line_width = int(cfg.get("line_width") or 4)
 
     for primitive in cfg.get("primitives") or []:
         kind = str(primitive.get("type") or "").strip().lower()
         if kind == "line":
-            draw.line(
-                (*_xy(primitive["from"], width, height), *_xy(primitive["to"], width, height)),
-                fill="black",
-                width=max(2, int(primitive.get("line_width") or line_width)),
-            )
+            _line(canvas, width, height, _xy(primitive["from"], width, height), _xy(primitive["to"], width, height), max(2, int(primitive.get("line_width") or line_width)))
         elif kind == "polyline":
             points = [_xy(p, width, height) for p in primitive.get("points") or []]
             if len(points) >= 2:
-                draw.line(points, fill="black", width=line_width, joint="curve")
+                _polyline(canvas, width, height, points, line_width)
         elif kind == "polygon":
             points = [_xy(p, width, height) for p in primitive.get("points") or []]
             if len(points) >= 3:
-                draw.line(points + [points[0]], fill="black", width=line_width, joint="curve")
+                _polyline(canvas, width, height, points + [points[0]], line_width)
         elif kind == "rect":
-            draw.rectangle(_bbox(primitive["bbox"], width, height), outline="black", width=line_width)
+            _rectangle(canvas, width, height, _bbox(primitive["bbox"], width, height), line_width)
         elif kind == "door":
-            _door(
-                draw,
-                primitive["bbox"],
-                width,
-                height,
-                line_width,
-                arched=bool(primitive.get("arched")),
-            )
+            _door(canvas, primitive["bbox"], width, height, line_width, arched=bool(primitive.get("arched")))
         elif kind == "archway":
-            _arch(
-                draw,
-                primitive["bbox"],
-                width,
-                height,
-                line_width,
-                depth=bool(primitive.get("depth", True)),
-            )
+            _arch(canvas, primitive["bbox"], width, height, line_width, depth=bool(primitive.get("depth", True)))
         elif kind == "pit":
-            _pit(
-                draw,
-                primitive.get("points") or [],
-                width,
-                height,
-                line_width,
-                spikes=bool(primitive.get("spikes", True)),
-            )
+            _pit(canvas, primitive.get("points") or [], width, height, line_width, spikes=bool(primitive.get("spikes", True)))
         elif kind == "connector":
-            _connector(draw, primitive, width, height, line_width)
+            _connector(canvas, primitive, width, height, line_width)
         else:
             raise ValueError(f"Unsupported scene scaffold primitive: {kind!r}")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    image.save(output_path, format="PNG")
+    _write_grayscale_png(output_path, canvas, width, height)
     return output_path
 
 
