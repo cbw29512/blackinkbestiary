@@ -6,7 +6,7 @@
   "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
   "comparable_to_previous": true,
   "comparison_reason": null,
-  "history_appended": true,
+  "history_appended": false,
   "history_entries": 65,
   "current_metrics": {
     "foundation_readiness": 100.0,
@@ -106,19 +106,19 @@
   },
   "defect_comparisons": {
     "ACTION_UNCLEAR": {
-      "previous": 0,
+      "previous": 1,
       "current": 1,
-      "delta": 1,
-      "signed_delta": "+1",
-      "trend": "regressing",
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     },
     "ENVIRONMENT_GENERIC": {
-      "previous": 2,
+      "previous": 1,
       "current": 1,
-      "delta": -1,
-      "signed_delta": "-1",
-      "trend": "improving",
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     },
     "IDENTITY_HEROIC_BULK": {
@@ -140,19 +140,19 @@
   },
   "efficiency_comparisons": {
     "gpu_attempts": {
-      "previous": 37,
+      "previous": 33,
       "current": 33,
-      "delta": -4.0,
-      "signed_delta": "-4.00",
-      "trend": "improving",
+      "delta": 0.0,
+      "signed_delta": "+0.00",
+      "trend": "flat",
       "lower_is_better": true
     },
     "refinement_passes": {
-      "previous": 28,
+      "previous": 24,
       "current": 24,
-      "delta": -4.0,
-      "signed_delta": "-4.00",
-      "trend": "improving",
+      "delta": 0.0,
+      "signed_delta": "+0.00",
+      "trend": "flat",
       "lower_is_better": true
     },
     "pages_at_max_refinements": {
@@ -172,11 +172,11 @@
       "lower_is_better": true
     },
     "avg_gpu_attempts_per_page": {
-      "previous": 4.11,
+      "previous": 3.67,
       "current": 3.67,
-      "delta": -0.44,
-      "signed_delta": "-0.44",
-      "trend": "improving",
+      "delta": 0.0,
+      "signed_delta": "+0.00",
+      "trend": "flat",
       "lower_is_better": true
     },
     "semantic_yield_percent": {
@@ -209,13 +209,13 @@
   },
   "previous_generation_efficiency": {
     "all_gate_yield_percent": 0.0,
-    "avg_gpu_attempts_per_page": 4.11,
-    "gpu_attempts": 37,
+    "avg_gpu_attempts_per_page": 3.67,
+    "gpu_attempts": 33,
     "gpu_attempts_per_semantic_pass": null,
     "pages_at_max_refinements": 0,
     "pages_considered": 9,
     "pages_semantic_stalled": 0,
-    "refinement_passes": 28,
+    "refinement_passes": 24,
     "semantic_yield_percent": 0.0
   },
   "current_defect_counts": {
@@ -238,7 +238,8 @@
     "QUALITY_DENSITY": 3
   },
   "previous_defect_counts": {
-    "ENVIRONMENT_GENERIC": 2,
+    "ACTION_UNCLEAR": 1,
+    "ENVIRONMENT_GENERIC": 1,
     "IDENTITY_HEROIC_BULK": 1,
     "UNCLASSIFIED": 6
   },
