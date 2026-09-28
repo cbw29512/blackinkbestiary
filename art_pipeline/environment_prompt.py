@@ -49,8 +49,9 @@ def _required_object_rules(page: dict) -> list[str]:
         )
     if "tripwire" in text:
         rules.append(
-            "Required tripwire must visibly cross the traversable path at believable ankle or shin height and "
-            "visibly connect to the triggered hazard so cause-and-effect reads instantly."
+            "Required tripwire is a taut ankle-or-shin-height line between two wall rings across the walking path. "
+            "It may run in front of a pit but must not hang from a torch, sconce, door handle, or ceiling, "
+            "must not dive into the pit, and must not be held in the creature's mouth or hands."
         )
     if "pressure plate" in text:
         rules.append(
@@ -61,6 +62,10 @@ def _required_object_rules(page: dict) -> list[str]:
         rules.append(
             "PIT-TRAP GEOMETRY LOCK: the pit is an opening cut into and interrupting the walking floor plane, with its rim flush or nearly flush with surrounding flagstones/ground. "
             "Its interior drops below floor level and any spikes rise from inside that recessed opening. Never draw a raised circular masonry well, basin, freestanding ring, planter, or above-floor container and call it a pit."
+        )
+    if "spear" in text:
+        rules.append(
+            "Required spear is gripped by the creature as usable gear. Do not plant it as a disconnected floor pole beside the pit."
         )
     if "lantern" in text and ("kick" in text or "kicking" in text):
         rules.append(
