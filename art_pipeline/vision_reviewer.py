@@ -9,10 +9,12 @@ from pathlib import Path
 
 from vision_review_prompts import (
     build_action_review_prompt,
+    build_completeness_review_prompt,
     build_environment_review_prompt,
     build_identity_review_prompt,
     build_review_prompt,
 )
+from prompt_builder import required_visible_inventory
 
 
 class VisionReviewError(RuntimeError):
@@ -75,8 +77,10 @@ def _parse_verdict(result: dict, stage: str) -> dict:
     ):
         raise VisionReviewError(f"{stage} reviewer returned invalid verdict: {verdict}")
 
-    verdict["defects"] = defects[:4]
-    verdict["preserve"] = preserve[:3]
+    preserve_limit = 12 if str(stage).strip().lower() == "completeness" else 3
+    defect_limit = 6 if str(stage).strip().lower() == "completeness" else 4
+    verdict["defects"] = defects[:defect_limit]
+    verdict["preserve"] = preserve[:preserve_limit]
     if verdict["defects"]:
         verdict["pass"] = False
         verdict["score"] = min(score, 49)
@@ -280,6 +284,8 @@ def _stage_required_evidence(page: dict, stage: str) -> list[str]:
             )
             if value
         ]
+    if stage == "completeness":
+        return required_visible_inventory(page)
     if stage == "action":
         return [
             value for value in (
@@ -297,7 +303,7 @@ def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[s
     if not verdict.get("pass"):
         return []
     required = _stage_required_evidence(page, stage)
-    if len(required) < 2:
+    if not required:
         return []
 
     preserve = [str(item).strip() for item in verdict.get("preserve") or [] if str(item).strip()]
@@ -307,14 +313,19 @@ def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[s
         for evidence in preserve:
             evidence_tokens = _semantic_tokens(evidence)
             shared = requirement_tokens & evidence_tokens
-            if len(shared) >= 2 and _semantic_overlap(requirement, evidence) >= 0.25:
+            if stage == "completeness":
+                enough = bool(shared) and _semantic_overlap(requirement, evidence) >= 0.18
+            else:
+                enough = len(shared) >= 2 and _semantic_overlap(requirement, evidence) >= 0.25
+            if enough:
                 matched.append(requirement)
                 break
 
-    if len(matched) >= 2:
+    minimum = len(required) if stage == "completeness" else min(2, len(required))
+    if len(matched) >= minimum:
         return []
     missing = [item for item in required if item not in matched]
-    return missing[:2]
+    return missing[:6] if stage == "completeness" else missing[:2]
 
 
 def _evidence_retry_prompt(prompt: str, stage: str, missing: list[str]) -> str:
@@ -380,6 +391,7 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         ("Identity", build_identity_review_prompt(page)),
         ("Environment", build_environment_review_prompt(page)),
         ("Action", build_action_review_prompt(page)),
+        ("Completeness", build_completeness_review_prompt(page)),
         ("Quality", build_review_prompt(page)),
     )
     for stage, prompt in gates:
