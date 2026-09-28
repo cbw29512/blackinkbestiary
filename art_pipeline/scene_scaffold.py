@@ -142,9 +142,24 @@ def _door(canvas: bytearray, box, width: int, height: int, line_width: int, arch
     _circle(canvas, width, height, (knob_x, knob_y), max(3, line_width), max(2, line_width - 1))
 
 
-def _pit(canvas: bytearray, points: Iterable, width: int, height: int, line_width: int, spikes: bool = True) -> None:
+def _pit(canvas: bytearray, points: Iterable, width: int, height: int, line_width: int, spikes: bool = True, open_near: bool = False) -> None:
     poly = [_xy(p, width, height) for p in points]
     if len(poly) < 3:
+        return
+    if open_near and len(poly) >= 4:
+        far_left, far_right, near_right, near_left = poly[:4]
+        _polyline(canvas, width, height, [near_left, far_left, far_right, near_right], line_width)
+
+        def _mix(a, b, t):
+            return (int(a[0] + (b[0] - a[0]) * t), int(a[1] + (b[1] - a[1]) * t))
+
+        _line(canvas, width, height, _mix(far_left, near_left, 0.42), _mix(far_right, near_right, 0.42), max(2, line_width - 1))
+        if spikes:
+            for index, t in enumerate((0.28, 0.5, 0.72)):
+                base = _mix(near_left, near_right, t)
+                tip = _mix(far_left, far_right, t)
+                tip = _mix(tip, base, 0.45)
+                _line(canvas, width, height, base, tip, max(2, line_width - 1))
         return
     _polyline(canvas, width, height, poly + [poly[0]], line_width)
     if not spikes or len(poly) < 4:
@@ -228,7 +243,7 @@ def render_scene_scaffold(
         elif kind == "archway":
             _arch(canvas, primitive["bbox"], width, height, line_width, depth=bool(primitive.get("depth", True)))
         elif kind == "pit":
-            _pit(canvas, primitive.get("points") or [], width, height, line_width, spikes=bool(primitive.get("spikes", True)))
+            _pit(canvas, primitive.get("points") or [], width, height, line_width, spikes=bool(primitive.get("spikes", True)), open_near=bool(primitive.get("open_near", False)))
         elif kind == "connector":
             _connector(canvas, primitive, width, height, line_width)
         else:
@@ -254,10 +269,14 @@ def scaffold_prompt_prefix(page: dict) -> str:
 
     opening_rule = str(cfg.get("opening_rule") or "").strip()
     subject_rule = str(cfg.get("subject_rule") or "").strip()
+    pit_rule = ""
+    if any(str(item.get("type") or "").lower() == "pit" and item.get("open_near") for item in cfg.get("primitives") or []):
+        pit_rule = "The pit is a hole cut into the floor with the near side open toward the viewer, not a closed tray or box. "
     return (
         "SCAFFOLD MODE: input lines are layout, not finished art. Keep openings, hazards, doors, and connector endpoints. "
         "Openings need visible depth; no empty white voids. "
         + (opening_rule + " " if opening_rule else "")
         + (subject_rule + " " if subject_rule else "")
+        + pit_rule
         + " ".join(connector_rules)
     ).strip()

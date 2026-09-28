@@ -11,7 +11,7 @@
       "habitat": "Tight trapped stone corridor",
       "moment": "Cackling as a tripwire is triggered",
       "identity_rules": [
-        "small reptilian humanoid only 2–3 feet tall",
+        "small reptilian humanoid only 2\u20133 feet tall",
         "long narrow lizard snout",
         "small horn nubs or short head spines",
         "visible balancing tail",
@@ -62,7 +62,7 @@
           "overall scene concept"
         ],
         "change": [
-          "reduce detail density roughly 30–40%",
+          "reduce detail density roughly 30\u201340%",
           "remove most hatching",
           "reduce tiny scale texture",
           "reduce unnecessary stone cracks",
@@ -93,7 +93,7 @@
       "scene_scaffold": {
         "enabled": true,
         "line_width": 4,
-        "subject_rule": "Keep the kobold in the left-middle foreground and visibly separate from the tripwire. The wire may pass in front of or behind the creature in perspective but may not touch, emerge from, attach to, or terminate on the kobold, tail, clothing, spear, or body.",
+        "subject_rule": "Place the kobold in the lower-left corner, feet on the flagstone, entirely clear of the tripwire. The wire is a straight line from the left wall ring to the right wall ring and must not touch the kobold, spear, tail, or hands.",
         "opening_rule": "The rear archway must visibly continue into another corridor section with receding floor and wall geometry; it must never be a featureless white opening.",
         "primitives": [
           {
@@ -159,34 +159,35 @@
             "role": "triggered_pit",
             "points": [
               [
-                0.43,
-                0.72
+                0.5,
+                0.62
+              ],
+              [
+                0.68,
+                0.6
               ],
               [
                 0.84,
-                0.7
+                0.86
               ],
               [
-                0.77,
-                0.93
-              ],
-              [
-                0.34,
-                0.91
+                0.36,
+                0.88
               ]
             ],
-            "spikes": true
+            "spikes": true,
+            "open_near": true
           },
           {
             "type": "connector",
             "role": "tripwire",
             "from": [
-              0.17,
-              0.61
+              0.4,
+              0.52
             ],
             "to": [
-              0.83,
-              0.59
+              0.76,
+              0.46
             ],
             "anchors": [
               "left wall ring",
@@ -1315,7 +1316,7 @@
     {
       "page_id": "I-27",
       "order": 27,
-      "monster_name": "Mimic — Chest",
+      "monster_name": "Mimic \u2014 Chest",
       "habitat": "Treasure vault",
       "moment": "Chest mouth opening around a reaching hand",
       "must_include": [
@@ -1359,7 +1360,7 @@
     {
       "page_id": "I-28",
       "order": 28,
-      "monster_name": "Mimic — Door",
+      "monster_name": "Mimic \u2014 Door",
       "habitat": "Torch-lit dungeon hall",
       "moment": "Door revealing tongue-handle and hidden eye",
       "must_include": [
