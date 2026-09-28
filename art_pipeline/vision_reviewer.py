@@ -307,25 +307,37 @@ def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[s
         return []
 
     preserve = [str(item).strip() for item in verdict.get("preserve") or [] if str(item).strip()]
+
+    if stage == "completeness":
+        # Completeness is intentionally stricter than the other gates: the
+        # reviewer must provide one distinct evidence line per required item,
+        # in the same order. One generic sentence cannot satisfy several items.
+        missing = []
+        for index, requirement in enumerate(required):
+            if index >= len(preserve):
+                missing.append(requirement)
+                continue
+            evidence = preserve[index]
+            shared = _semantic_tokens(requirement) & _semantic_tokens(evidence)
+            if not shared or _semantic_overlap(requirement, evidence) < 0.18:
+                missing.append(requirement)
+        return missing[:6]
+
     matched = []
     for requirement in required:
         requirement_tokens = _semantic_tokens(requirement)
         for evidence in preserve:
             evidence_tokens = _semantic_tokens(evidence)
             shared = requirement_tokens & evidence_tokens
-            if stage == "completeness":
-                enough = bool(shared) and _semantic_overlap(requirement, evidence) >= 0.18
-            else:
-                enough = len(shared) >= 2 and _semantic_overlap(requirement, evidence) >= 0.25
-            if enough:
+            if len(shared) >= 2 and _semantic_overlap(requirement, evidence) >= 0.25:
                 matched.append(requirement)
                 break
 
-    minimum = len(required) if stage == "completeness" else min(2, len(required))
+    minimum = min(2, len(required))
     if len(matched) >= minimum:
         return []
     missing = [item for item in required if item not in matched]
-    return missing[:6] if stage == "completeness" else missing[:2]
+    return missing[:2]
 
 
 def _evidence_retry_prompt(prompt: str, stage: str, missing: list[str]) -> str:
