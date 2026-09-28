@@ -2,21 +2,21 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
-  "measured_at": "2026-09-28T09:37:34.463114+00:00",
+  "measured_at": "2026-09-28T09:43:08.363473+00:00",
   "engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 100.0,
     "technical_qa_pass_rate": 100.0,
     "review_pipeline_health": 100.0,
-    "visual_cleanliness": 0.0,
-    "semantic_accuracy": 0.0,
+    "visual_cleanliness": 11.1,
+    "semantic_accuracy": 11.1,
     "completeness": 100.0,
     "print_package_readiness": 80.0,
     "locked_page_progress": 0.0,
     "replication_readiness": 100.0
   },
-  "overall_automated_readiness": 60.0,
+  "overall_automated_readiness": 62.8,
   "readiness_floor": 0.0,
   "series_score": 35.0,
   "series_readiness_floor": 0.0,
@@ -25,18 +25,18 @@
     "total": 9,
     "technical_passes": 9,
     "review_pipeline_passes": 9,
-    "visual_passes": 0,
-    "semantic_passes": 0,
-    "all_passes": 0,
+    "visual_passes": 1,
+    "semantic_passes": 1,
+    "all_passes": 1,
     "technical_qa": 100.0,
     "review_pipeline_health": 100.0,
-    "visual_cleanliness": 0.0,
-    "semantic_accuracy": 0.0,
-    "all_automated_gates": 0.0,
+    "visual_cleanliness": 11.1,
+    "semantic_accuracy": 11.1,
+    "all_automated_gates": 11.1,
     "rows": [
       {
         "page_id": "I-01",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -45,7 +45,7 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-04",
@@ -62,7 +62,7 @@
       },
       {
         "page_id": "I-08",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -71,11 +71,11 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-10",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -84,11 +84,11 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-14",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -97,7 +97,7 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-16",
@@ -114,7 +114,7 @@
       },
       {
         "page_id": "I-19",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -123,11 +123,11 @@
         "visual_stage": "action",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-20",
-        "status": "awaiting_exact_image_review",
+        "status": "assistant_rejected",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -136,20 +136,20 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "reject"
       },
       {
         "page_id": "I-22",
         "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
-        "visual_cleanliness_pass": false,
-        "semantic_accuracy_pass": false,
-        "all_automated_gates_pass": false,
+        "visual_cleanliness_pass": true,
+        "semantic_accuracy_pass": true,
+        "all_automated_gates_pass": true,
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": "approve"
       }
     ]
   },
@@ -160,9 +160,9 @@
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
     "avg_gpu_attempts_per_page": 5.0,
-    "gpu_attempts_per_semantic_pass": null,
-    "semantic_yield_percent": 0.0,
-    "all_gate_yield_percent": 0.0
+    "gpu_attempts_per_semantic_pass": 45.0,
+    "semantic_yield_percent": 2.2,
+    "all_gate_yield_percent": 2.2
   },
   "prompt_load": {
     "schema_version": 1,
@@ -631,22 +631,24 @@
         "foundation_readiness": 100.0,
         "technical_qa_pass_rate": 100.0,
         "review_pipeline_health": 100.0,
-        "visual_cleanliness": 0.0,
-        "semantic_accuracy": 0.0,
+        "visual_cleanliness": 11.1,
+        "semantic_accuracy": 11.1,
         "completeness": 100.0,
         "print_package_readiness": 80.0,
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 60.0,
+      "overall_automated_readiness": 62.8,
       "readiness_floor": 0.0,
-      "weakest_metric": "visual_cleanliness",
+      "weakest_metric": "locked_page_progress",
       "missing_required_categories": [],
       "known_blockers": [
-        "UNCLASSIFIED",
         "ENVIRONMENT_GENERIC",
+        "UNCLASSIFIED",
+        "IDENTITY_WRONG_CREATURE",
         "IDENTITY_HEROIC_BULK",
-        "IDENTITY_WRONG_CREATURE"
+        "IDENTITY_LIMB_COUNT",
+        "SWARM_WALLPAPER"
       ],
       "automated_100": false
     },
@@ -895,21 +897,23 @@
     }
   },
   "defect_counts": {
-    "UNCLASSIFIED": 4,
     "ENVIRONMENT_GENERIC": 3,
+    "UNCLASSIFIED": 3,
+    "IDENTITY_WRONG_CREATURE": 2,
     "IDENTITY_HEROIC_BULK": 1,
-    "IDENTITY_WRONG_CREATURE": 1
+    "IDENTITY_LIMB_COUNT": 1,
+    "SWARM_WALLPAPER": 1
   },
   "historical_defect_counts": {
     "IDENTITY_HEROIC_BULK": 34,
     "IDENTITY_HORNS_TUSKS": 33,
-    "IDENTITY_WRONG_CREATURE": 27,
-    "IDENTITY_LIMB_COUNT": 12,
+    "IDENTITY_WRONG_CREATURE": 28,
+    "IDENTITY_LIMB_COUNT": 13,
     "SIGNATURE_FEATURE_MISSING": 12,
     "ENVIRONMENT_GENERIC": 9,
-    "SWARM_WALLPAPER": 7,
-    "UNCLASSIFIED": 7,
+    "SWARM_WALLPAPER": 8,
     "ACTION_UNCLEAR": 6,
+    "UNCLASSIFIED": 6,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
   },
@@ -917,7 +921,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 43,
+      "evidence_count": 44,
       "distinct_pages": 9,
       "distinct_families": 5,
       "scope": [
@@ -1015,8 +1019,8 @@
     {
       "defect_code": "IDENTITY_WRONG_CREATURE",
       "label": "Wrong creature/body plan",
-      "evidence_count": 34,
-      "distinct_pages": 9,
+      "evidence_count": 35,
+      "distinct_pages": 10,
       "distinct_families": 9,
       "scope": [
         "monster_family",
@@ -1064,7 +1068,7 @@
     {
       "defect_code": "ENVIRONMENT_GENERIC",
       "label": "Generic/wrong environment",
-      "evidence_count": 22,
+      "evidence_count": 23,
       "distinct_pages": 6,
       "distinct_families": 6,
       "scope": [
@@ -1162,7 +1166,7 @@
     {
       "defect_code": "IDENTITY_LIMB_COUNT",
       "label": "Limb/body topology error",
-      "evidence_count": 12,
+      "evidence_count": 13,
       "distinct_pages": 4,
       "distinct_families": 4,
       "scope": [
@@ -1260,7 +1264,7 @@
     {
       "defect_code": "SWARM_WALLPAPER",
       "label": "Swarm wallpaper density",
-      "evidence_count": 7,
+      "evidence_count": 8,
       "distinct_pages": 2,
       "distinct_families": 2,
       "scope": [
@@ -1467,17 +1471,20 @@
     }
   },
   "status_counts": {
-    "awaiting_exact_image_review": 9
+    "assistant_rejected": 6,
+    "awaiting_exact_image_review": 3
   },
   "historical_status_counts": {
-    "assistant_rejected": 78,
-    "awaiting_exact_image_review": 9
+    "assistant_rejected": 84,
+    "awaiting_exact_image_review": 3
   },
   "known_blockers": [
-    "UNCLASSIFIED",
     "ENVIRONMENT_GENERIC",
+    "UNCLASSIFIED",
+    "IDENTITY_WRONG_CREATURE",
     "IDENTITY_HEROIC_BULK",
-    "IDENTITY_WRONG_CREATURE"
+    "IDENTITY_LIMB_COUNT",
+    "SWARM_WALLPAPER"
   ],
-  "measurement_fingerprint": "7012d9e98eef0fbf69f08b91838a98cfba4b487cf88d28d700e1dd781e755e4c"
+  "measurement_fingerprint": "d76953359ceea58602fcdd2b26aaa87ceda5f32b27988ed7cc428f2a82e8dd2c"
 }

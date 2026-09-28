@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "exact_image_matches": 7,
-  "agreements": 6,
+  "exact_image_matches": 1,
+  "agreements": 0,
   "local_false_positives": 0,
   "local_false_negatives": 1,
-  "agreement_rate": 85.7,
+  "agreement_rate": 0.0,
   "false_positive_rate": 0.0,
-  "false_negative_rate": 14.3,
+  "false_negative_rate": 100.0,
   "false_positive_rows": [],
   "false_negative_rows": [
     {
@@ -22,72 +22,6 @@
     }
   ],
   "matched_rows": [
-    {
-      "review_id": "I-01-C01-H0450d5d6fb0f219f",
-      "page_id": "I-01",
-      "candidate": 1,
-      "source_sha256": "0450d5d6fb0f219fc6074d651818bd8032934a62f7f8d8372b02f3c632b1d043",
-      "local_pass": false,
-      "local_score": 49,
-      "local_stage": "identity",
-      "authority_decision": "reject",
-      "authority_notes": "Reject: creature reads as a tall muscular lizardfolk/dragon humanoid rather than the locked small lean kobold silhouette. Preserve the clear trapped corridor, tripwire, pit, torch, and spear staging; rebuild the kobold as compact, lean, clearly small in scale, with the required kobold identity rather than heroic reptilian proportions."
-    },
-    {
-      "review_id": "I-08-C01-H125100e6f59f2f6a",
-      "page_id": "I-08",
-      "candidate": 1,
-      "source_sha256": "125100e6f59f2f6a5bd56c8221e201479d9723c57842074526b65c34e07a6bef",
-      "local_pass": false,
-      "local_score": 49,
-      "local_stage": "identity",
-      "authority_decision": "reject",
-      "authority_notes": "Reject: this reads as an ape/sasquatch-like brute and repeats the known bugbear identity drift. It is also standing in a ruined room rather than dropping from a ceiling crack into an ambush. Rebuild with locked bugbear identity and a physically clear overhead descent from a ceiling opening."
-    },
-    {
-      "review_id": "I-10-C01-Ha182a450e8f73e25",
-      "page_id": "I-10",
-      "candidate": 1,
-      "source_sha256": "a182a450e8f73e25ac8c59649d7c26736101bab4528d1c12d8676118e4886755",
-      "local_pass": false,
-      "local_score": 49,
-      "local_stage": "environment",
-      "authority_decision": "reject",
-      "authority_notes": "Reject: ogre silhouette is readable, but it is simply standing on a broad staircase. The required too-small spiral stair and physical wedging are not proven. Preserve the large ogre focal scale; make shoulders/hips visibly jammed against tight spiral-stair boundaries so the awkward wedged action is unmistakable."
-    },
-    {
-      "review_id": "I-14-C01-H87dc5b4d797e81d6",
-      "page_id": "I-14",
-      "candidate": 1,
-      "source_sha256": "87dc5b4d797e81d63a2e3aad02a00d910a5552155f3a09daf802d201516f7a88",
-      "local_pass": false,
-      "local_score": 49,
-      "local_stage": "environment",
-      "authority_decision": "reject",
-      "authority_notes": "Reject: image is a hanging cloth/ghost-like cone, not a darkmantle. Required creature topology and the action of peeling away from a stalactite above a lantern are absent. Rebuild as one continuous leathery mantle body with visible underside mouth/tentacles attached to or peeling from a stalactite; keep large open coloring regions without turning it into fabric."
-    },
-    {
-      "review_id": "I-19-C01-Hf03ee6fd0a98c1e5",
-      "page_id": "I-19",
-      "candidate": 1,
-      "source_sha256": "f03ee6fd0a98c1e5c0cafe9b1552d156efff888ab3caf69bb187c00408681de0",
-      "local_pass": false,
-      "local_score": 49,
-      "local_stage": "action",
-      "authority_decision": "reject",
-      "authority_notes": "Reject: the floor grate is clear, but the swarm is still a dense carpet of dozens of repeated rats, producing excessive tiny coloring regions and weak directional storytelling. Reduce to a controlled group of similarly scaled rats with broad white gaps and a clear stream pouring through/from the grate rather than wallpaper coverage."
-    },
-    {
-      "review_id": "I-20-C01-Hb697bbb0f5605a97",
-      "page_id": "I-20",
-      "candidate": 1,
-      "source_sha256": "b697bbb0f5605a97bc8e0664607d37b0e98963b3e679accf7e89aa0442456931",
-      "local_pass": false,
-      "local_score": 49,
-      "local_stage": "environment",
-      "authority_decision": "reject",
-      "authority_notes": "Reject: the centipede has sparse, irregular legs across many segments and a clawed/scorpion-like head, so the locked centipede anatomy fails. The required old-bone interaction is also absent. Preserve the large segmented curve and catacomb arches; use one pair of legs per visible segment, clear antennae/mandibles, no pincers, and visibly uncoil around an old bone."
-    },
     {
       "review_id": "I-22-C01-H37da8925d66a2d29",
       "page_id": "I-22",
