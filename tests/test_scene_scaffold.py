@@ -4,7 +4,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from PIL import Image
+import struct
+import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -43,20 +44,43 @@ class SceneScaffoldTests(unittest.TestCase):
             rendered = render_scene_scaffold(page, output, width=768, height=1024)
             self.assertEqual(rendered, output)
             self.assertTrue(output.exists())
-            with Image.open(output) as image:
-                self.assertEqual(image.size, (768, 1024))
-                gray = image.convert("L")
-                self.assertEqual(gray.getextrema(), (0, 255))
+            payload = output.read_bytes()
+            self.assertTrue(payload.startswith(b"\\x89PNG\\r\\n\\x1a\\n"))
+            width, height = struct.unpack(">II", payload[16:24])
+            self.assertEqual((width, height), (768, 1024))
 
-                connector = next(
-                    row for row in page["scene_scaffold"]["primitives"]
-                    if row["type"] == "connector"
-                )
-                for point in (connector["from"], connector["to"]):
-                    x = round(point[0] * 768)
-                    y = round(point[1] * 1024)
-                    neighborhood = gray.crop((x - 8, y - 8, x + 9, y + 9))
-                    self.assertEqual(neighborhood.getextrema()[0], 0)
+            offset = 8
+            idat = bytearray()
+            while offset < len(payload):
+                length = struct.unpack(">I", payload[offset:offset + 4])[0]
+                kind = payload[offset + 4:offset + 8]
+                data = payload[offset + 8:offset + 8 + length]
+                if kind == b"IDAT":
+                    idat.extend(data)
+                offset += 12 + length
+                if kind == b"IEND":
+                    break
+            raw = zlib.decompress(bytes(idat))
+            stride = 769
+            self.assertEqual(len(raw), 1024 * stride)
+
+            connector = next(
+                row for row in page["scene_scaffold"]["primitives"]
+                if row["type"] == "connector"
+            )
+            for point in (connector["from"], connector["to"]):
+                x = round(point[0] * 768)
+                y = round(point[1] * 1024)
+                black_found = False
+                for yy in range(max(0, y - 8), min(1024, y + 9)):
+                    row = raw[yy * stride + 1:(yy + 1) * stride]
+                    for xx in range(max(0, x - 8), min(768, x + 9)):
+                        if row[xx] == 0:
+                            black_found = True
+                            break
+                    if black_found:
+                        break
+                self.assertTrue(black_found)
 
     def test_scaffold_prompt_forbids_blank_openings_and_creature_attached_tripwire(self):
         prompt = scaffold_prompt_prefix(self.i01()).lower()
