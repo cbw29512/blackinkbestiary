@@ -1,7 +1,7 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
-  "quality_contract_fingerprint": "c71d76e5b64552528310e13b8f50e4b1e8451c0bda36582c19e1bc2712d20a04",
+  "snapshot_engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
+  "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "candidate_count": 9,
   "diagnostic_count": 78,
@@ -27,23 +27,23 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-28T01:46:53.9545381Z"
+    "updated_at": "2026-09-28T02:40:25.9518100Z"
   },
   "autopilot": {
     "schema_version": 1,
     "source": "RUN_ENGINE_AUTOPILOT.bat",
-    "phase": "sleeping",
-    "status": "ready",
-    "message": "Cycle complete; waiting five minutes for reviews or engine updates",
-    "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
-    "updated_at": "2026-09-28T01:47:06.227431+00:00"
+    "phase": "generating",
+    "status": "running",
+    "message": "Pre-GPU snapshot published before canary generation",
+    "engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
+    "updated_at": "2026-09-28T02:40:26.869911+00:00"
   },
   "engine_preflight": {
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-28T01:46:28.889343+00:00",
-    "updated_at": "2026-09-28T01:46:50.054820+00:00",
+    "started_at": "2026-09-28T02:40:01.490800+00:00",
+    "updated_at": "2026-09-28T02:40:22.316940+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -62,7 +62,6 @@
           "-v"
         ],
         "output_tail": [
-          "test_swarm_priority_capsule_prevents_wallpaper_composition (test_shape_locks.ShapeLockTests.test_swarm_priority_capsule_prevents_wallpaper_composition) ... ok",
           "test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates (test_start_production.StartProductionContractTests.test_autopilot_can_be_registered_for_windows_sign_in_without_duplicates) ... ok",
           "test_autopilot_publishes_phase_heartbeat_before_gpu_work (test_start_production.StartProductionContractTests.test_autopilot_publishes_phase_heartbeat_before_gpu_work) ... ok",
           "test_autopilot_startup_also_starts_live_monitor (test_start_production.StartProductionContractTests.test_autopilot_startup_also_starts_live_monitor) ... ok",
@@ -154,6 +153,7 @@
           "test_environment_gate_uses_concrete_geometry_not_generic_question_dump (test_vision_reviewer.VisionReviewerTests.test_environment_gate_uses_concrete_geometry_not_generic_question_dump) ... ok",
           "test_every_tome_i_page_populates_all_four_review_gates (test_vision_reviewer.VisionReviewerTests.test_every_tome_i_page_populates_all_four_review_gates) ... ok",
           "test_final_quality_gate_explicitly_rejects_decorative_artwork_frames (test_vision_reviewer.VisionReviewerTests.test_final_quality_gate_explicitly_rejects_decorative_artwork_frames) ... ok",
+          "test_final_quality_gate_requires_premium_retail_finish (test_vision_reviewer.VisionReviewerTests.test_final_quality_gate_requires_premium_retail_finish) ... ok",
           "test_goblin_bodybuilder_drift_is_a_hard_identity_gate (test_vision_reviewer.VisionReviewerTests.test_goblin_bodybuilder_drift_is_a_hard_identity_gate) ... ok",
           "test_habitat_story_and_physicality_are_hard_gates (test_vision_reviewer.VisionReviewerTests.test_habitat_story_and_physicality_are_hard_gates) ... ok",
           "test_identity_failure_stops_before_quality_review (test_vision_reviewer.VisionReviewerTests.test_identity_failure_stops_before_quality_review) ... ok",
@@ -179,7 +179,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 414 tests in 17.893s",
+          "Ran 417 tests in 17.572s",
           "",
           "OK"
         ]
@@ -432,33 +432,33 @@
   "selections": {},
   "candidates": [
     {
-      "review_id": "I-01-C01-Hd41ea0764dd1dbdd",
+      "review_id": "I-01-C01-H1116b740f2bd3632",
       "page_id": "I-01",
       "monster_name": "Kobold Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 5190629160843159163,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 9133423189446550118,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "f198108d581766ec0aadc01e25ac3ce8a408c8c7dcf013fff7820d00b407f43c",
       "review_fingerprint": "3c397eff4ba5e3570d82031d11dafbc1a7781384cb53934a79776b5031887b79",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-01-C01.jpg",
       "source_image": "test-gallery/I-01-C01.png",
-      "source_sha256": "d41ea0764dd1dbdd3564dc621ef4c8cb1df21335367a4880fddf8bf0b39ed2a6",
+      "source_sha256": "1116b740f2bd363201eeb7d885ee877c8230ea13c4e1d4502b738842360d0cf2",
       "visual_review": {
         "pass": false,
         "score": 49,
         "defects": [
-          "body reads furry/mammalian",
+          "body reads adult-human sized",
           "head becomes round and goblin-like",
-          "creature reads adult-human sized"
+          "body lacks reptilian texture"
         ],
         "preserve": [
           "long balancing tail",
-          "narrow shoulders",
-          "clawed hands and feet"
+          "clawed hands and feet",
+          "narrow shoulders"
         ],
         "stage": "identity"
       },
@@ -466,24 +466,24 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:03:11.404177+00:00"
+      "finished_at": "2026-09-28T01:54:37.310589+00:00"
     },
     {
-      "review_id": "I-04-C01-H054b683c3acf6e7d",
+      "review_id": "I-04-C01-Hc0b0ab738b2f30c8",
       "page_id": "I-04",
       "monster_name": "Goblin Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 4829142714904451281,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 7083414507861137440,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "8c7a573011417dd59bb8bf33a40bc54db29835bba70cea4d5b22b803a9e5cd16",
       "review_fingerprint": "8834b6ff54426e422629cadcba87c5d055373fb98a38c0a7eefde6c2ec213ea5",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-04-C01.jpg",
       "source_image": "test-gallery/I-04-C01.png",
-      "source_sha256": "054b683c3acf6e7daef3e984f42274bdb604027e0f44f26647ef9247577b2722",
+      "source_sha256": "c0b0ab738b2f30c8e811fe4f27b551c30d97c978614b9ed0b208e824f8eea753",
       "visual_review": {
         "pass": false,
         "score": 49,
@@ -501,62 +501,47 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:10:32.647346+00:00"
+      "finished_at": "2026-09-28T02:01:32.136539+00:00"
     },
     {
-      "review_id": "I-08-C01-Hbbb1a6ab8902388b",
+      "review_id": "I-08-C01-Hbd85019317b0389e",
       "page_id": "I-08",
       "monster_name": "Bugbear Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 4908591044510846885,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 1990653264085835622,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "714ed15c860d511ab34ccb9603da5d014694ab49114f982d2ccc8063aeaecea3",
       "review_fingerprint": "f5d15941ae7bce6fae5c6df41c9712505985d3dc2d5d6cdb8d7d82e68ea80b92",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-08-C01.jpg",
       "source_image": "test-gallery/I-08-C01.png",
-      "source_sha256": "bbb1a6ab8902388b7e24fb4ed28223b5ad1e3add1e8ca080c3da17a8966a0212",
-      "visual_review": {
-        "pass": false,
-        "score": 49,
-        "defects": [
-          "face reads primate rather than goblinoid",
-          "torso sculpted like superhero",
-          "arms not visibly below hips",
-          "fur hides anatomy"
-        ],
-        "preserve": [
-          "pointed ears",
-          "bipedal stance",
-          "no horns or tail"
-        ],
-        "stage": "identity"
-      },
-      "advisory_review_status": "needs_work",
-      "advisory_review_error": null,
+      "source_sha256": "bd85019317b0389e1283d87f74576b73229e6935cfb6efb7e3848eea58186244",
+      "visual_review": null,
+      "advisory_review_status": "unavailable",
+      "advisory_review_error": "Identity reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'face reads primate not goblinoid', 'gate': 'Draw a rangy long-armed goblinoid: narrow ribcage, arms hanging unusually low toward the knees, long forearms and hands, selective shaggy hair, and a goblinoid\u2014not gorilla\u2014face; no sculpted pectorals, six-pack, or bodybuilder shoulder mass.', 'overlap': 0.75}, {'kind': 'positive_gate_echo', 'defect': 'arms not visibly long', 'gate': 'Draw a rangy long-armed goblinoid: narrow ribcage, arms hanging unusually low toward the knees, long forearms and hands, selective shaggy hair, and a goblinoid\u2014not gorilla\u2014face; no sculpted pectorals, six-pack, or bodybuilder shoulder mass.', 'overlap': 0.75}]",
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:14:24.778585+00:00"
+      "finished_at": "2026-09-28T02:04:22.757690+00:00"
     },
     {
-      "review_id": "I-10-C01-H9b4fd30e10159e03",
+      "review_id": "I-10-C01-H6fe653f03b4c52f1",
       "page_id": "I-10",
       "monster_name": "Ogre",
       "candidate": 1,
       "selected": false,
-      "seed": 1730232396876977284,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 8763453091344164565,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "e9b2fb1655d0ac1c4bbaf49f97ac15744b11893267cc24de1135e1369c9b2287",
       "review_fingerprint": "250d6046249be02eb03945d893d9c6a97f45b4c1a32dcea6cfab18663ebbda2d",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-10-C01.jpg",
       "source_image": "test-gallery/I-10-C01.png",
-      "source_sha256": "9b4fd30e10159e037c2dda8b8e9bc4ea8ced57500ae36f3801ac41fc0b2bc8fb",
+      "source_sha256": "6fe653f03b4c52f1c432d20c8ead3a62041a66ef814dc58306bef4838212d83c",
       "visual_review": {
         "pass": false,
         "score": 49,
@@ -574,34 +559,34 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:20:45.979412+00:00"
+      "finished_at": "2026-09-28T02:10:37.129864+00:00"
     },
     {
-      "review_id": "I-14-C01-Haf07e166c25324f9",
+      "review_id": "I-14-C01-Hea4c974b491ec99d",
       "page_id": "I-14",
       "monster_name": "Darkmantle",
       "candidate": 1,
       "selected": false,
-      "seed": 3785709665664900277,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 2961871078132492974,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "fe189f8db0b4af38e3d4534d0a6756fcc1ea42c74fff328b548121e2e46144f2",
       "review_fingerprint": "f9a1b78e6b5633d88f2469ab97061caf49d585b4525962560d7eccc9f03bf486",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-14-C01.jpg",
       "source_image": "test-gallery/I-14-C01.png",
-      "source_sha256": "af07e166c25324f9ea3d3150ee4e3ef1fb7bbc2807d114f2adf80af6a85fff81",
+      "source_sha256": "ea4c974b491ec99d1ef20c2b1d93734f0d939ef9b1f740cd3395c56d3207f208",
       "visual_review": {
         "pass": false,
         "score": 49,
         "defects": [
-          "no stalactites or stalagmites visible"
+          "monster dominates space, obscuring habitat details"
         ],
         "preserve": [
-          "rocky ceiling arch",
-          "hanging lantern",
-          "irregular rock boundaries"
+          "chain-hung lantern",
+          "stalactite above lantern",
+          "rocky arched ceiling"
         ],
         "stage": "environment"
       },
@@ -609,34 +594,34 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:26:17.009719+00:00"
+      "finished_at": "2026-09-28T02:16:24.629426+00:00"
     },
     {
-      "review_id": "I-16-C01-Hec14a7b9df78c985",
+      "review_id": "I-16-C01-H50db7b3bfa25a445",
       "page_id": "I-16",
       "monster_name": "Giant Bat",
       "candidate": 1,
       "selected": false,
-      "seed": 6486038489562461422,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 3559279210064320107,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "298b9d340e27e00e9b2a5c1a95c29d3eb50369be24c807ade14407e599e4eb58",
       "review_fingerprint": "59e62e14b68b1f1f5f8b0bba8f37116a77da8a0944203f188c50db601bbafa87",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-16-C01.jpg",
       "source_image": "test-gallery/I-16-C01.png",
-      "source_sha256": "ec14a7b9df78c985cda2303c7a4078aa555713e20413fc9d15b920009eb8a86c",
+      "source_sha256": "50db7b3bfa25a445dd3095876e6e78cbd3026a5262d027d903279f1f232594a2",
       "visual_review": {
         "pass": false,
         "score": 49,
         "defects": [
-          "no visible river channel"
+          "no visible river channel beneath roost ledge"
         ],
         "preserve": [
-          "ceiling with hanging bat",
-          "rocky vertical walls",
-          "water surface with stones"
+          "rocky ceiling with hanging bat",
+          "asymmetrical rock walls",
+          "low water level with eroded banks"
         ],
         "stage": "environment"
       },
@@ -644,80 +629,57 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:32:20.067618+00:00"
+      "finished_at": "2026-09-28T02:19:44.038556+00:00"
     },
     {
-      "review_id": "I-19-C01-H3d82f95c9e3479ce",
+      "review_id": "I-19-C01-H4e440413c7ca74ec",
       "page_id": "I-19",
       "monster_name": "Rat Swarm",
       "candidate": 1,
       "selected": false,
-      "seed": 5893505970205022719,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 8902494100902111723,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "53af9ab116d54d20200fd04723b0e7e16c127795e66458b6f36d957327470e16",
       "review_fingerprint": "6fba48d869b2e43b287e7dafc891b5291dcd7cb0d908b574728bf62e5ddf2572",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-19-C01.jpg",
       "source_image": "test-gallery/I-19-C01.png",
-      "source_sha256": "3d82f95c9e3479ced5502a42550ef58294d040afcf7fd754086055fda9fd1f5b",
+      "source_sha256": "4e440413c7ca74ec702d5dafb54ea8c9ae4c4594b85a24b6fc2c499474436092",
       "visual_review": null,
       "advisory_review_status": "unavailable",
       "advisory_review_error": "Action reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'no water visible or ripple arcs', 'gate': 'Interaction proof is visible: WATER-CONTACT PROOF: visible ripple arcs must originate where the creature/body contacts the water surface; do not place decorative ripples elsewhere or leave the body floating above the waterline.', 'overlap': 0.75}]",
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:33:08.056020+00:00"
+      "finished_at": "2026-09-28T02:20:05.630541+00:00"
     },
     {
-      "review_id": "I-20-C01-Hb90371f54518aa34",
+      "review_id": "I-20-C01-H8dd297215218797b",
       "page_id": "I-20",
       "monster_name": "Giant Centipede",
       "candidate": 1,
       "selected": false,
-      "seed": 5217743958369133297,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+      "seed": 7299212315153732695,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
       "generation_fingerprint": "4e32f3b7ce4b83a4f496ec32542851e3323ff10675ee16d800301786b87cbd5e",
       "review_fingerprint": "f79513118936e8d988ca6b54b9b444437279a6e5758fffa7b4aef94216fa86d5",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-20-C01.jpg",
       "source_image": "test-gallery/I-20-C01.png",
-      "source_sha256": "b90371f54518aa340e0d2a910fd99f61c713dc40c521439fd5500f0d4dc2a7f7",
-      "visual_review": null,
-      "advisory_review_status": "unavailable",
-      "advisory_review_error": "Identity reviewer remained self-contradictory after consistency retry: [{'kind': 'positive_gate_echo', 'defect': 'front claws are not visible', 'gate': 'Identity check: front poison claws stay small mouth-adjacent forcipules, not giant pincers', 'overlap': 1.0}, {'kind': 'positive_gate_echo', 'defect': 'rear body ends in a plain taper with no scorpion-style tail weapon', 'gate': 'Identity check: rear body ends in a plain taper with no scorpion-style stinger or tail weapon', 'overlap': 1.0}]",
-      "assistant_review": null,
-      "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:35:09.443702+00:00"
-    },
-    {
-      "review_id": "I-22-C01-Hd330cbed4d1685ee",
-      "page_id": "I-22",
-      "monster_name": "Giant Spider",
-      "candidate": 1,
-      "selected": false,
-      "seed": 4252219520197039155,
-      "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
-      "generation_fingerprint": "4f10aace196ee6d046813ca7164e9e17d91a8bf88dc871a576d310f67c710e31",
-      "review_fingerprint": "fe9f98f4ae0078bf04f931a105e2bb0a0c50f7e9cdd56ccc67d591a20bbb26c4",
-      "generation_authority_current": true,
-      "review_authority_current": true,
-      "review_checked_at": null,
-      "preview": "review-previews/I-22-C01.jpg",
-      "source_image": "test-gallery/I-22-C01.png",
-      "source_sha256": "d330cbed4d1685ee486b173f40eb08b7cd3723aa08a471415599d0cdd2f7c98c",
+      "source_sha256": "8dd297215218797b51b578f743e7fd7cd5f8af271a76a4d1bb07dd9345ad4a03",
       "visual_review": {
         "pass": false,
         "score": 49,
         "defects": [
-          "no masonry or arches visible"
+          "arched burial niches not visible as niches, but as window frames"
         ],
         "preserve": [
-          "radial web spans center",
-          "open floor lane",
-          "frontal web frame"
+          "stone floor tiles",
+          "bone ossuary shelf",
+          "arched stone framing"
         ],
         "stage": "environment"
       },
@@ -725,7 +687,42 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T01:41:15.619499+00:00"
+      "finished_at": "2026-09-28T02:28:35.744979+00:00"
+    },
+    {
+      "review_id": "I-22-C01-Hcb90cca6a5037b9b",
+      "page_id": "I-22",
+      "monster_name": "Giant Spider",
+      "candidate": 1,
+      "selected": false,
+      "seed": 5475387753090512973,
+      "engine_commit": "697e1502e6e81a4d78694564743f0fb8a05c9388",
+      "generation_fingerprint": "4f10aace196ee6d046813ca7164e9e17d91a8bf88dc871a576d310f67c710e31",
+      "review_fingerprint": "fe9f98f4ae0078bf04f931a105e2bb0a0c50f7e9cdd56ccc67d591a20bbb26c4",
+      "generation_authority_current": false,
+      "review_authority_current": false,
+      "review_checked_at": null,
+      "preview": "review-previews/I-22-C01.jpg",
+      "source_image": "test-gallery/I-22-C01.png",
+      "source_sha256": "cb90cca6a5037b9be8a93b0ce3c2ca3f5a3abde75c128c99290af41cbfb6495f",
+      "visual_review": {
+        "pass": false,
+        "score": 49,
+        "defects": [
+          "no arches or masonry visible"
+        ],
+        "preserve": [
+          "web spans radial from center",
+          "spider dominates center",
+          "open floor lane visible"
+        ],
+        "stage": "environment"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-28T02:34:53.130966+00:00"
     }
   ],
   "diagnostics": [
