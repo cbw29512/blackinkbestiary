@@ -249,21 +249,15 @@ def scaffold_prompt_prefix(page: dict) -> str:
         if str(primitive.get("type") or "").lower() != "connector":
             continue
         role = str(primitive.get("role") or "connector").strip()
-        anchors = primitive.get("anchors") or ["fixed endpoint", "fixed endpoint"]
-        connector_rules.append(
-            f"{role}: preserve exactly two visible endpoints anchored to {anchors[0]} and {anchors[1]}; "
-            "do not attach, merge, or terminate the line on the creature unless the page explicitly requires that interaction."
-        )
+        anchors = primitive.get("anchors") or ["wall", "wall"]
+        connector_rules.append(f"{role}: two anchors ({anchors[0]}; {anchors[1]}); never on the creature.")
 
     opening_rule = str(cfg.get("opening_rule") or "").strip()
     subject_rule = str(cfg.get("subject_rule") or "").strip()
-    topology = " ".join(connector_rules)
     return (
-        "STRUCTURAL SCAFFOLD MODE — HARD GEOMETRY AUTHORITY: the provided input image is a layout scaffold, not finished artwork. "
-        "Preserve the topology and placement of its major black-line structures while converting them into polished fantasy coloring-page architecture. "
-        "Do not erase, relocate, or reinterpret the scaffold's openings, hazards, doors, or connector endpoints. "
-        "Every architectural opening must contain visible depth evidence such as receding floor/wall lines, a back plane, or continuing passage; never leave a large doorway or arch as an empty white void. "
+        "SCAFFOLD MODE: input lines are layout, not finished art. Keep openings, hazards, doors, and connector endpoints. "
+        "Openings need visible depth; no empty white voids. "
         + (opening_rule + " " if opening_rule else "")
         + (subject_rule + " " if subject_rule else "")
-        + topology
+        + " ".join(connector_rules)
     ).strip()

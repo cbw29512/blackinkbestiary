@@ -87,7 +87,7 @@ class SceneScaffoldTests(unittest.TestCase):
         self.assertIn("empty white void", prompt)
         self.assertIn("left wall ring", prompt)
         self.assertIn("right wall ring", prompt)
-        self.assertIn("do not attach", prompt)
+        self.assertIn("never on the creature", prompt)
         self.assertIn("kobold", prompt)
 
     def test_scaffold_is_part_of_generation_fingerprint_authority(self):

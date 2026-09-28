@@ -18,15 +18,12 @@ class ConnectorCompletenessTests(unittest.TestCase):
         self.assertEqual(len(proofs), 3)
         self.assertTrue(any("left wall ring" in item for item in proofs))
         self.assertTrue(any("right wall ring" in item for item in proofs))
-        self.assertTrue(any("not on the creature" in item for item in proofs))
+        self.assertTrue(any("not the creature" in item for item in proofs))
 
         resolved = resolve_page_spec(page, ROOT)
         for item in proofs:
             self.assertIn(item, resolved["must_include"])
-        self.assertIn(
-            "tripwire attached to creature, tail, clothing, or gear",
-            resolved["must_avoid"],
-        )
+        self.assertIn("tripwire on creature or gear", resolved["must_avoid"])
 
     def test_pages_without_scaffold_stay_unchanged(self) -> None:
         self.assertEqual(connector_completeness_items({"page_id": "X"}), [])
