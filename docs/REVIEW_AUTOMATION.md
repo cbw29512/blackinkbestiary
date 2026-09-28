@@ -42,6 +42,21 @@ This persistence layer changes only workstation process availability. It does no
 7. Repeat until the canary genuinely passes direct image inspection.
 8. After 9/9 exact-image canary approval, the full-gallery launcher generates/resumes the 50-page candidate set and always publishes completed/diagnostic state back to GitHub.
 
+## Human feedback flywheel
+
+Canary exact-image approval is human-authority by default while the production style is still being calibrated.
+
+- Double-click `REVIEW_CANARIES.bat` to review the current exact canary PNGs without relying on the localhost dashboard.
+- **Approve** means the exact image hash is premium-production acceptable.
+- **Reject + Regenerate** requires both a failure stage (identity, environment, action, or quality) and a written reason.
+- Human decisions are appended to `review-previews/decisions.json` with exact image hash provenance and `reviewer: human`.
+- The next generation pass consumes the rejection reason as a stage-specific recovery lock.
+- Historical rejection reasons are also available to the prompt builder for ranking known failure modes.
+- Repeated human reasons should be promoted into reusable monster-family, environment, action, or quality contracts only when the evidence is systemic. Do not turn one page-specific complaint into a global rule without repeated evidence.
+- This is feedback-driven system improvement, not model-weight fine-tuning. The generator improves through better structured authority, prompt composition, defect routing, and reusable contracts.
+
+When every current canary image is waiting for human review and no page needs new pixels, unattended autopilot must report `WAITING FOR HUMAN REVIEW` and sleep. It must not repeatedly call generation or publish duplicate snapshots merely to appear active.
+
 ## Review and refinement authority
 
 The local semantic reviewer is intentionally fail-closed and staged:
