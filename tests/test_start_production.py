@@ -143,10 +143,14 @@ class StartProductionContractTests(unittest.TestCase):
 
     def test_canary_gallery_has_one_click_opener_and_full_size_images(self):
         opener = (ROOT / "OPEN_CANARY_GALLERY.bat").read_text(encoding="utf-8")
+        local_gallery = (ROOT / "LOCAL_CANARY_GALLERY.html").read_text(encoding="utf-8")
         monitor = (ROOT / "web" / "autopilot-status.html").read_text(encoding="utf-8")
         script = (ROOT / "web" / "autopilot-status.js").read_text(encoding="utf-8")
-        self.assertIn("START_STATUS_DASHBOARD_IF_NEEDED.bat", opener)
-        self.assertIn("autopilot-status.html#canaries", opener)
+        self.assertIn("LOCAL_CANARY_GALLERY.html", opener)
+        self.assertNotIn("127.0.0.1", opener)
+        self.assertIn("web/test-gallery/", local_gallery)
+        self.assertIn("setInterval(render,5000)", local_gallery)
+        self.assertIn("viewer.showModal()", local_gallery)
         self.assertIn("imageDialog", monitor)
         self.assertIn("Click any picture to view it full-size", monitor)
         self.assertIn("canary-preview", script)
