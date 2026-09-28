@@ -400,13 +400,14 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
 
     url = settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/generate"
     gates = (
-        ("Identity", build_identity_review_prompt(page)),
-        ("Environment", build_environment_review_prompt(page)),
-        ("Action", build_action_review_prompt(page)),
-        ("Completeness", build_completeness_review_prompt(page)),
-        ("Quality", build_review_prompt(page)),
+        ("Identity", build_identity_review_prompt),
+        ("Environment", build_environment_review_prompt),
+        ("Action", build_action_review_prompt),
+        ("Completeness", build_completeness_review_prompt),
+        ("Quality", build_review_prompt),
     )
-    for stage, prompt in gates:
+    for stage, builder in gates:
+        prompt = builder(page)
         verdict = _run_gate(url, settings, encoded, prompt, stage)
         stage_id = stage.lower()
         missing = _stage_pass_evidence_issues(page, stage_id, verdict)
