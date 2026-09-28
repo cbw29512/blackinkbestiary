@@ -8,20 +8,22 @@ from pathlib import Path
 
 try:
     from .defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
-    from .learning_feedback import build_learning_queue
+    from .learning_feedback import build_learning_queue, human_feedback_summary
     from .master_engine_guard import audit_master_engine_separation, audit_replication_orchestration
     from .production_audit import audit_active_book
     from .prompt_load import prompt_load_report
     from .replication_probe import run_replication_probe
+    from .review_authority import decision_is_authoritative
     from .series_readiness import audit_series
     from .studio_config import active_book_paths
 except ImportError:
     from defect_taxonomy import count_defects, load_taxonomy, taxonomy_labels
-    from learning_feedback import build_learning_queue
+    from learning_feedback import build_learning_queue, human_feedback_summary
     from master_engine_guard import audit_master_engine_separation, audit_replication_orchestration
     from production_audit import audit_active_book
     from prompt_load import prompt_load_report
     from replication_probe import run_replication_probe
+    from review_authority import decision_is_authoritative
     from series_readiness import audit_series
     from studio_config import active_book_paths
 
@@ -149,6 +151,8 @@ def current_page_records(state: dict, page_ids: list[str]) -> list[dict]:
 
 def exact_image_authority_approved(item: dict, root: Path = ROOT) -> bool:
     assistant = item.get("assistant_review") or {}
+    if not decision_is_authoritative(assistant, root):
+        return False
     decision = str(assistant.get("decision") or "").strip().lower()
     review_id = str(assistant.get("review_id") or "").strip()
     if decision not in {"approve", "select"} or not review_id:
@@ -214,6 +218,7 @@ def canary_metrics(state: dict, canary_page_ids: list[str], root: Path = ROOT) -
             "visual_score": visual.get("score"),
             "local_visual_advisory_pass": bool(visual.get("pass")),
             "assistant_decision": assistant.get("decision"),
+            "exact_image_reviewer": assistant.get("reviewer"),
         })
 
     total = len(canary_page_ids)
@@ -528,6 +533,7 @@ def build_quality_snapshot(
     defects = count_defects(current_records, taxonomy)
     historical_defects = count_defects(historical_records, taxonomy)
     learning_queue = build_learning_queue(historical_records, root)
+    human_feedback = human_feedback_summary(root)
     status_counts = Counter(str(item.get("status") or "unknown") for item in current_records)
     historical_status_counts = Counter(
         str(item.get("status") or "unknown") for item in historical_records
@@ -578,6 +584,7 @@ def build_quality_snapshot(
         "defect_counts": defects,
         "historical_defect_counts": historical_defects,
         "learning_queue": learning_queue,
+        "human_feedback": human_feedback,
         "defect_labels": taxonomy_labels(taxonomy),
         "status_counts": dict(sorted(status_counts.items())),
         "historical_status_counts": dict(sorted(historical_status_counts.items())),

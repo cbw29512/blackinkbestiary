@@ -214,3 +214,81 @@ def build_learning_queue(records: list[dict], root: Path = ROOT) -> list[dict]:
             "examples": examples.get(code, [])[:3],
         })
     return queue
+
+
+def human_feedback_summary(root: Path = ROOT) -> dict:
+    """Summarize append-only human exact-image decisions for improvement telemetry."""
+    decisions_path = root / "review-previews" / "decisions.json"
+    empty = {
+        "total_reviews": 0,
+        "approvals": 0,
+        "rejections": 0,
+        "rejection_stage_counts": {},
+        "defect_counts": {},
+        "distinct_pages_reviewed": 0,
+        "recurring_defects": [],
+    }
+    if not decisions_path.exists():
+        return empty
+    try:
+        payload = json.loads(decisions_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return empty
+
+    human = [
+        row for row in payload.get("reviews", [])
+        if isinstance(row, dict)
+        and str(row.get("reviewer") or "").strip().lower() == "human"
+    ]
+    taxonomy = load_taxonomy(root / "config" / "defect_taxonomy.json")
+    labels = taxonomy_labels(taxonomy)
+    stage_counts = Counter()
+    defects = Counter()
+    pages = set()
+    approvals = rejections = 0
+
+    for row in human:
+        decision = str(row.get("decision") or "").strip().lower()
+        page_id = str(row.get("page_id") or "").strip()
+        if page_id:
+            pages.add(page_id)
+        if decision in {"approve", "select"}:
+            approvals += 1
+            continue
+        if decision != "reject":
+            continue
+        rejections += 1
+        stage = str(row.get("stage") or "").strip().lower() or "unspecified"
+        stage_counts[stage] += 1
+        record = {
+            "page_id": page_id,
+            "candidate": row.get("candidate"),
+            "status": "human_rejected",
+            "assistant_review": {
+                "notes": row.get("notes"),
+                "stage": stage,
+                "reviewer": "human",
+            },
+        }
+        for code in record_defect_codes(record, taxonomy):
+            if code != "UNCLASSIFIED":
+                defects[code] += 1
+
+    recurring = [
+        {
+            "defect_code": code,
+            "label": (labels.get(code) or {}).get("label"),
+            "count": count,
+        }
+        for code, count in sorted(defects.items(), key=lambda item: (-item[1], item[0]))
+        if count >= 2
+    ]
+    return {
+        "total_reviews": len(human),
+        "approvals": approvals,
+        "rejections": rejections,
+        "rejection_stage_counts": dict(sorted(stage_counts.items())),
+        "defect_counts": dict(sorted(defects.items())),
+        "distinct_pages_reviewed": len(pages),
+        "recurring_defects": recurring,
+    }
