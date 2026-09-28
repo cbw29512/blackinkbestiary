@@ -127,5 +127,23 @@
     "gargantuan": "Preserve gargantuan scale with unmistakable environmental comparison; avoid shrinking the creature into a normal room-sized subject.",
     "swarm": "The swarm is visually dominant as a collective group, while each member retains its canonical individual scale. No oversized leader or mascot creature.",
     "default": "Preserve the creature's canonical size and proportions. Achieve visual dominance through framing and placement, never by changing species scale."
+  },
+  "structural_scaffold": {
+    "purpose": "Optional deterministic geometry guidance for pages where exact spatial topology repeatedly fails under text-only generation.",
+    "policy": "Use for hard geometry such as architectural openings, pits, stairs, cages, chains, webs, bridges, doors, and connector lines. The generic engine interprets page data; page IDs and creature names must never be hard-coded into scaffold behavior.",
+    "supported_primitives": [
+      "line",
+      "polyline",
+      "polygon",
+      "rect",
+      "door",
+      "archway",
+      "pit",
+      "connector"
+    ],
+    "opening_rule": "Architectural openings must include visible depth evidence and may not render as large empty white voids.",
+    "connector_rule": "Connector primitives retain exactly two explicit endpoints and may not terminate on or merge into a creature unless that attachment is explicitly required by the story.",
+    "authority_rule": "The scaffold controls major topology and spatial relationships. The image model may stylize surfaces and add appropriate detail but may not erase or reinterpret the scaffold geometry.",
+    "fallback": "Pages without scene_scaffold continue through the ordinary text-to-image path."
   }
 }

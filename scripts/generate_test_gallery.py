@@ -28,6 +28,7 @@ from page_contract import resolve_page_spec
 from prompt_builder import build_prompt
 from qa import inspect_candidate
 from review_authority import decision_is_authoritative
+from scene_scaffold import render_scene_scaffold, scaffold_enabled, scaffold_prompt_prefix
 from qa_recovery import (
     QA_STALL_LIMIT,
     generic_qa_recovery_feedback,
@@ -222,7 +223,7 @@ def assistant_repair_plan(prior: dict | None) -> tuple[Path | None, dict | None]
         return None, None
     stage = str(assistant_review.get("stage") or "").strip().lower()
     source = existing_candidate_path(prior)
-    if stage not in {"environment", "action", "quality"} or source is None:
+    if stage not in {"environment", "action", "completeness", "quality"} or source is None:
         return None, None
     notes = str(assistant_review.get("notes") or "").strip()
     return source, {
@@ -265,6 +266,53 @@ def load_pages() -> list[dict]:
     if errors:
         raise RuntimeError("Production manifest invalid: " + " | ".join(errors))
     return [resolve_page_spec(page, ROOT) for page in tome["pages"]]
+
+
+def prepare_from_authority(
+    cli,
+    client,
+    config,
+    page,
+    seed: int,
+    candidate_no: int,
+    review_feedback: dict | None = None,
+) -> Path:
+    """Use deterministic structural guidance when a page declares hard geometry."""
+    if not scaffold_enabled(page):
+        return prepare(cli, config, page, seed, candidate_no, review_feedback)
+
+    unet = model_filename(config, "diffusion_models")
+    clip = model_filename(config, "text_encoders")
+    vae = model_filename(config, "vae")
+    scaffold_path = WORKFLOW_DIR / f"scaffold_{page['page_id'].lower()}_c{candidate_no:02d}.png"
+    render_scene_scaffold(page, scaffold_path, width=768, height=1024)
+    uploaded = client.upload_image(scaffold_path, subfolder="blackink-scaffolds")
+
+    prompt = build_prompt(page, review_feedback, candidate_no=candidate_no)
+    prefix = scaffold_prompt_prefix(page)
+    if prefix:
+        prompt = prefix + "\n\n" + prompt
+    assert_generation_ready(page, prompt, ROOT)
+
+    path = WORKFLOW_DIR / f"test_{page['page_id'].lower()}_c{candidate_no:02d}_scaffold.json"
+    prepare_distilled_image_edit(
+        cli,
+        config["templates"]["modify"] if "modify" in config["templates"] else config["templates"]["image_edit"],
+        path,
+        prompt=prompt,
+        seed=seed,
+        input_image=uploaded["load_image_name"],
+        model_filename=unet,
+        clip_filename=clip,
+        vae_filename=vae,
+    )
+    checked = envelope_data(cli.validate_workflow(path)) or {}
+    if not checked.get("valid"):
+        raise RuntimeError(
+            "Prepared structural-scaffold workflow failed validation: "
+            + json.dumps(checked)
+        )
+    return path
 
 
 def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: dict | None = None) -> Path:
@@ -380,8 +428,9 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
             )
             if structural_stagnation or identity_stagnation:
                 feedback["composition_escape_offset"] = pass_no
-            workflow = prepare(
+            workflow = prepare_from_authority(
                 cli,
+                client,
                 config,
                 page,
                 seed + pass_no,
@@ -677,7 +726,7 @@ def main() -> int:
                     if stage in {"identity", "environment", "action", "quality"}:
                         review_feedback["stage"] = stage
                 if assistant_repair_source is not None:
-                    # Exact-image environment/action/quality rejection keeps the
+                    # Exact-image environment/action/completeness/quality rejection keeps the
                     # successful creature pixels and performs one targeted edit
                     # before returning to the normal staged reviewer loop.
                     workflow = prepare_edit(
@@ -707,11 +756,13 @@ def main() -> int:
                 elif reviewer_recheck_source is not None:
                     # Reuse the current exact image as the refinement source.
                     # refine_candidate will route identity failures to fresh
-                    # text generation, while environment/action/quality
+                    # fresh authority generation, while later-stage failures
                     # failures preserve good pixels through image editing.
                     source = reviewer_recheck_source
                 else:
-                    workflow = prepare(cli, config, page, seed, candidate_no, review_feedback)
+                    workflow = prepare_from_authority(
+                        cli, client, config, page, seed, candidate_no, review_feedback
+                    )
                     write_generation_progress(
                         page["page_id"], page["monster_name"], candidate_no,
                         "rendering", message="ComfyUI is rendering the candidate",
