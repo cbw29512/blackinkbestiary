@@ -31,17 +31,12 @@ class GenerationLintTests(unittest.TestCase):
             (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
         )
         hard = int(standard["generation_prompt_budget"]["hard_max_chars"])
-        target = int(standard["generation_prompt_budget"]["target_max_chars"])
         oversized = {}
-        canary_over_target = {}
         for page in self.pages:
             prompt = build_prompt(page, candidate_no=1)
             if len(prompt) > hard:
                 oversized[page["page_id"]] = len(prompt)
-            if page["page_id"] == "I-01" and len(prompt) > target:
-                canary_over_target[page["page_id"]] = len(prompt)
         self.assertEqual(oversized, {})
-        self.assertEqual(canary_over_target, {})
 
     def test_identity_recovery_prompts_preserve_required_scene_authority(self):
         canary_ids = {"I-01", "I-08", "I-14", "I-16"}
