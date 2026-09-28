@@ -6,7 +6,7 @@
   "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
   "comparable_to_previous": true,
   "comparison_reason": null,
-  "history_appended": true,
+  "history_appended": false,
   "history_entries": 67,
   "current_metrics": {
     "foundation_readiness": 100.0,
@@ -105,36 +105,20 @@
     }
   },
   "defect_comparisons": {
-    "ACTION_UNCLEAR": {
-      "previous": 1,
-      "current": 0,
-      "delta": -1,
-      "signed_delta": "-1",
-      "trend": "improving",
-      "lower_is_better": true
-    },
     "ENVIRONMENT_GENERIC": {
-      "previous": 2,
+      "previous": 3,
       "current": 3,
-      "delta": 1,
-      "signed_delta": "+1",
-      "trend": "regressing",
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     },
     "IDENTITY_HEROIC_BULK": {
-      "previous": 2,
+      "previous": 1,
       "current": 1,
-      "delta": -1,
-      "signed_delta": "-1",
-      "trend": "improving",
-      "lower_is_better": true
-    },
-    "IDENTITY_LIMB_COUNT": {
-      "previous": 2,
-      "current": 0,
-      "delta": -2,
-      "signed_delta": "-2",
-      "trend": "improving",
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     },
     "IDENTITY_WRONG_CREATURE": {
@@ -145,38 +129,30 @@
       "trend": "flat",
       "lower_is_better": true
     },
-    "QUALITY_DENSITY": {
-      "previous": 1,
-      "current": 0,
-      "delta": -1,
-      "signed_delta": "-1",
-      "trend": "improving",
-      "lower_is_better": true
-    },
     "UNCLASSIFIED": {
-      "previous": 1,
+      "previous": 4,
       "current": 4,
-      "delta": 3,
-      "signed_delta": "+3",
-      "trend": "regressing",
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     }
   },
   "efficiency_comparisons": {
     "gpu_attempts": {
-      "previous": 33,
+      "previous": 41,
       "current": 41,
-      "delta": 8.0,
-      "signed_delta": "+8.00",
-      "trend": "regressing",
+      "delta": 0.0,
+      "signed_delta": "+0.00",
+      "trend": "flat",
       "lower_is_better": true
     },
     "refinement_passes": {
-      "previous": 24,
+      "previous": 32,
       "current": 32,
-      "delta": 8.0,
-      "signed_delta": "+8.00",
-      "trend": "regressing",
+      "delta": 0.0,
+      "signed_delta": "+0.00",
+      "trend": "flat",
       "lower_is_better": true
     },
     "pages_at_max_refinements": {
@@ -196,11 +172,11 @@
       "lower_is_better": true
     },
     "avg_gpu_attempts_per_page": {
-      "previous": 3.67,
+      "previous": 4.56,
       "current": 4.56,
-      "delta": 0.89,
-      "signed_delta": "+0.89",
-      "trend": "regressing",
+      "delta": 0.0,
+      "signed_delta": "+0.00",
+      "trend": "flat",
       "lower_is_better": true
     },
     "semantic_yield_percent": {
@@ -233,13 +209,13 @@
   },
   "previous_generation_efficiency": {
     "all_gate_yield_percent": 0.0,
-    "avg_gpu_attempts_per_page": 3.67,
-    "gpu_attempts": 33,
+    "avg_gpu_attempts_per_page": 4.56,
+    "gpu_attempts": 41,
     "gpu_attempts_per_semantic_pass": null,
     "pages_at_max_refinements": 0,
     "pages_considered": 9,
     "pages_semantic_stalled": 0,
-    "refinement_passes": 24,
+    "refinement_passes": 32,
     "semantic_yield_percent": 0.0
   },
   "current_defect_counts": {
@@ -262,13 +238,10 @@
     "QUALITY_DENSITY": 3
   },
   "previous_defect_counts": {
-    "ACTION_UNCLEAR": 1,
-    "ENVIRONMENT_GENERIC": 2,
-    "IDENTITY_HEROIC_BULK": 2,
-    "IDENTITY_LIMB_COUNT": 2,
+    "ENVIRONMENT_GENERIC": 3,
+    "IDENTITY_HEROIC_BULK": 1,
     "IDENTITY_WRONG_CREATURE": 1,
-    "QUALITY_DENSITY": 1,
-    "UNCLASSIFIED": 1
+    "UNCLASSIFIED": 4
   },
   "replication": {
     "score": 100,
