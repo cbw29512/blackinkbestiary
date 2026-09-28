@@ -6,8 +6,8 @@
   "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
   "comparable_to_previous": true,
   "comparison_reason": null,
-  "history_appended": false,
-  "history_entries": 65,
+  "history_appended": true,
+  "history_entries": 66,
   "current_metrics": {
     "foundation_readiness": 100.0,
     "technical_qa_pass_rate": 100.0,
@@ -115,26 +115,50 @@
     },
     "ENVIRONMENT_GENERIC": {
       "previous": 1,
-      "current": 1,
-      "delta": 0,
-      "signed_delta": "+0",
-      "trend": "flat",
+      "current": 2,
+      "delta": 1,
+      "signed_delta": "+1",
+      "trend": "regressing",
       "lower_is_better": true
     },
     "IDENTITY_HEROIC_BULK": {
       "previous": 1,
+      "current": 2,
+      "delta": 1,
+      "signed_delta": "+1",
+      "trend": "regressing",
+      "lower_is_better": true
+    },
+    "IDENTITY_LIMB_COUNT": {
+      "previous": 0,
+      "current": 2,
+      "delta": 2,
+      "signed_delta": "+2",
+      "trend": "regressing",
+      "lower_is_better": true
+    },
+    "IDENTITY_WRONG_CREATURE": {
+      "previous": 0,
       "current": 1,
-      "delta": 0,
-      "signed_delta": "+0",
-      "trend": "flat",
+      "delta": 1,
+      "signed_delta": "+1",
+      "trend": "regressing",
+      "lower_is_better": true
+    },
+    "QUALITY_DENSITY": {
+      "previous": 0,
+      "current": 1,
+      "delta": 1,
+      "signed_delta": "+1",
+      "trend": "regressing",
       "lower_is_better": true
     },
     "UNCLASSIFIED": {
       "previous": 6,
-      "current": 6,
-      "delta": 0,
-      "signed_delta": "+0",
-      "trend": "flat",
+      "current": 1,
+      "delta": -5,
+      "signed_delta": "-5",
+      "trend": "improving",
       "lower_is_better": true
     }
   },
@@ -219,23 +243,26 @@
     "semantic_yield_percent": 0.0
   },
   "current_defect_counts": {
-    "UNCLASSIFIED": 6,
+    "ENVIRONMENT_GENERIC": 2,
+    "IDENTITY_HEROIC_BULK": 2,
+    "IDENTITY_LIMB_COUNT": 2,
     "ACTION_UNCLEAR": 1,
-    "ENVIRONMENT_GENERIC": 1,
-    "IDENTITY_HEROIC_BULK": 1
+    "IDENTITY_WRONG_CREATURE": 1,
+    "QUALITY_DENSITY": 1,
+    "UNCLASSIFIED": 1
   },
   "current_historical_defect_counts": {
-    "IDENTITY_HEROIC_BULK": 34,
+    "IDENTITY_HEROIC_BULK": 35,
     "IDENTITY_HORNS_TUSKS": 33,
-    "IDENTITY_WRONG_CREATURE": 26,
-    "IDENTITY_LIMB_COUNT": 12,
+    "IDENTITY_WRONG_CREATURE": 27,
+    "IDENTITY_LIMB_COUNT": 14,
     "SIGNATURE_FEATURE_MISSING": 12,
-    "UNCLASSIFIED": 9,
+    "ENVIRONMENT_GENERIC": 8,
     "ACTION_UNCLEAR": 7,
-    "ENVIRONMENT_GENERIC": 7,
     "SWARM_WALLPAPER": 7,
+    "QUALITY_DENSITY": 4,
     "SWARM_OVERSIZED_LEADER": 4,
-    "QUALITY_DENSITY": 3
+    "UNCLASSIFIED": 4
   },
   "previous_defect_counts": {
     "ACTION_UNCLEAR": 1,
