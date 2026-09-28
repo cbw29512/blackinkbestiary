@@ -7,9 +7,11 @@ from pathlib import Path
 try:
     from .environment_catalog import resolve_environment_profile
     from .monster_catalog import resolve_monster_spec
+    from .connector_completeness import connector_completeness_items, connector_must_avoid_items
 except ImportError:
     from environment_catalog import resolve_environment_profile
     from monster_catalog import resolve_monster_spec
+    from connector_completeness import connector_completeness_items, connector_must_avoid_items
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_FILE = ROOT / "config" / "universal_page_contract.json"
@@ -73,11 +75,16 @@ def resolve_page_spec(page: dict, root: Path = ROOT) -> dict:
         monster.get("accuracy_checks"),
         page.get("identity_rules"),
     )
+    resolved["must_include"] = _merge_unique(
+        page.get("must_include"),
+        connector_completeness_items(page),
+    )
     resolved["must_avoid"] = _merge_unique(
         contract.get("global_must_avoid"),
         visual.get("must_avoid"),
         environment.get("must_avoid"),
         page.get("must_avoid"),
+        connector_must_avoid_items(page),
     )
     defaults = contract.get("defaults") or {}
     resolved.setdefault("composition", defaults.get("composition", ""))
