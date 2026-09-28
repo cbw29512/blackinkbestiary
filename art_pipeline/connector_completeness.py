@@ -14,7 +14,7 @@ def connector_completeness_items(page: dict) -> list[str]:
         anchors = [str(a).strip() for a in (primitive.get("anchors") or []) if str(a).strip()]
         while len(anchors) < 2:
             anchors.append("wall endpoint")
-        items.append(f"{role} path-span")
+        items.append(f"{role} must visibly cross the traversable path")
         items.append(f"{role} A: {anchors[0]}")
         items.append(f"{role} B: {anchors[1]}")
     return items
