@@ -2,7 +2,7 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
-  "measured_at": "2026-09-28T09:29:10.385104+00:00",
+  "measured_at": "2026-09-28T09:37:34.463114+00:00",
   "engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
   "active_book_id": "TOME-I",
   "metrics": {
@@ -107,8 +107,8 @@
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": null,
-        "visual_score": null,
+        "visual_stage": "environment",
+        "visual_score": 49,
         "local_visual_advisory_pass": false,
         "assistant_decision": null
       },
@@ -155,11 +155,11 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 41,
-    "refinement_passes": 32,
+    "gpu_attempts": 45,
+    "refinement_passes": 36,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 4.56,
+    "avg_gpu_attempts_per_page": 5.0,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -168,9 +168,9 @@
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 11013.3,
+    "generation_chars_avg": 11049.6,
     "generation_chars_max": 11827,
-    "generation_words_avg": 1555.6,
+    "generation_words_avg": 1560.3,
     "generation_words_max": 1657,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
@@ -432,9 +432,9 @@
       {
         "page_id": "I-16",
         "generation": {
-          "chars": 10610,
-          "words": 1508,
-          "nonempty_lines": 63,
+          "chars": 10936,
+          "words": 1551,
+          "nonempty_lines": 64,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -917,7 +917,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 44,
+      "evidence_count": 43,
       "distinct_pages": 9,
       "distinct_families": 5,
       "scope": [
@@ -1015,7 +1015,7 @@
     {
       "defect_code": "IDENTITY_WRONG_CREATURE",
       "label": "Wrong creature/body plan",
-      "evidence_count": 30,
+      "evidence_count": 34,
       "distinct_pages": 9,
       "distinct_families": 9,
       "scope": [
@@ -1479,5 +1479,5 @@
     "IDENTITY_HEROIC_BULK",
     "IDENTITY_WRONG_CREATURE"
   ],
-  "measurement_fingerprint": "b1a4537d80ad4f7ac049632d21f32a8fc424f3b6025870e2670a65a484a6a942"
+  "measurement_fingerprint": "7012d9e98eef0fbf69f08b91838a98cfba4b487cf88d28d700e1dd781e755e4c"
 }
