@@ -121,8 +121,6 @@ def _arch(canvas: bytearray, box, width: int, height: int, line_width: int, dept
 
         cx = (ix0 + ix1) // 2
         vanish_y = int(iy0 + (iy1 - iy0) * 0.58)
-        _line(canvas, width, height, (ix0, iy1), (cx, vanish_y), inner_width)
-        _line(canvas, width, height, (ix1, iy1), (cx, vanish_y), inner_width)
         for frac in (0.72, 0.82, 0.91):
             y = int(vanish_y + (iy1 - vanish_y) * frac)
             half = int((ix1 - ix0) * (frac - 0.58) * 0.42)
@@ -148,17 +146,19 @@ def _pit(canvas: bytearray, points: Iterable, width: int, height: int, line_widt
         return
     if open_near and len(poly) >= 4:
         far_left, far_right, near_right, near_left = poly[:4]
-        _polyline(canvas, width, height, [near_left, far_left, far_right, near_right], line_width)
+        _line(canvas, width, height, far_left, far_right, line_width)
 
         def _mix(a, b, t):
             return (int(a[0] + (b[0] - a[0]) * t), int(a[1] + (b[1] - a[1]) * t))
 
-        _line(canvas, width, height, _mix(far_left, near_left, 0.42), _mix(far_right, near_right, 0.42), max(2, line_width - 1))
+        lip_left = _mix(far_left, near_left, 0.35)
+        lip_right = _mix(far_right, near_right, 0.35)
+        _line(canvas, width, height, lip_left, lip_right, max(2, line_width - 1))
         if spikes:
-            for index, t in enumerate((0.28, 0.5, 0.72)):
-                base = _mix(near_left, near_right, t)
+            for t in (0.3, 0.5, 0.7):
+                base = _mix(lip_left, lip_right, t)
                 tip = _mix(far_left, far_right, t)
-                tip = _mix(tip, base, 0.45)
+                tip = _mix(base, tip, 0.6)
                 _line(canvas, width, height, base, tip, max(2, line_width - 1))
         return
     _polyline(canvas, width, height, poly + [poly[0]], line_width)
