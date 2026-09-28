@@ -509,10 +509,11 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
         "Create ONE printable fantasy monster coloring-book page.",
         (
             "PRIORITY ORDER — OBEY IN THIS ORDER: 1) exact creature body plan/anatomy, 2) canonical size/proportions, "
-            "3) the one visible story action/contact, 4) unmistakable environment geometry, 5) clean coloring-book style. "
+            "3) zero-omission required-element coverage, 4) the one visible story action/contact, 5) unmistakable environment geometry, 6) clean coloring-book style. "
             "If lower-priority detail conflicts with a higher-priority requirement, remove the lower-priority detail."
         ),
         recovery_lock,
+        format_required_visible_inventory(page),
         "IDENTITY — HIGHEST PRIORITY:\n" + "\n".join(f"- {x}" for x in identity_lines if x and not x.endswith(":")),
         _historical_scene_failure_lock(page),
     ]
@@ -656,6 +657,45 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
 
 
 
+def required_visible_inventory(page: dict) -> list[str]:
+    """Return every page-specific fact that must be visibly present in the final image."""
+    page = resolve_page_spec(page, ROOT)
+    variant = page.get("environment_variant") or {}
+    values = [
+        *(page.get("must_include") or []),
+        variant.get("landmark"),
+        variant.get("interaction"),
+    ]
+    result = []
+    seen = set()
+    for value in values:
+        item = str(value or "").strip()
+        if not item:
+            continue
+        key = re.sub(r"[^a-z0-9]+", " ", item.lower()).strip()
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        result.append(item)
+    return result
+
+
+def format_required_visible_inventory(page: dict) -> str:
+    items = required_visible_inventory(page)
+    if not items:
+        return ""
+    lines = [
+        "REQUIRED-ELEMENT INVENTORY — ZERO OMISSIONS ALLOWED:",
+        *[f"{index}. {item}" for index, item in enumerate(items, start=1)],
+        (
+            "COVERAGE-FIRST LAYOUT LOCK — NON-NEGOTIABLE: allocate a clear visible place or relationship for EVERY numbered item before adding decoration. "
+            "No item may be implied, hidden, replaced by a similar object, merged into unrelated scenery, or omitted to improve composition. "
+            "If the page is too crowded, remove optional decoration; never remove a required item."
+        ),
+    ]
+    return "\n".join(lines)
+
+
 def build_page_verification_checklist(page: dict) -> dict[str, list[str]]:
     """Canonical checklist shared by generation and every review gate."""
     page = resolve_page_spec(page, ROOT)
@@ -693,8 +733,11 @@ def build_page_verification_checklist(page: dict) -> dict[str, list[str]]:
     action = [f"Scene moment reads as: {page['moment']}"]
     action.extend(story_checklist(page, ROOT))
     action.extend(physicality_checklist(page))
-    for item in page.get("must_include", []):
-        action.append(f"Required element present: {item}")
+
+    completeness = [
+        f"Required element present: {item}"
+        for item in required_visible_inventory(page)
+    ]
 
     quality = [
         "Large open white coloring regions",
@@ -725,6 +768,7 @@ def build_page_verification_checklist(page: dict) -> dict[str, list[str]]:
         "identity": clean(identity),
         "environment": clean(environment),
         "action": clean(action),
+        "completeness": clean(completeness),
         "quality": clean(quality),
     }
 
@@ -733,7 +777,7 @@ def build_supervisor_checklist(page: dict) -> list[str]:
     checklist = build_page_verification_checklist(page)
     return [
         item
-        for stage in ("identity", "environment", "action", "quality")
+        for stage in ("identity", "environment", "action", "completeness", "quality")
         for item in checklist[stage]
     ]
 
@@ -743,7 +787,7 @@ def format_page_verification_checklist(
     stages: tuple[str, ...] | None = None,
 ) -> str:
     checklist = build_page_verification_checklist(page)
-    selected_stages = stages or ("identity", "environment", "action", "quality")
+    selected_stages = stages or ("identity", "environment", "action", "completeness", "quality")
     lines = ["MANDATORY PAGE VERIFICATION CHECKLIST — EVERY ITEM MUST PASS:"]
     for stage in selected_stages:
         lines.append(stage.upper() + ":")
@@ -760,6 +804,7 @@ def format_generation_self_check(identity_focus_mode: bool = False) -> str:
     return (
         "GENERATION SELF-CHECK — BEFORE FINALIZING: "
         "IDENTITY: exact species silhouette, body mass, limb topology, and canonical size; "
+        "COMPLETENESS: every numbered required element is visibly present with no substitutions or omissions; "
         "ENVIRONMENT: the selected habitat and unique landmark read through large structural forms; "
         "ACTION: the required verb/contact/cause-and-effect is visibly clear; "
         "QUALITY: broad white coloring regions, simple line density, no grayscale/color contamination, and blank print-safe margins. "
