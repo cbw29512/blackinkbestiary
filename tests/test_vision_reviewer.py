@@ -18,7 +18,7 @@ class VisionReviewerTests(unittest.TestCase):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         for page in tome["pages"]:
             checklist = build_page_verification_checklist(page)
-            self.assertEqual(set(checklist), {"identity", "environment", "action", "quality"})
+            self.assertEqual(set(checklist), {"identity", "environment", "action", "completeness", "quality"})
             for stage, checks in checklist.items():
                 self.assertTrue(checks, f"{page['page_id']} missing {stage} checks")
 
@@ -36,6 +36,7 @@ class VisionReviewerTests(unittest.TestCase):
             "environment_profile_id": "underground.trapped-stone-corridor",
             "moment": "kobold triggers a tripwire",
             "archetype": "trap_scene",
+            "must_include": ["visible tripwire across the corridor"],
         }
 
     def test_final_quality_gate_explicitly_rejects_decorative_artwork_frames(self):
@@ -281,10 +282,16 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertFalse(payload["stream"])
         self.assertFalse(payload["think"])
 
-    def test_all_four_gates_must_pass(self):
+    def test_all_five_gates_must_pass(self):
         identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}
         environment = {"pass": True, "score": 95, "defects": [], "preserve": ["stone corridor"]}
         action = {"pass": True, "score": 94, "defects": [], "preserve": ["tripwire crosses floor"]}
+        completeness = {
+            "pass": True,
+            "score": 93,
+            "defects": [],
+            "preserve": vr.required_visible_inventory(self.page),
+        }
         quality = {"pass": True, "score": 92, "defects": [], "preserve": ["broad white regions"]}
         with tempfile.TemporaryDirectory() as td:
             image_path = Path(td) / "candidate.png"
@@ -296,6 +303,7 @@ class VisionReviewerTests(unittest.TestCase):
                     {"response": json.dumps(identity)},
                     {"response": json.dumps(environment)},
                     {"response": json.dumps(action)},
+                    {"response": json.dumps(completeness)},
                     {"response": json.dumps(quality)},
                 ],
             ) as request:
@@ -305,7 +313,42 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertEqual(result["defects"], quality["defects"])
         self.assertEqual(result["preserve"], quality["preserve"])
         self.assertEqual(result["stage"], "quality")
+        self.assertEqual(request.call_count, 5)
+
+    def test_completeness_failure_stops_before_quality_gate(self):
+        identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}
+        environment = {"pass": True, "score": 95, "defects": [], "preserve": ["stone corridor"]}
+        action = {"pass": True, "score": 94, "defects": [], "preserve": ["tripwire crosses floor"]}
+        completeness = {
+            "pass": False,
+            "score": 35,
+            "defects": ["rear arch is a blank white void"],
+            "preserve": ["tripwire is visible"],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            image_path = Path(td) / "candidate.png"
+            image_path.write_bytes(b"x")
+            with patch.object(
+                vr,
+                "_request",
+                side_effect=[
+                    {"response": json.dumps(identity)},
+                    {"response": json.dumps(environment)},
+                    {"response": json.dumps(action)},
+                    {"response": json.dumps(completeness)},
+                ],
+            ) as request:
+                result = vr.review_image(self.page, image_path, self.config)
+        self.assertFalse(result["pass"])
+        self.assertEqual(result["stage"], "completeness")
         self.assertEqual(request.call_count, 4)
+
+    def test_completeness_prompt_requires_item_by_item_zero_omission_audit(self):
+        prompt = vp.build_completeness_review_prompt(self.page)
+        self.assertIn("REQUIRED-ELEMENT COMPLETENESS GATE", prompt)
+        self.assertIn("every numbered required element", prompt)
+        self.assertIn("blank white void", prompt)
+        self.assertIn("unexplained endpoint", prompt)
 
     def test_environment_failure_stops_before_action_gate(self):
         identity = {"pass": True, "score": 96, "defects": [], "preserve": ["small wiry body"]}

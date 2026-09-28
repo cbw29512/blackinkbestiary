@@ -25,7 +25,7 @@ class ReviewDecisionTests(unittest.TestCase):
             (ROOT / "data" / "review_failure_memory.json").read_text(encoding="utf-8")
         )
         self.assertEqual(payload.get("schema_version"), 1)
-        allowed = {"identity", "environment", "action", "scene", "quality"}
+        allowed = {"identity", "environment", "action", "scene", "completeness", "quality"}
         self.assertTrue(payload.get("pages"))
         for page_id, rows in payload["pages"].items():
             self.assertTrue(page_id)

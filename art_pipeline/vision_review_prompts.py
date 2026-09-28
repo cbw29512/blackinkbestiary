@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prompt_builder import build_page_verification_checklist
+from prompt_builder import build_page_verification_checklist, required_visible_inventory
 
 
 def _checks(page: dict, stage: str) -> list[str]:
@@ -89,6 +89,36 @@ def build_scene_review_prompt(page: dict) -> str:
     return build_environment_review_prompt(page) + "\n\n" + build_action_review_prompt(page)
 
 
+def build_completeness_review_prompt(page: dict) -> str:
+    required = required_visible_inventory(page)
+    if not required:
+        raise RuntimeError(
+            f"{page.get('page_id')}: completeness vision gate has no required visible inventory"
+        )
+    numbered = "\n".join(
+        f"{index}. {item}" for index, item in enumerate(required, start=1)
+    )
+    return """You are the Black-Ink Bestiary REQUIRED-ELEMENT COMPLETENESS GATE.
+Your only job is to verify that every numbered required element is literally visible in the image.
+
+Fail closed. Do not reward overall attractiveness, correct genre, or a generally similar scene.
+Audit the list item-by-item. An item is missing if it is absent, hidden, ambiguous, replaced by a similar object, merged into unrelated scenery, or only implied by context.
+For connector/relationship requirements, verify both endpoints or participants and the intended relationship. A loose line, rope, chain, web, weapon, limb, or prop with an unexplained endpoint is not acceptable evidence.
+For architectural openings, doors, arches, tunnels, shafts, pits, or passages, verify that the required structure actually reads as that structure rather than a blank white void or generic shape.
+For action-linked props, the prop and the required action/contact must both be visible.
+Do not infer an element from the written requirement. Judge pixels only.
+
+PASS EVIDENCE RULE: if and only if every numbered item is visibly satisfied, return pass=true and include one short preserve/evidence string for EVERY numbered item, in the same order. You may return up to 12 preserve items.
+If any item fails, return pass=false and list the missing/ambiguous items as defects. At most 6 defects are needed; one missing item is enough to fail.
+
+Return exactly one compact JSON object and nothing else:
+{"pass": true|false, "score": 0-100, "defects": ["missing or ambiguous required element"], "preserve": ["visible evidence for item 1", "visible evidence for item 2"]}
+Any completeness failure must be pass=false and score 49 or lower.
+
+REQUIRED VISIBLE INVENTORY:
+""" + numbered + """
+"""
+
 def build_review_prompt(page: dict) -> str:
     selected = _require_checks(page, "quality")
     return """You are the Black-Ink Bestiary FINAL COLORING-PAGE GATE.
@@ -118,12 +148,14 @@ FINAL QUALITY GATES:
 
 def review_stage_errors(page: dict) -> list[str]:
     errors = []
-    builders = (
+    builders = [
         ("identity", build_identity_review_prompt),
         ("environment", build_environment_review_prompt),
         ("action", build_action_review_prompt),
-        ("quality", build_review_prompt),
-    )
+    ]
+    if required_visible_inventory(page):
+        builders.append(("completeness", build_completeness_review_prompt))
+    builders.append(("quality", build_review_prompt))
     for stage, builder in builders:
         try:
             builder(page)

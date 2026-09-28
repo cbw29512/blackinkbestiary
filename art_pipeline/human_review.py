@@ -11,7 +11,7 @@ except ImportError:
     from review_authority import decision_is_authoritative
 
 VALID_DECISIONS = {"approve", "reject"}
-VALID_STAGES = {"identity", "environment", "action", "quality"}
+VALID_STAGES = {"identity", "environment", "action", "completeness", "quality"}
 REVIEWABLE_STATUSES = {
     "awaiting_exact_image_review",
     "ready_for_review",
@@ -95,7 +95,7 @@ def append_human_decision(
         raise ValueError("Decision must be approve or reject.")
     if decision == "reject":
         if stage not in VALID_STAGES:
-            raise ValueError("Rejected images require identity, environment, action, or quality stage.")
+            raise ValueError("Rejected images require identity, environment, action, completeness, or quality stage.")
         if not notes:
             raise ValueError("Rejected images require a written reason.")
 

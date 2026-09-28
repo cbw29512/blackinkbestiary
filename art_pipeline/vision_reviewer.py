@@ -9,10 +9,12 @@ from pathlib import Path
 
 from vision_review_prompts import (
     build_action_review_prompt,
+    build_completeness_review_prompt,
     build_environment_review_prompt,
     build_identity_review_prompt,
     build_review_prompt,
 )
+from prompt_builder import required_visible_inventory
 
 
 class VisionReviewError(RuntimeError):
@@ -75,8 +77,10 @@ def _parse_verdict(result: dict, stage: str) -> dict:
     ):
         raise VisionReviewError(f"{stage} reviewer returned invalid verdict: {verdict}")
 
-    verdict["defects"] = defects[:4]
-    verdict["preserve"] = preserve[:3]
+    preserve_limit = 12 if str(stage).strip().lower() == "completeness" else 3
+    defect_limit = 6 if str(stage).strip().lower() == "completeness" else 4
+    verdict["defects"] = defects[:defect_limit]
+    verdict["preserve"] = preserve[:preserve_limit]
     if verdict["defects"]:
         verdict["pass"] = False
         verdict["score"] = min(score, 49)
@@ -280,6 +284,8 @@ def _stage_required_evidence(page: dict, stage: str) -> list[str]:
             )
             if value
         ]
+    if stage == "completeness":
+        return required_visible_inventory(page)
     if stage == "action":
         return [
             value for value in (
@@ -297,10 +303,29 @@ def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[s
     if not verdict.get("pass"):
         return []
     required = _stage_required_evidence(page, stage)
-    if len(required) < 2:
+    if not required:
         return []
 
     preserve = [str(item).strip() for item in verdict.get("preserve") or [] if str(item).strip()]
+
+    if stage == "completeness":
+        # Completeness is intentionally stricter than the other gates: the
+        # reviewer must provide one distinct evidence line per required item,
+        # in the same order. One generic sentence cannot satisfy several items.
+        missing = []
+        for index, requirement in enumerate(required):
+            if index >= len(preserve):
+                missing.append(requirement)
+                continue
+            evidence = preserve[index]
+            shared = _semantic_tokens(requirement) & _semantic_tokens(evidence)
+            if not shared or _semantic_overlap(requirement, evidence) < 0.18:
+                missing.append(requirement)
+        return missing[:6]
+
+    if len(required) < 2:
+        return []
+
     matched = []
     for requirement in required:
         requirement_tokens = _semantic_tokens(requirement)
@@ -311,7 +336,8 @@ def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[s
                 matched.append(requirement)
                 break
 
-    if len(matched) >= 2:
+    minimum = min(2, len(required))
+    if len(matched) >= minimum:
         return []
     missing = [item for item in required if item not in matched]
     return missing[:2]
@@ -376,13 +402,17 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         raise VisionReviewError(f"Could not read image for vision review: {image_path}: {exc}") from exc
 
     url = settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/generate"
-    gates = (
-        ("Identity", build_identity_review_prompt(page)),
-        ("Environment", build_environment_review_prompt(page)),
-        ("Action", build_action_review_prompt(page)),
-        ("Quality", build_review_prompt(page)),
-    )
-    for stage, prompt in gates:
+    gates = [
+        ("Identity", build_identity_review_prompt),
+        ("Environment", build_environment_review_prompt),
+        ("Action", build_action_review_prompt),
+    ]
+    if required_visible_inventory(page):
+        gates.append(("Completeness", build_completeness_review_prompt))
+    gates.append(("Quality", build_review_prompt))
+
+    for stage, builder in gates:
+        prompt = builder(page)
         verdict = _run_gate(url, settings, encoded, prompt, stage)
         stage_id = stage.lower()
         missing = _stage_pass_evidence_issues(page, stage_id, verdict)

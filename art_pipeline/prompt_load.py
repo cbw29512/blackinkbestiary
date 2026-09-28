@@ -8,6 +8,7 @@ try:
     from .studio_config import active_book_paths
     from .vision_review_prompts import (
         build_action_review_prompt,
+        build_completeness_review_prompt,
         build_environment_review_prompt,
         build_identity_review_prompt,
         build_review_prompt,
@@ -17,6 +18,7 @@ except ImportError:
     from studio_config import active_book_paths
     from vision_review_prompts import (
         build_action_review_prompt,
+        build_completeness_review_prompt,
         build_environment_review_prompt,
         build_identity_review_prompt,
         build_review_prompt,
@@ -62,6 +64,7 @@ def prompt_load_report(root: Path = ROOT, page_ids: list[str] | None = None) -> 
                 "identity": build_identity_review_prompt(page),
                 "environment": build_environment_review_prompt(page),
                 "action": build_action_review_prompt(page),
+                "completeness": build_completeness_review_prompt(page),
                 "quality": build_review_prompt(page),
             }
             rows.append({
@@ -87,7 +90,7 @@ def prompt_load_report(root: Path = ROOT, page_ids: list[str] | None = None) -> 
     checklist_items = [row["checklist_items"] for row in rows]
     review_stage_chars = {
         stage: [row["review"][stage]["chars"] for row in rows]
-        for stage in ("identity", "environment", "action", "quality")
+        for stage in ("identity", "environment", "action", "completeness", "quality")
     }
 
     return {
