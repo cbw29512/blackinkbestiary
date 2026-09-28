@@ -73,10 +73,20 @@ if "!STATE_EXIT!"=="0" (
 )
 
 echo.
+if "!STATE_EXIT!"=="20" (
+  python scripts\autopilot_heartbeat.py review-wait ready "WAITING FOR HUMAN REVIEW - no generation required"
+  echo.
+  echo WAITING FOR HUMAN REVIEW: current pixels need approve/reject decisions.
+  echo No GPU generation or duplicate review snapshot publishing will run in this state.
+  echo Double-click REVIEW_CANARIES.bat to approve or reject each current image with a reason.
+  timeout /t 300 /nobreak >nul
+  goto LOOP
+)
+
 if "!STATE_EXIT!"=="10" (
   echo [6/7] Reconciling canary state and generating only pages that truly need new pixels...
 ) else (
-  echo [6/7] Reconciling review authority on existing images; current pixels will be skipped unless stale or failed...
+  echo [6/7] Reconciling review authority on existing images...
 )
 python scripts\autopilot_heartbeat.py generating running "Pre-GPU snapshot published before canary generation"
 echo Publishing pre-GPU heartbeat snapshot...
