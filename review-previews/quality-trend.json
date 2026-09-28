@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "active_book_id": "TOME-I",
-  "engine_commit": "1d3ccb4c837fa39db3a290f2b5d7f05892656a15",
+  "engine_commit": "92989f6b535a590c0db5f0475db1ae73af8508ed",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
   "comparable_to_previous": true,
   "comparison_reason": null,
   "history_appended": true,
-  "history_entries": 74,
+  "history_entries": 75,
   "current_metrics": {
     "foundation_readiness": 80.0,
     "technical_qa_pass_rate": 100.0,
