@@ -93,7 +93,7 @@
       "scene_scaffold": {
         "enabled": true,
         "line_width": 4,
-        "subject_rule": "Place the kobold in the lower-left corner, feet on the flagstone, entirely clear of the tripwire. The wire is a straight line from the left wall ring to the right wall ring and must not touch the kobold, spear, tail, or hands.",
+        "subject_rule": "The kobold stands in the lower-left, clear of every scaffold line. No scaffold line is a spear. The only thin line with two rings is the tripwire, and it must stay on the walls.",
         "opening_rule": "The rear archway must visibly continue into another corridor section with receding floor and wall geometry; it must never be a featureless white opening.",
         "primitives": [
           {
@@ -101,9 +101,9 @@
             "role": "side_door",
             "bbox": [
               0.06,
-              0.12,
-              0.32,
-              0.66
+              0.16,
+              0.3,
+              0.62
             ],
             "arched": true
           },
@@ -111,89 +111,81 @@
             "type": "archway",
             "role": "rear_passage",
             "bbox": [
-              0.58,
-              0.12,
-              0.88,
-              0.58
+              0.56,
+              0.14,
+              0.9,
+              0.52
             ],
             "depth": true
-          },
-          {
-            "type": "polyline",
-            "role": "left_corridor_edge",
-            "points": [
-              [
-                0.05,
-                0.69
-              ],
-              [
-                0.46,
-                0.55
-              ],
-              [
-                0.63,
-                0.46
-              ]
-            ]
-          },
-          {
-            "type": "polyline",
-            "role": "right_corridor_edge",
-            "points": [
-              [
-                0.95,
-                0.69
-              ],
-              [
-                0.82,
-                0.56
-              ],
-              [
-                0.7,
-                0.46
-              ]
-            ]
-          },
-          {
-            "type": "pit",
-            "role": "triggered_pit",
-            "points": [
-              [
-                0.5,
-                0.62
-              ],
-              [
-                0.68,
-                0.6
-              ],
-              [
-                0.84,
-                0.86
-              ],
-              [
-                0.36,
-                0.88
-              ]
-            ],
-            "spikes": true,
-            "open_near": true
           },
           {
             "type": "connector",
             "role": "tripwire",
             "from": [
-              0.4,
-              0.52
+              0.32,
+              0.66
             ],
             "to": [
-              0.76,
-              0.46
+              0.92,
+              0.66
             ],
             "anchors": [
               "left wall ring",
               "right wall ring"
             ],
             "line_width": 3
+          },
+          {
+            "type": "pit",
+            "role": "triggered_pit",
+            "open_near": true,
+            "spikes": true,
+            "points": [
+              [
+                0.48,
+                0.76
+              ],
+              [
+                0.66,
+                0.75
+              ],
+              [
+                0.7,
+                0.84
+              ],
+              [
+                0.44,
+                0.85
+              ]
+            ]
+          },
+          {
+            "type": "polyline",
+            "role": "floor_left",
+            "points": [
+              [
+                0.08,
+                0.82
+              ],
+              [
+                0.42,
+                0.8
+              ]
+            ]
+          },
+          {
+            "type": "polyline",
+            "role": "floor_right",
+            "points": [
+              [
+                0.72,
+                0.8
+              ],
+              [
+                0.94,
+                0.82
+              ]
+            ]
           }
         ]
       }
