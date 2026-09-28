@@ -53,7 +53,7 @@ class ReviewApp:
         self.stage = ttk.Combobox(
             form,
             state="readonly",
-            values=("identity", "environment", "action", "quality"),
+            values=("identity", "environment", "action", "completeness", "quality"),
             width=18,
         )
         self.stage.grid(row=0, column=1, sticky="w", padx=(8, 0))
@@ -113,7 +113,7 @@ class ReviewApp:
         self.context.configure(state="disabled")
 
         local_stage = str(advisory.get("stage") or "").lower()
-        if local_stage in {"identity", "environment", "action", "quality"}:
+        if local_stage in {"identity", "environment", "action", "completeness", "quality"}:
             self.stage.set(local_stage)
         self.notes.delete("1.0", "end")
         self.status.config(text="Approve only if this exact image is premium-production ready.")
