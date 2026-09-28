@@ -179,8 +179,10 @@ def main() -> int:
             "review_id": target_review_id,
             "decision": decision,
             "notes": notes,
-            "reviewer": str(review.get("reviewer") or "").strip().lower(),
         }
+        reviewer = str(review.get("reviewer") or "").strip().lower()
+        if reviewer:
+            next_review["reviewer"] = reviewer
         if review.get("decided_at"):
             next_review["decided_at"] = review.get("decided_at")
         if stage:
@@ -228,7 +230,7 @@ def main() -> int:
             if selection_eligible(item):
                 state.setdefault("selections", {})[page_id] = {
                     "candidate": candidate_no,
-                    "source": "human_selected",
+                    "source": "assistant_selected",
                     "review_id": target_review_id,
                 }
             else:
@@ -249,7 +251,7 @@ def main() -> int:
             ):
                 state.setdefault("selections", {})[page_id] = {
                     "candidate": candidate_no,
-                    "source": "human_review",
+                    "source": "assistant_review",
                     "review_id": target_review_id,
                 }
 
