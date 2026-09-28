@@ -156,6 +156,26 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("canary-preview", script)
         self.assertIn("showModal()", script)
 
+    def test_local_web_review_studio_is_one_click_and_local_only(self):
+        opener = (ROOT / "OPEN_REVIEW_STUDIO.bat").read_text(encoding="utf-8")
+        server = (ROOT / "server.py").read_text(encoding="utf-8")
+        html = (ROOT / "web" / "human-review.html").read_text(encoding="utf-8")
+        script = (ROOT / "web" / "human-review.js").read_text(encoding="utf-8")
+
+        self.assertIn("START_STATUS_DASHBOARD_IF_NEEDED.bat", opener)
+        self.assertIn("127.0.0.1:8765/human-review.html", opener)
+        self.assertIn("/api/human-review", server)
+        self.assertIn("/api/human-review/decision", server)
+        self.assertIn("assert_local_only_host", server)
+        self.assertIn('"127.0.0.1"', server)
+        self.assertNotIn("validate_state(load_tome(), load_state())\n    server =", server)
+        self.assertIn("Approve premium page", html)
+        self.assertIn("Reject + queue regeneration", html)
+        self.assertIn("HONEST 0–100 STATUS", html)
+        self.assertIn("AI ADVISORY", html)
+        self.assertIn("human-review/decision", script)
+        self.assertIn("A rejection reason is required.", script)
+
     def test_autopilot_publishes_phase_heartbeat_before_gpu_work(self):
         autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         heartbeat = (ROOT / "scripts" / "autopilot_heartbeat.py").read_text(encoding="utf-8")
