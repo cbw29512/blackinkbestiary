@@ -13,6 +13,7 @@ try:
     from .production_audit import audit_active_book
     from .prompt_load import prompt_load_report
     from .replication_probe import run_replication_probe
+    from .review_authority import decision_is_authoritative
     from .series_readiness import audit_series
     from .studio_config import active_book_paths
 except ImportError:
@@ -22,6 +23,7 @@ except ImportError:
     from production_audit import audit_active_book
     from prompt_load import prompt_load_report
     from replication_probe import run_replication_probe
+    from review_authority import decision_is_authoritative
     from series_readiness import audit_series
     from studio_config import active_book_paths
 
@@ -149,6 +151,8 @@ def current_page_records(state: dict, page_ids: list[str]) -> list[dict]:
 
 def exact_image_authority_approved(item: dict, root: Path = ROOT) -> bool:
     assistant = item.get("assistant_review") or {}
+    if not decision_is_authoritative(assistant, root):
+        return False
     decision = str(assistant.get("decision") or "").strip().lower()
     review_id = str(assistant.get("review_id") or "").strip()
     if decision not in {"approve", "select"} or not review_id:
@@ -214,6 +218,7 @@ def canary_metrics(state: dict, canary_page_ids: list[str], root: Path = ROOT) -
             "visual_score": visual.get("score"),
             "local_visual_advisory_pass": bool(visual.get("pass")),
             "assistant_decision": assistant.get("decision"),
+            "exact_image_reviewer": assistant.get("reviewer"),
         })
 
     total = len(canary_page_ids)
