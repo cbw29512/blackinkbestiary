@@ -2,8 +2,8 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
-  "measured_at": "2026-09-28T23:08:08.321844+00:00",
-  "engine_commit": "f1c099c63dd96e95d9fe3c7111ce402be1eeac70",
+  "measured_at": "2026-09-28T23:44:32.511058+00:00",
+  "engine_commit": "07f340772b7971994fe5de1a428090c8fb8730e1",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 80.0,
@@ -42,8 +42,8 @@
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "identity",
-        "visual_score": 49,
+        "visual_stage": "environment",
+        "visual_score": 45,
         "local_visual_advisory_pass": false,
         "assistant_decision": null,
         "exact_image_reviewer": null
@@ -177,10 +177,10 @@
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 11417.8,
-    "generation_chars_max": 12177,
-    "generation_words_avg": 1612.3,
-    "generation_words_max": 1728,
+    "generation_chars_avg": 11419.4,
+    "generation_chars_max": 12192,
+    "generation_words_avg": 1612.8,
+    "generation_words_max": 1732,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
       "hard_max_chars": 14000,
@@ -192,14 +192,14 @@
     "checklist_items_max": 86,
     "review_chars_avg": {
       "identity": 4000.4,
-      "environment": 3270.4,
+      "environment": 3271.8,
       "action": 2810.2,
       "completeness": 1858.3,
       "quality": 5004.0
     },
     "review_chars_max": {
       "identity": 4475,
-      "environment": 4157,
+      "environment": 4169,
       "action": 3148,
       "completeness": 2026,
       "quality": 5004
@@ -208,8 +208,8 @@
       {
         "page_id": "I-01",
         "generation": {
-          "chars": 12177,
-          "words": 1728,
+          "chars": 12192,
+          "words": 1732,
           "nonempty_lines": 75,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
@@ -223,8 +223,8 @@
             "duplicate_line_percent": 0.0
           },
           "environment": {
-            "chars": 4157,
-            "words": 620,
+            "chars": 4169,
+            "words": 622,
             "nonempty_lines": 35,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
@@ -728,8 +728,7 @@
       "known_blockers": [
         "UNCLASSIFIED",
         "ENVIRONMENT_GENERIC",
-        "ACTION_UNCLEAR",
-        "IDENTITY_HEROIC_BULK"
+        "ACTION_UNCLEAR"
       ],
       "automated_100": false
     },
@@ -978,19 +977,18 @@
     }
   },
   "defect_counts": {
-    "UNCLASSIFIED": 5,
+    "UNCLASSIFIED": 6,
     "ENVIRONMENT_GENERIC": 2,
-    "ACTION_UNCLEAR": 1,
-    "IDENTITY_HEROIC_BULK": 1
+    "ACTION_UNCLEAR": 1
   },
   "historical_defect_counts": {
-    "IDENTITY_HEROIC_BULK": 34,
+    "IDENTITY_HEROIC_BULK": 33,
     "IDENTITY_HORNS_TUSKS": 33,
     "IDENTITY_WRONG_CREATURE": 26,
     "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
+    "UNCLASSIFIED": 9,
     "ENVIRONMENT_GENERIC": 8,
-    "UNCLASSIFIED": 8,
     "ACTION_UNCLEAR": 7,
     "SWARM_WALLPAPER": 7,
     "SWARM_OVERSIZED_LEADER": 4,
@@ -1000,7 +998,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 42,
+      "evidence_count": 39,
       "distinct_pages": 9,
       "distinct_families": 5,
       "scope": [
@@ -1568,8 +1566,7 @@
   "known_blockers": [
     "UNCLASSIFIED",
     "ENVIRONMENT_GENERIC",
-    "ACTION_UNCLEAR",
-    "IDENTITY_HEROIC_BULK"
+    "ACTION_UNCLEAR"
   ],
-  "measurement_fingerprint": "1772993e3976495d25d68caa1df7ef5157aa42b760cd80e1725a32c73e641a46"
+  "measurement_fingerprint": "31d9714ba5b60f7fbad2c5e95206ad78ed23881b17d7d9536775d64a5cf64fbf"
 }
