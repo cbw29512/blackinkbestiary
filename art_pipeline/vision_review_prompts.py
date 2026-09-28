@@ -100,7 +100,11 @@ Do not reward an attractive illustration if it would be tedious to color.
 For swarm pages, broad white gaps and controlled population are mandatory; clearly excessive visible members are an automatic fail even if each individual is recognizable.
 For web pages, webs must not become dense wallpaper that erases the environment.
 COLORING LOAD AUDIT: judge the whole page, not isolated objects. If repeated grids, webs, bricks, scales, fur marks, or many small creatures create tiny enclosed coloring cells across much of the page, fail for excessive line density even when the line art is technically clean.
-Pass only when there is no meaningful visible defect worth another edit.
+PREMIUM RETAIL STANDARD: this is a paid premium coloring-book page, not a draft, concept image, or merely acceptable AI output. PASS only if the page looks intentionally authored and commercially finished at normal printed-page viewing distance. A technically clean page still fails if it looks generic, underdeveloped, overly empty, overly busy, repetitive, template-like, or visibly AI-generated.
+PREMIUM COMPOSITION AUDIT: require a clear focal hierarchy, several large readable habitat cues, useful depth, balanced negative space, broad colorable regions, controlled interior detail, and no accidental tangencies, duplicated motifs, malformed leftovers, or shortcut-looking background treatment.
+PREMIUM COLORABILITY AUDIT: large and medium coloring regions must dominate. Tiny enclosed cells, repeated micro-patterns, dense webs, fur strokes, masonry grids, swarm bodies, and similar repetitive detail must stay subordinate and sparse enough that coloring remains satisfying rather than tedious.
+PREMIUM COHERENCE AUDIT: the creature, environment, and story interaction must read as one coherent designed scene. Reject a correctly drawn monster that appears pasted onto a generic backdrop or a detailed environment that competes with the focal subject.
+Pass only when there is no meaningful visible defect worth another edit AND the page would not feel out of place beside a professionally edited premium retail coloring book.
 DEFECT WORDING RULE: describe the visible production failure in plain negative language. Never copy a positive quality requirement verbatim into defects.
 
 Return exactly one compact JSON object and nothing else:

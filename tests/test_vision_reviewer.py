@@ -231,6 +231,16 @@ class VisionReviewerTests(unittest.TestCase):
         self.assertIn("upper bound as a hard visual limit", rat_prompt)
         self.assertIn("wallpaper density", rat_prompt)
 
+    def test_final_quality_gate_requires_premium_retail_finish(self):
+        tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
+        page = next(item for item in tome["pages"] if item["page_id"] == "I-22")
+        prompt = vr.build_review_prompt(page)
+        self.assertIn("PREMIUM RETAIL STANDARD", prompt)
+        self.assertIn("PREMIUM COMPOSITION AUDIT", prompt)
+        self.assertIn("PREMIUM COLORABILITY AUDIT", prompt)
+        self.assertIn("PREMIUM COHERENCE AUDIT", prompt)
+        self.assertIn("professionally edited premium retail coloring book", prompt)
+
     def test_quality_gate_rejects_page_wide_micro_pattern_load(self):
         tome = json.loads((ROOT / "data" / "tome-I.json").read_text(encoding="utf-8"))
         rats = next(item for item in tome["pages"] if item["page_id"] == "I-19")
