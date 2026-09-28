@@ -15,7 +15,10 @@ class HumanReviewTests(unittest.TestCase):
         (root / "review-previews").mkdir()
         (root / "web" / "test-gallery").mkdir(parents=True)
         (root / "config" / "quality_scorecard.json").write_text(
-            json.dumps({"canary_page_ids": ["I-01"]}), encoding="utf-8"
+            json.dumps({
+                "canary_page_ids": ["I-01"],
+                "exact_image_reviewer": "human",
+            }), encoding="utf-8"
         )
         state = {
             "results": [{
@@ -61,6 +64,25 @@ class HumanReviewTests(unittest.TestCase):
         row = append_human_decision(root, item, "approve")
         self.assertEqual(row["decision"], "approve")
         self.assertEqual(row["reviewer"], "human")
+
+    def test_review_queue_keeps_old_ai_approval_but_hides_human_approval(self):
+        temp, root = self.make_root()
+        self.addCleanup(temp.cleanup)
+        state_path = root / "data" / "test-gallery-state.json"
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+        item = state["results"][0]
+        review_id = "I-01-C01-H" + __import__("hashlib").sha256(b"exact-image").hexdigest()[:16]
+
+        item["assistant_review"] = {
+            "decision": "approve",
+            "review_id": review_id,
+        }
+        state_path.write_text(json.dumps(state), encoding="utf-8")
+        self.assertEqual(len(current_canary_items(root)), 1)
+
+        item["assistant_review"]["reviewer"] = "human"
+        state_path.write_text(json.dumps(state), encoding="utf-8")
+        self.assertEqual(current_canary_items(root), [])
 
     def test_human_review_window_shows_contract_and_advisory_context(self):
         script = (Path(__file__).resolve().parents[1] / "scripts" / "human_canary_review.py").read_text(

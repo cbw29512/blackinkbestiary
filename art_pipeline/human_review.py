@@ -5,6 +5,11 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    from .review_authority import decision_is_authoritative
+except ImportError:
+    from review_authority import decision_is_authoritative
+
 VALID_DECISIONS = {"approve", "reject"}
 VALID_STAGES = {"identity", "environment", "action", "quality"}
 REVIEWABLE_STATUSES = {
@@ -59,6 +64,17 @@ def current_canary_items(root: Path) -> list[dict]:
         if int(item.get("candidate") or 0) != 1:
             continue
         if str(item.get("status") or "") not in REVIEWABLE_STATUSES:
+            continue
+        assistant = item.get("assistant_review") or {}
+        try:
+            review_id = exact_review_id(root, item)
+        except ValueError:
+            continue
+        if (
+            decision_is_authoritative(assistant, root)
+            and str(assistant.get("decision") or "").strip().lower() in {"approve", "select"}
+            and str(assistant.get("review_id") or "").strip() == review_id
+        ):
             continue
         rows.append(item)
     order = {page_id: i for i, page_id in enumerate(configured_canary_ids(root))}

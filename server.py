@@ -32,6 +32,15 @@ from art_pipeline.quality_system import expand_defect_tags, review_diagnosis
 from art_pipeline.studio_config import active_book_paths
 from art_pipeline.state_validation import ACTIVE_STATES, assert_valid_state
 from art_pipeline.autopilot_status import public_autopilot_status
+from art_pipeline.human_review import (
+    REVIEWABLE_STATUSES as HUMAN_REVIEWABLE_STATUSES,
+    append_human_decision,
+    configured_canary_ids,
+    current_image_path as human_current_image_path,
+    exact_review_id as human_exact_review_id,
+)
+from art_pipeline.learning_feedback import human_feedback_summary
+from art_pipeline.review_authority import decision_is_authoritative
 
 ROOT = Path(__file__).resolve().parent
 WEB_DIR = ROOT / "web"
@@ -47,6 +56,10 @@ GENERATOR_LOG = DATA_DIR / "generation-worker.log"
 TEST_GALLERY_STATE = DATA_DIR / "test-gallery-state.json"
 _GENERATION_LOCK = threading.Lock()
 _GENERATION_PROCESS = None
+QUALITY_CURRENT = ROOT / "review-previews" / "quality-current.json"
+REVIEW_DECISIONS = ROOT / "review-previews" / "decisions.json"
+QUALITY_SCORECARD = ROOT / "config" / "quality_scorecard.json"
+LOCAL_ONLY_HOSTS = {"127.0.0.1", "localhost", "::1"}
 
 VALID_DECISIONS = {"approve", "modify", "regenerate"}
 GENERATABLE_STATES = {"queued", "modify_requested", "regenerate_requested", "generation_failed"}
@@ -412,6 +425,257 @@ def register_candidate(payload):
     return public_state()
 
 
+
+def current_engine_commit() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="strict",
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError, UnicodeDecodeError):
+        return "unknown"
+
+
+def _safe_image_url(item: dict) -> str | None:
+    path = human_current_image_path(ROOT, item)
+    try:
+        resolved = path.resolve()
+        web_root = WEB_DIR.resolve()
+    except OSError:
+        return None
+    if not resolved.exists() or not resolved.is_file():
+        return None
+    if resolved != web_root and web_root not in resolved.parents:
+        return None
+    return "/" + resolved.relative_to(web_root).as_posix()
+
+
+def _human_decision_history() -> dict[str, list[dict]]:
+    if not REVIEW_DECISIONS.exists():
+        return {}
+    try:
+        payload = read_json(REVIEW_DECISIONS)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return {}
+    rows: dict[str, list[dict]] = {}
+    for review in payload.get("reviews", []):
+        if str(review.get("reviewer") or "").strip().lower() != "human":
+            continue
+        page_id = str(review.get("page_id") or "").strip()
+        if not page_id:
+            continue
+        rows.setdefault(page_id, []).append({
+            "decision": review.get("decision"),
+            "stage": review.get("stage"),
+            "notes": review.get("notes"),
+            "decided_at": review.get("decided_at"),
+            "review_id": review.get("review_id"),
+        })
+    return rows
+
+
+def _human_review_pages() -> list[dict]:
+    canary_ids = configured_canary_ids(ROOT)
+    state = read_json(TEST_GALLERY_STATE) if TEST_GALLERY_STATE.exists() else {"results": []}
+    latest: dict[str, dict] = {}
+    for item in state.get("results", []):
+        page_id = str(item.get("page_id") or "")
+        if page_id in canary_ids and int(item.get("candidate") or 0) == 1:
+            latest[page_id] = item
+
+    contexts = {}
+    try:
+        tome = load_tome()
+        contexts = {str(page.get("page_id") or ""): page for page in tome.get("pages", [])}
+    except Exception:
+        contexts = {}
+
+    history = _human_decision_history()
+    pages = []
+    for page_id in canary_ids:
+        item = latest.get(page_id) or {}
+        page = contexts.get(page_id) or {}
+        assistant = item.get("assistant_review") or {}
+        status = str(item.get("status") or "missing")
+        review_id = None
+        if item:
+            try:
+                review_id = human_exact_review_id(ROOT, item)
+            except ValueError:
+                review_id = None
+        authoritative = bool(item) and decision_is_authoritative(assistant, ROOT)
+        decision = str(assistant.get("decision") or "").strip().lower()
+        approved = bool(
+            authoritative
+            and decision in {"approve", "select"}
+            and review_id
+            and str(assistant.get("review_id") or "").strip() == review_id
+        )
+        reviewable = bool(
+            item
+            and status in HUMAN_REVIEWABLE_STATUSES
+            and review_id
+            and not approved
+        )
+        needs_generation = status in {
+            "assistant_rejected",
+            "failed",
+            "technical_qa_failed",
+            "vision_reviewer_failed",
+            "semantic_stalled",
+        }
+        advisory = item.get("visual_review") or {}
+        pages.append({
+            "page_id": page_id,
+            "monster_name": item.get("monster_name") or page.get("monster_name"),
+            "candidate": int(item.get("candidate") or 1),
+            "status": status,
+            "review_id": review_id,
+            "image_url": _safe_image_url(item) if item else None,
+            "human_approved": approved,
+            "awaiting_human": reviewable,
+            "needs_generation": needs_generation,
+            "habitat": page.get("habitat"),
+            "story_moment": page.get("moment"),
+            "must_include": page.get("must_include") or [],
+            "identity_rules": page.get("identity_rules") or [],
+            "advisory": {
+                "stage": advisory.get("stage"),
+                "score": advisory.get("score"),
+                "pass": bool(advisory.get("pass")),
+                "defects": advisory.get("defects") or [],
+                "preserve": advisory.get("preserve") or [],
+            },
+            "human_history": (history.get(page_id) or [])[-5:],
+        })
+    return pages
+
+
+def public_human_review() -> dict:
+    pages = _human_review_pages()
+    scorecard = read_json(QUALITY_SCORECARD)
+    quality = {}
+    if QUALITY_CURRENT.exists():
+        try:
+            quality = read_json(QUALITY_CURRENT)
+        except (OSError, ValueError, json.JSONDecodeError):
+            quality = {}
+
+    engine = current_engine_commit()
+    expected_contract = str(scorecard.get("contract_version") or "")
+    measured_contract = str(quality.get("quality_contract_version") or "")
+    quality_engine = str(quality.get("engine_commit") or "")
+    score_stale = bool(
+        not quality
+        or measured_contract != expected_contract
+        or (engine != "unknown" and quality_engine and quality_engine != engine)
+    )
+
+    try:
+        autopilot = public_autopilot_status()
+    except Exception as exc:
+        autopilot = {"error": str(exc)}
+
+    return {
+        "schema_version": 1,
+        "local_only": True,
+        "engine_commit": engine,
+        "quality_contract_version": expected_contract,
+        "human_approved": sum(1 for page in pages if page["human_approved"]),
+        "awaiting_human": sum(1 for page in pages if page["awaiting_human"]),
+        "needs_generation": sum(1 for page in pages if page["needs_generation"]),
+        "canary_total": len(pages),
+        "quality": {
+            "overall_automated_readiness": quality.get("overall_automated_readiness"),
+            "readiness_floor": quality.get("readiness_floor"),
+            "series_score": quality.get("series_score"),
+            "metrics": quality.get("metrics") or {},
+            "known_blockers": quality.get("known_blockers") or [],
+            "measured_at": quality.get("measured_at"),
+            "measured_engine_commit": quality_engine or None,
+            "measured_contract_version": measured_contract or None,
+            "stale": score_stale,
+        },
+        "human_feedback": human_feedback_summary(ROOT),
+        "autopilot": autopilot,
+        "pages": pages,
+    }
+
+
+def apply_human_review_from_web(payload: dict) -> dict:
+    page_id = str(payload.get("page_id") or "").strip()
+    candidate = int(payload.get("candidate") or 0)
+    supplied_review_id = str(payload.get("review_id") or "").strip()
+    decision = str(payload.get("decision") or "").strip().lower()
+    stage = str(payload.get("stage") or "").strip().lower()
+    notes = str(payload.get("notes") or "").strip()
+
+    if page_id not in configured_canary_ids(ROOT):
+        raise ValueError("Unknown Canary page.")
+    if candidate < 1:
+        raise ValueError("Candidate number is required.")
+
+    state = read_json(TEST_GALLERY_STATE) if TEST_GALLERY_STATE.exists() else {"results": []}
+    match = None
+    for item in state.get("results", []):
+        if (
+            str(item.get("page_id") or "") == page_id
+            and int(item.get("candidate") or 0) == candidate
+        ):
+            match = item
+    if match is None:
+        raise ValueError("Current Canary candidate was not found.")
+    if str(match.get("status") or "") not in HUMAN_REVIEWABLE_STATUSES:
+        raise ValueError("This Canary is no longer awaiting human review.")
+
+    current_review_id = human_exact_review_id(ROOT, match)
+    if not supplied_review_id or supplied_review_id != current_review_id:
+        raise ValueError(
+            "This image changed after the page loaded. Refresh before making a decision."
+        )
+
+    row = append_human_decision(
+        ROOT,
+        match,
+        decision=decision,
+        notes=notes,
+        stage=stage,
+    )
+
+    subprocess.run(
+        [worker_python(), str(ROOT / "scripts" / "apply_review_decisions.py")],
+        cwd=ROOT,
+        check=True,
+    )
+    publish = subprocess.run(
+        [worker_python(), str(ROOT / "scripts" / "publish_review_previews.py")],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        capture_output=True,
+    )
+    result = public_human_review()
+    result["saved_decision"] = row
+    result["published"] = publish.returncode == 0
+    if publish.returncode != 0:
+        detail = (publish.stderr or publish.stdout or "").strip().splitlines()
+        result["publish_warning"] = detail[-1] if detail else "Review snapshot publish failed; the local decision is still saved."
+    return result
+
+
+def assert_local_only_host(host: str) -> None:
+    if str(host or "").strip().lower() not in LOCAL_ONLY_HOSTS:
+        raise ValueError(
+            "Black-Ink review Studio is local-only. Bind to 127.0.0.1, localhost, or ::1."
+        )
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "BlackInkBestiary/0.1"
 
@@ -455,6 +719,9 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/autopilot-status":
                 self.send_json(public_autopilot_status())
                 return
+            if path == "/api/human-review":
+                self.send_json(public_human_review())
+                return
             if path == "/api/test-gallery":
                 self.send_json(read_json(TEST_GALLERY_STATE) if TEST_GALLERY_STATE.exists() else {"results": []})
                 return
@@ -469,6 +736,9 @@ class Handler(BaseHTTPRequestHandler):
         path = urlparse(self.path).path
         try:
             payload = self.read_body_json()
+            if path == "/api/human-review/decision":
+                self.send_json(apply_human_review_from_web(payload))
+                return
             if path == "/api/decision":
                 decision = payload.get("decision", "")
                 result = apply_decision(
@@ -555,7 +825,9 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def run(host="127.0.0.1", port=8765, open_browser=True):
-    validate_state(load_tome(), load_state())
+    assert_local_only_host(host)
+    # Keep the review/health server available even when unrelated production
+    # state is temporarily invalid; stateful API routes validate on access.
     server = ThreadingHTTPServer((host, port), Handler)
     url = f"http://{host}:{port}"
     print(f"Black-Ink Bestiary Studio: {url}")
