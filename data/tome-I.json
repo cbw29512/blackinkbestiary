@@ -89,6 +89,112 @@
         "mode": "grounded",
         "support": "both feet on the flagstone floor beside the trap",
         "motion": "leaning and twisting toward the tripwire while cackling; no floating feet"
+      },
+      "scene_scaffold": {
+        "enabled": true,
+        "line_width": 4,
+        "subject_rule": "Keep the kobold in the left-middle foreground and visibly separate from the tripwire. The wire may pass in front of or behind the creature in perspective but may not touch, emerge from, attach to, or terminate on the kobold, tail, clothing, spear, or body.",
+        "opening_rule": "The rear archway must visibly continue into another corridor section with receding floor and wall geometry; it must never be a featureless white opening.",
+        "primitives": [
+          {
+            "type": "door",
+            "role": "side_door",
+            "bbox": [
+              0.06,
+              0.12,
+              0.32,
+              0.66
+            ],
+            "arched": true
+          },
+          {
+            "type": "archway",
+            "role": "rear_passage",
+            "bbox": [
+              0.58,
+              0.12,
+              0.88,
+              0.58
+            ],
+            "depth": true
+          },
+          {
+            "type": "polyline",
+            "role": "left_corridor_edge",
+            "points": [
+              [
+                0.05,
+                0.69
+              ],
+              [
+                0.46,
+                0.55
+              ],
+              [
+                0.63,
+                0.46
+              ]
+            ]
+          },
+          {
+            "type": "polyline",
+            "role": "right_corridor_edge",
+            "points": [
+              [
+                0.95,
+                0.69
+              ],
+              [
+                0.82,
+                0.56
+              ],
+              [
+                0.7,
+                0.46
+              ]
+            ]
+          },
+          {
+            "type": "pit",
+            "role": "triggered_pit",
+            "points": [
+              [
+                0.43,
+                0.72
+              ],
+              [
+                0.84,
+                0.7
+              ],
+              [
+                0.77,
+                0.93
+              ],
+              [
+                0.34,
+                0.91
+              ]
+            ],
+            "spikes": true
+          },
+          {
+            "type": "connector",
+            "role": "tripwire",
+            "from": [
+              0.17,
+              0.61
+            ],
+            "to": [
+              0.83,
+              0.59
+            ],
+            "anchors": [
+              "left wall ring",
+              "right wall ring"
+            ],
+            "line_width": 3
+          }
+        ]
       }
     },
     {
