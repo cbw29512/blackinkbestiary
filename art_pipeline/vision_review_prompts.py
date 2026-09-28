@@ -148,13 +148,14 @@ FINAL QUALITY GATES:
 
 def review_stage_errors(page: dict) -> list[str]:
     errors = []
-    builders = (
+    builders = [
         ("identity", build_identity_review_prompt),
         ("environment", build_environment_review_prompt),
         ("action", build_action_review_prompt),
-        ("completeness", build_completeness_review_prompt),
-        ("quality", build_review_prompt),
-    )
+    ]
+    if required_visible_inventory(page):
+        builders.append(("completeness", build_completeness_review_prompt))
+    builders.append(("quality", build_review_prompt))
     for stage, builder in builders:
         try:
             builder(page)
