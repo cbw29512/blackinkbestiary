@@ -2,7 +2,7 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
-  "measured_at": "2026-09-28T09:43:08.363473+00:00",
+  "measured_at": "2026-09-28T10:08:33.111924+00:00",
   "engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
   "active_book_id": "TOME-I",
   "metrics": {
@@ -36,7 +36,7 @@
     "rows": [
       {
         "page_id": "I-01",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -45,7 +45,7 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-04",
@@ -62,7 +62,7 @@
       },
       {
         "page_id": "I-08",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -71,11 +71,11 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-10",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -84,20 +84,20 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-14",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
+        "visual_stage": null,
+        "visual_score": null,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-16",
@@ -114,7 +114,7 @@
       },
       {
         "page_id": "I-19",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -123,11 +123,11 @@
         "visual_stage": "action",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-20",
-        "status": "assistant_rejected",
+        "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
         "visual_cleanliness_pass": false,
@@ -136,7 +136,7 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "reject"
+        "assistant_decision": null
       },
       {
         "page_id": "I-22",
@@ -155,14 +155,14 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 45,
-    "refinement_passes": 36,
+    "gpu_attempts": 41,
+    "refinement_passes": 32,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 5.0,
-    "gpu_attempts_per_semantic_pass": 45.0,
-    "semantic_yield_percent": 2.2,
-    "all_gate_yield_percent": 2.2
+    "avg_gpu_attempts_per_page": 4.56,
+    "gpu_attempts_per_semantic_pass": 41.0,
+    "semantic_yield_percent": 2.4,
+    "all_gate_yield_percent": 2.4
   },
   "prompt_load": {
     "schema_version": 1,
@@ -643,12 +643,10 @@
       "weakest_metric": "locked_page_progress",
       "missing_required_categories": [],
       "known_blockers": [
-        "ENVIRONMENT_GENERIC",
         "UNCLASSIFIED",
-        "IDENTITY_WRONG_CREATURE",
-        "IDENTITY_HEROIC_BULK",
-        "IDENTITY_LIMB_COUNT",
-        "SWARM_WALLPAPER"
+        "ENVIRONMENT_GENERIC",
+        "ACTION_UNCLEAR",
+        "IDENTITY_HEROIC_BULK"
       ],
       "automated_100": false
     },
@@ -897,23 +895,21 @@
     }
   },
   "defect_counts": {
-    "ENVIRONMENT_GENERIC": 3,
-    "UNCLASSIFIED": 3,
-    "IDENTITY_WRONG_CREATURE": 2,
-    "IDENTITY_HEROIC_BULK": 1,
-    "IDENTITY_LIMB_COUNT": 1,
-    "SWARM_WALLPAPER": 1
+    "UNCLASSIFIED": 5,
+    "ENVIRONMENT_GENERIC": 2,
+    "ACTION_UNCLEAR": 1,
+    "IDENTITY_HEROIC_BULK": 1
   },
   "historical_defect_counts": {
     "IDENTITY_HEROIC_BULK": 34,
     "IDENTITY_HORNS_TUSKS": 33,
-    "IDENTITY_WRONG_CREATURE": 28,
-    "IDENTITY_LIMB_COUNT": 13,
+    "IDENTITY_WRONG_CREATURE": 26,
+    "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
-    "ENVIRONMENT_GENERIC": 9,
-    "SWARM_WALLPAPER": 8,
-    "ACTION_UNCLEAR": 6,
-    "UNCLASSIFIED": 6,
+    "ENVIRONMENT_GENERIC": 8,
+    "UNCLASSIFIED": 8,
+    "ACTION_UNCLEAR": 7,
+    "SWARM_WALLPAPER": 7,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
   },
@@ -921,7 +917,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 44,
+      "evidence_count": 42,
       "distinct_pages": 9,
       "distinct_families": 5,
       "scope": [
@@ -970,9 +966,9 @@
     {
       "defect_code": "IDENTITY_HORNS_TUSKS",
       "label": "Unwanted horns/tusks/orc drift",
-      "evidence_count": 35,
-      "distinct_pages": 10,
-      "distinct_families": 6,
+      "evidence_count": 33,
+      "distinct_pages": 9,
+      "distinct_families": 5,
       "scope": [
         "monster_family",
         "master_engine"
@@ -1019,9 +1015,9 @@
     {
       "defect_code": "IDENTITY_WRONG_CREATURE",
       "label": "Wrong creature/body plan",
-      "evidence_count": 35,
-      "distinct_pages": 10,
-      "distinct_families": 9,
+      "evidence_count": 31,
+      "distinct_pages": 8,
+      "distinct_families": 8,
       "scope": [
         "monster_family",
         "master_engine"
@@ -1068,9 +1064,9 @@
     {
       "defect_code": "ENVIRONMENT_GENERIC",
       "label": "Generic/wrong environment",
-      "evidence_count": 23,
-      "distinct_pages": 6,
-      "distinct_families": 6,
+      "evidence_count": 21,
+      "distinct_pages": 5,
+      "distinct_families": 5,
       "scope": [
         "master_engine",
         "page_recipe"
@@ -1166,7 +1162,7 @@
     {
       "defect_code": "IDENTITY_LIMB_COUNT",
       "label": "Limb/body topology error",
-      "evidence_count": 13,
+      "evidence_count": 12,
       "distinct_pages": 4,
       "distinct_families": 4,
       "scope": [
@@ -1215,7 +1211,7 @@
     {
       "defect_code": "ACTION_UNCLEAR",
       "label": "Action/story beat unclear",
-      "evidence_count": 9,
+      "evidence_count": 10,
       "distinct_pages": 3,
       "distinct_families": 3,
       "scope": [
@@ -1264,7 +1260,7 @@
     {
       "defect_code": "SWARM_WALLPAPER",
       "label": "Swarm wallpaper density",
-      "evidence_count": 8,
+      "evidence_count": 7,
       "distinct_pages": 2,
       "distinct_families": 2,
       "scope": [
@@ -1471,20 +1467,17 @@
     }
   },
   "status_counts": {
-    "assistant_rejected": 6,
-    "awaiting_exact_image_review": 3
+    "awaiting_exact_image_review": 9
   },
   "historical_status_counts": {
-    "assistant_rejected": 84,
-    "awaiting_exact_image_review": 3
+    "assistant_rejected": 78,
+    "awaiting_exact_image_review": 9
   },
   "known_blockers": [
-    "ENVIRONMENT_GENERIC",
     "UNCLASSIFIED",
-    "IDENTITY_WRONG_CREATURE",
-    "IDENTITY_HEROIC_BULK",
-    "IDENTITY_LIMB_COUNT",
-    "SWARM_WALLPAPER"
+    "ENVIRONMENT_GENERIC",
+    "ACTION_UNCLEAR",
+    "IDENTITY_HEROIC_BULK"
   ],
-  "measurement_fingerprint": "d76953359ceea58602fcdd2b26aaa87ceda5f32b27988ed7cc428f2a82e8dd2c"
+  "measurement_fingerprint": "8439a58f8c3be46acd2e5927449992fdd3de9f188d0884b716ba291dd5214459"
 }
