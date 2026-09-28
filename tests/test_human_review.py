@@ -103,7 +103,7 @@ class HumanReviewTests(unittest.TestCase):
         self.assertIn("WAITING FOR HUMAN REVIEW", text)
         self.assertIn("No GPU generation or duplicate review snapshot publishing", text)
         wait_at = text.index('if "!STATE_EXIT!"=="20"')
-        generate_at = text.index("generate_test_gallery.py --canary-failed")
+        generate_at = text.index("generate_next_canary.py")
         self.assertLess(wait_at, generate_at)
 
 
