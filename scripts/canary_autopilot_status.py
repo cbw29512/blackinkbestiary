@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from page_contract import resolve_page_spec
+from review_authority import decision_is_authoritative
 from studio_config import active_book_paths
 STATE = ROOT / "data" / "test-gallery-state.json"
 QUALITY_SCORECARD = ROOT / "config" / "quality_scorecard.json"
@@ -93,13 +94,15 @@ def classify(
         )
     )
 
+    authoritative = decision_is_authoritative(assistant, root)
     if (
-        decision in {"approve", "select"}
+        authoritative
+        and decision in {"approve", "select"}
         and exact_review_is_current
         and fingerprint_is_current
     ):
         return "approved"
-    if decision == "reject" and exact_review_is_current:
+    if authoritative and decision == "reject" and exact_review_is_current:
         return "needs_generation"
 
     status = str(item.get("status") or "")
