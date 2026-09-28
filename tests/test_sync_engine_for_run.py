@@ -16,12 +16,17 @@ spec.loader.exec_module(sync)
 
 class SyncEngineForRunTests(unittest.TestCase):
     def test_git_output_is_decoded_as_utf8_not_windows_codepage(self):
-        completed = b'{"notes":"2\xe2\x80\x933 feet; mantle peels downward"}\n'
-        with patch.object(sync.subprocess, "check_output", return_value=completed) as check_output:
+        raw = b'{"notes":"2\xe2\x80\x933 feet; mantle peels downward"}\n'
+
+        def fake_check_output(*args, **kwargs):
+            self.assertTrue(kwargs["text"])
+            self.assertEqual(kwargs["encoding"], "utf-8")
+            self.assertEqual(kwargs["errors"], "strict")
+            return raw.decode(kwargs["encoding"], errors=kwargs["errors"])
+
+        with patch.object(sync.subprocess, "check_output", side_effect=fake_check_output):
             text = sync.output("git", "show", "origin/review-previews-live:review-previews/decisions.json")
         self.assertIn("2\u20133 feet", text)
-        self.assertEqual(check_output.call_args.kwargs["encoding"], "utf-8")
-        self.assertEqual(check_output.call_args.kwargs["errors"], "strict")
 
     def test_review_decisions_are_imported_from_dedicated_review_branch(self):
         calls = []
