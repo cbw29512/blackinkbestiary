@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Ink Bestiary — Local Canary Gallery</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#171717;background:#f3f0e9}
+*{box-sizing:border-box}body{margin:0;padding:24px}.wrap{max-width:1500px;margin:auto}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+h1{margin:0 0 6px}.muted{color:#666}.status{margin:16px 0;padding:12px 14px;background:#fff;border:1px solid #d9d4ca;border-radius:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:#fff;border:1px solid #d9d4ca;border-radius:12px;padding:12px;box-shadow:0 2px 8px #0000000a}
+.card img{display:block;width:100%;aspect-ratio:3/4;object-fit:contain;background:#fff;border:1px solid #e0ddd5;cursor:zoom-in}
+.card h2{font-size:1rem;margin:10px 0 2px}.missing{display:grid;place-items:center;aspect-ratio:3/4;border:1px dashed #bbb;color:#777;background:#fafafa;text-align:center;padding:18px}
+button{padding:8px 12px;border:1px solid #aaa;background:#fff;border-radius:8px;cursor:pointer}
+dialog{border:0;border-radius:12px;padding:12px;max-width:96vw;max-height:96vh}
+dialog::backdrop{background:#000b}dialog img{display:block;max-width:92vw;max-height:86vh;object-fit:contain;background:#fff}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="top">
+  <div>
+    <h1>Black Ink Bestiary — Local Canary Nine</h1>
+    <div class="muted">Directly reads the latest local PNGs. No localhost server required.</div>
+  </div>
+  <button id="refreshNow" type="button">Refresh now</button>
+</div>
+<div id="status" class="status">Loading latest local canary images…</div>
+<div id="gallery" class="grid"></div>
+</main>
+<dialog id="viewer"><button id="closeViewer" type="button">Close</button><img id="viewerImage" alt=""></dialog>
+<script>
+const pages=[
+  ["I-01","Kobold Warrior"],["I-04","Goblin Warrior"],["I-08","Bugbear Warrior"],
+  ["I-10","Ogre"],["I-14","Darkmantle"],["I-16","Giant Bat"],
+  ["I-19","Rat Swarm"],["I-20","Giant Centipede"],["I-22","Giant Spider"]
+];
+const gallery=document.getElementById("gallery");
+const status=document.getElementById("status");
+const viewer=document.getElementById("viewer");
+const viewerImage=document.getElementById("viewerImage");
+
+function render(){
+  const stamp=Date.now();
+  gallery.innerHTML=pages.map(([id,name])=>{
+    const path="web/test-gallery/"+id+"-C01.png?t="+stamp;
+    return '<article class="card">'+
+      '<img src="'+path+'" alt="'+id+' '+name+'" data-page="'+id+'" data-name="'+name+'">'+
+      '<h2>'+id+' — '+name+'</h2>'+
+      '<div class="muted">Current local candidate C01</div>'+
+      '</article>';
+  }).join("");
+  let loaded=0,failed=0;
+  gallery.querySelectorAll("img").forEach(img=>{
+    img.onload=()=>{loaded++;updateStatus(loaded,failed);};
+    img.onerror=()=>{
+      failed++;updateStatus(loaded,failed);
+      const replacement=document.createElement("div");
+      replacement.className="missing";
+      replacement.textContent=img.dataset.page+" is being regenerated or has not been written yet.";
+      img.replaceWith(replacement);
+    };
+    img.onclick=()=>{
+      viewerImage.src=img.src;
+      viewerImage.alt=img.alt;
+      viewer.showModal();
+    };
+  });
+}
+function updateStatus(loaded,failed){
+  const now=new Date().toLocaleTimeString();
+  status.textContent=loaded+" of 9 current images visible"+(failed?" • "+failed+" temporarily unavailable":"")+" • refreshed "+now;
+}
+document.getElementById("refreshNow").onclick=render;
+document.getElementById("closeViewer").onclick=()=>viewer.close();
+viewer.onclick=e=>{if(e.target===viewer)viewer.close();};
+render();
+setInterval(render,5000);
+</script>
+</body>
+</html>
