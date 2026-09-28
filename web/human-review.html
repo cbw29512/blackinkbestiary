@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Ink Bestiary — Human Review Studio</title>
+<link rel="stylesheet" href="/human-review.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">LOCAL-ONLY PRODUCTION REVIEW</div>
+      <h1>Black Ink Bestiary</h1>
+      <p class="muted">Human approval is authoritative. AI notes are advisory.</p>
+    </div>
+    <div class="top-actions">
+      <a class="ghost-button" href="/autopilot-status.html">Autopilot monitor</a>
+      <button id="refreshBtn" class="ghost-button" type="button">Refresh</button>
+    </div>
+  </header>
+
+  <section id="scoreStrip" class="score-strip" aria-live="polite"></section>
+  <div id="staleBanner" class="banner hidden"></div>
+
+  <section class="workspace">
+    <aside class="queue-panel">
+      <div class="panel-heading">
+        <div>
+          <div class="eyebrow">CANARY QUEUE</div>
+          <h2>Pages</h2>
+        </div>
+        <span id="queueCount" class="pill"></span>
+      </div>
+      <div id="queue" class="queue"></div>
+    </aside>
+
+    <section class="review-panel">
+      <div id="emptyState" class="empty hidden">
+        <h2>No page currently needs your review.</h2>
+        <p>Approved pages are locked for this exact image hash. Rejected pages will return after regeneration.</p>
+      </div>
+
+      <div id="reviewContent" class="review-content hidden">
+        <div class="image-column">
+          <div class="image-frame">
+            <img id="candidateImage" alt="Current Canary candidate">
+          </div>
+          <div class="image-meta">
+            <span id="pageId" class="pill"></span>
+            <span id="pageStatus" class="pill neutral"></span>
+            <span id="reviewId" class="hash"></span>
+          </div>
+        </div>
+
+        <div class="decision-column">
+          <div>
+            <div class="eyebrow">CURRENT PAGE</div>
+            <h2 id="monsterName"></h2>
+          </div>
+
+          <section class="contract-card">
+            <div class="contract-row"><span>Habitat</span><strong id="habitat"></strong></div>
+            <div class="contract-row"><span>Story moment</span><strong id="storyMoment"></strong></div>
+            <div>
+              <span class="contract-label">Must include</span>
+              <ul id="mustInclude"></ul>
+            </div>
+          </section>
+
+          <section class="advisory-card">
+            <div class="panel-heading compact">
+              <div>
+                <div class="eyebrow">AI ADVISORY</div>
+                <h3>Second set of eyes</h3>
+              </div>
+              <span id="advisoryStage" class="pill neutral"></span>
+            </div>
+            <div id="advisoryScore" class="muted"></div>
+            <ul id="advisoryDefects"></ul>
+          </section>
+
+          <section class="decision-card">
+            <div class="eyebrow">YOUR DECISION</div>
+            <div class="decision-buttons">
+              <button id="approveBtn" class="approve" type="button">Approve premium page</button>
+              <button id="rejectBtn" class="reject" type="button">Reject + queue regeneration</button>
+              <button id="skipBtn" class="ghost-button" type="button">Skip for now</button>
+            </div>
+
+            <div id="rejectFields" class="reject-fields hidden">
+              <label for="stage">What failed?</label>
+              <select id="stage">
+                <option value="identity">Identity / anatomy</option>
+                <option value="environment">Environment</option>
+                <option value="action">Action / story</option>
+                <option value="quality">Premium quality / colorability</option>
+              </select>
+              <label for="notes">Why are you rejecting it?</label>
+              <textarea id="notes" rows="5" placeholder="Be specific. Example: The bugbear still looks like a gorilla; arms need to hang below the hips and the torso is too bodybuilder-like."></textarea>
+              <button id="confirmRejectBtn" class="reject solid" type="button">Save reason and regenerate</button>
+            </div>
+            <div id="decisionMessage" class="message"></div>
+          </section>
+
+          <section id="historyCard" class="history-card hidden">
+            <div class="eyebrow">YOUR RECENT FEEDBACK</div>
+            <div id="history"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="metrics-panel">
+    <div class="panel-heading">
+      <div>
+        <div class="eyebrow">HONEST 0–100 STATUS</div>
+        <h2>Production metrics</h2>
+      </div>
+      <div id="metricTimestamp" class="muted"></div>
+    </div>
+    <div id="metrics" class="metrics-grid"></div>
+    <div class="feedback-grid">
+      <div class="metric-card">
+        <div class="metric-name">Human feedback</div>
+        <div id="feedbackSummary"></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Current blockers</div>
+        <div id="blockers"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="/human-review.js"></script>
+</body>
+</html>
