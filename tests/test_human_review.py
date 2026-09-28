@@ -62,6 +62,17 @@ class HumanReviewTests(unittest.TestCase):
         self.assertEqual(row["decision"], "approve")
         self.assertEqual(row["reviewer"], "human")
 
+    def test_human_review_window_shows_contract_and_advisory_context(self):
+        script = (Path(__file__).resolve().parents[1] / "scripts" / "human_canary_review.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("HABITAT:", script)
+        self.assertIn("STORY MOMENT:", script)
+        self.assertIn("MUST INCLUDE:", script)
+        self.assertIn("LOCAL AI ADVISORY (not authoritative)", script)
+        self.assertIn("active_book_paths", script)
+        self.assertIn("resolve_page_spec", script)
+
     def test_autopilot_waits_instead_of_fake_generation_when_review_is_pending(self):
         text = (Path(__file__).resolve().parents[1] / "RUN_ENGINE_AUTOPILOT.bat").read_text(
             encoding="utf-8"
