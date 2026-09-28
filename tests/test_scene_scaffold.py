@@ -45,7 +45,7 @@ class SceneScaffoldTests(unittest.TestCase):
             self.assertEqual(rendered, output)
             self.assertTrue(output.exists())
             payload = output.read_bytes()
-            self.assertTrue(payload.startswith(b"\\x89PNG\\r\\n\\x1a\\n"))
+            self.assertTrue(payload.startswith(b"\x89PNG\r\n\x1a\n"))
             width, height = struct.unpack(">II", payload[16:24])
             self.assertEqual((width, height), (768, 1024))
 
