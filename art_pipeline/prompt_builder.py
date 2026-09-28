@@ -594,7 +594,6 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
             ),
             "ACTION — SECOND PRIORITY:\n" + "\n".join(f"- {x}" for x in action_lines if x),
             "ENVIRONMENT — THIRD PRIORITY:\n" + "\n".join(f"- {x}" for x in environment_lines if x),
-            _brief_items("MUST INCLUDE", page.get("must_include"), 6),
             _brief_items("MUST AVOID", page.get("must_avoid"), 5),
         ])
 
@@ -658,25 +657,18 @@ def build_prompt(page: dict, review_notes: dict | None = None, candidate_no: int
 
 
 def required_visible_inventory(page: dict) -> list[str]:
-    """Return every page-specific fact that must be visibly present in the final image."""
+    """Return the explicit zero-omission page inventory."""
     page = resolve_page_spec(page, ROOT)
-    variant = page.get("environment_variant") or {}
-    values = [
-        *(page.get("must_include") or []),
-        variant.get("landmark"),
-        variant.get("interaction"),
-    ]
     result = []
     seen = set()
-    for value in values:
+    for value in page.get("must_include") or []:
         item = str(value or "").strip()
         if not item:
             continue
         key = re.sub(r"[^a-z0-9]+", " ", item.lower()).strip()
-        if not key or key in seen:
-            continue
-        seen.add(key)
-        result.append(item)
+        if key and key not in seen:
+            seen.add(key)
+            result.append(item)
     return result
 
 
@@ -685,13 +677,9 @@ def format_required_visible_inventory(page: dict) -> str:
     if not items:
         return ""
     lines = [
-        "REQUIRED-ELEMENT INVENTORY — ZERO OMISSIONS ALLOWED:",
+        "REQUIRED-ELEMENT INVENTORY — ZERO OMISSIONS:",
         *[f"{index}. {item}" for index, item in enumerate(items, start=1)],
-        (
-            "COVERAGE-FIRST LAYOUT LOCK — NON-NEGOTIABLE: allocate a clear visible place or relationship for EVERY numbered item before adding decoration. "
-            "No item may be implied, hidden, replaced by a similar object, merged into unrelated scenery, or omitted to improve composition. "
-            "If the page is too crowded, remove optional decoration; never remove a required item."
-        ),
+        "Every numbered item must be visibly present. Remove optional decoration before omitting, hiding, substituting, or merging any required item.",
     ]
     return "\n".join(lines)
 
