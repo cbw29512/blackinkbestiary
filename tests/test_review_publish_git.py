@@ -14,6 +14,26 @@ import review_publish_git as rpg
 
 
 class ReviewPublishGitTests(unittest.TestCase):
+    def test_review_publisher_decodes_git_output_as_utf8(self):
+        raw = b'{"notes":"premium \xe2\x80\x9d review"}\n'
+
+        def fake_check_output(*args, **kwargs):
+            self.assertTrue(kwargs["text"])
+            self.assertEqual(kwargs["encoding"], "utf-8")
+            self.assertEqual(kwargs["errors"], "strict")
+            return raw.decode(kwargs["encoding"], errors=kwargs["errors"])
+
+        with patch.object(rpg.subprocess, "check_output", side_effect=fake_check_output):
+            text = rpg.output(Path("C:/fake"), "git", "show", "x:y")
+        self.assertIn("premium \u201d review", text)
+
+    def test_review_worktree_uses_utf8_for_git_output(self):
+        helper = (ROOT / "scripts" / "review_publish_worktree.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('encoding="utf-8"', helper)
+        self.assertIn('errors="strict"', helper)
+
     def test_sync_live_decisions_fetches_validated_ledger(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
