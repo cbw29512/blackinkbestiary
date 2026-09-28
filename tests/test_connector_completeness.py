@@ -19,7 +19,7 @@ class ConnectorCompletenessTests(unittest.TestCase):
         self.assertEqual(len(proofs), 3)
         self.assertTrue(any("left wall ring" in item for item in proofs))
         self.assertTrue(any("right wall ring" in item for item in proofs))
-        self.assertTrue(any("not the creature" in item for item in proofs))
+        self.assertTrue(any("cross the traversable path" in item for item in proofs))
 
         resolved = resolve_page_spec(page, ROOT)
         for item in proofs:

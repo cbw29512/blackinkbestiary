@@ -245,7 +245,8 @@ class EnvironmentCatalogTests(unittest.TestCase):
         self.assertIn("visibly attach to the wall", text)
         self.assertIn("never draw it as a freestanding floor torch", text)
         self.assertIn("tripwire must visibly cross the traversable path", text)
-        self.assertIn("cause-and-effect reads instantly", text)
+        self.assertIn("two wall rings", text)
+        self.assertNotIn("connect to the triggered hazard", text)
     def test_trap_page_automatically_receives_hazard_and_trap_overlay(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-01")
         palette = assemble_environment_palette(page, ROOT)
@@ -303,7 +304,6 @@ class EnvironmentCatalogTests(unittest.TestCase):
         ids = [item["overlay_id"] for item in overlays]
         self.assertIn("laboratory", ids)
         self.assertLess(ids.index("laboratory"), len(ids))
-
 
     def test_creature_support_requirement_does_not_own_environment_scenery(self):
         page = next(page for page in self.tome["pages"] if page["page_id"] == "I-28")
