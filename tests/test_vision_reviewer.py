@@ -36,6 +36,7 @@ class VisionReviewerTests(unittest.TestCase):
             "environment_profile_id": "underground.trapped-stone-corridor",
             "moment": "kobold triggers a tripwire",
             "archetype": "trap_scene",
+            "must_include": ["visible tripwire across the corridor"],
         }
 
     def test_final_quality_gate_explicitly_rejects_decorative_artwork_frames(self):
