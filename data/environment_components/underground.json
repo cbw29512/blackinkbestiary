@@ -1015,7 +1015,7 @@
     "hazards": [
       {
         "id": "hazard-01",
-        "text": "visible tripwire crossing the path into one large pit or trigger zone",
+        "text": "visible tripwire across the path, in front of one pit cut into the floor",
         "contexts": [
           "trap",
           "built"

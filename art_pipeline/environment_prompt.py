@@ -61,7 +61,7 @@ def _required_object_rules(page: dict) -> list[str]:
     if "pit" in text:
         rules.append(
             "PIT-TRAP GEOMETRY LOCK: the pit is an opening cut into and interrupting the walking floor plane, with its rim flush or nearly flush with surrounding flagstones/ground. "
-            "Its interior drops below floor level and any spikes rise from inside that recessed opening. Never draw a raised circular masonry well, basin, freestanding ring, planter, or above-floor container and call it a pit."
+            "Its interior drops below floor level and any spikes rise from inside that recessed opening. Never draw a raised circular masonry well, basin, freestanding ring, planter, spike tray, or above-floor container and call it a pit."
         )
     if "spear" in text:
         rules.append(
