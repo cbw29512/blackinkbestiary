@@ -674,7 +674,7 @@ def main() -> int:
                 retry_failed,
                 force_rerun=(
                     args.canary
-                    or (args.canary_failed and stale_generation_authority)
+                    or stale_generation_authority
                 ),
                 retry_max_refinements=(
                     not args.canary_failed

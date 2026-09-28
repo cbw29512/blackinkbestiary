@@ -205,6 +205,11 @@ class TestGalleryResumeTests(unittest.TestCase):
             )
         )
 
+    def test_one_at_a_time_reruns_when_generation_fingerprint_changes(self):
+        source = (ROOT / "scripts" / "generate_test_gallery.py").read_text(encoding="utf-8")
+        self.assertIn("or stale_generation_authority", source)
+        self.assertNotIn("args.canary_failed and stale_generation_authority", source)
+
     def test_stale_generation_authority_forces_canary_rerun(self):
         prior = {
             "status": "ready_for_review",
