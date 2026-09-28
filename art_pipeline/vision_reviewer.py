@@ -323,6 +323,9 @@ def _stage_pass_evidence_issues(page: dict, stage: str, verdict: dict) -> list[s
                 missing.append(requirement)
         return missing[:6]
 
+    if len(required) < 2:
+        return []
+
     matched = []
     for requirement in required:
         requirement_tokens = _semantic_tokens(requirement)
@@ -399,13 +402,15 @@ def review_image(page: dict, image_path: str | Path, config: dict) -> dict:
         raise VisionReviewError(f"Could not read image for vision review: {image_path}: {exc}") from exc
 
     url = settings.get("base_url", "http://127.0.0.1:11434").rstrip("/") + "/api/generate"
-    gates = (
+    gates = [
         ("Identity", build_identity_review_prompt),
         ("Environment", build_environment_review_prompt),
         ("Action", build_action_review_prompt),
-        ("Completeness", build_completeness_review_prompt),
-        ("Quality", build_review_prompt),
-    )
+    ]
+    if required_visible_inventory(page):
+        gates.append(("Completeness", build_completeness_review_prompt))
+    gates.append(("Quality", build_review_prompt))
+
     for stage, builder in gates:
         prompt = builder(page)
         verdict = _run_gate(url, settings, encoded, prompt, stage)
