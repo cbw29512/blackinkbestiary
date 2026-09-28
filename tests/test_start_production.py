@@ -156,6 +156,22 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("canary-preview", script)
         self.assertIn("showModal()", script)
 
+    def test_one_at_a_time_calibration_stops_after_one_canary(self):
+        launcher = (ROOT / "RUN_NEXT_CANARY.bat").read_text(encoding="utf-8")
+        runner = (ROOT / "scripts" / "run_next_canary.ps1").read_text(encoding="utf-8")
+        resolver = (ROOT / "scripts" / "next_canary_target.py").read_text(encoding="utf-8")
+
+        self.assertIn("run_next_canary.ps1", launcher)
+        self.assertIn("sync_engine_for_run.py", runner)
+        self.assertIn("apply_review_decisions.py", runner)
+        self.assertIn("next_canary_target.py", runner)
+        self.assertIn('"--only", $pageId', runner)
+        self.assertIn('"--candidate", "1"', runner)
+        self.assertIn("Other Canary pages will not run", runner)
+        self.assertIn("OPEN_REVIEW_STUDIO.bat", runner)
+        self.assertIn("if status != \"approved\"", resolver)
+        self.assertNotIn("--canary-failed", runner)
+
     def test_safe_workspace_cleanup_preserves_production_state(self):
         cleanup = (ROOT / "scripts" / "clean_local_workspace.ps1").read_text(encoding="utf-8")
         launcher = (ROOT / "CLEAN_LOCAL_WORKSPACE.bat").read_text(encoding="utf-8")
