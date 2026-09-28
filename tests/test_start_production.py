@@ -172,6 +172,13 @@ class StartProductionContractTests(unittest.TestCase):
         self.assertIn("if status != \"approved\"", resolver)
         self.assertNotIn("--canary-failed", runner)
 
+        autopilot = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
+        generator = (ROOT / "scripts" / "generate_next_canary.py").read_text(encoding="utf-8")
+        self.assertIn("generate_next_canary.py", autopilot)
+        self.assertNotIn("generate_test_gallery.py --canary-failed", autopilot)
+        self.assertIn("--only", generator)
+        self.assertIn("all later Canary pages remain blocked until human approval", generator)
+
     def test_safe_workspace_cleanup_preserves_production_state(self):
         cleanup = (ROOT / "scripts" / "clean_local_workspace.ps1").read_text(encoding="utf-8")
         launcher = (ROOT / "CLEAN_LOCAL_WORKSPACE.bat").read_text(encoding="utf-8")
