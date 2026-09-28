@@ -18,7 +18,13 @@ def run(root: Path, *args: str) -> None:
 
 
 def output(root: Path, *args: str) -> str:
-    return subprocess.check_output(args, cwd=root, text=True).strip()
+    return subprocess.check_output(
+        args,
+        cwd=root,
+        text=True,
+        encoding="utf-8",
+        errors="strict",
+    ).strip()
 
 
 def tracked_changes_outside_previews(root: Path) -> list[str]:
@@ -26,6 +32,8 @@ def tracked_changes_outside_previews(root: Path) -> list[str]:
         ["git", "status", "--porcelain", "--untracked-files=no"],
         cwd=root,
         text=True,
+        encoding="utf-8",
+        errors="strict",
         capture_output=True,
         check=True,
     )
