@@ -1,38 +1,38 @@
 {
   "schema_version": 1,
-  "quality_contract_version": "black-ink-quality-scorecard-v10",
-  "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
-  "measured_at": "2026-09-28T12:55:21.450085+00:00",
-  "engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
+  "quality_contract_version": "black-ink-quality-scorecard-v11",
+  "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
+  "measured_at": "2026-09-28T22:34:08.857921+00:00",
+  "engine_commit": "3c6b28b76956c026db6d4fd17b190c2484b9d62c",
   "active_book_id": "TOME-I",
   "metrics": {
-    "foundation_readiness": 100.0,
+    "foundation_readiness": 80.0,
     "technical_qa_pass_rate": 100.0,
     "review_pipeline_health": 100.0,
-    "visual_cleanliness": 11.1,
-    "semantic_accuracy": 11.1,
+    "visual_cleanliness": 0.0,
+    "semantic_accuracy": 0.0,
     "completeness": 100.0,
     "print_package_readiness": 80.0,
     "locked_page_progress": 0.0,
     "replication_readiness": 100.0
   },
-  "overall_automated_readiness": 62.8,
+  "overall_automated_readiness": 57.5,
   "readiness_floor": 0.0,
-  "series_score": 35.0,
+  "series_score": 32.5,
   "series_readiness_floor": 0.0,
   "series_automated_100": false,
   "canary": {
     "total": 9,
     "technical_passes": 9,
     "review_pipeline_passes": 9,
-    "visual_passes": 1,
-    "semantic_passes": 1,
-    "all_passes": 1,
+    "visual_passes": 0,
+    "semantic_passes": 0,
+    "all_passes": 0,
     "technical_qa": 100.0,
     "review_pipeline_health": 100.0,
-    "visual_cleanliness": 11.1,
-    "semantic_accuracy": 11.1,
-    "all_automated_gates": 11.1,
+    "visual_cleanliness": 0.0,
+    "semantic_accuracy": 0.0,
+    "all_automated_gates": 0.0,
     "rows": [
       {
         "page_id": "I-01",
@@ -45,7 +45,8 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-04",
@@ -58,7 +59,8 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-08",
@@ -71,7 +73,8 @@
         "visual_stage": "identity",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-10",
@@ -84,7 +87,8 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-14",
@@ -97,7 +101,8 @@
         "visual_stage": null,
         "visual_score": null,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-16",
@@ -110,7 +115,8 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-19",
@@ -123,7 +129,8 @@
         "visual_stage": "action",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-20",
@@ -136,20 +143,22 @@
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": null
+        "assistant_decision": null,
+        "exact_image_reviewer": null
       },
       {
         "page_id": "I-22",
         "status": "awaiting_exact_image_review",
         "technical_pass": true,
         "review_pipeline_pass": true,
-        "visual_cleanliness_pass": true,
-        "semantic_accuracy_pass": true,
-        "all_automated_gates_pass": true,
+        "visual_cleanliness_pass": false,
+        "semantic_accuracy_pass": false,
+        "all_automated_gates_pass": false,
         "visual_stage": "environment",
         "visual_score": 49,
         "local_visual_advisory_pass": false,
-        "assistant_decision": "approve"
+        "assistant_decision": "approve",
+        "exact_image_reviewer": null
       }
     ]
   },
@@ -160,46 +169,48 @@
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
     "avg_gpu_attempts_per_page": 4.56,
-    "gpu_attempts_per_semantic_pass": 41.0,
-    "semantic_yield_percent": 2.4,
-    "all_gate_yield_percent": 2.4
+    "gpu_attempts_per_semantic_pass": null,
+    "semantic_yield_percent": 0.0,
+    "all_gate_yield_percent": 0.0
   },
   "prompt_load": {
     "schema_version": 1,
     "pages_measured": 9,
     "errors": [],
-    "generation_chars_avg": 11049.6,
-    "generation_chars_max": 11827,
-    "generation_words_avg": 1560.3,
-    "generation_words_max": 1657,
+    "generation_chars_avg": 11395.4,
+    "generation_chars_max": 12154,
+    "generation_words_avg": 1607.7,
+    "generation_words_max": 1701,
     "generation_prompt_budget": {
       "target_max_chars": 12000,
       "hard_max_chars": 14000,
       "hard_max_words": 2000,
       "within_hard_budget": true,
-      "within_target_budget": true
+      "within_target_budget": false
     },
-    "checklist_items_avg": 78.4,
-    "checklist_items_max": 82,
+    "checklist_items_avg": 78.8,
+    "checklist_items_max": 85,
     "review_chars_avg": {
       "identity": 4000.4,
       "environment": 3240.7,
-      "action": 3067.9,
+      "action": 2810.2,
+      "completeness": 1861.0,
       "quality": 5004.0
     },
     "review_chars_max": {
       "identity": 4475,
       "environment": 3889,
-      "action": 3407,
+      "action": 3148,
+      "completeness": 2050,
       "quality": 5004
     },
     "rows": [
       {
         "page_id": "I-01",
         "generation": {
-          "chars": 11475,
-          "words": 1610,
-          "nonempty_lines": 64,
+          "chars": 11976,
+          "words": 1686,
+          "nonempty_lines": 75,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -219,9 +230,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 3078,
-            "words": 455,
-            "nonempty_lines": 36,
+            "chars": 2704,
+            "words": 403,
+            "nonempty_lines": 29,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 2050,
+            "words": 316,
+            "nonempty_lines": 24,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -233,20 +251,21 @@
             "duplicate_line_percent": 0.0
           }
         },
-        "checklist_items": 82,
+        "checklist_items": 85,
         "checklist_by_stage": {
           "identity": 15,
           "environment": 21,
-          "action": 24,
+          "action": 17,
+          "completeness": 10,
           "quality": 22
         }
       },
       {
         "page_id": "I-04",
         "generation": {
-          "chars": 11659,
-          "words": 1639,
-          "nonempty_lines": 65,
+          "chars": 11986,
+          "words": 1683,
+          "nonempty_lines": 71,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -266,9 +285,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 2998,
-            "words": 452,
-            "nonempty_lines": 34,
+            "chars": 2732,
+            "words": 414,
+            "nonempty_lines": 29,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1854,
+            "words": 281,
+            "nonempty_lines": 19,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -284,16 +310,17 @@
         "checklist_by_stage": {
           "identity": 18,
           "environment": 19,
-          "action": 22,
+          "action": 17,
+          "completeness": 5,
           "quality": 22
         }
       },
       {
         "page_id": "I-08",
         "generation": {
-          "chars": 10874,
-          "words": 1530,
-          "nonempty_lines": 63,
+          "chars": 11197,
+          "words": 1572,
+          "nonempty_lines": 67,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -313,9 +340,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 2942,
-            "words": 439,
-            "nonempty_lines": 32,
+            "chars": 2767,
+            "words": 414,
+            "nonempty_lines": 29,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1813,
+            "words": 274,
+            "nonempty_lines": 17,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -331,16 +365,17 @@
         "checklist_by_stage": {
           "identity": 20,
           "environment": 18,
-          "action": 20,
+          "action": 17,
+          "completeness": 3,
           "quality": 22
         }
       },
       {
         "page_id": "I-10",
         "generation": {
-          "chars": 10725,
-          "words": 1510,
-          "nonempty_lines": 60,
+          "chars": 11052,
+          "words": 1554,
+          "nonempty_lines": 66,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -360,9 +395,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 2992,
-            "words": 445,
-            "nonempty_lines": 34,
+            "chars": 2736,
+            "words": 409,
+            "nonempty_lines": 29,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1844,
+            "words": 279,
+            "nonempty_lines": 19,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -378,16 +420,17 @@
         "checklist_by_stage": {
           "identity": 12,
           "environment": 18,
-          "action": 22,
+          "action": 17,
+          "completeness": 5,
           "quality": 22
         }
       },
       {
         "page_id": "I-14",
         "generation": {
-          "chars": 11827,
-          "words": 1657,
-          "nonempty_lines": 63,
+          "chars": 12154,
+          "words": 1701,
+          "nonempty_lines": 69,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -407,9 +450,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 3407,
-            "words": 501,
-            "nonempty_lines": 35,
+            "chars": 3148,
+            "words": 466,
+            "nonempty_lines": 30,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1847,
+            "words": 278,
+            "nonempty_lines": 19,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -425,16 +475,17 @@
         "checklist_by_stage": {
           "identity": 15,
           "environment": 18,
-          "action": 23,
+          "action": 18,
+          "completeness": 5,
           "quality": 22
         }
       },
       {
         "page_id": "I-16",
         "generation": {
-          "chars": 10936,
-          "words": 1551,
-          "nonempty_lines": 64,
+          "chars": 11263,
+          "words": 1595,
+          "nonempty_lines": 70,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -454,9 +505,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 3089,
-            "words": 460,
-            "nonempty_lines": 34,
+            "chars": 2834,
+            "words": 424,
+            "nonempty_lines": 29,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1843,
+            "words": 279,
+            "nonempty_lines": 19,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -472,16 +530,17 @@
         "checklist_by_stage": {
           "identity": 12,
           "environment": 18,
-          "action": 22,
+          "action": 17,
+          "completeness": 5,
           "quality": 22
         }
       },
       {
         "page_id": "I-19",
         "generation": {
-          "chars": 10648,
-          "words": 1516,
-          "nonempty_lines": 64,
+          "chars": 10975,
+          "words": 1560,
+          "nonempty_lines": 70,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -501,9 +560,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 3137,
-            "words": 465,
-            "nonempty_lines": 35,
+            "chars": 2893,
+            "words": 429,
+            "nonempty_lines": 30,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1832,
+            "words": 279,
+            "nonempty_lines": 19,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -519,16 +585,17 @@
         "checklist_by_stage": {
           "identity": 16,
           "environment": 18,
-          "action": 23,
+          "action": 18,
+          "completeness": 5,
           "quality": 22
         }
       },
       {
         "page_id": "I-20",
         "generation": {
-          "chars": 10843,
-          "words": 1535,
-          "nonempty_lines": 65,
+          "chars": 11170,
+          "words": 1579,
+          "nonempty_lines": 71,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -548,9 +615,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 2863,
-            "words": 423,
-            "nonempty_lines": 34,
+            "chars": 2618,
+            "words": 387,
+            "nonempty_lines": 29,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1833,
+            "words": 279,
+            "nonempty_lines": 19,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -566,16 +640,17 @@
         "checklist_by_stage": {
           "identity": 18,
           "environment": 18,
-          "action": 22,
+          "action": 17,
+          "completeness": 5,
           "quality": 22
         }
       },
       {
         "page_id": "I-22",
         "generation": {
-          "chars": 10459,
-          "words": 1495,
-          "nonempty_lines": 65,
+          "chars": 10786,
+          "words": 1539,
+          "nonempty_lines": 71,
           "duplicate_lines": 0,
           "duplicate_line_percent": 0.0
         },
@@ -595,9 +670,16 @@
             "duplicate_line_percent": 0.0
           },
           "action": {
-            "chars": 3105,
-            "words": 462,
-            "nonempty_lines": 35,
+            "chars": 2860,
+            "words": 427,
+            "nonempty_lines": 30,
+            "duplicate_lines": 0,
+            "duplicate_line_percent": 0.0
+          },
+          "completeness": {
+            "chars": 1833,
+            "words": 278,
+            "nonempty_lines": 19,
             "duplicate_lines": 0,
             "duplicate_line_percent": 0.0
           },
@@ -613,7 +695,8 @@
         "checklist_by_stage": {
           "identity": 15,
           "environment": 18,
-          "action": 23,
+          "action": 18,
+          "completeness": 5,
           "quality": 22
         }
       }
@@ -628,19 +711,19 @@
       "recipe_ready": 50,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 100.0,
         "review_pipeline_health": 100.0,
-        "visual_cleanliness": 11.1,
-        "semantic_accuracy": 11.1,
+        "visual_cleanliness": 0.0,
+        "semantic_accuracy": 0.0,
         "completeness": 100.0,
         "print_package_readiness": 80.0,
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 62.8,
+      "overall_automated_readiness": 57.5,
       "readiness_floor": 0.0,
-      "weakest_metric": "locked_page_progress",
+      "weakest_metric": "visual_cleanliness",
       "missing_required_categories": [],
       "known_blockers": [
         "UNCLASSIFIED",
@@ -658,7 +741,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -668,7 +751,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 35.0,
+      "overall_automated_readiness": 32.5,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -683,7 +766,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -693,7 +776,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 35.0,
+      "overall_automated_readiness": 32.5,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -708,7 +791,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -718,7 +801,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 35.0,
+      "overall_automated_readiness": 32.5,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -733,7 +816,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -743,7 +826,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 35.0,
+      "overall_automated_readiness": 32.5,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -758,7 +841,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -768,7 +851,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 35.0,
+      "overall_automated_readiness": 32.5,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -783,7 +866,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -793,7 +876,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 35.0,
+      "overall_automated_readiness": 32.5,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -808,7 +891,7 @@
       "recipe_ready": 0,
       "locked_pages": 0,
       "metrics": {
-        "foundation_readiness": 100.0,
+        "foundation_readiness": 80.0,
         "technical_qa_pass_rate": 0.0,
         "review_pipeline_health": 0.0,
         "visual_cleanliness": 0.0,
@@ -818,7 +901,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 35.0,
+      "overall_automated_readiness": 32.5,
       "readiness_floor": 0.0,
       "weakest_metric": "technical_qa_pass_rate",
       "missing_required_categories": [],
@@ -831,7 +914,7 @@
     "engine_preflight_passed": true,
     "series_audit_green": true,
     "active_book_structure_valid": true,
-    "autopilot_heartbeat_current": true
+    "autopilot_heartbeat_current": false
   },
   "print_package": {
     "score": 80,
@@ -1404,6 +1487,15 @@
       ]
     }
   ],
+  "human_feedback": {
+    "total_reviews": 0,
+    "approvals": 0,
+    "rejections": 0,
+    "rejection_stage_counts": {},
+    "defect_counts": {},
+    "distinct_pages_reviewed": 0,
+    "recurring_defects": []
+  },
   "defect_labels": {
     "TECH_SAFE_MARGIN": {
       "category": "technical",
@@ -1479,5 +1571,5 @@
     "ACTION_UNCLEAR",
     "IDENTITY_HEROIC_BULK"
   ],
-  "measurement_fingerprint": "8439a58f8c3be46acd2e5927449992fdd3de9f188d0884b716ba291dd5214459"
+  "measurement_fingerprint": "6ace1e2d1a01601707d6f45a6fd47703eaed527eb55e6aa377c29d253ac74886"
 }
