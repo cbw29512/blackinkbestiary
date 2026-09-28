@@ -112,6 +112,8 @@ def main() -> int:
     subprocess.run(
         ["git", "restore", "--staged", "--worktree", "review-previews"],
         cwd=ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
         check=False,
     )
 
