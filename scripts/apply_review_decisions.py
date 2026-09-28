@@ -40,7 +40,7 @@ def review_id_for(item: dict) -> str | None:
 
 def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
     explicit = str(review.get("stage") or "").strip().lower()
-    if explicit in {"identity", "environment", "action", "quality"}:
+    if explicit in {"identity", "environment", "action", "completeness", "quality"}:
         return explicit
 
     notes = str(review.get("notes") or "").lower()
@@ -89,6 +89,12 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
         "feeding", "offering", "signaling", "signal", "interaction",
         "contact", "recoil", "crawling", "story",
     )
+    completeness_terms = (
+        "missing", "omitted", "omit", "absent", "not present", "left out",
+        "blank doorway", "blank door", "empty doorway", "empty arch",
+        "unexplained rope", "unexplained line", "missing prop", "missing object",
+        "required element", "must include",
+    )
     quality_terms = (
         "wallpaper", "dense web", "too dense", "border", "frame",
         "black fill", "grayscale", "clutter", "coloring", "negative space",
@@ -106,6 +112,7 @@ def classify_rejection_stage(review: dict, item: dict | None = None) -> str:
         ("identity", identity_terms),
         ("environment", environment_terms),
         ("action", action_terms),
+        ("completeness", completeness_terms),
         ("quality", quality_terms),
     ):
         if stage == "identity" and identity_already_ok:
