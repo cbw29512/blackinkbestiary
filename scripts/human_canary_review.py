@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 import tkinter as tk
@@ -12,21 +13,39 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from human_review import append_human_decision, current_canary_items, current_image_path
+from page_contract import resolve_page_spec
+from studio_config import active_book_paths
+
+
+def load_page_contexts():
+    manifest = json.loads(
+        active_book_paths(ROOT)["manifest"].read_text(encoding="utf-8")
+    )
+    return {
+        str(page.get("page_id") or ""): resolve_page_spec(page, ROOT)
+        for page in manifest.get("pages", [])
+        if page.get("page_id")
+    }
 
 
 class ReviewApp:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.items = current_canary_items(ROOT)
+        self.page_contexts = load_page_contexts()
         self.index = 0
         self.photo = None
         root.title("Black Ink Bestiary - Human Canary Review")
-        root.geometry("980x920")
+        root.geometry("1040x1080")
 
         self.heading = ttk.Label(root, font=("Segoe UI", 14, "bold"))
         self.heading.pack(pady=(10, 4))
         self.image_label = ttk.Label(root)
         self.image_label.pack(padx=12, pady=8)
+
+        self.context = tk.Text(root, height=8, wrap="word")
+        self.context.pack(fill="x", padx=18, pady=(0, 8))
+        self.context.configure(state="disabled")
 
         form = ttk.Frame(root)
         form.pack(fill="x", padx=18)
@@ -59,11 +78,15 @@ class ReviewApp:
         if not self.items or self.index >= len(self.items):
             self.heading.config(text="No more current canary images awaiting your review.")
             self.image_label.config(image="")
+            self.context.configure(state="normal")
+            self.context.delete("1.0", "end")
+            self.context.configure(state="disabled")
             self.status.config(text="Close this window. Rejected pages will regenerate on the next autopilot cycle.")
             return
         item = self.items[self.index]
         page_id = str(item.get("page_id") or "")
-        monster = str(item.get("monster_name") or "")
+        page = self.page_contexts.get(page_id) or {}
+        monster = str(item.get("monster_name") or page.get("monster_name") or "")
         self.heading.config(text=f"{self.index + 1}/{len(self.items)} - {page_id} - {monster}")
         path = current_image_path(ROOT, item)
         with Image.open(path) as image:
@@ -71,7 +94,25 @@ class ReviewApp:
             image.thumbnail((780, 650))
             self.photo = ImageTk.PhotoImage(image)
         self.image_label.config(image=self.photo)
-        local_stage = str((item.get("visual_review") or {}).get("stage") or "").lower()
+
+        advisory = item.get("visual_review") or {}
+        defects = [str(x).strip() for x in advisory.get("defects") or [] if str(x).strip()]
+        context_lines = [
+            f"HABITAT: {page.get('habitat', '')}",
+            f"STORY MOMENT: {page.get('moment', '')}",
+            "MUST INCLUDE: " + "; ".join(str(x) for x in page.get("must_include") or []),
+            (
+                "LOCAL AI ADVISORY (not authoritative): "
+                + (f"stage={advisory.get('stage')} score={advisory.get('score')} defects=" + "; ".join(defects)
+                   if advisory else "no advisory verdict")
+            ),
+        ]
+        self.context.configure(state="normal")
+        self.context.delete("1.0", "end")
+        self.context.insert("1.0", "\n".join(context_lines))
+        self.context.configure(state="disabled")
+
+        local_stage = str(advisory.get("stage") or "").lower()
         if local_stage in {"identity", "environment", "action", "quality"}:
             self.stage.set(local_stage)
         self.notes.delete("1.0", "end")
