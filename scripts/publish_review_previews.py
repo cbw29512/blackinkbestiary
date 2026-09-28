@@ -49,6 +49,7 @@ from generation_fingerprint import page_generation_fingerprint, page_review_fing
 from quality_history import build_quality_snapshot
 from reviewer_audit import reviewer_disagreement_report
 from page_contract import resolve_page_spec
+from review_authority import decision_is_authoritative
 from studio_config import active_book_paths
 
 STATE = ROOT / "data" / "test-gallery-state.json"
@@ -258,7 +259,8 @@ def main() -> int:
         )
         assistant = item.get("assistant_review") or {}
         exact_assistant_approved = (
-            str(assistant.get("decision") or "").lower() in {"approve", "select"}
+            decision_is_authoritative(assistant, ROOT)
+            and str(assistant.get("decision") or "").lower() in {"approve", "select"}
             and str(assistant.get("review_id") or "") == exact_review_id
         )
         selected = (
