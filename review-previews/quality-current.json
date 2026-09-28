@@ -2,7 +2,7 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v10",
   "quality_contract_fingerprint": "6359ef1573ebb998b1f13b6c98ff94f879c8ca525bf8316f021cf1d25cb9725a",
-  "measured_at": "2026-09-28T02:40:33.607799+00:00",
+  "measured_at": "2026-09-28T03:14:32.245926+00:00",
   "engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
   "active_book_id": "TOME-I",
   "metrics": {
@@ -94,8 +94,8 @@
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
+        "visual_stage": null,
+        "visual_score": null,
         "local_visual_advisory_pass": false,
         "assistant_decision": null
       },
@@ -120,8 +120,8 @@
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": null,
-        "visual_score": null,
+        "visual_stage": "action",
+        "visual_score": 49,
         "local_visual_advisory_pass": false,
         "assistant_decision": null
       },
@@ -133,8 +133,8 @@
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
+        "visual_stage": null,
+        "visual_score": null,
         "local_visual_advisory_pass": false,
         "assistant_decision": null
       },
@@ -155,11 +155,11 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 37,
-    "refinement_passes": 28,
+    "gpu_attempts": 33,
+    "refinement_passes": 24,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 4.11,
+    "avg_gpu_attempts_per_page": 3.67,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -644,6 +644,7 @@
       "missing_required_categories": [],
       "known_blockers": [
         "UNCLASSIFIED",
+        "ACTION_UNCLEAR",
         "ENVIRONMENT_GENERIC",
         "IDENTITY_HEROIC_BULK"
       ],
@@ -895,7 +896,8 @@
   },
   "defect_counts": {
     "UNCLASSIFIED": 6,
-    "ENVIRONMENT_GENERIC": 2,
+    "ACTION_UNCLEAR": 1,
+    "ENVIRONMENT_GENERIC": 1,
     "IDENTITY_HEROIC_BULK": 1
   },
   "historical_defect_counts": {
@@ -905,9 +907,9 @@
     "IDENTITY_LIMB_COUNT": 12,
     "SIGNATURE_FEATURE_MISSING": 12,
     "UNCLASSIFIED": 9,
-    "ENVIRONMENT_GENERIC": 8,
+    "ACTION_UNCLEAR": 7,
+    "ENVIRONMENT_GENERIC": 7,
     "SWARM_WALLPAPER": 7,
-    "ACTION_UNCLEAR": 6,
     "SWARM_OVERSIZED_LEADER": 4,
     "QUALITY_DENSITY": 3
   },
@@ -915,9 +917,9 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 39,
-      "distinct_pages": 9,
-      "distinct_families": 5,
+      "evidence_count": 43,
+      "distinct_pages": 10,
+      "distinct_families": 6,
       "scope": [
         "monster_family",
         "master_engine"
@@ -1013,9 +1015,9 @@
     {
       "defect_code": "IDENTITY_WRONG_CREATURE",
       "label": "Wrong creature/body plan",
-      "evidence_count": 28,
-      "distinct_pages": 8,
-      "distinct_families": 8,
+      "evidence_count": 27,
+      "distinct_pages": 7,
+      "distinct_families": 7,
       "scope": [
         "monster_family",
         "master_engine"
@@ -1062,9 +1064,9 @@
     {
       "defect_code": "ENVIRONMENT_GENERIC",
       "label": "Generic/wrong environment",
-      "evidence_count": 23,
-      "distinct_pages": 6,
-      "distinct_families": 6,
+      "evidence_count": 16,
+      "distinct_pages": 3,
+      "distinct_families": 3,
       "scope": [
         "master_engine",
         "page_recipe"
@@ -1207,6 +1209,55 @@
       ]
     },
     {
+      "defect_code": "ACTION_UNCLEAR",
+      "label": "Action/story beat unclear",
+      "evidence_count": 7,
+      "distinct_pages": 3,
+      "distinct_families": 3,
+      "scope": [
+        "master_engine",
+        "page_recipe"
+      ],
+      "master_engine_lesson": "Require visible verb/contact/cause-and-effect proof rather than proximity.",
+      "monster_family_lesson": null,
+      "page_recipe_lesson": "Clarify the unique action relationship in the page recipe.",
+      "priority": "high",
+      "auto_apply": false,
+      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
+      "examples": [
+        {
+          "page_id": "I-18",
+          "candidate": 1,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        },
+        {
+          "page_id": "I-18",
+          "candidate": 2,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        },
+        {
+          "page_id": "I-18",
+          "candidate": 3,
+          "pass": null,
+          "evidence_source": "candidate_record",
+          "stage": null,
+          "evidence_text": [
+            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
+          ]
+        }
+      ]
+    },
+    {
       "defect_code": "SWARM_WALLPAPER",
       "label": "Swarm wallpaper density",
       "evidence_count": 7,
@@ -1251,55 +1302,6 @@
           "stage": null,
           "evidence_text": [
             "Reject: bat swarm is either wallpaper-dense or dominated by a giant focal bat; use a controlled population of similarly scaled bats in a clear upward spiral from the well with an open readable center."
-          ]
-        }
-      ]
-    },
-    {
-      "defect_code": "ACTION_UNCLEAR",
-      "label": "Action/story beat unclear",
-      "evidence_count": 6,
-      "distinct_pages": 2,
-      "distinct_families": 2,
-      "scope": [
-        "master_engine",
-        "page_recipe"
-      ],
-      "master_engine_lesson": "Require visible verb/contact/cause-and-effect proof rather than proximity.",
-      "monster_family_lesson": null,
-      "page_recipe_lesson": "Clarify the unique action relationship in the page recipe.",
-      "priority": "high",
-      "auto_apply": false,
-      "reason": "Lessons are queued for evidence-driven engine/family/page updates; raw reviewer text never rewrites authority automatically.",
-      "examples": [
-        {
-          "page_id": "I-18",
-          "candidate": 1,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
-          ]
-        },
-        {
-          "page_id": "I-18",
-          "candidate": 2,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
-          ]
-        },
-        {
-          "page_id": "I-18",
-          "candidate": 3,
-          "pass": null,
-          "evidence_source": "candidate_record",
-          "stage": null,
-          "evidence_text": [
-            "Reject: giant rat is feeding/posing rather than defending a nest; use one giant rat in a low defensive crouch over visible nest material among burst grain sacks."
           ]
         }
       ]
@@ -1473,8 +1475,9 @@
   },
   "known_blockers": [
     "UNCLASSIFIED",
+    "ACTION_UNCLEAR",
     "ENVIRONMENT_GENERIC",
     "IDENTITY_HEROIC_BULK"
   ],
-  "measurement_fingerprint": "ee4fafde8dd1db73d71dda7aab99fc8a7f751cd36ce05aebccff05790638964b"
+  "measurement_fingerprint": "955850b80e32a5cd0aedc4dccfe8543d800ccc381b1f4f9c67f54c727bdda1c1"
 }
