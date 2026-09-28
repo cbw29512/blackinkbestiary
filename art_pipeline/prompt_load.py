@@ -18,6 +18,7 @@ except ImportError:
     from studio_config import active_book_paths
     from vision_review_prompts import (
         build_action_review_prompt,
+        build_completeness_review_prompt,
         build_environment_review_prompt,
         build_identity_review_prompt,
         build_review_prompt,
