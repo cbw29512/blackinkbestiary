@@ -143,6 +143,11 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
             "SCENE REBUILD MODE — NON-NEGOTIABLE: preserve correct creature anatomy and successful unrelated environment, but rebuild pose, prop placement, contact geometry, camera/framing, or environment structure as needed so the required action and place read literally. "
             "Do not preserve a neutral pose or generic setting merely because it is attractive."
         )
+    elif stage == "completeness":
+        repair_strategy = (
+            "COMPLETENESS REPAIR MODE — NON-NEGOTIABLE: preserve correct creature identity and successful scene structure, but restore EVERY missing or ambiguous required element. "
+            "Required props, openings, hazards, landmarks, and relationships must be literally visible and physically coherent. Remove optional decoration if space is needed; never trade away another required element."
+        )
     elif stage == "quality":
         repair_strategy = (
             "QUALITY REPAIR MODE: preserve correct creature anatomy, scene action, perspective, and environment identity. "
@@ -206,6 +211,11 @@ def build_edit_prompt(page: dict, review_notes: dict | None = None, candidate_no
         final_instruction = (
             "Correct every listed scene/action defect completely, even if that requires moving the creature, props, or camera and rebuilding affected environment geometry. "
             "Preserve correct anatomy and successful unrelated background elements. Keep every successful part that does not block the required visible action."
+        )
+    elif stage == "completeness":
+        final_instruction = (
+            "Restore every missing or ambiguous required element while preserving correct anatomy and already-successful required elements. "
+            "Do not substitute similar objects or imply requirements off-page. Return only when the full required inventory is visibly complete."
         )
     elif stage == "quality":
         final_instruction = (
