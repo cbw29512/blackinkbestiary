@@ -27,6 +27,7 @@ from manifest_validation import validate_manifest
 from page_contract import resolve_page_spec
 from prompt_builder import build_prompt
 from qa import inspect_candidate
+from review_authority import decision_is_authoritative
 from qa_recovery import (
     QA_STALL_LIMIT,
     generic_qa_recovery_feedback,
@@ -112,7 +113,7 @@ def load_or_init_state(copies: int, reset: bool = False) -> dict:
             # image approval on the result record, but clear only the automatic
             # one-candidate selection.
             for page_id, selection in list(state["selections"].items()):
-                if str((selection or {}).get("source") or "") == "assistant_review":
+                if str((selection or {}).get("source") or "") in {"assistant_review", "human_review"}:
                     state["selections"].pop(page_id, None)
         state["copies_per_page"] = next_copies
         state["updated_at"] = utc_now()
@@ -205,6 +206,8 @@ def exact_assistant_approval_is_current(
     if generation_authority_stale(prior, current_generation_fingerprint):
         return False
     assistant = prior.get("assistant_review") or {}
+    if not decision_is_authoritative(assistant, ROOT):
+        return False
     if str(assistant.get("decision") or "").lower() not in {"approve", "select"}:
         return False
     recorded = str(assistant.get("review_id") or "")
@@ -215,6 +218,8 @@ def assistant_repair_plan(prior: dict | None) -> tuple[Path | None, dict | None]
     if not prior or str(prior.get("status") or "") != "assistant_rejected":
         return None, None
     assistant_review = prior.get("assistant_review") or {}
+    if not decision_is_authoritative(assistant_review, ROOT):
+        return None, None
     stage = str(assistant_review.get("stage") or "").strip().lower()
     source = existing_candidate_path(prior)
     if stage not in {"environment", "action", "quality"} or source is None:
