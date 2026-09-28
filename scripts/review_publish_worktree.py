@@ -11,7 +11,13 @@ def run(cwd: Path, *args: str) -> None:
 
 
 def output(cwd: Path, *args: str) -> str:
-    return subprocess.check_output(args, cwd=cwd, text=True).strip()
+    return subprocess.check_output(
+        args,
+        cwd=cwd,
+        text=True,
+        encoding="utf-8",
+        errors="strict",
+    ).strip()
 
 
 def publish_snapshot_once(
