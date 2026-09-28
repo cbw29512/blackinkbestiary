@@ -84,7 +84,7 @@ if "!STATE_EXIT!"=="20" (
 )
 
 if "!STATE_EXIT!"=="10" (
-  echo [6/7] Reconciling canary state and generating only pages that truly need new pixels...
+  echo [6/7] Generating only the first unresolved Canary page...
 ) else (
   echo [6/7] Reconciling review authority on existing images...
 )
@@ -94,7 +94,7 @@ python scripts\publish_review_previews.py
 if errorlevel 1 (
   echo Pre-GPU heartbeat publication failed; generation will continue and final publish will retry.
 )
-python scripts\generate_test_gallery.py --canary-failed --copies 1
+python scripts\generate_next_canary.py
 set "GEN_EXIT=!ERRORLEVEL!"
 
 echo.

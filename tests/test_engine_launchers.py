@@ -63,11 +63,11 @@ class EngineLauncherContractTests(unittest.TestCase):
     def test_autopilot_always_runs_canary_reconciliation_before_publish(self):
         text = (ROOT / "RUN_ENGINE_AUTOPILOT.bat").read_text(encoding="utf-8")
         self.assertIn(
-            "python scripts\\generate_test_gallery.py --canary-failed --copies 1",
+            "python scripts\\generate_next_canary.py",
             text,
         )
         self.assertLess(
-            text.index("scripts\\generate_test_gallery.py"),
+            text.index("scripts\\generate_next_canary.py"),
             text.rindex("scripts\\publish_review_previews.py"),
         )
         self.assertNotIn(

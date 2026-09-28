@@ -107,6 +107,10 @@ def classify(
 
     status = str(item.get("status") or "")
     if status == "awaiting_exact_image_review":
+        # Human review is local-first. A state row without the actual local
+        # image is not reviewable and must be regenerated locally.
+        if current_review_id is None:
+            return "needs_generation"
         if not fingerprint_is_current:
             return "needs_generation"
         return "awaiting_review"
