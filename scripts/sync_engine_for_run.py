@@ -12,7 +12,13 @@ DECISIONS_PATH = ROOT / DECISIONS_RELATIVE
 
 
 def output(*args: str) -> str:
-    return subprocess.check_output(args, cwd=ROOT, text=True).strip()
+    return subprocess.check_output(
+        args,
+        cwd=ROOT,
+        text=True,
+        encoding="utf-8",
+        errors="strict",
+    ).strip()
 
 
 def run(*args: str) -> None:
@@ -51,7 +57,7 @@ def sync_review_decisions() -> bool:
         )
         payload = output("git", "show", f"{remote_ref}:{DECISIONS_RELATIVE}")
         parsed = json.loads(payload)
-    except (subprocess.CalledProcessError, json.JSONDecodeError) as exc:
+    except (subprocess.CalledProcessError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         print(f"Could not synchronize AI review decisions: {exc}")
         return False
 
@@ -75,6 +81,8 @@ def tracked_changes_outside_previews() -> list[str]:
         ["git", "status", "--porcelain", "--untracked-files=no"],
         cwd=ROOT,
         text=True,
+        encoding="utf-8",
+        errors="strict",
         capture_output=True,
         check=True,
     )
