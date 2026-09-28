@@ -3,9 +3,14 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from review_authority import decision_is_authoritative
+
 STATE = ROOT / "data" / "test-gallery-state.json"
 DECISIONS = ROOT / "review-previews" / "decisions.json"
 
@@ -149,6 +154,8 @@ def main() -> int:
         decision = str(review.get("decision") or "").lower()
         if not target_review_id or decision not in {"approve", "reject", "select"}:
             continue
+        if not decision_is_authoritative(review, ROOT):
+            continue
         latest_by_review_id[target_review_id] = review
 
     current_items = {}
@@ -172,7 +179,10 @@ def main() -> int:
             "review_id": target_review_id,
             "decision": decision,
             "notes": notes,
+            "reviewer": str(review.get("reviewer") or "").strip().lower(),
         }
+        if review.get("decided_at"):
+            next_review["decided_at"] = review.get("decided_at")
         if stage:
             next_review["stage"] = stage
         page_id = str(item.get("page_id"))
@@ -218,7 +228,7 @@ def main() -> int:
             if selection_eligible(item):
                 state.setdefault("selections", {})[page_id] = {
                     "candidate": candidate_no,
-                    "source": "assistant_selected",
+                    "source": "human_selected",
                     "review_id": target_review_id,
                 }
             else:
@@ -239,7 +249,7 @@ def main() -> int:
             ):
                 state.setdefault("selections", {})[page_id] = {
                     "candidate": candidate_no,
-                    "source": "assistant_review",
+                    "source": "human_review",
                     "review_id": target_review_id,
                 }
 
