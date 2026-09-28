@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "source": "RUN_ENGINE_AUTOPILOT.bat",
-  "phase": "sleeping",
-  "status": "ready",
-  "message": "Cycle complete; waiting five minutes for reviews or engine updates",
-  "engine_commit": "bb3adef2fe56e5b3379ae1a0ad465a24855270cd",
-  "updated_at": "2026-09-28T00:51:00.278282+00:00"
+  "phase": "generating",
+  "status": "running",
+  "message": "Pre-GPU snapshot published before canary generation",
+  "engine_commit": "6a5a17023d2a97509cf46ccf2066223997e02b27",
+  "updated_at": "2026-09-28T01:01:36.980253+00:00"
 }
