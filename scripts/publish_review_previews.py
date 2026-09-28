@@ -102,7 +102,8 @@ def verdict_rank(verdict: dict) -> tuple:
         "environment": 2,
         "scene": 2,
         "action": 3,
-        "quality": 4,
+        "completeness": 4,
+        "quality": 5,
     }.get(stage, 0)
     return (
         1 if verdict.get("pass") else 0,
