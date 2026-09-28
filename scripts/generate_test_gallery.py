@@ -317,7 +317,7 @@ def reuse_existing_image_after_reviewer_recheck(verdict: dict) -> bool:
     if verdict.get("pass"):
         return False
     stage = str(verdict.get("stage") or "").strip().lower()
-    return stage in {"environment", "scene", "action", "quality"}
+    return stage in {"environment", "scene", "action", "completeness", "quality"}
 
 
 def verdict_rank(verdict: dict) -> tuple:
@@ -332,7 +332,8 @@ def verdict_rank(verdict: dict) -> tuple:
         "environment": 2,
         "scene": 2,
         "action": 3,
-        "quality": 4,
+        "completeness": 4,
+        "quality": 5,
     }.get(stage, 0)
     return (
         1 if verdict.get("pass") else 0,
@@ -364,7 +365,7 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
 
         identity_stagnation = stage == "identity" and trailing_same_stage >= 2
         structural_stagnation = (
-            stage in {"environment", "scene", "action"}
+            stage in {"environment", "scene", "action", "completeness"}
             and trailing_same_stage >= 2
         )
         if stage == "identity" or structural_stagnation:
@@ -388,7 +389,7 @@ def refine_candidate(cli, client, config, page, candidate_no: int, seed: int, in
                 feedback,
             )
         else:
-            # First environment/action repair and all quality repairs are
+            # First environment/action/completeness repair and all quality repairs are
             # cumulative image edits so successful anatomy/scene work survives.
             workflow = prepare_edit(
                 cli,
