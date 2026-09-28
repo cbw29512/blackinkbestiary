@@ -2,8 +2,8 @@
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
-  "measured_at": "2026-09-28T23:44:32.511058+00:00",
-  "engine_commit": "07f340772b7971994fe5de1a428090c8fb8730e1",
+  "measured_at": "2026-09-28T23:52:43.624115+00:00",
+  "engine_commit": "1d3ccb4c837fa39db3a290f2b5d7f05892656a15",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 80.0,
@@ -1568,5 +1568,5 @@
     "ENVIRONMENT_GENERIC",
     "ACTION_UNCLEAR"
   ],
-  "measurement_fingerprint": "31d9714ba5b60f7fbad2c5e95206ad78ed23881b17d7d9536775d64a5cf64fbf"
+  "measurement_fingerprint": "5bc0ed529b15dc9fb8bf628c658221f7452e390148daed451f5107b23e2e6e69"
 }

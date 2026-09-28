@@ -1,6 +1,6 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "07f340772b7971994fe5de1a428090c8fb8730e1",
+  "snapshot_engine_commit": "1d3ccb4c837fa39db3a290f2b5d7f05892656a15",
   "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "candidate_count": 9,
@@ -51,7 +51,7 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-28T23:41:58.9240573Z"
+    "updated_at": "2026-09-28T23:50:09.1825930Z"
   },
   "autopilot": {
     "schema_version": 1,
@@ -66,8 +66,8 @@
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-28T23:41:31.811089+00:00",
-    "updated_at": "2026-09-28T23:41:55.991140+00:00",
+    "started_at": "2026-09-28T23:49:42.222655+00:00",
+    "updated_at": "2026-09-28T23:50:06.529261+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -203,7 +203,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 440 tests in 20.313s",
+          "Ran 440 tests in 20.447s",
           "",
           "OK"
         ]
@@ -456,33 +456,30 @@
   "selections": {},
   "candidates": [
     {
-      "review_id": "I-01-C01-Hd44c38ab334ee1a1",
+      "review_id": "I-01-C01-He0a6d8ac8290fe12",
       "page_id": "I-01",
       "monster_name": "Kobold Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 7996075015698173954,
-      "engine_commit": "07f340772b7971994fe5de1a428090c8fb8730e1",
-      "generation_fingerprint": "446d1ae22739fc0501fb578d462cec312d02ad248f68832b8021048c63e5b8a9",
-      "review_fingerprint": "a34e61d2299cb8449b0b17001a23b0854948ef9822cb059f8774a44c2d3dd022",
+      "seed": 2626074048119608208,
+      "engine_commit": "1d3ccb4c837fa39db3a290f2b5d7f05892656a15",
+      "generation_fingerprint": "bded2bf8299f480420f9e5a9436cd1352ea7554eebfc6970a51c5c813d0e0717",
+      "review_fingerprint": "ddac1bf4663d253fdac1e89c25b4c10aedaf16691184b6a7b8d84d3f9d455f87",
       "generation_authority_current": true,
       "review_authority_current": true,
       "review_checked_at": null,
       "preview": "review-previews/I-01-C01.jpg",
       "source_image": "test-gallery/I-01-C01.png",
-      "source_sha256": "d44c38ab334ee1a122998d90f7f5d1135fa0b0d839770d548b9eceb09da8349a",
+      "source_sha256": "e0a6d8ac8290fe12dc4fcaae5fbed8a5baefdfd3d44e3856e64429b7815f1cf0",
       "visual_review": {
         "pass": false,
         "score": 45,
         "defects": [
-          "tripwire not anchored to wall rings",
-          "pit not recessed into floor",
-          "torch not mounted to wall bracket"
+          "pit rim not flush with flagstones"
         ],
         "preserve": [
-          "stone arches framing corridor",
-          "kobold beside tripwire",
-          "punji pit beside torch bracket"
+          "tripwire between wall rings",
+          "wall-mounted torch bracket"
         ],
         "stage": "environment"
       },
@@ -490,7 +487,7 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T23:44:24.947824+00:00"
+      "finished_at": "2026-09-28T23:52:35.955410+00:00"
     },
     {
       "review_id": "I-04-C01-H6173b71c67393976",

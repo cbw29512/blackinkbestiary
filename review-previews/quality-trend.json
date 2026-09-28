@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "active_book_id": "TOME-I",
-  "engine_commit": "07f340772b7971994fe5de1a428090c8fb8730e1",
+  "engine_commit": "1d3ccb4c837fa39db3a290f2b5d7f05892656a15",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
   "comparable_to_previous": true,
   "comparison_reason": null,
   "history_appended": true,
-  "history_entries": 73,
+  "history_entries": 74,
   "current_metrics": {
     "foundation_readiness": 80.0,
     "technical_qa_pass_rate": 100.0,
@@ -121,20 +121,12 @@
       "trend": "flat",
       "lower_is_better": true
     },
-    "IDENTITY_HEROIC_BULK": {
-      "previous": 1,
-      "current": 0,
-      "delta": -1,
-      "signed_delta": "-1",
-      "trend": "improving",
-      "lower_is_better": true
-    },
     "UNCLASSIFIED": {
-      "previous": 5,
+      "previous": 6,
       "current": 6,
-      "delta": 1,
-      "signed_delta": "+1",
-      "trend": "regressing",
+      "delta": 0,
+      "signed_delta": "+0",
+      "trend": "flat",
       "lower_is_better": true
     }
   },
@@ -239,8 +231,7 @@
   "previous_defect_counts": {
     "ACTION_UNCLEAR": 1,
     "ENVIRONMENT_GENERIC": 2,
-    "IDENTITY_HEROIC_BULK": 1,
-    "UNCLASSIFIED": 5
+    "UNCLASSIFIED": 6
   },
   "replication": {
     "score": 100,
