@@ -478,7 +478,7 @@ class TestGalleryResumeTests(unittest.TestCase):
                 "stage": "identity",
             })
         )
-        for stage in ("environment", "scene", "action", "quality"):
+        for stage in ("environment", "scene", "action", "completeness", "quality"):
             self.assertTrue(
                 gallery.reuse_existing_image_after_reviewer_recheck({
                     "pass": False,
@@ -512,6 +512,12 @@ class TestGalleryResumeTests(unittest.TestCase):
             "score": 42,
             "defects": ["missing action"],
         }
+        completeness_fail = {
+            "pass": False,
+            "stage": "completeness",
+            "score": 41,
+            "defects": ["missing required prop"],
+        }
         quality_fail = {
             "pass": False,
             "stage": "quality",
@@ -520,7 +526,8 @@ class TestGalleryResumeTests(unittest.TestCase):
         }
         self.assertGreater(gallery.verdict_rank(environment_fail), gallery.verdict_rank(identity_fail))
         self.assertGreater(gallery.verdict_rank(action_fail), gallery.verdict_rank(environment_fail))
-        self.assertGreater(gallery.verdict_rank(quality_fail), gallery.verdict_rank(action_fail))
+        self.assertGreater(gallery.verdict_rank(completeness_fail), gallery.verdict_rank(action_fail))
+        self.assertGreater(gallery.verdict_rank(quality_fail), gallery.verdict_rank(completeness_fail))
 
     def test_repeated_action_failure_escalates_from_edit_to_fresh_regeneration(self):
         with tempfile.TemporaryDirectory() as td:
@@ -609,7 +616,7 @@ class TestGalleryResumeTests(unittest.TestCase):
             "text": notes or "Previous candidate was rejected during visual review. Rebuild the failed composition.",
             "routing_recommendation": "regenerate",
         }
-        if stage in {"identity", "environment", "action", "quality"}:
+        if stage in {"identity", "environment", "action", "completeness", "quality"}:
             feedback["stage"] = stage
 
         self.assertEqual(feedback["stage"], "identity")
