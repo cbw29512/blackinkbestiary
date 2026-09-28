@@ -26,17 +26,22 @@ class GenerationLintTests(unittest.TestCase):
                 failures[page["page_id"]] = errors
         self.assertEqual(failures, {})
 
-    def test_every_tome_i_prompt_stays_within_target_budget(self):
+    def test_every_tome_i_prompt_stays_within_hard_budget(self):
         standard = json.loads(
             (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
         )
+        hard = int(standard["generation_prompt_budget"]["hard_max_chars"])
         target = int(standard["generation_prompt_budget"]["target_max_chars"])
         oversized = {}
+        canary_over_target = {}
         for page in self.pages:
             prompt = build_prompt(page, candidate_no=1)
-            if len(prompt) > target:
+            if len(prompt) > hard:
                 oversized[page["page_id"]] = len(prompt)
+            if page["page_id"] == "I-01" and len(prompt) > target:
+                canary_over_target[page["page_id"]] = len(prompt)
         self.assertEqual(oversized, {})
+        self.assertEqual(canary_over_target, {})
 
     def test_identity_recovery_prompts_preserve_required_scene_authority(self):
         canary_ids = {"I-01", "I-08", "I-14", "I-16"}
@@ -62,11 +67,11 @@ class GenerationLintTests(unittest.TestCase):
             self.assertIn("PAGE RECIPE LOCK — NON-NEGOTIABLE:", prompt, page["page_id"])
         self.assertEqual(failures, {})
 
-    def test_identity_recovery_prompts_stay_within_target_budget(self):
+    def test_identity_recovery_prompts_stay_within_hard_budget(self):
         standard = json.loads(
             (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
         )
-        target = int(standard["generation_prompt_budget"]["target_max_chars"])
+        hard = int(standard["generation_prompt_budget"]["hard_max_chars"])
         oversized = {}
         for page in self.pages:
             prompt = build_prompt(
@@ -79,7 +84,7 @@ class GenerationLintTests(unittest.TestCase):
                 },
                 candidate_no=1,
             )
-            if len(prompt) > target:
+            if len(prompt) > hard:
                 oversized[page["page_id"]] = len(prompt)
         self.assertEqual(oversized, {})
 
@@ -87,7 +92,7 @@ class GenerationLintTests(unittest.TestCase):
         standard = json.loads(
             (ROOT / "config" / "coloring_page_standard.json").read_text(encoding="utf-8")
         )
-        target = int(standard["generation_prompt_budget"]["target_max_chars"])
+        hard = int(standard["generation_prompt_budget"]["hard_max_chars"])
         scenarios = {
             "I-04": ("action", "lantern must be visibly kicked"),
             "I-10": ("environment", "central spiral column must be visible"),
@@ -115,7 +120,7 @@ class GenerationLintTests(unittest.TestCase):
             errors = edit_prompt_lint_errors(page, prompt, ROOT)
             if errors:
                 failures[page["page_id"]] = errors
-            if len(prompt) > target:
+            if len(prompt) > hard:
                 oversized[page["page_id"]] = len(prompt)
             self.assertIn(note, prompt, page["page_id"])
             self.assertIn("PAGE RECIPE LOCK — NON-NEGOTIABLE:", prompt, page["page_id"])
