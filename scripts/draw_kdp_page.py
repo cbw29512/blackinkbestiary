@@ -20,7 +20,6 @@ HEIGHT = 2176
 PRINT_WIDTH = 2550
 PRINT_HEIGHT = 3300
 MARGIN = 112
-# Only true ink lines become black. Gray puddles stay white and colorable.
 INK_CUTOFF = 90
 
 STANDARD_RULES = {
@@ -32,6 +31,10 @@ STANDARD_RULES = {
         "color",
         "text",
         "letters",
+        "numbers",
+        "title",
+        "caption",
+        "name plate",
         "border",
         "page frame",
         "blank white opening",
@@ -66,13 +69,13 @@ def brief(page: dict) -> str:
     return "\n".join(
         [
             "All-ages fantasy dungeon coloring book page, portrait.",
+            "These sentences are instructions only. Do not write any words, titles, names, letters, or numbers in the picture.",
             page.get("picture") or "",
-            f"Subject: {page.get('subject', '')}.",
             f"Ink: {rules.get('ink', STANDARD_RULES['ink'])}.",
             f"Shapes: {rules.get('shapes', STANDARD_RULES['shapes'])}.",
             f"Do not include: {forbidden}.",
             f"The creature must not be: {avoid}.",
-            "The drawing fills the sheet. Closed openings only. Outlines only. Every white region must be colorable. No solid black blobs.",
+            "The drawing fills the sheet. Closed openings only. Outlines only. Every white region must be colorable. No solid black blobs. No caption.",
         ]
     )
 
