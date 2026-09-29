@@ -1,0 +1,14 @@
+{
+  "page_id": "COVER",
+  "kind": "kdp_paperback_cover",
+  "title": "Black-Ink Bestiary",
+  "subtitle": "Tome I — Caves & Dungeons",
+  "series_line": "Fifty fantasy monsters in their underground lairs",
+  "picture": "Full-color Amazon thumbnail cover, portrait 8.5x11 wrap later. A hobgoblin captain and a bugbear drop-ambush share one dungeon hall without crowding. Bold readable title at the top. No D&D logo, no Wizards marks, no readable map text. The cover should look like a premium all-ages fantasy gift, not a toddler cartoon and not a horror book.",
+  "print": {
+    "trim": "8.5x11",
+    "need": ["front", "spine", "back"],
+    "back_copy": "Fifty all-ages coloring pages. One monster per page. Caves, halls, traps, and lairs. Bold outlines. Large shapes. No gray wash."
+  },
+  "must_not_be": ["a movie poster", "a children's sticker book", "a photoreal horror cover"]
+}
