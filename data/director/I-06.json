@@ -1,0 +1,11 @@
+{
+  "page_id": "I-06",
+  "subject": "Hobgoblin Warrior",
+  "picture": "One medium athletic hobgoblin soldier leads a shield-wall drill in an underground barracks tunnel. He is taller than a goblin, with smaller pointed ears, a broad flat nose, no tusks, and an upright military posture. Three overlapping rectangular shields are held in a line, feet planted in a marked floor lane. A large shield rack stands against the wall. The tunnel has a stone ceiling, large block walls, and a white doorway at the far end.",
+  "line_rules": {
+    "ink": "pure black outlines on white",
+    "shapes": "large closed regions a person can color",
+    "forbidden": ["gray fill", "shading", "color", "text", "border", "solid black hole", "tiny bricks"]
+  },
+  "must_not_be": ["a small goblin", "an orc with tusks", "a bugbear"]
+}
