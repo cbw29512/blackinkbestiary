@@ -166,11 +166,11 @@ def main() -> int:
             return 2
         prompt = (
             "Keep this coloring book page. Keep the ogre on the spiral stairs, "
-            "the pointing fist, the door, walls, and ceiling. "
-            "Fix only the club hand. The ogre holds a thick log club upright, vertical in the picture, "
-            "with a normal grip: fingers wrapped around the handle, thumb along the side. "
-            "The club is a straight tree limb standing tall, almost as long as his torso. "
-            "Do not add a floating second club. Bold black outlines on white."
+            "the pointing fist, the vertical log club, the door, walls, and ceiling. "
+            "Fix only the club grip. One hand holds the upright club. "
+            "Four fingers wrap the handle once. The thumb sits on the side. "
+            "The club stays vertical. Do not add a second fist on the club. "
+            "Bold black outlines on white."
         )
         print(f"Editing {page_id} from {source}.")
         job = post_json(
