@@ -1,0 +1,11 @@
+{
+  "page_id": "I-10",
+  "subject": "Ogre",
+  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A huge clumsy ogre is stuck on a too-small spiral dungeon stair. Thick belly, small-looking head, big hands, simple hide clothes, one large club held against the steps. He is wedged between the inner pillar and the outer wall. Spiral stone steps as large shapes, stone ceiling, inner column, closed door at the bottom landing. Bold even line weight matching the other pages. No black fills, no blank holes, no page frame, no insult gestures.",
+  "line_rules": {
+    "ink": "bold even outlines only on white",
+    "shapes": "large closed colorable regions",
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank hole", "solid black hole", "middle finger", "strand hair"]
+  },
+  "must_not_be": ["a troll", "a giant human", "an oni", "a bugbear"]
+}
