@@ -1,11 +1,11 @@
 {
   "page_id": "I-07",
   "subject": "Hobgoblin Captain",
-  "picture": "A medium athletic hobgoblin captain stands in a cave war room and pins a dagger into a tunnel map on a wooden table. He has small pointed ears, a broad flat nose, no tusks, and a commanding upright posture. The map is drawn as tunnel lines only, with no words and no letters. The cave has a stone ceiling, rock walls, a rack of weapons, and two tunnel openings that are closed by wooden doors so there is no blank white hole. The drawing reaches all four edges.",
+  "picture": "All-ages fantasy coloring book page, portrait, bold black outlines, large simple shapes. A hobgoblin captain stands in a cave war room and pins a dagger into a simple tunnel map on a wooden table. He looks like a soldier, not a goblin: broader jaw, flat nose, short pointed ears close to the head, no tusks, no long elf ears, medium athletic build, upright commanding posture, large armor plates. The map is only a few wide tunnel paths, no words, no letters, no tiny dashes. The cave has a stone ceiling, simple rock walls, a weapon rack with a few large swords, and two closed wooden doors with plain boards and almost no wood grain. The floor is a few large stone slabs, not a mosaic of small tiles. A couple of simple crates sit in the corners. The drawing reaches all four edges. Every region is a big closed shape to color.",
   "line_rules": {
-    "ink": "pure black outlines on white",
-    "shapes": "large closed regions a person can color",
-    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "blank white opening", "solid black hole"]
+    "ink": "bold pure black outlines on white",
+    "shapes": "large closed regions a child or adult can color quickly",
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "blank white opening", "solid black hole", "dense wood grain", "tiny floor tiles", "strand hair", "long goblin ears"]
   },
-  "must_not_be": ["an orc", "a small goblin", "a bugbear"]
+  "must_not_be": ["an orc", "a small goblin", "a bugbear", "an elf"]
 }
