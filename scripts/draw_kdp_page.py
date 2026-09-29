@@ -165,11 +165,11 @@ def main() -> int:
             print(f"No local image for {page_id} to edit.", file=sys.stderr)
             return 2
         prompt = (
-            "Keep this coloring book page. Keep the ogre, the pointing hand, "
-            "the stick in his other hand, the spiral stairs, the door, walls, and ceiling. "
-            "Remove only the floating club and loose hand on the upper-left stairs. "
-            "Continue the stone steps and the wooden rail through that space. "
-            "Bold black outlines on white. Same picture otherwise."
+            "Keep this coloring book page exactly. Keep the ogre on the spiral stairs, "
+            "the pointing fist, the door, walls, and ceiling. "
+            "Put a simple thick log club back into the ogre's empty hand. "
+            "The club is one straight tree limb, almost as long as his torso. "
+            "Do not add a second floating club. Bold black outlines on white."
         )
         print(f"Editing {page_id} from {source}.")
         job = post_json(
