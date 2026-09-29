@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from qa import inspect_binding_gutter, inspect_candidate
-from png_content_qa import enforce_print_safe_margin, normalize_monochrome_line_art
+from png_content_qa import _decode_rows, apply_print_ink, enforce_print_safe_margin, normalize_monochrome_line_art
 
 
 def _chunk(kind: bytes, data: bytes) -> bytes:
@@ -260,6 +260,38 @@ class PngContentQATests(unittest.TestCase):
             self.assertNotIn("safe_margin_too_busy", after["reasons"])
             self.assertTrue(after["content_qa"]["pass"])
 
+    def test_print_ink_snaps_gray_and_thickens_a_line(self):
+        width, height = 12, 8
+
+        def write(path: Path):
+            rows = bytearray()
+            for y in range(height):
+                rows.append(0)
+                for x in range(width):
+                    if x == 5 and 2 <= y <= 5:
+                        rows.append(40)
+                    elif x == 6 and y == 3:
+                        rows.append(140)
+                    else:
+                        rows.append(230)
+            ihdr = struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0)
+            path.write_bytes(
+                b"\x89PNG\r\n\x1a\n"
+                + _chunk(b"IHDR", ihdr)
+                + _chunk(b"IDAT", zlib.compress(bytes(rows), 6))
+                + _chunk(b"IEND", b"")
+            )
+
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "ink.png"
+            write(path)
+            report = apply_print_ink(path, threshold=176, thicken=1)
+            self.assertGreater(report["black_pixels"], 4)
+            _, _, _, rows = _decode_rows(path.read_bytes())
+            self.assertEqual(rows[3][4], 0)
+            self.assertEqual(rows[3][5], 0)
+            self.assertEqual(rows[3][0], 255)
+            self.assertTrue(all(pixel in (0, 255) for row in rows for pixel in row))
 
 
 if __name__ == "__main__":

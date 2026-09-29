@@ -8,12 +8,12 @@ from pathlib import Path
 try:
     from .manifest_validation import validate_manifest
     from .page_contract import resolve_page_spec
-    from .png_content_qa import enforce_print_safe_margin, normalize_monochrome_line_art
+    from .png_content_qa import apply_print_ink, enforce_print_safe_margin, normalize_monochrome_line_art
     from .studio_config import active_book_paths
 except ImportError:
     from manifest_validation import validate_manifest
     from page_contract import resolve_page_spec
-    from png_content_qa import enforce_print_safe_margin, normalize_monochrome_line_art
+    from png_content_qa import apply_print_ink, enforce_print_safe_margin, normalize_monochrome_line_art
     from studio_config import active_book_paths
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -122,6 +122,7 @@ def collect_output(client, images: list[dict], page_id: str, attempt: int, inspe
         destination = CANDIDATE_DIR / f"{page_id}-A{attempt:03d}-{index}.png"
         client.download_image(image, destination)
         normalize_monochrome_line_art(destination)
+        apply_print_ink(destination)
         enforce_print_safe_margin(destination)
         report = inspector(destination)
         reports.append(report)

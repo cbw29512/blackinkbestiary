@@ -725,6 +725,12 @@ def main() -> int:
                     }
                     if stage in {"identity", "environment", "action", "quality"}:
                         review_feedback["stage"] = stage
+                if scaffold_enabled(page):
+                    # A scaffold page is one trace of the guide, then print ink.
+                    # Do not edit the previous picture and do not let the reviewer redraw it.
+                    review_feedback = None
+                    assistant_repair_source = None
+                    reviewer_recheck_source = None
                 if assistant_repair_source is not None:
                     # Exact-image environment/action/completeness/quality rejection keeps the
                     # successful creature pixels and performs one targeted edit
@@ -771,13 +777,32 @@ def main() -> int:
                         cli, client, workflow, page["page_id"], candidate_no, inspect_candidate
                     )
                     source = ROOT / "web" / relative
-                write_generation_progress(
-                    page["page_id"], page["monster_name"], candidate_no,
-                    "reviewing", message="Running semantic review and refinement",
-                )
-                best, visual_verdict, pass_history = refine_candidate(
-                    cli, client, config, page, candidate_no, seed, source
-                )
+                if scaffold_enabled(page):
+                    write_generation_progress(
+                        page["page_id"], page["monster_name"], candidate_no,
+                        "inking", message="One traced draw. Print ink only. No reviewer redraw.",
+                    )
+                    best = source
+                    visual_verdict = {
+                        "pass": False,
+                        "score": 0,
+                        "defects": ["single traced draw; human review decides"],
+                        "preserve": [],
+                        "stage": "human",
+                    }
+                    pass_history = [{
+                        "pass": 0,
+                        "image": str(source),
+                        "review": visual_verdict,
+                    }]
+                else:
+                    write_generation_progress(
+                        page["page_id"], page["monster_name"], candidate_no,
+                        "reviewing", message="Running semantic review and refinement",
+                    )
+                    best, visual_verdict, pass_history = refine_candidate(
+                        cli, client, config, page, candidate_no, seed, source
+                    )
                 destination = OUTPUT_DIR / f"{page['page_id']}-C{candidate_no:02d}.png"
                 destination.write_bytes(best.read_bytes())
                 record.update({

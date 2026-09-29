@@ -167,6 +167,70 @@ def normalize_monochrome_line_art(path: str | Path) -> dict:
     }
 
 
+def apply_print_ink(path: str | Path, *, threshold: int = 176, thicken: int = 1) -> dict:
+    """Snap a drawing to print ink: pure black or white, then a fixed stroke weight.
+
+    Gray shading becomes paper unless it is already dark enough to be a line.
+    Thickening only grows black, so a thin guide line survives at coloring-book weight.
+    """
+    path = Path(path)
+    raw = path.read_bytes()
+    if not raw.startswith(PNG_SIGNATURE):
+        raise ValueError("not_png")
+
+    width, height, color_type, rows = _decode_rows(raw)
+    channels = _CHANNELS[color_type]
+    dark = bytearray(width * height)
+    for y, source in enumerate(rows):
+        for x in range(width):
+            i = x * channels
+            if color_type in {0, 4}:
+                luma = source[i]
+            else:
+                r, g, b = source[i], source[i + 1], source[i + 2]
+                luma = (299 * r + 587 * g + 114 * b) // 1000
+            if luma < threshold:
+                dark[y * width + x] = 1
+
+    if thicken > 0:
+        grown = bytearray(dark)
+        for y in range(height):
+            for x in range(width):
+                if not dark[y * width + x]:
+                    continue
+                for dy in range(-thicken, thicken + 1):
+                    yy = y + dy
+                    if yy < 0 or yy >= height:
+                        continue
+                    for dx in range(-thicken, thicken + 1):
+                        xx = x + dx
+                        if 0 <= xx < width:
+                            grown[yy * width + xx] = 1
+        dark = grown
+
+    scanlines = bytearray()
+    for y in range(height):
+        scanlines.append(0)
+        start = y * width
+        scanlines.extend(0 if dark[start + x] else 255 for x in range(width))
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0)
+    path.write_bytes(
+        PNG_SIGNATURE
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"IDAT", zlib.compress(bytes(scanlines), 6))
+        + _png_chunk(b"IEND", b"")
+    )
+    return {
+        "path": str(path),
+        "width": width,
+        "height": height,
+        "threshold": threshold,
+        "thicken": thicken,
+        "black_pixels": sum(dark),
+    }
+
+
 def enforce_print_safe_margin(
     path: str | Path,
     margin_ratio: float = 0.045,
