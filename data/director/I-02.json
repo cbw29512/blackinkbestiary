@@ -1,0 +1,11 @@
+{
+  "page_id": "I-02",
+  "subject": "Kobold Shrine-Keeper",
+  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A small scaly kobold shrine-keeper in a low cave shrine raises one large copper coin as an offering. Same kobold family as locked I-01: short snout, cranial ridges or small horns, long tail, scaly plates. Crude stone altar, a few large coins, one dragon-skull prop as big simple shapes. Cave ceiling, simple walls, large floor slabs, closed doorway. No rope, no tripwire. Bold even line weight matching I-01 and I-08. No black fills, no blank holes, no page frame, no readable letters on the coins.",
+  "line_rules": {
+    "ink": "bold even outlines only on white",
+    "shapes": "large closed colorable regions",
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank hole", "solid black hole", "rope", "tripwire", "strand hair"]
+  },
+  "must_not_be": ["a goblin priest", "a human cleric", "a dragon"]
+}
