@@ -273,7 +273,8 @@ def scaffold_prompt_prefix(page: dict) -> str:
     if any(str(item.get("type") or "").lower() == "pit" and item.get("open_near") for item in cfg.get("primitives") or []):
         pit_rule = "The pit is a hole cut into the floor with the near side open toward the viewer, not a closed tray or box. "
     return (
-        "SCAFFOLD MODE: input lines are layout, not finished art. Keep openings, hazards, doors, and connector endpoints. "
+        "SCAFFOLD MODE: input lines are layout, not finished art. Trace them. Do not move, join, or replace them. "
+        "Draw the creature only on open paper. The creature must not hold, join, or replace a connector line. "
         "Openings need visible depth; no empty white voids. "
         + (opening_rule + " " if opening_rule else "")
         + (subject_rule + " " if subject_rule else "")

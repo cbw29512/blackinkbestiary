@@ -108,6 +108,7 @@ class SceneScaffoldTests(unittest.TestCase):
         source = (ROOT / "scripts" / "generate_test_gallery.py").read_text(encoding="utf-8")
         self.assertIn("def prepare_from_authority(", source)
         self.assertIn("render_scene_scaffold(", source)
+        self.assertIn("single traced draw", source)
         self.assertGreaterEqual(source.count("prepare_from_authority("), 3)
         self.assertIn("blackink-scaffolds", source)
 
