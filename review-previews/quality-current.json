@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v11",
-  "quality_contract_fingerprint": "8e191f70b53a4e7564b0c66df309a527c82d9edaa499d3fd8af3436902ef72b9",
-  "measured_at": "2026-09-29T00:55:29.270097+00:00",
-  "engine_commit": "66d18f2d25045dad5556bcc362248a10b13aa34b",
+  "quality_contract_fingerprint": "b3fbf3ce9bd4e7ac271805da0259a0fda2984fa3e7d2371930bac12012db4fa3",
+  "measured_at": "2026-09-29T02:02:21.106280+00:00",
+  "engine_commit": "58acc3d040c1cf368272042c37046b1abf3e7ff8",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 80.0,
-    "technical_qa_pass_rate": 88.9,
-    "review_pipeline_health": 88.9,
+    "technical_qa_pass_rate": 77.8,
+    "review_pipeline_health": 77.8,
     "visual_cleanliness": 0.0,
     "semantic_accuracy": 0.0,
     "completeness": 100.0,
@@ -16,24 +16,38 @@
     "locked_page_progress": 0.0,
     "replication_readiness": 100.0
   },
-  "overall_automated_readiness": 56.1,
+  "overall_automated_readiness": 54.7,
   "readiness_floor": 0.0,
   "series_score": 32.5,
   "series_readiness_floor": 0.0,
   "series_automated_100": false,
   "canary": {
     "total": 9,
-    "technical_passes": 8,
-    "review_pipeline_passes": 8,
+    "technical_passes": 7,
+    "review_pipeline_passes": 7,
     "visual_passes": 0,
     "semantic_passes": 0,
     "all_passes": 0,
-    "technical_qa": 88.9,
-    "review_pipeline_health": 88.9,
+    "technical_qa": 77.8,
+    "review_pipeline_health": 77.8,
     "visual_cleanliness": 0.0,
     "semantic_accuracy": 0.0,
     "all_automated_gates": 0.0,
     "rows": [
+      {
+        "page_id": "I-04",
+        "status": "failed",
+        "technical_pass": false,
+        "review_pipeline_pass": false,
+        "visual_cleanliness_pass": false,
+        "semantic_accuracy_pass": false,
+        "all_automated_gates_pass": false,
+        "visual_stage": null,
+        "visual_score": null,
+        "local_visual_advisory_pass": false,
+        "assistant_decision": null,
+        "exact_image_reviewer": null
+      },
       {
         "page_id": "I-16",
         "status": "failed",
@@ -58,20 +72,6 @@
         "all_automated_gates_pass": false,
         "visual_stage": "human",
         "visual_score": 0,
-        "local_visual_advisory_pass": false,
-        "assistant_decision": null,
-        "exact_image_reviewer": null
-      },
-      {
-        "page_id": "I-04",
-        "status": "awaiting_exact_image_review",
-        "technical_pass": true,
-        "review_pipeline_pass": true,
-        "visual_cleanliness_pass": false,
-        "semantic_accuracy_pass": false,
-        "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
         "local_visual_advisory_pass": false,
         "assistant_decision": null,
         "exact_image_reviewer": null
@@ -164,11 +164,11 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 33,
-    "refinement_passes": 24,
+    "gpu_attempts": 29,
+    "refinement_passes": 20,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 3.67,
+    "avg_gpu_attempts_per_page": 3.22,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -712,8 +712,8 @@
       "locked_pages": 0,
       "metrics": {
         "foundation_readiness": 80.0,
-        "technical_qa_pass_rate": 88.9,
-        "review_pipeline_health": 88.9,
+        "technical_qa_pass_rate": 77.8,
+        "review_pipeline_health": 77.8,
         "visual_cleanliness": 0.0,
         "semantic_accuracy": 0.0,
         "completeness": 100.0,
@@ -721,7 +721,7 @@
         "locked_page_progress": 0.0,
         "replication_readiness": 100.0
       },
-      "overall_automated_readiness": 56.1,
+      "overall_automated_readiness": 54.7,
       "readiness_floor": 0.0,
       "weakest_metric": "visual_cleanliness",
       "missing_required_categories": [],
@@ -998,7 +998,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 37,
+      "evidence_count": 34,
       "distinct_pages": 9,
       "distinct_families": 5,
       "scope": [
@@ -1557,18 +1557,18 @@
     }
   },
   "status_counts": {
-    "awaiting_exact_image_review": 8,
-    "failed": 1
+    "awaiting_exact_image_review": 7,
+    "failed": 2
   },
   "historical_status_counts": {
     "assistant_rejected": 78,
-    "awaiting_exact_image_review": 8,
-    "failed": 1
+    "awaiting_exact_image_review": 7,
+    "failed": 2
   },
   "known_blockers": [
     "UNCLASSIFIED",
     "ENVIRONMENT_GENERIC",
     "ACTION_UNCLEAR"
   ],
-  "measurement_fingerprint": "1959114a421eda52683e57ad574cab26012d75d84d5bec54288b9c3fcbc23bd7"
+  "measurement_fingerprint": "5f5a16432d6eeee6bce3ae9c40a5c8d8c6f33aba7b6374b1ef30cb1f63d36498"
 }
