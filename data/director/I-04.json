@@ -1,11 +1,11 @@
 {
   "page_id": "I-04",
   "subject": "Goblin Warrior",
-  "picture": "A small goblin warrior in a narrow stone dungeon corridor. One foot is planted on the floor. The other foot strikes the body of a hanging lantern and knocks that lantern off its wall hook, so the lantern is tipping in the air. He holds a crude sword in one hand and a small round shield in the other hand. He has big pointed ears and a long nose. The corridor has a stone ceiling, large block walls, large floor slabs, one wooden crate, and one fallen stone. The drawing reaches all four edges.",
+  "picture": "A small goblin warrior in a narrow stone dungeon corridor is visibly kicking a hanging lantern completely free of its wall hook. One foot is planted on the floor. The raised foot is touching the lantern body at the instant of impact. The lantern is airborne and separated from the empty wall hook; no chain or rope still connects the lantern to the wall. He holds a crude sword in one hand and a small round shield in the other hand. He has big pointed ears and a long nose. The corridor has a stone ceiling, large block walls, large floor slabs, one wooden crate, one fallen stone, and a plain wooden door with no symbols or plaques. The drawing reaches all four edges.",
   "line_rules": {
     "ink": "pure black outlines on white",
     "shapes": "large closed regions a person can color",
-    "forbidden": ["gray fill", "shading", "color", "text", "border", "tiny bricks", "individual hair strands", "a small sketch floating in a blank page", "a star plaque", "a second round object on the wall"]
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "tiny bricks", "individual hair strands", "a small sketch floating in a blank page", "star", "plaque", "symbol on the door", "a second round object on the wall", "chain or rope connecting the kicked lantern to the wall"]
   },
   "must_not_be": ["a bugbear", "a troll", "a human knight"]
 }
