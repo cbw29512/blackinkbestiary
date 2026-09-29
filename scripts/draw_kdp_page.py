@@ -28,6 +28,14 @@ HUMANOIDS = {
     "I-10", "I-11", "I-12", "I-29", "I-32", "I-33", "I-34", "I-46", "I-50",
 }
 
+EDIT_PROMPTS = {
+    "I-16": (
+        "Keep this coloring book page. Keep the cave, doors, stairs, floor, and this same cute giant bat. "
+        "Remove the pole attached to the bat. The bat is flying through the cave with wings open. "
+        "No hook, no rope, no ceiling pole. Bold black outlines on white."
+    ),
+}
+
 
 def load_page(page_id: str) -> dict:
     spec_path = ROOT / "data" / "director" / f"{page_id}.json"
@@ -56,7 +64,7 @@ def brief(page: dict) -> str:
         "lighting": "Flat even light, outlines only",
         "color_palette": ["#000000", "#FFFFFF"],
         "composition": "Full page, no caption, no title banner",
-        "scale": "Weapons, doors, stairs, and furniture match the creature. An ogre club is nearly as long as his torso. A kobold spear is light. Stairs that trap an ogre are narrower than his shoulders.",
+        "scale": "Weapons, doors, stairs, and furniture match the creature.",
         "mood": "playful dungeon adventure",
     }
     if page_id in HUMANOIDS:
@@ -164,13 +172,10 @@ def main() -> int:
         if not source.exists():
             print(f"No local image for {page_id} to edit.", file=sys.stderr)
             return 2
-        prompt = (
-            "Keep this coloring book page. Keep the ogre on the spiral stairs, "
-            "the pointing fist, the vertical log club, the door, walls, and ceiling. "
-            "Fix only the club grip. One hand holds the upright club. "
-            "Four fingers wrap the handle once. The thumb sits on the side. "
-            "The club stays vertical. Do not add a second fist on the club. "
-            "Bold black outlines on white."
+        custom = " ".join(args[2:]).strip()
+        prompt = custom or EDIT_PROMPTS.get(
+            page_id,
+            "Keep this coloring book page and apply only the requested fix. Bold black outlines on white.",
         )
         print(f"Editing {page_id} from {source}.")
         job = post_json(
