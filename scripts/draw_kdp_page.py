@@ -60,11 +60,13 @@ def to_print_png(source: Path, dest: Path) -> None:
     from PIL import Image
 
     image = Image.open(source).convert("L")
-    image = image.point(lambda pixel: 0 if pixel < 180 else 255, mode="1")
-    image = image.convert("L")
+    image = image.point(lambda pixel: 0 if pixel < 180 else 255)
     max_w = PRINT_WIDTH - (MARGIN * 2)
     max_h = PRINT_HEIGHT - (MARGIN * 2)
-    image.thumbnail((max_w, max_h), Image.Resampling.LANCZOS)
+    scale = min(max_w / image.width, max_h / image.height)
+    size = (round(image.width * scale), round(image.height * scale))
+    image = image.resize(size, Image.Resampling.LANCZOS)
+    image = image.point(lambda pixel: 0 if pixel < 180 else 255)
     page = Image.new("L", (PRINT_WIDTH, PRINT_HEIGHT), 255)
     left = (PRINT_WIDTH - image.width) // 2
     top = (PRINT_HEIGHT - image.height) // 2
