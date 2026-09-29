@@ -1,6 +1,7 @@
 """Draw one KDP coloring page from a director JSON file.
 
 Uses FLUX.2 Pro. The key stays in the environment. One page per run.
+Prefers data/director/I-XX.json, then data/director/tome-I-briefs.json.
 """
 
 from __future__ import annotations
@@ -14,27 +15,62 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.bfl.ai/v1/flux-2-pro"
-# Portrait near 8.5x11, multiples of 16, under 4 megapixels.
 WIDTH = 1680
 HEIGHT = 2176
 PRINT_WIDTH = 2550
 PRINT_HEIGHT = 3300
-MARGIN = 112  # 0.375 inch at 300 DPI
+MARGIN = 112
+
+STANDARD_RULES = {
+    "ink": "bold outlines only on white",
+    "shapes": "large closed colorable regions",
+    "forbidden": [
+        "gray fill",
+        "shading",
+        "color",
+        "text",
+        "letters",
+        "border",
+        "page frame",
+        "blank white opening",
+        "solid black hole",
+        "solid black puddle",
+        "filled shadow",
+        "dense wood grain",
+        "tiny floor tiles",
+        "strand hair",
+    ],
+}
+
+
+def load_page(page_id: str) -> dict:
+    spec_path = ROOT / "data" / "director" / f"{page_id}.json"
+    if spec_path.exists():
+        return json.loads(spec_path.read_text(encoding="utf-8"))
+    catalog_path = ROOT / "data" / "director" / "tome-I-briefs.json"
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    for item in catalog.get("pages") or []:
+        if item.get("page_id") == page_id:
+            page = dict(item)
+            page.setdefault("line_rules", STANDARD_RULES)
+            return page
+    raise FileNotFoundError(f"No director brief for {page_id}")
 
 
 def brief(page: dict) -> str:
-    rules = page.get("line_rules") or {}
-    forbidden = ", ".join(rules.get("forbidden") or [])
+    rules = page.get("line_rules") or STANDARD_RULES
+    forbidden = ", ".join(rules.get("forbidden") or STANDARD_RULES["forbidden"])
     avoid = ", ".join(page.get("must_not_be") or [])
     return "\n".join(
         [
+            "All-ages fantasy dungeon coloring book page, portrait.",
             page.get("picture") or "",
             f"Subject: {page.get('subject', '')}.",
-            f"Ink: {rules.get('ink', 'pure black outlines on white')}.",
-            f"Shapes: {rules.get('shapes', 'large closed regions')}.",
+            f"Ink: {rules.get('ink', STANDARD_RULES['ink'])}.",
+            f"Shapes: {rules.get('shapes', STANDARD_RULES['shapes'])}.",
             f"Do not include: {forbidden}.",
             f"The creature must not be: {avoid}.",
-            "The drawing fills the sheet. No blank white opening and no solid black hole. Every area is a closed shape to color.",
+            "The drawing fills the sheet. Closed openings only. Outlines only. Every white region must be colorable. No solid black blobs.",
         ]
     )
 
@@ -77,12 +113,17 @@ def to_print_png(source: Path, dest: Path) -> None:
 
 def main() -> int:
     page_id = sys.argv[1] if len(sys.argv) > 1 else "I-04"
+    if page_id.upper() == "COVER":
+        print(
+            "Cover is a separate color wrap. Use data/director/COVER.json. Do not draw it with this page script yet.",
+            file=sys.stderr,
+        )
+        return 2
     key = os.environ.get("BFL_API_KEY", "").strip()
     if not key:
         print("Set BFL_API_KEY first. No page was requested.", file=sys.stderr)
         return 2
-    spec_path = ROOT / "data" / "director" / f"{page_id}.json"
-    page = json.loads(spec_path.read_text(encoding="utf-8"))
+    page = load_page(page_id)
     prompt = brief(page)
     print(f"Requesting {page_id} at {WIDTH}x{HEIGHT}.")
     job = post_json(API, {"prompt": prompt, "width": WIDTH, "height": HEIGHT}, key)
@@ -90,7 +131,6 @@ def main() -> int:
     if not polling:
         print(json.dumps(job), file=sys.stderr)
         return 1
-    status = "Pending"
     result = {}
     for _ in range(60):
         time.sleep(2)
