@@ -285,7 +285,7 @@ def prepare_from_authority(
     clip = model_filename(config, "text_encoders")
     vae = model_filename(config, "vae")
     scaffold_path = WORKFLOW_DIR / f"scaffold_{page['page_id'].lower()}_c{candidate_no:02d}.png"
-    render_scene_scaffold(page, scaffold_path, width=768, height=1024)
+    render_scene_scaffold(page, scaffold_path, width=1152, height=1536)
     uploaded = client.upload_image(scaffold_path, subfolder="blackink-scaffolds")
 
     prompt = build_prompt(page, review_feedback, candidate_no=candidate_no)
@@ -331,8 +331,8 @@ def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: di
         model_filename=unet,
         clip_filename=clip,
         vae_filename=vae,
-        width=768,
-        height=1024,
+        width=1152,
+        height=1536,
     )
     verdict = envelope_data(cli.validate_workflow(path)) or {}
     if not verdict.get("valid"):

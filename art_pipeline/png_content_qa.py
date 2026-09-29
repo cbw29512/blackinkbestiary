@@ -167,11 +167,11 @@ def normalize_monochrome_line_art(path: str | Path) -> dict:
     }
 
 
-def apply_print_ink(path: str | Path, *, threshold: int = 176, thicken: int = 1) -> dict:
-    """Snap a drawing to print ink: pure black or white, then a fixed stroke weight.
+def apply_print_ink(path: str | Path, *, threshold: int = 128, thicken: int = 2) -> dict:
+    """Snap a drawing to a bold coloring-book contour.
 
-    Gray shading becomes paper unless it is already dark enough to be a line.
-    Thickening only grows black, so a thin guide line survives at coloring-book weight.
+    Faint pencil gray becomes paper. Isolated specks are dropped.
+    Surviving lines are thickened so the outer contour reads as ink, not a sketch.
     """
     path = Path(path)
     raw = path.read_bytes()
@@ -191,6 +191,20 @@ def apply_print_ink(path: str | Path, *, threshold: int = 176, thicken: int = 1)
                 luma = (299 * r + 587 * g + 114 * b) // 1000
             if luma < threshold:
                 dark[y * width + x] = 1
+
+    kept = bytearray(width * height)
+    for y in range(height):
+        for x in range(width):
+            if not dark[y * width + x]:
+                continue
+            neighbors = 0
+            for dy, dx in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                yy, xx = y + dy, x + dx
+                if 0 <= yy < height and 0 <= xx < width and dark[yy * width + xx]:
+                    neighbors += 1
+            if neighbors >= 1:
+                kept[y * width + x] = 1
+    dark = kept
 
     if thicken > 0:
         grown = bytearray(dark)

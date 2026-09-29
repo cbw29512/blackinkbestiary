@@ -14,8 +14,10 @@ ROOT = Path(__file__).resolve().parents[1]
 GENERATION_EXECUTION_FILES = (
     "art_pipeline/flux2_klein_profile.py",
     "art_pipeline/generation_runtime.py",
+    "art_pipeline/png_content_qa.py",
     "art_pipeline/workflow_adapter.py",
     "art_pipeline/scene_scaffold.py",
+    "scripts/generate_test_gallery.py",
 )
 
 # Declarative files are direct pixel authority, not incidental implementation.
