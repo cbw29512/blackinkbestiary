@@ -4,7 +4,7 @@
   "comfy_url": "http://127.0.0.1:8188",
   "model": {
     "family": "FLUX.2 [klein]",
-    "variant": "4B distilled FP8",
+    "variant": "4B base FP8 production, distilled FP8 for edits",
     "license": "Apache-2.0"
   },
   "templates": {
@@ -19,6 +19,17 @@
       "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4b-fp8/resolve/main/flux-2-klein-4b-fp8.safetensors",
       "sha256": "97ed34fe0567e436200f2faee3939b88f2b5d99f8af2a4dc16532c4245c0ccb6",
       "size_bytes": 4070000000
+    },
+    {
+      "folder": "diffusion_models",
+      "role": "production",
+      "filename": "flux-2-klein-base-4b-fp8.safetensors",
+      "relative_path": "models/diffusion_models",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-base-4b-fp8/resolve/main/flux-2-klein-base-4b-fp8.safetensors",
+      "sha256": "44bab3a86fe98b85d21dd2a4729ebdc3ae51fb8a39f76e457e18c724219e6840",
+      "size_bytes": 4090000000,
+      "steps": 20,
+      "cfg": 4
     },
     {
       "folder": "text_encoders",

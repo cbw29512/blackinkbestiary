@@ -69,11 +69,25 @@ def set_page_status(page_id: str, status: str, error: str | None = None) -> None
     write_json(STATE_FILE, state)
 
 
-def model_filename(config: dict, folder: str) -> str:
-    match = next((item for item in config["models"] if item.get("folder") == folder), None)
+def model_filename(config: dict, folder: str, role: str | None = None) -> str:
+    models = [item for item in config["models"] if item.get("folder") == folder]
+    if role:
+        match = next((item for item in models if item.get("role") == role), None)
+    else:
+        match = next((item for item in models if not item.get("role")), None) or (models[0] if models else None)
     if not match:
-        raise RuntimeError(f"No model configured for {folder}")
+        raise RuntimeError(f"No model configured for {folder}" + (f" role {role}" if role else ""))
     return match["filename"]
+
+
+def production_sampler(config: dict) -> tuple[str, int, float]:
+    match = next(
+        (item for item in config["models"] if item.get("role") == "production"),
+        None,
+    )
+    if not match:
+        raise RuntimeError("No production diffusion model is configured")
+    return match["filename"], int(match.get("steps") or 20), float(match.get("cfg") or 4)
 
 
 def find_prompt_id(value):

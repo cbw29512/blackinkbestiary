@@ -104,6 +104,8 @@ def patch_distilled_definition(
     vae_filename: str,
     width: int,
     height: int,
+    steps: int = 4,
+    guidance: float = 1,
 ) -> None:
     nodes = definition.get("nodes")
     if not isinstance(nodes, list):
@@ -125,10 +127,10 @@ def patch_distilled_definition(
     _set_widget(vae, 0, vae_filename)
     _set_widget(noise, 0, seed)
     _set_widget(noise, 1, "fixed")
-    _set_widget(scheduler, 0, 4)
+    _set_widget(scheduler, 0, int(steps))
     _set_widget(scheduler, 1, width)
     _set_widget(scheduler, 2, height)
-    _set_widget(cfg, 0, 1)
+    _set_widget(cfg, 0, guidance)
     _set_widget(latent, 0, width)
     _set_widget(latent, 1, height)
     _set_widget(latent, 2, 1)
@@ -187,6 +189,8 @@ def prepare_distilled_text_to_image(
     vae_filename: str,
     width: int = 768,
     height: int = 1024,
+    steps: int = 4,
+    guidance: float = 1,
 ) -> dict:
     cli.fetch_template(template_name, workflow_path)
     workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
@@ -203,6 +207,8 @@ def prepare_distilled_text_to_image(
         vae_filename=vae_filename,
         width=width,
         height=height,
+        steps=steps,
+        guidance=guidance,
     )
     prompt_node = patch_shared_prompt(workflow, prompt)
     activate_branch(workflow, selected_root, roots)
