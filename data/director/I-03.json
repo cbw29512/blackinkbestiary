@@ -1,11 +1,11 @@
 {
   "page_id": "I-03",
   "subject": "Goblin Minion",
-  "picture": "All-ages fantasy coloring book page, portrait, same look as locked I-01 and I-02. Outline art only. A small goblin runs through a dungeon kitchen. One head, one torso, two arms, two hands, two legs, two feet. The hand holding the ham is a left hand. The empty swinging hand is a right hand. The two thumbs point toward each other, not the same way. No two right hands. Large ham under the left arm. Hanging pots, wooden table, closed pantry door, stone ceiling, large floor slabs. No words. Bold even outlines. No black floor spots, no page frame.",
+  "picture": "All-ages fantasy coloring book page, portrait, same look as locked I-01 and I-02. Outline art only. A small goblin runs through a dungeon kitchen carrying a large ham. One head, one torso, two arms, two hands, two legs, two feet. Big pointed ears, long nose, scrawny body, simple tunic. Hanging pots, wooden table, closed pantry door, stone ceiling, large floor slabs. No words. Bold even outlines. No black fills, no page frame.",
   "line_rules": {
     "ink": "bold even outlines only on white",
     "shapes": "large closed colorable regions",
-    "forbidden": ["gray fill", "shading", "color", "text", "letters", "title", "caption", "border", "page frame", "blank hole", "solid black hole", "two right hands", "extra arm"]
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "title", "caption", "border", "page frame", "blank hole", "solid black hole"]
   },
   "must_not_be": ["a hobgoblin", "a human cook", "a kobold"]
 }
