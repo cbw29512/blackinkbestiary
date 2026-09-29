@@ -2,6 +2,7 @@
   "audience": "all-ages gift",
   "accuracy": "fantasy-accurate enough",
   "theme": "caves and dungeons fantasy",
+  "house_look": "Match locked I-01 and I-02. Bold even outlines, full cave or dungeon room, large colorable shapes, no words, no black blobs, no blank holes, no frames.",
   "must_have_every_page": [
     "one correct monster family",
     "one clear action",
@@ -11,11 +12,13 @@
     "floor",
     "closed openings or openings filled with the next room",
     "pure black outlines on white",
-    "same bold line weight as the other pages",
+    "same bold line weight as I-01 and I-02",
     "large closed coloring shapes",
     "no gray",
     "no text",
     "no letters",
+    "no numbers",
+    "no titles or captions",
     "no solid black fills",
     "no blank holes",
     "no decorative page frame"
@@ -23,5 +26,5 @@
   "opening_rule": "A crack, door, window, mouth, or tunnel must show the next room: joists, boards, stone slabs, or a closed door. Never a white void and never a black void.",
   "texture_rule": "Big slabs, big armor plates, simple wood boards. No dense grain, no tiny floor tiles, no strand hair.",
   "ink_rule": "Outlines only. Every white region must be colorable. No black blobs, no filled shadows, no solid voids.",
-  "line_rule": "Same bold even outline on every page. No light sketch pages mixed with heavy ink pages."
+  "line_rule": "Same bold even outline as locked I-01 and I-02."
 }
