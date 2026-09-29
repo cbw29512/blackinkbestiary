@@ -1,10 +1,10 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "58acc3d040c1cf368272042c37046b1abf3e7ff8",
+  "snapshot_engine_commit": "be6315696bab3ff78fb97cb2737df8cfa9aa263b",
   "quality_contract_fingerprint": "b3fbf3ce9bd4e7ac271805da0259a0fda2984fa3e7d2371930bac12012db4fa3",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
-  "candidate_count": 7,
-  "diagnostic_count": 80,
+  "candidate_count": 8,
+  "diagnostic_count": 79,
   "quality_snapshot": "review-previews/quality-current.json",
   "reviewer_disagreement_snapshot": "review-previews/reviewer-disagreement.json",
   "reviewer_disagreement": {
@@ -51,7 +51,7 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-29T02:02:10.5637736Z"
+    "updated_at": "2026-09-29T02:11:22.5096270Z"
   },
   "autopilot": {
     "schema_version": 1,
@@ -66,8 +66,8 @@
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-29T02:01:40.714509+00:00",
-    "updated_at": "2026-09-29T02:02:06.635977+00:00",
+    "started_at": "2026-09-29T02:10:55.269857+00:00",
+    "updated_at": "2026-09-29T02:11:19.825255+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -203,7 +203,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 443 tests in 21.986s",
+          "Ran 444 tests in 20.577s",
           "",
           "OK"
         ]
@@ -485,6 +485,37 @@
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
       "finished_at": "2026-09-29T00:07:32.230521+00:00"
+    },
+    {
+      "review_id": "I-04-C01-H2ebdda6eff87c3be",
+      "page_id": "I-04",
+      "monster_name": "Goblin Warrior",
+      "candidate": 1,
+      "selected": false,
+      "seed": 7247297398312609539,
+      "engine_commit": "be6315696bab3ff78fb97cb2737df8cfa9aa263b",
+      "generation_fingerprint": "e78d9e98ffa8c0c357ae5d9b966f2a51a7bf0104bb6254e94a5e3fd6a97950bd",
+      "review_fingerprint": "059d1f880d91e62e3ad01a870a47554bb43f1d2047a919bf6d061d107d9e5de9",
+      "generation_authority_current": true,
+      "review_authority_current": true,
+      "review_checked_at": null,
+      "preview": "review-previews/I-04-C01.jpg",
+      "source_image": "test-gallery/I-04-C01.png",
+      "source_sha256": "2ebdda6eff87c3bee6b03bead3dd0902418d53753223cb605e98b43fe64b5123",
+      "visual_review": {
+        "pass": false,
+        "score": 0,
+        "defects": [
+          "single traced draw; human review decides"
+        ],
+        "preserve": [],
+        "stage": "human"
+      },
+      "advisory_review_status": "needs_work",
+      "advisory_review_error": null,
+      "assistant_review": null,
+      "status": "awaiting_exact_image_review",
+      "finished_at": "2026-09-29T02:12:18.760405+00:00"
     },
     {
       "review_id": "I-08-C01-H0786b4e4cf0cea71",
@@ -2882,21 +2913,6 @@
       "error": "Expected exactly one CLIPTextEncode node, found 2",
       "started_at": "2026-09-29T00:55:20.738980+00:00",
       "finished_at": "2026-09-29T00:55:21.588542+00:00",
-      "visual_review": null,
-      "assistant_review": null
-    },
-    {
-      "page_id": "I-04",
-      "monster_name": "Goblin Warrior",
-      "candidate": 1,
-      "status": "failed",
-      "engine_commit": "58acc3d040c1cf368272042c37046b1abf3e7ff8",
-      "generation_fingerprint": "3067f4a026b4ffc282df8abcb93c42f59a99c2c4bfe3ceaf77ca10babcd48637",
-      "review_fingerprint": "556d2822acd666f484c41367e1cf3311c5dee536d520c7336ba7ea469ca01131",
-      "review_checked_at": null,
-      "error": "Expected exactly one CLIPTextEncode node, found 2",
-      "started_at": "2026-09-29T02:02:12.592235+00:00",
-      "finished_at": "2026-09-29T02:02:13.338495+00:00",
       "visual_review": null,
       "assistant_review": null
     }
