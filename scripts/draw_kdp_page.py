@@ -34,6 +34,9 @@ EDIT_PROMPTS = {
         "Remove the pole attached to the bat. The bat is flying through the cave with wings open. "
         "No hook, no rope, no ceiling pole. Bold black outlines on white."
     ),
+    "I-25": (
+        "Keep this hanging cloaker and this room. Leave one tail. Remove the extra hanging leg."
+    ),
 }
 
 
@@ -121,7 +124,7 @@ def poll_and_save(job: dict, key: str, page_id: str) -> int:
         print(json.dumps(job), file=sys.stderr)
         return 1
     result = {}
-    for _ in range(60):
+    for _ in range(150):
         time.sleep(2)
         result = get_json(polling, key)
         status = str(result.get("status") or "")
