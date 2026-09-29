@@ -1,0 +1,11 @@
+{
+  "page_id": "I-03",
+  "subject": "Goblin Minion",
+  "picture": "All-ages fantasy coloring book page, portrait, same look as locked I-01 and I-02. Outline art only. A small goblin minion runs through a dungeon kitchen with a stolen ham under one arm. Big pointed ears, long nose, scrawny body, simple tunic. Hanging pots as large shapes, a wooden table, a closed pantry door, stone ceiling, large floor slabs. No words, no letters, no title. Bold even outlines. No black fills, no blank doorway, no page frame.",
+  "line_rules": {
+    "ink": "bold even outlines only on white",
+    "shapes": "large closed colorable regions",
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "numbers", "title", "caption", "border", "page frame", "blank hole", "solid black hole"]
+  },
+  "must_not_be": ["a hobgoblin", "a human cook", "a kobold"]
+}
