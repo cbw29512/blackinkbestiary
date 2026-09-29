@@ -335,6 +335,7 @@ def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: di
         height=1536,
         steps=steps,
         guidance=guidance,
+        variant="base",
     )
     verdict = envelope_data(cli.validate_workflow(path)) or {}
     if not verdict.get("valid"):

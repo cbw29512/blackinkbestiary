@@ -39,23 +39,32 @@ def _set_widget(node: dict, index: int, value) -> None:
     values[index] = value
 
 
-def _find_distilled_definition(workflow: dict) -> dict:
+def _find_text_definition(workflow: dict, variant: str) -> dict:
     definitions = workflow.get("definitions")
     subgraphs = definitions.get("subgraphs") if isinstance(definitions, dict) else None
     if not isinstance(subgraphs, list):
         raise RuntimeError("Official FLUX template has no subgraph definitions.")
 
-    matches = [
-        sg for sg in subgraphs
-        if isinstance(sg, dict)
-        and "text to image" in str(sg.get("name", "")).lower()
-        and "flux.2 klein 4b" in str(sg.get("name", "")).lower()
-        and "distilled" in str(sg.get("name", "")).lower()
-    ]
+    want_distilled = variant == "distilled"
+    matches = []
+    for sg in subgraphs:
+        if not isinstance(sg, dict):
+            continue
+        name = str(sg.get("name", "")).lower()
+        if "text to image" not in name or "flux.2 klein 4b" not in name:
+            continue
+        if ("distilled" in name) == want_distilled:
+            matches.append(sg)
     if len(matches) != 1:
         names = [sg.get("name") for sg in subgraphs if isinstance(sg, dict)]
-        raise RuntimeError(f"Could not identify one distilled FLUX.2 Klein text-to-image subgraph: {names}")
+        raise RuntimeError(
+            f"Could not identify one {variant} FLUX.2 Klein text-to-image subgraph: {names}"
+        )
     return matches[0]
+
+
+def _find_distilled_definition(workflow: dict) -> dict:
+    return _find_text_definition(workflow, "distilled")
 
 
 def _find_branch_instances(workflow: dict, selected_definition: dict) -> tuple[str, list[str]]:
@@ -191,11 +200,12 @@ def prepare_distilled_text_to_image(
     height: int = 1024,
     steps: int = 4,
     guidance: float = 1,
+    variant: str = "distilled",
 ) -> dict:
     cli.fetch_template(template_name, workflow_path)
     workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
 
-    definition = _find_distilled_definition(workflow)
+    definition = _find_text_definition(workflow, variant)
     selected_root, roots = _find_branch_instances(workflow, definition)
 
     patch_distilled_definition(

@@ -150,6 +150,40 @@ class Flux2KleinProfileTests(unittest.TestCase):
         self.assertEqual(nodes["CLIPLoader"]["properties"]["models"][0]["name"], "qwen_3_4b.safetensors")
         self.assertEqual(nodes["VAELoader"]["properties"]["models"][0]["name"], "flux2-vae.safetensors")
 
+    def test_base_variant_selects_the_undistilled_branch(self):
+        workflow = template_workflow()
+        base = next(sg for sg in workflow["definitions"]["subgraphs"] if sg["id"] == BASE_ID)
+        base["nodes"] = distilled_definition()["nodes"]
+        cli = FakeCli(workflow)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "prepared.json"
+            result = prepare_distilled_text_to_image(
+                cli,
+                "image_flux2_klein_text_to_image",
+                path,
+                prompt="giant bat hanging by its feet",
+                seed=7,
+                model_filename="flux-2-klein-base-4b-fp8.safetensors",
+                clip_filename="qwen_3_4b.safetensors",
+                vae_filename="flux2-vae.safetensors",
+                width=1152,
+                height=1536,
+                steps=20,
+                guidance=4,
+                variant="base",
+            )
+            out = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(result["selected_root"], "75")
+        top = {str(n["id"]): n for n in out["nodes"]}
+        self.assertEqual(top["75"]["mode"], 0)
+        self.assertEqual(top["77"]["mode"], 4)
+        definition = next(sg for sg in out["definitions"]["subgraphs"] if sg["id"] == BASE_ID)
+        nodes = {n["type"]: n for n in definition["nodes"]}
+        self.assertEqual(nodes["UNETLoader"]["widgets_values"][0], "flux-2-klein-base-4b-fp8.safetensors")
+        self.assertEqual(nodes["Flux2Scheduler"]["widgets_values"][:3], [20, 1152, 1536])
+        self.assertEqual(nodes["CFGGuider"]["widgets_values"][0], 4)
+
 
 if __name__ == "__main__":
     unittest.main()
