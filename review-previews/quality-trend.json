@@ -6,7 +6,7 @@
   "quality_contract_fingerprint": "8e191f70b53a4e7564b0c66df309a527c82d9edaa499d3fd8af3436902ef72b9",
   "comparable_to_previous": true,
   "comparison_reason": null,
-  "history_appended": true,
+  "history_appended": false,
   "history_entries": 80,
   "current_metrics": {
     "foundation_readiness": 80.0,
@@ -25,9 +25,9 @@
     "locked_page_progress": 0.0,
     "print_package_readiness": 80.0,
     "replication_readiness": 100.0,
-    "review_pipeline_health": 100.0,
+    "review_pipeline_health": 88.9,
     "semantic_accuracy": 0.0,
-    "technical_qa_pass_rate": 100.0,
+    "technical_qa_pass_rate": 88.9,
     "visual_cleanliness": 0.0
   },
   "comparisons": {
@@ -40,19 +40,19 @@
       "higher_is_better": true
     },
     "technical_qa_pass_rate": {
-      "previous": 100.0,
+      "previous": 88.9,
       "current": 88.9,
-      "delta": -11.1,
-      "signed_delta": "-11.1",
-      "trend": "regressing",
+      "delta": 0.0,
+      "signed_delta": "+0.0",
+      "trend": "flat",
       "higher_is_better": true
     },
     "review_pipeline_health": {
-      "previous": 100.0,
+      "previous": 88.9,
       "current": 88.9,
-      "delta": -11.1,
-      "signed_delta": "-11.1",
-      "trend": "regressing",
+      "delta": 0.0,
+      "signed_delta": "+0.0",
+      "trend": "flat",
       "higher_is_better": true
     },
     "visual_cleanliness": {
