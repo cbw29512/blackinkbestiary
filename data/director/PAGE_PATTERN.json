@@ -4,6 +4,7 @@
   "theme": "caves and dungeons fantasy",
   "house_look": "Match locked I-01 and I-02. Bold even outlines, full cave or dungeon room, large colorable shapes, no words, no black blobs, no blank holes, no frames.",
   "humanoid_rule": "If the creature is a humanoid it has one head, one torso, two arms, two hands, two legs, two feet. No extra limbs.",
+  "proportion_rule": "Weapons, doors, stairs, and furniture match the creature. An ogre club is nearly torso-long. A kobold spear is light. Stairs that trap an ogre are narrower than his shoulders.",
   "must_have_every_page": [
     "one correct monster family",
     "one clear action",
@@ -14,6 +15,7 @@
     "closed openings or openings filled with the next room",
     "pure black outlines on white",
     "same bold line weight as I-01 and I-02",
+    "believable scale",
     "large closed coloring shapes",
     "no gray",
     "no text",
