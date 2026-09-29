@@ -1,11 +1,11 @@
 {
   "page_id": "I-08",
   "subject": "Bugbear Warrior",
-  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A tall bugbear warrior drops through a broken crack in a dungeon-hall ceiling to ambush below. He is a large hairy goblinoid soldier, taller and bulkier than a hobgoblin, not a troll. Blunt snout, short pointed ears, shaggy fur in large clumps, simple hide armor plates, one big spiked club. The ceiling hole is broken stone and hanging rock you can color, with white open shapes inside the crack. No solid black void. No black puddle on the floor. No decorative frame around the page. The hall has block walls, a fully closed wooden door, large flagstones, one crate, one barrel. Every area is a closed white shape to color. The drawing fills the sheet.",
+  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A tall bugbear warrior drops through a broken crack in a dungeon-hall ceiling to ambush below. Large hairy goblinoid, not a troll: blunt snout, short pointed ears, fur in large clumps, hide armor plates, one spiked club. Through the ceiling crack you can see the room above: wooden joists and floorboards or large stone slabs of the upper floor, plus a few hanging broken stones. That upper floor fills the hole. No blank white sky and no solid black void. No floor puddle. No page frame. The hall has block walls, a fully closed wooden door, large flagstones, one crate, one barrel. Every region is a closed white shape to color.",
   "line_rules": {
     "ink": "bold outlines only on white",
     "shapes": "large closed colorable regions",
-    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank white opening", "solid black hole", "solid black puddle", "filled shadow", "dense wood grain", "tiny bricks", "strand hair"]
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank white opening", "blank hole", "solid black hole", "solid black puddle", "filled shadow", "dense wood grain", "strand hair"]
   },
   "must_not_be": ["a troll", "a hobgoblin", "a small goblin", "an orc", "a bear"]
 }
