@@ -1,11 +1,11 @@
 {
   "page_id": "I-08",
   "subject": "Bugbear Warrior",
-  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A tall bugbear warrior drops through a broken crack in a dungeon-hall ceiling to ambush below. Large hairy goblinoid, not a troll: blunt snout, short pointed ears, fur in large clumps, hide armor plates, one spiked club. Through the ceiling crack you can see the room above: wooden joists and floorboards or large stone slabs of the upper floor, plus a few hanging broken stones. That upper floor fills the hole. No blank white sky and no solid black void. No floor puddle. No page frame. The hall has block walls, a fully closed wooden door, large flagstones, one crate, one barrel. Every region is a closed white shape to color.",
+  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A tall bugbear warrior drops through a broken dungeon ceiling, both feet off the floor. In both hands he holds one large spiked club raised to strike. The club head is a big spiked ball on a thick handle. He is not holding a ceiling beam. There is no weapon on the floor. There is no extra pole in the middle of the room. He is a large hairy goblinoid, not a troll: blunt snout, short pointed ears, fur in large clumps, simple hide armor. Through the broken ceiling you see wooden joists and floorboards of the room above, large simple shapes, plus a few broken stones. Closed wooden door on the back wall. One crate. One barrel. Large floor slabs. Block walls. No blank hole, no black blob, no gray puddle, no page frame.",
   "line_rules": {
     "ink": "bold outlines only on white",
     "shapes": "large closed colorable regions",
-    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank white opening", "blank hole", "solid black hole", "solid black puddle", "filled shadow", "dense wood grain", "strand hair"]
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank hole", "solid black hole", "weapon on the floor", "center pole", "holding a beam", "strand hair"]
   },
   "must_not_be": ["a troll", "a hobgoblin", "a small goblin", "an orc", "a bear"]
 }
