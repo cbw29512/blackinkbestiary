@@ -9,16 +9,18 @@
     "stone ceiling",
     "walls",
     "floor",
-    "closed openings, no white hole",
+    "closed openings or openings filled with the next room",
     "pure black outlines on white",
     "large closed coloring shapes",
     "no gray",
     "no text",
     "no letters",
     "no solid black fills",
+    "no blank holes",
     "no decorative page frame"
   ],
-  "texture_rule": "less texture than the first I-07-raw. Big slabs, big armor plates, simple wood boards. No dense grain, no tiny floor tiles, no strand hair.",
+  "opening_rule": "A crack, door, window, mouth, or tunnel must show the next room: joists, boards, stone slabs, or a closed door. Never a white void and never a black void.",
+  "texture_rule": "Big slabs, big armor plates, simple wood boards. No dense grain, no tiny floor tiles, no strand hair.",
   "ink_rule": "Outlines only. Every white region must be colorable. No black blobs, no filled shadows, no solid voids.",
   "line_rule": "bold clear outlines a child and an adult can both color"
 }
