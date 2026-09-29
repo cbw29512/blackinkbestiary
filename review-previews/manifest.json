@@ -1,7 +1,7 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "ba4a8776b4783b01bbdbb5d4445b031d0e7901ea",
-  "quality_contract_fingerprint": "fd018d00b77781c9024d84084b47ae9c7071f8ec6b037fa5ecbe1911a0744221",
+  "snapshot_engine_commit": "40335f07498fe762c084eb8a09ef1cfbde12da99",
+  "quality_contract_fingerprint": "8e191f70b53a4e7564b0c66df309a527c82d9edaa499d3fd8af3436902ef72b9",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "candidate_count": 9,
   "diagnostic_count": 78,
@@ -51,7 +51,7 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-29T00:16:27.1730252Z"
+    "updated_at": "2026-09-29T00:21:59.0820981Z"
   },
   "autopilot": {
     "schema_version": 1,
@@ -66,8 +66,8 @@
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-29T00:16:01.108244+00:00",
-    "updated_at": "2026-09-29T00:16:24.623828+00:00",
+    "started_at": "2026-09-29T00:21:31.531484+00:00",
+    "updated_at": "2026-09-29T00:21:56.491299+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -203,7 +203,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 441 tests in 19.719s",
+          "Ran 441 tests in 20.913s",
           "",
           "OK"
         ]
@@ -465,8 +465,8 @@
       "engine_commit": "e9b3d424d735fdb84a6abd6b12a3a6802eb7e5f0",
       "generation_fingerprint": "9ecac29892a190968d2bcb2f082d6740b0e24e03ae7f607d9fcd39ab65b8e729",
       "review_fingerprint": "3df64c4de50f1385858d403819f67a048a4b5e01dd2193ce4885ba3fb75e094d",
-      "generation_authority_current": true,
-      "review_authority_current": true,
+      "generation_authority_current": false,
+      "review_authority_current": false,
       "review_checked_at": null,
       "preview": "review-previews/I-01-C01.jpg",
       "source_image": "test-gallery/I-01-C01.png",
@@ -617,21 +617,21 @@
       "finished_at": "2026-09-28T09:56:32.939934+00:00"
     },
     {
-      "review_id": "I-16-C01-H9984b8560cc509d3",
+      "review_id": "I-16-C01-H1c6bdcf647b70db7",
       "page_id": "I-16",
       "monster_name": "Giant Bat",
       "candidate": 1,
       "selected": false,
-      "seed": 3347606310685223617,
-      "engine_commit": "ba4a8776b4783b01bbdbb5d4445b031d0e7901ea",
-      "generation_fingerprint": "470ea1edc089b464da4b162252bf62bbb635ed52333a874a5095d3de2acfb5bf",
-      "review_fingerprint": "86bc65abe19bcb2f4e59c35a82610cf906abb1756884bc8482c23eaa09260292",
+      "seed": 1514024057809379382,
+      "engine_commit": "40335f07498fe762c084eb8a09ef1cfbde12da99",
+      "generation_fingerprint": "865fe4fb800b02b79d7730dd71fced03fe8a69c060159576bb0edc2731c94490",
+      "review_fingerprint": "9b5f191188d052fb02d31e34e0cbe45f5097d172db78d7c66a7606ea46181311",
       "generation_authority_current": true,
       "review_authority_current": true,
       "review_checked_at": null,
       "preview": "review-previews/I-16-C01.jpg",
       "source_image": "test-gallery/I-16-C01.png",
-      "source_sha256": "9984b8560cc509d3bc5f36cbfb84311f23396a8333188961429bf8b59ca26e96",
+      "source_sha256": "1c6bdcf647b70db7b73ecb3db072ef5be58f67feab2a8642bb2734006bd4406b",
       "visual_review": {
         "pass": false,
         "score": 0,
@@ -645,7 +645,7 @@
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-29T00:16:51.593473+00:00"
+      "finished_at": "2026-09-29T00:22:14.830032+00:00"
     },
     {
       "review_id": "I-19-C01-H644ad81b1b811488",

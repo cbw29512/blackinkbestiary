@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "active_book_id": "TOME-I",
-  "engine_commit": "ba4a8776b4783b01bbdbb5d4445b031d0e7901ea",
+  "engine_commit": "40335f07498fe762c084eb8a09ef1cfbde12da99",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
-  "quality_contract_fingerprint": "fd018d00b77781c9024d84084b47ae9c7071f8ec6b037fa5ecbe1911a0744221",
+  "quality_contract_fingerprint": "8e191f70b53a4e7564b0c66df309a527c82d9edaa499d3fd8af3436902ef72b9",
   "comparable_to_previous": false,
   "comparison_reason": "quality contract changed; new baseline established",
   "history_appended": true,
-  "history_entries": 77,
+  "history_entries": 78,
   "current_metrics": {
     "foundation_readiness": 80.0,
     "technical_qa_pass_rate": 100.0,
@@ -46,13 +46,13 @@
   },
   "previous_generation_efficiency": {
     "all_gate_yield_percent": 0.0,
-    "avg_gpu_attempts_per_page": 4.11,
-    "gpu_attempts": 37,
+    "avg_gpu_attempts_per_page": 3.67,
+    "gpu_attempts": 33,
     "gpu_attempts_per_semantic_pass": null,
     "pages_at_max_refinements": 0,
     "pages_considered": 9,
     "pages_semantic_stalled": 0,
-    "refinement_passes": 28,
+    "refinement_passes": 24,
     "semantic_yield_percent": 0.0
   },
   "current_defect_counts": {
