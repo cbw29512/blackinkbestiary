@@ -1,0 +1,15 @@
+{
+  "parked": [
+    {
+      "page_id": "I-25-cloaker",
+      "subject": "Cloaker",
+      "why": "Flux kept drawing a person, a hanger shirt, or a bat. Need a clean manta-cloak or classic FR hanging-cloak hit. Slot I-25 was filled with Hook Horror."
+    },
+    {
+      "page_id": "I-30",
+      "subject": "Otyugh",
+      "why": "Three bad takes: tentacle-in-mouth, plant-face, two-mouth cartoon. Redo with a reference image. Official parts: 3 legs, 2 spiked tentacles, 1 stalk with both eyes, gash mouth on the body."
+    }
+  ],
+  "do_not_close_the_book_without": ["Cloaker", "Otyugh"]
+}
