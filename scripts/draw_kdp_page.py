@@ -20,6 +20,8 @@ HEIGHT = 2176
 PRINT_WIDTH = 2550
 PRINT_HEIGHT = 3300
 MARGIN = 112
+# Only true ink lines become black. Gray puddles stay white and colorable.
+INK_CUTOFF = 90
 
 STANDARD_RULES = {
     "ink": "bold outlines only on white",
@@ -97,13 +99,13 @@ def to_print_png(source: Path, dest: Path) -> None:
     from PIL import Image
 
     image = Image.open(source).convert("L")
-    image = image.point(lambda pixel: 0 if pixel < 180 else 255)
+    image = image.point(lambda pixel: 0 if pixel < INK_CUTOFF else 255)
     max_w = PRINT_WIDTH - (MARGIN * 2)
     max_h = PRINT_HEIGHT - (MARGIN * 2)
     scale = min(max_w / image.width, max_h / image.height)
     size = (round(image.width * scale), round(image.height * scale))
     image = image.resize(size, Image.Resampling.LANCZOS)
-    image = image.point(lambda pixel: 0 if pixel < 180 else 255)
+    image = image.point(lambda pixel: 0 if pixel < INK_CUTOFF else 255)
     page = Image.new("L", (PRINT_WIDTH, PRINT_HEIGHT), 255)
     left = (PRINT_WIDTH - image.width) // 2
     top = (PRINT_HEIGHT - image.height) // 2
@@ -119,6 +121,13 @@ def main() -> int:
             file=sys.stderr,
         )
         return 2
+    args = sys.argv[1:]
+    if args and args[0] == "--convert":
+        raw = Path(args[1])
+        dest = Path(args[2]) if len(args) > 2 else raw.with_suffix(".png")
+        to_print_png(raw, dest)
+        print(f"Saved {dest}")
+        return 0
     key = os.environ.get("BFL_API_KEY", "").strip()
     if not key:
         print("Set BFL_API_KEY first. No page was requested.", file=sys.stderr)
