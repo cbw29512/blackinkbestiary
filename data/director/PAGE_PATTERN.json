@@ -14,8 +14,11 @@
     "large closed coloring shapes",
     "no gray",
     "no text",
-    "no letters"
+    "no letters",
+    "no solid black fills",
+    "no decorative page frame"
   ],
-  "texture_rule": "less texture than I-07-raw. Big slabs, big armor plates, simple wood boards. No dense grain, no tiny floor tiles, no strand hair.",
+  "texture_rule": "less texture than the first I-07-raw. Big slabs, big armor plates, simple wood boards. No dense grain, no tiny floor tiles, no strand hair.",
+  "ink_rule": "Outlines only. Every white region must be colorable. No black blobs, no filled shadows, no solid voids.",
   "line_rule": "bold clear outlines a child and an adult can both color"
 }
