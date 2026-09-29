@@ -1,0 +1,11 @@
+{
+  "page_id": "I-09",
+  "subject": "Bugbear Stalker",
+  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A tall bugbear stalker creeps through a low stone crawlway. He drags a large sack with one hand and raises the other hand with one finger for silence. Same monster family as the locked I-08 bugbear: large hairy goblinoid, blunt snout, short pointed ears, fur in large clumps, simple hide straps. Not a troll. The crawlway has a low stone ceiling, tight block walls, large floor slabs, and a closed wooden hatch or door ahead. If any crack shows, fill it with the next room's boards or stones. No blank hole, no black blob, no gray puddle, no page frame, no weapon on the floor.",
+  "line_rules": {
+    "ink": "bold outlines only on white",
+    "shapes": "large closed colorable regions",
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank hole", "solid black hole", "strand hair"]
+  },
+  "must_not_be": ["a troll", "a hobgoblin", "a small goblin", "a bear"]
+}
