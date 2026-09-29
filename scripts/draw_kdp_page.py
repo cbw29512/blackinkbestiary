@@ -15,8 +15,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.bfl.ai/v1/flux-2-pro"
-WIDTH = 1680
-HEIGHT = 2176
+# Largest 8.5x11 portrait under the 4 MP Flux cap. Multiples of 16.
+WIDTH = 1760
+HEIGHT = 2272
 PRINT_WIDTH = 2550
 PRINT_HEIGHT = 3300
 MARGIN = 112
