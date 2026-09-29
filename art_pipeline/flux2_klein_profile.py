@@ -10,6 +10,24 @@ def envelope_data(payload):
     return payload
 
 
+def _text_encodes(nodes: list[dict]) -> tuple[dict, dict | None]:
+    matches = [n for n in nodes if isinstance(n, dict) and n.get("type") == "CLIPTextEncode"]
+    if len(matches) == 1:
+        return matches[0], None
+    positive = [
+        n for n in matches
+        if "positive" in str(n.get("title", "")).lower()
+    ]
+    negative = [
+        n for n in matches
+        if "negative" in str(n.get("title", "")).lower()
+    ]
+    if len(positive) != 1:
+        titles = [n.get("title") for n in matches]
+        raise RuntimeError(f"Expected one positive CLIPTextEncode, found {titles}")
+    return positive[0], negative[0] if len(negative) == 1 else None
+
+
 def _node_by_type(nodes: list[dict], node_type: str) -> dict:
     matches = [n for n in nodes if isinstance(n, dict) and n.get("type") == node_type]
     if len(matches) != 1:
@@ -127,7 +145,7 @@ def patch_distilled_definition(
     scheduler = _node_by_type(nodes, "Flux2Scheduler")
     cfg = _node_by_type(nodes, "CFGGuider")
     latent = _node_by_type(nodes, "EmptyFlux2LatentImage")
-    text = _node_by_type(nodes, "CLIPTextEncode")
+    text, negative = _text_encodes(nodes)
     width_node = _primitive_by_title(nodes, "Width")
     height_node = _primitive_by_title(nodes, "Height")
 
@@ -144,6 +162,8 @@ def patch_distilled_definition(
     _set_widget(latent, 1, height)
     _set_widget(latent, 2, 1)
     _set_widget(text, 0, prompt)
+    if negative is not None:
+        _set_widget(negative, 0, "")
     _set_widget(width_node, 0, width)
     _set_widget(width_node, 1, "fixed")
     _set_widget(height_node, 0, height)
