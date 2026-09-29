@@ -1,7 +1,7 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "e9b3d424d735fdb84a6abd6b12a3a6802eb7e5f0",
-  "quality_contract_fingerprint": "5d59d44097a574335efdac451564fdaef7163524f853ce6da8474b109fae55bc",
+  "snapshot_engine_commit": "ba4a8776b4783b01bbdbb5d4445b031d0e7901ea",
+  "quality_contract_fingerprint": "fd018d00b77781c9024d84084b47ae9c7071f8ec6b037fa5ecbe1911a0744221",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "candidate_count": 9,
   "diagnostic_count": 78,
@@ -51,7 +51,7 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-29T00:07:03.3513900Z"
+    "updated_at": "2026-09-29T00:16:27.1730252Z"
   },
   "autopilot": {
     "schema_version": 1,
@@ -66,8 +66,8 @@
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-29T00:06:36.594997+00:00",
-    "updated_at": "2026-09-29T00:07:00.660087+00:00",
+    "started_at": "2026-09-29T00:16:01.108244+00:00",
+    "updated_at": "2026-09-29T00:16:24.623828+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -203,7 +203,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 441 tests in 20.197s",
+          "Ran 441 tests in 19.719s",
           "",
           "OK"
         ]
@@ -617,39 +617,35 @@
       "finished_at": "2026-09-28T09:56:32.939934+00:00"
     },
     {
-      "review_id": "I-16-C01-H730a66157f9be882",
+      "review_id": "I-16-C01-H9984b8560cc509d3",
       "page_id": "I-16",
       "monster_name": "Giant Bat",
       "candidate": 1,
       "selected": false,
-      "seed": 1424098447184773404,
-      "engine_commit": "0794aab74708e000d1e66fbb28ec727126b0e2d3",
-      "generation_fingerprint": "e4a04df66f8e485d836c0be026e178d188956290fb098cfc35f0ccd91bfa10a3",
-      "review_fingerprint": "87702cc87ed27ac453df14d0616b5ee9b3c7197d54ca7a9daddeb1a042bc3ca8",
-      "generation_authority_current": false,
-      "review_authority_current": false,
+      "seed": 3347606310685223617,
+      "engine_commit": "ba4a8776b4783b01bbdbb5d4445b031d0e7901ea",
+      "generation_fingerprint": "470ea1edc089b464da4b162252bf62bbb635ed52333a874a5095d3de2acfb5bf",
+      "review_fingerprint": "86bc65abe19bcb2f4e59c35a82610cf906abb1756884bc8482c23eaa09260292",
+      "generation_authority_current": true,
+      "review_authority_current": true,
       "review_checked_at": null,
       "preview": "review-previews/I-16-C01.jpg",
       "source_image": "test-gallery/I-16-C01.png",
-      "source_sha256": "730a66157f9be88281e990c0bceb2bc1398fcefada57c34cd64bc03b49dcae04",
+      "source_sha256": "9984b8560cc509d3bc5f36cbfb84311f23396a8333188961429bf8b59ca26e96",
       "visual_review": {
         "pass": false,
-        "score": 49,
+        "score": 0,
         "defects": [
-          "no visible river channel beneath roost ledge"
+          "single traced draw; human review decides"
         ],
-        "preserve": [
-          "rocky ceiling with bat hanging",
-          "asymmetrical rock walls",
-          "water flowing between stone banks"
-        ],
-        "stage": "environment"
+        "preserve": [],
+        "stage": "human"
       },
       "advisory_review_status": "needs_work",
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T09:37:27.746819+00:00"
+      "finished_at": "2026-09-29T00:16:51.593473+00:00"
     },
     {
       "review_id": "I-19-C01-H644ad81b1b811488",

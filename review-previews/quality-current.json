@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v11",
-  "quality_contract_fingerprint": "5d59d44097a574335efdac451564fdaef7163524f853ce6da8474b109fae55bc",
-  "measured_at": "2026-09-29T00:07:39.898976+00:00",
-  "engine_commit": "e9b3d424d735fdb84a6abd6b12a3a6802eb7e5f0",
+  "quality_contract_fingerprint": "fd018d00b77781c9024d84084b47ae9c7071f8ec6b037fa5ecbe1911a0744221",
+  "measured_at": "2026-09-29T00:16:59.460560+00:00",
+  "engine_commit": "ba4a8776b4783b01bbdbb5d4445b031d0e7901ea",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 80.0,
@@ -34,6 +34,20 @@
     "semantic_accuracy": 0.0,
     "all_automated_gates": 0.0,
     "rows": [
+      {
+        "page_id": "I-16",
+        "status": "awaiting_exact_image_review",
+        "technical_pass": true,
+        "review_pipeline_pass": true,
+        "visual_cleanliness_pass": false,
+        "semantic_accuracy_pass": false,
+        "all_automated_gates_pass": false,
+        "visual_stage": "human",
+        "visual_score": 0,
+        "local_visual_advisory_pass": false,
+        "assistant_decision": null,
+        "exact_image_reviewer": null
+      },
       {
         "page_id": "I-01",
         "status": "awaiting_exact_image_review",
@@ -105,20 +119,6 @@
         "exact_image_reviewer": null
       },
       {
-        "page_id": "I-16",
-        "status": "awaiting_exact_image_review",
-        "technical_pass": true,
-        "review_pipeline_pass": true,
-        "visual_cleanliness_pass": false,
-        "semantic_accuracy_pass": false,
-        "all_automated_gates_pass": false,
-        "visual_stage": "environment",
-        "visual_score": 49,
-        "local_visual_advisory_pass": false,
-        "assistant_decision": null,
-        "exact_image_reviewer": null
-      },
-      {
         "page_id": "I-19",
         "status": "awaiting_exact_image_review",
         "technical_pass": true,
@@ -164,11 +164,11 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 37,
-    "refinement_passes": 28,
+    "gpu_attempts": 33,
+    "refinement_passes": 24,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 4.11,
+    "avg_gpu_attempts_per_page": 3.67,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -1096,7 +1096,7 @@
     {
       "defect_code": "IDENTITY_WRONG_CREATURE",
       "label": "Wrong creature/body plan",
-      "evidence_count": 31,
+      "evidence_count": 27,
       "distinct_pages": 8,
       "distinct_families": 8,
       "scope": [
@@ -1568,5 +1568,5 @@
     "ENVIRONMENT_GENERIC",
     "ACTION_UNCLEAR"
   ],
-  "measurement_fingerprint": "95c7cc34e483c9d06eaceb04afb17b2b30edfd36e3905bdcabb154887e4db530"
+  "measurement_fingerprint": "e932ee2a6d3fe883f69802527dda7a2737da9453e10fe61a23a55f3274d28a5a"
 }
