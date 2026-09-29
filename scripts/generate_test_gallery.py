@@ -777,32 +777,23 @@ def main() -> int:
                         cli, client, workflow, page["page_id"], candidate_no, inspect_candidate
                     )
                     source = ROOT / "web" / relative
-                if scaffold_enabled(page):
-                    write_generation_progress(
-                        page["page_id"], page["monster_name"], candidate_no,
-                        "inking", message="One traced draw. Print ink only. No reviewer redraw.",
-                    )
-                    best = source
-                    visual_verdict = {
-                        "pass": False,
-                        "score": 0,
-                        "defects": ["single traced draw; human review decides"],
-                        "preserve": [],
-                        "stage": "human",
-                    }
-                    pass_history = [{
-                        "pass": 0,
-                        "image": str(source),
-                        "review": visual_verdict,
-                    }]
-                else:
-                    write_generation_progress(
-                        page["page_id"], page["monster_name"], candidate_no,
-                        "reviewing", message="Running semantic review and refinement",
-                    )
-                    best, visual_verdict, pass_history = refine_candidate(
-                        cli, client, config, page, candidate_no, seed, source
-                    )
+                write_generation_progress(
+                    page["page_id"], page["monster_name"], candidate_no,
+                    "inking", message="One draw. Print ink only. No reviewer redraw.",
+                )
+                best = source
+                visual_verdict = {
+                    "pass": False,
+                    "score": 0,
+                    "defects": ["single traced draw; human review decides"],
+                    "preserve": [],
+                    "stage": "human",
+                }
+                pass_history = [{
+                    "pass": 0,
+                    "image": str(source),
+                    "review": visual_verdict,
+                }]
                 destination = OUTPUT_DIR / f"{page['page_id']}-C{candidate_no:02d}.png"
                 destination.write_bytes(best.read_bytes())
                 record.update({
