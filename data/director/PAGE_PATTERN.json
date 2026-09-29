@@ -3,6 +3,7 @@
   "accuracy": "fantasy-accurate enough",
   "theme": "caves and dungeons fantasy",
   "house_look": "Match locked I-01 and I-02. Bold even outlines, full cave or dungeon room, large colorable shapes, no words, no black blobs, no blank holes, no frames.",
+  "humanoid_rule": "If the creature is a humanoid it has one head, one torso, two arms, two hands, two legs, two feet. No extra limbs.",
   "must_have_every_page": [
     "one correct monster family",
     "one clear action",
