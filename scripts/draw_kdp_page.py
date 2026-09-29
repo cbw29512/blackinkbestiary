@@ -25,7 +25,7 @@ INK_CUTOFF = 90
 
 HUMANOIDS = {
     "I-01", "I-02", "I-03", "I-04", "I-05", "I-06", "I-07", "I-08", "I-09",
-    "I-10", "I-11", "I-12", "I-29", "I-32", "I-33", "I-34", "I-46", "I-50",
+    "I-10", "I-11", "I-12",
 }
 
 EDIT_PROMPTS = {
@@ -33,9 +33,6 @@ EDIT_PROMPTS = {
         "Keep this coloring book page. Keep the cave, doors, stairs, floor, and this same cute giant bat. "
         "Remove the pole attached to the bat. The bat is flying through the cave with wings open. "
         "No hook, no rope, no ceiling pole. Bold black outlines on white."
-    ),
-    "I-25": (
-        "Keep this hanging cloaker and this room. Leave one tail. Remove the extra hanging leg."
     ),
 }
 
