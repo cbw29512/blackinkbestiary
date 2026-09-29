@@ -798,3 +798,33 @@ def format_generation_self_check(identity_focus_mode: bool = False) -> str:
         "QUALITY: broad white coloring regions, simple line density, no grayscale/color contamination, and blank print-safe margins. "
         "The downstream reviewer will enforce the complete resolved checklist."
     )
+
+
+def build_local_draw_prompt(page: dict) -> str:
+    """Short model brief. The long contract stays for review. The GPU gets this."""
+    page = resolve_page_spec(page, ROOT)
+    spec = load_monster_spec(page) or {}
+    visual = spec.get("visual_identity") or {}
+    variant = page.get("environment_variant") or {}
+    physicality = page.get("physicality") or {}
+    includes = [str(item).strip() for item in (page.get("must_include") or []) if str(item).strip()]
+    lines = [
+        "Black-and-white fantasy coloring book page, portrait, pure black ink outlines on white.",
+        "No gray fill, no shading, no color, no text, no border.",
+        "The room is complete and reaches all four edges, including a drawn ceiling. Large closed shapes to color. Not tiny bricks. Not individual hair strands.",
+        f"SUBJECT: {page.get('monster_name', '')}.",
+        f"Story: {page.get('moment', '')}. Habitat: {page.get('habitat', '')}.",
+        "Must show: " + ", ".join(includes) + ".",
+        f"Landmark: {variant.get('landmark', '')}.",
+        f"Framing: {variant.get('framing', '')}.",
+        f"Interaction: {variant.get('interaction', '')}.",
+        f"Support: {physicality.get('support', '')}.",
+        f"Motion: {physicality.get('motion', '')}.",
+        f"Shape: {visual.get('shape_lock', '')}",
+        f"Limbs: {visual.get('limb_structure', '')}",
+        "PAGE RECIPE LOCK — NON-NEGOTIABLE: draw only the subject, action, and room stated above.",
+        "ANATOMICAL INTEGRITY LOCK — NON-NEGOTIABLE: no extra heads, limbs, wings, or tails.",
+        "MODEL ENVIRONMENT PRIORITY CAPSULE: ceiling, walls, and floor are large stone shapes with open white centers.",
+    ]
+    return "\n".join(line for line in lines if line.strip())
+

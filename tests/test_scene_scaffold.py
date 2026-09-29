@@ -104,13 +104,11 @@ class SceneScaffoldTests(unittest.TestCase):
         self.assertEqual(result, expected)
         normal.assert_called_once()
 
-    def test_generator_routes_fresh_scaffolded_pages_through_image_guidance(self):
+    def test_generator_draws_from_the_short_local_prompt(self):
         source = (ROOT / "scripts" / "generate_test_gallery.py").read_text(encoding="utf-8")
         self.assertIn("def prepare_from_authority(", source)
-        self.assertIn("render_scene_scaffold(", source)
-        self.assertIn("single traced draw", source)
+        self.assertIn("build_local_draw_prompt", source)
         self.assertGreaterEqual(source.count("prepare_from_authority("), 3)
-        self.assertIn("blackink-scaffolds", source)
 
 
 if __name__ == "__main__":

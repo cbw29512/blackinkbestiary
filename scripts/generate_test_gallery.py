@@ -25,7 +25,7 @@ from generation_lint import assert_generation_ready
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
 from manifest_validation import validate_manifest
 from page_contract import resolve_page_spec
-from prompt_builder import build_prompt
+from prompt_builder import build_local_draw_prompt, build_prompt
 from qa import inspect_candidate
 from review_authority import decision_is_authoritative
 from scene_scaffold import render_scene_scaffold, scaffold_enabled, scaffold_prompt_prefix
@@ -277,42 +277,8 @@ def prepare_from_authority(
     candidate_no: int,
     review_feedback: dict | None = None,
 ) -> Path:
-    """Use deterministic structural guidance when a page declares hard geometry."""
-    if not scaffold_enabled(page):
-        return prepare(cli, config, page, seed, candidate_no, review_feedback)
-
-    unet = model_filename(config, "diffusion_models")
-    clip = model_filename(config, "text_encoders")
-    vae = model_filename(config, "vae")
-    scaffold_path = WORKFLOW_DIR / f"scaffold_{page['page_id'].lower()}_c{candidate_no:02d}.png"
-    render_scene_scaffold(page, scaffold_path, width=1152, height=1536)
-    uploaded = client.upload_image(scaffold_path, subfolder="blackink-scaffolds")
-
-    prompt = build_prompt(page, review_feedback, candidate_no=candidate_no)
-    prefix = scaffold_prompt_prefix(page)
-    if prefix:
-        prompt = prefix + "\n\n" + prompt
-    assert_generation_ready(page, prompt, ROOT)
-
-    path = WORKFLOW_DIR / f"test_{page['page_id'].lower()}_c{candidate_no:02d}_scaffold.json"
-    prepare_distilled_image_edit(
-        cli,
-        config["templates"]["modify"] if "modify" in config["templates"] else config["templates"]["image_edit"],
-        path,
-        prompt=prompt,
-        seed=seed,
-        input_image=uploaded["load_image_name"],
-        model_filename=unet,
-        clip_filename=clip,
-        vae_filename=vae,
-    )
-    checked = envelope_data(cli.validate_workflow(path)) or {}
-    if not checked.get("valid"):
-        raise RuntimeError(
-            "Prepared structural-scaffold workflow failed validation: "
-            + json.dumps(checked)
-        )
-    return path
+    """Draw the page from the short coloring brief. Do not trace a scaffold."""
+    return prepare(cli, config, page, seed, candidate_no, review_feedback)
 
 
 def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: dict | None = None) -> Path:
@@ -320,7 +286,7 @@ def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: di
     clip = model_filename(config, "text_encoders")
     vae = model_filename(config, "vae")
     path = WORKFLOW_DIR / f"test_{page['page_id'].lower()}_c{candidate_no:02d}.json"
-    prompt = build_prompt(page, review_feedback, candidate_no=candidate_no)
+    prompt = build_local_draw_prompt(page)
     assert_generation_ready(page, prompt, ROOT)
     meta = prepare_distilled_text_to_image(
         cli,
