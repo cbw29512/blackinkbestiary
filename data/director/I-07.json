@@ -1,0 +1,11 @@
+{
+  "page_id": "I-07",
+  "subject": "Hobgoblin Captain",
+  "picture": "A medium athletic hobgoblin captain stands in a cave war room and pins a dagger into a tunnel map on a wooden table. He has small pointed ears, a broad flat nose, no tusks, and a commanding upright posture. The map is drawn as tunnel lines only, with no words and no letters. The cave has a stone ceiling, rock walls, a rack of weapons, and two tunnel openings that are closed by wooden doors so there is no blank white hole. The drawing reaches all four edges.",
+  "line_rules": {
+    "ink": "pure black outlines on white",
+    "shapes": "large closed regions a person can color",
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "blank white opening", "solid black hole"]
+  },
+  "must_not_be": ["an orc", "a small goblin", "a bugbear"]
+}
