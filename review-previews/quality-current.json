@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "quality_contract_version": "black-ink-quality-scorecard-v11",
-  "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
-  "measured_at": "2026-09-28T23:58:15.963272+00:00",
-  "engine_commit": "92989f6b535a590c0db5f0475db1ae73af8508ed",
+  "quality_contract_fingerprint": "5d59d44097a574335efdac451564fdaef7163524f853ce6da8474b109fae55bc",
+  "measured_at": "2026-09-29T00:07:39.898976+00:00",
+  "engine_commit": "e9b3d424d735fdb84a6abd6b12a3a6802eb7e5f0",
   "active_book_id": "TOME-I",
   "metrics": {
     "foundation_readiness": 80.0,
@@ -42,8 +42,8 @@
         "visual_cleanliness_pass": false,
         "semantic_accuracy_pass": false,
         "all_automated_gates_pass": false,
-        "visual_stage": "action",
-        "visual_score": 45,
+        "visual_stage": "human",
+        "visual_score": 0,
         "local_visual_advisory_pass": false,
         "assistant_decision": null,
         "exact_image_reviewer": null
@@ -164,11 +164,11 @@
   },
   "generation_efficiency": {
     "pages_considered": 9,
-    "gpu_attempts": 41,
-    "refinement_passes": 32,
+    "gpu_attempts": 37,
+    "refinement_passes": 28,
     "pages_at_max_refinements": 0,
     "pages_semantic_stalled": 0,
-    "avg_gpu_attempts_per_page": 4.56,
+    "avg_gpu_attempts_per_page": 4.11,
     "gpu_attempts_per_semantic_pass": null,
     "semantic_yield_percent": 0.0,
     "all_gate_yield_percent": 0.0
@@ -998,7 +998,7 @@
     {
       "defect_code": "IDENTITY_HEROIC_BULK",
       "label": "Heroic/bodybuilder bulk drift",
-      "evidence_count": 40,
+      "evidence_count": 37,
       "distinct_pages": 9,
       "distinct_families": 5,
       "scope": [
@@ -1568,5 +1568,5 @@
     "ENVIRONMENT_GENERIC",
     "ACTION_UNCLEAR"
   ],
-  "measurement_fingerprint": "6e74cd94cc9a37151b5a894830ad9937004ea2f81ab0c966d951ce1d84d2af44"
+  "measurement_fingerprint": "95c7cc34e483c9d06eaceb04afb17b2b30edfd36e3905bdcabb154887e4db530"
 }

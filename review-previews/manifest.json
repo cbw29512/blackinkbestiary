@@ -1,7 +1,7 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "92989f6b535a590c0db5f0475db1ae73af8508ed",
-  "quality_contract_fingerprint": "2f8d64356c79f95e6c2a2f695a3edbb33bf30f3e0d61a90cb42837350e8c0bc2",
+  "snapshot_engine_commit": "e9b3d424d735fdb84a6abd6b12a3a6802eb7e5f0",
+  "quality_contract_fingerprint": "5d59d44097a574335efdac451564fdaef7163524f853ce6da8474b109fae55bc",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "candidate_count": 9,
   "diagnostic_count": 78,
@@ -51,7 +51,7 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-28T23:55:45.7765717Z"
+    "updated_at": "2026-09-29T00:07:03.3513900Z"
   },
   "autopilot": {
     "schema_version": 1,
@@ -66,8 +66,8 @@
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-28T23:55:20.501011+00:00",
-    "updated_at": "2026-09-28T23:55:45.133666+00:00",
+    "started_at": "2026-09-29T00:06:36.594997+00:00",
+    "updated_at": "2026-09-29T00:07:00.660087+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -203,7 +203,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 440 tests in 20.765s",
+          "Ran 441 tests in 20.197s",
           "",
           "OK"
         ]
@@ -456,39 +456,35 @@
   "selections": {},
   "candidates": [
     {
-      "review_id": "I-01-C01-Hbed45b69e6f0c9e0",
+      "review_id": "I-01-C01-H1e2cc76247f1dd54",
       "page_id": "I-01",
       "monster_name": "Kobold Warrior",
       "candidate": 1,
       "selected": false,
-      "seed": 4502972645639484372,
-      "engine_commit": "92989f6b535a590c0db5f0475db1ae73af8508ed",
-      "generation_fingerprint": "97fceb7e3a9df0b6efb9bcc7f353be55fd5265edf97786f71e21903f5e72265a",
-      "review_fingerprint": "2218b3447805282ecf50964d1ac98f1a604cb17260a3c892d4e9a69fffa8d2d5",
+      "seed": 458871134334967305,
+      "engine_commit": "e9b3d424d735fdb84a6abd6b12a3a6802eb7e5f0",
+      "generation_fingerprint": "9ecac29892a190968d2bcb2f082d6740b0e24e03ae7f607d9fcd39ab65b8e729",
+      "review_fingerprint": "3df64c4de50f1385858d403819f67a048a4b5e01dd2193ce4885ba3fb75e094d",
       "generation_authority_current": true,
       "review_authority_current": true,
       "review_checked_at": null,
       "preview": "review-previews/I-01-C01.jpg",
       "source_image": "test-gallery/I-01-C01.png",
-      "source_sha256": "bed45b69e6f0c9e024d79f126b54ef491e1ec1a8e632f3788e86f52ff604dd28",
+      "source_sha256": "1e2cc76247f1dd54cfc79bd3e471e57bd9b13d80fa83e2158fde0b049d927529",
       "visual_review": {
         "pass": false,
-        "score": 45,
+        "score": 0,
         "defects": [
-          "no visible cackling or vocalization"
+          "single traced draw; human review decides"
         ],
-        "preserve": [
-          "monster gripping tripwire",
-          "monster standing beside trap",
-          "monster leaning toward tripwire"
-        ],
-        "stage": "action"
+        "preserve": [],
+        "stage": "human"
       },
       "advisory_review_status": "needs_work",
       "advisory_review_error": null,
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-28T23:58:07.797744+00:00"
+      "finished_at": "2026-09-29T00:07:32.230521+00:00"
     },
     {
       "review_id": "I-04-C01-H6173b71c67393976",
