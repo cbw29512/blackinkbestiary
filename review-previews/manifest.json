@@ -1,10 +1,10 @@
 {
   "schema_version": 6,
-  "snapshot_engine_commit": "a18cef9350c07f26034020fe007c95864405b978",
+  "snapshot_engine_commit": "66d18f2d25045dad5556bcc362248a10b13aa34b",
   "quality_contract_fingerprint": "8e191f70b53a4e7564b0c66df309a527c82d9edaa499d3fd8af3436902ef72b9",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
-  "candidate_count": 9,
-  "diagnostic_count": 78,
+  "candidate_count": 8,
+  "diagnostic_count": 79,
   "quality_snapshot": "review-previews/quality-current.json",
   "reviewer_disagreement_snapshot": "review-previews/reviewer-disagreement.json",
   "reviewer_disagreement": {
@@ -51,7 +51,7 @@
     "stage": "complete",
     "message": "Local artist ready; local vision reviewer is advisory.",
     "detail": "authority=advisory",
-    "updated_at": "2026-09-29T00:43:10.4538175Z"
+    "updated_at": "2026-09-29T00:48:58.8585194Z"
   },
   "autopilot": {
     "schema_version": 1,
@@ -66,8 +66,8 @@
     "schema_version": 2,
     "status": "passed",
     "stage": "complete",
-    "started_at": "2026-09-29T00:42:10.820041+00:00",
-    "updated_at": "2026-09-29T00:42:36.084788+00:00",
+    "started_at": "2026-09-29T00:48:30.731355+00:00",
+    "updated_at": "2026-09-29T00:48:55.500927+00:00",
     "python": "C:\\Users\\divcl\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
     "checks": [
       {
@@ -203,7 +203,7 @@
           "test_submit_one_reloads_instructions_before_page_context (test_worker_instruction_reload.WorkerInstructionReloadTests.test_submit_one_reloads_instructions_before_page_context) ... ok",
           "",
           "----------------------------------------------------------------------",
-          "Ran 441 tests in 21.396s",
+          "Ran 442 tests in 20.731s",
           "",
           "OK"
         ]
@@ -615,37 +615,6 @@
       "assistant_review": null,
       "status": "awaiting_exact_image_review",
       "finished_at": "2026-09-28T09:56:32.939934+00:00"
-    },
-    {
-      "review_id": "I-16-C01-H626e0d69e20e4de2",
-      "page_id": "I-16",
-      "monster_name": "Giant Bat",
-      "candidate": 1,
-      "selected": false,
-      "seed": 3416968975738458145,
-      "engine_commit": "a18cef9350c07f26034020fe007c95864405b978",
-      "generation_fingerprint": "1cdf76ef190237ac07f46ae6c31c4dcd32dcc24b2d131b3f6ed24253448abd69",
-      "review_fingerprint": "a3289f67a938f03cd467f0214874eef7a0705d3c7c99e78067cf934d580da856",
-      "generation_authority_current": true,
-      "review_authority_current": true,
-      "review_checked_at": null,
-      "preview": "review-previews/I-16-C01.jpg",
-      "source_image": "test-gallery/I-16-C01.png",
-      "source_sha256": "626e0d69e20e4de2f16e533502100bb045b9e3c43c3ad1622415c13f094c20e7",
-      "visual_review": {
-        "pass": false,
-        "score": 0,
-        "defects": [
-          "single traced draw; human review decides"
-        ],
-        "preserve": [],
-        "stage": "human"
-      },
-      "advisory_review_status": "needs_work",
-      "advisory_review_error": null,
-      "assistant_review": null,
-      "status": "awaiting_exact_image_review",
-      "finished_at": "2026-09-29T00:44:38.708071+00:00"
     },
     {
       "review_id": "I-19-C01-H644ad81b1b811488",
@@ -2935,6 +2904,21 @@
         "decision": "reject",
         "notes": "Reject: spider anatomy is close, but the page does not clearly read as a web-filled dungeon hall; keep exactly eight legs while making the stone hall/arch unmistakable and the spider visibly supported at the web center."
       }
+    },
+    {
+      "page_id": "I-16",
+      "monster_name": "Giant Bat",
+      "candidate": 1,
+      "status": "failed",
+      "engine_commit": "66d18f2d25045dad5556bcc362248a10b13aa34b",
+      "generation_fingerprint": "d91123b45b2145db8c33ac4669d6315e92fbdac19ebcf5954d039a382b76f669",
+      "review_fingerprint": "33a379ba07825f7f35f1c5a55d405c233e62da3264d735c66fe091bf51a96f15",
+      "review_checked_at": null,
+      "error": "Expected exactly one CLIPTextEncode node, found 2",
+      "started_at": "2026-09-29T00:49:00.856432+00:00",
+      "finished_at": "2026-09-29T00:49:01.646536+00:00",
+      "visual_review": null,
+      "assistant_review": null
     }
   ]
 }

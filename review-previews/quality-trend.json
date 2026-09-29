@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "active_book_id": "TOME-I",
-  "engine_commit": "a18cef9350c07f26034020fe007c95864405b978",
+  "engine_commit": "66d18f2d25045dad5556bcc362248a10b13aa34b",
   "quality_contract_version": "black-ink-quality-scorecard-v11",
   "quality_contract_fingerprint": "8e191f70b53a4e7564b0c66df309a527c82d9edaa499d3fd8af3436902ef72b9",
   "comparable_to_previous": true,
   "comparison_reason": null,
   "history_appended": true,
-  "history_entries": 79,
+  "history_entries": 80,
   "current_metrics": {
     "foundation_readiness": 80.0,
-    "technical_qa_pass_rate": 100.0,
-    "review_pipeline_health": 100.0,
+    "technical_qa_pass_rate": 88.9,
+    "review_pipeline_health": 88.9,
     "visual_cleanliness": 0.0,
     "semantic_accuracy": 0.0,
     "completeness": 100.0,
@@ -41,18 +41,18 @@
     },
     "technical_qa_pass_rate": {
       "previous": 100.0,
-      "current": 100.0,
-      "delta": 0.0,
-      "signed_delta": "+0.0",
-      "trend": "flat",
+      "current": 88.9,
+      "delta": -11.1,
+      "signed_delta": "-11.1",
+      "trend": "regressing",
       "higher_is_better": true
     },
     "review_pipeline_health": {
       "previous": 100.0,
-      "current": 100.0,
-      "delta": 0.0,
-      "signed_delta": "+0.0",
-      "trend": "flat",
+      "current": 88.9,
+      "delta": -11.1,
+      "signed_delta": "-11.1",
+      "trend": "regressing",
       "higher_is_better": true
     },
     "visual_cleanliness": {
