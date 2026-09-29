@@ -1,11 +1,5 @@
 {
   "page_id": "I-10",
   "subject": "Ogre",
-  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A huge clumsy ogre is stuck on a too-small spiral dungeon stair. Thick belly, small-looking head, big hands, simple hide clothes, one large club held against the steps. He is wedged between the inner pillar and the outer wall. Spiral stone steps as large shapes, stone ceiling, inner column, closed door at the bottom landing. Bold even line weight matching the other pages. No black fills, no blank holes, no page frame, no insult gestures.",
-  "line_rules": {
-    "ink": "bold even outlines only on white",
-    "shapes": "large closed colorable regions",
-    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank hole", "solid black hole", "middle finger", "strand hair"]
-  },
-  "must_not_be": ["a troll", "a giant human", "an oni", "a bugbear"]
+  "picture": "A huge clumsy ogre is jammed on a spiral dungeon stair that is too small for him. His shoulders press the center stone pillar and the outer wall at the same time. Knees bent, belly squeezed between the rail and the pillar, one giant foot hanging off a tiny step, the other foot planted. He holds a simple club. One head, one torso, two arms, two hands, two legs, two feet. Thick belly, small-looking head, hide wrap. Stone spiral steps as large shapes, center pillar, stone ceiling, closed wooden door at the bottom landing. Bold even black outlines on white, same look as locked I-01 and I-02."
 }
