@@ -19,7 +19,7 @@ from flux2_klein_profile import envelope_data, prepare_distilled_text_to_image
 from image_edit_profile import prepare_distilled_image_edit
 from edit_prompt import build_edit_prompt
 from vision_reviewer import VisionReviewError, review_image, review_notes
-from generation_runtime import model_filename, read_json
+from generation_runtime import model_filename, production_sampler, read_json
 from generation_progress import write_generation_progress
 from generation_lint import assert_generation_ready
 from generation_fingerprint import page_generation_fingerprint, page_review_fingerprint
@@ -316,7 +316,7 @@ def prepare_from_authority(
 
 
 def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: dict | None = None) -> Path:
-    unet = model_filename(config, "diffusion_models")
+    unet, steps, guidance = production_sampler(config)
     clip = model_filename(config, "text_encoders")
     vae = model_filename(config, "vae")
     path = WORKFLOW_DIR / f"test_{page['page_id'].lower()}_c{candidate_no:02d}.json"
@@ -333,6 +333,8 @@ def prepare(cli, config, page, seed: int, candidate_no: int, review_feedback: di
         vae_filename=vae,
         width=1152,
         height=1536,
+        steps=steps,
+        guidance=guidance,
     )
     verdict = envelope_data(cli.validate_workflow(path)) or {}
     if not verdict.get("valid"):

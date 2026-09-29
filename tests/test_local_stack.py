@@ -14,14 +14,15 @@ class LocalStackConfigTests(unittest.TestCase):
         self.assertEqual(self.config["comfy_cli_version"], "1.20.0")
         self.assertEqual(self.config["comfyui_version"], "0.36.0")
         self.assertEqual(self.config["workspace"], ".blackink-comfy")
-        self.assertEqual(self.config["model"]["variant"], "4B distilled FP8")
+        self.assertEqual(self.config["model"]["variant"], "4B base FP8 production, distilled FP8 for edits")
 
     def test_exactly_three_core_model_files(self):
         models = self.config["models"]
-        self.assertEqual(len(models), 3)
+        self.assertEqual(len(models), 4)
         names = {item["filename"] for item in models}
         self.assertEqual(names, {
             "flux-2-klein-4b-fp8.safetensors",
+            "flux-2-klein-base-4b-fp8.safetensors",
             "qwen_3_4b.safetensors",
             "flux2-vae.safetensors",
         })
