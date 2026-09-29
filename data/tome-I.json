@@ -841,7 +841,10 @@
         "text inside the artwork",
         "generic or empty background",
         "environment disconnected from the story moment",
-        "clutter that obscures monster, habitat, or story beat"
+        "clutter that obscures monster, habitat, or story beat",
+        "cute mascot face",
+        "thin pencil sketch",
+        "hanging by human-like hands from a bar"
       ],
       "coloring_rules": {
         "outer_contour": "bold",
