@@ -8,7 +8,7 @@ sys.path.insert(0, str(ROOT / "art_pipeline"))
 
 from generation_lint import edit_prompt_lint_errors, generation_lint_errors
 from page_contract import resolve_page_spec
-from prompt_builder import build_prompt
+from prompt_builder import build_local_draw_prompt, build_prompt
 from edit_prompt import build_edit_prompt
 
 
@@ -180,6 +180,14 @@ class GenerationLintTests(unittest.TestCase):
         prompt = build_prompt(page, candidate_no=1)
         errors = generation_lint_errors(page, prompt, ROOT)
         self.assertTrue(any("exact requirement conflict" in item for item in errors))
+
+    def test_local_draw_prompt_is_short_and_names_the_ceiling(self):
+        page = next(item for item in self.pages if item["page_id"] == "I-04")
+        prompt = build_local_draw_prompt(page)
+        self.assertLess(len(prompt), 4000)
+        self.assertIn("SUBJECT: Goblin Warrior.", prompt)
+        self.assertIn("ceiling", prompt.lower())
+        self.assertEqual(generation_lint_errors(page, prompt, ROOT), [])
 
 
 if __name__ == "__main__":
