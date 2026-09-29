@@ -1,11 +1,11 @@
 {
   "page_id": "I-04",
   "subject": "Goblin Warrior",
-  "picture": "A small goblin warrior in a narrow stone dungeon corridor kicks a hanging lantern off its wall bracket. One foot stays planted on the floor. The other foot hits the lantern. He holds a crude sword and a small round shield. He has big pointed ears and a long nose. The corridor includes a stone ceiling, large block walls, large floor slabs, one wooden crate, and one fallen stone. The drawing reaches all four edges.",
+  "picture": "A small goblin warrior in a narrow stone dungeon corridor. One foot is planted on the floor. The other foot strikes the body of a hanging lantern and knocks that lantern off its wall hook, so the lantern is tipping in the air. He holds a crude sword in one hand and a small round shield in the other hand. He has big pointed ears and a long nose. The corridor has a stone ceiling, large block walls, large floor slabs, one wooden crate, and one fallen stone. The drawing reaches all four edges.",
   "line_rules": {
     "ink": "pure black outlines on white",
     "shapes": "large closed regions a person can color",
-    "forbidden": ["gray fill", "shading", "color", "text", "border", "tiny bricks", "individual hair strands", "a small sketch floating in a blank page"]
+    "forbidden": ["gray fill", "shading", "color", "text", "border", "tiny bricks", "individual hair strands", "a small sketch floating in a blank page", "a star plaque", "a second round object on the wall"]
   },
   "must_not_be": ["a bugbear", "a troll", "a human knight"]
 }
