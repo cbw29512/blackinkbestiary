@@ -44,7 +44,14 @@ STANDARD_RULES = {
         "dense wood grain",
         "tiny floor tiles",
         "strand hair",
+        "extra arm",
+        "extra leg",
     ],
+}
+
+HUMANOIDS = {
+    "I-01", "I-02", "I-03", "I-04", "I-05", "I-06", "I-07", "I-08", "I-09",
+    "I-10", "I-11", "I-12", "I-29", "I-32", "I-33", "I-34", "I-46", "I-50",
 }
 
 
@@ -66,18 +73,23 @@ def brief(page: dict) -> str:
     rules = page.get("line_rules") or STANDARD_RULES
     forbidden = ", ".join(rules.get("forbidden") or STANDARD_RULES["forbidden"])
     avoid = ", ".join(page.get("must_not_be") or [])
-    return "\n".join(
-        [
-            "All-ages fantasy dungeon coloring book page, portrait.",
-            "These sentences are instructions only. Do not write any words, titles, names, letters, or numbers in the picture.",
-            page.get("picture") or "",
-            f"Ink: {rules.get('ink', STANDARD_RULES['ink'])}.",
-            f"Shapes: {rules.get('shapes', STANDARD_RULES['shapes'])}.",
-            f"Do not include: {forbidden}.",
-            f"The creature must not be: {avoid}.",
-            "The drawing fills the sheet. Closed openings only. Outlines only. Every white region must be colorable. No solid black blobs. No caption.",
-        ]
-    )
+    page_id = str(page.get("page_id") or "")
+    lines = [
+        "All-ages fantasy dungeon coloring book page, portrait.",
+        "These sentences are instructions only. Do not write any words, titles, names, letters, or numbers in the picture.",
+        page.get("picture") or "",
+        f"Ink: {rules.get('ink', STANDARD_RULES['ink'])}.",
+        f"Shapes: {rules.get('shapes', STANDARD_RULES['shapes'])}.",
+        f"Do not include: {forbidden}.",
+        f"The creature must not be: {avoid}.",
+        "The drawing fills the sheet. Closed openings only. Outlines only. Every white region must be colorable. No solid black blobs. No caption.",
+    ]
+    if page_id in HUMANOIDS:
+        lines.insert(
+            2,
+            "Humanoid anatomy is strict: one head, one torso, two arms, two hands, two legs, two feet. No extra limbs.",
+        )
+    return "\n".join(lines)
 
 
 def post_json(url: str, payload: dict, key: str) -> dict:
@@ -136,6 +148,7 @@ def main() -> int:
         print("Set BFL_API_KEY first. No page was requested.", file=sys.stderr)
         return 2
     page = load_page(page_id)
+    page["page_id"] = page.get("page_id") or page_id
     prompt = brief(page)
     print(f"Requesting {page_id} at {WIDTH}x{HEIGHT}.")
     job = post_json(API, {"prompt": prompt, "width": WIDTH, "height": HEIGHT}, key)
