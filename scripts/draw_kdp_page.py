@@ -34,6 +34,7 @@ def brief(page: dict) -> str:
             f"Shapes: {rules.get('shapes', 'large closed regions')}.",
             f"Do not include: {forbidden}.",
             f"The creature must not be: {avoid}.",
+            "The drawing fills the sheet. No blank white opening and no solid black hole. Every area is a closed shape to color.",
         ]
     )
 
