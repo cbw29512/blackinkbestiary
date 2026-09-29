@@ -6,6 +6,7 @@ so the model draws our brief instead of rewriting it.
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import sys
@@ -66,6 +67,10 @@ def brief(page: dict) -> str:
     return json.dumps(payload, indent=2)
 
 
+def encode_image(path: Path) -> str:
+    return base64.b64encode(path.read_bytes()).decode("ascii")
+
+
 def post_json(url: str, payload: dict, key: str) -> dict:
     data = json.dumps(payload).encode("utf-8")
     request = urllib.request.Request(
@@ -74,7 +79,7 @@ def post_json(url: str, payload: dict, key: str) -> dict:
         headers={"x-key": key, "Content-Type": "application/json", "accept": "application/json"},
         method="POST",
     )
-    with urllib.request.urlopen(request, timeout=60) as response:
+    with urllib.request.urlopen(request, timeout=120) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
@@ -102,38 +107,7 @@ def to_print_png(source: Path, dest: Path) -> None:
     page.save(dest, format="PNG", dpi=(300, 300))
 
 
-def main() -> int:
-    page_id = sys.argv[1] if len(sys.argv) > 1 else "I-04"
-    if page_id.upper() == "COVER":
-        print("Cover is a separate color wrap.", file=sys.stderr)
-        return 2
-    args = sys.argv[1:]
-    if args and args[0] == "--convert":
-        raw = Path(args[1])
-        dest = Path(args[2]) if len(args) > 2 else raw.with_suffix(".png")
-        to_print_png(raw, dest)
-        print(f"Saved {dest}")
-        return 0
-    key = os.environ.get("BFL_API_KEY", "").strip()
-    if not key:
-        print("Set BFL_API_KEY first. No page was requested.", file=sys.stderr)
-        return 2
-    page = load_page(page_id)
-    page["page_id"] = page.get("page_id") or page_id
-    prompt = brief(page)
-    print(f"Requesting {page_id} at {WIDTH}x{HEIGHT}.")
-    job = post_json(
-        API,
-        {
-            "prompt": prompt,
-            "width": WIDTH,
-            "height": HEIGHT,
-            "disable_pup": True,
-            "safety_tolerance": 4,
-            "output_format": "png",
-        },
-        key,
-    )
+def poll_and_save(job: dict, key: str, page_id: str) -> int:
     polling = job.get("polling_url")
     if not polling:
         print(json.dumps(job), file=sys.stderr)
@@ -168,6 +142,69 @@ def main() -> int:
     except ImportError:
         print("Pillow is not installed. The raw image was saved. The 300 DPI page was not.")
     return 0
+
+
+def main() -> int:
+    args = sys.argv[1:]
+    if args and args[0] == "--convert":
+        raw = Path(args[1])
+        dest = Path(args[2]) if len(args) > 2 else raw.with_suffix(".png")
+        to_print_png(raw, dest)
+        print(f"Saved {dest}")
+        return 0
+    key = os.environ.get("BFL_API_KEY", "").strip()
+    if not key:
+        print("Set BFL_API_KEY first. No page was requested.", file=sys.stderr)
+        return 2
+    if args and args[0] == "--edit":
+        page_id = args[1] if len(args) > 1 else "I-10"
+        source = ROOT / "web" / "kdp-pages" / f"{page_id}-raw.jpg"
+        if not source.exists():
+            source = ROOT / "web" / "kdp-pages" / f"{page_id}.png"
+        if not source.exists():
+            print(f"No local image for {page_id} to edit.", file=sys.stderr)
+            return 2
+        prompt = (
+            "Keep this coloring book page. Keep the ogre, the pointing hand, "
+            "the stick in his other hand, the spiral stairs, the door, walls, and ceiling. "
+            "Remove only the floating club and loose hand on the upper-left stairs. "
+            "Continue the stone steps and the wooden rail through that space. "
+            "Bold black outlines on white. Same picture otherwise."
+        )
+        print(f"Editing {page_id} from {source}.")
+        job = post_json(
+            API,
+            {
+                "prompt": prompt,
+                "input_image": encode_image(source),
+                "disable_pup": True,
+                "safety_tolerance": 4,
+                "output_format": "png",
+            },
+            key,
+        )
+        return poll_and_save(job, key, page_id)
+    page_id = args[0] if args else "I-04"
+    if page_id.upper() == "COVER":
+        print("Cover is a separate color wrap.", file=sys.stderr)
+        return 2
+    page = load_page(page_id)
+    page["page_id"] = page.get("page_id") or page_id
+    prompt = brief(page)
+    print(f"Requesting {page_id} at {WIDTH}x{HEIGHT}.")
+    job = post_json(
+        API,
+        {
+            "prompt": prompt,
+            "width": WIDTH,
+            "height": HEIGHT,
+            "disable_pup": True,
+            "safety_tolerance": 4,
+            "output_format": "png",
+        },
+        key,
+    )
+    return poll_and_save(job, key, page_id)
 
 
 if __name__ == "__main__":
