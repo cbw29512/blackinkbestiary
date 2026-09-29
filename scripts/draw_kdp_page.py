@@ -15,7 +15,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.bfl.ai/v1/flux-2-pro"
-# Largest 8.5x11 portrait under the 4 MP Flux cap. Multiples of 16.
 WIDTH = 1760
 HEIGHT = 2272
 PRINT_WIDTH = 2550
@@ -56,6 +55,7 @@ def brief(page: dict) -> str:
         "lighting": "Flat even light, outlines only",
         "color_palette": ["#000000", "#FFFFFF"],
         "composition": "Full page, no caption, no title banner",
+        "scale": "Weapons, doors, stairs, and furniture match the creature. An ogre club is nearly as long as his torso. A kobold spear is light. Stairs that trap an ogre are narrower than his shoulders.",
         "mood": "playful dungeon adventure",
     }
     if page_id in HUMANOIDS:
