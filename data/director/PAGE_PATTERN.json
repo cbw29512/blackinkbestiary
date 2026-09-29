@@ -1,0 +1,21 @@
+{
+  "audience": "all-ages gift",
+  "accuracy": "fantasy-accurate enough",
+  "theme": "caves and dungeons fantasy",
+  "must_have_every_page": [
+    "one correct monster family",
+    "one clear action",
+    "full dungeon or cave room",
+    "stone ceiling",
+    "walls",
+    "floor",
+    "closed openings, no white hole",
+    "pure black outlines on white",
+    "large closed coloring shapes",
+    "no gray",
+    "no text",
+    "no letters"
+  ],
+  "texture_rule": "less texture than I-07-raw. Big slabs, big armor plates, simple wood boards. No dense grain, no tiny floor tiles, no strand hair.",
+  "line_rule": "bold clear outlines a child and an adult can both color"
+}
