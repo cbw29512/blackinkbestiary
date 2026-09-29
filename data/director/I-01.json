@@ -1,0 +1,11 @@
+{
+  "page_id": "I-01",
+  "subject": "Kobold Warrior",
+  "picture": "All-ages fantasy coloring book page, portrait. Outline art only. A small scaly kobold warrior in a tight trapped stone corridor cackles as a tripwire snaps at ankle height. Kobold, not a goblin: short snout, cranial ridges or small horns, long tail, scaly hide in large plates, spear and a slatted shield. The tripwire is a single clear line across the hall tied to a wall peg. A covered pit lid or trapdoor is visible in the floor. Stone ceiling, large block walls, large floor slabs, one wall torch as an empty colorable shape with no black flame, closed far door. Bold even line weight matching I-08. No black fills, no blank holes, no page frame, no insult gestures.",
+  "line_rules": {
+    "ink": "bold even outlines only on white",
+    "shapes": "large closed colorable regions",
+    "forbidden": ["gray fill", "shading", "color", "text", "letters", "border", "page frame", "blank hole", "solid black hole", "middle finger", "strand hair", "tiny bricks"]
+  },
+  "must_not_be": ["a goblin", "a dragonborn", "a human", "a kobold without a tail"]
+}
