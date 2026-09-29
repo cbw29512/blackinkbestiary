@@ -2,12 +2,12 @@
   "schema_version": 11,
   "contract_version": "black-ink-quality-scorecard-v11",
   "canary_page_ids": [
+    "I-16",
     "I-01",
     "I-04",
     "I-08",
     "I-10",
     "I-14",
-    "I-16",
     "I-19",
     "I-20",
     "I-22"
