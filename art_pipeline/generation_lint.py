@@ -11,6 +11,17 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 
+_DISALLOWED_REPLICATION_PHRASES = (
+    "copy the official",
+    "copy official",
+    "official look:",
+    "match the official",
+    "matches the official",
+    "replicate the official",
+    "imitate the official",
+    "classic fr",
+)
+
 
 def _norm(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
@@ -56,6 +67,13 @@ def generation_lint_errors(page: dict, prompt: str, root: Path = ROOT) -> list[s
     for token in ("<missing>", "TODO", "TBD"):
         if token.lower() in text.lower():
             errors.append(f"{page_id}: unresolved placeholder {token!r} reached generation prompt")
+
+    lowered = text.lower()
+    for phrase in _DISALLOWED_REPLICATION_PHRASES:
+        if phrase in lowered:
+            errors.append(
+                f"{page_id}: replication language reached generation prompt: {phrase!r}"
+            )
 
     subject = str(page.get("monster_name") or "").strip()
     if subject and f"SUBJECT: {subject}." not in text:
@@ -139,6 +157,13 @@ def edit_prompt_lint_errors(page: dict, prompt: str, root: Path = ROOT) -> list[
     for token in ("<missing>", "TODO", "TBD"):
         if token.lower() in text.lower():
             errors.append(f"{page_id}: unresolved placeholder {token!r} reached edit prompt")
+
+    lowered = text.lower()
+    for phrase in _DISALLOWED_REPLICATION_PHRASES:
+        if phrase in lowered:
+            errors.append(
+                f"{page_id}: replication language reached edit prompt: {phrase!r}"
+            )
 
     subject = str(page.get("monster_name") or "").strip()
     if subject and _norm(subject) not in normalized_prompt:
