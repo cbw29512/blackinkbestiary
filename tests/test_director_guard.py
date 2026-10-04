@@ -17,8 +17,22 @@ class DirectorGuardTests(unittest.TestCase):
     def write_manifest(self, root: Path, monster_name: str = "Flying Sword") -> None:
         try:
             data = root / "data"
+            config = root / "config"
             data.mkdir(parents=True, exist_ok=True)
-            (data / "tome-I.json").write_text(
+            config.mkdir(parents=True, exist_ok=True)
+            (config / "studio.json").write_text(
+                json.dumps(
+                    {
+                        "active_book": {
+                            "manifest": "data/book.json",
+                            "state": "data/state.json",
+                            "reviews": "data/reviews.jsonl",
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (data / "book.json").write_text(
                 json.dumps(
                     {
                         "pages": [
