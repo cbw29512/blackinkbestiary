@@ -44,6 +44,8 @@ The launcher repairs or verifies the pinned local AI stack when needed, then sta
 
 Full Tome I generation remains blocked until the nine configured canary pages have current exact-image approval under the current engine/review authority.
 
+Legacy `data/director/` briefs are **not** production authority. The old `scripts/draw_kdp_page.py` external-API utility is disabled unless `BLACKINK_ALLOW_LEGACY_DIRECTOR_API=1` is explicitly set, and even then its page ID/subject must agree with the canonical `data/tome-I.json` manifest. It cannot silently redefine a Tome I page.
+
 ## Product North Star
 
 Black-Ink Bestiary is an eight-book line of approximately 50-page, 2024-SRD-monster coloring books. Books are primarily organized by environment/location while retaining monster-family variety.
