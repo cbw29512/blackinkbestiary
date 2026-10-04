@@ -15,6 +15,10 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "art_pipeline"))
+
+from director_guard import assert_director_request_allowed
+
 API = "https://api.bfl.ai/v1/flux-2-pro"
 WIDTH = 1760
 HEIGHT = 2272
@@ -166,6 +170,12 @@ def main() -> int:
         return 2
     if args and args[0] == "--edit":
         page_id = args[1] if len(args) > 1 else "I-10"
+        page = load_page(page_id)
+        try:
+            assert_director_request_allowed(page, ROOT)
+        except RuntimeError as exc:
+            print(str(exc), file=sys.stderr)
+            return 2
         source = ROOT / "web" / "kdp-pages" / f"{page_id}-raw.jpg"
         if not source.exists():
             source = ROOT / "web" / "kdp-pages" / f"{page_id}.png"
@@ -196,6 +206,11 @@ def main() -> int:
         return 2
     page = load_page(page_id)
     page["page_id"] = page.get("page_id") or page_id
+    try:
+        assert_director_request_allowed(page, ROOT)
+    except RuntimeError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
     prompt = brief(page)
     print(f"Requesting {page_id} at {WIDTH}x{HEIGHT}.")
     job = post_json(
