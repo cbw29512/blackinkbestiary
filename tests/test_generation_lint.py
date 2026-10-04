@@ -181,6 +181,22 @@ class GenerationLintTests(unittest.TestCase):
         errors = generation_lint_errors(page, prompt, ROOT)
         self.assertTrue(any("exact requirement conflict" in item for item in errors))
 
+    def test_generation_prompt_rejects_replication_language(self):
+        page = self.pages[0]
+        prompt = build_prompt(page, candidate_no=1) + "\nOfficial look: copy the official published monster art."
+        errors = generation_lint_errors(page, prompt, ROOT)
+        self.assertTrue(any("replication language" in item for item in errors))
+
+    def test_edit_prompt_rejects_replication_language(self):
+        page = self.pages[0]
+        prompt = build_edit_prompt(
+            page,
+            {"stage": "quality", "text": "preserve the clean silhouette"},
+            candidate_no=1,
+        ) + "\nMatch the official reference exactly."
+        errors = edit_prompt_lint_errors(page, prompt, ROOT)
+        self.assertTrue(any("replication language" in item for item in errors))
+
     def test_local_draw_prompt_is_short_and_names_the_ceiling(self):
         page = next(item for item in self.pages if item["page_id"] == "I-04")
         prompt = build_local_draw_prompt(page)
