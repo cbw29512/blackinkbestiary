@@ -6,6 +6,11 @@ import os
 import re
 from pathlib import Path
 
+try:
+    from .studio_config import load_studio_config, resolve_root_path
+except ImportError:
+    from studio_config import load_studio_config, resolve_root_path
+
 logger = logging.getLogger(__name__)
 
 LEGACY_DIRECTOR_API_ENV = "BLACKINK_ALLOW_LEGACY_DIRECTOR_API"
@@ -36,7 +41,12 @@ def director_request_errors(
                 f"legacy director API is disabled; set {LEGACY_DIRECTOR_API_ENV}=1 only for an intentional external-API draft"
             )
 
-        manifest_path = root / "data" / "tome-I.json"
+        studio = load_studio_config(root)
+        manifest_path = resolve_root_path(
+            root,
+            studio["active_book"]["manifest"],
+            "active book manifest",
+        )
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         canonical = next(
             (item for item in manifest.get("pages") or [] if str(item.get("page_id") or "") == page_id),
