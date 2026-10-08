@@ -11,6 +11,7 @@ from collections import Counter
 from pathlib import Path
 
 from review_publish_git import REVIEW_BRANCH, publish_preview_snapshot
+from review_snapshot_state import latest_candidate_records, reviewable_candidate_records
 
 
 def load_pillow():
@@ -113,17 +114,6 @@ def verdict_rank(verdict: dict) -> tuple:
     )
 
 
-def current_reviewable_keys(state: dict) -> set[tuple[str, int]]:
-    allowed = REVIEWABLE_STATUSES
-    return {
-        (str(item.get("page_id")), int(item.get("candidate") or 0))
-        for item in state.get("results", [])
-        if item.get("page_id")
-        and int(item.get("candidate") or 0) > 0
-        and str(item.get("status") or "") in allowed
-    }
-
-
 def existing_history_source(item: dict) -> Path | None:
     candidates = []
     for step in item.get("pass_history") or []:
@@ -182,17 +172,12 @@ def main() -> int:
     SOURCE_DIR.mkdir(parents=True, exist_ok=True)
     current_authority = current_authority_fingerprints(ROOT)
 
-    metadata = {
-        (str(item.get("page_id")), int(item.get("candidate") or 0)): item
-        for item in state.get("results", [])
-        if item.get("page_id") and int(item.get("candidate") or 0) > 0
-    }
+    metadata = latest_candidate_records(state)
+    # Historical reviewable records must not resurrect rejected/failed PNGs.
+    reviewable_metadata = reviewable_candidate_records(metadata, REVIEWABLE_STATUSES)
 
     restored = 0
-    reviewable = [
-        item for item in state.get("results", [])
-        if str(item.get("status") or "") in REVIEWABLE_STATUSES
-    ]
+    reviewable = list(reviewable_metadata.values())
     for item in reviewable:
         page_id = str(item.get("page_id") or "")
         candidate = int(item.get("candidate") or 0)
@@ -202,7 +187,7 @@ def main() -> int:
         if not destination.exists() and restore_final_from_history(item):
             restored += 1
 
-    reviewable_keys = current_reviewable_keys(state)
+    reviewable_keys = set(reviewable_metadata)
 
     sources = []
     for source in sorted(SOURCE_DIR.glob("*.png")):
